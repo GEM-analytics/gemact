@@ -1,0 +1,29 @@
+API reference guide
+=================
+
+lossmodel
+-----------
+
+.. automodule:: lossmodel
+   :members:
+   :inherited-members:
+
+lossreserve
+--------------
+
+.. automodule:: lossreserve
+   :members:
+
+lossaggregation
+----------------
+
+.. automodule:: lossaggregation
+   :members:
+
+distributions
+----------------
+
+.. automodule:: distributions
+   :members:
+
+

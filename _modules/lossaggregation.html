@@ -1,0 +1,712 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>lossaggregation &#8212; gemact</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   GemAct
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Table of Contents
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../introduction.html">
+   Introduction
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
+<div class="sbt-scroll-pixel-helper"></div>
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            <div class="topbar-left">
+                
+                <label class="nav-toggle-button" for="__navigation">
+                    <div class="visually-hidden">Toggle navigation</div>
+                    <i class="fas fa-bars"></i>
+                </label>
+                
+            </div>
+            
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com//GEM-analytics"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1></h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <h1>Source code for lossaggregation</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">distributions</span>
+<span class="kn">from</span> <span class="nn">twiggy</span> <span class="kn">import</span> <span class="n">quick_setup</span><span class="p">,</span><span class="n">log</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">helperfunctions</span> <span class="k">as</span> <span class="nn">hfns</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">factorial</span>
+
+<span class="c1"># logging.basicConfig(format=&#39;%(asctime)s : %(levelname)s : %(message)s&#39;, level=logging.INFO)</span>
+<span class="c1"># logger = logging.getLogger(&#39;&#39;)</span>
+<span class="c1"># now = datetime.now()</span>
+<span class="n">quick_setup</span><span class="p">()</span>
+<span class="n">logger</span><span class="o">=</span> <span class="n">log</span><span class="o">.</span><span class="n">name</span><span class="p">(</span><span class="s1">&#39;lossaggregation&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="LossAggregation"><a class="viewcode-back" href="../api.html#lossaggregation.LossAggregation">[docs]</a><span class="k">class</span> <span class="nc">LossAggregation</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This class computes the probability that the sum of random variables</span>
+<span class="sd">        with a dependence structure specified by a copula with the AEP algorithm.</span>
+
+<span class="sd">        :param d_la: dimension of the AEP algorithm.</span>
+<span class="sd">        :type d_la: ``int``</span>
+<span class="sd">        :param s_la: probability threshold.</span>
+<span class="sd">        :type s_la: ``float``</span>
+<span class="sd">        :param n_la: number of iteration of the AEP algorithm.</span>
+<span class="sd">        :type n_la: ``int``</span>
+<span class="sd">        :param mdict: dictionary of the supported distributions.</span>
+<span class="sd">        :type mdict: ``dict``</span>
+<span class="sd">        :param  m1:  first marginal distribution, provided as a string and assigned to a scipy object in properties</span>
+<span class="sd">        :type m1: ``str``</span>
+<span class="sd">        :param  m2:  second marginal distribution, provided as a string and assigned to a scipy object in properties</span>
+<span class="sd">        :type m2: ``str``</span>
+<span class="sd">        :param m3:   third marginal distribution, provided as a string and assigned to a scipy object in properties. Optional.</span>
+<span class="sd">        :type m3: ``str``</span>
+<span class="sd">        :param  m4:  fourth marginal distribution, provided as a string and assigned to a scipy object in properties. Optional.</span>
+<span class="sd">        :type m4: ``str``</span>
+<span class="sd">        :param  m5:  fifth marginal distribution, provided as a string and assigned to a scipy object in properties. Optional.</span>
+<span class="sd">        :type m5: ``str``</span>
+<span class="sd">        :param m1par:  parameters of the first marginal, provided as a dictionary according to the scipy parametrization.</span>
+<span class="sd">        :type m1par: ``dict``</span>
+<span class="sd">        :param m2par:   parameters of the first marginal, provided as a dictionary according to the scipy parametrization.</span>
+<span class="sd">        :type m2par: ``dict``</span>
+<span class="sd">        :param m3par: parameters of the third marginal, provided as a dictionary according to the scipy parametrization. Optional.</span>
+<span class="sd">        :type m3par: ``dict``</span>
+<span class="sd">        :param m4par: parameters of the fourth marginal, provided as a dictionary according to the scipy parametrization. Optional.</span>
+<span class="sd">        :type m4par: ``dict``</span>
+<span class="sd">        :param m5par: parameters of the fifth marginal, provided as a dictionary according to the scipy parametrization. Optional.</span>
+<span class="sd">        :type m5par: ``dict``</span>
+<span class="sd">        :param  dist1:  distribution from which first marginal cdf are computed.</span>
+<span class="sd">        :type dist1: ``scipy.stats._distn_infrastructure.rv_frozen``</span>
+<span class="sd">        :param  dist2:  distribution from which second marginal cdf are computed.</span>
+<span class="sd">        :type dist2: ``scipy.stats._distn_infrastructure.rv_frozen``</span>
+<span class="sd">        :param dist3: distribution from which third marginal cdf are computed.Optional.</span>
+<span class="sd">        :type dist3: ``scipy.stats._distn_infrastructure.rv_frozen``</span>
+<span class="sd">        :param  dist4:  distribution from which fourth marginal cdf are computed.Optional.</span>
+<span class="sd">        :type dist4: ``scipy.stats._distn_infrastructure.rv_frozen``</span>
+<span class="sd">        :param dist5: distribution from which fifth marginal cdf are computed.Optional.</span>
+<span class="sd">        :type dist5: ``scipy.stats._distn_infrastructure.rv_frozen``</span>
+<span class="sd">        :param alpha_la: AEP algorithm alpha parameter.</span>
+<span class="sd">        :type alpha_la: ``float``</span>
+<span class="sd">        :param b_la: vector b of the AEP algorithm.</span>
+<span class="sd">        :type b_la: ``numpy.ndarry``</span>
+<span class="sd">        :param h_la: vector h of the AEP algorithm.</span>
+<span class="sd">        :type h_la: ``numpy.ndarry``</span>
+<span class="sd">        :param Mat: Matrix of the vectors in the {0,1}**d_la space.</span>
+<span class="sd">        :type Mat: ``numpy.ndarry``</span>
+<span class="sd">        :param Card: It contains the cardinality of the matrix Mat.</span>
+<span class="sd">        :type Card: ``numpy.ndarray``</span>
+<span class="sd">        :param m_la: It contains +1,-1,0 values that indicate whether the new simpleces origined from sN_ must be summed, subtracted or ignored.</span>
+<span class="sd">        :type m_la: ``numpy.ndarry``</span>
+<span class="sd">        :param N_la: Number of new simpleces received in each step.</span>
+<span class="sd">        :type N_la: ``float``</span>
+<span class="sd">        :param sN_: It contains +1,-1,0 values that indicate whether a volume must be summed, subtracted or ignored.</span>
+<span class="sd">        :type sN_: ``numpy.ndarry``</span>
+<span class="sd">        :param ext: probability correction in convergence</span>
+<span class="sd">        :type ext: ``float``</span>
+<span class="sd">        :param __s:  It contains either +1 or -1. It indicates whether to sum or subtract a volume. Private.</span>
+<span class="sd">        :type __s: ``numpy.ndarray``</span>
+<span class="sd">        :param out: It contains the result of the AEP algorithm. It must be between zero and one as this is a probability.</span>
+<span class="sd">        :type out: ``float``</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">m3</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">m4</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">m5</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">m3par</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">m4par</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">m5par</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c1">#setted by the user</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__dceiling</span> <span class="o">=</span> <span class="mi">5</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">d_la</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">s_la</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;s_la&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_la</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;n_la&#39;</span><span class="p">]</span>
+        <span class="c1"># self.copula_la = kwargs[&#39;copula_la&#39;]</span>
+        <span class="c1"># self.copulaPar_la = kwargs[&#39;copulaPar_la&#39;]</span>
+        <span class="c1">## marginals</span>
+        <span class="c1">##available marginals</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mdict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;gamma&#39;</span><span class="p">:</span> <span class="n">stats</span><span class="o">.</span><span class="n">gamma</span><span class="p">,</span>
+                      <span class="s1">&#39;lognorm&#39;</span><span class="p">:</span> <span class="n">stats</span><span class="o">.</span><span class="n">lognorm</span><span class="p">,</span>
+                      <span class="s1">&#39;exponential&#39;</span><span class="p">:</span> <span class="n">distributions</span><span class="o">.</span><span class="n">exponential</span><span class="p">,</span>
+                      <span class="s1">&#39;genpareto&#39;</span><span class="p">:</span> <span class="n">stats</span><span class="o">.</span><span class="n">genpareto</span><span class="p">}</span>
+        <span class="c1">### distributions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m1</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;m1&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m2</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;m2&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m3</span> <span class="o">=</span> <span class="n">m3</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m4</span> <span class="o">=</span> <span class="n">m4</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m5</span> <span class="o">=</span> <span class="n">m5</span>
+        <span class="c1">### parameters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m1par</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;m1par&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m2par</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;m2par&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m3par</span> <span class="o">=</span> <span class="n">m3par</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m4par</span> <span class="o">=</span> <span class="n">m4par</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m5par</span> <span class="o">=</span> <span class="n">m5par</span>
+
+        <span class="c1">### define it</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dist1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">m1</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">m1par</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dist2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">m2</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">m2par</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">marginals</span><span class="o">=</span> <span class="n">hfns</span><span class="o">.</span><span class="n">MarginalCdf2D</span><span class="p">(</span><span class="n">dist1</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dist1</span><span class="p">,</span>
+                                               <span class="n">dist2</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dist2</span><span class="p">,</span>
+                                               <span class="n">d_la</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">d_la</span><span class="p">)</span><span class="o">.</span><span class="n">marginal_cdf</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;The marginal distributions in m1,m2 are not parametrized correctly.&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">m3</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">dist3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">m3</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">m3par</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;The marginal distribution in m3 is not parametrized correctly.&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">d_la</span><span class="o">=</span><span class="mi">3</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">marginals</span> <span class="o">=</span> <span class="n">hfns</span><span class="o">.</span><span class="n">MarginalCdf3D</span><span class="p">(</span><span class="n">dist1</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dist1</span><span class="p">,</span>
+                                                <span class="n">dist2</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dist2</span><span class="p">,</span>
+                                                <span class="n">dist3</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dist3</span><span class="p">,</span>
+                                                <span class="n">d_la</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">d_la</span><span class="p">)</span><span class="o">.</span><span class="n">marginal_cdf</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">m4</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">dist4</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">m4</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">m4par</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;The marginal distribution in m4 is not parametrized correctly.&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">d_la</span> <span class="o">=</span> <span class="mi">4</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">marginals</span> <span class="o">=</span> <span class="n">hfns</span><span class="o">.</span><span class="n">MarginalCdf4D</span><span class="p">(</span><span class="n">dist1</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dist1</span><span class="p">,</span>
+                                                <span class="n">dist2</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dist2</span><span class="p">,</span>
+                                                <span class="n">dist3</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dist3</span><span class="p">,</span>
+                                                <span class="n">dist4</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dist4</span><span class="p">,</span>
+                                                <span class="n">d_la</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">d_la</span><span class="p">)</span><span class="o">.</span><span class="n">marginal_cdf</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">m5</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">dist5</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">m5</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">m5par</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;The marginal distribution in m4 is not parametrized correctly.&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">d_la</span> <span class="o">=</span> <span class="mi">5</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">marginals</span> <span class="o">=</span> <span class="n">hfns</span><span class="o">.</span><span class="n">MarginalCdf5D</span><span class="p">(</span><span class="n">dist1</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dist1</span><span class="p">,</span>
+                                                <span class="n">dist2</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dist2</span><span class="p">,</span>
+                                                <span class="n">dist3</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dist3</span><span class="p">,</span>
+                                                <span class="n">dist4</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dist4</span><span class="p">,</span>
+                                                <span class="n">dist5</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dist5</span><span class="p">,</span>
+                                                <span class="n">d_la</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">d_la</span><span class="p">)</span><span class="o">.</span><span class="n">marginal_cdf</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">copdist</span><span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;copdist&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">coppar</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;coppar&#39;</span><span class="p">]</span>
+
+        <span class="c1">#setted by us</span>
+        <span class="c1">## about copulas</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">copula</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">copdist</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">coppar</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;The copula distribution is not parametrized correctly </span><span class="se">\n</span><span class="s2"> See our documentation: https://UnGiornoCiFacciamoPureIlSito.html &quot;</span><span class="p">)</span>
+
+        <span class="c1"># self.__copuladict={&#39;clayton&#39;:copulae.ClaytonCopula,&#39;gumbel&#39;:hfns.GumbelCDF}</span>
+        <span class="c1"># try:</span>
+        <span class="c1">#     self.__copulaCDF=self.copdist(**self.coppar).cdf</span>
+        <span class="c1"># except:</span>
+        <span class="c1">#     logger.error(&quot;The copula distribution is not parametrized correctly \n See our documentation: https://UnGiornoCiFacciamoPureIlSito.html &quot;)</span>
+
+
+        <span class="c1">## about the AEP algorithm</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">alpha_la</span> <span class="o">=</span> <span class="mf">2.</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">d_la</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">b_la</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">]]),</span> <span class="bp">self</span><span class="o">.</span><span class="n">d_la</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">h_la</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">s_la</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Mat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">iMat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">d_la</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Card</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">iCardinality</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m_la</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_j</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">N_la</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">**</span> <span class="bp">self</span><span class="o">.</span><span class="n">d_la</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sN_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s_new</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">]))</span><span class="c1">#self.s_la</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ext</span><span class="o">=</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">d_la</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">d_la</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">factorial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">d_la</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">d_la</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__s</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">d_la</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Mat</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+
+        <span class="c1">#result</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">v_h</span><span class="p">(</span><span class="n">b</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">b_la</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha_la</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">h_la</span><span class="p">,</span>  <span class="n">Mat</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">Mat</span><span class="p">)</span> <span class="c1">#Copula=self.Cop,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__AEP</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">d_la</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__d_la</span>
+
+    <span class="nd">@d_la</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">d_la</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">var</span><span class="p">,</span><span class="nb">float</span><span class="p">):</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;The value you provided for your problem dimensions will be converted to an integer&quot;</span><span class="p">)</span>
+            <span class="n">var</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">var</span><span class="p">,</span><span class="nb">int</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Please provide d_la as a positive integer between 1 and 5&#39;</span><span class="p">)</span>
+
+        <span class="k">assert</span> <span class="n">var</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">var</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dceiling</span><span class="p">,</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Please provide d_la as a positive integer between 1 and 5&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__d_la</span> <span class="o">=</span> <span class="n">var</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">s_la</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__s_la</span>
+
+    <span class="nd">@s_la</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">s_la</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">var</span><span class="p">,</span><span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">var</span><span class="p">,</span><span class="nb">float</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Please provide the quantile s_la as an integer or a flaot&quot;</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">var</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Please provide the quantile s_la as a positive value&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__s_la</span> <span class="o">=</span> <span class="p">[[</span><span class="n">var</span><span class="p">]]</span> <span class="c1">#ricordiamoci che prima facevamo questo step a monte. Ora sfruttiamo le proprietà di questo attributo</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">n_la</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__n_la</span>
+
+    <span class="nd">@n_la</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">n_la</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">var</span><span class="p">,</span><span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="n">var</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Please provide the number of steps n_la as a positive integer&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__n_la</span> <span class="o">=</span> <span class="n">var</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">copdist</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__copdist</span>
+
+    <span class="nd">@copdist</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">copdist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">var</span><span class="p">,</span><span class="nb">str</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;The copula name must be given as a string&#39;</span><span class="p">)</span>
+        <span class="c1"># this is the set of possible distributions</span>
+        <span class="n">cdict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;clayton&#39;</span><span class="p">:</span> <span class="n">hfns</span><span class="o">.</span><span class="n">ClaytonCDF</span><span class="p">,</span>
+                  <span class="s1">&#39;frank&#39;</span><span class="p">:</span> <span class="n">hfns</span><span class="o">.</span><span class="n">FrankCDF</span><span class="p">,</span>
+                  <span class="s1">&#39;gumbel&#39;</span><span class="p">:</span><span class="n">hfns</span><span class="o">.</span><span class="n">GumbelCDF</span><span class="p">}</span>
+        <span class="k">assert</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">cdict</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="s2">&quot;</span><span class="si">%r</span><span class="s2"> is not supported </span><span class="se">\n</span><span class="s2"> See our documentation: https://UnGiornoCiFacciamoPureIlSito.html &quot;</span> <span class="o">%</span> <span class="n">var</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__copdist</span> <span class="o">=</span> <span class="n">cdict</span><span class="p">[</span><span class="n">var</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">coppar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__coppar</span>
+
+    <span class="nd">@coppar</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">coppar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="nb">dict</span><span class="p">),</span> <span class="s1">&#39;The copula distribution parameters must be given as a dictionary&#39;</span>
+        <span class="c1"># if &#39;dim&#39; not in var.keys():</span>
+        <span class="c1">#     var[&#39;dim&#39;] = self.d_la</span>
+        <span class="c1"># else:</span>
+        <span class="c1">#     if var[&#39;dim&#39;] != self.d_la:</span>
+        <span class="c1">#         logger.warning(&#39;The dimension you specified inside your copula will be disregarded.&#39;)</span>
+        <span class="c1">#         var[&#39;dim&#39;] = self.d_la</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__coppar</span> <span class="o">=</span> <span class="n">var</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">m1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__m1</span>
+
+    <span class="nd">@m1</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">m1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="n">var</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">mdict</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="s2">&quot;</span><span class="si">%r</span><span class="s2"> is not supported </span><span class="se">\n</span><span class="s2"> See our documentation: https://UnGiornoCiFacciamoPureIlSito.html &quot;</span> <span class="o">%</span> <span class="n">var</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__m1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mdict</span><span class="p">[</span><span class="n">var</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">m2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__m2</span>
+
+    <span class="nd">@m2</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">m2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="n">var</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">mdict</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="s2">&quot;</span><span class="si">%r</span><span class="s2"> is not supported </span><span class="se">\n</span><span class="s2"> See our documentation: https://UnGiornoCiFacciamoPureIlSito.html &quot;</span> <span class="o">%</span> <span class="n">var</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__m2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mdict</span><span class="p">[</span><span class="n">var</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">m3</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__m3</span>
+
+    <span class="nd">@m3</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">m3</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">var</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="n">var</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">mdict</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="s2">&quot;</span><span class="si">%r</span><span class="s2"> is not supported </span><span class="se">\n</span><span class="s2"> See our documentation: https://UnGiornoCiFacciamoPureIlSito.html &quot;</span> <span class="o">%</span> <span class="n">var</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__m3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mdict</span><span class="p">[</span><span class="n">var</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="n">var</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">,</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Please provide in m3 a marginal supported distribution or drop the argument.&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__m3</span> <span class="o">=</span> <span class="n">var</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">m4</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__m4</span>
+
+    <span class="nd">@m4</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">m4</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">var</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="n">var</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">mdict</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="s2">&quot;</span><span class="si">%r</span><span class="s2"> is not supported </span><span class="se">\n</span><span class="s2"> See our documentation: https://UnGiornoCiFacciamoPureIlSito.html &quot;</span> <span class="o">%</span> <span class="n">var</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__m4</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mdict</span><span class="p">[</span><span class="n">var</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="n">var</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">,</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+                <span class="s1">&#39;Please provide in m4 a marginal supported distribution or drop the argument.&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__m4</span> <span class="o">=</span> <span class="n">var</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">m5</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__m5</span>
+
+    <span class="nd">@m5</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">m5</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">var</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="n">var</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">mdict</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="s2">&quot;</span><span class="si">%r</span><span class="s2"> is not supported </span><span class="se">\n</span><span class="s2"> See our documentation: https://UnGiornoCiFacciamoPureIlSito.html &quot;</span> <span class="o">%</span> <span class="n">var</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__m5</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mdict</span><span class="p">[</span><span class="n">var</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="n">var</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">,</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+                <span class="s1">&#39;Please provide in m5 a marginal supported distribution or drop the argument.&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__m5</span> <span class="o">=</span> <span class="n">var</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">m1par</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__m1par</span>
+
+    <span class="nd">@m1par</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">m1par</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="nb">dict</span><span class="p">),</span> <span class="s1">&#39;The m1 distribution parameters must be given as a dictionary&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__m1par</span> <span class="o">=</span> <span class="n">var</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">m2par</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__m2par</span>
+
+    <span class="nd">@m2par</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">m2par</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="nb">dict</span><span class="p">),</span> <span class="s1">&#39;The m2 distribution parameters must be given as a dictionary&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__m2par</span> <span class="o">=</span> <span class="n">var</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">m3par</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__m3par</span>
+
+    <span class="nd">@m3par</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">m3par</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">var</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="nb">dict</span><span class="p">),</span> <span class="s1">&#39;The m3 distribution parameters must be given as a dictionary&#39;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__m3par</span> <span class="o">=</span> <span class="n">var</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="n">var</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">,</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Please provide the m3 distribution parameters as a dictionary or drop the argument.&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__m3par</span> <span class="o">=</span> <span class="n">var</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">m4par</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__m4par</span>
+
+    <span class="nd">@m4par</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">m4par</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">var</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="nb">dict</span><span class="p">),</span> <span class="s1">&#39;The m4 distribution parameters must be given as a dictionary&#39;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__m4par</span> <span class="o">=</span> <span class="n">var</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="n">var</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">,</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Please provide the m4 distribution parameters as a dictionary or drop the argument.&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__m4par</span> <span class="o">=</span> <span class="n">var</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">m5par</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__m5par</span>
+
+    <span class="nd">@m5par</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">m5par</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">var</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="nb">dict</span><span class="p">),</span> <span class="s1">&#39;The m4 distribution parameters must be given as a dictionary&#39;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__m5par</span> <span class="o">=</span> <span class="n">var</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="n">var</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">,</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Please provide the m5 distribution parameters as a dictionary or drop the argument.&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__m5par</span> <span class="o">=</span> <span class="n">var</span>
+
+<div class="viewcode-block" id="LossAggregation.iMat"><a class="viewcode-back" href="../api.html#lossaggregation.LossAggregation.iMat">[docs]</a>    <span class="k">def</span> <span class="nf">iMat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">d</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        It computes the matrix points in which copulas must be computed.</span>
+
+<span class="sd">        :param d: dimension.</span>
+<span class="sd">        :type d: ``int``</span>
+<span class="sd">        :return: matrix of points.</span>
+<span class="sd">        :rtype:``numpy.ndarray``</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">d</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">temp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">iMat</span><span class="p">(</span><span class="n">d</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">d</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">ncol</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ncol</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span>
+                <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">ncol</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">ncol</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">d</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">ncol</span><span class="p">)),</span>
+                <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">MarginalCdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">):</span>
+        <span class="n">out_</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">d_la</span><span class="p">)</span>
+        <span class="n">out_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dist1</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">out_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dist2</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="c1"># out_=np.append(x1, x2)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">d_la</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">out_</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dist3</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+            <span class="c1"># out_ = np.append(out_,x3)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">d_la</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">out_</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dist4</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+            <span class="c1"># out_ = np.append(out_,x4)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">d_la</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="n">out_</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dist5</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+            <span class="c1"># out_ = np.append(out_,x5)</span>
+        <span class="k">return</span> <span class="n">out_</span>
+
+    <span class="c1"># def CopulaCDF(self,x):</span>
+    <span class="c1">#     return hfns.ClaytonCDF(self.MarginalCdf(x),par=self.coppar[&#39;theta&#39;],d=self.d_la)</span>
+    <span class="c1">#</span>
+    <span class="c1"># def Cop(self,x):  # input matrice le cui colonne sono punti.</span>
+    <span class="c1">#     return np.apply_along_axis(func1d=self.CopulaCDF, arr=x, axis=0)</span>
+
+    <span class="k">def</span> <span class="nf">v_h</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">b</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">Mat</span><span class="p">):</span> <span class="c1">#Copula</span>
+        <span class="c1"># arg_= b.reshape(self.d_la, 1) + h * Mat</span>
+        <span class="c1"># idx = np.argwhere(np.any(arg_[..., :] == 0, axis=0))</span>
+        <span class="n">v_</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">((</span><span class="n">b</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">d_la</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">h</span> <span class="o">*</span> <span class="n">Mat</span><span class="p">))</span> <span class="c1">#*self.__s * (np.sign(h) ** self.d_la))</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">copula</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">marginals</span><span class="p">(</span><span class="n">v_</span><span class="p">))</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__s</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">h</span><span class="p">)</span> <span class="o">**</span> <span class="bp">self</span><span class="o">.</span><span class="n">d_la</span><span class="p">)))</span>
+        <span class="c1"># return np.sum(Copula(b.reshape(self.d_la, 1) + h * Mat) * self.__s*(np.sign(h) ** self.d_la))</span>
+        <span class="c1"># return np.sum(Copula(np.delete(arg_, idx, axis=1)) * np.delete(self.__s, idx, axis=0))</span>
+
+    <span class="k">def</span> <span class="nf">iCardinality</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Mat</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]</span>
+
+    <span class="k">def</span> <span class="nf">m_j</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">mx_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Card</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">greater</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">mx_</span> <span class="o">&gt;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha_la</span><span class="p">))</span>
+        <span class="n">equal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">mx_</span> <span class="o">==</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha_la</span><span class="p">))</span>
+        <span class="n">lower</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">mx_</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha_la</span><span class="p">))</span>
+        <span class="n">mx_</span><span class="p">[</span><span class="n">greater</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">d_la</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">mx_</span><span class="p">[</span><span class="n">greater</span><span class="p">])</span>
+        <span class="n">mx_</span><span class="p">[</span><span class="n">equal</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">mx_</span><span class="p">[</span><span class="n">lower</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">mx_</span><span class="p">[</span><span class="n">lower</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">mx_</span>
+
+    <span class="k">def</span> <span class="nf">s_new</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">s_old</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">s_old</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">N_la</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m_la</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">s_old</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">h_new</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">h_old</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Card</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">h_old</span><span class="p">))</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha_la</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">h_old</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Card</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">b_new</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">b_old</span><span class="p">,</span> <span class="n">h_old</span><span class="p">):</span>
+        <span class="n">Mat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Mat</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">h_old</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">N_la</span><span class="p">)</span>
+        <span class="n">times</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">h</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">Mat</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">b_old</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">N_la</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha_la</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">d_la</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">Mat</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">times</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">__AEP</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_la</span><span class="p">):</span>
+            <span class="c1"># ix= self.sN_&gt;0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">b_la</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">b_new</span><span class="p">(</span><span class="n">b_old</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">b_la</span><span class="p">,</span> <span class="n">h_old</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">h_la</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">h_la</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">h_new</span><span class="p">(</span><span class="n">h_old</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">h_la</span><span class="p">)</span>
+            <span class="c1"># btemp = self.b_la[:,ix]</span>
+            <span class="c1"># htemp = self.h_la[ix]</span>
+            <span class="n">volumes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">b_la</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+                <span class="n">volumes</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">volumes</span><span class="p">,[</span><span class="bp">self</span><span class="o">.</span><span class="n">v_h</span><span class="p">(</span><span class="n">b</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">b_la</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">d_la</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">h</span><span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha_la</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">h_la</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">Mat</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">Mat</span><span class="p">)])</span> <span class="c1">#, Copula=self.Cop</span>
+            <span class="c1"># for i in range(0, self.b_la.shape[1]):</span>
+            <span class="c1">#     volumes=np.append(volumes,[self.v_h(b=self.b_la[:, i].reshape(self.d_la, 1), h= self.alpha_la *self.h_la[i], Copula=self.Cop, Mat=self.Mat)])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">out</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sN_</span> <span class="o">*</span> <span class="n">volumes</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sN_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s_new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sN_</span><span class="p">)</span>
+            <span class="c1"># print(self.out)</span>
+        <span class="k">return</span> <span class="mi">0</span></div>
+
+<span class="c1"># # logger.info(&#39;&#39;)</span>
+<span class="c1"># la=LossAggregation(s_la=1,</span>
+<span class="c1">#                    n_la=2,</span>
+<span class="c1">#                    m1=&#39;genpareto&#39;,</span>
+<span class="c1">#                    m1par={&#39;loc&#39;:0,&#39;scale&#39;:1/.9,&#39;c&#39;:1/.9},</span>
+<span class="c1">#                    m2=&#39;genpareto&#39;,</span>
+<span class="c1">#                    m2par={&#39;loc&#39;:0,&#39;scale&#39;:1/1.8,&#39;c&#39;:1/1.8},</span>
+<span class="c1">#                    m3=&#39;genpareto&#39;,</span>
+<span class="c1">#                    m3par={&#39;loc&#39;:0,&#39;scale&#39;:1/2.6,&#39;c&#39;:1/2.6},</span>
+<span class="c1">#                    m4=&#39;genpareto&#39;,</span>
+<span class="c1">#                    m4par={&#39;loc&#39;:0,&#39;scale&#39;:1/3.3,&#39;c&#39;:1/3.3},</span>
+<span class="c1">#                    m5=&#39;genpareto&#39;,</span>
+<span class="c1">#                    m5par={&#39;loc&#39;:0,&#39;scale&#39;:1/4,&#39;c&#39;:1/4},</span>
+<span class="c1">#                    copdist=&#39;clayton&#39;,</span>
+<span class="c1">#                    coppar={&#39;par&#39;:1.2})</span>
+<span class="c1">#</span>
+<span class="c1"># print(la.out)</span>
+
+<span class="c1"># logger.info(&#39;&#39;)</span>
+<span class="c1"># #53 s con pacchetto</span>
+<span class="c1"># #36 s con nostra funzione</span>
+<span class="c1"># print(la.out)</span>
+<span class="c1">#n=8 0.3558334717726974</span>
+
+<span class="c1"># s = (-1) ** np.sum(la.Mat, axis=0)</span>
+<span class="c1"># arg_=(la.b_la.reshape(la.d_la, 1) + la.h_la * la.Mat) * s</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1"># def ParClaytonCDF(x, par=.4,d=3):</span>
+<span class="c1">#     out_=np.zeros(d)</span>
+<span class="c1">#     out_[0]=1-(1+x[0])**-.9</span>
+<span class="c1">#     out_[1] = 1 - (1 + x[1])**-1.8</span>
+<span class="c1">#     out_[2] = 1 - (1 + x[2]) ** -2.6</span>
+<span class="c1">#     if (x&gt;0.).all():</span>
+<span class="c1">#         return (np.sum(out_**-par)-d+1) ** -(1 / par)</span>
+<span class="c1">#         # return (x[0] ** -par + x[1] ** -par - 1) ** -(1 / par)</span>
+<span class="c1">#     else:</span>
+<span class="c1">#         return 0.</span>
+
+
+
+<span class="c1"># print(ParClaytonCDF(np.array([.25,.25,.75]))+\</span>
+<span class="c1"># ParClaytonCDF(np.array([.25,.75,.25]))+\</span>
+<span class="c1"># ParClaytonCDF(np.array([.75,.25,.25]))+\</span>
+<span class="c1"># ParClaytonCDF(np.array([.5,.5,.5]))-\</span>
+<span class="c1"># ParClaytonCDF(np.array([.5,.5,.25]))-\</span>
+<span class="c1"># ParClaytonCDF(np.array([.5,.25,.5]))-\</span>
+<span class="c1"># ParClaytonCDF(np.array([.25,.5,.5]))-\</span>
+<span class="c1"># ParClaytonCDF(np.array([.25,.25,.25])))</span>
+</pre></div>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Gabriele Pittarello, Edoardo Luini, Manfred Marvin Marchione<br/>
+    
+        &copy; Copyright 2022, Gabriele Pittarello, Edoardo Luini, Manfred Marvin Marchione.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

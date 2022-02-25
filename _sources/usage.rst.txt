@@ -1,0 +1,5 @@
+Installation
+=============
+In order to install GemAct::
+
+   pip install gemact

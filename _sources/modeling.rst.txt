@@ -1,0 +1,117 @@
+Actuarial modeling with GemAct
+================================
+
+(Re)insurance pricing with GemAct
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+GemAct pricing model is based on the collective risk theory. 
+In order to price our (re)insurance contracts we model the company aggregate claim cost under the following assumptions.
+
+* :math:`\widetilde{S} \sim g(S)` and :math:`\widetilde{Y_i} \sim f(Y)`
+*  Given :math:`\widetilde{N}=n`,  the severity :math:`\widetilde{Y_1},\ldots,\widetilde{Y_n}` is i.i.d and does not depend on :math:`n`.
+* :math:`\widetilde{N}` does not depend on :math:`\widetilde{Y_1},\ldots,\widetilde{Y_n}` in any way.
+
+.. math:: \widetilde{S}=\sum_{i=1}^{\widetilde{N}} \widetilde{{Y_i}}
+   :label: crm
+
+Denote the pure reinsurance premium as :math:`P= \mathbb{E}\left( S \right)`
+
+Excess-of-Loss (XL)
+--------------------
+
+Reinstatements
+----------------
+
+Quota share
+-------------
+
+Deductibles
+-------------
+
+Stop Loss (SL)
+-----------------
+
+
+Loss reserving with GemAct
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fisher-Lange
+-------------
+
+Collective risk model for claims reserving
+---------------------------------------------
+
+
+Summary of distributions supported by GemAct
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following table summarizes the distribution supported by GemAct and Scipy.
+
++--------------------------------------------------+-------------+--------+--------+---------------------------+
+| Distribution                                     | Support     | GemAct | SciPy  | GemAct parametrization    |
+|                                                  |             |        |        |                           |
++==================================================+=============+========+========+===========================+
+| The Burr Distribution.                           |  continuous |    v   |   v    |                           | 
++--------------------------------------------------+-------------+--------+--------+---------------------------+ 
+| The Generalized Pareto Distribution.             |  continuous |    v   |   v    |                           | 
++--------------------------------------------------+-------------+--------+--------+---------------------------+ 
+| The Inverse Burr Distribution (Dagum).           |  continuous |    v   |   v    |                           | 
++--------------------------------------------------+-------------+--------+--------+---------------------------+ 
+| The Inverse Gamma Distribution.                  |  continuous |    v   |   v    |                           |  
++--------------------------------------------------+-------------+--------+--------+---------------------------+ 
+|The Inverse Exponential Distribution.             |  continuous |        |        |                           | 
++--------------------------------------------------+-------------+--------+--------+---------------------------+ 
+|The Inverse Gamma Distribution.                   |  continuous |    v   |   v    |                           | 
++--------------------------------------------------+-------------+--------+--------+---------------------------+ 
+|The Inverse Gaussian Distribution.                |  continuous |        |        |                           | 
++--------------------------------------------------+-------------+--------+--------+---------------------------+ 
+|The Inverse Paralogistic Distribution.            |  continuous |    v   |   v    |                           |  
++--------------------------------------------------+-------------+--------+--------+---------------------------+ 
+|The Inverse Pareto Distribution.                  |  continuous |        |        |                           | 
++--------------------------------------------------+-------------+--------+--------+---------------------------+ 
+|The Inverse Transformed Gamma Distribution.       |  continuous |        |        |                           | 
++--------------------------------------------------+-------------+--------+--------+---------------------------+ 
+|The Weibull Distribution.                         |  continuous |    v   |   v    |                           | 
++--------------------------------------------------+-------------+--------+--------+---------------------------+ 
+|The Inverse Weibull Distribution.                 |  continuous |    v   |   v    |                           | 
++--------------------------------------------------+-------------+--------+--------+---------------------------+ 
+|The Loggamma Distribution.                        |  continuous |        |        |                           | 
++--------------------------------------------------+-------------+--------+--------+---------------------------+ 
+|The Loglogistic Distribution.                     |  continuous |        |        |                           |  
++--------------------------------------------------+-------------+--------+--------+---------------------------+ 
+|The Logarithmic Distribution.                     |  continuous |        |        |                           | 
++--------------------------------------------------+-------------+--------+--------+---------------------------+ 
+|The Paralogistic Distribution.                    |  continuous |    v   |   v    |                           | 
++--------------------------------------------------+-------------+--------+--------+---------------------------+ 
+|The Pareto Distribution.                          |  continuous |    v   |   v    |                           |  
++--------------------------------------------------+-------------+--------+--------+---------------------------+ 
+|The Single-parameter Pareto Distribution.         |  continuous |    v   |   v    |                           |  
++--------------------------------------------------+-------------+--------+--------+---------------------------+ 
+|The Pareto II Distribution.                       |  continuous |    v   |   v    |                           |  
++--------------------------------------------------+-------------+--------+--------+---------------------------+ 
+|The Pareto III Distribution.                      |  continuous |    v   |   v    |                           | 
++--------------------------------------------------+-------------+--------+--------+---------------------------+ 
+|The Pareto IV Distribution.                       |  continuous |    v   |   v    |                           | 
++--------------------------------------------------+-------------+--------+--------+---------------------------+ 
+|The Beta distribution.                            |continuous   |    v   |   v    |                           |  
++--------------------------------------------------+-------------+--------+--------+---------------------------+
+|The Zero-Modified Binomial Distribution.          | discrete    |    v   |   x    |                           | 
++--------------------------------------------------+-------------+--------+--------+---------------------------+ 
+|The Zero-Modified Geometric Distribution.         | discrete    |    v   |   x    |                           | 
++--------------------------------------------------+-------------+--------+--------+---------------------------+ 
+|The Zero-Modified Logarithmic Distribution.       | discrete    |    v   |   x    |                           | 
++--------------------------------------------------+-------------+--------+--------+---------------------------+ 
+|The Zero-Modified Negative Binomial Distribution  | discrete    |    v   |   x    |                           | 
++--------------------------------------------------+-------------+--------+--------+---------------------------+ 
+|The Zero-Modified Poisson Distribution            | discrete    |    v   |   x    |                           | 
++--------------------------------------------------+-------------+--------+--------+---------------------------+ 
+|The Zero-Truncated Binomial Distribution          | discrete    |    v   |   x    |                           | 
++--------------------------------------------------+-------------+--------+--------+---------------------------+ 
+|The Zero-Truncated Geometric Distribution         | discrete    |    v   |   x    |                           | 
++--------------------------------------------------+-------------+--------+--------+---------------------------+ 
+|The Zero-Truncated Negative Binomial Distribution | discrete    |    v   |   x    |                           | 
++--------------------------------------------------+-------------+--------+--------+---------------------------+ 
+|The Zero-Truncated Poisson Distribution           | discrete    |    v   |   x    |                           |  
++--------------------------------------------------+-------------+--------+--------+---------------------------+ 
+ 
+
