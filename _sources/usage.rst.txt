@@ -1,5 +1,8 @@
 Installation
 =============
+
 In order to install GemAct::
 
    pip install gemact
+
+In case you are installing the GEMAct package in Google Colab, please make sure restart the kernel or to refresh the page before using GEMAct.

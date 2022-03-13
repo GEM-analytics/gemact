@@ -33,6 +33,7 @@
     <script src="../_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
+    <link rel="shortcut icon" href="../_static/webtab.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -61,6 +62,11 @@
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
       
       
     </a>
@@ -85,6 +91,16 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../introduction.html">
    Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../usage.html">
+   Installation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../api.html">
+   API reference guide
   </a>
  </li>
 </ul>
@@ -171,142 +187,19 @@
 <span></span><span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
-<span class="c1"># import logging</span>
-<span class="kn">import</span> <span class="nn">gemdata</span>
-<span class="kn">import</span> <span class="nn">helperfunctions</span> <span class="k">as</span> <span class="nn">hfns</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="c1"># from datetime import datetime</span>
+<span class="kn">import</span> <span class="nn">helperfunctions</span> <span class="k">as</span> <span class="nn">hfns</span>
 <span class="kn">from</span> <span class="nn">twiggy</span> <span class="kn">import</span> <span class="n">quick_setup</span><span class="p">,</span><span class="n">log</span>
 
-<span class="c1"># logging.basicConfig(format=&#39;%(asctime)s : %(levelname)s : %(message)s&#39;, level=logging.INFO)</span>
-<span class="c1"># logger = logging.getLogger(&#39;&#39;)</span>
-<span class="c1"># now = datetime.now()</span>
-
 <span class="n">quick_setup</span><span class="p">()</span>
-<span class="n">logger</span><span class="o">=</span> <span class="n">log</span><span class="o">.</span><span class="n">name</span><span class="p">(</span><span class="s1">&#39;lossmodel&#39;</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">log</span><span class="o">.</span><span class="n">name</span><span class="p">(</span><span class="s1">&#39;lossreserve&#39;</span><span class="p">)</span>
 
-<span class="c1">#</span>
-<span class="c1"># IPtriangle = np.array([[28446,31963,37775,40418,44116,50294,49620,46410,48295,52590,58599,60361],</span>
-<span class="c1">#                    [ 29251,36106,40125, 44499 ,45490 , 48040 , 49991 , 49694 , 49354 , 50606 , 53743 , np.nan],</span>
-<span class="c1">#                    [ 12464, 13441, 12951, 15370, 15339, 17843, 19570, 20881, 18304, 18604, np.nan,np.nan],</span>
-<span class="c1">#                    [ 5144, 5868, 6034, 5594, 5478, 7035,  10047, 8202, 8833, np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    [ 2727, 2882, 3010, 2616, 2541, 3934, 5750, 4714, np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    [ 2359, 2422,  1264, 1984, 2906, 2726, 3313,np.nan, np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    [ 1334, 918, 1250, 2137, 1294, 2267,np.nan,np.nan, np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    [ 1238, 1076, 1135,  1184,  1124, np.nan,np.nan,np.nan, np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    [ 941, 734,  904, 873,np.nan , np.nan,np.nan,np.nan, np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    [860,458,559,np.nan,np.nan , np.nan,np.nan,np.nan, np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    [282,456,np.nan,np.nan,np.nan , np.nan,np.nan,np.nan, np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    [727,np.nan,np.nan,np.nan ,np.nan,np.nan,np.nan,np.nan, np.nan,np.nan,np.nan,np.nan]]).T</span>
-<span class="c1">#</span>
-<span class="c1">#</span>
-<span class="c1">#</span>
-<span class="c1"># ## claims number</span>
-<span class="c1"># in_triangle =np.array([[34433, 35475,  37004,  37038,  36849,  39171,  37492,  34188,  31308,  30357,  30717,  30590 ],</span>
-<span class="c1">#                    [13796, 13718,  13820,  13631,  13416,  12601,  12282, 12245, 10743,  10117,  11081 , np.nan],</span>
-<span class="c1">#                    [1589,  1501 ,  1527 ,  1463 ,  1564 ,  1592 ,  2057 ,  1938 ,  1908 ,  1611 , np.nan,np.nan],</span>
-<span class="c1">#                    [568, 548,  436,  500,  422,  559,  739,  761,  639 , np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    [278,209,  194,  164,  182,  273,  391,  295 , np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    [152,  134,  72,  80,  107,  175,  287 ,np.nan, np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    [104,  51,  46,  63,  81,  155 ,np.nan,np.nan, np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    [55,  44,  29,  40,  42 , np.nan,np.nan,np.nan, np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    [30,  27,  17,  26 ,np.nan , np.nan,np.nan,np.nan, np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    [31,  20,  17 ,np.nan,np.nan , np.nan,np.nan,np.nan, np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    [18,  16 ,np.nan,np.nan,np.nan , np.nan,np.nan,np.nan, np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    [19 ,np.nan,np.nan,np.nan ,np.nan,np.nan,np.nan,np.nan, np.nan,np.nan,np.nan,np.nan]]).T</span>
-<span class="c1">#</span>
-<span class="c1"># # CNtriangle=CNtriangle.T</span>
-<span class="c1">#</span>
-<span class="c1"># #incurred number</span>
-<span class="c1"># cased_number_triangle = np.array([[19508, 18794,  18099,17565,  17207, 16775, 17413,  17714,  15417,  14126,15481,  15178 ],</span>
-<span class="c1">#                    [4038,  3310,  2854,  2732,  2642, 3170, 4396,  4325,  3872,  3751,  3931  , np.nan],</span>
-<span class="c1">#                    [1374, 1114,  838,  875,  869,  1310,  1900,  1885,  1807,  1895  , np.nan,np.nan],</span>
-<span class="c1">#                    [727, 529,  395,  395,  474,  758,  1056,  1006,  1050 , np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    [445, 318, 196, 250, 318, 476, 615, 685  , np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    [289,  185,  139,  178,  216,  296,  325  ,np.nan, np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    [180,  148, 97,  123,  141,  145 ,np.nan,np.nan, np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    [125,  105,  73,  89,  102 , np.nan,np.nan,np.nan, np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    [98, 80, 69, 66  ,np.nan , np.nan,np.nan,np.nan, np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    [71, 58, 51  ,np.nan,np.nan , np.nan,np.nan,np.nan, np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    [54, 43 ,np.nan,np.nan,np.nan , np.nan,np.nan,np.nan, np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    [36 ,np.nan,np.nan,np.nan ,np.nan,np.nan,np.nan,np.nan, np.nan,np.nan,np.nan,np.nan]]).T</span>
-<span class="c1">#</span>
-<span class="c1"># cased_amount_triangle= np.array([[56551, 63344, 66954,  72768, 76338,  83493,  92136,  97059,  94658,  104836,  112265,  107822],</span>
-<span class="c1">#                    [26907, 25706,  25502,  26613,  29399,  37080,  44671, 47808,  44919,  48968,  47921 ,np.nan],</span>
-<span class="c1">#                    [12910,  12497,  13034,  13663,  16012,  19807,  25963,  26658,  26905,  29487  ,np.nan,np.nan],</span>
-<span class="c1">#                    [7836,  7797, 8177,  9695,10904, 14191, 17438, 17590,  18725 , np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    [6201,  6088, 5767,  7363, 8774, 11144, 12034,  12339 , np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    [4555, 4289, 4623,6052,  6308, 8161, 7718 ,np.nan, np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    [3806, 3743,3620, 4111, 5255, 4926 ,np.nan,np.nan, np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    [3189, 2915, 2547, 3060, 2845 , np.nan,np.nan,np.nan, np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    [2792, 2252, 1804, 1901 ,np.nan , np.nan,np.nan,np.nan, np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    [1987, 1762, 1853 ,np.nan,np.nan , np.nan,np.nan,np.nan, np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    [1784, 1795 ,np.nan,np.nan,np.nan , np.nan,np.nan,np.nan, np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    [1068 ,np.nan,np.nan,np.nan ,np.nan,np.nan,np.nan,np.nan, np.nan,np.nan,np.nan,np.nan]]).T</span>
-<span class="c1">#</span>
-<span class="c1">#</span>
-<span class="c1">#</span>
-<span class="c1"># reported_=np.array([57133,57896,58721,58248,57785,59753,58772,54761,49832,47899,49511,48946])</span>
-<span class="c1">#</span>
-
-<span class="c1">#incurred amount</span>
-<span class="c1"># incurred_amount_triangle = pd.DataFrame({&#39;ay&#39;: np.arange(1993, 2005),</span>
-<span class="c1">#                    &#39;0&#39;:[56551, 63344, 66954,  72768, 76338,  83493,  92136,  97059,  94658,  104836,  112265,  107822],</span>
-<span class="c1">#                    &#39;1&#39;:[26907, 25706,  25502,  26613,  29399,  37080,  44671, 47808,  44919,  48968,  47921 ,np.nan],</span>
-<span class="c1">#                    &#39;2&#39;:[12910,  12497,  13034,  13663,  16012,  19807,  25963,  26658,  26905,  29487  ,np.nan,np.nan],</span>
-<span class="c1">#                    &#39;3&#39;:[7836,  7797, 8177,  9695,10904, 14191, 17438, 17590,  18725 , np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    &#39;4&#39;:[6201,  6088, 5767,  7363, 8774, 11144, 12034,  12339 , np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    &#39;5&#39;:[4555, 4289, 4623,6052,  6308, 8161, 7718 ,np.nan, np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    &#39;6&#39;:[3806, 3743,3620, 4111, 5255, 4926 ,np.nan,np.nan, np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    &#39;7&#39;:[3189, 2915, 2547, 3060, 2845 , np.nan,np.nan,np.nan, np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    &#39;8&#39;:[2792, 2252, 1804, 1901 ,np.nan , np.nan,np.nan,np.nan, np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    &#39;9&#39;:[1987, 1762, 1853 ,np.nan,np.nan , np.nan,np.nan,np.nan, np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    &#39;10&#39;:[1784, 1795 ,np.nan,np.nan,np.nan , np.nan,np.nan,np.nan, np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    &#39;11&#39;:[1068 ,np.nan,np.nan,np.nan ,np.nan,np.nan,np.nan,np.nan, np.nan,np.nan,np.nan,np.nan]</span>
-<span class="c1">#                    })</span>
-<span class="c1"># #reopenings</span>
-<span class="c1"># reopenings_triangle = pd.DataFrame({&#39;ay&#39;: np.arange(1993, 2005),</span>
-<span class="c1">#                    &#39;0&#39;:[0,  0   ,  0  ,   0 ,    0,    0,    0,    0,    0, 0 ,  0,   0   ],</span>
-<span class="c1">#                    &#39;1&#39;:[565,  540, 610, 676, 701, 1132, 1204,1006, 1135,1407,1295 ,np.nan],</span>
-<span class="c1">#                    &#39;2&#39;:[275,308, 357, 353,  469, 487, 547, 528,  660, 629 ,np.nan,np.nan],</span>
-<span class="c1">#                    &#39;3&#39;:[104 ,114,118,  149, 152, 152, 186, 185, 181 , np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    &#39;4&#39;:[48, 54, 56, 60, 68, 67,98,  87 , np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    &#39;5&#39;:[25, 34, 33, 31,32,57, 52  ,np.nan, np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    &#39;6&#39;:[19, 24, 16, 25, 31, 26  ,np.nan,np.nan, np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    &#39;7&#39;:[16, 14, 13, 17, 16  , np.nan,np.nan,np.nan, np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    &#39;8&#39;:[9,  9, 17,10  ,np.nan , np.nan,np.nan,np.nan, np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    &#39;9&#39;:[8, 5, 5  ,np.nan,np.nan , np.nan,np.nan,np.nan, np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    &#39;10&#39;:[8,7 ,np.nan,np.nan,np.nan , np.nan,np.nan,np.nan, np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    &#39;11&#39;:[5 ,np.nan,np.nan,np.nan ,np.nan,np.nan,np.nan,np.nan, np.nan,np.nan,np.nan,np.nan]</span>
-<span class="c1">#                    })</span>
-<span class="c1"># ##senza seguito</span>
-<span class="c1"># ss_triangle = pd.DataFrame({&#39;ay&#39;: np.arange(1993, 2005),</span>
-<span class="c1">#                    &#39;0&#39;:[3192, 3627,3617, 3645, 3729, 3806, 3866, 2859, 3107, 3416, 3313, 3178 ],</span>
-<span class="c1">#                    &#39;1&#39;:[2239, 2306, 2034, 1875, 1858, 2136, 1934, 2137, 1952, 1664, 1763 ,np.nan],</span>
-<span class="c1">#                    &#39;2&#39;:[1349,  1002, 846,  754, 679,  768, 988,  1044, 824, 874 ,np.nan,np.nan],</span>
-<span class="c1">#                    &#39;3&#39;:[183, 151, 124, 126, 129, 148, 290, 303, 299  , np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    &#39;4&#39;:[52, 56, 61, 38, 45, 76, 142, 113 , np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    &#39;5&#39;:[29, 33, 19, 25, 29, 60, 55  ,np.nan, np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    &#39;6&#39;:[25, 11, 12, 15, 24, 21   ,np.nan,np.nan, np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    &#39;7&#39;:[16, 14, 8, 11, 13  , np.nan,np.nan,np.nan, np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    &#39;8&#39;:[7, 7,  4, 7  ,np.nan , np.nan,np.nan,np.nan, np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    &#39;9&#39;:[4, 7, 6   ,np.nan,np.nan , np.nan,np.nan,np.nan, np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    &#39;10&#39;:[7,  7  ,np.nan,np.nan,np.nan , np.nan,np.nan,np.nan, np.nan,np.nan,np.nan,np.nan],</span>
-<span class="c1">#                    &#39;11&#39;:[4,np.nan,np.nan,np.nan ,np.nan,np.nan,np.nan,np.nan, np.nan,np.nan,np.nan,np.nan]</span>
-<span class="c1">#                    })</span>
-
-<span class="c1"># import numpy as np</span>
-<span class="c1"># j=3</span>
-<span class="c1"># ip_ = np.array([[100,100,300],[100,200,100],[100,100,100]])</span>
-<span class="c1"># in_ = np.array([[100,100,100],[100,100,100],[100,100,100]])</span>
-<span class="c1"># cn_= np.array([[1,2,3],[4,5,6],[7,8,9]])</span>
-<span class="c1">#</span>
-<span class="c1"># # trix=np.repeat(-1,j*j).reshape(j,j)</span>
-<span class="c1"># ix = np.tile(np.arange(0, j), j).reshape(j, j) + np.tile(np.arange(1, j+1),j).reshape(j,j).T</span>
 
 <div class="viewcode-block" id="LossReserve"><a class="viewcode-back" href="../api.html#lossreserve.LossReserve">[docs]</a><span class="k">class</span> <span class="nc">LossReserve</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Class to compute the loss reserve. The available models are the Fisher-Lange model and the collective risk model.</span>
+<span class="sd">    Class to compute the loss reserve. The available models are the deterministic Fisher-Lange and the collective risk model.</span>
+<span class="sd">    Input company data must be ``numpy.ndarray`` data on numbers and payments must be in triangular form:</span>
+<span class="sd">    two dimensional ``numpy.ndarray`` with shape (I,J) with I=J.</span>
 
 <span class="sd">    :param tail: set it to True when the tail estimate is required. Default False.</span>
 <span class="sd">    :type tail: ``bool``</span>
@@ -339,6 +232,8 @@
 
 <span class="sd">    :Keyword Arguments:</span>
 <span class="sd">        * *ip_tr* = (``numpy.ndarray``) --</span>
+<span class="sd">            Incremental payments triangle</span>
+<span class="sd">        * *cumulatives_tr* = (``numpy.ndarray``) --</span>
 <span class="sd">            Incremental payments triangle</span>
 <span class="sd">        * *cp_tr* = (``numpy.ndarray``) --</span>
 <span class="sd">            Cased payments triangle</span>
@@ -375,22 +270,23 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">czj_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">czj</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">j</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">j</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 
         <span class="c1">#triangles</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ip_tr</span><span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;incremental_payments&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ip_tr</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;incremental_payments&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cumulatives_tr</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;cumulatives_tr&#39;</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cp_tr</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;cased_payments&#39;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">in_tr</span><span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;incurred_number&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">in_tr</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;incurred_number&#39;</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cn_tr</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;cased_number&#39;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ap_tr</span><span class="o">=</span> <span class="kc">None</span> <span class="c1">#Il triangolo dei pagamenti medi è costruito nelle proprietà senza effetivamente definire un metodo</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ap_tr</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1">#Il triangolo dei pagamenti medi è costruito nelle proprietà senza effetivamente definire un metodo</span>
 
         <span class="c1">#variables and other objects</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reserving_method</span> <span class="o">==</span> <span class="s1">&#39;crm&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">ntr_sim</span><span class="o">=</span><span class="n">ntr_sim</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">setseed</span><span class="o">=</span><span class="n">setseed</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">mixingfpar</span><span class="o">=</span><span class="n">mixingfpar</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">mixingspar</span><span class="o">=</span><span class="n">mixingspar</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ntr_sim</span> <span class="o">=</span> <span class="n">ntr_sim</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setseed</span> <span class="o">=</span> <span class="n">setseed</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mixingfpar</span> <span class="o">=</span> <span class="n">mixingfpar</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mixingspar</span> <span class="o">=</span> <span class="n">mixingspar</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">gamma1</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">gamma</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">mixingfpar</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">gamma2</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">gamma</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">mixingspar</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">gamma3</span><span class="o">=</span><span class="n">stats</span><span class="o">.</span><span class="n">gamma</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">pois</span><span class="o">=</span><span class="n">stats</span><span class="o">.</span><span class="n">poisson</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">gamma3</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">gamma</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pois</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">poisson</span>
 
         <span class="c1">#attributes with opportunities of not standard customization</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">custom_alphas</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
@@ -404,13 +300,13 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">ssFl_</span><span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__SsComputer</span><span class="p">()</span>
 
         <span class="c1"># results</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ss_tr</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__SsTriangle</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">predicted_Inumbers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__fillNumbers</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ss_tr</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__SsTriangle</span><span class="p">()</span> <span class="c1">#triangle of settlement speed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">predicted_Inumbers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__fillNumbers</span><span class="p">()</span> <span class="c1">#individual payments triangle</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">flreserve</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__Flreserve</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">flreserve</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__Flreserve</span><span class="p">()</span> <span class="c1">#fisher-lange reserve</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reserving_method</span><span class="o">==</span><span class="s1">&#39;crm&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">crmreserve</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">msep</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">skewness</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__StochasticCRM</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">crmreserve</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">msep</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">skewness</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__StochasticCRM</span><span class="p">()</span> <span class="c1">#crm reserving: value of the reserve, mean-squared error of prediction and skewness.</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">tail</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -427,7 +323,7 @@
 
     <span class="nd">@reserving_method</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">reserving_method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var</span><span class="p">):</span>
-        <span class="k">assert</span> <span class="n">var</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;fisherlange&#39;</span><span class="p">,</span><span class="s1">&#39;crm&#39;</span><span class="p">],</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%r</span><span class="s2"> is not supported from our package&quot;</span><span class="o">%</span><span class="n">var</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">var</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;chl&#39;</span><span class="p">,</span><span class="s1">&#39;fisherlange&#39;</span><span class="p">,</span><span class="s1">&#39;crm&#39;</span><span class="p">],</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%r</span><span class="s2"> is not supported from our package&quot;</span><span class="o">%</span><span class="n">var</span><span class="p">)</span>
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">var</span><span class="p">,</span><span class="nb">str</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%r</span><span class="s2"> must be a string&quot;</span><span class="o">%</span><span class="n">var</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">var</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="n">var</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;What did you mean with </span><span class="si">%r</span><span class="s2">? &#39;reservingmethod&#39; is set to </span><span class="si">%r</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="n">var</span><span class="o">.</span><span class="n">lower</span><span class="p">()))</span>
@@ -472,7 +368,7 @@
 
     <span class="nd">@czj</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">czj</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reserving_method</span> <span class="o">==</span> <span class="s1">&#39;fisherlange&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reserving_method</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;chl&#39;</span><span class="p">,</span><span class="s1">&#39;fisherlange&#39;</span><span class="p">]:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__czj</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">var</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -499,30 +395,84 @@
 
     <span class="nd">@ip_tr</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">ip_tr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var</span><span class="p">):</span>
-        <span class="n">var</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">var</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
-        <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">var</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;The Incremental Payments triangle must be a two dimensional numpy.ndarray&#39;</span><span class="p">)</span>
-        <span class="k">assert</span> <span class="n">var</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">var</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;The Incremental Payments triangle must be a two dimensional with same shape on both dimensions. </span><span class="se">\n</span><span class="s1"> The triangle shape is: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="o">%</span><span class="nb">str</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reserving_method</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;chl&#39;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">var</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__ip_tr</span> <span class="o">=</span> <span class="n">var</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">var</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">var</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+                <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">var</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+                    <span class="s1">&#39;The Incremental Payments triangle must be a two dimensional numpy.ndarray&#39;</span><span class="p">)</span>
+                <span class="k">assert</span> <span class="n">var</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">var</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+                    <span class="s1">&#39;The Incremental Payments triangle must be a two dimensional with same shape on both dimensions. </span><span class="se">\n</span><span class="s1"> The triangle shape is: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span>
+                        <span class="n">var</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
 
-        <span class="n">nans</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">var</span><span class="p">)</span> <span class="c1">#sia con np.nan di numpy che con NaN di python te li trova. Ricordiamoci che è un punto delicato</span>
+                <span class="n">nans</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span>
+                    <span class="n">var</span><span class="p">)</span>  <span class="c1"># sia con np.nan di numpy che con NaN di python te li trova. Ricordiamoci che è un punto delicato</span>
 
-        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">nans</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">nans</span><span class="p">])</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">j</span><span class="p">,</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Check your Incremental Payments input.</span><span class="se">\n</span><span class="s1"> Not valid values in the upper triangle.&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__ip_tr</span> <span class="o">=</span> <span class="n">var</span>
+                <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">nans</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">nans</span><span class="p">])</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">j</span><span class="p">,</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+                        <span class="s1">&#39;Check your Incremental Payments input.</span><span class="se">\n</span><span class="s1"> Not valid values in the upper triangle.&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__ip_tr</span> <span class="o">=</span> <span class="n">var</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reserving_method</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;fisher_lange&#39;</span><span class="p">,</span><span class="s1">&#39;crm&#39;</span><span class="p">]:</span>
+            <span class="n">var</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">var</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+            <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">var</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;The Incremental Payments triangle must be a two dimensional numpy.ndarray&#39;</span><span class="p">)</span>
+            <span class="k">assert</span> <span class="n">var</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">var</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;The Incremental Payments triangle must be a two dimensional with same shape on both dimensions. </span><span class="se">\n</span><span class="s1"> The triangle shape is: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="o">%</span><span class="nb">str</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+
+            <span class="n">nans</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">var</span><span class="p">)</span> <span class="c1">#sia con np.nan di numpy che con NaN di python te li trova. Ricordiamoci che è un punto delicato</span>
+
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">nans</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">nans</span><span class="p">])</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">j</span><span class="p">,</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Check your Incremental Payments input.</span><span class="se">\n</span><span class="s1"> Not valid values in the upper triangle.&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__ip_tr</span> <span class="o">=</span> <span class="n">var</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">cumulatives_tr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__cumulatives_tr</span>
+
+    <span class="nd">@cumulatives_tr</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">cumulatives_tr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reserving_method</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;chl&#39;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ip_tr</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">var</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">var</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+                <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">var</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+                    <span class="s1">&#39;The Incremental Payments triangle must be a two dimensional numpy.ndarray&#39;</span><span class="p">)</span>
+                <span class="k">assert</span> <span class="n">var</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">var</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+                    <span class="s1">&#39;The Incremental Payments triangle must be a two dimensional with same shape on both dimensions. </span><span class="se">\n</span><span class="s1"> The triangle shape is: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span>
+                        <span class="n">var</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+
+                <span class="n">nans</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span>
+                    <span class="n">var</span><span class="p">)</span>  <span class="c1"># sia con np.nan di numpy che con NaN di python te li trova. Ricordiamoci che è un punto delicato</span>
+
+                <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">nans</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">nans</span><span class="p">])</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">j</span><span class="p">,</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+                        <span class="s1">&#39;Check your Incremental Payments input.</span><span class="se">\n</span><span class="s1"> Not valid values in the upper triangle.&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__cumulatives_tr</span> <span class="o">=</span> <span class="n">var</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">cumuls</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ip_tr</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">cumuls</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+                    <span class="n">cumuls</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">cumuls</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">cumuls</span><span class="p">[:,</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__cumulatives_tr</span> <span class="o">=</span> <span class="n">cumuls</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__cumulatives_tr</span> <span class="o">=</span> <span class="kc">None</span>
+
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">cp_tr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__cp_tr</span>
 
     <span class="nd">@cp_tr</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">cp_tr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var</span><span class="p">):</span>
-        <span class="n">var</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">var</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
-        <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">var</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;The Cased Payments triangle must be a two dimensional numpy.ndarray&#39;</span><span class="p">)</span>
-        <span class="k">assert</span> <span class="n">var</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">var</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;The Cased Payments triangle must be a two dimensional with same shape on both dimensions. </span><span class="se">\n</span><span class="s1"> The triangle shape is: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="o">%</span><span class="nb">str</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reserving_method</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;fisher_lange&#39;</span><span class="p">,</span> <span class="s1">&#39;crm&#39;</span><span class="p">]:</span>
+            <span class="n">var</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">var</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+            <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">var</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;The Cased Payments triangle must be a two dimensional numpy.ndarray&#39;</span><span class="p">)</span>
+            <span class="k">assert</span> <span class="n">var</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">var</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;The Cased Payments triangle must be a two dimensional with same shape on both dimensions. </span><span class="se">\n</span><span class="s1"> The triangle shape is: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="o">%</span><span class="nb">str</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
 
-        <span class="n">nans</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">var</span><span class="p">)</span> <span class="c1">#sia con np.nan di numpy che con NaN di python te li trova. Ricordiamoci che è un punto delicato</span>
+            <span class="n">nans</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">var</span><span class="p">)</span> <span class="c1">#sia con np.nan di numpy che con NaN di python te li trova. Ricordiamoci che è un punto delicato</span>
 
-        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">nans</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">nans</span><span class="p">])</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">j</span><span class="p">,</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Check your Cased Payments input.</span><span class="se">\n</span><span class="s1"> Not valid values in the upper triangle.&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__cp_tr</span> <span class="o">=</span> <span class="n">var</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">nans</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">nans</span><span class="p">])</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">j</span><span class="p">,</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Check your Cased Payments input.</span><span class="se">\n</span><span class="s1"> Not valid values in the upper triangle.&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__cp_tr</span> <span class="o">=</span> <span class="n">var</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__cp_tr</span> <span class="o">=</span> <span class="n">var</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">in_tr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -530,15 +480,18 @@
 
     <span class="nd">@in_tr</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">in_tr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var</span><span class="p">):</span>
-        <span class="n">var</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">var</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
-        <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">var</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;The Incurred Number triangle must be a two dimensional numpy.ndarray&#39;</span><span class="p">)</span>
-        <span class="k">assert</span> <span class="n">var</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">var</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;The Incurred Number triangle must be a two dimensional with same shape on both dimensions. </span><span class="se">\n</span><span class="s1"> The triangle shape is: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="o">%</span><span class="nb">str</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reserving_method</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;fisher_lange&#39;</span><span class="p">,</span> <span class="s1">&#39;crm&#39;</span><span class="p">]:</span>
+            <span class="n">var</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">var</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+            <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">var</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;The Incurred Number triangle must be a two dimensional numpy.ndarray&#39;</span><span class="p">)</span>
+            <span class="k">assert</span> <span class="n">var</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">var</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;The Incurred Number triangle must be a two dimensional with same shape on both dimensions. </span><span class="se">\n</span><span class="s1"> The triangle shape is: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="o">%</span><span class="nb">str</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
 
-        <span class="n">nans</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">var</span><span class="p">)</span> <span class="c1">#sia con np.nan di numpy che con NaN di python te li trova. Ricordiamoci che è un punto delicato</span>
+            <span class="n">nans</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">var</span><span class="p">)</span> <span class="c1">#sia con np.nan di numpy che con NaN di python te li trova. Ricordiamoci che è un punto delicato</span>
 
-        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">nans</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">nans</span><span class="p">])</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">j</span><span class="p">,</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Check your Incurred Number input. </span><span class="se">\n</span><span class="s1"> Not valid values in the upper triangle.&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__in_tr</span> <span class="o">=</span> <span class="n">var</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">nans</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">nans</span><span class="p">])</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">j</span><span class="p">,</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Check your Incurred Number input. </span><span class="se">\n</span><span class="s1"> Not valid values in the upper triangle.&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__in_tr</span> <span class="o">=</span> <span class="n">var</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__in_tr</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">cn_tr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -546,15 +499,18 @@
 
     <span class="nd">@cn_tr</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">cn_tr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var</span><span class="p">):</span>
-        <span class="n">var</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">var</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
-        <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">var</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;The Cased Number triangle must be a two dimensional numpy.ndarray&#39;</span><span class="p">)</span>
-        <span class="k">assert</span> <span class="n">var</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">var</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;The Cased Number triangle must be a two dimensional with same shape on both dimensions. </span><span class="se">\n</span><span class="s1"> The triangle shape is: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="o">%</span><span class="nb">str</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reserving_method</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;fisher_lange&#39;</span><span class="p">,</span> <span class="s1">&#39;crm&#39;</span><span class="p">]:</span>
+            <span class="n">var</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">var</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+            <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">var</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;The Cased Number triangle must be a two dimensional numpy.ndarray&#39;</span><span class="p">)</span>
+            <span class="k">assert</span> <span class="n">var</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">var</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;The Cased Number triangle must be a two dimensional with same shape on both dimensions. </span><span class="se">\n</span><span class="s1"> The triangle shape is: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="o">%</span><span class="nb">str</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
 
-        <span class="n">nans</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">var</span><span class="p">)</span> <span class="c1">#sia con np.nan di numpy che con NaN di python te li trova. Ricordiamoci che è un punto delicato</span>
+            <span class="n">nans</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">var</span><span class="p">)</span> <span class="c1">#sia con np.nan di numpy che con NaN di python te li trova. Ricordiamoci che è un punto delicato</span>
 
-        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">nans</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">nans</span><span class="p">])</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">j</span><span class="p">,</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Check your Cased Number input.</span><span class="se">\n</span><span class="s1"> Not valid values in the upper triangle.&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__cn_tr</span> <span class="o">=</span> <span class="n">var</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">nans</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">nans</span><span class="p">])</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">j</span><span class="p">,</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Check your Cased Number input.</span><span class="se">\n</span><span class="s1"> Not valid values in the upper triangle.&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__cn_tr</span> <span class="o">=</span> <span class="n">var</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__cn_tr</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">ntr_sim</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -588,7 +544,7 @@
 
     <span class="nd">@mixingfpar</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">mixingfpar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var</span><span class="p">):</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">reserving_method</span> <span class="o">==</span> <span class="s2">&quot;fisherlange&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reserving_method</span> <span class="o">==</span> <span class="s2">&quot;crm&quot;</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">var</span><span class="p">,</span><span class="nb">dict</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;The frequency mixing parameters for the crm reserving model must be provided as a dictionary&quot;</span><span class="p">)</span>
                 <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="n">item</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;scale&quot;</span><span class="p">,</span><span class="s2">&quot;a&quot;</span><span class="p">]),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;The mixing frequency parameters for the crm reserving model must be provided as &#39;a&#39; and &#39;scale&#39;. See: https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.gamma.html&quot;</span><span class="p">)</span>
@@ -604,7 +560,7 @@
 
     <span class="nd">@mixingspar</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">mixingspar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var</span><span class="p">):</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">reserving_method</span> <span class="o">==</span> <span class="s2">&quot;fisherlange&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reserving_method</span> <span class="o">==</span> <span class="s2">&quot;crm&quot;</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="nb">dict</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
                     <span class="s2">&quot;The severity mixing parameters for the crm reserving model must be provided as a dictionary&quot;</span><span class="p">)</span>
@@ -857,7 +813,7 @@
             <span class="n">diagcml_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">predicted_Ipayments</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">crmul_ay</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">predicted_Ipayments</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">crmul_ay</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">predicted_Ipayments</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">diagcml_</span>
 
-        <span class="k">for</span> <span class="n">ay</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">predicted_Ipayments</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">lr</span><span class="o">.</span><span class="n">tail</span><span class="p">):</span> <span class="c1">#add to the estimated random cumulative payments the upper triangle amounts</span>
+        <span class="k">for</span> <span class="n">ay</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">predicted_Ipayments</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">tail</span><span class="p">):</span> <span class="c1">#add to the estimated random cumulative payments the upper triangle amounts</span>
             <span class="n">diagcml_</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">predicted_Ipayments</span><span class="p">[</span><span class="n">ay</span><span class="p">,:(</span><span class="bp">self</span><span class="o">.</span><span class="n">j</span><span class="o">-</span><span class="n">ay</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">tail</span><span class="o">+</span><span class="mi">1</span><span class="p">)])[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1">#separate it to make it readable</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">crmul_ay</span><span class="p">[</span><span class="n">ay</span><span class="p">]</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">crmul_ay</span><span class="p">[</span><span class="n">ay</span><span class="p">]</span><span class="o">+</span><span class="n">diagcml_</span>
 
@@ -867,7 +823,6 @@
 <div class="viewcode-block" id="LossReserve.SSPlot"><a class="viewcode-back" href="../api.html#lossreserve.LossReserve.SSPlot">[docs]</a>    <span class="k">def</span> <span class="nf">SSPlot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">start_</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        It plots the settlement speed vector for each accident year.</span>
-
 <span class="sd">        :param start_: starting accident year from which to plot.</span>
 <span class="sd">        :type start_: ``int``</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -883,7 +838,6 @@
 <div class="viewcode-block" id="LossReserve.AverageCostPlot"><a class="viewcode-back" href="../api.html#lossreserve.LossReserve.AverageCostPlot">[docs]</a>    <span class="k">def</span> <span class="nf">AverageCostPlot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        It plots the mean average cost for each development year.</span>
-
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">x_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">j</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">tail</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Plot of the Average Cost (mean of each DY, data and predictions)&#39;</span><span class="p">)</span>
@@ -896,7 +850,6 @@
 <div class="viewcode-block" id="LossReserve.AlphaPlot"><a class="viewcode-back" href="../api.html#lossreserve.LossReserve.AlphaPlot">[docs]</a>    <span class="k">def</span> <span class="nf">AlphaPlot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        It plots the Fisher-Lange alpha.</span>
-
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">x_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">j</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">tail</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Plot of Alpha&#39;</span><span class="p">)</span>
@@ -947,24 +900,8 @@
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> CRM reserve: &#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">crmreserve</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> CRM msep: &#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">msep</span><span class="p">)</span></div></div>
 
-<span class="c1"># claims_inflation= np.array([1.06,	1.053,	1.045,	1.038,	1.03,	1.03,	1.03,	1.03,	1.03,	1.03,	1.03, 1.03])</span>
-<span class="c1"># czj=np.array([.5,.75,1.,1.25,1.5,2.,2.5,3.,4.,5.,7.,.01])</span>
 
-<span class="c1"># lr = LossReserve(tail=True,</span>
-<span class="c1">#                incremental_payments=gemdata.IPtriangle,</span>
-<span class="c1">#                cased_payments=gemdata.cased_amount_triangle,</span>
-<span class="c1">#                cased_number=gemdata.cased_number_triangle,</span>
-<span class="c1">#                reported_claims=gemdata.reported_,</span>
-<span class="c1">#                incurred_number=gemdata.in_triangle,</span>
-<span class="c1">#                czj=gemdata.czj,</span>
-<span class="c1">#                reserving_method=&#39;crm&#39;,</span>
-<span class="c1">#                ntr_sim=int(10),</span>
-<span class="c1">#                mixingfpar={&#39;a&#39;:1/.08**2,</span>
-<span class="c1">#                            &#39;scale&#39;:.08**2},</span>
-<span class="c1">#                mixingspar={&#39;a&#39;:1/.08**2,&#39;scale&#39;:.08**2},</span>
-<span class="c1">#                claims_inflation=gemdata.claims_inflation)</span>
-<span class="c1">#</span>
-<span class="c1"># lr.claimsreserving()</span>
+
 </pre></div>
 
               </div>

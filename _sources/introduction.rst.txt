@@ -1,9 +1,9 @@
 Introduction
 ==================================
 
-GemAct is an **actuarial package**, based on the collective risk theory framework, that offers a comprehensive set of tools for **non-life** (re)insurance **pricing**, stochastic **claims reserving**, and **risk aggregation**.
+GEMAct is an **actuarial package**, based on the collective risk theory framework, that offers a comprehensive set of tools for **non-life** (re)insurance **pricing**, stochastic **claims reserving**, and **risk aggregation**.
 
-The variety of available functionalities makes GemAct modeling very flexible and provides actuarial scientists and practitioners with a powerful tool that fits into the expanding community of **Python** programming language.
+The variety of available functionalities makes GEMAct modeling very flexible and provides actuarial scientists and practitioners with a powerful tool that fits into the expanding community of **Python** programming language.
 
 Scope
 --------
@@ -16,7 +16,7 @@ Scope
 Reinsurance treaties
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The GemAct package can be used for pricing the following reinsurance treaties and their combinations.
+The GEMAct package can be used for pricing the following reinsurance treaties and their combinations.
 
 * Excess-of-Loss (XL).
 * Reinstatements.
@@ -27,9 +27,8 @@ The GemAct package can be used for pricing the following reinsurance treaties an
 Computational methods for pricing
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The computational methods offered by the GemAct package for the collective risk model computation are either simulative or non-simulative.
+The computational methods offered by the GEMAct package for the collective risk model computation are either simulative or non-simulative.
 
 * Recursive method (exact computation).
 * Discrete Fourier transform, via the Fast Fourier Transform (FFT) algorithm. 
-* Quasi-Monte Carlo simulation.
 * Monte Carlo simulation.
