@@ -4,12 +4,11 @@ This script contains helper function to be used in the main scripts "lossmodel.p
 
 import numpy as np
 from scipy.interpolate import interp1d
-from . import sobol as sbl
+import sobol as sbl
 
-from twiggy import quick_setup,log
-quick_setup()
-logger = log.name('hfns')
-
+import logging
+logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
+logger = logging.getLogger('hfns')
 
 def ecdf(x_):
     """
@@ -48,7 +47,6 @@ def sobol_generator(n, dim,skip=0):
     return sbl.i4_sobol_generate(m=dim, n=n,skip=skip)
 
 #LossReserve
-
 def normalizerNans(x_):
     """
     It normalizes a vector with nan values.
@@ -64,32 +62,6 @@ def normalizerNans(x_):
     if np.sum(np.isnan(x_)) < x_.shape[0]:
         x_[~np.isnan(x_)]=x_[~np.isnan(x_)]/np.sum(x_[~np.isnan(x_)])
     return x_
-
-#LossAggregation
-
-# def iMat(d):
-#     if d == 1:
-#         return np.array([0, 1])
-#     else:
-#         temp = iMat(d - 1)
-#         if d - 1 == 1:
-#             ncol = temp.shape[0]
-#         else:
-#             ncol = temp.shape[1]
-#         return np.concatenate((np.repeat([0, 1], ncol).reshape(1, 2 * ncol), np.tile(temp, 2).reshape(d - 1, 2 * ncol)),
-#                               axis=0)
-
-# def ClaytonCDF(x, theta1=1., theta2=1. / 2, scale1=1., scale2=1. / 2, par=1.5):
-#
-#     if (x[0] > 0. and x[1] > 0.):
-#
-#         x1 = 1 - ((1 + theta1 * x[0] / scale1) ** -(1 / theta1))
-#         x2 = 1 - ((1 + theta2 * x[1] / scale2) ** -(1 / theta2))
-#         return (x1 ** -par + x2 ** -par - 1) ** -(1 / par)
-#     else:
-#         return 0.
-
-##### Clayton #####
 
 class ClaytonCDF:
     """
@@ -178,37 +150,6 @@ class FrankCDF:
             1 + np.prod(np.exp(-self.par * np.minimum(x[PosIndex, :], 1)) - 1, axis=1) / (np.exp(-self.par) - 1) ** (d - 1))
         return output
 
-# def FrankCDF(x, par):
-#     """
-#     Frank cumulative distribution function.
-#
-#     :param x: Array with shape (N,d) where N is the number of points and d the dimension
-#     :type x: numpy.ndarray
-#     :param par: Frank copula parameter.
-#     :type par: float
-#
-#     :return: Frank c.d.f. for each row of x.
-#     :rtype: numpy.ndarray
-#     """
-#     if par < 0:
-#         raise ValueError("The input 'par' must be non-negative")
-#     if len(x.shape) == 1:
-#         if (x <= 0).any():
-#             return 0
-#         else:
-#             d = len(x)
-#             return -1 / par * np.log(1 + np.prod(np.exp(-par * np.minimum(x, 1)) - 1) / (np.exp(-par) - 1) ** (d - 1))
-#     N = len(x)
-#     d = len(x[0])
-#     output = np.array([0.] * N)
-#     PosIndex = ~np.array(x <= 0).any(axis=1)
-#     output[PosIndex] = -1 / par * np.log(
-#         1 + np.prod(np.exp(-par * np.minimum(x[PosIndex, :], 1)) - 1, axis=1) / (np.exp(-par) - 1) ** (d - 1))
-#     return output
-
-
-##### Gumbel #####
-
 ## GumbelCDF
 class GumbelCDF:
     """
@@ -252,171 +193,6 @@ class GumbelCDF:
         output[PosIndex] = np.exp(-np.sum((-np.log(np.minimum(x[PosIndex, :], 1))) ** self.par, axis=1) ** (1 / self.par))
         return output
 
-
-# def GumbelCDF(x, par):
-#     """
-#     Gumbel cumulative distribution function.
-#
-#     :param x: Array with shape (N,d) where N is the number of points and d the dimension
-#     :type x: numpy.ndarray
-#     :param par: Gumbel copula parameter.
-#     :type par: float
-#
-#     :return: Gumbel c.d.f. for each row of x.
-#     :rtype: numpy.ndarray
-#     """
-#     if par < 1:
-#         raise ValueError("The input 'par' must be non-negative")
-#     if len(x.shape) == 1:
-#         if (x <= 0).any():
-#             return 0
-#         else:
-#             return np.exp(-np.sum((-np.log(np.minimum(x, 1))) ** par) ** (1 / par))
-#     N = len(x)
-#     output = np.array([0.] * N)
-#     PosIndex = ~np.array(x <= 0).any(axis=1)
-#     output[PosIndex] = np.exp(-np.sum((-np.log(np.minimum(x[PosIndex, :], 1))) ** par, axis=1) ** (1 / par))
-#     return output
-
-### Marginals ###
-class MarginalCdf2D:
-    def __init__(self,dist1,dist2,d_la):
-        self.dist1=dist1
-        self.dist2=dist2
-        self.d_la=d_la
-
-    def marginal_cdf(self,x):
-
-        if len(x.shape) == 1:
-            return np.array([self.dist1.cdf(x[0]), self.dist2.cdf(x[1])])
-
-        out_= np.zeros(x.shape[0]*x.shape[1]).reshape(x.shape[0],-1)
-        out_[:,0]= self.dist1.cdf(x[:,0])
-        out_[:,1] = self.dist2.cdf(x[:,1])
-        return out_
-
-class MarginalCdf3D:
-    def __init__(self,
-                 dist1,
-                 dist2,
-                 dist3,
-                 d_la):
-        self.dist1=dist1
-        self.dist2=dist2
-        self.dist3=dist3
-        self.d_la=d_la
-
-    def marginal_cdf(self,x):
-        if len(x.shape) == 1:
-            return np.array([self.dist1.cdf(x[0]), self.dist2.cdf(x[1]),self.dist3.cdf(x[2])])
-
-        out_= np.zeros(x.shape[0]*x.shape[1]).reshape(x.shape[0],-1)
-        out_[:,0]= self.dist1.cdf(x[:,0])
-        out_[:,1] = self.dist2.cdf(x[:,1])
-        out_[:,2] = self.dist3.cdf(x[:,2])
-        return out_
-
-class MarginalCdf4D:
-    def __init__(self,
-                 dist1,
-                 dist2,
-                 dist3,
-                 dist4,
-                 d_la):
-        self.dist1=dist1
-        self.dist2=dist2
-        self.dist3=dist3
-        self.dist4=dist4
-        self.d_la=d_la
-
-    def marginal_cdf(self,x):
-        if len(x.shape) == 1:
-            return np.array([self.dist1.cdf(x[0]),
-                             self.dist2.cdf(x[1]),
-                             self.dist3.cdf(x[2]),
-                             self.dist4.cdf(x[3])])
-
-        out_= np.zeros(x.shape[0]*x.shape[1]).reshape(x.shape[0],-1)
-        out_[:,0]= self.dist1.cdf(x[:,0])
-        out_[:,1] = self.dist2.cdf(x[:,1])
-        out_[:,2] = self.dist3.cdf(x[:,2])
-        out_[:,3] = self.dist4.cdf(x[:,3])
-        return out_
-
-class MarginalCdf5D:
-    def __init__(self,
-                 dist1,
-                 dist2,
-                 dist3,
-                 dist4,
-                 dist5,
-                 d_la):
-
-        self.dist1=dist1
-        self.dist2=dist2
-        self.dist3=dist3
-        self.dist4=dist4
-        self.dist5 = dist5
-        self.d_la=d_la
-
-    def marginal_cdf(self,x):
-        if len(x.shape) == 1:
-            return np.array([self.dist1.cdf(x[0]),
-                             self.dist2.cdf(x[1]),
-                             self.dist3.cdf(x[2]),
-                             self.dist4.cdf(x[3]),
-                             self.dist5.cdf(x[3])])
-
-        out_= np.zeros(x.shape[0]*x.shape[1]).reshape(x.shape[0],-1)
-        out_[:,0]= self.dist1.cdf(x[:,0])
-        out_[:,1] = self.dist2.cdf(x[:,1])
-        out_[:,2] = self.dist3.cdf(x[:,2])
-        out_[:,3] = self.dist4.cdf(x[:,3])
-        out_[:,4] = self.dist5.cdf(x[:,4])
-        return out_
-
-# def ClaytonCDF(x, par=1.5,d=2):
-#     """
-#     Clayton cumulative distribution function.
-#
-#     :param x: vettore
-#     :type x: numpy.ndarray
-#     :param par: Clayton parameter.
-#     :type par: float
-#     :param d: Copula dimension.
-#     :type d: int
-#
-#     :return: clayton cdf
-#     :rtype: numpy.ndarray
-#     """
-#     if (x>0.).all():
-#         if (x == 1.).any():
-#             return 1.
-#         else:
-#             return (np.sum(x**-par)-d+1) ** -(1 / par)
-#         # return (x[0] ** -par + x[1] ** -par - 1) ** -(1 / par)
-#     else:
-#         return 0.
-#
-# def GumbelCDF(x, par=1):
-#
-#     if (x > 0.).all():
-#         if (x == 1.).any():
-#             return 1.
-#         else:
-#             return np.exp(-(np.sum((-np.log(x)) ** par)**(1 / par)))
-#     else:
-#         return 0.
-
-#aggiungi la copula
-def Cop(x): #input matrice le cui colonne sono punti.
-    return np.apply_along_axis(func1d=ClaytonCDF,arr=x,axis=0)
-
-def v_h(b, h, Copula, Mat):
-    # alpha= d/(d+1)
-    s = (-1) ** np.sum(Mat, axis=0)
-    return sum(Copula(b.reshape(2, 1) + h * Mat) * s)
-
 def lrcrm_f1(x,dist):
     """
     It simulates a random number from a poisson distribution.
@@ -446,3 +222,24 @@ def lrcrm_f2(x,dist):
     :rtype: numpy.ndarray
     """
     return np.sum(dist(a=x[1],scale=x[2]).rvs(int(x[0])))
+
+def cartesian_product(*arrays):
+    """
+    Generates the matrix points where copula is computed.
+
+    :param d: dimension.
+    :type d: ``int``
+    :return: matrix of points.
+    :rtype:``numpy.ndarray``
+    """
+    broadcastable = np.ix_(*arrays)
+    broadcasted = np.broadcast_arrays(*broadcastable)
+    rows, cols = np.prod(broadcasted[0].shape), len(broadcasted)
+    dtype = np.result_type(*arrays)
+
+    out = np.empty(rows * cols, dtype=dtype)
+    start, end = 0, rows
+    for a in broadcasted:
+        out[start:end] = a.reshape(-1)
+        start, end = end, end + rows
+    return out.reshape(cols, rows)
