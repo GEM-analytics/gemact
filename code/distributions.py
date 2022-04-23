@@ -1,4 +1,5 @@
 import numpy as np
+import time
 # from scipy import rand ---> remove?
 import scipy.stats
 import scipy.special
@@ -9,9 +10,7 @@ from twiggy import quick_setup, log
 quick_setup()
 logger= log.name('lossaggregation')
 
-## Distribution Wrapper Class
-class _DiscrDistributionWrapper():
-
+class _Distribution():
     """
     Wrapper for discrete distributions. Parent (private) class to be inherited.
     """
@@ -22,55 +21,34 @@ class _DiscrDistributionWrapper():
     @property
     def dist(self):
         return self.__dist
+    
+    # @dist.setter
+    # def dist(self, value):
+    #     self.__dist = value
 
-    def rvs(self, size=1, random_state=None):
-        """
-        Random variates generator function.
+    def rvs(self, size=1, random_state=None, **kwargs):
+            """
+            Random variates generator function.
 
-        :param size: random variates sample size (default=1).
-        :type size: int, optional
-        :param random_state: random state for the random number generator (default=None).
-        :type random_state: int, optional
-        :return: random variates.
-        :rtype: numpy.int or numpy.ndarray
+            :param size: random variates sample size (default=1).
+            :type size: int, optional
+            :param random_state: random state for the random number generator (default=None).
+            :type random_state: int, optional
+            :return: random variates.
+            :rtype: numpy.int or numpy.ndarray
 
-        """
-        random_state = 1234 if random_state is None else random_state
-        assert isinstance(random_state, int), logger.error("random_state has to be an integer")
+            """
+            random_state = int(time.time()) if random_state is None else random_state
+            assert isinstance(random_state, int), logger.error("random_state has to be an integer")
 
-        try:
-            size=int(size)
-        except:
-            logger.error('Please provide size as an integer')
+            try:
+                size=int(size)
+            except:
+                logger.error('Please provide size as an integer')
 
-        return self.dist.rvs(size=size, random_state=random_state)
+            return self.dist.rvs(size=size, random_state=random_state, **kwargs)
 
-    def pmf(self, k):
-        """
-        Probability mass function.
-
-        :param k: quantile where probability mass function is evaluated.
-        :type k: int
-
-        :return: probability mass function.
-        :rtype: numpy.float64 or numpy.ndarray
-
-        """
-        return self.dist.pmf(k=k)
-
-    def logpmf(self, k):
-        """
-        Natural logarithm of the probability mass function.
-
-        :param k: quantile where the (natural) probability mass function logarithm is evaluated.
-        :type k: int
-        :return: natural logarithm of the probability mass function
-        :rtype: numpy.float64 or numpy.ndarray
-
-        """
-        return self.dist.logpmf(k=k)
-
-    def cdf(self, k):
+    def cdf(self, k, **kwargs):
         """
         Cumulative distribution function.
 
@@ -80,9 +58,9 @@ class _DiscrDistributionWrapper():
         :rtype: numpy.float64 or numpy.ndarray
 
         """
-        return self.dist.cdf(k=k)
+        return self.dist.cdf(k=k, **kwargs)
 
-    def logcdf(self, k):
+    def logcdf(self, k, **kwargs):
         """
         Log of the cumulative distribution function.
 
@@ -92,9 +70,9 @@ class _DiscrDistributionWrapper():
         :rtype: numpy.float64 or numpy.ndarray
 
         """
-        return self.dist.logcdf(k=k)
+        return self.dist.logcdf(k=k, **kwargs)
 
-    def sf(self, k):
+    def sf(self, k, **kwargs):
         """
         Survival function.
 
@@ -104,9 +82,9 @@ class _DiscrDistributionWrapper():
         :rtype: numpy.float64 or numpy.ndarray
 
         """
-        return self.dist.sf(k=k)
+        return self.dist.sf(k=k, **kwargs)
 
-    def logsf(self, k):
+    def logsf(self, k, **kwargs):
         """
         Natural logarithm of the survival function.
 
@@ -116,9 +94,9 @@ class _DiscrDistributionWrapper():
         :rtype: numpy.float64 or numpy.ndarray
 
         """
-        return self.dist.logsf(k=k)
+        return self.dist.logsf(k=k, **kwargs)
 
-    def ppf(self, q):
+    def ppf(self, q, **kwargs):
         """
         Percent point function, a.k.a. the quantile function, inverse of cdf.
 
@@ -128,9 +106,9 @@ class _DiscrDistributionWrapper():
         :rtype: numpy.float64 or numpy.ndarray
 
         """
-        return self.dist.ppf(q=q)
+        return self.dist.ppf(q=q, **kwargs)
 
-    def isf(self, q):
+    def isf(self, q, **kwargs):
         """
         Inverse survival function (inverse of sf).
 
@@ -140,7 +118,7 @@ class _DiscrDistributionWrapper():
         :rtype: numpy.float64 or numpy.ndarray
 
         """
-        return self.dist.ppf(1 - q)
+        return self.dist.ppf(1 - q, **kwargs)
 
     def stats(self, moments='mv'):
         """
@@ -154,7 +132,7 @@ class _DiscrDistributionWrapper():
         """
         return self.dist.stats(moments=moments)
 
-    def entropy(self):
+    def entropy(self, **kwargs):
         """
         (Differential) entropy of the rv.
 
@@ -162,7 +140,7 @@ class _DiscrDistributionWrapper():
         :rtype: numpy.ndarray
 
         """
-        return self.dist.entropy()
+        return self.dist.entropy(**kwargs)
 
     def expect(self, func, lb=None, ub=None, conditional=False):
         """
@@ -183,7 +161,7 @@ class _DiscrDistributionWrapper():
         """
         return self.dist.expect(func, lb=lb, ub=ub, conditional=conditional)
 
-    def median(self):
+    def median(self, **kwargs):
         """
         Median of the distribution.
 
@@ -191,9 +169,9 @@ class _DiscrDistributionWrapper():
         :rtype: float
 
         """
-        return self.dist.median()
+        return self.dist.median(**kwargs)
 
-    def mean(self):
+    def mean(self, **kwargs):
         """
         Mean of the distribution.
 
@@ -201,9 +179,9 @@ class _DiscrDistributionWrapper():
         :rtype: float
 
         """
-        return self.dist.mean()
+        return self.dist.mean(**kwargs)
 
-    def var(self):
+    def var(self, **kwargs):
         """
         Variance of the distribution.
 
@@ -211,9 +189,9 @@ class _DiscrDistributionWrapper():
         :rtype: float
 
         """
-        return self.dist.var()
+        return self.dist.var(**kwargs)
 
-    def std(self):
+    def std(self, **kwargs):
         """
         Standard deviation of the distribution.
 
@@ -221,9 +199,9 @@ class _DiscrDistributionWrapper():
         :rtype: float
 
         """
-        return self.dist.std()
+        return self.dist.std(**kwargs)
 
-    def interval(self, alpha):
+    def interval(self, **kwargs):
         """
         Endpoints of the range that contains fraction alpha [0, 1] of the distribution.
 
@@ -233,26 +211,129 @@ class _DiscrDistributionWrapper():
         :rtype: tuple
 
         """
-        return self.dist.interval(alpha=alpha)
+        return self.dist.interval(**kwargs)
+    
+    def moment(self, n):
+        """
+        Non-central moment of order n.
+
+        :param n: moment of order n
+        :return: non-central moment of order n
+        """
+        return self.dist.moment(n=n)
+
+## Distribution Wrapper Class
+class _DiscreteDistribution(_Distribution):
+
+    """
+    Wrapper for discrete distributions. Parent (private) class to be inherited.
+    """
+
+    def __init__(self):
+        super().__init__()
+        self.__dist = None
+
+    @property
+    def dist(self):
+        return self.__dist
+    
+    # @dist.setter
+    # def dist(self, value):
+    #     self.__dist = value
+
+    def pmf(self, k, **kwargs):
+        """
+        Probability mass function.
+
+        :param k: quantile where probability mass function is evaluated.
+        :type k: int
+
+        :return: probability mass function.
+        :rtype: numpy.float64 or numpy.ndarray
+
+        """
+        return self.dist.pmf(k=k, **kwargs)
+
+    def logpmf(self, k, **kwargs):
+        """
+        Natural logarithm of the probability mass function.
+
+        :param k: quantile where the (natural) probability mass function logarithm is evaluated.
+        :type k: int
+        :return: natural logarithm of the probability mass function
+        :rtype: numpy.float64 or numpy.ndarray
+
+        """
+        return self.dist.logpmf(k=k, **kwargs)
+
+## Distribution Wrapper Class
+class _ContinuousDistribution(_Distribution):
+
+    """
+    Wrapper for continuous distributions. Parent (private) class to be inherited.
+    """
+
+    def __init__(self):
+        super().__init__()
+        self.__dist = None
+
+    @property
+    def dist(self):
+        return self.__dist
+    
+    @dist.setter
+    def dist(self, value):
+        self.__dist = value
+
+    def pdf(self, k, **kwargs):
+        """
+        Probability density function.
+
+        :param k: quantile where probability mass function is evaluated.
+        :type k: int
+
+        :return: probability mass function.
+        :rtype: numpy.float64 or numpy.ndarray
+
+        """
+        return self.dist.pdf(k=k, **kwargs)
+
+    def logpdf(self, k, **kwargs):
+        """
+        Natural logarithm of the probability denisty function.
+
+        :param k: quantile where the (natural) probability mass function logarithm is evaluated.
+        :type k: int
+        :return: natural logarithm of the probability mass function
+        :rtype: numpy.float64 or numpy.ndarray
+
+        """
+        return self.dist.logpdf(k=k, **kwargs)
+
+    def fit(self, data, **kwargs):
+        """
+        Return estimates of shape (if applicable), location, and scale parameters from data.
+        The default estimation method is Maximum Likelihood Estimation (MLE), but Method of Moments (MM) is also available.
+        Refer to ``scipy.stats.rv_continuous.fit``
+
+        :param data: data to use in estimating the distribution parameters.
+        :type k: array_like
+        :return: parameter_tuple. Estimates for any shape parameters (if applicable), followed by those for location and scale.
+        :rtype: tuple of floats
+
+        """
+        return self.dist.fit(data, **kwargs)
 
 ## Poisson Distribution Class
-class Poisson(_DiscrDistributionWrapper):
+class Poisson(_DiscreteDistribution):
     """
     Poisson distribution. Wrapper to scipy poisson distribution.
-    Refer to :py:class:'~_DiscrDistributionWrapper' (its parent class) for additional details.
+    Refer to :py:class:'~_DiscreteDistribution' (its parent class) for additional details.
 
     :param loc: location parameter (default=0), to shift the support of the distribution.
     :type loc: int, optional
     :param dist: (private) scipy reference distribution.
     :type dist: ``scipy.stats._discrete_distns.poisson_gen``
-
-    # to remove ---
-    :param a: (private) rv a parameter according to the (a, b, k) parametrization.
-    :type a: float
-    :param b: (private) rv b parameter according to the (a, b, k) parametrization.
-    :type b: float
-    :param p0: (private) rv probability in zero.
-    :type p0: float
 
     :param \**kwargs:
     See below
@@ -329,10 +410,10 @@ class Poisson(_DiscrDistributionWrapper):
         return self.a, self.b, self.p0
 
 ## Binomial Distribution Class
-class Binom(_DiscrDistributionWrapper):
+class Binom(_DiscreteDistribution):
     """
     Binomial distribution. Wrapper to scipy binomial distribution.
-    Refer to :py:class:'~_DiscrDistributionWrapper' (its parent class) for additional details.
+    Refer to :py:class:'~_DiscreteDistribution' (its parent class) for additional details.
 
     :param loc: location parameter (default=0), to shift the support of the distribution.
     :type loc: int, optional
@@ -357,6 +438,7 @@ class Binom(_DiscrDistributionWrapper):
     """
     name = 'binom'
     def __init__(self, loc=0, **kwargs):
+        super().__init__()
         self.__n = kwargs['n']
         self.__p = kwargs['p']
         self.__loc = loc
@@ -431,10 +513,10 @@ class Binom(_DiscrDistributionWrapper):
         return self.a, self.b, self.p0
 
 ## Geometric Distribution Class
-class Geom(_DiscrDistributionWrapper):
+class Geom(_DiscreteDistribution):
     """
     Geometric distribution. Wrapper to scipy geometric distribution.
-    Refer to :py:class:'~_DiscrDistributionWrapper' (its parent class) for additional details.
+    Refer to :py:class:'~_DiscreteDistribution' (its parent class) for additional details.
 
     :param loc: location parameter (default=0), to shift the support of the distribution.
     :type loc: int, optional
@@ -458,6 +540,7 @@ class Geom(_DiscrDistributionWrapper):
 
     name = 'geom'
     def __init__(self, loc=0, **kwargs):
+        super().__init__()
         self.__p = kwargs['p']
         self.__loc = loc
         self.__dist = scipy.stats.geom(p=self.p, loc=self.loc)
@@ -521,10 +604,10 @@ class Geom(_DiscrDistributionWrapper):
         return self.a, self.b, self.p0
 
 ## Negative Binomial Class
-class NegBinom(_DiscrDistributionWrapper):
+class NegBinom(_DiscreteDistribution):
     """
     Negative Binomial distribution. Wrapper to scipy negative binomial distribution.
-    Refer to :py:class:'~_DiscrDistributionWrapper' (its parent class) for additional details.
+    Refer to :py:class:'~_DiscreteDistribution' (its parent class) for additional details.
 
     :param loc: location parameter (default=0), to shift the support of the distribution.
     :type loc: int, optional
@@ -550,6 +633,7 @@ class NegBinom(_DiscrDistributionWrapper):
 
     name = 'nbinom'
     def __init__(self, loc=0, **kwargs):
+        super().__init__()
         self.__n = kwargs['n']
         self.__p = kwargs['p']
         self.__loc = loc
@@ -767,7 +851,7 @@ class ZTPoisson:
 
         """
 
-        random_state = 1234 if random_state is None else random_state
+        random_state = int(time.time()) if random_state is None else random_state
         assert isinstance(random_state, int), logger.error("random_state has to be an integer")
 
         try:
@@ -979,7 +1063,7 @@ class ZMPoisson:
         :rtype: numpy.int or numpy.ndarray
 
         """
-        random_state = 1234 if (random_state is None) else random_state
+        random_state = int(time.time()) if (random_state is None) else random_state
         assert isinstance(random_state, int), logger.error("random_state has to be an integer")
         np.random.seed(random_state)
 
@@ -1191,7 +1275,7 @@ class ZTBinom:
         :rtype: numpy.int or numpy.ndarray
 
         """
-        random_state = 1234 if (random_state is None) else random_state
+        random_state = int(time.time()) if  (random_state is None) else random_state
         assert isinstance(random_state, int), logger.error("random_state has to be an integer")
         np.random.seed(random_state)
 
@@ -1391,7 +1475,7 @@ class ZMBinom:
 
         """
 	    
-        random_state = 1234 if random_state is None else random_state
+        random_state = int(time.time()) if random_state is None else random_state
         assert isinstance(random_state, int), logger.error("random_state has to be an integer")
 
         try:
@@ -1574,7 +1658,7 @@ class ZTGeom:
         :rtype: numpy.int or numpy.ndarray
 
         """
-        random_state = 1234 if random_state is None else random_state
+        random_state = int(time.time()) if random_state is None else random_state
         assert isinstance(random_state, int), logger.error("random_state has to be an integer")
 
         try:
@@ -1944,7 +2028,7 @@ class ZTNegBinom:
         :rtype: numpy.int or numpy.ndarray
 
         """
-        random_state = 1234 if (random_state is None) else random_state
+        random_state = int(time.time()) if (random_state is None) else random_state
         assert isinstance(random_state, int), logger.error("random_state has to be an integer")
         np.random.seed(random_state)
 
@@ -2156,7 +2240,7 @@ class ZMNegBinom:
         :rtype: numpy.int or numpy.ndarray
 
         """
-        random_state = 1234 if (random_state is None) else random_state
+        random_state = int(time.time()) if (random_state is None) else random_state
         assert isinstance(random_state, int), logger.error("random_state has to be an integer")
         np.random.seed(random_state)
 
@@ -2328,7 +2412,7 @@ class ZMLogser:
         :rtype: numpy.int or numpy.ndarray
 
         """
-        random_state = 1234 if (random_state is None) else random_state
+        random_state = int(time.time()) if (random_state is None) else random_state
         assert isinstance(random_state, int), logger.error("random_state has to be an integer")
         np.random.seed(random_state)
 
@@ -2364,21 +2448,23 @@ class ZMLogser:
             return temp
 
 ## Exponential
-class Exponential:
+class Exponential(_ContinuousDistribution):
     """
-    expontential distribution.
-
+    Expontential distribution.
+    
     :param theta: exponential distribution theta parameter.
     :type theta: ``float``
     :param loc: location parameter
     :type loc: ``float``
+    :param dist: (private) scipy reference distribution.
+    :type dist: ``scipy.stats._continuous_distns.expon_gen``
 
     """
-    name='exponential'
+    name = 'exponential'
     def __init__(self, loc=0, theta=1):
+        super().__init__()
         self.theta = theta
         self.loc=loc
-        #scipy exponential distribution
         self.dist = scipy.stats.expon(loc=self.loc)
 
     @property
@@ -2386,12 +2472,12 @@ class Exponential:
         return self.__theta
 
     @theta.setter
-    def theta(self, var):
-        assert var > 0 , logger.error(
+    def theta(self, value):
+        assert value > 0 , logger.error(
             'theta must be positive')
-        self.__theta = var
+        self.__theta = value
 
-    def pdf(self,x):
+    def pdf(self, x):
         """
         Probability density function.
 
@@ -2400,9 +2486,9 @@ class Exponential:
         :return: pdf
         :rtype: ``numpy.float64`` or ``numpy.ndarray``
         """
-        return self.theta*self.dist.pdf(self.loc+self.theta*x)
+        return self.theta*self.dist.pdf(self.loc + self.theta*x)
 
-    def logpdf(self,x):
+    def logpdf(self, x):
         """
         Log of the probability density function.
 
@@ -2413,7 +2499,7 @@ class Exponential:
         """
         return self.dist.logpdf(self.theta*x)
 
-    def cdf(self,x):
+    def cdf(self, x):
         """
         Cumulative distribution function.
 
@@ -2424,7 +2510,7 @@ class Exponential:
         """
         return self.dist.cdf(self.loc+self.theta * (x-self.loc))
 
-    def logcdf(self,x):
+    def logcdf(self, x):
         """
         Log of the cumulative distribution function.
 
@@ -2435,7 +2521,7 @@ class Exponential:
         """
         return self.dist.logcdf(self.theta*x)
 
-    def sf(self,x):
+    def sf(self, x):
         """
         Survival function (also defined as 1 - cdf, but sf is sometimes more accurate).
 
@@ -2446,7 +2532,7 @@ class Exponential:
         """
         return self.dist.sf(self.theta*x)
 
-    def logsf(self,x):
+    def logsf(self, x):
         """
         Log of the survival function.
 
@@ -2457,7 +2543,7 @@ class Exponential:
         """
         return self.dist.logsf(self.theta*x)
 
-    def isf(self,x):
+    def isf(self, x):
         """
         Inverse survival function (inverse of sf).
 
@@ -2468,7 +2554,7 @@ class Exponential:
         """
         return self.dist.isf(self.theta*x)
 
-    def rvs(self, size,random_state=42):
+    def rvs(self, size, random_state=None):
         """
         Random variates.
 
@@ -2481,11 +2567,15 @@ class Exponential:
         :rtype: ``numpy.float64`` or ``numpy.ndarray``
 
         """
+        random_state = int(time.time()) if random_state is None else random_state
+        assert isinstance(random_state, int), logger.error("random_state has to be an integer")
+
         try:
             size=int(size)
         except:
             logger.error('Please provide size as an integer')
-        return scipy.stats.expon.rvs(size=size,random_state=random_state)/self.theta+self.loc
+        
+        return scipy.stats.expon.rvs(size=size, random_state=random_state)/self.theta + self.loc
 
     def entropy(self):
         """
@@ -2503,7 +2593,7 @@ class Exponential:
         :return: mean.
         :rtype: ``numpy.float64``
         """
-        return 1/ self.theta
+        return 1 / self.theta
 
     def var(self):
         """
@@ -2523,7 +2613,7 @@ class Exponential:
         """
         return np.sqrt(self.variance)
 
-    def ppf(self,x):
+    def ppf(self, x):
         """
         Percent point function (inverse of cdf — percentiles).
 
@@ -2541,7 +2631,7 @@ class Exponential:
 
         temp= -np.log(1-x)/self.theta
 
-        zeros = np.where(((x>=1.)& (x <=0.)))[0]
+        zeros = np.where(((x>=1.) & (x <=0.)))[0]
 
         if zeros.size == 0:
             return temp
@@ -2580,7 +2670,7 @@ class Exponential:
         return (1 - scipy.stats.expon.cdf(self.theta * (d - loc)))
 
 ## Gamma
-class Gamma:
+class Gamma(_ContinuousDistribution):
     """
     Wrapper to scipy gamma distribution.
     When a is an integer it reduces to an Erlang distribution.
@@ -2594,223 +2684,44 @@ class Gamma:
     :type scale: ``float``
     :param loc: gamma location parameter.
     :type loc: ``float``
-    :param __dist: scipy corresponding RV.
-    :type __dist: ``scipy.stats._continuous_distns.gamma_gen ``
+    :param dist: scipy corresponding RV.
+    :type dist: ``scipy.stats._continuous_distns.gamma_gen ``
     """
 
     def __init__(self, loc=0, scale=1, **kwargs):
-        self.a=kwargs['a']
-        self.scale = scale
-        self.loc = loc
+        super().__init__()
+        self.__loc = loc
+        self.__scale = scale
+        self.__a = kwargs['a']
         self.__dist = scipy.stats.gamma(a=self.a, loc=self.loc, scale=self.scale)
 
-    def rvs(self, size=1, random_state=None):
-        """
-        Random variates.
+    @property
+    def loc(self):
+        return self.__loc
 
-        :param size: random variates sample size.
-        :type size: int
-        :param random_state: random state for the random number generator.
-        :type random_state: int
+    @loc.setter
+    def loc(self, value):
+        assert isinstance(value, float), logger.error("loc has to be float type")
+        self.__loc = value
 
-        :return: Random variates.
-        :rtype: ``numpy.float64`` or ``numpy.ndarray``
+    @property
+    def scale(self):
+        return self.__scale
 
-        """
-        return self.__dist.rvs(size=size,random_state=random_state)
+    @scale.setter
+    def scale(self, value):
+        assert isinstance(value, float), logger.error("scale has to be float type")
+        self.__scale = value
 
-    def pdf(self,x):
+    @property
+    def dist(self):
+        return self.__dist
 
-        """
-        Probability distribution function
+    @property
+    def a(self):
+        return self.__a
 
-        :param x: probability distribution function will be computed in k.
-        :type x: int
-
-        :return: pdf
-        :rtype: ``numpy.float64`` or ``numpy.ndarray``
-
-        """
-        return self.__dist.pdf(x=x)
-
-    def logpdf(self,x):
-        """
-        Log of the probability distribution function.
-
-        :param x: log of the probability distribution function computed in k.
-        :type x: int
-        :return: log pmf
-        :rtype: ``numpy.float64`` or ``numpy.ndarray``
-
-        """
-        return self.__dist.logpdf(x=x)
-
-    def cdf(self,x):
-        """
-        Cumulative distribution function.
-
-        :param x: cumulative distribution function will be computed in k.
-        :type x: int
-        :return: cdf
-        :rtype: ``numpy.float64`` or ``numpy.ndarray``
-        """
-        return self.__dist.cdf(x=x)
-
-    def logcdf(self,x):
-        """
-        Log of the cumulative distribution function.
-
-        :param k: log of the cumulative density function computed in k.
-        :type k: int
-        :return: cdf
-        :rtype: ``numpy.float64`` or ``numpy.ndarray``
-        """
-        return self.__dist.logcdf(x=x)
-
-    def sf(self,x):
-        """
-        Survival function (also defined as 1 - cdf, but sf is sometimes more accurate).
-
-        :param x: survival function will be computed in k.
-        :type x: int
-        :return: sf
-        :rtype: ``numpy.float64`` or ``numpy.ndarray``
-
-        """
-        return self.__dist.sf(x=x)
-
-    def logsf(self,x):
-        """
-        Log of the survival function.
-
-        :param x:log of the survival function computed in k.
-        :type x: int
-        :return: cdf
-        :rtype: ``numpy.float64`` or ``numpy.ndarray``
-        """
-        return self.__dist.logsf(x=x)
-
-    def ppf(self,q):
-        """
-        Percent point function (inverse of cdf — percentiles).
-
-        :param q: Percent point function computed in q.
-        :return: ppf
-        :rtype: ``numpy.float64`` or ``numpy.ndarray``
-        """
-        return self.__dist.ppf(q=q)
-
-    def isf(self,q):
-        """
-        Inverse survival function (inverse of sf).
-
-        :param q: Inverse survival function computed in q.
-        :return: inverse sf
-        :rtype: ``numpy.float64`` or ``numpy.ndarray``
-        """
-        return self.__dist.isf(q=q)
-
-    def moment(self,n):
-        """
-        Non-central moment of order n.
-
-        :param n: moment of order n
-        :return: non-central moment of order n
-        """
-        return self.__dist.moment(n=n)
-
-    def stats(self, moments='mv'):
-        """
-        Mean(‘m’), variance(‘v’), skew(‘s’), and/or kurtosis(‘k’).
-
-        :param moments: moments to be returned.
-        :return: moments.
-        :rtype: tuple
-        """
-        return self.__dist.stats(moments=moments)
-
-    def entropy(self):
-        """
-        (Differential) entropy of the RV.
-
-        :return: entropy
-        :rtype: ``numpy.ndarray``
-        """
-        return self.__dist.entropy()
-
-    def fit(self,data):
-        """
-        Parameter estimates for generic data.
-
-        :param data: data on which to fit the distribution.
-        :return: fitted distribution.
-        """
-        return self.__dist.fit(data)
-
-
-    def expect(self,func, args=None, lb=None, ub=None, conditional=False, **kwds):
-        """
-        Expected value of a function (of one argument) with respect to the distribution.
-
-        :param func: class 'function'.
-        :param args:argument of func.
-        :param lb: lower bound.
-        :param ub: upper bound.
-        :return: expectation with respect to the distribution.
-
-        """
-        if args is None:
-            args = (self.a,)
-        return self.__dist.expect(func, args=args, lb=lb, ub=ub, conditional=conditional)
-
-    def median(self):
-        """
-        Median of the distribution.
-
-        :return: median
-        :rtype: ``numpy.float64``
-        """
-        return self.__dist.median()
-
-    def mean(self):
-        """
-        Mean of the distribution.
-
-        :return: mean.
-        :rtype: ``numpy.float64``
-        """
-        return self.__dist.mean()
-
-    def var(self):
-        """
-        Variance of the distribution.
-
-        :return: variance.
-        :rtype: ``numpy.float64``
-        """
-        return self.__dist.var()
-
-    def std(self):
-        """
-        Standard deviation of the distribution.
-
-        :return: standard deviation.
-        :rtype: ``numpy.float64``
-        """
-        return self.__dist.std()
-
-    def interval(self,alpha):
-        """
-        Endpoints of the range that contains fraction alpha [0, 1] of the distribution.
-
-        :param alpha: fraction alpha
-        :rtype alpha: float
-        :return: Endpoints
-        :rtype: tuple
-        """
-        return self.__dist.interval(alpha=alpha)
-
-    def Emv(self,v):
+    def Emv(self, v):
         """
         Expected value of the function min(x,v).
 
@@ -2829,7 +2740,7 @@ class Gamma:
         out[v < 0] = v[v < 0]
         return out
 
-    def den(self,d,loc):
+    def den(self, d, loc):
         """
         It returns the denominator of the local moments discretization.
 
@@ -2848,7 +2759,7 @@ class Gamma:
         return 1 - scipy.stats.gamma(loc=0,a=self.a,scale=1/beta).cdf(d - loc)
 
 ## Generalized Pareto
-class GenPareto:
+class GenPareto(_ContinuousDistribution):
     """
     Wrapper to scipy genpareto distribution.
     When c=0 it reduces to an Exponential distribution.
@@ -2865,217 +2776,39 @@ class GenPareto:
     :type __dist: ``scipy.stats._continuous_distns.genpareto_gen ``
 
     """
-    name="genpareto"
+    name = "genpareto"
     def __init__(self, loc=0, scale=1, **kwargs):
+        super().__init__()
         self.c = kwargs['c']
         self.scale = scale
         self.loc = loc
         self.__dist = scipy.stats.genpareto(c=self.c, loc=self.loc, scale=self.scale)
 
-    def rvs(self, size=1, random_state=None):
-        """
-        Random variates.
+    @property
+    def loc(self):
+        return self.__loc
 
-        :param size: random variates sample size.
-        :type size: ``int``
-        :param random_state: random state for the random number generator.
-        :type random_state: ``int``
+    @loc.setter
+    def loc(self, value):
+        assert isinstance(value, float), logger.error("loc has to be float type")
+        self.__loc = value
 
-        :return: Random variates.
-        :rtype: ``numpy.float64`` or ``numpy.ndarray``
+    @property
+    def scale(self):
+        return self.__scale
 
-        """
-        return self.__dist.rvs(size=size, random_state=random_state)
+    @scale.setter
+    def scale(self, value):
+        assert isinstance(value, float), logger.error("scale has to be float type")
+        self.__scale = value
 
-    def pdf(self, x):
+    @property
+    def dist(self):
+        return self.__dist
 
-        """
-        Probability distribution function
-
-        :param x: probability distribution function will be computed in k.
-        :type x: ``int``
-
-        :return: pdf
-        :rtype:``numpy.float64`` or ``numpy.ndarray``
-
-        """
-        return self.__dist.pdf(x=x)
-
-    def logpdf(self, x):
-        """
-        Log of the probability distribution function.
-
-        :param x: log of the probability distribution function computed in k.
-        :type x: ``int``
-        :return: log pmf
-        :rtype: ``numpy.float64`` or ``numpy.ndarray``
-
-        """
-        return self.__dist.logpdf(x=x)
-
-    def cdf(self, x):
-        """
-        Cumulative distribution function.
-
-        :param x: cumulative distribution function will be computed in k.
-        :type x: ``int``
-        :return: cdf
-        :rtype: ``numpy.float64`` or ``numpy.ndarray``
-        """
-        return self.__dist.cdf(x=x)
-
-    def logcdf(self, x):
-        """
-        Log of the cumulative distribution function.
-
-        :param k: log of the cumulative density function computed in x.
-        :type k: ``int``
-        :return: cdf
-        :rtype: ``numpy.float64`` or ``numpy.ndarray``
-        """
-        return self.__dist.logcdf(x=x)
-
-    def sf(self, x):
-        """
-        Survival function (also defined as 1 - cdf, but sf is sometimes more accurate).
-
-        :param x: survival function will be computed in x.
-        :type x: ``int``
-        :return: sf
-        :rtype: ``numpy.float64`` or ``numpy.ndarray``
-
-        """
-        return self.__dist.sf(x=x)
-
-    def logsf(self, x):
-        """
-        Log of the survival function.
-
-        :param x:log of the survival function computed in x.
-        :type x: ``int``
-        :return: cdf
-        :rtype: ``numpy.float64`` or ``numpy.ndarray``
-        """
-        return self.__dist.logsf(x=x)
-
-    def ppf(self, q):
-        """
-        Percent point function (inverse of cdf — percentiles).
-
-        :param q: Percent point function computed in q.
-        :return: ppf
-        :rtype: ``numpy.float64`` or ``numpy.ndarray``
-        """
-        return self.__dist.ppf(q=q)
-
-    def isf(self, q):
-        """
-        Inverse survival function (inverse of sf).
-
-        :param q: Inverse survival function computed in q.
-        :return: inverse sf
-        :rtype: ``numpy.float64`` or ``numpy.ndarray``
-        """
-        return self.__dist.isf(q=q)
-
-    def moment(self, n):
-        """
-        Non-central moment of order n.
-
-        :param n: moment of order n
-        :return: non-central moment of order n
-        """
-        return self.__dist.moment(n=n)
-
-    def stats(self, moments='mv'):
-        """
-        Mean(‘m’), variance(‘v’), skew(‘s’), and/or kurtosis(‘k’).
-
-        :param moments: moments to be returned.
-        :return: moments.
-        :rtype: tuple
-        """
-        return self.__dist.stats(moments=moments)
-
-    def entropy(self):
-        """
-        (Differential) entropy of the RV.
-
-        :return: entropy
-        :rtype: ``numpy.ndarray``
-        """
-        return self.__dist.entropy()
-
-    def fit(self, data):
-        """
-        Parameter estimates for generic data.
-
-        :param data: data on which to fit the distribution.
-        :return: fitted distribution.
-        """
-        return self.__dist.fit(data)
-
-    def expect(self, func, args=None, lb=None, ub=None, conditional=False, **kwds):
-        """
-        Expected value of a function (of one argument) with respect to the distribution.
-
-        :param func: class 'function'.
-        :param args:argument of func.
-        :param lb: lower bound.
-        :param ub: upper bound.
-        :return: expectation with respect to the distribution.
-
-        """
-        if args is None:
-            args = (self.a,)
-        return self.__dist.expect(func, args=args, lb=lb, ub=ub, conditional=conditional)
-
-    def median(self):
-        """
-        Median of the distribution.
-
-        :return: median
-        :rtype: ``numpy.float64``
-        """
-        return self.__dist.median()
-
-    def mean(self):
-        """
-        Mean of the distribution.
-
-        :return: mean.
-        :rtype: ``numpy.float64``
-        """
-        return self.__dist.mean()
-
-    def var(self):
-        """
-        Variance of the distribution.
-
-        :return: variance.
-        :rtype: ``numpy.float64``
-        """
-        return self.__dist.var()
-
-    def std(self):
-        """
-        Standard deviation of the distribution.
-
-        :return: standard deviation.
-        :rtype: ``numpy.float64``
-        """
-        return self.__dist.std()
-
-    def interval(self, alpha):
-        """
-        Endpoints of the range that contains fraction alpha [0, 1] of the distribution.
-
-        :param alpha: fraction alpha
-        :rtype alpha: float
-        :return: Endpoints
-        :rtype: tuple
-        """
-        return self.__dist.interval(alpha=alpha)
+    @property
+    def c(self):
+        return self.__c
 
     def Emv(self, v):
         """
@@ -3114,7 +2847,7 @@ class GenPareto:
         return 1 - scipy.stats.genpareto(loc=0,c=self.c,scale=scale_).cdf(d - loc)
 
 #### Lognormal
-class Lognorm:
+class Lognorm(_ContinuousDistribution):
     """
     Wrapper to scipy lognormal distribution.
 
@@ -3129,215 +2862,37 @@ class Lognorm:
     """
 
     def __init__(self, loc=0, scale=1, **kwargs):
+        super().__init__()
         self.s = kwargs['s']
         self.scale = scale
         self.loc = loc
         self.__dist = scipy.stats.lognorm(s=self.s, loc=self.loc, scale=self.scale)
 
-    def rvs(self, size=1, random_state=None):
-        """
-        Random variates.
+    @property
+    def loc(self):
+        return self.__loc
 
-        :param size: random variates sample size.
-        :type size: ``int``
-        :param random_state: random state for the random number generator.
-        :type random_state: ``int``
+    @loc.setter
+    def loc(self, value):
+        assert isinstance(value, float), logger.error("loc has to be float type")
+        self.__loc = value
 
-        :return: Random variates.
-        :rtype: ``numpy.float64`` or ``numpy.ndarray``
+    @property
+    def scale(self):
+        return self.__scale
 
-        """
-        return self.__dist.rvs(size=size, random_state=random_state)
+    @scale.setter
+    def scale(self, value):
+        assert isinstance(value, float), logger.error("scale has to be float type")
+        self.__scale = value
 
-    def pdf(self, x):
+    @property
+    def dist(self):
+        return self.__dist
 
-        """
-        Probability distribution function
-
-        :param x: probability distribution function will be computed in k.
-        :type x: ``int``
-
-        :return: pdf
-        :rtype:``numpy.float64`` or ``numpy.ndarray``
-
-        """
-        return self.__dist.pdf(x=x)
-
-    def logpdf(self, x):
-        """
-        Log of the probability distribution function.
-
-        :param x: log of the probability distribution function computed in k.
-        :type x: ``int``
-        :return: log pmf
-        :rtype: ``numpy.float64`` or ``numpy.ndarray``
-
-        """
-        return self.__dist.logpdf(x=x)
-
-    def cdf(self, x):
-        """
-        Cumulative distribution function.
-
-        :param x: cumulative distribution function will be computed in k.
-        :type x: ``int``
-        :return: cdf
-        :rtype: ``numpy.float64`` or ``numpy.ndarray``
-        """
-        return self.__dist.cdf(x=x)
-
-    def logcdf(self, x):
-        """
-        Log of the cumulative distribution function.
-
-        :param k: log of the cumulative density function computed in x.
-        :type k: ``int``
-        :return: cdf
-        :rtype: ``numpy.float64`` or ``numpy.ndarray``
-        """
-        return self.__dist.logcdf(x=x)
-
-    def sf(self, x):
-        """
-        Survival function (also defined as 1 - cdf, but sf is sometimes more accurate).
-
-        :param x: survival function will be computed in x.
-        :type x: ``int``
-        :return: sf
-        :rtype: ``numpy.float64`` or ``numpy.ndarray``
-
-        """
-        return self.__dist.sf(x=x)
-
-    def logsf(self, x):
-        """
-        Log of the survival function.
-
-        :param x:log of the survival function computed in x.
-        :type x: ``int``
-        :return: cdf
-        :rtype: ``numpy.float64`` or ``numpy.ndarray``
-        """
-        return self.__dist.logsf(x=x)
-
-    def ppf(self, q):
-        """
-        Percent point function (inverse of cdf — percentiles).
-
-        :param q: Percent point function computed in q.
-        :return: ppf
-        :rtype: ``numpy.float64`` or ``numpy.ndarray``
-        """
-        return self.__dist.ppf(q=q)
-
-    def isf(self, q):
-        """
-        Inverse survival function (inverse of sf).
-
-        :param q: Inverse survival function computed in q.
-        :return: inverse sf
-        :rtype: ``numpy.float64`` or ``numpy.ndarray``
-        """
-        return self.__dist.isf(q=q)
-
-    def moment(self, n):
-        """
-        Non-central moment of order n.
-
-        :param n: moment of order n
-        :return: non-central moment of order n
-        """
-        return self.__dist.moment(n=n)
-
-    def stats(self, moments='mv'):
-        """
-        Mean(‘m’), variance(‘v’), skew(‘s’), and/or kurtosis(‘k’).
-
-        :param moments: moments to be returned.
-        :return: moments.
-        :rtype: tuple
-        """
-        return self.__dist.stats(moments=moments)
-
-    def entropy(self):
-        """
-        (Differential) entropy of the RV.
-
-        :return: entropy
-        :rtype: ``numpy.ndarray``
-        """
-        return self.__dist.entropy()
-
-    def fit(self, data):
-        """
-        Parameter estimates for generic data.
-
-        :param data: data on which to fit the distribution.
-        :return: fitted distribution.
-        """
-        return self.__dist.fit(data)
-
-    def expect(self, func, args=None, lb=None, ub=None, conditional=False, **kwds):
-        """
-        Expected value of a function (of one argument) with respect to the distribution.
-
-        :param func: class 'function'.
-        :param args:argument of func.
-        :param lb: lower bound.
-        :param ub: upper bound.
-        :return: expectation with respect to the distribution.
-
-        """
-        if args is None:
-            args = (self.a,)
-        return self.__dist.expect(func, args=args, lb=lb, ub=ub, conditional=conditional)
-
-    def median(self):
-        """
-        Median of the distribution.
-
-        :return: median
-        :rtype: ``numpy.float64``
-        """
-        return self.__dist.median()
-
-    def mean(self):
-        """
-        Mean of the distribution.
-
-        :return: mean.
-        :rtype: ``numpy.float64``
-        """
-        return self.__dist.mean()
-
-    def var(self):
-        """
-        Variance of the distribution.
-
-        :return: variance.
-        :rtype: ``numpy.float64``
-        """
-        return self.__dist.var()
-
-    def std(self):
-        """
-        Standard deviation of the distribution.
-
-        :return: standard deviation.
-        :rtype: ``numpy.float64``
-        """
-        return self.__dist.std()
-
-    def interval(self, alpha):
-        """
-        Endpoints of the range that contains fraction alpha [0, 1] of the distribution.
-
-        :param alpha: fraction alpha
-        :rtype alpha: float
-        :return: Endpoints
-        :rtype: tuple
-        """
-        return self.__dist.interval(alpha=alpha)
+    @property
+    def s(self):
+        return self.__s
 
     def Emv(self, v):
         """
@@ -3392,15 +2947,51 @@ class GenBeta:
     """
     def __init__(self, shape1, shape2, shape3, scale):
         
-        assert shape1 > 0, "shape1 has to be > 0"
-        assert shape2 > 0, "shape2 has to be > 0"
-        assert shape3 > 0, "shape3 has to be > 0"
-        assert scale > 0, "scale has to be > 0"
+        self.__shape1 = shape1
+        self.__shape2 = shape2
+        self.__shape3 = shape3
+        self.__scale = scale
+        self.__dist = scipy.stats.beta(shape1, shape2)
 
-        self.shape1 = shape1
-        self.shape2 = shape2
-        self.shape3 = shape3
-        self.scale = scale
+    @property
+    def shape1(self):
+        return self.__shape1
+
+    @shape1.setter
+    def shape1(self, value):
+        assert value > 0, logger.error("shape1 has to be > 0")
+        self.__shape1 = value
+
+    @property
+    def shape2(self):
+        return self.__shape2
+
+    @shape2.setter
+    def shape2(self, value):
+        assert value > 0, logger.error("shape2 has to be > 0")
+        self.__shape2 = value
+
+    @property
+    def shape3(self):
+        return self.__shape3
+
+    @shape3.setter
+    def shape3(self, value):
+        assert value > 0, logger.error("shape3 has to be > 0")
+        self.__shape3 = value
+
+    @property
+    def scale(self):
+        return self.__scale
+
+    @shape3.setter
+    def scale(self, value):
+        assert value > 0, logger.error("scale has to be > 0")
+        self.__scale = value
+
+    @property
+    def dist(self):
+        return self.__dist
 
     def rvs(self, size=1, random_state=None):
         """
@@ -3420,7 +3011,7 @@ class GenBeta:
         except:
             logger.error('Please provide size as an integer')
 
-        random_state = 1234 if (random_state is None) else random_state
+        random_state = int(time.time()) if (random_state is None) else random_state
         np.random.seed(random_state)
 
         tmp_ = scipy.stats.beta(a=self.shape1, b=self.shape2).rvs(size=size, random_state=random_state)
@@ -3480,7 +3071,7 @@ class GenBeta:
             return 1
 
         u = np.exp(self.shape3 * (np.log(x) - np.log(self.scale)))
-        return self.__dist.cdf(x=u)
+        return self.dist.cdf(x=u)
 
     def logpdf(self, x):
         """
@@ -3536,17 +3127,17 @@ class GenBeta:
         :return: ppf
         :rtype: ``numpy.float64`` or ``numpy.ndarray``
         """
-        return self.scale * pow(self.__dist.ppf(q=q), 1.0/self.shape3)
+        return self.scale * pow(self.dist.ppf(q=q), 1.0/self.shape3)
 
-    # def isf(self, q):
-    #     """
-    #     Inverse survival function (inverse of sf).
+    def isf(self, q):
+        """
+        Inverse survival function (inverse of sf).
 
-    #     :param q: Inverse survival function computed in q.
-    #     :return: inverse sf
-    #     :rtype: ``numpy.float64`` or ``numpy.ndarray``
-    #     """
-    #     return self.__dist.isf(q=q)
+        :param q: Inverse survival function computed in q.
+        :return: inverse sf
+        :rtype: ``numpy.float64`` or ``numpy.ndarray``
+        """
+        return self.dist.ppf(1-q)
 
     def moment(self, n):
         """
@@ -3583,24 +3174,6 @@ class GenBeta:
 
         return tuple(t_)
 
-    # def entropy(self):
-    #     """
-    #     (Differential) entropy of the RV.
-
-    #     :return: entropy
-    #     :rtype: ``numpy.ndarray``
-    #     """
-    #     return self.__dist.entropy()
-
-    # def fit(self, data):
-    #     """
-    #     Parameter estimates for generic data.
-
-    #     :param data: data on which to fit the distribution.
-    #     :return: fitted distribution.
-    #     """
-    #     return self.__dist.fit(data)
-
     # def expect(self, func, args=None, lb=None, ub=None, conditional=False, **kwds):
     #     """
     #     Expected value of a function (of one argument) with respect to the distribution.
@@ -3632,7 +3205,7 @@ class GenBeta:
         :return: mean.
         :rtype: ``numpy.float64``
         """
-        return self.self.moment(1)
+        return self.moment(1)
 
     def var(self):
         """
@@ -3705,13 +3278,12 @@ class GenBeta:
 
     #     return 1 - stats.genpareto(loc=0,c=self.c,scale=scale_).cdf(d - loc)
 
-class Burr12:
+class Burr12(_ContinuousDistribution):
     """
-    Wrapper to scipy burr distribution.
-    It is referred to the Burr Type XII, Singhâ€“Maddala distribution.
+    Burr distribution, also referred to as the Burr Type XII, Singh–Maddala distribution.
     When d=1, this is a Fisk distribution.
     When c=d, this is a Paralogistic distribution.
-
+    
     :param c: burr shape parameter c.
     :type c: `` float``
     :param d: burr shape parameter d.
@@ -3720,226 +3292,52 @@ class Burr12:
     :type scale: ``float``
     :param loc: burr location parameter.
     :type loc: ``float``
-    :param __dist: scipy corresponding RV.
-    :type __dist: ``scipy.stats._continuous_distns.lognorm_gen ``
-
-
+    :param dist: scipy corresponding RV.
+    :type dist: ``scipy.stats._continuous_distns.burr_gen object``
     """
 
     def __init__(self, loc=0, scale=1, **kwargs):
-        self.c = kwargs['c']
-        self.d = kwargs['d']
-        self.scale = scale
-        self.loc = loc
-        self.__dist = scipy.stats.burr12(c=self.c,
-                                    d=self.d,
-                                    loc=self.loc,
-                                    scale=self.scale)
+        super().__init__()
+        self.__c = kwargs['c']
+        self.__d = kwargs['d']
+        self.__scale = scale
+        self.__loc = loc
+        self.__dist = scipy.stats.burr12(
+            c=self.c,
+            d=self.d,
+            loc=self.loc,
+            scale=self.scale
+            )
 
-    def rvs(self, size=1, random_state=None):
-        """
-        Random variates.
+    @property
+    def loc(self):
+        return self.__loc
 
-        :param size: random variates sample size.
-        :type size: ``int``
-        :param random_state: random state for the random number generator.
-        :type random_state: ``int``
+    @loc.setter
+    def loc(self, value):
+        assert isinstance(value, float), logger.error("loc has to be float type")
+        self.__loc = value
 
-        :return: Random variates.
-        :rtype: ``numpy.float64`` or ``numpy.ndarray``
+    @property
+    def scale(self):
+        return self.__scale
 
-        """
-        return self.__dist.rvs(size=size, random_state=random_state)
+    @scale.setter
+    def scale(self, value):
+        assert isinstance(value, float), logger.error("scale has to be float type")
+        self.__scale = value
 
-    def pdf(self, x):
+    @property
+    def dist(self):
+        return self.__dist
 
-        """
-        Probability distribution function
+    @property
+    def c(self):
+        return self.__c
 
-        :param x: probability distribution function will be computed in k.
-        :type x: ``int``
-
-        :return: pdf
-        :rtype:``numpy.float64`` or ``numpy.ndarray``
-
-        """
-        return self.__dist.pdf(x=x)
-
-    def logpdf(self, x):
-        """
-        Log of the probability distribution function.
-
-        :param x: log of the probability distribution function computed in k.
-        :type x: ``int``
-        :return: log pmf
-        :rtype: ``numpy.float64`` or ``numpy.ndarray``
-
-        """
-        return self.__dist.logpdf(x=x)
-
-    def cdf(self, x):
-        """
-        Cumulative distribution function.
-
-        :param x: cumulative distribution function will be computed in k.
-        :type x: ``int``
-        :return: cdf
-        :rtype: ``numpy.float64`` or ``numpy.ndarray``
-        """
-        return self.__dist.cdf(x=x)
-
-    def logcdf(self, x):
-        """
-        Log of the cumulative distribution function.
-
-        :param k: log of the cumulative density function computed in x.
-        :type k: ``int``
-        :return: cdf
-        :rtype: ``numpy.float64`` or ``numpy.ndarray``
-        """
-        return self.__dist.logcdf(x=x)
-
-    def sf(self, x):
-        """
-        Survival function (also defined as 1 - cdf, but sf is sometimes more accurate).
-
-        :param x: survival function will be computed in x.
-        :type x: ``int``
-        :return: sf
-        :rtype: ``numpy.float64`` or ``numpy.ndarray``
-
-        """
-        return self.__dist.sf(x=x)
-
-    def logsf(self, x):
-        """
-        Log of the survival function.
-
-        :param x:log of the survival function computed in x.
-        :type x: ``int``
-        :return: cdf
-        :rtype: ``numpy.float64`` or ``numpy.ndarray``
-        """
-        return self.__dist.logsf(x=x)
-
-    def ppf(self, q):
-        """
-        Percent point function (inverse of cdf â€” percentiles).
-
-        :param q: Percent point function computed in q.
-        :return: ppf
-        :rtype: ``numpy.float64`` or ``numpy.ndarray``
-        """
-        return self.__dist.ppf(q=q)
-
-    def isf(self, q):
-        """
-        Inverse survival function (inverse of sf).
-
-        :param q: Inverse survival function computed in q.
-        :return: inverse sf
-        :rtype: ``numpy.float64`` or ``numpy.ndarray``
-        """
-        return self.__dist.isf(q=q)
-
-    def moment(self, n):
-        """
-        Non-central moment of order n.
-
-        :param n: moment of order n
-        :return: non-central moment of order n
-        """
-        return self.__dist.moment(n=n)
-
-    def stats(self, moments='mv'):
-        """
-        Mean(â€˜mâ€™), variance(â€˜vâ€™), skew(â€˜sâ€™), and/or kurtosis(â€˜kâ€™).
-
-        :param moments: moments to be returned.
-        :return: moments.
-        :rtype: tuple
-        """
-        return self.__dist.stats(moments=moments)
-
-    def entropy(self):
-        """
-        (Differential) entropy of the RV.
-
-        :return: entropy
-        :rtype: ``numpy.ndarray``
-        """
-        return self.__dist.entropy()
-
-    def fit(self, data):
-        """
-        Parameter estimates for generic data.
-
-        :param data: data on which to fit the distribution.
-        :return: fitted distribution.
-        """
-        return self.__dist.fit(data)
-
-    def expect(self, func, args=None, lb=None, ub=None, conditional=False, **kwds):
-        """
-        Expected value of a function (of one argument) with respect to the distribution.
-
-        :param func: class 'function'.
-        :param args:argument of func.
-        :param lb: lower bound.
-        :param ub: upper bound.
-        :return: expectation with respect to the distribution.
-
-        """
-        if args is None:
-            args = (self.a,)
-        return self.__dist.expect(func, args=args, lb=lb, ub=ub, conditional=conditional)
-
-    def median(self):
-        """
-        Median of the distribution.
-
-        :return: median
-        :rtype: ``numpy.float64``
-        """
-        return self.__dist.median()
-
-    def mean(self):
-        """
-        Mean of the distribution.
-
-        :return: mean.
-        :rtype: ``numpy.float64``
-        """
-        return self.__dist.mean()
-
-    def var(self):
-        """
-        Variance of the distribution.
-
-        :return: variance.
-        :rtype: ``numpy.float64``
-        """
-        return self.__dist.var()
-
-    def std(self):
-        """
-        Standard deviation of the distribution.
-
-        :return: standard deviation.
-        :rtype: ``numpy.float64``
-        """
-        return self.__dist.std()
-
-    def interval(self, alpha):
-        """
-        Endpoints of the range that contains fraction alpha [0, 1] of the distribution.
-
-        :param alpha: fraction alpha
-        :rtype alpha: float
-        :return: Endpoints
-        :rtype: tuple
-        """
-        return self.__dist.interval(alpha=alpha)
+    @property
+    def d(self):
+        return self.__d
 
     def Emv(self, v):
         """
