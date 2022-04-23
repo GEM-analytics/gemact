@@ -8,24 +8,21 @@ import scipy.special
 from twiggy import quick_setup, log
 
 quick_setup()
-logger= log.name('lossaggregation')
+logger= log.name('distributions')
 
 class _Distribution():
     """
-    Wrapper for discrete distributions. Parent (private) class to be inherited.
+    Distribution class.
+    (Grand) Parent (private) class to be inherited.
     """
 
     def __init__(self):
-        self.__dist = None
+        pass
 
     @property
     def dist(self):
         return self.__dist
     
-    # @dist.setter
-    # def dist(self, value):
-    #     self.__dist = value
-
     def rvs(self, size=1, random_state=None, **kwargs):
             """
             Random variates generator function.
@@ -226,21 +223,18 @@ class _Distribution():
 class _DiscreteDistribution(_Distribution):
 
     """
-    Wrapper for discrete distributions. Parent (private) class to be inherited.
+    Discrete distribution class.
+    Parent (private) class to be inherited.
     """
 
     def __init__(self):
         super().__init__()
-        self.__dist = None
+        pass
 
     @property
     def dist(self):
         return self.__dist
     
-    # @dist.setter
-    # def dist(self, value):
-    #     self.__dist = value
-
     def pmf(self, k, **kwargs):
         """
         Probability mass function.
@@ -265,12 +259,26 @@ class _DiscreteDistribution(_Distribution):
 
         """
         return self.dist.logpmf(k=k, **kwargs)
+    
+    def abk(self):
+        """
+        Function returning (a, b, k) parametrization.
+
+        :return: a, b, probability in zero
+        :rtype: ``numpy.array``
+        """
+        try:
+            return self.a, self.b, self.p0
+
+        except ValueError:
+            print("Distribution without (a, b, k) parametrization")
 
 ## Distribution Wrapper Class
 class _ContinuousDistribution(_Distribution):
 
     """
-    Wrapper for continuous distributions. Parent (private) class to be inherited.
+    Continuous distribution class.
+    Parent (private) class to be inherited. 
     """
 
     def __init__(self):
@@ -327,14 +335,12 @@ class _ContinuousDistribution(_Distribution):
 ## Poisson Distribution Class
 class Poisson(_DiscreteDistribution):
     """
-    Poisson distribution. Wrapper to scipy poisson distribution.
-    Refer to :py:class:'~_DiscreteDistribution' (its parent class) for additional details.
+    Poisson distribution.
+    Wrapper to scipy poisson distribution (``scipy.stats._discrete_distns.poisson_gen``)
+    Refer to :py:class:'~_DiscreteDistribution' for additional details.
 
     :param loc: location parameter (default=0), to shift the support of the distribution.
-    :type loc: int, optional
-    :param dist: (private) scipy reference distribution.
-    :type dist: ``scipy.stats._discrete_distns.poisson_gen``
-
+    :type loc: ``int``, optional
     :param \**kwargs:
     See below
 
@@ -349,10 +355,10 @@ class Poisson(_DiscreteDistribution):
         super().__init__()
         self.__mu = kwargs['mu']
         self.__loc = loc
-        self.__dist = scipy.stats.poisson(mu=self.mu, loc=self.loc)
-        self.__a = 0
-        self.__b = self.mu
-        self.__p0 = np.exp(-self.mu)
+        # self.dist: read only property -- see below
+        # self.a: read only property -- see below 
+        # self.b: read only property -- see below 
+        # self.p0: read only property -- see below 
 
     @property
     def mu(self):
@@ -374,58 +380,41 @@ class Poisson(_DiscreteDistribution):
 
     @property
     def dist(self):
-        return self.__dist
+        return scipy.stats.poisson(mu=self.mu, loc=self.loc)
 
     @property
     def a(self):
-        return self.__a
+        return 0
     
     @property
     def b(self):
-        return self.__b
+        return self.mu
 
     @property
     def p0(self):
-        return self.__p0
+        return np.exp(-self.mu)
 
     def pgf(self, f):
         """
         Probability generating function. It computes the probability generating function
-        of the rv given the (a, b, k) parametrization.
+        of the random variable given the (a, b, k) parametrization.
 
-        :param f: punto in cui viene valutata la funzione...
-        :type f: numpy array (supporto distr)
+        :param f: point where the function is evaluated
+        :type f: ``numpy array``
         :return: probability generated in f.
-        :rtype: numpy.ndarray
+        :rtype: ``numpy.ndarray``
         """
         return np.exp(self.b * (f - 1))
-
-    def abk(self):
-        """
-        It returns the abk parametrization
-
-        :return: a, b, probability in zero
-        :rtype: numpy.array
-        """
-        return self.a, self.b, self.p0
 
 ## Binomial Distribution Class
 class Binom(_DiscreteDistribution):
     """
-    Binomial distribution. Wrapper to scipy binomial distribution.
-    Refer to :py:class:'~_DiscreteDistribution' (its parent class) for additional details.
+    Binomial distribution.
+    Wrapper to scipy binomial distribution (``scipy.stats._discrete_distns.binom_gen``).
+    Refer to :py:class:'~_DiscreteDistribution' for additional details.
 
     :param loc: location parameter (default=0), to shift the support of the distribution.
-    :type loc: int, optional
-    :param dist: (private) scipy reference distribution.
-    :type dist: ``scipy.stats._discrete_distns.binom_gen``
-    :param a: (private) rv a parameter according to the (a, b, k) parametrization.
-    :type a: float
-    :param b: (private) rv b parameter according to the (a, b, k) parametrization.
-    :type b: float
-    :param p0: (private) rv probability in zero.
-    :type p0: float
-    
+    :type loc: ``int``, optional
     :param \**kwargs:
     See below
 
@@ -442,10 +431,10 @@ class Binom(_DiscreteDistribution):
         self.__n = kwargs['n']
         self.__p = kwargs['p']
         self.__loc = loc
-        self.__dist = scipy.stats.binom(n=self.n, p=self.p, loc=self.loc)
-        self.__a = -self.p / (1 - self.p)
-        self.__b = (self.n + 1) * (self.p/(1 - self.p))
-        self.__p0 = (1 - self.p) ** self.n
+        # self.__dist: read only property -- see below
+        # self.__a: read only property -- see below
+        # self.__b: read only property -- see below
+        # self.__p0: read only property -- see below
     
     @property
     def n(self):
@@ -477,58 +466,41 @@ class Binom(_DiscreteDistribution):
 
     @property
     def dist(self):
-        return self.__dist
+        return scipy.stats.binom(n=self.n, p=self.p, loc=self.loc)
 
     @property
     def a(self):
-        return self.__a
+        return -self.p / (1 - self.p)
     
     @property
     def b(self):
-        return self.__b
+        return (self.n + 1) * (self.p/(1 - self.p))
     
     @property
     def p0(self):
-        return self.__p0
+        return (1 - self.p) ** self.n
 
     def pgf(self, f):
         """
         Probability generating function. It computes the probability generating function
-        of the rv given the (a, b, k) parametrization.
+        of the random variable given the (a, b, k) parametrization.
 
-        :param f:
-        :type f: 
+        :param f: point where the function is evaluated
+        :type f: ``numpy array``
         :return: probability generated in f.
-        :rtype: numpy.ndarray
+        :rtype: ``numpy.ndarray``
         """
         return (1 + self.a / (self.a - 1)*(f - 1))**(-self.b/self.a-1)
-
-    def abk(self):
-        """
-        It returns the abk parametrization
-
-        :return: a,b,probability in zero
-        :rtype: int
-        """
-        return self.a, self.b, self.p0
 
 ## Geometric Distribution Class
 class Geom(_DiscreteDistribution):
     """
-    Geometric distribution. Wrapper to scipy geometric distribution.
-    Refer to :py:class:'~_DiscreteDistribution' (its parent class) for additional details.
+    Geometric distribution.
+    Wrapper to scipy geometric distribution (``scipy.stats._discrete_distns.geom_gen``).
+    Refer to :py:class:'~_DiscreteDistribution' for additional details.
 
     :param loc: location parameter (default=0), to shift the support of the distribution.
-    :type loc: int, optional
-    :param dist: (private) scipy reference distribution.
-    :type dist: ``scipy.stats._discrete_distns.geom_gen``
-    :param a: (private) rv a parameter according to the (a, b, k) parametrization.
-    :type a: float
-    :param b: (private) rv b parameter according to the (a, b, k) parametrization.
-    :type b: float
-    :param p0: (private) rv probability in zero.
-    :type p0: float
-
+    :type loc: ``int``, optional
     :param \**kwargs:
     See below
 
@@ -543,10 +515,10 @@ class Geom(_DiscreteDistribution):
         super().__init__()
         self.__p = kwargs['p']
         self.__loc = loc
-        self.__dist = scipy.stats.geom(p=self.p, loc=self.loc)
-        self.__a = 1 - self.p
-        self.__b = 0
-        self.__p0 = np.array([((1 - self.p)/self.p)**(-1)])
+        # self.__dist: read only property -- see below
+        # self.__a: read only property -- see below
+        # self.__b: read only property -- see below
+        # self.__p0: read only property -- see below
 
     @property
     def p(self):
@@ -568,58 +540,41 @@ class Geom(_DiscreteDistribution):
 
     @property
     def dist(self):
-        return self.__dist
+        return scipy.stats.geom(p=self.p, loc=self.loc)
 
     @property
     def a(self):
-        return self.__a
+        return 1 - self.p
     
     @property
     def b(self):
-        return self.__b
+        return 0
     
     @property
     def p0(self):
-        return self.__p0
+        return np.array([((1 - self.p)/self.p)**(-1)])
 
     def pgf(self, f):
         """
         Probability generating function. It computes the probability generating function
-        of the rv given the (a, b, k) parametrization.
+        of the random variable given the (a, b, k) parametrization.
 
-        :param f:
-        :type f: 
+        :param f: point where the function is evaluated
+        :type f: ``numpy array``
         :return: probability generated in f.
-        :rtype: numpy.ndarray
+        :rtype: ``numpy.ndarray``
         """
         return (1- self.a/(1-self.a) * (f-1))**(-1)
-
-    def abk(self):
-        """
-        It returns the abk parametrization
-
-        :return: a, b, probability in zero
-        :rtype: int
-        """
-        return self.a, self.b, self.p0
 
 ## Negative Binomial Class
 class NegBinom(_DiscreteDistribution):
     """
-    Negative Binomial distribution. Wrapper to scipy negative binomial distribution.
-    Refer to :py:class:'~_DiscreteDistribution' (its parent class) for additional details.
+    Negative Binomial distribution.
+    Wrapper to scipy negative binomial distribution (``scipy.stats._discrete_distns.nbinom_gen``).
+    Refer to :py:class:'~_DiscreteDistribution' for additional details.
 
     :param loc: location parameter (default=0), to shift the support of the distribution.
-    :type loc: int, optional
-    :param dist: (private) scipy reference distribution.
-    :type dist: ``scipy.stats._discrete_distns.nbinom_gen``
-    :param a: (private) rv a parameter according to the (a, b, k) parametrization.
-    :type a: float
-    :param b: (private) rv b parameter according to the (a, b, k) parametrization.
-    :type b: float
-    :param p0: (private) rv probability in zero.
-    :type p0: float
-
+    :type loc: ``int``, optional
     :param \**kwargs:
     See below
 
@@ -637,10 +592,10 @@ class NegBinom(_DiscreteDistribution):
         self.__n = kwargs['n']
         self.__p = kwargs['p']
         self.__loc = loc
-        self.__dist = scipy.stats.nbinom(n=self.n, p=self.p, loc=self.loc)
-        self.__a = 1 - self.p
-        self.__b = (self.n - 1)*(1 - self.p)
-        self.__p0 = np.array([self.p**self.n])
+        # self.__dist: read only property -- see below
+        # self.__a: read only property -- see below
+        # self.__b: read only property -- see below
+        # self.__p0: read only property -- see below
     
     @property
     def n(self):
@@ -658,8 +613,7 @@ class NegBinom(_DiscreteDistribution):
 
     @p.setter
     def p(self, value):
-        assert value >= 0 and value <= 1,\
-            logger.error('p must be between zero and one.')
+        assert (0 <= value <= 1), logger.error("p has to be in [0, 1]")
         self.__p = value
 
     @property
@@ -673,11 +627,11 @@ class NegBinom(_DiscreteDistribution):
 
     @property
     def dist(self):
-        return self.__dist
+        return self.scipy.stats.nbinom(n=self.n, p=self.p, loc=self.loc)
 
     @property
     def a(self):
-        return self.__a
+        return 1 - self.p
     
     @property
     def b(self):
@@ -685,45 +639,29 @@ class NegBinom(_DiscreteDistribution):
     
     @property
     def p0(self):
-        return self.__p0
+        return (self.n - 1)*(1 - self.p)
 
     def pgf(self, f):
         """
         Probability generating function. It computes the probability generating function
-        of the rv given the (a, b, k) parametrization.
+        of the random variable given the (a, b, k) parametrization.
 
-        :param f:
-        :type f: 
+        :param f: point where the function is evaluated
+        :type f: ``numpy array``
         :return: probability generated in f.
-        :rtype: numpy.ndarray
+        :rtype: ``numpy.ndarray``
         """
         return (1- self.a/(1-self.a) * (f-1))**(-self.b/self.a - 1)
-
-    def abk(self):
-        """
-        It returns the abk parametrization
-
-        :return: a, b, probability in zero
-        :rtype: int
-        """
-        return self.a, self.b, self.p0
 
 ## Zero-truncated Poisson Distribution Class
 class ZTPoisson:
     """
-    Zero-truncated Poisson distribution. Poisson distribution with no mass (truncated) in 0.
+    Zero-truncated Poisson distribution.
+    Poisson distribution with no mass (truncated) in 0.
+    scipy reference non-zero-truncated distribution: ``scipy.stats._discrete_distns.poisson_gen``
 
     :param loc: location parameter (default=0), to shift the support of the distribution.
-    :type loc: int, optional
-    :param dist: (private) scipy reference non-zero-truncated distribution.
-    :type dist: ``scipy.stats._discrete_distns.poisson_gen``
-    :param a: (private) rv a parameter according to the (a, b, k) parametrization.
-    :type a: float
-    :param b: (private) rv b parameter according to the (a, b, k) parametrization.
-    :type b: float
-    :param p0: (private) base rv probability in zero.
-    :type p0: float
-
+    :type loc: ``int``, optional
     :param \**kwargs:
     See below
 
@@ -737,10 +675,10 @@ class ZTPoisson:
     def __init__(self, loc=0, **kwargs):
         self.__mu = kwargs['mu']
         self.__loc = loc
-        self.__dist = scipy.stats.poisson(mu=self.mu, loc=self.loc)
-        self.__a = 0
-        self.__b = self.mu
-        self.__p0 = np.exp(-self.mu)
+        # self.__dist: read only property -- see below
+        # self.__a: read only property -- see below
+        # self.__b: read only property -- see below
+        # self.__p0: read only property -- see below. Base Poisson distribution probability mass in zero.
         
     @property
     def mu(self):
@@ -762,30 +700,29 @@ class ZTPoisson:
 
     @property
     def dist(self):
-        return self.__dist
+        return scipy.stats.poisson(mu=self.mu, loc=self.loc)
 
     @property
     def a(self):
-        return self.__a
+        return 0
     
     @property
     def b(self):
-        return self.__b
+        return self.mu
     
     @property
     def p0(self):
-        return self.__p0
+        return np.exp(-self.mu)
 
     def pmf(self, k):
         """
         Probability mass function.
 
         :param k: quantile where probability mass function is evaluated.
-        :type k: int
+        :type k: ``int``
 
         :return: probability mass function.
-        :rtype: numpy.float64 or numpy.ndarray
-
+        :rtype: ``numpy.float64`` or ``numpy.ndarray``
         """
 
         temp = self.dist.pmf(k)/(1 - self.p0)
@@ -805,10 +742,10 @@ class ZTPoisson:
         Natural logarithm of the probability mass function.
 
         :param k: quantile where the (natural) probability mass function logarithm is evaluated.
-        :type k: int
+        :type k: ``int``
 
         :return: natural logarithm of the probability mass function
-        :rtype: numpy.float64 or numpy.ndarray
+        :rtype: ``numpy.float64`` or ``numpy.ndarray``
         """
 
         return np.log(self.pmf(k))
@@ -818,9 +755,9 @@ class ZTPoisson:
         Cumulative distribution function.
 
         :param k: quantile where the cumulative distribution function is evaluated.
-        :type k: int
+        :type k: ``int``
         :return: cumulative distribution function.
-        :rtype: numpy.float64 or numpy.ndarray
+        :rtype: ``numpy.float64`` or ``numpy.ndarray``
 
         """
 
@@ -831,9 +768,9 @@ class ZTPoisson:
         Log of the cumulative distribution function.
 
         :param k: quantile where log of the cumulative density function is evaluated.
-        :type k: int
+        :type k: ``int``
         :return: natural logarithm of the cumulative distribution function.
-        :rtype: numpy.float64 or numpy.ndarray
+        :rtype: ``numpy.float64`` or ``numpy.ndarray``
 
         """
         return np.log(self.cdf(k=k))
@@ -843,11 +780,11 @@ class ZTPoisson:
         Random variates generator function.
 
         :param size: random variates sample size.
-        :type size: int, optional
+        :type size: ``int``, optional
         :param random_state: random state for the random number generator.
-        :type random_state: int, optional
+        :type random_state: ``int``, optional
         :return: random variates.
-        :rtype: numpy.int or numpy.ndarray
+        :rtype: ``numpy.int`` or ``numpy.ndarray``
 
         """
 
@@ -868,9 +805,9 @@ class ZTPoisson:
         Percent point function, a.k.a. the quantile function, inverse of cdf.
 
         :param q: level at which the percent point function is evaluated.
-        :type q: float
+        :type q: ``float``
         :return: percent point function.
-        :rtype: numpy.float64 or numpy.ndarray
+        :rtype: ``numpy.int`` or ``numpy.ndarray``
 
         """
 
@@ -880,26 +817,22 @@ class ZTPoisson:
     def pgf(self, f):
         """
         Probability generating function. It computes the probability generating function
-        of the rv given the (a, b, k) parametrization.
+        of the random variable given the (a, b, k) parametrization.
 
-        :param f:
-        :type f: 
+        :param f: point where the function is evaluated
+        :type f: ``numpy array``
         :return: probability generated in f.
-        :rtype: numpy.ndarray
-
+        :rtype: ``numpy.ndarray``
         """
-
         return (np.exp(self.b*f) - 1)/(np.exp(self.b) - 1)
 
     def abk(self):
         """
-        It returns the abk parametrization
+        Function returning (a, b, k) parametrization.
 
         :return: a, b, probability in zero
-        :rtype: int
-
+        :rtype: ``numpy.array``
         """
-
         return self.a, self.b, 0
 
 ## Zero-modified Poisson
@@ -907,20 +840,12 @@ class ZMPoisson:
     """
     Zero-modified Poisson distribution. Discrete mixture between a degenerate distribution
     at zero and a non-modified Poisson distribution.
+    scipy reference non-zero-modified distribution: ``scipy.stats._discrete_distns.poisson_gen``
 
     :param loc: location parameter (default=0).
     :type loc: ``float``, optional 
-    :param a: (private) rv a parameter according to the (a, b, k) parametrization.
-    :type a: ``float``
-    :param b: (private) rv b parameter according to the (a, b, k) parametrization.
-    :type b: ``float``
-    :param p0: (private) base Poisson distribution probability mass in zero.
-    :type p0: ``float``
-    :param dist: (private) scipy reference non-zero-modified distribution.
-    :type dist: ``scipy.stats._discrete_distns.poisson_gen``
-    :param maxDiff: (private) threshold to determine which method to generate random variates.
-    :type maxDiff: ``float`` (fixed)
-
+    :param maxDiff: threshold to determine which method to generate random variates (default=0.95).
+    :type maxDiff: ``float``, optional 
     :param \**kwargs:
         See below
 
@@ -933,15 +858,15 @@ class ZMPoisson:
     """
 
     name = 'ZMpoisson'
-    def __init__(self, loc=0, **kwargs):
+    def __init__(self, loc=0, maxDiff = 0.95, **kwargs):
         self.__loc = loc
         self.__mu = kwargs['mu']
         self.__p0M = kwargs['p0M']
-        self.__dist = scipy.stats.poisson(mu=self.mu, loc=self.loc)
-        self.__a = 0
-        self.__b = self.mu
-        self.__p0 = np.exp(-self.mu)
-        self.__maxDiff = 0.95
+        self.__maxDiff = maxDiff
+        # self.__dist: read only property -- see below
+        # self.__a: read only property -- see below
+        # self.__b: read only property -- see below
+        # self.__p0: read only property -- see below. Base Poisson distribution probability mass in zero
 
     @property
     def loc(self):
@@ -949,7 +874,7 @@ class ZMPoisson:
 
     @loc.setter
     def loc(self, value):
-        assert isinstance(value, int), logger.error("loc has to be int type")
+        assert isinstance(value, int), logger.error('loc has to be int type')
         self.__loc = value
 
     @property
@@ -971,35 +896,38 @@ class ZMPoisson:
         self.__p0M = value
 
     @property
+    def maxDiff(self):
+        return self.__maxDiff
+
+    @maxDiff.setter
+    def maxDiff(self, value):
+        self.__maxDiff = value
+
+    @property
     def dist(self):
-        return self.__dist
+        return scipy.stats.poisson(mu=self.mu, loc=self.loc)
 
     @property
     def a(self):
-        return self.__a
+        return 0
     
     @property
     def b(self):
-        return self.__b
+        return self.mu
     
     @property
     def p0(self):
-        return self.__p0
-
-    @property
-    def maxDiff(self):
-        return self.__maxDiff
+        return np.exp(-self.mu)
 
     def pmf(self, k):
         """
         Probability mass function.
 
         :param k: quantile where probability mass function is evaluated.
-        :type k: int
+        :type k: ``int``
 
         :return: probability mass function.
-        :rtype: numpy.float64 or numpy.ndarray
-
+        :rtype: ``numpy.float64`` or ``numpy.ndarray``
         """
         
         temp = self.dist.pmf(k)*(1 - self.p0M)/(1 - self.p0)
@@ -1019,10 +947,10 @@ class ZMPoisson:
         Natural logarithm of the probability mass function.
 
         :param k: quantile where the (natural) probability mass function logarithm is evaluated.
-        :type k: int
+        :type k: ``int``
 
         :return: natural logarithm of the probability mass function
-        :rtype: numpy.float64 or numpy.ndarray
+        :rtype: ``numpy.float64`` or ``numpy.ndarray``
         """
 
         return np.log(self.pmf(k))
@@ -1032,9 +960,9 @@ class ZMPoisson:
         Cumulative distribution function.
 
         :param k: quantile where the cumulative distribution function is evaluated.
-        :type k: int
+        :type k: ``int``
         :return: cumulative distribution function.
-        :rtype: numpy.float64 or numpy.ndarray
+        :rtype: ``numpy.float64`` or ``numpy.ndarray``
 
         """
         return self.p0M + (1 - self.p0M)*(self.dist.cdf(k) - self.dist.cdf(0))/(1 - self.dist.cdf(0))
@@ -1044,10 +972,9 @@ class ZMPoisson:
         Log of the cumulative distribution function.
 
         :param k: quantile where log of the cumulative density function is evaluated.
-        :type k: int
+        :type k: ``int``
         :return: natural logarithm of the cumulative distribution function.
-        :rtype: numpy.float64 or numpy.ndarray
-
+        :rtype: ``numpy.float64`` or ``numpy.ndarray``
         """
         return np.log(self.cdf(k=k))
 
@@ -1055,12 +982,12 @@ class ZMPoisson:
         """
         Random variates generator function.
 
-        :param size: random variates sample size.
-        :type size: int, optional
+        :param size: random variates sample size (default = 1).
+        :type size: ``int``, optional
         :param random_state: random state for the random number generator.
-        :type random_state: int, optional
+        :type random_state: ``int``, optional
         :return: random variates.
-        :rtype: numpy.int or numpy.ndarray
+        :rtype: ``numpy.int`` or ``numpy.ndarray``
 
         """
         random_state = int(time.time()) if (random_state is None) else random_state
@@ -1104,9 +1031,9 @@ class ZMPoisson:
         Percent point function, a.k.a. the quantile function, inverse of cdf.
 
         :param q: level at which the percent point function is evaluated.
-        :type q: float
+        :type q: ``float``
         :return: percent point function.
-        :rtype: numpy.float64 or numpy.ndarray
+        :rtype: ``numpy.int`` or ``numpy.ndarray``
 
         """
         
@@ -1117,21 +1044,21 @@ class ZMPoisson:
     def pgf(self, f):
         """
         Probability generating function. It computes the probability generating function
-        of the rv given the (a, b, k) parametrization.
+        of the random variable given the (a, b, k) parametrization.
 
-        :param f:
-        :type f: 
+        :param f: point where the function is evaluated
+        :type f: ``numpy array``
         :return: probability generated in f.
-        :rtype: numpy.ndarray
+        :rtype: ``numpy.ndarray``
         """
         return self.p0M+(1 - self.p0M)*(np.exp(self.b*f) - 1)/(np.exp(self.b) - 1)
 
     def abk(self):
         """
-        It returns the abk parametrization
+        Function returning (a, b, k) parametrization.
 
         :return: a, b, probability in zero
-        :rtype: ``numpy.float64``
+        :rtype: ``numpy.array``
         """
         return self.a, self.b, self.p0M 
 
@@ -1139,15 +1066,7 @@ class ZMPoisson:
 class ZTBinom:
     """
     Zero-truncated binomial distribution. Binomial distribution with no mass (truncated) in 0.
-
-    :param a: (private) rv a parameter according to the (a, b, k) parametrization.
-    :type a: float
-    :param b: (private) rv b parameter according to the (a, b, k) parametrization.
-    :type b: float
-    :param p0: (private) base rv probability in zero.
-    :type p0: float
-    :param dist: (private) scipy reference non-zero-truncated distribution.
-    :type dist: ``scipy.stats._discrete_distns.binom_gen``
+    scipy reference non-zero-truncated distribution: ``scipy.stats._discrete_distns.binom_gen``.
 
     :param \**kwargs:
         See below
@@ -1163,10 +1082,10 @@ class ZTBinom:
     def __init__(self, **kwargs):
         self.__n = kwargs['n']
         self.__p = kwargs['p']
-        self.__dist = scipy.stats.binom(n=self.n, p=self.p)
-        self.__a = -self.p/(1 - self.p)
-        self.__b = (self.n + 1)*(self.p/(1 - self.p))
-        self.__p0 = np.array([(1 - self.p)**self.n])
+        # self.__dist: read only property -- see below
+        # self.__a: read only property -- see below
+        # self.__b: read only property -- see below
+        # self.__p0: read only property -- see below. Base binomial distribution probability mass in zero.
 
     @property
     def n(self):
@@ -1174,7 +1093,8 @@ class ZTBinom:
 
     @n.setter
     def n(self, value):
-        assert (isinstance(value, int) and value >= 1), logger.error('n must be a natural number')
+        assert (isinstance(value, int) and (value > 0)),\
+             logger.error("n has to be a positive integer")
         self.__n = value
 
     @property
@@ -1183,34 +1103,34 @@ class ZTBinom:
 
     @p.setter
     def p(self, value):
-        assert (0 <= value <= 1), logger.error('p must be between zero and one.')
+        assert (0 <= value <= 1), logger.error("p has to be in [0, 1]")
         self.__p = value
 
     @property
     def dist(self):
-        return self.__dist
+        return scipy.stats.binom(n=self.n, p=self.p)
 
     @property
     def a(self):
-        return self.__a
+        return -self.p/(1 - self.p)
     
     @property
     def b(self):
-        return self.__b
+        return (self.n + 1)*(self.p/(1 - self.p))
     
     @property
     def p0(self):
-        return self.__p0
+        return (1 - self.p)**self.n
 
     def pmf(self, k):
         """
         Probability mass function.
 
         :param k: quantile where probability mass function is evaluated.
-        :type k: int
+        :type k: ``int``
 
         :return: probability mass function.
-        :rtype: numpy.float64 or numpy.ndarray
+        :rtype: ``numpy.float64`` or ``numpy.ndarray``
 
         """
         
@@ -1231,10 +1151,10 @@ class ZTBinom:
         Natural logarithm of the probability mass function.
 
         :param k: quantile where the (natural) probability mass function logarithm is evaluated.
-        :type k: int
+        :type k: ``int``
 
         :return: natural logarithm of the probability mass function
-        :rtype: numpy.float64 or numpy.ndarray
+        :rtype: ``numpy.float64`` or ``numpy.ndarray``
         """
 
         return np.log(self.pmf(k))
@@ -1244,9 +1164,9 @@ class ZTBinom:
         Cumulative distribution function.
 
         :param k: quantile where the cumulative distribution function is evaluated.
-        :type k: int
+        :type k: ``int``
         :return: cumulative distribution function.
-        :rtype: numpy.float64 or numpy.ndarray
+        :rtype: ``numpy.float64`` or ``numpy.ndarray``
 
         """
         return (self.dist.cdf(k) - self.dist.cdf(0)) / (1 - self.dist.cdf(0))
@@ -1256,9 +1176,9 @@ class ZTBinom:
         Log of the cumulative distribution function.
 
         :param k: quantile where log of the cumulative density function is evaluated.
-        :type k: int
+        :type k: ``int``
         :return: natural logarithm of the cumulative distribution function.
-        :rtype: numpy.float64 or numpy.ndarray
+        :rtype: ``numpy.float64`` or ``numpy.ndarray``
 
         """
         return np.log(self.cdf(k=k))
@@ -1267,12 +1187,12 @@ class ZTBinom:
         """
         Random variates generator function.
 
-        :param size: random variates sample size.
-        :type size: int, optional
+        :param size: random variates sample size (default=1).
+        :type size: ``int``, optional
         :param random_state: random state for the random number generator.
-        :type random_state: int, optional
+        :type random_state: ``int``, optional
         :return: random variates.
-        :rtype: numpy.int or numpy.ndarray
+        :rtype: ``numpy.int`` or ``numpy.ndarray``
 
         """
         random_state = int(time.time()) if  (random_state is None) else random_state
@@ -1292,9 +1212,9 @@ class ZTBinom:
         Percent point function, a.k.a. the quantile function, inverse of cdf.
 
         :param q: level at which the percent point function is evaluated.
-        :type q: float
+        :type q: ``float``
         :return: percent point function.
-        :rtype: numpy.float64 or numpy.ndarray
+        :rtype: ``numpy.float64`` or ``numpy.ndarray``
 
         """
 
@@ -1304,12 +1224,12 @@ class ZTBinom:
     def pgf(self, f):
         """
         Probability generating function. It computes the probability generating function
-        of the rv given the (a, b, k) parametrization.
+        of the random variable given the (a, b, k) parametrization.
 
-        :param f:
-        :type f: 
+        :param f: point where the function is evaluated
+        :type f: ``numpy array``
         :return: probability generated in f.
-        :rtype: numpy.ndarray
+        :rtype: ``numpy.ndarray``
         """
         a_ = self.a
         b_ = self.b
@@ -1317,10 +1237,10 @@ class ZTBinom:
 
     def abk(self):
         """
-        It returns the abk parametrization
+        Function returning (a, b, k) parametrization.
 
         :return: a, b, probability in zero
-        :rtype: ``numpy.float64``
+        :rtype: ``numpy.array``
         """
         return self.a, self.b, 0
 

@@ -61,17 +61,17 @@ class Frequency:
     def fdist(self, var):
         #this is the set of possible distributions
         frdict = {'poisson': distributions.Poisson,
-                  'ZTpoisson':distributions.ZTpoisson,
-                  'ZMpoisson': distributions.ZMpoisson,
+                  'ZTpoisson':distributions.ZTPoisson,
+                  'ZMpoisson': distributions.ZMPoisson,
                   'binom': distributions.Binom,
-                  'ZTbinom': distributions.ZTbinom,
-                  'ZMbinom': distributions.ZMbinom,
+                  'ZTbinom': distributions.ZTBinom,
+                  'ZMbinom': distributions.ZMBinom,
                   'geom':distributions.Geom,
-                  'ZTgeom': distributions.ZTgeom,
-                  'ZMgeom': distributions.ZMgeom,
-                  'nbinom':distributions.Nbinom,
-                  'ZTnbinom': distributions.ZTnbinom,
-                  'ZMnbinom': distributions.ZMnbinom
+                  'ZTgeom': distributions.ZTGeom,
+                  'ZMgeom': distributions.ZMGeom,
+                  'nbinom':distributions.NegBinom,
+                  'ZTnbinom': distributions.ZTNegBinom,
+                  'ZMnbinom': distributions.ZMNegBinom
                   }
 
         assert var in frdict.keys(), "%r is not supported \n See our documentation: https://gem-analytics.github.io/gemact/" % var
