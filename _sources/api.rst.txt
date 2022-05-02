@@ -1,7 +1,6 @@
 API reference guide
 =================
 
-
 ``LossModel``
 ---------------
 
@@ -373,6 +372,30 @@ For a better explanation refer to :cite:t:`scipy` documentation.
    :label: poisson
 
 Given :math:`\mu \geq 0` and :math:`k \geq 0`.
+
+Example code on the usage of the Poisson class::
+
+    from gemact import distributions
+    import numpy as np
+
+    mu=4
+    dist=distributions.Poisson(mu=mu)
+    seq=np.arange(0,20)
+    nsim=int(1e+05)
+
+    # Compute the mean via pmf
+    mean=np.sum(dist.pmf(seq)*seq)
+    variance=np.sum(dist.pmf(seq)*(seq-mean)**2)
+
+    print('Mean',mean)
+    print('Theoretical mean',dist.mean())
+    print('Variance',variance)
+    print('Theoretical variance',dist.var())
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+
+
 
 ``Binom``
 ------------------
