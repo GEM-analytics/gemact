@@ -2055,6 +2055,20 @@ of the random variable given the (a, b, k) parametrization.</p>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Simulated variance&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">nsim</span><span class="p">)))</span>
 </pre></div>
 </div>
+<p>Then, use <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> library to print the pmf and the cdf of a Poisson:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1">#pmf</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">seq</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Probability mass function, ~Poisson(mu=4)&#39;</span><span class="p">)</span>
+
+<span class="c1">#cdf</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">20</span><span class="p">),</span><span class="n">dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">20</span><span class="p">)),</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;pre&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Cumulative distribution function, ~ Poisson(mu=4)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/pmfPois.png"><img alt="_images/pmfPois.png" src="_images/pmfPois.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="_images/cdfPois.png"><img alt="_images/cdfPois.png" src="_images/cdfPois.png" style="width: 400px;" /></a>
 </div>
 </div>
 <div class="section" id="binom">
