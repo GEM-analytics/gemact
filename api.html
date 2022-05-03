@@ -2128,6 +2128,42 @@ of the random variable given the (a, b, k) parametrization.</p>
    k
 \end{array} \right) p^{k}(1-p)^{n-k}\end{split}\]</div>
 <p>for <span class="math notranslate nohighlight">\(k \in\{0,1, \ldots, n\}, 0 \leq p \leq 1\)</span></p>
+<p>Example code on the usage of the Binom class:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gemact</span> <span class="kn">import</span> <span class="n">distributions</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">n</span><span class="o">=</span><span class="mi">10</span>
+<span class="n">p</span><span class="o">=</span><span class="mf">0.5</span>
+<span class="n">dist</span><span class="o">=</span><span class="n">distributions</span><span class="o">.</span><span class="n">Binom</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span><span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">)</span>
+<span class="n">seq</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">nsim</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mf">1e+05</span><span class="p">)</span>
+
+<span class="c1"># Compute the mean via pmf</span>
+<span class="n">mean</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span><span class="o">*</span><span class="n">seq</span><span class="p">)</span>
+<span class="n">variance</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">seq</span><span class="o">-</span><span class="n">mean</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mean&#39;</span><span class="p">,</span><span class="n">mean</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Theoretical mean&#39;</span><span class="p">,</span><span class="n">dist</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Variance&#39;</span><span class="p">,</span><span class="n">variance</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Theoretical variance&#39;</span><span class="p">,</span><span class="n">dist</span><span class="o">.</span><span class="n">var</span><span class="p">())</span>
+<span class="c1">#compare with simulations</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Simulated mean&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">nsim</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Simulated variance&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">nsim</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p>Then, use <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> library to print the pmf and the cdf of a Poisson:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="c1">#pmf</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">seq</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Probability mass function, ~Binom(n=10,p=0.5)&#39;</span><span class="p">)</span>
+
+<span class="c1">#cdf</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">20</span><span class="p">),</span><span class="n">dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">20</span><span class="p">)),</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;pre&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Cumulative distribution function, ~Binom(n=10,p=0.5)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/pmfBinom.png"><img alt="_images/pmfBinom.png" src="_images/pmfBinom.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="_images/cdfBinom.png"><img alt="_images/cdfBinom.png" src="_images/cdfBinom.png" style="width: 400px;" /></a>
 </div>
 </div>
 <div class="section" id="geom">
@@ -2181,6 +2217,42 @@ of the random variable given the (a, b, k) parametrization.</p>
 <div class="math notranslate nohighlight" id="equation-geom">
 <span class="eqno">(16)<a class="headerlink" href="#equation-geom" title="Permalink to this equation">¶</a></span>\[f(k)=(1-p)^{k-1} p\]</div>
 <p>for <span class="math notranslate nohighlight">\(k \geq 1,0&lt;p \leq 1\)</span></p>
+<p>Example code on the usage of the Geom class:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gemact</span> <span class="kn">import</span> <span class="n">distributions</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">p</span><span class="o">=</span><span class="mf">0.8</span>
+<span class="n">dist</span><span class="o">=</span><span class="n">distributions</span><span class="o">.</span><span class="n">Geom</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">)</span>
+<span class="n">seq</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mf">.001</span><span class="p">)</span>
+<span class="n">nsim</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mf">1e+05</span><span class="p">)</span>
+
+<span class="c1"># Compute the mean via pmf</span>
+<span class="n">mean</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span><span class="o">*</span><span class="n">seq</span><span class="p">)</span>
+<span class="n">variance</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">seq</span><span class="o">-</span><span class="n">mean</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mean&#39;</span><span class="p">,</span><span class="n">mean</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Theoretical mean&#39;</span><span class="p">,</span><span class="n">dist</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Variance&#39;</span><span class="p">,</span><span class="n">variance</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Theoretical variance&#39;</span><span class="p">,</span><span class="n">dist</span><span class="o">.</span><span class="n">var</span><span class="p">())</span>
+<span class="c1">#compare with simulations</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Simulated mean&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">nsim</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Simulated variance&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">nsim</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p>Then, use <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> library to print the pmf and the cdf of a Geom:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1">#pmf</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">seq</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Probability mass function, ~Geom(p=0.8)&#39;</span><span class="p">)</span>
+
+<span class="c1">#cdf</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">20</span><span class="p">),</span><span class="n">dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">20</span><span class="p">)),</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;pre&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Cumulative distribution function, ~Geom(p=0.8)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/pmfGeom.png"><img alt="_images/pmfGeom.png" src="_images/pmfGeom.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="_images/cdfGeom.png"><img alt="_images/cdfGeom.png" src="_images/cdfGeom.png" style="width: 400px;" /></a>
 </div>
 </div>
 <div class="section" id="nbinom">
@@ -2194,6 +2266,42 @@ of the random variable given the (a, b, k) parametrization.</p>
    n-1
 \end{array}\right) p^{n}(1-p)^{k}\end{split}\]</div>
 <p>for <span class="math notranslate nohighlight">\(k \geq 0,0&lt;p \leq 1\)</span></p>
+<p>Example code on the usage of the NBinom class:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gemact</span> <span class="kn">import</span> <span class="n">distributions</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">n</span><span class="o">=</span><span class="mi">10</span>
+<span class="n">p</span><span class="o">=</span><span class="mf">.5</span>
+<span class="n">dist</span><span class="o">=</span><span class="n">distributions</span><span class="o">.</span><span class="n">Nbinom</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span><span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">)</span>
+<span class="n">seq</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mf">.001</span><span class="p">)</span>
+<span class="n">nsim</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mf">1e+05</span><span class="p">)</span>
+
+<span class="c1"># Compute the mean via pmf</span>
+<span class="n">mean</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span><span class="o">*</span><span class="n">seq</span><span class="p">)</span>
+<span class="n">variance</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">seq</span><span class="o">-</span><span class="n">mean</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mean&#39;</span><span class="p">,</span><span class="n">mean</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Theoretical mean&#39;</span><span class="p">,</span><span class="n">dist</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Variance&#39;</span><span class="p">,</span><span class="n">variance</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Theoretical variance&#39;</span><span class="p">,</span><span class="n">dist</span><span class="o">.</span><span class="n">var</span><span class="p">())</span>
+<span class="c1">#compare with simulations</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Simulated mean&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">nsim</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Simulated variance&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">nsim</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p>Then, use <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> library to print the pmf and the cdf of a NBinom:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="c1">#pmf</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">seq</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Probability mass function, ~NBinom(n=10,p=0.8)&#39;</span><span class="p">)</span>
+
+<span class="c1">#cdf</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">20</span><span class="p">),</span><span class="n">dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">20</span><span class="p">)),</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;pre&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Cumulative distribution function, ~NBinom(n=10,p=0.8)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/pmfNBinom.png"><img alt="_images/pmfNBinom.png" src="_images/pmfNBinom.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="_images/cdfNBinom.png"><img alt="_images/cdfNBinom.png" src="_images/cdfNBinom.png" style="width: 400px;" /></a>
 </div>
 </div>
 <div class="section" id="ztpoisson">

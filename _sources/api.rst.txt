@@ -433,6 +433,45 @@ For a better explanation refer to :cite:t:`scipy` documentation.
 
 for :math:`k \in\{0,1, \ldots, n\}, 0 \leq p \leq 1`
 
+Example code on the usage of the Binom class::
+
+    from gemact import distributions
+    import numpy as np
+
+    n=10
+    p=0.5
+    dist=distributions.Binom(n=n,p=p)
+    seq=np.arange(0,20)
+    nsim=int(1e+05)
+
+    # Compute the mean via pmf
+    mean=np.sum(dist.pmf(seq)*seq)
+    variance=np.sum(dist.pmf(seq)*(seq-mean)**2)
+
+    print('Mean',mean)
+    print('Theoretical mean',dist.mean())
+    print('Variance',variance)
+    print('Theoretical variance',dist.var())
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+Then, use ``matplotlib`` library to print the pmf and the cdf of a Poisson::
+
+    import matplotlib.pyplot as plt
+    #pmf
+    plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
+    plt.title('Probability mass function, ~Binom(n=10,p=0.5)')
+
+    #cdf
+    plt.step(np.arange(-2,20),dist.cdf(np.arange(-2,20)),'-', where='pre')
+    plt.title('Cumulative distribution function, ~Binom(n=10,p=0.5)')
+
+.. image:: images/pmfBinom.png
+  :width: 400
+
+.. image:: images/cdfBinom.png
+  :width: 400
+
 ``Geom``
 ------------------
 
@@ -448,6 +487,45 @@ For a better explanation refer to :cite:t:`scipy` documentation.
    :label: geom
 
 for :math:`k \geq 1,0<p \leq 1`
+
+Example code on the usage of the Geom class::
+
+    from gemact import distributions
+    import numpy as np
+
+    p=0.8
+    dist=distributions.Geom(p=p)
+    seq=np.arange(0,100,.001)
+    nsim=int(1e+05)
+
+    # Compute the mean via pmf
+    mean=np.sum(dist.pmf(seq)*seq)
+    variance=np.sum(dist.pmf(seq)*(seq-mean)**2)
+
+    print('Mean',mean)
+    print('Theoretical mean',dist.mean())
+    print('Variance',variance)
+    print('Theoretical variance',dist.var())
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+Then, use ``matplotlib`` library to print the pmf and the cdf of a Geom::
+
+    import matplotlib.pyplot as plt
+
+    #pmf
+    plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
+    plt.title('Probability mass function, ~Geom(p=0.8)')
+
+    #cdf
+    plt.step(np.arange(-2,20),dist.cdf(np.arange(-2,20)),'-', where='pre')
+    plt.title('Cumulative distribution function, ~Geom(p=0.8)')
+
+.. image:: images/pmfGeom.png
+  :width: 400
+
+.. image:: images/cdfGeom.png
+  :width: 400
 
 ``Nbinom``
 ------------------
@@ -467,6 +545,46 @@ For a better explanation refer to :cite:t:`scipy` documentation.
    :label: geom
 
 for :math:`k \geq 0,0<p \leq 1`
+
+Example code on the usage of the NBinom class::
+
+    from gemact import distributions
+    import numpy as np
+
+    n=10
+    p=.5
+    dist=distributions.Nbinom(n=n,p=p)
+    seq=np.arange(0,100,.001)
+    nsim=int(1e+05)
+
+    # Compute the mean via pmf
+    mean=np.sum(dist.pmf(seq)*seq)
+    variance=np.sum(dist.pmf(seq)*(seq-mean)**2)
+
+    print('Mean',mean)
+    print('Theoretical mean',dist.mean())
+    print('Variance',variance)
+    print('Theoretical variance',dist.var())
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+
+Then, use ``matplotlib`` library to print the pmf and the cdf of a NBinom::
+
+    import matplotlib.pyplot as plt
+    #pmf
+    plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
+    plt.title('Probability mass function, ~NBinom(n=10,p=0.8)')
+
+    #cdf
+    plt.step(np.arange(-2,20),dist.cdf(np.arange(-2,20)),'-', where='pre')
+    plt.title('Cumulative distribution function, ~NBinom(n=10,p=0.8)')
+
+.. image:: images/pmfNBinom.png
+  :width: 400
+
+.. image:: images/cdfNBinom.png
+  :width: 400
 
 ``ZTpoisson``
 ------------------
