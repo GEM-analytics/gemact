@@ -366,7 +366,7 @@ The following table summarizes the distribution supported by GemAct and Scipy.
 Parametrization
 ~~~~~~~~~~~~~~~~~~~~
 
-For a better explanation refer to :cite:t:`scipy` documentation.
+For a better explanation refer to the `SciPy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.poisson.html>`_, see :cite:t:`scipy`.
 
 .. math:: f(k)=\exp (-\mu) \frac{\mu^{k}}{k !}
    :label: poisson
@@ -422,7 +422,7 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a Poisson::
 Parametrization
 ~~~~~~~~~~~~~~~~~~~~
 
-For a better explanation refer to :cite:t:`scipy` documentation.
+For a better explanation refer to the `SciPy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.binom.html>`_, see :cite:t:`scipy`.
 
 .. math:: f(k)=\left(
    \begin{array}{l}
@@ -481,7 +481,7 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a Poisson::
 Parametrization
 ~~~~~~~~~~~~~~~~~~~~
 
-For a better explanation refer to :cite:t:`scipy` documentation.
+For a better explanation refer to the `SciPy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.geom.html>`_, see :cite:t:`scipy`..
 
 .. math:: f(k)=(1-p)^{k-1} p
    :label: geom
@@ -536,7 +536,7 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a Geom::
 Parametrization
 ~~~~~~~~~~~~~~~~~~~~
 
-For a better explanation refer to :cite:t:`scipy` documentation.
+For a better explanation refer to the `SciPy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.nbinom.html>`_, see :cite:t:`scipy`.
 
 .. math:: f(k)=\left(\begin{array}{c}
       k+n-1 \\
