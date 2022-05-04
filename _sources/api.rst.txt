@@ -604,6 +604,45 @@ The probability generating function of a Zero-Truncated poisson is defined in eq
 .. math:: P^{T}(z)=\frac{P(z)-p_{0}}{1-p_{0}}
    :label: ztpois
 
+
+Example code on the usage of the ZTPoisson class::
+
+    from gemact import distributions
+    import numpy as np
+
+    mu=2
+    dist=distributions.ZTpoisson(mu=mu)
+    seq=np.arange(0,30,.001)
+    nsim=int(1e+05)
+
+    # Compute the mean via pmf
+    mean=np.sum(dist.pmf(seq)*seq)
+    variance=np.sum(dist.pmf(seq)*(seq-mean)**2)
+
+    print('Mean',mean)
+    print('Variance',variance)
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+
+Then, use ``matplotlib`` library to print the pmf and the cdf of a ZTPoisson::
+
+    import matplotlib.pyplot as plt
+
+    #pmf
+    plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
+    plt.title('Probability mass function, ~ZTPois(mu=2)')
+    #cdf
+    plt.step(np.arange(0,20),dist.cdf(np.arange(0,20)),'-', where='pre')
+    plt.title('Cumulative distribution function,  ~ZTPois(mu=2)')
+
+.. image:: images/pmfZTPois.png
+  :width: 400
+
+.. image:: images/cdfZTPois.png
+  :width: 400
+
+
 ``ZMpoisson``
 ------------------
 
@@ -621,6 +660,45 @@ The probability generating function of a Zero-Truncated poisson is defined in eq
 
 .. math:: P^{M}(z)=p_{0}^{M}+\frac{1-p_{0}^{M}}{1-p_{0}}\left[P(z)-p_{0}\right]
    :label: zmpois
+
+Example code on the usage of the ZMPoisson class::
+
+    from gemact import distributions
+    import numpy as np
+
+    mu=2
+    p0M=0.1
+    dist=distributions.ZMpoisson(mu=mu,p0M=p0M)
+    seq=np.arange(0,30,.001)
+    nsim=int(1e+05)
+
+    # Compute the mean via pmf
+    mean=np.sum(dist.pmf(seq)*seq)
+    variance=np.sum(dist.pmf(seq)*(seq-mean)**2)
+
+    print('Mean',mean)
+    print('Variance',variance)
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+
+Then, use ``matplotlib`` library to print the pmf and the cdf of a ZMPoisson::
+
+    import matplotlib.pyplot as plt
+
+    #pmf
+    plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
+    plt.title('Probability mass function, ~ZMPois(mu=2,p0M=.1)')
+
+    #cdf
+    plt.step(np.arange(0,20),dist.cdf(np.arange(0,20)),'-', where='pre')
+    plt.title('Cumulative distribution function,  ~ZMPois(mu=2,p0M=.1)')
+
+.. image:: images/pmfZMPois.png
+  :width: 400
+
+.. image:: images/cdfZMPois.png
+  :width: 400
 
 ``ZTbinom``
 ------------------
@@ -640,6 +718,48 @@ The probability generating function of a Zero-Truncated binomial is defined in e
 .. math:: P^{T}(z)=\frac{P(z)-p_{0}}{1-p_{0}}
    :label: ztbinom
 
+Example code on the usage of the ZTBinom class::
+
+    from gemact import distributions
+    import numpy as np
+
+    n=10
+    p=.2
+    dist=distributions.ZTbinom(n=n,
+                               p=p)
+    seq=np.arange(0,30,.001)
+    nsim=int(1e+05)
+
+    # Compute the mean via pmf
+    mean=np.sum(dist.pmf(seq)*seq)
+    variance=np.sum(dist.pmf(seq)*(seq-mean)**2)
+
+    print('Mean',mean)
+    print('Variance',variance)
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+
+Then, use ``matplotlib`` library to print the pmf and the cdf of a ZTBinom::
+
+    import matplotlib.pyplot as plt
+
+    #pmf
+    plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
+    plt.title('Probability mass function, ~ZTBinom(n=10 p=.2)')
+
+
+    #cdf
+    plt.step(np.arange(0,20),dist.cdf(np.arange(0,20)),'-', where='pre')
+    plt.title('Cumulative distribution function,  ~ZTBinom(n=10 p=.2)')
+.. image:: images/pmfZTBinom.png
+  :width: 400
+
+.. image:: images/cdfZTBinom.png
+  :width: 400
+
+
+
 ``ZMbinom``
 ------------------
 
@@ -657,6 +777,46 @@ The probability generating function of a Zero-Truncated binomial is defined in e
 
 .. math:: P^{M}(z)=p_{0}^{M}+\frac{1-p_{0}^{M}}{1-p_{0}}\left[P(z)-p_{0}\right]
    :label: zmbinom
+
+Example code on the usage of the ZMBinom class::
+
+    from gemact import distributions
+    import numpy as np
+
+    n=10
+    p=.2
+    p0M=.05
+    dist=distributions.ZMbinom(n=n,p=p,p0M=p0M)
+    seq=np.arange(0,100,.001)
+    nsim=int(1e+05)
+
+    # Compute the mean via pmf
+    mean=np.sum(dist.pmf(seq)*seq)
+    variance=np.sum(dist.pmf(seq)*(seq-mean)**2)
+
+    print('Mean',mean)
+    print('Variance',variance)
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+
+Then, use ``matplotlib`` library to print the pmf and the cdf of a ZMPoisson::
+
+    import matplotlib.pyplot as plt
+
+    #pmf
+    plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
+    plt.title('Probability mass function, ~ZMBinom(n=10,p=.5,p0M=.05)')
+
+    #cdf
+    plt.step(np.arange(0,20),dist.cdf(np.arange(0,20)),'-', where='pre')
+    plt.title('Cumulative distribution function,  ~ZMBinom(n=10,p=.5,p0M=.05)')
+
+.. image:: images/pmfZMBinom.png
+  :width: 400
+
+.. image:: images/cdfZMBinom.png
+  :width: 400
 
 ``ZTgeom``
 ------------------
@@ -676,6 +836,43 @@ The probability generating function of a Zero-Truncated geometric is defined in 
 .. math:: P^{T}(z)=\frac{P(z)-p_{0}}{1-p_{0}}
    :label: ztgeom
 
+Example code on the usage of the ZTGeom class::
+
+    from gemact import distributions
+    import numpy as np
+
+    p=.2
+    dist=distributions.ZTgeom(p=p)
+    seq=np.arange(0,100,.001)
+    nsim=int(1e+05)
+
+    # Compute the mean via pmf
+    mean=np.sum(dist.pmf(seq)*seq)
+    variance=np.sum(dist.pmf(seq)*(seq-mean)**2)
+
+    print('Mean',mean)
+    print('Variance',variance)
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+
+Then, use ``matplotlib`` library to print the pmf and the cdf of a ZTGeom::
+
+    import matplotlib.pyplot as plt
+
+    #pmf
+    plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
+    plt.title('Probability mass function, ~ZTGeom(p=.2)')
+    #cdf
+    plt.step(np.arange(0,20),dist.cdf(np.arange(0,20)),'-', where='pre')
+    plt.title('Cumulative distribution function,  ~ZTGeom(p=.2)')
+
+.. image:: images/pmfZTGeom.png
+  :width: 400
+
+.. image:: images/cdfZTGeom.png
+  :width: 400
+
 ``ZMgeom``
 ------------------
 
@@ -694,6 +891,45 @@ The probability generating function of a Zero-Modified geometric is defined in e
 .. math:: P^{M}(z)=p_{0}^{M}+\frac{1-p_{0}^{M}}{1-p_{0}}\left[P(z)-p_{0}\right]
    :label: zmgeom
 
+Example code on the usage of the ZMGeom class::
+
+    from gemact import distributions
+    import numpy as np
+
+    p=.2
+    p0M=.01
+    dist=distributions.ZMgeom(p=p,p0M=p0M)
+    seq=np.arange(0,100,.001)
+    nsim=int(1e+05)
+
+    # Compute the mean via pmf
+    mean=np.sum(dist.pmf(seq)*seq)
+    variance=np.sum(dist.pmf(seq)*(seq-mean)**2)
+
+    print('Mean',mean)
+    print('Variance',variance)
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+
+Then, use ``matplotlib`` library to print the pmf and the cdf of a ZMGeom::
+
+    import matplotlib.pyplot as plt
+
+    #pmf
+    plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
+    plt.title('Probability mass function, ~ZMGeom(p=.2,p0M=.01)')
+
+    #cdf
+    plt.step(np.arange(0,20),dist.cdf(np.arange(0,20)),'-', where='pre')
+    plt.title('Cumulative distribution function,  ~ZMGeom(p=.2,p0M=.01)')
+
+.. image:: images/pmfZMGeom.png
+  :width: 400
+
+.. image:: images/cdfZMGeom.png
+  :width: 400
+
 ``ZTnbinom``
 ------------------
 
@@ -711,6 +947,46 @@ The probability generating function of a Zero-Truncated negative binomial is def
 
 .. math:: P^{T}(z)=\frac{P(z)-p_{0}}{1-p_{0}}
    :label: ztnbinom
+
+Example code on the usage of the ZTNbinom class::
+
+    from gemact import distributions
+    import numpy as np
+
+    p=.2
+    n=10
+    dist=distributions.ZTnbinom(p=p,n=n)
+    seq=np.arange(0,100,.001)
+    nsim=int(1e+05)
+
+    # Compute the mean via pmf
+    mean=np.sum(dist.pmf(seq)*seq)
+    variance=np.sum(dist.pmf(seq)*(seq-mean)**2)
+
+    print('Mean',mean)
+    print('Variance',variance)
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+
+Then, use ``matplotlib`` library to print the pmf and the cdf of a ZTNbinom::
+
+    import matplotlib.pyplot as plt
+
+    #pmf
+    plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
+    plt.title('Probability mass function, ~ZTNbinom(p=.2,n=10)')
+
+    #cdf
+    plt.step(np.arange(0,100),dist.cdf(np.arange(0,100)),'-', where='pre')
+    plt.title('Cumulative distribution function,  ~ZTNbinom(p=.2,n=10)')
+
+.. image:: images/pmfZTnbinom.png
+  :width: 400
+
+.. image:: images/cdfZTNbinom.png
+  :width: 400
+
 
 ``ZMnbinom``
 ------------------
@@ -747,6 +1023,46 @@ The probability generating function of a Zero-Modified logarithmic is defined in
 
 .. math:: P^{M}(z)=p_{0}^{M}+\frac{1-p_{0}^{M}}{1-p_{0}}\left[P(z)-p_{0}\right]
    :label: zmlogser
+
+
+Example code on the usage of the ZMlogser class::
+
+    from gemact import distributions
+    import numpy as np
+
+    p=.2
+    p0M=.01
+    dist=distributions.ZMlogser(p=p,p0M=p0M)
+    seq=np.arange(0,100,.001)
+    nsim=int(1e+05)
+
+    # Compute the mean via pmf
+    mean=np.sum(dist.pmf(seq)*seq)
+    variance=np.sum(dist.pmf(seq)*(seq-mean)**2)
+
+    print('Mean',mean)
+    print('Variance',variance)
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+
+Then, use ``matplotlib`` library to print the pmf and the cdf of a ZMlogser::
+
+    import matplotlib.pyplot as plt
+
+    #pmf
+    plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
+    plt.title('Probability mass function, ~ZMlogser(p=.2, p0M=.01)')
+    #cdf
+    plt.step(np.arange(0,10),dist.cdf(np.arange(0,10)),'-', where='pre')
+    plt.title('Cumulative distribution function,  ~ZMlogser(p=.2, p0M=.01)')
+
+.. image:: images/pmfZMLogser.png
+  :width: 400
+
+.. image:: images/cdfZMLogser.png
+  :width: 400
+
 
 ``Gamma``
 ------------------

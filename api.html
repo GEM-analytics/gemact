@@ -2313,6 +2313,39 @@ of the random variable given the (a, b, k) parametrization.</p>
 <p>The probability generating function of a Zero-Truncated poisson is defined in equation <a class="reference internal" href="#equation-ztpois">(18)</a>.</p>
 <div class="math notranslate nohighlight" id="equation-ztpois">
 <span class="eqno">(18)<a class="headerlink" href="#equation-ztpois" title="Permalink to this equation">¶</a></span>\[P^{T}(z)=\frac{P(z)-p_{0}}{1-p_{0}}\]</div>
+<p>Example code on the usage of the ZTPoisson class:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gemact</span> <span class="kn">import</span> <span class="n">distributions</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">mu</span><span class="o">=</span><span class="mi">2</span>
+<span class="n">dist</span><span class="o">=</span><span class="n">distributions</span><span class="o">.</span><span class="n">ZTpoisson</span><span class="p">(</span><span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">)</span>
+<span class="n">seq</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mf">.001</span><span class="p">)</span>
+<span class="n">nsim</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mf">1e+05</span><span class="p">)</span>
+
+<span class="c1"># Compute the mean via pmf</span>
+<span class="n">mean</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span><span class="o">*</span><span class="n">seq</span><span class="p">)</span>
+<span class="n">variance</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">seq</span><span class="o">-</span><span class="n">mean</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mean&#39;</span><span class="p">,</span><span class="n">mean</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Variance&#39;</span><span class="p">,</span><span class="n">variance</span><span class="p">)</span>
+<span class="c1">#compare with simulations</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Simulated mean&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">nsim</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Simulated variance&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">nsim</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p>Then, use <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> library to print the pmf and the cdf of a ZTPoisson:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1">#pmf</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">seq</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Probability mass function, ~ZTPois(mu=2)&#39;</span><span class="p">)</span>
+<span class="c1">#cdf</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">),</span><span class="n">dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">)),</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;pre&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Cumulative distribution function,  ~ZTPois(mu=2)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/pmfZTPois.png"><img alt="_images/pmfZTPois.png" src="_images/pmfZTPois.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="_images/cdfZTPois.png"><img alt="_images/cdfZTPois.png" src="_images/cdfZTPois.png" style="width: 400px;" /></a>
 </div>
 </div>
 <div class="section" id="zmpoisson">
@@ -2324,6 +2357,41 @@ of the random variable given the (a, b, k) parametrization.</p>
 <p>The probability generating function of a Zero-Truncated poisson is defined in equation <a class="reference internal" href="#equation-zmpois">(19)</a></p>
 <div class="math notranslate nohighlight" id="equation-zmpois">
 <span class="eqno">(19)<a class="headerlink" href="#equation-zmpois" title="Permalink to this equation">¶</a></span>\[P^{M}(z)=p_{0}^{M}+\frac{1-p_{0}^{M}}{1-p_{0}}\left[P(z)-p_{0}\right]\]</div>
+<p>Example code on the usage of the ZMPoisson class:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gemact</span> <span class="kn">import</span> <span class="n">distributions</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">mu</span><span class="o">=</span><span class="mi">2</span>
+<span class="n">p0M</span><span class="o">=</span><span class="mf">0.1</span>
+<span class="n">dist</span><span class="o">=</span><span class="n">distributions</span><span class="o">.</span><span class="n">ZMpoisson</span><span class="p">(</span><span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span><span class="n">p0M</span><span class="o">=</span><span class="n">p0M</span><span class="p">)</span>
+<span class="n">seq</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mf">.001</span><span class="p">)</span>
+<span class="n">nsim</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mf">1e+05</span><span class="p">)</span>
+
+<span class="c1"># Compute the mean via pmf</span>
+<span class="n">mean</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span><span class="o">*</span><span class="n">seq</span><span class="p">)</span>
+<span class="n">variance</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">seq</span><span class="o">-</span><span class="n">mean</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mean&#39;</span><span class="p">,</span><span class="n">mean</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Variance&#39;</span><span class="p">,</span><span class="n">variance</span><span class="p">)</span>
+<span class="c1">#compare with simulations</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Simulated mean&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">nsim</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Simulated variance&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">nsim</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p>Then, use <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> library to print the pmf and the cdf of a ZMPoisson:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1">#pmf</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">seq</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Probability mass function, ~ZMPois(mu=2,p0M=.1)&#39;</span><span class="p">)</span>
+
+<span class="c1">#cdf</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">),</span><span class="n">dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">)),</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;pre&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Cumulative distribution function,  ~ZMPois(mu=2,p0M=.1)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/pmfZMPois.png"><img alt="_images/pmfZMPois.png" src="_images/pmfZMPois.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="_images/cdfZMPois.png"><img alt="_images/cdfZMPois.png" src="_images/cdfZMPois.png" style="width: 400px;" /></a>
 </div>
 </div>
 <div class="section" id="ztbinom">
@@ -2335,6 +2403,43 @@ of the random variable given the (a, b, k) parametrization.</p>
 <p>The probability generating function of a Zero-Truncated binomial is defined in equation <a class="reference internal" href="#equation-ztbinom">(20)</a>.</p>
 <div class="math notranslate nohighlight" id="equation-ztbinom">
 <span class="eqno">(20)<a class="headerlink" href="#equation-ztbinom" title="Permalink to this equation">¶</a></span>\[P^{T}(z)=\frac{P(z)-p_{0}}{1-p_{0}}\]</div>
+<p>Example code on the usage of the ZTBinom class:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gemact</span> <span class="kn">import</span> <span class="n">distributions</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">n</span><span class="o">=</span><span class="mi">10</span>
+<span class="n">p</span><span class="o">=</span><span class="mf">.2</span>
+<span class="n">dist</span><span class="o">=</span><span class="n">distributions</span><span class="o">.</span><span class="n">ZTbinom</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span>
+                           <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">)</span>
+<span class="n">seq</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mf">.001</span><span class="p">)</span>
+<span class="n">nsim</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mf">1e+05</span><span class="p">)</span>
+
+<span class="c1"># Compute the mean via pmf</span>
+<span class="n">mean</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span><span class="o">*</span><span class="n">seq</span><span class="p">)</span>
+<span class="n">variance</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">seq</span><span class="o">-</span><span class="n">mean</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mean&#39;</span><span class="p">,</span><span class="n">mean</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Variance&#39;</span><span class="p">,</span><span class="n">variance</span><span class="p">)</span>
+<span class="c1">#compare with simulations</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Simulated mean&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">nsim</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Simulated variance&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">nsim</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p>Then, use <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> library to print the pmf and the cdf of a ZTBinom:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1">#pmf</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">seq</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Probability mass function, ~ZTBinom(n=10 p=.2)&#39;</span><span class="p">)</span>
+
+
+<span class="c1">#cdf</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">),</span><span class="n">dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">)),</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;pre&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Cumulative distribution function,  ~ZTBinom(n=10 p=.2)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/pmfZTBinom.png"><img alt="_images/pmfZTBinom.png" src="_images/pmfZTBinom.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="_images/cdfZTBinom.png"><img alt="_images/cdfZTBinom.png" src="_images/cdfZTBinom.png" style="width: 400px;" /></a>
 </div>
 </div>
 <div class="section" id="zmbinom">
@@ -2346,6 +2451,42 @@ of the random variable given the (a, b, k) parametrization.</p>
 <p>The probability generating function of a Zero-Truncated binomial is defined in equation <a class="reference internal" href="#equation-zmbinom">(21)</a></p>
 <div class="math notranslate nohighlight" id="equation-zmbinom">
 <span class="eqno">(21)<a class="headerlink" href="#equation-zmbinom" title="Permalink to this equation">¶</a></span>\[P^{M}(z)=p_{0}^{M}+\frac{1-p_{0}^{M}}{1-p_{0}}\left[P(z)-p_{0}\right]\]</div>
+<p>Example code on the usage of the ZMBinom class:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gemact</span> <span class="kn">import</span> <span class="n">distributions</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">n</span><span class="o">=</span><span class="mi">10</span>
+<span class="n">p</span><span class="o">=</span><span class="mf">.2</span>
+<span class="n">p0M</span><span class="o">=</span><span class="mf">.05</span>
+<span class="n">dist</span><span class="o">=</span><span class="n">distributions</span><span class="o">.</span><span class="n">ZMbinom</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span><span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="n">p0M</span><span class="o">=</span><span class="n">p0M</span><span class="p">)</span>
+<span class="n">seq</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mf">.001</span><span class="p">)</span>
+<span class="n">nsim</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mf">1e+05</span><span class="p">)</span>
+
+<span class="c1"># Compute the mean via pmf</span>
+<span class="n">mean</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span><span class="o">*</span><span class="n">seq</span><span class="p">)</span>
+<span class="n">variance</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">seq</span><span class="o">-</span><span class="n">mean</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mean&#39;</span><span class="p">,</span><span class="n">mean</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Variance&#39;</span><span class="p">,</span><span class="n">variance</span><span class="p">)</span>
+<span class="c1">#compare with simulations</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Simulated mean&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">nsim</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Simulated variance&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">nsim</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p>Then, use <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> library to print the pmf and the cdf of a ZMPoisson:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1">#pmf</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">seq</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Probability mass function, ~ZMBinom(n=10,p=.5,p0M=.05)&#39;</span><span class="p">)</span>
+
+<span class="c1">#cdf</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">),</span><span class="n">dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">)),</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;pre&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Cumulative distribution function,  ~ZMBinom(n=10,p=.5,p0M=.05)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/pmfZMBinom.png"><img alt="_images/pmfZMBinom.png" src="_images/pmfZMBinom.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="_images/cdfZMBinom.png"><img alt="_images/cdfZMBinom.png" src="_images/cdfZMBinom.png" style="width: 400px;" /></a>
 </div>
 </div>
 <div class="section" id="ztgeom">
@@ -2357,6 +2498,39 @@ of the random variable given the (a, b, k) parametrization.</p>
 <p>The probability generating function of a Zero-Truncated geometric is defined in equation <a class="reference internal" href="#equation-ztgeom">(22)</a>.</p>
 <div class="math notranslate nohighlight" id="equation-ztgeom">
 <span class="eqno">(22)<a class="headerlink" href="#equation-ztgeom" title="Permalink to this equation">¶</a></span>\[P^{T}(z)=\frac{P(z)-p_{0}}{1-p_{0}}\]</div>
+<p>Example code on the usage of the ZTGeom class:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gemact</span> <span class="kn">import</span> <span class="n">distributions</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">p</span><span class="o">=</span><span class="mf">.2</span>
+<span class="n">dist</span><span class="o">=</span><span class="n">distributions</span><span class="o">.</span><span class="n">ZTgeom</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">)</span>
+<span class="n">seq</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mf">.001</span><span class="p">)</span>
+<span class="n">nsim</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mf">1e+05</span><span class="p">)</span>
+
+<span class="c1"># Compute the mean via pmf</span>
+<span class="n">mean</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span><span class="o">*</span><span class="n">seq</span><span class="p">)</span>
+<span class="n">variance</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">seq</span><span class="o">-</span><span class="n">mean</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mean&#39;</span><span class="p">,</span><span class="n">mean</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Variance&#39;</span><span class="p">,</span><span class="n">variance</span><span class="p">)</span>
+<span class="c1">#compare with simulations</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Simulated mean&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">nsim</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Simulated variance&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">nsim</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p>Then, use <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> library to print the pmf and the cdf of a ZTGeom:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1">#pmf</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">seq</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Probability mass function, ~ZTGeom(p=.2)&#39;</span><span class="p">)</span>
+<span class="c1">#cdf</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">),</span><span class="n">dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">)),</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;pre&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Cumulative distribution function,  ~ZTGeom(p=.2)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/pmfZTGeom.png"><img alt="_images/pmfZTGeom.png" src="_images/pmfZTGeom.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="_images/cdfZTGeom.png"><img alt="_images/cdfZTGeom.png" src="_images/cdfZTGeom.png" style="width: 400px;" /></a>
 </div>
 </div>
 <div class="section" id="zmgeom">
@@ -2368,6 +2542,41 @@ of the random variable given the (a, b, k) parametrization.</p>
 <p>The probability generating function of a Zero-Modified geometric is defined in equation <a class="reference internal" href="#equation-zmgeom">(23)</a>.</p>
 <div class="math notranslate nohighlight" id="equation-zmgeom">
 <span class="eqno">(23)<a class="headerlink" href="#equation-zmgeom" title="Permalink to this equation">¶</a></span>\[P^{M}(z)=p_{0}^{M}+\frac{1-p_{0}^{M}}{1-p_{0}}\left[P(z)-p_{0}\right]\]</div>
+<p>Example code on the usage of the ZMGeom class:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gemact</span> <span class="kn">import</span> <span class="n">distributions</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">p</span><span class="o">=</span><span class="mf">.2</span>
+<span class="n">p0M</span><span class="o">=</span><span class="mf">.01</span>
+<span class="n">dist</span><span class="o">=</span><span class="n">distributions</span><span class="o">.</span><span class="n">ZMgeom</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="n">p0M</span><span class="o">=</span><span class="n">p0M</span><span class="p">)</span>
+<span class="n">seq</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mf">.001</span><span class="p">)</span>
+<span class="n">nsim</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mf">1e+05</span><span class="p">)</span>
+
+<span class="c1"># Compute the mean via pmf</span>
+<span class="n">mean</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span><span class="o">*</span><span class="n">seq</span><span class="p">)</span>
+<span class="n">variance</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">seq</span><span class="o">-</span><span class="n">mean</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mean&#39;</span><span class="p">,</span><span class="n">mean</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Variance&#39;</span><span class="p">,</span><span class="n">variance</span><span class="p">)</span>
+<span class="c1">#compare with simulations</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Simulated mean&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">nsim</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Simulated variance&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">nsim</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p>Then, use <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> library to print the pmf and the cdf of a ZMGeom:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1">#pmf</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">seq</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Probability mass function, ~ZMGeom(p=.2,p0M=.01)&#39;</span><span class="p">)</span>
+
+<span class="c1">#cdf</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">),</span><span class="n">dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">)),</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;pre&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Cumulative distribution function,  ~ZMGeom(p=.2,p0M=.01)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/pmfZMGeom.png"><img alt="_images/pmfZMGeom.png" src="_images/pmfZMGeom.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="_images/cdfZMGeom.png"><img alt="_images/cdfZMGeom.png" src="_images/cdfZMGeom.png" style="width: 400px;" /></a>
 </div>
 </div>
 <div class="section" id="ztnbinom">
@@ -2379,6 +2588,41 @@ of the random variable given the (a, b, k) parametrization.</p>
 <p>The probability generating function of a Zero-Truncated negative binomial is defined in equation <a class="reference internal" href="#equation-ztnbinom">(24)</a>.</p>
 <div class="math notranslate nohighlight" id="equation-ztnbinom">
 <span class="eqno">(24)<a class="headerlink" href="#equation-ztnbinom" title="Permalink to this equation">¶</a></span>\[P^{T}(z)=\frac{P(z)-p_{0}}{1-p_{0}}\]</div>
+<p>Example code on the usage of the ZTNbinom class:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gemact</span> <span class="kn">import</span> <span class="n">distributions</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">p</span><span class="o">=</span><span class="mf">.2</span>
+<span class="n">n</span><span class="o">=</span><span class="mi">10</span>
+<span class="n">dist</span><span class="o">=</span><span class="n">distributions</span><span class="o">.</span><span class="n">ZTnbinom</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+<span class="n">seq</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mf">.001</span><span class="p">)</span>
+<span class="n">nsim</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mf">1e+05</span><span class="p">)</span>
+
+<span class="c1"># Compute the mean via pmf</span>
+<span class="n">mean</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span><span class="o">*</span><span class="n">seq</span><span class="p">)</span>
+<span class="n">variance</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">seq</span><span class="o">-</span><span class="n">mean</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mean&#39;</span><span class="p">,</span><span class="n">mean</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Variance&#39;</span><span class="p">,</span><span class="n">variance</span><span class="p">)</span>
+<span class="c1">#compare with simulations</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Simulated mean&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">nsim</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Simulated variance&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">nsim</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p>Then, use <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> library to print the pmf and the cdf of a ZTNbinom:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1">#pmf</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">seq</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Probability mass function, ~ZTNbinom(p=.2,n=10)&#39;</span><span class="p">)</span>
+
+<span class="c1">#cdf</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">),</span><span class="n">dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">)),</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;pre&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Cumulative distribution function,  ~ZTNbinom(p=.2,n=10)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/pmfZTnbinom.png"><img alt="_images/pmfZTnbinom.png" src="_images/pmfZTnbinom.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="_images/cdfZTNbinom.png"><img alt="_images/cdfZTNbinom.png" src="_images/cdfZTNbinom.png" style="width: 400px;" /></a>
 </div>
 </div>
 <div class="section" id="zmnbinom">
@@ -2401,6 +2645,40 @@ of the random variable given the (a, b, k) parametrization.</p>
 <p>The probability generating function of a Zero-Modified logarithmic is defined in equation <a class="reference internal" href="#equation-zmlogser">(26)</a>.</p>
 <div class="math notranslate nohighlight" id="equation-zmlogser">
 <span class="eqno">(26)<a class="headerlink" href="#equation-zmlogser" title="Permalink to this equation">¶</a></span>\[P^{M}(z)=p_{0}^{M}+\frac{1-p_{0}^{M}}{1-p_{0}}\left[P(z)-p_{0}\right]\]</div>
+<p>Example code on the usage of the ZMlogser class:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gemact</span> <span class="kn">import</span> <span class="n">distributions</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">p</span><span class="o">=</span><span class="mf">.2</span>
+<span class="n">p0M</span><span class="o">=</span><span class="mf">.01</span>
+<span class="n">dist</span><span class="o">=</span><span class="n">distributions</span><span class="o">.</span><span class="n">ZMlogser</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="n">p0M</span><span class="o">=</span><span class="n">p0M</span><span class="p">)</span>
+<span class="n">seq</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mf">.001</span><span class="p">)</span>
+<span class="n">nsim</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mf">1e+05</span><span class="p">)</span>
+
+<span class="c1"># Compute the mean via pmf</span>
+<span class="n">mean</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span><span class="o">*</span><span class="n">seq</span><span class="p">)</span>
+<span class="n">variance</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">seq</span><span class="o">-</span><span class="n">mean</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mean&#39;</span><span class="p">,</span><span class="n">mean</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Variance&#39;</span><span class="p">,</span><span class="n">variance</span><span class="p">)</span>
+<span class="c1">#compare with simulations</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Simulated mean&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">nsim</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Simulated variance&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">nsim</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p>Then, use <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> library to print the pmf and the cdf of a ZMlogser:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1">#pmf</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">seq</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Probability mass function, ~ZMlogser(p=.2, p0M=.01)&#39;</span><span class="p">)</span>
+<span class="c1">#cdf</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span><span class="n">dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">)),</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;pre&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Cumulative distribution function,  ~ZMlogser(p=.2, p0M=.01)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/pmfZMLogser.png"><img alt="_images/pmfZMLogser.png" src="_images/pmfZMLogser.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="_images/cdfZMLogser.png"><img alt="_images/cdfZMLogser.png" src="_images/cdfZMLogser.png" style="width: 400px;" /></a>
 </div>
 </div>
 <div class="section" id="gamma">
