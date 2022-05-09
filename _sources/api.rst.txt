@@ -1073,12 +1073,49 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a ZMlogser::
 Parametrization
 ~~~~~~~~~~~~~~~~~~~~
 
-For a better explanation refer to :cite:t:`scipy` documentation.
+For a better explanation refer to the `SciPy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.gamma.html>`_, see :cite:t:`scipy`.
 
 .. math:: f(x, a)=\frac{x^{a-1} e^{-x}}{\Gamma(a)}
-   :label: poisson
+   :label: gamma
 
 Given :math:`f(x, a)=\frac{x^{a-1} e^{-x}}{\Gamma(a)}` and :math:`x \geq 0, a>0`. :math:`\Gamma(a)` refers to the gamma function.
+
+Example code on the usage of the Gamma class::
+
+    from gemact import distributions
+    import numpy as np
+
+    a=2
+    b=5
+    dist=distributions.Gamma(a=a,
+                             beta=b)
+    seq=np.arange(0,100,.1)
+    nsim=int(1e+05)
+
+    print('Theorical mean',dist.mean())
+    print('Theorical variance',dist.var())
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+
+Then, use ``matplotlib`` library to print the pmf and the cdf of a Gamma::
+
+    import matplotlib.pyplot as plt
+
+    #pmf
+    plt.hist(dist.rvs(nsim),
+             bins=100,
+             density=True)
+    plt.title('Probability density function, ~Gamma(a=2, beta=5)')
+    #cdf
+    plt.plot(seq,dist.cdf(seq))
+    plt.title('Cumulative distribution function,  ~Gamma(a=2, beta=5)')
+
+.. image:: images/pdfGamma.png
+  :width: 400
+
+.. image:: images/cdfGamma.png
+  :width: 400
 
 ``Exponential``
 ------------------
@@ -1090,9 +1127,45 @@ Parametrization
 ~~~~~~~~~~~~~~~~~~~~
 
 .. math:: f(x, \theta)=\theta \cdot e^{-\theta x}
-   :label: gamma
+   :label: exponential
 
 Given :math:`\theta \geq 0`. 
+
+Example code on the usage of the Exponential class::
+
+    from gemact import distributions
+    import numpy as np
+
+    theta=.1
+    dist=distributions.Exponential(theta=theta)
+    seq=np.arange(0,200,.1)
+    nsim=int(1e+05)
+
+    print('Theorical mean',dist.mean())
+    print('Theorical variance',dist.var())
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+
+Then, use ``matplotlib`` library to print the pmf and the cdf of an Exponential::
+
+    import matplotlib.pyplot as plt
+
+    #pmf
+    plt.hist(dist.rvs(nsim),
+             bins=100,
+             density=True)
+    plt.title('Probability density function, ~Gamma(a=2, beta=5)')
+    #cdf
+    plt.plot(seq,dist.cdf(seq))
+    plt.title('Cumulative distribution function,  ~Gamma(a=2, beta=5)')
+
+.. image:: images/pdfExponential.png
+  :width: 400
+
+.. image:: images/cdfExponential.png
+  :width: 400
+
 
 ``Invgamma``
 ------------------
@@ -1113,18 +1186,61 @@ Given :math:`x>=0, a>0 `. :math:`\Gamma(a)` refers to the gamma function.
 ``Genpareto``
 ------------------
 
-.. autoclass:: distributions.Invgamma
+.. autoclass:: distributions.Genpareto
    :members:
 
 Parametrization
 ~~~~~~~~~~~~~~~~~~~~
 
-For a better explanation refer to :cite:t:`scipy` documentation.
+For a better explanation refer to the `SciPy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.genpareto.html>`_, see :cite:t:`scipy`.
+
 
 .. math:: f(x, c)=(1+c x)^{-1-1 / c}
    :label: genpareto
 
-Given :math:`x \geq 0` if :math:`c \geq 0`. :math:`0 \leq x \leq-1 / c if $c<0$`.
+Given :math:`x \geq 0` if :math:`c \geq 0`. :math:`0 \leq x \leq-1 / c if c<0`.
+
+Example code on the usage of the GenPareto class::
+
+    from gemact import distributions
+    import numpy as np
+
+    c=.4
+    loc=0
+    scale=0.25
+
+    dist=distributions.Genpareto(c=c,
+                                loc=loc,
+                                scale=scale)
+
+    seq=np.arange(0,100,.1)
+    nsim=int(1e+05)
+
+    print('Theorical mean',dist.mean())
+    print('Theorical variance',dist.var())
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+
+Then, use ``matplotlib`` library to print the pmf and the cdf of a GenPareto::
+
+    import matplotlib.pyplot as plt
+
+    #pmf
+    plt.hist(dist.rvs(nsim),
+             bins=50,
+             density=True)
+    plt.title('Probability density function, ~GenPareto(a=2, beta=5)')
+
+    #cdf
+    plt.plot(seq,dist.cdf(seq))
+    plt.title('Cumulative distribution function,  ~GenPareto(a=2, beta=5)')
+
+.. image:: images/pdfGenPareto.png
+  :width: 400
+
+.. image:: images/cdfGenPareto.png
+  :width: 400
 
 ``Lognorm``
 ------------------
@@ -1135,12 +1251,47 @@ Given :math:`x \geq 0` if :math:`c \geq 0`. :math:`0 \leq x \leq-1 / c if $c<0$`
 Parametrization
 ~~~~~~~~~~~~~~~~~~~~
 
-For a better explanation refer to :cite:t:`scipy` documentation.
+For a better explanation refer to the `SciPy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.lognorm.html>`_, see :cite:t:`scipy`.
 
 .. math:: f(x, s)=\frac{1}{s x \sqrt{2 \pi}} \exp \left(-\frac{\log ^{2}(x)}{2 s^{2}}\right)
    :label: lognorm
 
 Given :math:`x>0, s>0`.
+
+Example code on the usage of the LogNorm class::
+
+    from gemact import distributions
+    import numpy as np
+
+    s=2
+    dist=distributions.Lognorm(s=s)
+
+    seq=np.arange(0,100,.1)
+    nsim=int(1e+08)
+
+    print('Theorical mean',dist.mean())
+    print('Theorical variance',dist.var())
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+
+Then, use ``matplotlib`` library to print the pmf and the cdf of a LogNorm::
+
+    import matplotlib.pyplot as plt
+    #pmf
+    plt.hist(dist.rvs(nsim),
+             bins=20,
+             density=True)
+    plt.title('Probability density function, ~LogNormal(s=2)')
+    #cdf
+    plt.plot(seq,dist.cdf(seq))
+    plt.title('Cumulative distribution function, ~LogNormal(s=2)')
+
+.. image:: images/pdfLogNorm.png
+  :width: 400
+
+.. image:: images/cdfLogNorm.png
+  :width: 400
 
 ``Burr12``
 ------------------
@@ -1151,12 +1302,53 @@ Given :math:`x>0, s>0`.
 Parametrization
 ~~~~~~~~~~~~~~~~~~~~
 
-For a better explanation refer to :cite:t:`scipy` `documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.burr12.html>`_ .
+For a better explanation refer to the `Scipy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.burr12.html>`_ , see :cite:t:`scipy`.
 
 .. math:: f(x, c, d)=c d x^{c-1} /\left(1+x^{c}\right)^{d+1}
    :label: burr12
 
 Given :math:`x>=0 and c, d>0`.
+
+Example code on the usage of the Burr12 class::
+
+    from gemact import distributions
+    import numpy as np
+
+    c=2
+    d=3
+    dist=distributions.Burr12(c=c,
+                              d=d)
+
+    seq=np.arange(0,100,.1)
+    nsim=int(1e+05)
+
+    print('Theorical mean',dist.mean())
+    print('Theorical variance',dist.var())
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+
+Then, use ``matplotlib`` library to print the pmf and the cdf of a Burr12::
+
+    import matplotlib.pyplot as plt
+
+    #pmf
+    plt.hist(dist.rvs(nsim),
+             bins=100,
+             density=True)
+    plt.title('Probability density function, ~Burr12(c=c,d=d)')
+
+    #cdf
+    plt.plot(seq,dist.cdf(seq))
+    plt.title('Cumulative distribution function,  ~Burr12(c=c,d=d)')
+
+.. image:: images/pdfBurr12.png
+  :width: 400
+
+.. image:: images/cdfBurr12.png
+  :width: 400
+
+
 
 ``Dagum``
 ------------------
@@ -1167,12 +1359,51 @@ Given :math:`x>=0 and c, d>0`.
 Parametrization
 ~~~~~~~~~~~~~~~~~~~~
 
-For a better explanation refer to :cite:t:`scipy` `documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.mielke.html>`_.
+For a better explanation refer to the `SciPy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.mielke.html>`_ ,see :cite:t:`scipy`.
 
 .. math:: f(x, k, s)=\frac{k x^{k-1}}{\left(1+x^{s}\right)^{1+k / s}}
    :label: dagum
 
 Given :math:`x>0` , :math:`k,s>0`.
+
+
+Example code on the usage of the Dagum class::
+
+    from gemact import distributions
+    import numpy as np
+
+    d=2
+    s=4.2
+    dist=distributions.Dagum(d=d,
+                             s=s)
+
+    seq=np.arange(0,3,.001)
+    nsim=int(1e+05)
+
+    print('Theorical mean',dist.mean())
+    print('Theorical variance',dist.var())
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+Then, use ``matplotlib`` library to print the pmf and the cdf of a Dagum::
+
+    import matplotlib.pyplot as plt
+
+    #pmf
+    plt.hist(dist.rvs(nsim),
+             bins=100,
+             density=True)
+    plt.title('Probability density function, ~Dagum(d=4,s=2)')
+
+    #cdf
+    plt.plot(seq,dist.cdf(seq))
+    plt.title('Cumulative distribution function,  ~Dagum(d=c,s=4.2)')
+
+.. image:: images/pdfDagum.png
+  :width: 400
+
+.. image:: images/cdfDagum.png
+  :width: 400
 
 
 ``Weibull_min``
@@ -1184,13 +1415,50 @@ Given :math:`x>0` , :math:`k,s>0`.
 Parametrization
 ~~~~~~~~~~~~~~~~~~~~
 
-For a better explanation refer to :cite:t:`scipy` `documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.weibull_min.html>`_.
+For a better explanation refer to the `SciPy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.weibull_min.html>`_ , see :cite:t:`scipy`.
 
 .. math:: f(x, c)=c x^{c-1} \exp \left(-x^{c}\right)
    :label: weibull_min
 
 Given :math:`x>0` , :math:`c>0`.
 
+
+
+Example code on the usage of the Weibull_min class::
+
+    from gemact import distributions
+    import numpy as np
+
+    c=2.2
+    dist=distributions.Weibull_min(c=c)
+
+    seq=np.arange(0,3,.001)
+    nsim=int(1e+05)
+
+    print('Theorical mean',dist.mean())
+    print('Theorical variance',dist.var())
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+Then, use ``matplotlib`` library to print the pmf and the cdf of a Weibull_min::
+
+    import matplotlib.pyplot as plt
+
+    #pmf
+    plt.hist(dist.rvs(nsim),
+             bins=100,
+             density=True)
+    plt.title('Probability density function, ~Weibull_min(s=2.2)')
+
+    #cdf
+    plt.plot(seq,dist.cdf(seq))
+    plt.title('Cumulative distribution function,  ~Invweibull(c=7.2)')
+
+.. image:: images/pdfWeibull_min.png
+  :width: 400
+
+.. image:: images/cdfWeibull_min.png
+  :width: 400
 
 ``Invweibull``
 ------------------
@@ -1208,6 +1476,43 @@ For a better explanation refer to :cite:t:`scipy` `documentation <https://docs.s
 
 Given :math:`x>0` , :math:`c>0`.
 
+
+Example code on the usage of the Invweibull class::
+
+    from gemact import distributions
+    import numpy as np
+
+    c=7.2
+    dist=distributions.Invweibull(c=c)
+
+    seq=np.arange(0,3,.001)
+    nsim=int(1e+05)
+
+    print('Theorical mean',dist.mean())
+    print('Theorical variance',dist.var())
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+Then, use ``matplotlib`` library to print the pmf and the cdf of a Invweibull::
+
+    import matplotlib.pyplot as plt
+
+    #pmf
+    plt.hist(dist.rvs(nsim),
+             bins=100,
+             density=True)
+    plt.title('Probability density function, ~Invweibull(c=7.2)')
+    #cdf
+    plt.plot(seq,dist.cdf(seq))
+    plt.title('Cumulative distribution function,  ~Invweibull(c=7.2)')
+
+.. image:: images/pdfInvweibull.png
+  :width: 400
+
+.. image:: images/cdfInvweibull.png
+  :width: 400
+
+
 ``Beta``
 ------------------
 
@@ -1217,17 +1522,51 @@ Given :math:`x>0` , :math:`c>0`.
 Parametrization
 ~~~~~~~~~~~~~~~~~~~~
 
-For a better explanation refer to :cite:t:`scipy` `documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.beta.html>`_.
+For a better explanation refer to the `SciPy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.beta.html>`_, :cite:t:`scipy` .
 
 .. math:: f(x, a, b)=\frac{\Gamma(a+b) x^{a-1}(1-x)^{b-1}}{\Gamma(a) \Gamma(b)}
-   :label: invweibull
+   :label: beta
 
 Given :math:`0<=x<=1, a>0, b>0` , :math:`\Gamma` is the gamma function.
 
-Example
-~~~~~~~~~~~~~~~~~~~~
+Example code on the usage of the Beta class::
 
-Refer to the `SciPy guide <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.beta.html>`_.
+    from gemact import distributions
+    import numpy as np
+
+    a=2
+    b=5
+    dist=distributions.Beta(a=a,
+                            b=b)
+
+    seq=np.arange(0,1,.001)
+    nsim=int(1e+05)
+
+    print('Theorical mean',dist.mean())
+    print('Theorical variance',dist.var())
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+Then, use ``matplotlib`` library to print the pmf and the cdf of a Beta::
+
+    import matplotlib.pyplot as plt
+
+    #pmf
+    plt.hist(dist.rvs(nsim),
+             bins=100,
+             density=True)
+    plt.title('Probability density function, ~Beta(a=2,b=5)')
+    #cdf
+    plt.plot(seq,dist.cdf(seq))
+    plt.title('Cumulative distribution function,  ~Beta(a=2,b=5)')
+
+.. image:: images/pdfBeta.png
+  :width: 400
+
+.. image:: images/cdfBeta.png
+  :width: 400
+
+
 
 
 References

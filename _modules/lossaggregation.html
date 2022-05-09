@@ -645,17 +645,17 @@
             <span class="c1"># print(self.out)</span>
         <span class="k">return</span> <span class="mi">0</span></div>
 
-<span class="c1"># # logger.info(&#39;&#39;)</span>
-<span class="n">la</span><span class="o">=</span><span class="n">LossAggregation</span><span class="p">(</span><span class="n">s_la</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-                   <span class="n">n_la</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-                   <span class="n">m1</span><span class="o">=</span><span class="s1">&#39;genpareto&#39;</span><span class="p">,</span>
-                   <span class="n">m1par</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;loc&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;scale&#39;</span><span class="p">:</span><span class="mi">1</span><span class="o">/</span><span class="mf">.9</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">:</span><span class="mi">1</span><span class="o">/</span><span class="mf">.9</span><span class="p">},</span>
-                   <span class="n">m2</span><span class="o">=</span><span class="s1">&#39;genpareto&#39;</span><span class="p">,</span>
-                   <span class="n">m2par</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;loc&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;scale&#39;</span><span class="p">:</span><span class="mi">1</span><span class="o">/</span><span class="mf">1.8</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">:</span><span class="mi">1</span><span class="o">/</span><span class="mf">1.8</span><span class="p">},</span>
-                   <span class="n">copdist</span><span class="o">=</span><span class="s1">&#39;clayton&#39;</span><span class="p">,</span>
-                   <span class="n">coppar</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="mf">1.2</span><span class="p">})</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">la</span><span class="o">.</span><span class="n">out</span><span class="p">)</span>
+<span class="c1"># # # logger.info(&#39;&#39;)</span>
+<span class="c1"># la=LossAggregation(s_la=1,</span>
+<span class="c1">#                    n_la=2,</span>
+<span class="c1">#                    m1=&#39;genpareto&#39;,</span>
+<span class="c1">#                    m1par={&#39;loc&#39;:0,&#39;scale&#39;:1/.9,&#39;c&#39;:1/.9},</span>
+<span class="c1">#                    m2=&#39;genpareto&#39;,</span>
+<span class="c1">#                    m2par={&#39;loc&#39;:0,&#39;scale&#39;:1/1.8,&#39;c&#39;:1/1.8},</span>
+<span class="c1">#                    copdist=&#39;clayton&#39;,</span>
+<span class="c1">#                    coppar={&#39;par&#39;:1.2})</span>
+<span class="c1">#</span>
+<span class="c1"># print(la.out)</span>
 
 <span class="c1"># logger.info(&#39;&#39;)</span>
 <span class="c1"># #53 s con pacchetto</span>
