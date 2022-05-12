@@ -1656,7 +1656,7 @@ class ZMGeom:
         :return: probability mass function.
         :rtype: ``numpy.float64`` or ``numpy.ndarray``
         """
-        return (self.dist.pmf(x) + 1) * (1 - self.p0M)) / (1 - self.p0)
+        return (self.dist.pmf(x) + 1) * (1 - self.p0M) / (1 - self.p0)
 
     def logpmf(self, x):
         """
