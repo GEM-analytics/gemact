@@ -263,7 +263,7 @@ class _DiscreteDistribution(_Distribution):
         except ValueError:
             print("Distribution without (a, b, x) parametrization")
 
-## Contonuous distribution 
+## Continuous distribution 
 class _ContinuousDistribution(_Distribution):
 
     """
@@ -3809,6 +3809,7 @@ class InvGauss(_ContinuousDistribution):
         # return 1 - scipy.stats.invgauss(loc=0, mu=self.mu, scale=scale_).cdf(d - loc)
         return 1 - self.dist.cdf(low - loc)
 
+## Fisk 
 class Fisk(_ContinuousDistribution):
     """
     Wrapper to scipy Fisk distribution.
