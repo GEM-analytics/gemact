@@ -1,7 +1,6 @@
 API reference guide
 =================
 
-
 ``LossModel``
 ---------------
 
@@ -367,12 +366,52 @@ The following table summarizes the distribution supported by GemAct and Scipy.
 Parametrization
 ~~~~~~~~~~~~~~~~~~~~
 
-For a better explanation refer to :cite:t:`scipy` documentation.
+For a better explanation refer to the `SciPy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.poisson.html>`_, see :cite:t:`scipy`.
 
 .. math:: f(k)=\exp (-\mu) \frac{\mu^{k}}{k !}
    :label: poisson
 
 Given :math:`\mu \geq 0` and :math:`k \geq 0`.
+
+Example code on the usage of the Poisson class::
+
+    from gemact import distributions
+    import numpy as np
+
+    mu=4
+    dist=distributions.Poisson(mu=mu)
+    seq=np.arange(0,20)
+    nsim=int(1e+05)
+
+    # Compute the mean via pmf
+    mean=np.sum(dist.pmf(seq)*seq)
+    variance=np.sum(dist.pmf(seq)*(seq-mean)**2)
+
+    print('Mean',mean)
+    print('Theoretical mean',dist.mean())
+    print('Variance',variance)
+    print('Theoretical variance',dist.var())
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+
+Then, use ``matplotlib`` library to print the pmf and the cdf of a Poisson::
+
+    import matplotlib.pyplot as plt
+
+    #pmf
+    plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
+    plt.title('Probability mass function, ~Poisson(mu=4)')
+
+    #cdf
+    plt.step(np.arange(-2,20),dist.cdf(np.arange(-2,20)),'-', where='pre')
+    plt.title('Cumulative distribution function, ~ Poisson(mu=4)')
+
+.. image:: images/pmfPois.png
+  :width: 400
+
+.. image:: images/cdfPois.png
+  :width: 400
 
 ``Binom``
 ------------------
@@ -383,7 +422,7 @@ Given :math:`\mu \geq 0` and :math:`k \geq 0`.
 Parametrization
 ~~~~~~~~~~~~~~~~~~~~
 
-For a better explanation refer to :cite:t:`scipy` documentation.
+For a better explanation refer to the `SciPy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.binom.html>`_, see :cite:t:`scipy`.
 
 .. math:: f(k)=\left(
    \begin{array}{l}
@@ -394,6 +433,45 @@ For a better explanation refer to :cite:t:`scipy` documentation.
 
 for :math:`k \in\{0,1, \ldots, n\}, 0 \leq p \leq 1`
 
+Example code on the usage of the Binom class::
+
+    from gemact import distributions
+    import numpy as np
+
+    n=10
+    p=0.5
+    dist=distributions.Binom(n=n,p=p)
+    seq=np.arange(0,20)
+    nsim=int(1e+05)
+
+    # Compute the mean via pmf
+    mean=np.sum(dist.pmf(seq)*seq)
+    variance=np.sum(dist.pmf(seq)*(seq-mean)**2)
+
+    print('Mean',mean)
+    print('Theoretical mean',dist.mean())
+    print('Variance',variance)
+    print('Theoretical variance',dist.var())
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+Then, use ``matplotlib`` library to print the pmf and the cdf of a Poisson::
+
+    import matplotlib.pyplot as plt
+    #pmf
+    plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
+    plt.title('Probability mass function, ~Binom(n=10,p=0.5)')
+
+    #cdf
+    plt.step(np.arange(-2,20),dist.cdf(np.arange(-2,20)),'-', where='pre')
+    plt.title('Cumulative distribution function, ~Binom(n=10,p=0.5)')
+
+.. image:: images/pmfBinom.png
+  :width: 400
+
+.. image:: images/cdfBinom.png
+  :width: 400
+
 ``Geom``
 ------------------
 
@@ -403,12 +481,51 @@ for :math:`k \in\{0,1, \ldots, n\}, 0 \leq p \leq 1`
 Parametrization
 ~~~~~~~~~~~~~~~~~~~~
 
-For a better explanation refer to :cite:t:`scipy` documentation.
+For a better explanation refer to the `SciPy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.geom.html>`_, see :cite:t:`scipy`..
 
 .. math:: f(k)=(1-p)^{k-1} p
    :label: geom
 
 for :math:`k \geq 1,0<p \leq 1`
+
+Example code on the usage of the Geom class::
+
+    from gemact import distributions
+    import numpy as np
+
+    p=0.8
+    dist=distributions.Geom(p=p)
+    seq=np.arange(0,100,.001)
+    nsim=int(1e+05)
+
+    # Compute the mean via pmf
+    mean=np.sum(dist.pmf(seq)*seq)
+    variance=np.sum(dist.pmf(seq)*(seq-mean)**2)
+
+    print('Mean',mean)
+    print('Theoretical mean',dist.mean())
+    print('Variance',variance)
+    print('Theoretical variance',dist.var())
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+Then, use ``matplotlib`` library to print the pmf and the cdf of a Geom::
+
+    import matplotlib.pyplot as plt
+
+    #pmf
+    plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
+    plt.title('Probability mass function, ~Geom(p=0.8)')
+
+    #cdf
+    plt.step(np.arange(-2,20),dist.cdf(np.arange(-2,20)),'-', where='pre')
+    plt.title('Cumulative distribution function, ~Geom(p=0.8)')
+
+.. image:: images/pmfGeom.png
+  :width: 400
+
+.. image:: images/cdfGeom.png
+  :width: 400
 
 ``Nbinom``
 ------------------
@@ -419,7 +536,7 @@ for :math:`k \geq 1,0<p \leq 1`
 Parametrization
 ~~~~~~~~~~~~~~~~~~~~
 
-For a better explanation refer to :cite:t:`scipy` documentation.
+For a better explanation refer to the `SciPy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.nbinom.html>`_, see :cite:t:`scipy`.
 
 .. math:: f(k)=\left(\begin{array}{c}
       k+n-1 \\
@@ -428,6 +545,46 @@ For a better explanation refer to :cite:t:`scipy` documentation.
    :label: geom
 
 for :math:`k \geq 0,0<p \leq 1`
+
+Example code on the usage of the NBinom class::
+
+    from gemact import distributions
+    import numpy as np
+
+    n=10
+    p=.5
+    dist=distributions.Nbinom(n=n,p=p)
+    seq=np.arange(0,100,.001)
+    nsim=int(1e+05)
+
+    # Compute the mean via pmf
+    mean=np.sum(dist.pmf(seq)*seq)
+    variance=np.sum(dist.pmf(seq)*(seq-mean)**2)
+
+    print('Mean',mean)
+    print('Theoretical mean',dist.mean())
+    print('Variance',variance)
+    print('Theoretical variance',dist.var())
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+
+Then, use ``matplotlib`` library to print the pmf and the cdf of a NBinom::
+
+    import matplotlib.pyplot as plt
+    #pmf
+    plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
+    plt.title('Probability mass function, ~NBinom(n=10,p=0.8)')
+
+    #cdf
+    plt.step(np.arange(-2,20),dist.cdf(np.arange(-2,20)),'-', where='pre')
+    plt.title('Cumulative distribution function, ~NBinom(n=10,p=0.8)')
+
+.. image:: images/pmfNBinom.png
+  :width: 400
+
+.. image:: images/cdfNBinom.png
+  :width: 400
 
 ``ZTpoisson``
 ------------------
@@ -447,6 +604,45 @@ The probability generating function of a Zero-Truncated poisson is defined in eq
 .. math:: P^{T}(z)=\frac{P(z)-p_{0}}{1-p_{0}}
    :label: ztpois
 
+
+Example code on the usage of the ZTPoisson class::
+
+    from gemact import distributions
+    import numpy as np
+
+    mu=2
+    dist=distributions.ZTpoisson(mu=mu)
+    seq=np.arange(0,30,.001)
+    nsim=int(1e+05)
+
+    # Compute the mean via pmf
+    mean=np.sum(dist.pmf(seq)*seq)
+    variance=np.sum(dist.pmf(seq)*(seq-mean)**2)
+
+    print('Mean',mean)
+    print('Variance',variance)
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+
+Then, use ``matplotlib`` library to print the pmf and the cdf of a ZTPoisson::
+
+    import matplotlib.pyplot as plt
+
+    #pmf
+    plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
+    plt.title('Probability mass function, ~ZTPois(mu=2)')
+    #cdf
+    plt.step(np.arange(0,20),dist.cdf(np.arange(0,20)),'-', where='pre')
+    plt.title('Cumulative distribution function,  ~ZTPois(mu=2)')
+
+.. image:: images/pmfZTPois.png
+  :width: 400
+
+.. image:: images/cdfZTPois.png
+  :width: 400
+
+
 ``ZMpoisson``
 ------------------
 
@@ -464,6 +660,45 @@ The probability generating function of a Zero-Truncated poisson is defined in eq
 
 .. math:: P^{M}(z)=p_{0}^{M}+\frac{1-p_{0}^{M}}{1-p_{0}}\left[P(z)-p_{0}\right]
    :label: zmpois
+
+Example code on the usage of the ZMPoisson class::
+
+    from gemact import distributions
+    import numpy as np
+
+    mu=2
+    p0M=0.1
+    dist=distributions.ZMpoisson(mu=mu,p0M=p0M)
+    seq=np.arange(0,30,.001)
+    nsim=int(1e+05)
+
+    # Compute the mean via pmf
+    mean=np.sum(dist.pmf(seq)*seq)
+    variance=np.sum(dist.pmf(seq)*(seq-mean)**2)
+
+    print('Mean',mean)
+    print('Variance',variance)
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+
+Then, use ``matplotlib`` library to print the pmf and the cdf of a ZMPoisson::
+
+    import matplotlib.pyplot as plt
+
+    #pmf
+    plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
+    plt.title('Probability mass function, ~ZMPois(mu=2,p0M=.1)')
+
+    #cdf
+    plt.step(np.arange(0,20),dist.cdf(np.arange(0,20)),'-', where='pre')
+    plt.title('Cumulative distribution function,  ~ZMPois(mu=2,p0M=.1)')
+
+.. image:: images/pmfZMPois.png
+  :width: 400
+
+.. image:: images/cdfZMPois.png
+  :width: 400
 
 ``ZTbinom``
 ------------------
@@ -483,6 +718,48 @@ The probability generating function of a Zero-Truncated binomial is defined in e
 .. math:: P^{T}(z)=\frac{P(z)-p_{0}}{1-p_{0}}
    :label: ztbinom
 
+Example code on the usage of the ZTBinom class::
+
+    from gemact import distributions
+    import numpy as np
+
+    n=10
+    p=.2
+    dist=distributions.ZTbinom(n=n,
+                               p=p)
+    seq=np.arange(0,30,.001)
+    nsim=int(1e+05)
+
+    # Compute the mean via pmf
+    mean=np.sum(dist.pmf(seq)*seq)
+    variance=np.sum(dist.pmf(seq)*(seq-mean)**2)
+
+    print('Mean',mean)
+    print('Variance',variance)
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+
+Then, use ``matplotlib`` library to print the pmf and the cdf of a ZTBinom::
+
+    import matplotlib.pyplot as plt
+
+    #pmf
+    plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
+    plt.title('Probability mass function, ~ZTBinom(n=10 p=.2)')
+
+
+    #cdf
+    plt.step(np.arange(0,20),dist.cdf(np.arange(0,20)),'-', where='pre')
+    plt.title('Cumulative distribution function,  ~ZTBinom(n=10 p=.2)')
+.. image:: images/pmfZTBinom.png
+  :width: 400
+
+.. image:: images/cdfZTBinom.png
+  :width: 400
+
+
+
 ``ZMbinom``
 ------------------
 
@@ -500,6 +777,46 @@ The probability generating function of a Zero-Truncated binomial is defined in e
 
 .. math:: P^{M}(z)=p_{0}^{M}+\frac{1-p_{0}^{M}}{1-p_{0}}\left[P(z)-p_{0}\right]
    :label: zmbinom
+
+Example code on the usage of the ZMBinom class::
+
+    from gemact import distributions
+    import numpy as np
+
+    n=10
+    p=.2
+    p0M=.05
+    dist=distributions.ZMbinom(n=n,p=p,p0M=p0M)
+    seq=np.arange(0,100,.001)
+    nsim=int(1e+05)
+
+    # Compute the mean via pmf
+    mean=np.sum(dist.pmf(seq)*seq)
+    variance=np.sum(dist.pmf(seq)*(seq-mean)**2)
+
+    print('Mean',mean)
+    print('Variance',variance)
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+
+Then, use ``matplotlib`` library to print the pmf and the cdf of a ZMPoisson::
+
+    import matplotlib.pyplot as plt
+
+    #pmf
+    plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
+    plt.title('Probability mass function, ~ZMBinom(n=10,p=.5,p0M=.05)')
+
+    #cdf
+    plt.step(np.arange(0,20),dist.cdf(np.arange(0,20)),'-', where='pre')
+    plt.title('Cumulative distribution function,  ~ZMBinom(n=10,p=.5,p0M=.05)')
+
+.. image:: images/pmfZMBinom.png
+  :width: 400
+
+.. image:: images/cdfZMBinom.png
+  :width: 400
 
 ``ZTgeom``
 ------------------
@@ -519,6 +836,43 @@ The probability generating function of a Zero-Truncated geometric is defined in 
 .. math:: P^{T}(z)=\frac{P(z)-p_{0}}{1-p_{0}}
    :label: ztgeom
 
+Example code on the usage of the ZTGeom class::
+
+    from gemact import distributions
+    import numpy as np
+
+    p=.2
+    dist=distributions.ZTgeom(p=p)
+    seq=np.arange(0,100,.001)
+    nsim=int(1e+05)
+
+    # Compute the mean via pmf
+    mean=np.sum(dist.pmf(seq)*seq)
+    variance=np.sum(dist.pmf(seq)*(seq-mean)**2)
+
+    print('Mean',mean)
+    print('Variance',variance)
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+
+Then, use ``matplotlib`` library to print the pmf and the cdf of a ZTGeom::
+
+    import matplotlib.pyplot as plt
+
+    #pmf
+    plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
+    plt.title('Probability mass function, ~ZTGeom(p=.2)')
+    #cdf
+    plt.step(np.arange(0,20),dist.cdf(np.arange(0,20)),'-', where='pre')
+    plt.title('Cumulative distribution function,  ~ZTGeom(p=.2)')
+
+.. image:: images/pmfZTGeom.png
+  :width: 400
+
+.. image:: images/cdfZTGeom.png
+  :width: 400
+
 ``ZMgeom``
 ------------------
 
@@ -537,6 +891,45 @@ The probability generating function of a Zero-Modified geometric is defined in e
 .. math:: P^{M}(z)=p_{0}^{M}+\frac{1-p_{0}^{M}}{1-p_{0}}\left[P(z)-p_{0}\right]
    :label: zmgeom
 
+Example code on the usage of the ZMGeom class::
+
+    from gemact import distributions
+    import numpy as np
+
+    p=.2
+    p0M=.01
+    dist=distributions.ZMgeom(p=p,p0M=p0M)
+    seq=np.arange(0,100,.001)
+    nsim=int(1e+05)
+
+    # Compute the mean via pmf
+    mean=np.sum(dist.pmf(seq)*seq)
+    variance=np.sum(dist.pmf(seq)*(seq-mean)**2)
+
+    print('Mean',mean)
+    print('Variance',variance)
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+
+Then, use ``matplotlib`` library to print the pmf and the cdf of a ZMGeom::
+
+    import matplotlib.pyplot as plt
+
+    #pmf
+    plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
+    plt.title('Probability mass function, ~ZMGeom(p=.2,p0M=.01)')
+
+    #cdf
+    plt.step(np.arange(0,20),dist.cdf(np.arange(0,20)),'-', where='pre')
+    plt.title('Cumulative distribution function,  ~ZMGeom(p=.2,p0M=.01)')
+
+.. image:: images/pmfZMGeom.png
+  :width: 400
+
+.. image:: images/cdfZMGeom.png
+  :width: 400
+
 ``ZTnbinom``
 ------------------
 
@@ -554,6 +947,46 @@ The probability generating function of a Zero-Truncated negative binomial is def
 
 .. math:: P^{T}(z)=\frac{P(z)-p_{0}}{1-p_{0}}
    :label: ztnbinom
+
+Example code on the usage of the ZTNbinom class::
+
+    from gemact import distributions
+    import numpy as np
+
+    p=.2
+    n=10
+    dist=distributions.ZTnbinom(p=p,n=n)
+    seq=np.arange(0,100,.001)
+    nsim=int(1e+05)
+
+    # Compute the mean via pmf
+    mean=np.sum(dist.pmf(seq)*seq)
+    variance=np.sum(dist.pmf(seq)*(seq-mean)**2)
+
+    print('Mean',mean)
+    print('Variance',variance)
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+
+Then, use ``matplotlib`` library to print the pmf and the cdf of a ZTNbinom::
+
+    import matplotlib.pyplot as plt
+
+    #pmf
+    plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
+    plt.title('Probability mass function, ~ZTNbinom(p=.2,n=10)')
+
+    #cdf
+    plt.step(np.arange(0,100),dist.cdf(np.arange(0,100)),'-', where='pre')
+    plt.title('Cumulative distribution function,  ~ZTNbinom(p=.2,n=10)')
+
+.. image:: images/pmfZTnbinom.png
+  :width: 400
+
+.. image:: images/cdfZTNbinom.png
+  :width: 400
+
 
 ``ZMnbinom``
 ------------------
@@ -591,6 +1024,46 @@ The probability generating function of a Zero-Modified logarithmic is defined in
 .. math:: P^{M}(z)=p_{0}^{M}+\frac{1-p_{0}^{M}}{1-p_{0}}\left[P(z)-p_{0}\right]
    :label: zmlogser
 
+
+Example code on the usage of the ZMlogser class::
+
+    from gemact import distributions
+    import numpy as np
+
+    p=.2
+    p0M=.01
+    dist=distributions.ZMlogser(p=p,p0M=p0M)
+    seq=np.arange(0,100,.001)
+    nsim=int(1e+05)
+
+    # Compute the mean via pmf
+    mean=np.sum(dist.pmf(seq)*seq)
+    variance=np.sum(dist.pmf(seq)*(seq-mean)**2)
+
+    print('Mean',mean)
+    print('Variance',variance)
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+
+Then, use ``matplotlib`` library to print the pmf and the cdf of a ZMlogser::
+
+    import matplotlib.pyplot as plt
+
+    #pmf
+    plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
+    plt.title('Probability mass function, ~ZMlogser(p=.2, p0M=.01)')
+    #cdf
+    plt.step(np.arange(0,10),dist.cdf(np.arange(0,10)),'-', where='pre')
+    plt.title('Cumulative distribution function,  ~ZMlogser(p=.2, p0M=.01)')
+
+.. image:: images/pmfZMLogser.png
+  :width: 400
+
+.. image:: images/cdfZMLogser.png
+  :width: 400
+
+
 ``Gamma``
 ------------------
 
@@ -600,12 +1073,49 @@ The probability generating function of a Zero-Modified logarithmic is defined in
 Parametrization
 ~~~~~~~~~~~~~~~~~~~~
 
-For a better explanation refer to :cite:t:`scipy` documentation.
+For a better explanation refer to the `SciPy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.gamma.html>`_, see :cite:t:`scipy`.
 
 .. math:: f(x, a)=\frac{x^{a-1} e^{-x}}{\Gamma(a)}
-   :label: poisson
+   :label: gamma
 
 Given :math:`f(x, a)=\frac{x^{a-1} e^{-x}}{\Gamma(a)}` and :math:`x \geq 0, a>0`. :math:`\Gamma(a)` refers to the gamma function.
+
+Example code on the usage of the Gamma class::
+
+    from gemact import distributions
+    import numpy as np
+
+    a=2
+    b=5
+    dist=distributions.Gamma(a=a,
+                             beta=b)
+    seq=np.arange(0,100,.1)
+    nsim=int(1e+05)
+
+    print('Theorical mean',dist.mean())
+    print('Theorical variance',dist.var())
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+
+Then, use ``matplotlib`` library to print the pmf and the cdf of a Gamma::
+
+    import matplotlib.pyplot as plt
+
+    #pmf
+    plt.hist(dist.rvs(nsim),
+             bins=100,
+             density=True)
+    plt.title('Probability density function, ~Gamma(a=2, beta=5)')
+    #cdf
+    plt.plot(seq,dist.cdf(seq))
+    plt.title('Cumulative distribution function,  ~Gamma(a=2, beta=5)')
+
+.. image:: images/pdfGamma.png
+  :width: 400
+
+.. image:: images/cdfGamma.png
+  :width: 400
 
 ``Exponential``
 ------------------
@@ -617,9 +1127,45 @@ Parametrization
 ~~~~~~~~~~~~~~~~~~~~
 
 .. math:: f(x, \theta)=\theta \cdot e^{-\theta x}
-   :label: gamma
+   :label: exponential
 
 Given :math:`\theta \geq 0`. 
+
+Example code on the usage of the Exponential class::
+
+    from gemact import distributions
+    import numpy as np
+
+    theta=.1
+    dist=distributions.Exponential(theta=theta)
+    seq=np.arange(0,200,.1)
+    nsim=int(1e+05)
+
+    print('Theorical mean',dist.mean())
+    print('Theorical variance',dist.var())
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+
+Then, use ``matplotlib`` library to print the pmf and the cdf of an Exponential::
+
+    import matplotlib.pyplot as plt
+
+    #pmf
+    plt.hist(dist.rvs(nsim),
+             bins=100,
+             density=True)
+    plt.title('Probability density function, ~Gamma(a=2, beta=5)')
+    #cdf
+    plt.plot(seq,dist.cdf(seq))
+    plt.title('Cumulative distribution function,  ~Gamma(a=2, beta=5)')
+
+.. image:: images/pdfExponential.png
+  :width: 400
+
+.. image:: images/cdfExponential.png
+  :width: 400
+
 
 ``Invgamma``
 ------------------
@@ -640,18 +1186,61 @@ Given :math:`x>=0, a>0 `. :math:`\Gamma(a)` refers to the gamma function.
 ``Genpareto``
 ------------------
 
-.. autoclass:: distributions.Invgamma
+.. autoclass:: distributions.Genpareto
    :members:
 
 Parametrization
 ~~~~~~~~~~~~~~~~~~~~
 
-For a better explanation refer to :cite:t:`scipy` documentation.
+For a better explanation refer to the `SciPy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.genpareto.html>`_, see :cite:t:`scipy`.
+
 
 .. math:: f(x, c)=(1+c x)^{-1-1 / c}
    :label: genpareto
 
-Given :math:`x \geq 0` if :math:`c \geq 0`. :math:`0 \leq x \leq-1 / c if $c<0$`.
+Given :math:`x \geq 0` if :math:`c \geq 0`. :math:`0 \leq x \leq-1 / c if c<0`.
+
+Example code on the usage of the GenPareto class::
+
+    from gemact import distributions
+    import numpy as np
+
+    c=.4
+    loc=0
+    scale=0.25
+
+    dist=distributions.Genpareto(c=c,
+                                loc=loc,
+                                scale=scale)
+
+    seq=np.arange(0,100,.1)
+    nsim=int(1e+05)
+
+    print('Theorical mean',dist.mean())
+    print('Theorical variance',dist.var())
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+
+Then, use ``matplotlib`` library to print the pmf and the cdf of a GenPareto::
+
+    import matplotlib.pyplot as plt
+
+    #pmf
+    plt.hist(dist.rvs(nsim),
+             bins=50,
+             density=True)
+    plt.title('Probability density function, ~GenPareto(a=2, beta=5)')
+
+    #cdf
+    plt.plot(seq,dist.cdf(seq))
+    plt.title('Cumulative distribution function,  ~GenPareto(a=2, beta=5)')
+
+.. image:: images/pdfGenPareto.png
+  :width: 400
+
+.. image:: images/cdfGenPareto.png
+  :width: 400
 
 ``Lognorm``
 ------------------
@@ -662,12 +1251,47 @@ Given :math:`x \geq 0` if :math:`c \geq 0`. :math:`0 \leq x \leq-1 / c if $c<0$`
 Parametrization
 ~~~~~~~~~~~~~~~~~~~~
 
-For a better explanation refer to :cite:t:`scipy` documentation.
+For a better explanation refer to the `SciPy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.lognorm.html>`_, see :cite:t:`scipy`.
 
 .. math:: f(x, s)=\frac{1}{s x \sqrt{2 \pi}} \exp \left(-\frac{\log ^{2}(x)}{2 s^{2}}\right)
    :label: lognorm
 
 Given :math:`x>0, s>0`.
+
+Example code on the usage of the LogNorm class::
+
+    from gemact import distributions
+    import numpy as np
+
+    s=2
+    dist=distributions.Lognorm(s=s)
+
+    seq=np.arange(0,100,.1)
+    nsim=int(1e+08)
+
+    print('Theorical mean',dist.mean())
+    print('Theorical variance',dist.var())
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+
+Then, use ``matplotlib`` library to print the pmf and the cdf of a LogNorm::
+
+    import matplotlib.pyplot as plt
+    #pmf
+    plt.hist(dist.rvs(nsim),
+             bins=20,
+             density=True)
+    plt.title('Probability density function, ~LogNormal(s=2)')
+    #cdf
+    plt.plot(seq,dist.cdf(seq))
+    plt.title('Cumulative distribution function, ~LogNormal(s=2)')
+
+.. image:: images/pdfLogNorm.png
+  :width: 400
+
+.. image:: images/cdfLogNorm.png
+  :width: 400
 
 ``Burr12``
 ------------------
@@ -678,12 +1302,53 @@ Given :math:`x>0, s>0`.
 Parametrization
 ~~~~~~~~~~~~~~~~~~~~
 
-For a better explanation refer to :cite:t:`scipy` `documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.burr12.html>`_ .
+For a better explanation refer to the `Scipy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.burr12.html>`_ , see :cite:t:`scipy`.
 
 .. math:: f(x, c, d)=c d x^{c-1} /\left(1+x^{c}\right)^{d+1}
    :label: burr12
 
 Given :math:`x>=0 and c, d>0`.
+
+Example code on the usage of the Burr12 class::
+
+    from gemact import distributions
+    import numpy as np
+
+    c=2
+    d=3
+    dist=distributions.Burr12(c=c,
+                              d=d)
+
+    seq=np.arange(0,100,.1)
+    nsim=int(1e+05)
+
+    print('Theorical mean',dist.mean())
+    print('Theorical variance',dist.var())
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+
+Then, use ``matplotlib`` library to print the pmf and the cdf of a Burr12::
+
+    import matplotlib.pyplot as plt
+
+    #pmf
+    plt.hist(dist.rvs(nsim),
+             bins=100,
+             density=True)
+    plt.title('Probability density function, ~Burr12(c=c,d=d)')
+
+    #cdf
+    plt.plot(seq,dist.cdf(seq))
+    plt.title('Cumulative distribution function,  ~Burr12(c=c,d=d)')
+
+.. image:: images/pdfBurr12.png
+  :width: 400
+
+.. image:: images/cdfBurr12.png
+  :width: 400
+
+
 
 ``Dagum``
 ------------------
@@ -694,12 +1359,51 @@ Given :math:`x>=0 and c, d>0`.
 Parametrization
 ~~~~~~~~~~~~~~~~~~~~
 
-For a better explanation refer to :cite:t:`scipy` `documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.mielke.html>`_.
+For a better explanation refer to the `SciPy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.mielke.html>`_ ,see :cite:t:`scipy`.
 
 .. math:: f(x, k, s)=\frac{k x^{k-1}}{\left(1+x^{s}\right)^{1+k / s}}
    :label: dagum
 
 Given :math:`x>0` , :math:`k,s>0`.
+
+
+Example code on the usage of the Dagum class::
+
+    from gemact import distributions
+    import numpy as np
+
+    d=2
+    s=4.2
+    dist=distributions.Dagum(d=d,
+                             s=s)
+
+    seq=np.arange(0,3,.001)
+    nsim=int(1e+05)
+
+    print('Theorical mean',dist.mean())
+    print('Theorical variance',dist.var())
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+Then, use ``matplotlib`` library to print the pmf and the cdf of a Dagum::
+
+    import matplotlib.pyplot as plt
+
+    #pmf
+    plt.hist(dist.rvs(nsim),
+             bins=100,
+             density=True)
+    plt.title('Probability density function, ~Dagum(d=4,s=2)')
+
+    #cdf
+    plt.plot(seq,dist.cdf(seq))
+    plt.title('Cumulative distribution function,  ~Dagum(d=c,s=4.2)')
+
+.. image:: images/pdfDagum.png
+  :width: 400
+
+.. image:: images/cdfDagum.png
+  :width: 400
 
 
 ``Weibull_min``
@@ -711,13 +1415,50 @@ Given :math:`x>0` , :math:`k,s>0`.
 Parametrization
 ~~~~~~~~~~~~~~~~~~~~
 
-For a better explanation refer to :cite:t:`scipy` `documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.weibull_min.html>`_.
+For a better explanation refer to the `SciPy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.weibull_min.html>`_ , see :cite:t:`scipy`.
 
 .. math:: f(x, c)=c x^{c-1} \exp \left(-x^{c}\right)
    :label: weibull_min
 
 Given :math:`x>0` , :math:`c>0`.
 
+
+
+Example code on the usage of the Weibull_min class::
+
+    from gemact import distributions
+    import numpy as np
+
+    c=2.2
+    dist=distributions.Weibull_min(c=c)
+
+    seq=np.arange(0,3,.001)
+    nsim=int(1e+05)
+
+    print('Theorical mean',dist.mean())
+    print('Theorical variance',dist.var())
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+Then, use ``matplotlib`` library to print the pmf and the cdf of a Weibull_min::
+
+    import matplotlib.pyplot as plt
+
+    #pmf
+    plt.hist(dist.rvs(nsim),
+             bins=100,
+             density=True)
+    plt.title('Probability density function, ~Weibull_min(s=2.2)')
+
+    #cdf
+    plt.plot(seq,dist.cdf(seq))
+    plt.title('Cumulative distribution function,  ~Invweibull(c=7.2)')
+
+.. image:: images/pdfWeibull_min.png
+  :width: 400
+
+.. image:: images/cdfWeibull_min.png
+  :width: 400
 
 ``Invweibull``
 ------------------
@@ -735,6 +1476,43 @@ For a better explanation refer to :cite:t:`scipy` `documentation <https://docs.s
 
 Given :math:`x>0` , :math:`c>0`.
 
+
+Example code on the usage of the Invweibull class::
+
+    from gemact import distributions
+    import numpy as np
+
+    c=7.2
+    dist=distributions.Invweibull(c=c)
+
+    seq=np.arange(0,3,.001)
+    nsim=int(1e+05)
+
+    print('Theorical mean',dist.mean())
+    print('Theorical variance',dist.var())
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+Then, use ``matplotlib`` library to print the pmf and the cdf of a Invweibull::
+
+    import matplotlib.pyplot as plt
+
+    #pmf
+    plt.hist(dist.rvs(nsim),
+             bins=100,
+             density=True)
+    plt.title('Probability density function, ~Invweibull(c=7.2)')
+    #cdf
+    plt.plot(seq,dist.cdf(seq))
+    plt.title('Cumulative distribution function,  ~Invweibull(c=7.2)')
+
+.. image:: images/pdfInvweibull.png
+  :width: 400
+
+.. image:: images/cdfInvweibull.png
+  :width: 400
+
+
 ``Beta``
 ------------------
 
@@ -744,17 +1522,51 @@ Given :math:`x>0` , :math:`c>0`.
 Parametrization
 ~~~~~~~~~~~~~~~~~~~~
 
-For a better explanation refer to :cite:t:`scipy` `documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.beta.html>`_.
+For a better explanation refer to the `SciPy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.beta.html>`_, :cite:t:`scipy` .
 
 .. math:: f(x, a, b)=\frac{\Gamma(a+b) x^{a-1}(1-x)^{b-1}}{\Gamma(a) \Gamma(b)}
-   :label: invweibull
+   :label: beta
 
 Given :math:`0<=x<=1, a>0, b>0` , :math:`\Gamma` is the gamma function.
 
-Example
-~~~~~~~~~~~~~~~~~~~~
+Example code on the usage of the Beta class::
 
-Refer to the `SciPy guide <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.beta.html>`_.
+    from gemact import distributions
+    import numpy as np
+
+    a=2
+    b=5
+    dist=distributions.Beta(a=a,
+                            b=b)
+
+    seq=np.arange(0,1,.001)
+    nsim=int(1e+05)
+
+    print('Theorical mean',dist.mean())
+    print('Theorical variance',dist.var())
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+Then, use ``matplotlib`` library to print the pmf and the cdf of a Beta::
+
+    import matplotlib.pyplot as plt
+
+    #pmf
+    plt.hist(dist.rvs(nsim),
+             bins=100,
+             density=True)
+    plt.title('Probability density function, ~Beta(a=2,b=5)')
+    #cdf
+    plt.plot(seq,dist.cdf(seq))
+    plt.title('Cumulative distribution function,  ~Beta(a=2,b=5)')
+
+.. image:: images/pdfBeta.png
+  :width: 400
+
+.. image:: images/cdfBeta.png
+  :width: 400
+
+
 
 
 References

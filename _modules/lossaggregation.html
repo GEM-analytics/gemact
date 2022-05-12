@@ -188,7 +188,6 @@
 <span class="kn">from</span> <span class="nn">twiggy</span> <span class="kn">import</span> <span class="n">quick_setup</span><span class="p">,</span><span class="n">log</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">helperfunctions</span> <span class="k">as</span> <span class="nn">hfns</span>
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
 <span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">factorial</span>
 
 <span class="n">quick_setup</span><span class="p">()</span>
@@ -276,10 +275,17 @@
         <span class="c1"># self.copulaPar_la = kwargs[&#39;copulaPar_la&#39;]</span>
         <span class="c1">## marginals</span>
         <span class="c1">##available marginals</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">mdict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;gamma&#39;</span><span class="p">:</span> <span class="n">stats</span><span class="o">.</span><span class="n">gamma</span><span class="p">,</span>
-                      <span class="s1">&#39;lognorm&#39;</span><span class="p">:</span> <span class="n">stats</span><span class="o">.</span><span class="n">lognorm</span><span class="p">,</span>
-                      <span class="s1">&#39;exponential&#39;</span><span class="p">:</span> <span class="n">distributions</span><span class="o">.</span><span class="n">exponential</span><span class="p">,</span>
-                      <span class="s1">&#39;genpareto&#39;</span><span class="p">:</span> <span class="n">stats</span><span class="o">.</span><span class="n">genpareto</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mdict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;gamma&#39;</span><span class="p">:</span> <span class="n">distributions</span><span class="o">.</span><span class="n">Gamma</span><span class="p">,</span>
+                  <span class="s1">&#39;lognorm&#39;</span><span class="p">:</span> <span class="n">distributions</span><span class="o">.</span><span class="n">Lognorm</span><span class="p">,</span>
+                  <span class="s1">&#39;exponential&#39;</span><span class="p">:</span><span class="n">distributions</span><span class="o">.</span><span class="n">Exponential</span><span class="p">,</span>
+                  <span class="s1">&#39;genpareto&#39;</span><span class="p">:</span> <span class="n">distributions</span><span class="o">.</span><span class="n">GenPareto</span><span class="p">,</span>
+                  <span class="s1">&#39;burr12&#39;</span><span class="p">:</span> <span class="n">distributions</span><span class="o">.</span><span class="n">Burr12</span><span class="p">}</span><span class="c1">#</span>
+                  <span class="c1"># &#39;dagum&#39;: distributions.Dagum,</span>
+                  <span class="c1"># &#39;invgamma&#39;: distributions.Invgamma,</span>
+                  <span class="c1"># &#39;weibull_min&#39;: distributions.Weibull_min,</span>
+                  <span class="c1"># &#39;invweibull&#39;: distributions.Invweibull,</span>
+                  <span class="c1"># &#39;beta&#39;: distributions.Beta}</span>
+
         <span class="c1">### distributions</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">m1</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;m1&#39;</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">m2</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;m2&#39;</span><span class="p">]</span>
@@ -639,19 +645,13 @@
             <span class="c1"># print(self.out)</span>
         <span class="k">return</span> <span class="mi">0</span></div>
 
-<span class="c1"># # logger.info(&#39;&#39;)</span>
+<span class="c1"># # # logger.info(&#39;&#39;)</span>
 <span class="c1"># la=LossAggregation(s_la=1,</span>
 <span class="c1">#                    n_la=2,</span>
 <span class="c1">#                    m1=&#39;genpareto&#39;,</span>
 <span class="c1">#                    m1par={&#39;loc&#39;:0,&#39;scale&#39;:1/.9,&#39;c&#39;:1/.9},</span>
 <span class="c1">#                    m2=&#39;genpareto&#39;,</span>
 <span class="c1">#                    m2par={&#39;loc&#39;:0,&#39;scale&#39;:1/1.8,&#39;c&#39;:1/1.8},</span>
-<span class="c1">#                    m3=&#39;genpareto&#39;,</span>
-<span class="c1">#                    m3par={&#39;loc&#39;:0,&#39;scale&#39;:1/2.6,&#39;c&#39;:1/2.6},</span>
-<span class="c1">#                    m4=&#39;genpareto&#39;,</span>
-<span class="c1">#                    m4par={&#39;loc&#39;:0,&#39;scale&#39;:1/3.3,&#39;c&#39;:1/3.3},</span>
-<span class="c1">#                    m5=&#39;genpareto&#39;,</span>
-<span class="c1">#                    m5par={&#39;loc&#39;:0,&#39;scale&#39;:1/4,&#39;c&#39;:1/4},</span>
 <span class="c1">#                    copdist=&#39;clayton&#39;,</span>
 <span class="c1">#                    coppar={&#39;par&#39;:1.2})</span>
 <span class="c1">#</span>
