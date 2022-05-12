@@ -13,18 +13,20 @@ DIST_DICT = {
     'lognorm': distributions.Lognorm,
     'exponential':distributions.Exponential,
     'genpareto': distributions.GenPareto,
-    'burr12': distributions.Burr12
-    #   'dagum': distributions.Dagum,
-    #   'invgamma': distributions.Invgamma,
-    #   'weibull_min': distributions.Weibull_min,
-    #   'invweibull': distributions.Invweibull,
-    #  'beta': distributions.Beta
+    'burr12': distributions.Burr12,
+    'dagum': distributions.Dagum,
+    'invgamma': distributions.InvGamma,
+    'weibull_min': distributions.Weibull,
+    'invweibull': distributions.InvWeibull,
+    'beta': distributions.Beta,
+    'fisk': distributions.Fisk,
+    'invgauss': distributions.InvGauss
     }
 
 COP_DICT = {
     'clayton': hf.ClaytonCDF,
     'frank': hf.FrankCDF,
-    'gumbel':hf.GumbelCDF
+    'gumbel': hf.GumbelCDF
     }
 
 class LossAggregation:
