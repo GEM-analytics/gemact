@@ -10,6 +10,17 @@ import logging
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 logger = logging.getLogger('hfns')
 
+def arg_type_handler(x):
+    type_tuple = (float, int, list, np.ndarray)
+    assert isinstance(x, type_tuple), 'x should be one of %r' %type_tuple
+    if type(x) == list:
+        x = np.array(x)
+    if type(x) == np.ndarray:
+        x = x.flatten()
+    if type(x) == int or type(x) == float:
+        x = np.array([x])
+    return x
+
 def ecdf(x_):
     """
     It computes the empirical cumulative density function.

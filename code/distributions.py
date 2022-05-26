@@ -3552,7 +3552,6 @@ class Weibull(_ContinuousDistribution):
 
 ## Inverse Weibull
 class InvWeibull(_ContinuousDistribution):
-
     """
     Wrapper to scipy inverse Weibull distribution.
     ``scipy.stats._continuous_distns.invweibull_gen object``
