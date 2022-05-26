@@ -3,6 +3,7 @@ import scipy.stats
 import scipy.special
 import time # used for setting random number generator seed if None
 from twiggy import quick_setup, log
+from . import helperfunctions as hf
 
 quick_setup()
 logger= log.name('distributions')
@@ -2995,7 +2996,7 @@ class GenBeta:
 
         tmp_ = scipy.stats.beta(a=self.shape1, b=self.shape2).rvs(size=size, random_state=random_state)
         return self.scale * pow(tmp_, 1.0/self.shape3)
-
+        
     def pdf(self, x):
         """
         Probability density function.
@@ -3005,35 +3006,40 @@ class GenBeta:
         :return: probability density function in x.
         :rtype: ``numpy.float64`` or ``numpy.ndarray``
         """
-        if (x < 0.0 or x > self.scale):
-            return 0
+
+        x = hf.arg_type_handler(x)
+        x_shape = len(x) 
+        output = np.zeros(x_shape)
+
+        # if (x < 0.0) or (x > self.scale) return 0 # not needed, it is already zero
         
-        psh = self.shape1 * self.shape3
-
-        if (x == 0.0):
-            if (psh > 1):
-                return(0)
-            elif (psh < 1):
-                return np.infty
-            else:
-                return self.shape3/ scipy.special.beta(self.shape1, self.shape2)
+        filter_one = (x == 0.0)
+        if np.any(filter_one):
+            # output[filter_x_is_zero * (self.shape1 * self.shape3 > 1)] = 0 # not needed, it is already zero
+            output[filter_one * (self.shape1 * self.shape3 < 1)] = np.infty
+            output[filter_one * (self.shape1 * self.shape3 == 1)] = self.shape3 / scipy.special.beta(self.shape1, self.shape2)
         
-        if (x == self.scale):
-            if (self.shape2 > 1):
-                return 0
-            if (self.shape2 < 1):
-                return np.infty 
-            else:
-                return self.shape1 * self.shape3
+        filter_two = (x > 0.0) * (x < self.scale)
+        if np.any(filter_two):
+            x_ = x[filter_two]
+            logu = self.shape3 * (np.log(x_) - np.log(self.scale))
+            log1mu = np.log1p(-np.exp(logu))
+            tmp = np.exp(np.log(self.shape3) + self.shape1 * logu + (self.shape2 - 1.0) * \
+                log1mu - np.log(x_) - scipy.special.betaln(self.shape1, self.shape2))
+            output[filter_two] = tmp
 
-        logu = self.shape3 * (np.log(x) - np.log(self.scale))
-        log1mu = np.log1p(-np.exp(logu))
+        filter_three = (x > 0.0) * (x == self.scale)
+        if np.any(filter_three):
+            # output[filter_x_is_selfscale * (self.shape2 > 1)] = 0 # not needed, it is already zero
+            output[filter_three * (self.shape2 < 1)] = np.infty
+            output[filter_three * (self.shape2 == 1)] = self.shape1 * self.shape3
+        
+        if len(output) == 1:
+            output = output.item()
 
-        return np.exp(np.log(self.shape3) + self.shape1 * logu + (self.shape2 - 1.0) * \
-            log1mu - np.log(x) - scipy.special.betaln(self.shape1, self.shape2))
+        return output
 
     def cdf(self, x):
-
         """
         Cumulative distribution function.
 
@@ -3043,13 +3049,24 @@ class GenBeta:
         :rtype:``numpy.float64`` or ``numpy.ndarray``
 
         """
-        if (x <= 0):
-            return 0
-        if (x >= self.scale):
-            return 1
+        x = hf.arg_type_handler(x)
+        x_shape = len(x) 
+        output = np.zeros(x_shape)
 
-        u = np.exp(self.shape3 * (np.log(x) - np.log(self.scale)))
-        return self.dist.cdf(u)
+        # if (x <= 0.0) return 0 # not needed, it is already zero
+
+        filter_one = (x > 0.0) * (x < self.scale)
+        if np.any(filter_one):
+            u = np.exp(self.shape3 * (np.log(x[filter_one]) - np.log(self.scale)))
+            output[filter_one] = self.dist.cdf(u)
+        
+        filter_two = (x >= self.scale)
+        if np.any(filter_two):
+            output[filter_two] = 1
+
+        if len(output) == 1:
+            output = output.item()
+        return output
 
     def logpdf(self, x):
         """
@@ -3191,27 +3208,38 @@ class GenBeta:
 
     def Emv(self, v):
         """
-        Expected value of the function min(x,v).
+        Expected value of the function min(x, v).
 
         :param v: values with respect to the minimum.
         :type v: ``numpy.ndarray``
         :return: expected value of the minimum function.
         :rtype: ``numpy.float64`` or ``numpy.ndarray``
         """
-        if (1 <= - self.shape1 * self.shape3):
-            return np.inf
-        
-        if (v <= 0.0):
-            return 0.0
-        
-        z_ = 0 if np.isinf(v) else v
-        
-        tmp_ = 1 / self.shape3
-        u_ = np.exp(self.shape3 * (np.log(v) - np.log(self.scale)))
 
-        return self.scale * scipy.special.beta(self.shape1 + tmp_, self.shape2) / \
-            scipy.special.beta(self.shape1, self.shape2) * scipy.stats.beta.cdf(u_, self.shape1 + tmp_, self.shape2) \
-            + z_ * self.__dist.cdf(u_)
+        v = hf.arg_type_handler(v)
+        v_shape = len(v) 
+        output = np.zeros(v_shape)
+
+        # if (v <= 0.0) return 0 # not needed, it is already zero
+        
+        filter_one = (v > 0.0)
+        if np.any(filter_one):
+            v_ = v[filter_one]
+            z_ = 0 if np.isinf(v_) else v_
+            tmp_ = 1 / self.shape3
+            u_ = np.exp(self.shape3 * (np.log(v_) - np.log(self.scale)))
+            
+            output[filter_one] = self.scale * scipy.special.beta(self.shape1 + tmp_, self.shape2) / \
+                scipy.special.beta(self.shape1, self.shape2) * scipy.stats.beta.cdf(u_, self.shape1 + tmp_, self.shape2) \
+                    + z_ * self.dist.cdf(u_)
+        
+        if (1 <= - self.shape1 * self.shape3):
+            output = [np.infty] * v_shape
+
+        if len(output) == 1:
+            output = output.item()
+
+        return output 
 
 ## Burr
 class Burr12(_ContinuousDistribution):
