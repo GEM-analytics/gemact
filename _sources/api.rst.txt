@@ -306,7 +306,7 @@ The following table summarizes the distribution supported by GemAct and Scipy.
 +--------------------------------------------------+-------------+--------+--------+ 
 | The Inverse Gamma Distribution.                  |  continuous |    v   |   v    |                            
 +--------------------------------------------------+-------------+--------+--------+ 
-|The Inverse Gamma Distribution.                   |  continuous |    v   |   v    |                           
+|The Inverse Gaussian Distribution.                |  continuous |    v   |   v    |
 +--------------------------------------------------+-------------+--------+--------+ 
 |The Inverse Paralogistic Distribution.            |  continuous |    v   |   v    |                           
 +--------------------------------------------------+-------------+--------+--------+ 
@@ -527,10 +527,10 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a Geom::
 .. image:: images/cdfGeom.png
   :width: 400
 
-``Nbinom``
+``NegBinom``
 ------------------
 
-.. autoclass:: distributions.Nbinom
+.. autoclass:: distributions.NegBinom
    :members:
 
 Parametrization
@@ -546,7 +546,7 @@ For a better explanation refer to the `SciPy documentation <https://docs.scipy.o
 
 for :math:`k \geq 0,0<p \leq 1`
 
-Example code on the usage of the NBinom class::
+Example code on the usage of the NegBinom class::
 
     from gemact import distributions
     import numpy as np
@@ -589,7 +589,7 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a NBinom::
 ``ZTpoisson``
 ------------------
 
-.. autoclass:: distributions.ZTpoisson
+.. autoclass:: distributions.ZTPoisson
    :members:
 
 Parametrization
@@ -643,10 +643,10 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a ZTPoisson::
   :width: 400
 
 
-``ZMpoisson``
+``ZMPoisson``
 ------------------
 
-.. autoclass:: distributions.ZMpoisson
+.. autoclass:: distributions.ZMPoisson
    :members:
 
 Parametrization
@@ -700,10 +700,10 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a ZMPoisson::
 .. image:: images/cdfZMPois.png
   :width: 400
 
-``ZTbinom``
+``ZTBinom``
 ------------------
 
-.. autoclass:: distributions.ZTbinom
+.. autoclass:: distributions.ZTBinom
    :members:
 
 Parametrization
@@ -760,10 +760,10 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a ZTBinom::
 
 
 
-``ZMbinom``
+``ZMBinom``
 ------------------
 
-.. autoclass:: distributions.ZMbinom
+.. autoclass:: distributions.ZMBinom
    :members:
 
 Parametrization
@@ -818,10 +818,10 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a ZMPoisson::
 .. image:: images/cdfZMBinom.png
   :width: 400
 
-``ZTgeom``
+``ZTGeom``
 ------------------
 
-.. autoclass:: distributions.ZTgeom
+.. autoclass:: distributions.ZTGeom
    :members:
 
 Parametrization
@@ -873,7 +873,7 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a ZTGeom::
 .. image:: images/cdfZTGeom.png
   :width: 400
 
-``ZMgeom``
+``ZMGeom``
 ------------------
 
 .. autoclass:: distributions.ZMgeom
@@ -930,10 +930,10 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a ZMGeom::
 .. image:: images/cdfZMGeom.png
   :width: 400
 
-``ZTnbinom``
+``ZTNegBinom``
 ------------------
 
-.. autoclass:: distributions.ZTnbinom
+.. autoclass:: distributions.ZTNegBinom
    :members:
 
 Parametrization
@@ -948,7 +948,7 @@ The probability generating function of a Zero-Truncated negative binomial is def
 .. math:: P^{T}(z)=\frac{P(z)-p_{0}}{1-p_{0}}
    :label: ztnbinom
 
-Example code on the usage of the ZTNbinom class::
+Example code on the usage of the ZTNegBinom class::
 
     from gemact import distributions
     import numpy as np
@@ -988,10 +988,10 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a ZTNbinom::
   :width: 400
 
 
-``ZMnbinom``
+``ZMNegBinom``
 ------------------
 
-.. autoclass:: distributions.ZMnbinom
+.. autoclass:: distributions.ZTNegBinom
    :members:
 
 Parametrization
@@ -1006,10 +1006,10 @@ The probability generating function of a Zero-Modified negative binomial is defi
 .. math:: P^{M}(z)=p_{0}^{M}+\frac{1-p_{0}^{M}}{1-p_{0}}\left[P(z)-p_{0}\right]
    :label: zmnbinom
 
-``ZMlogser``
+``ZMLogser``
 ------------------
 
-.. autoclass:: distributions.ZMlogser
+.. autoclass:: distributions.ZMLogser
    :members:
 
 Parametrization
@@ -1025,7 +1025,7 @@ The probability generating function of a Zero-Modified logarithmic is defined in
    :label: zmlogser
 
 
-Example code on the usage of the ZMlogser class::
+Example code on the usage of the ZMLogser class::
 
     from gemact import distributions
     import numpy as np
@@ -1166,11 +1166,25 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of an Exponential:
 .. image:: images/cdfExponential.png
   :width: 400
 
-
-``Invgamma``
+``InvGauss``
 ------------------
 
-.. autoclass:: distributions.Invgamma
+.. autoclass:: distributions.InvGauss
+   :members:
+
+Parametrization
+~~~~~~~~~~~~~~~~~~~~
+
+For a better explanation refer to :cite:t:`scipy` documentation.
+
+.. math:: f(x, \mu)=\frac{1}{\sqrt{2 \pi x^{3}}} \exp \left(-\frac{(x-\mu)^{2}}{2 x \mu^{2}}\right)
+   :label: invgamma
+
+
+``InvGamma``
+------------------
+
+.. autoclass:: distributions.InvGamma
    :members:
 
 Parametrization
@@ -1183,10 +1197,10 @@ For a better explanation refer to :cite:t:`scipy` documentation.
 
 Given :math:`x>=0, a>0 `. :math:`\Gamma(a)` refers to the gamma function.
 
-``Genpareto``
+``GenPareto``
 ------------------
 
-.. autoclass:: distributions.Genpareto
+.. autoclass:: distributions.GenPareto
    :members:
 
 Parametrization
@@ -1242,10 +1256,10 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a GenPareto::
 .. image:: images/cdfGenPareto.png
   :width: 400
 
-``Lognorm``
+``Lognormal``
 ------------------
 
-.. autoclass:: distributions.Lognorm
+.. autoclass:: distributions.Lognormal
    :members:
 
 Parametrization
@@ -1258,7 +1272,7 @@ For a better explanation refer to the `SciPy documentation <https://docs.scipy.o
 
 Given :math:`x>0, s>0`.
 
-Example code on the usage of the LogNorm class::
+Example code on the usage of the Lognormal class::
 
     from gemact import distributions
     import numpy as np
@@ -1406,10 +1420,10 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a Dagum::
   :width: 400
 
 
-``Weibull_min``
+``Weibull``
 ------------------
 
-.. autoclass:: distributions.Weibull_min
+.. autoclass:: distributions.Weibull
    :members:
 
 Parametrization
@@ -1424,7 +1438,7 @@ Given :math:`x>0` , :math:`c>0`.
 
 
 
-Example code on the usage of the Weibull_min class::
+Example code on the usage of the Weibull class::
 
     from gemact import distributions
     import numpy as np
@@ -1460,10 +1474,10 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a Weibull_min::
 .. image:: images/cdfWeibull_min.png
   :width: 400
 
-``Invweibull``
+``InvWeibull``
 ------------------
 
-.. autoclass:: distributions.Invweibull
+.. autoclass:: distributions.InvWeibull
    :members:
 
 Parametrization
@@ -1477,7 +1491,7 @@ For a better explanation refer to :cite:t:`scipy` `documentation <https://docs.s
 Given :math:`x>0` , :math:`c>0`.
 
 
-Example code on the usage of the Invweibull class::
+Example code on the usage of the InvWeibull class::
 
     from gemact import distributions
     import numpy as np
