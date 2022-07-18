@@ -682,6 +682,22 @@
      </li>
     </ul>
    </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#genbeta">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       GenBeta
+      </span>
+     </code>
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id79">
+       Parametrization
+      </a>
+     </li>
+    </ul>
+   </li>
   </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
@@ -1198,6 +1214,22 @@
      </li>
     </ul>
    </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#genbeta">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       GenBeta
+      </span>
+     </code>
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id79">
+       Parametrization
+      </a>
+     </li>
+    </ul>
+   </li>
   </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
@@ -1434,8 +1466,8 @@ Quantiles are added to both plots.</p>
 <p>Equation <a class="reference internal" href="#equation-xlpremium">(3)</a> shows the reinsurance premium for excess of loss treaties. It is possible to obtain a plain-vanilla XL with <span class="math notranslate nohighlight">\(L=0\)</span>, <span class="math notranslate nohighlight">\(K=+\infty\)</span> and <span class="math notranslate nohighlight">\(c=0\)</span>.</p>
 <div class="math notranslate nohighlight" id="equation-reinstatementslayer">
 <span class="eqno">(4)<a class="headerlink" href="#equation-reinstatementslayer" title="Permalink to this equation">¶</a></span>\[P=\frac{D_{L K}}{1+\frac{1}{m} \sum_{k=1}^{K} c_{k} d_{L, k-1}}\]</div>
-<p>GEMAct pricing model is based on  <span id="id1">Klugman and Panjer [<a class="reference internal" href="#id86" title="P. Klugman and H.H. Panjer. Loss models from data to decisions. Wiley, SOA, 2019.">KP19</a>]</span> and  <span id="id2">Sundt [<a class="reference internal" href="#id88" title="B. Sundt. On excess of loss reinsurance with reinstatements. Insurance: Mathematics and Economics, 1991.">Sun91</a>]</span>.</p>
-<p>Refer again to <span id="id3">Klugman and Panjer [<a class="reference internal" href="#id86" title="P. Klugman and H.H. Panjer. Loss models from data to decisions. Wiley, SOA, 2019.">KP19</a>]</span> for the recursive formula to compute the collective risk model and to <span id="id4">Embrechts and Frei [<a class="reference internal" href="#id82" title="P. Embrechts and M. Frei. Panjer recursion versus fft for compound distributions. Mathematical Methods of Operations Research, 2008.">EF08</a>]</span> for the Fast Fourier transform to approximate the Discrete Fourier Transform of the collective risk model.</p>
+<p>GEMAct pricing model is based on  <span id="id1">Klugman and Panjer [<a class="reference internal" href="#id87" title="P. Klugman and H.H. Panjer. Loss models from data to decisions. Wiley, SOA, 2019.">KP19</a>]</span> and  <span id="id2">Sundt [<a class="reference internal" href="#id89" title="B. Sundt. On excess of loss reinsurance with reinstatements. Insurance: Mathematics and Economics, 1991.">Sun91</a>]</span>.</p>
+<p>Refer again to <span id="id3">Klugman and Panjer [<a class="reference internal" href="#id87" title="P. Klugman and H.H. Panjer. Loss models from data to decisions. Wiley, SOA, 2019.">KP19</a>]</span> for the recursive formula to compute the collective risk model and to <span id="id4">Embrechts and Frei [<a class="reference internal" href="#id83" title="P. Embrechts and M. Frei. Panjer recursion versus fft for compound distributions. Mathematical Methods of Operations Research, 2008.">EF08</a>]</span> for the Fast Fourier transform to approximate the Discrete Fourier Transform of the collective risk model.</p>
 </div>
 <div class="section" id="examples">
 <h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
@@ -1576,7 +1608,7 @@ parameters of the severity distribution.</p></li>
 
 <div class="section" id="severity-discretization">
 <h3>Severity discretization<a class="headerlink" href="#severity-discretization" title="Permalink to this headline">¶</a></h3>
-<p>In order to pass from a continuous distribution to an arithmetic distribution, it is important to preserve the distribution properties either locally or globally. Given a span <span class="math notranslate nohighlight">\(h\)</span> and <span class="math notranslate nohighlight">\(M\)</span> the last available point, in <span id="id5">Klugman and Panjer [<a class="reference internal" href="#id86" title="P. Klugman and H.H. Panjer. Loss models from data to decisions. Wiley, SOA, 2019.">KP19</a>]</span> there are two available solutions.</p>
+<p>In order to pass from a continuous distribution to an arithmetic distribution, it is important to preserve the distribution properties either locally or globally. Given a span <span class="math notranslate nohighlight">\(h\)</span> and <span class="math notranslate nohighlight">\(M\)</span> the last available point, in <span id="id5">Klugman and Panjer [<a class="reference internal" href="#id87" title="P. Klugman and H.H. Panjer. Loss models from data to decisions. Wiley, SOA, 2019.">KP19</a>]</span> there are two available solutions.</p>
 <p><strong>Method of mass dispersal</strong></p>
 <div class="math notranslate nohighlight" id="equation-md1">
 <span class="eqno">(5)<a class="headerlink" href="#equation-md1" title="Permalink to this equation">¶</a></span>\[f_{0}=\operatorname{Pr}\left(\widetilde{Y}&lt;\frac{h}{2}\right)=F_{\widetilde{Y}}\left(\frac{h}{2}-0\right)\]</div>
@@ -1703,8 +1735,8 @@ In case no tail is present it must be J-1 dimensional.</p></li>
 <dt class="sig sig-object py" id="lossreserve.LossReserve.SSPlot">
 <span class="sig-name descname"><span class="pre">SSPlot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lossreserve.html#LossReserve.SSPlot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lossreserve.LossReserve.SSPlot" title="Permalink to this definition">¶</a></dt>
 <dd><p>It plots the settlement speed vector for each accident year.
-:param <a href="#id91"><span class="problematic" id="id92">start_</span></a>: starting accident year from which to plot.
-:type <a href="#id93"><span class="problematic" id="id94">start_</span></a>: <code class="docutils literal notranslate"><span class="pre">int</span></code></p>
+:param <a href="#id92"><span class="problematic" id="id93">start_</span></a>: starting accident year from which to plot.
+:type <a href="#id94"><span class="problematic" id="id95">start_</span></a>: <code class="docutils literal notranslate"><span class="pre">int</span></code></p>
 </dd></dl>
 
 <dl class="py method">
@@ -1719,7 +1751,7 @@ are compared with the Fisher-Lange.</p>
 <div class="section" id="claims-reserving">
 <h3>Claims reserving<a class="headerlink" href="#claims-reserving" title="Permalink to this headline">¶</a></h3>
 <p>GEMAct provides a software implementation of average cost methods for claims reserving based on the collective risk model framework.</p>
-<p>The methods implemented in GEMAct are the Fisher-Lange in <span id="id7">Fisher <em>et al.</em> [<a class="reference internal" href="#id89" title="Wayne H. Fisher, Jeffrey T. Lange, and John Balcarek. Loss reserve testing: a report year approach. 1999.">FLB99</a>]</span> the collective risk model for claims reserving in <span id="id8">Ricotta and Clemente [<a class="reference internal" href="#id90" title="Alessandro Ricotta and Gian Paolo Clemente. An extension of collective risk model for stochastic claim reserving. 2016.">RC16</a>]</span>.</p>
+<p>The methods implemented in GEMAct are the Fisher-Lange in <span id="id7">Fisher <em>et al.</em> [<a class="reference internal" href="#id90" title="Wayne H. Fisher, Jeffrey T. Lange, and John Balcarek. Loss reserve testing: a report year approach. 1999.">FLB99</a>]</span> the collective risk model for claims reserving in <span id="id8">Ricotta and Clemente [<a class="reference internal" href="#id91" title="Alessandro Ricotta and Gian Paolo Clemente. An extension of collective risk model for stochastic claim reserving. 2016.">RC16</a>]</span>.</p>
 <p>GEMAct allows for tail estimates and assumes the triangular inputs to be provided as a <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> with two equal dimensions <code class="docutils literal notranslate"><span class="pre">(I,J)</span></code>, where <code class="docutils literal notranslate"><span class="pre">I=J</span></code>.</p>
 <p>The aim of average cost methods is to model incremental payments as in equation <a class="reference internal" href="#equation-acmethods">(12)</a>.</p>
 <div class="math notranslate nohighlight" id="equation-acmethods">
@@ -1778,7 +1810,7 @@ are compared with the Fisher-Lange.</p>
 <li><p><span class="math notranslate nohighlight">\(𝑋=(X_i, \ldots, X_d)\)</span> vector of strictly positive random components.</p></li>
 <li><p>The joint c.d.f. <span class="math notranslate nohighlight">\(H(x_1,…,x_d )=P\left[ X_1 +\ldots +X_d \right]\)</span> is known or it can be computed numerically.</p></li>
 </ul>
-<p>Refer to <span id="id9">Arbenz <em>et al.</em> [<a class="reference internal" href="#id81" title="Philipp Arbenz, Paul Embrechts, and Giovanni Puccetti. The aep algorithm for the fast computation of the distribution of the sum of dependent random variables. Bernoulli, 17:562-591, 2011.">AEP11</a>]</span> for an extensive explanation on the AEP algorithm.</p>
+<p>Refer to <span id="id9">Arbenz <em>et al.</em> [<a class="reference internal" href="#id82" title="Philipp Arbenz, Paul Embrechts, and Giovanni Puccetti. The aep algorithm for the fast computation of the distribution of the sum of dependent random variables. Bernoulli, 17:562-591, 2011.">AEP11</a>]</span> for an extensive explanation on the AEP algorithm.</p>
 </div>
 <div class="section" id="id10">
 <h3>Examples<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
@@ -1894,67 +1926,72 @@ are compared with the Fisher-Lange.</p>
 <td><p>v</p></td>
 <td><p>v</p></td>
 </tr>
-<tr class="row-odd"><td><p>The Poisson Distribution.</p></td>
+<tr class="row-odd"><td><p>The Generalized Beta distribution.</p></td>
+<td><p>continuous</p></td>
+<td><p>x</p></td>
+<td><p>v</p></td>
+</tr>
+<tr class="row-even"><td><p>The Poisson Distribution.</p></td>
 <td><p>discrete</p></td>
 <td><p>v</p></td>
 <td><p>v</p></td>
 </tr>
-<tr class="row-even"><td><p>The Binomial Distribution.</p></td>
+<tr class="row-odd"><td><p>The Binomial Distribution.</p></td>
 <td><p>discrete</p></td>
 <td><p>v</p></td>
 <td><p>v</p></td>
 </tr>
-<tr class="row-odd"><td><p>The Geometric Distribution.</p></td>
+<tr class="row-even"><td><p>The Geometric Distribution.</p></td>
 <td><p>discrete</p></td>
 <td><p>v</p></td>
 <td><p>v</p></td>
 </tr>
-<tr class="row-even"><td><p>The Negative Binomial Distribution.</p></td>
+<tr class="row-odd"><td><p>The Negative Binomial Distribution.</p></td>
 <td><p>discrete</p></td>
 <td><p>v</p></td>
 <td><p>v</p></td>
 </tr>
-<tr class="row-odd"><td><p>The Zero-Modified Binomial Distribution.</p></td>
+<tr class="row-even"><td><p>The Zero-Modified Binomial Distribution.</p></td>
 <td><p>discrete</p></td>
 <td><p>v</p></td>
 <td><p>x</p></td>
 </tr>
-<tr class="row-even"><td><p>The Zero-Modified Geometric Distribution.</p></td>
+<tr class="row-odd"><td><p>The Zero-Modified Geometric Distribution.</p></td>
 <td><p>discrete</p></td>
 <td><p>v</p></td>
 <td><p>x</p></td>
 </tr>
-<tr class="row-odd"><td><p>The Zero-Modified Logarithmic Distribution.</p></td>
+<tr class="row-even"><td><p>The Zero-Modified Logarithmic Distribution.</p></td>
 <td><p>discrete</p></td>
 <td><p>v</p></td>
 <td><p>x</p></td>
 </tr>
-<tr class="row-even"><td><p>The Zero-Modified Negative Binomial Distribution</p></td>
+<tr class="row-odd"><td><p>The Zero-Modified Negative Binomial Distribution</p></td>
 <td><p>discrete</p></td>
 <td><p>v</p></td>
 <td><p>x</p></td>
 </tr>
-<tr class="row-odd"><td><p>The Zero-Modified Poisson Distribution</p></td>
+<tr class="row-even"><td><p>The Zero-Modified Poisson Distribution</p></td>
 <td><p>discrete</p></td>
 <td><p>v</p></td>
 <td><p>x</p></td>
 </tr>
-<tr class="row-even"><td><p>The Zero-Truncated Binomial Distribution</p></td>
+<tr class="row-odd"><td><p>The Zero-Truncated Binomial Distribution</p></td>
 <td><p>discrete</p></td>
 <td><p>v</p></td>
 <td><p>x</p></td>
 </tr>
-<tr class="row-odd"><td><p>The Zero-Truncated Geometric Distribution</p></td>
+<tr class="row-even"><td><p>The Zero-Truncated Geometric Distribution</p></td>
 <td><p>discrete</p></td>
 <td><p>v</p></td>
 <td><p>x</p></td>
 </tr>
-<tr class="row-even"><td><p>The Zero-Truncated Negative Binomial Distribution</p></td>
+<tr class="row-odd"><td><p>The Zero-Truncated Negative Binomial Distribution</p></td>
 <td><p>discrete</p></td>
 <td><p>v</p></td>
 <td><p>x</p></td>
 </tr>
-<tr class="row-odd"><td><p>The Zero-Truncated Poisson Distribution</p></td>
+<tr class="row-even"><td><p>The Zero-Truncated Poisson Distribution</p></td>
 <td><p>discrete</p></td>
 <td><p>v</p></td>
 <td><p>x</p></td>
@@ -2026,7 +2063,7 @@ of the random variable given the (a, b, x) parametrization.</p>
 
 <div class="section" id="parametrization">
 <h3>Parametrization<a class="headerlink" href="#parametrization" title="Permalink to this headline">¶</a></h3>
-<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.poisson.html">SciPy documentation</a>, see <span id="id11">Virtanen <em>et al.</em> [<a class="reference internal" href="#id85" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span>.</p>
+<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.poisson.html">SciPy documentation</a>, see <span id="id11">Virtanen <em>et al.</em> [<a class="reference internal" href="#id86" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span>.</p>
 <div class="math notranslate nohighlight" id="equation-poisson">
 <span class="eqno">(14)<a class="headerlink" href="#equation-poisson" title="Permalink to this equation">¶</a></span>\[f(k)=\exp (-\mu) \frac{\mu^{k}}{k !}\]</div>
 <p>Given <span class="math notranslate nohighlight">\(\mu \geq 0\)</span> and <span class="math notranslate nohighlight">\(k \geq 0\)</span>.</p>
@@ -2134,7 +2171,7 @@ of the random variable given the (a, b, x) parametrization.</p>
 
 <div class="section" id="id12">
 <h3>Parametrization<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
-<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.binom.html">SciPy documentation</a>, see <span id="id14">Virtanen <em>et al.</em> [<a class="reference internal" href="#id85" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span>.</p>
+<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.binom.html">SciPy documentation</a>, see <span id="id14">Virtanen <em>et al.</em> [<a class="reference internal" href="#id86" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span>.</p>
 <div class="math notranslate nohighlight" id="equation-binomial">
 <span class="eqno">(15)<a class="headerlink" href="#equation-binomial" title="Permalink to this equation">¶</a></span>\[\begin{split}f(k)=\left(
 \begin{array}{l}
@@ -2244,7 +2281,7 @@ of the random variable given the (a, b, x) parametrization.</p>
 
 <div class="section" id="id15">
 <h3>Parametrization<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
-<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.geom.html">SciPy documentation</a>, see <span id="id17">Virtanen <em>et al.</em> [<a class="reference internal" href="#id85" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span>..</p>
+<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.geom.html">SciPy documentation</a>, see <span id="id17">Virtanen <em>et al.</em> [<a class="reference internal" href="#id86" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span>..</p>
 <div class="math notranslate nohighlight" id="equation-geom">
 <span class="eqno">(16)<a class="headerlink" href="#equation-geom" title="Permalink to this equation">¶</a></span>\[f(k)=(1-p)^{k-1} p\]</div>
 <p>for <span class="math notranslate nohighlight">\(k \geq 1,0&lt;p \leq 1\)</span></p>
@@ -2352,7 +2389,7 @@ of the random variable given the (a, b, x) parametrization.</p>
 
 <div class="section" id="id18">
 <h3>Parametrization<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h3>
-<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.nbinom.html">SciPy documentation</a>, see <span id="id20">Virtanen <em>et al.</em> [<a class="reference internal" href="#id85" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span>.</p>
+<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.nbinom.html">SciPy documentation</a>, see <span id="id20">Virtanen <em>et al.</em> [<a class="reference internal" href="#id86" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span>.</p>
 <div class="math notranslate nohighlight" id="equation-geom">
 <span class="eqno">(17)<a class="headerlink" href="#equation-geom" title="Permalink to this equation">¶</a></span>\[\begin{split}f(k)=\left(\begin{array}{c}
    k+n-1 \\
@@ -4154,20 +4191,6 @@ shape parameter a.</p></li>
 </dd>
 </dl>
 <dl class="py method">
-<dt class="sig sig-object py" id="distributions.Gamma.Emv">
-<span class="sig-name descname"><span class="pre">Emv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#Gamma.Emv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.Gamma.Emv" title="Permalink to this definition">¶</a></dt>
-<dd><p>Expected value of the function min(x,v).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>v</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – values with respect to the minimum.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>expected value of the minimum function.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="distributions.Gamma.den">
 <span class="sig-name descname"><span class="pre">den</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#Gamma.den"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.Gamma.den" title="Permalink to this definition">¶</a></dt>
 <dd><p>It returns the denominator of the local moments discretization.</p>
@@ -4187,11 +4210,28 @@ shape parameter a.</p></li>
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="distributions.Gamma.lev">
+<span class="sig-name descname"><span class="pre">lev</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#Gamma.lev"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.Gamma.lev" title="Permalink to this definition">¶</a></dt>
+<dd><p>Limited expected value, i.e. expected value of the function min(x, v).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>v</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.float</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – values with respect to the minimum.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>expected value of the minimum function.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 <div class="section" id="id45">
 <h3>Parametrization<a class="headerlink" href="#id45" title="Permalink to this headline">¶</a></h3>
-<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.gamma.html">SciPy documentation</a>, see <span id="id47">Virtanen <em>et al.</em> [<a class="reference internal" href="#id85" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span>.</p>
+<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.gamma.html">SciPy documentation</a>, see <span id="id47">Virtanen <em>et al.</em> [<a class="reference internal" href="#id86" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span>.</p>
 <div class="math notranslate nohighlight" id="equation-gamma">
 <span class="eqno">(27)<a class="headerlink" href="#equation-gamma" title="Permalink to this equation">¶</a></span>\[f(x, a)=\frac{x^{a-1} e^{-x}}{\Gamma(a)}\]</div>
 <p>Given <span class="math notranslate nohighlight">\(f(x, a)=\frac{x^{a-1} e^{-x}}{\Gamma(a)}\)</span> and <span class="math notranslate nohighlight">\(x \geq 0, a&gt;0\)</span>. <span class="math notranslate nohighlight">\(\Gamma(a)\)</span> refers to the gamma function.</p>
@@ -4245,23 +4285,6 @@ scipy reference distribution: <code class="docutils literal notranslate"><span c
 </ul>
 </dd>
 </dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="distributions.Exponential.Emv">
-<span class="sig-name descname"><span class="pre">Emv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#Exponential.Emv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.Exponential.Emv" title="Permalink to this definition">¶</a></dt>
-<dd><p>Expected value of the function min(x, v).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>v</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – values with respect to the minimum.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>expected value of the minimum function.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py method">
 <dt class="sig sig-object py" id="distributions.Exponential.cdf">
 <span class="sig-name descname"><span class="pre">cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#Exponential.cdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.Exponential.cdf" title="Permalink to this definition">¶</a></dt>
@@ -4326,6 +4349,23 @@ scipy reference distribution: <code class="docutils literal notranslate"><span c
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="distributions.Exponential.lev">
+<span class="sig-name descname"><span class="pre">lev</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#Exponential.lev"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.Exponential.lev" title="Permalink to this definition">¶</a></dt>
+<dd><p>Limited expected value, i.e. expected value of the function min(x, v).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>v</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.float</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – values with respect to the minimum.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>expected value of the minimum function.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -4557,23 +4597,6 @@ shape parameter mu.</p></li>
 </dd>
 </dl>
 <dl class="py method">
-<dt class="sig sig-object py" id="distributions.InvGauss.Emv">
-<span class="sig-name descname"><span class="pre">Emv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#InvGauss.Emv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.InvGauss.Emv" title="Permalink to this definition">¶</a></dt>
-<dd><p>Expected value of the function min(x, v).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>v</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – values with respect to the minimum.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>expected value of the minimum function.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="distributions.InvGauss.den">
 <span class="sig-name descname"><span class="pre">den</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#InvGauss.den"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.InvGauss.den" title="Permalink to this definition">¶</a></dt>
 <dd><p>It returns the denominator of the local moments discretization.</p>
@@ -4593,11 +4616,28 @@ shape parameter mu.</p></li>
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="distributions.InvGauss.lev">
+<span class="sig-name descname"><span class="pre">lev</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#InvGauss.lev"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.InvGauss.lev" title="Permalink to this definition">¶</a></dt>
+<dd><p>Limited expected value, i.e. expected value of the function min(x, v).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>v</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.float</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – values with respect to the minimum.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>expected value of the minimum function.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 <div class="section" id="id49">
 <h3>Parametrization<a class="headerlink" href="#id49" title="Permalink to this headline">¶</a></h3>
-<p>For a better explanation refer to <span id="id50">Virtanen <em>et al.</em> [<a class="reference internal" href="#id85" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span> documentation.</p>
+<p>For a better explanation refer to <span id="id50">Virtanen <em>et al.</em> [<a class="reference internal" href="#id86" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span> documentation.</p>
 <div class="math notranslate nohighlight" id="equation-invgamma">
 <span class="eqno">(29)<a class="headerlink" href="#equation-invgamma" title="Permalink to this equation">¶</a></span>\[f(x, \mu)=\frac{1}{\sqrt{2 \pi x^{3}}} \exp \left(-\frac{(x-\mu)^{2}}{2 x \mu^{2}}\right)\]</div>
 </div>
@@ -4628,20 +4668,6 @@ shape parameter a.</p></li>
 </dd>
 </dl>
 <dl class="py method">
-<dt class="sig sig-object py" id="distributions.InvGamma.Emv">
-<span class="sig-name descname"><span class="pre">Emv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#InvGamma.Emv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.InvGamma.Emv" title="Permalink to this definition">¶</a></dt>
-<dd><p>Expected value of the function min(x,v).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>v</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – values with respect to the minimum.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>expected value of the minimum function.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="distributions.InvGamma.den">
 <span class="sig-name descname"><span class="pre">den</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#InvGamma.den"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.InvGamma.den" title="Permalink to this definition">¶</a></dt>
 <dd><p>It returns the denominator of the local moments discretization.</p>
@@ -4661,11 +4687,28 @@ shape parameter a.</p></li>
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="distributions.InvGamma.lev">
+<span class="sig-name descname"><span class="pre">lev</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#InvGamma.lev"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.InvGamma.lev" title="Permalink to this definition">¶</a></dt>
+<dd><p>Limited expected value, i.e. expected value of the function min(x, v).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>v</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.float</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – values with respect to the minimum.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>expected value of the minimum function.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 <div class="section" id="id51">
 <h3>Parametrization<a class="headerlink" href="#id51" title="Permalink to this headline">¶</a></h3>
-<p>For a better explanation refer to <span id="id52">Virtanen <em>et al.</em> [<a class="reference internal" href="#id85" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span> documentation.</p>
+<p>For a better explanation refer to <span id="id52">Virtanen <em>et al.</em> [<a class="reference internal" href="#id86" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span> documentation.</p>
 <div class="math notranslate nohighlight" id="equation-invgamma">
 <span class="eqno">(30)<a class="headerlink" href="#equation-invgamma" title="Permalink to this equation">¶</a></span>\[f(x, a)=\frac{x^{-a-1}}{\Gamma(a)} \exp \left(-\frac{1}{x}\right)\]</div>
 <p>Given <span class="math notranslate nohighlight">\(x&gt;=0, a&gt;0 \)</span>Gamma(a)` refers to the gamma function.</p>
@@ -4703,23 +4746,6 @@ shape parameter c.</p></li>
 </dd>
 </dl>
 <dl class="py method">
-<dt class="sig sig-object py" id="distributions.GenPareto.Emv">
-<span class="sig-name descname"><span class="pre">Emv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#GenPareto.Emv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.GenPareto.Emv" title="Permalink to this definition">¶</a></dt>
-<dd><p>Expected value of the function min(x, v).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>v</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.float</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – values with respect to the minimum.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>expected value of the minimum function.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="distributions.GenPareto.den">
 <span class="sig-name descname"><span class="pre">den</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#GenPareto.den"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.GenPareto.den" title="Permalink to this definition">¶</a></dt>
 <dd><p>It returns the denominator of the local moments discretization.</p>
@@ -4739,11 +4765,28 @@ shape parameter c.</p></li>
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="distributions.GenPareto.lev">
+<span class="sig-name descname"><span class="pre">lev</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#GenPareto.lev"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.GenPareto.lev" title="Permalink to this definition">¶</a></dt>
+<dd><p>Limited expected value, i.e. expected value of the function min(x, v).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>v</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.float</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – values with respect to the minimum.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>expected value of the minimum function.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 <div class="section" id="id55">
 <h3>Parametrization<a class="headerlink" href="#id55" title="Permalink to this headline">¶</a></h3>
-<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.genpareto.html">SciPy documentation</a>, see <span id="id57">Virtanen <em>et al.</em> [<a class="reference internal" href="#id85" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span>.</p>
+<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.genpareto.html">SciPy documentation</a>, see <span id="id57">Virtanen <em>et al.</em> [<a class="reference internal" href="#id86" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span>.</p>
 <div class="math notranslate nohighlight" id="equation-genpareto">
 <span class="eqno">(31)<a class="headerlink" href="#equation-genpareto" title="Permalink to this equation">¶</a></span>\[f(x, c)=(1+c x)^{-1-1 / c}\]</div>
 <p>Given <span class="math notranslate nohighlight">\(x \geq 0\)</span> if <span class="math notranslate nohighlight">\(c \geq 0\)</span>. <span class="math notranslate nohighlight">\(0 \leq x \leq-1 / c if c&lt;0\)</span>.</p>
@@ -4816,23 +4859,6 @@ shape parameter s.</p></li>
 </dd>
 </dl>
 <dl class="py method">
-<dt class="sig sig-object py" id="distributions.Lognormal.Emv">
-<span class="sig-name descname"><span class="pre">Emv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#Lognormal.Emv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.Lognormal.Emv" title="Permalink to this definition">¶</a></dt>
-<dd><p>Expected value of the function min(x, v).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>v</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.float</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – values with respect to the minimum.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>expected value of the minimum function.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="distributions.Lognormal.den">
 <span class="sig-name descname"><span class="pre">den</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#Lognormal.den"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.Lognormal.den" title="Permalink to this definition">¶</a></dt>
 <dd><p>It returns the denominator of the local moments discretization.</p>
@@ -4852,11 +4878,28 @@ shape parameter s.</p></li>
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="distributions.Lognormal.lev">
+<span class="sig-name descname"><span class="pre">lev</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#Lognormal.lev"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.Lognormal.lev" title="Permalink to this definition">¶</a></dt>
+<dd><p>Limited expected value, i.e. expected value of the function min(x, v).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>v</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.float</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – values with respect to the minimum.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>expected value of the minimum function.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 <div class="section" id="id60">
 <h3>Parametrization<a class="headerlink" href="#id60" title="Permalink to this headline">¶</a></h3>
-<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.lognorm.html">SciPy documentation</a>, see <span id="id62">Virtanen <em>et al.</em> [<a class="reference internal" href="#id85" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span>.</p>
+<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.lognorm.html">SciPy documentation</a>, see <span id="id62">Virtanen <em>et al.</em> [<a class="reference internal" href="#id86" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span>.</p>
 <div class="math notranslate nohighlight" id="equation-lognorm">
 <span class="eqno">(32)<a class="headerlink" href="#equation-lognorm" title="Permalink to this equation">¶</a></span>\[f(x, s)=\frac{1}{s x \sqrt{2 \pi}} \exp \left(-\frac{\log ^{2}(x)}{2 s^{2}}\right)\]</div>
 <p>Given <span class="math notranslate nohighlight">\(x&gt;0, s&gt;0\)</span>.</p>
@@ -4923,20 +4966,6 @@ shape parameter d.</p></li>
 </dd>
 </dl>
 <dl class="py method">
-<dt class="sig sig-object py" id="distributions.Burr12.Emv">
-<span class="sig-name descname"><span class="pre">Emv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#Burr12.Emv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.Burr12.Emv" title="Permalink to this definition">¶</a></dt>
-<dd><p>Expected value of the function min(x, v).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>v</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – values with respect to the minimum.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>expected value of the minimum function.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="distributions.Burr12.den">
 <span class="sig-name descname"><span class="pre">den</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#Burr12.den"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.Burr12.den" title="Permalink to this definition">¶</a></dt>
 <dd><p>It returns the denominator of the local moments discretization.</p>
@@ -4956,11 +4985,28 @@ shape parameter d.</p></li>
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="distributions.Burr12.lev">
+<span class="sig-name descname"><span class="pre">lev</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#Burr12.lev"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.Burr12.lev" title="Permalink to this definition">¶</a></dt>
+<dd><p>Limited expected value, i.e. expected value of the function min(x, v).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>v</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.float</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – values with respect to the minimum.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>expected value of the minimum function.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 <div class="section" id="id63">
 <h3>Parametrization<a class="headerlink" href="#id63" title="Permalink to this headline">¶</a></h3>
-<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.burr12.html">Scipy documentation</a> , see <span id="id65">Virtanen <em>et al.</em> [<a class="reference internal" href="#id85" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span>.</p>
+<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.burr12.html">Scipy documentation</a> , see <span id="id65">Virtanen <em>et al.</em> [<a class="reference internal" href="#id86" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span>.</p>
 <div class="math notranslate nohighlight" id="equation-burr12">
 <span class="eqno">(33)<a class="headerlink" href="#equation-burr12" title="Permalink to this equation">¶</a></span>\[f(x, c, d)=c d x^{c-1} /\left(1+x^{c}\right)^{d+1}\]</div>
 <p>Given <span class="math notranslate nohighlight">\(x&gt;=0 and c, d&gt;0\)</span>.</p>
@@ -5031,23 +5077,6 @@ shape parameter s.</p></li>
 </dd>
 </dl>
 <dl class="py method">
-<dt class="sig sig-object py" id="distributions.Dagum.Emv">
-<span class="sig-name descname"><span class="pre">Emv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#Dagum.Emv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.Dagum.Emv" title="Permalink to this definition">¶</a></dt>
-<dd><p>Expected value of the function min(x,v).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>v</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – values with respect to the minimum.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>expected value of the minimum function.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="distributions.Dagum.den">
 <span class="sig-name descname"><span class="pre">den</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#Dagum.den"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.Dagum.den" title="Permalink to this definition">¶</a></dt>
 <dd><p>It returns the denominator of the local moments discretization.</p>
@@ -5067,11 +5096,28 @@ shape parameter s.</p></li>
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="distributions.Dagum.lev">
+<span class="sig-name descname"><span class="pre">lev</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#Dagum.lev"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.Dagum.lev" title="Permalink to this definition">¶</a></dt>
+<dd><p>Limited expected value, i.e. expected value of the function min(x, v).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>v</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.float</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – values with respect to the minimum.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>expected value of the minimum function.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 <div class="section" id="id68">
 <h3>Parametrization<a class="headerlink" href="#id68" title="Permalink to this headline">¶</a></h3>
-<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.mielke.html">SciPy documentation</a> ,see <span id="id70">Virtanen <em>et al.</em> [<a class="reference internal" href="#id85" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span>.</p>
+<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.mielke.html">SciPy documentation</a> ,see <span id="id70">Virtanen <em>et al.</em> [<a class="reference internal" href="#id86" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span>.</p>
 <div class="math notranslate nohighlight" id="equation-dagum">
 <span class="eqno">(34)<a class="headerlink" href="#equation-dagum" title="Permalink to this equation">¶</a></span>\[f(x, k, s)=\frac{k x^{k-1}}{\left(1+x^{s}\right)^{1+k / s}}\]</div>
 <p>Given <span class="math notranslate nohighlight">\(x&gt;0\)</span> , <span class="math notranslate nohighlight">\(k,s&gt;0\)</span>.</p>
@@ -5138,20 +5184,6 @@ shape parameter c.</p></li>
 </dd>
 </dl>
 <dl class="py method">
-<dt class="sig sig-object py" id="distributions.Weibull.Emv">
-<span class="sig-name descname"><span class="pre">Emv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#Weibull.Emv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.Weibull.Emv" title="Permalink to this definition">¶</a></dt>
-<dd><p>Expected value of the function min(x,v).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>v</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – values with respect to the minimum.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>expected value of the minimum function.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="distributions.Weibull.den">
 <span class="sig-name descname"><span class="pre">den</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#Weibull.den"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.Weibull.den" title="Permalink to this definition">¶</a></dt>
 <dd><p>It returns the denominator of the local moments discretization.</p>
@@ -5171,11 +5203,28 @@ shape parameter c.</p></li>
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="distributions.Weibull.lev">
+<span class="sig-name descname"><span class="pre">lev</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#Weibull.lev"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.Weibull.lev" title="Permalink to this definition">¶</a></dt>
+<dd><p>Limited expected value, i.e. expected value of the function min(x, v).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>v</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.float</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – values with respect to the minimum.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>expected value of the minimum function.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 <div class="section" id="id71">
 <h3>Parametrization<a class="headerlink" href="#id71" title="Permalink to this headline">¶</a></h3>
-<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.weibull_min.html">SciPy documentation</a> , see <span id="id73">Virtanen <em>et al.</em> [<a class="reference internal" href="#id85" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span>.</p>
+<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.weibull_min.html">SciPy documentation</a> , see <span id="id73">Virtanen <em>et al.</em> [<a class="reference internal" href="#id86" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span>.</p>
 <div class="math notranslate nohighlight" id="equation-weibull-min">
 <span class="eqno">(35)<a class="headerlink" href="#equation-weibull-min" title="Permalink to this equation">¶</a></span>\[f(x, c)=c x^{c-1} \exp \left(-x^{c}\right)\]</div>
 <p>Given <span class="math notranslate nohighlight">\(x&gt;0\)</span> , <span class="math notranslate nohighlight">\(c&gt;0\)</span>.</p>
@@ -5240,20 +5289,6 @@ shape parameter c.</p></li>
 </dd>
 </dl>
 <dl class="py method">
-<dt class="sig sig-object py" id="distributions.InvWeibull.Emv">
-<span class="sig-name descname"><span class="pre">Emv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#InvWeibull.Emv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.InvWeibull.Emv" title="Permalink to this definition">¶</a></dt>
-<dd><p>Expected value of the function min(x,v).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>v</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – values with respect to the minimum.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>expected value of the minimum function.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="distributions.InvWeibull.den">
 <span class="sig-name descname"><span class="pre">den</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#InvWeibull.den"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.InvWeibull.den" title="Permalink to this definition">¶</a></dt>
 <dd><p>It returns the denominator of the local moments discretization.</p>
@@ -5273,11 +5308,28 @@ shape parameter c.</p></li>
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="distributions.InvWeibull.lev">
+<span class="sig-name descname"><span class="pre">lev</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#InvWeibull.lev"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.InvWeibull.lev" title="Permalink to this definition">¶</a></dt>
+<dd><p>Limited expected value, i.e. expected value of the function min(x, v).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>v</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.float</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – values with respect to the minimum.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>expected value of the minimum function.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 <div class="section" id="id74">
 <h3>Parametrization<a class="headerlink" href="#id74" title="Permalink to this headline">¶</a></h3>
-<p>For a better explanation refer to <span id="id75">Virtanen <em>et al.</em> [<a class="reference internal" href="#id85" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span> <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.invweibull.html">documentation</a>.</p>
+<p>For a better explanation refer to <span id="id75">Virtanen <em>et al.</em> [<a class="reference internal" href="#id86" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span> <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.invweibull.html">documentation</a>.</p>
 <div class="math notranslate nohighlight" id="equation-invweibull">
 <span class="eqno">(36)<a class="headerlink" href="#equation-invweibull" title="Permalink to this equation">¶</a></span>\[f(x, c)=c x^{-c-1} \exp \left(-x^{-c}\right)\]</div>
 <p>Given <span class="math notranslate nohighlight">\(x&gt;0\)</span> , <span class="math notranslate nohighlight">\(c&gt;0\)</span>.</p>
@@ -5343,20 +5395,6 @@ shape parameter b.</p></li>
 </dd>
 </dl>
 <dl class="py method">
-<dt class="sig sig-object py" id="distributions.Beta.Emv">
-<span class="sig-name descname"><span class="pre">Emv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#Beta.Emv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.Beta.Emv" title="Permalink to this definition">¶</a></dt>
-<dd><p>Expected value of the function min(x,v).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>v</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – values with respect to the minimum.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>expected value of the minimum function.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="distributions.Beta.den">
 <span class="sig-name descname"><span class="pre">den</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#Beta.den"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.Beta.den" title="Permalink to this definition">¶</a></dt>
 <dd><p>It returns the denominator of the local moments discretization.</p>
@@ -5376,11 +5414,28 @@ shape parameter b.</p></li>
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="distributions.Beta.lev">
+<span class="sig-name descname"><span class="pre">lev</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#Beta.lev"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.Beta.lev" title="Permalink to this definition">¶</a></dt>
+<dd><p>Limited expected value, i.e. expected value of the function min(x, v).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>v</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.float</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – values with respect to the minimum.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>expected value of the minimum function.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 <div class="section" id="id76">
 <h3>Parametrization<a class="headerlink" href="#id76" title="Permalink to this headline">¶</a></h3>
-<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.beta.html">SciPy documentation</a>, <span id="id78">Virtanen <em>et al.</em> [<a class="reference internal" href="#id85" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span> .</p>
+<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.beta.html">SciPy documentation</a>, <span id="id78">Virtanen <em>et al.</em> [<a class="reference internal" href="#id86" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span> .</p>
 <div class="math notranslate nohighlight" id="equation-beta">
 <span class="eqno">(37)<a class="headerlink" href="#equation-beta" title="Permalink to this equation">¶</a></span>\[f(x, a, b)=\frac{\Gamma(a+b) x^{a-1}(1-x)^{b-1}}{\Gamma(a) \Gamma(b)}\]</div>
 <p>Given <span class="math notranslate nohighlight">\(0&lt;=x&lt;=1, a&gt;0, b&gt;0\)</span> , <span class="math notranslate nohighlight">\(\Gamma\)</span> is the gamma function.</p>
@@ -5420,29 +5475,364 @@ shape parameter b.</p></li>
 <a class="reference internal image-reference" href="_images/cdfBeta.png"><img alt="_images/cdfBeta.png" src="_images/cdfBeta.png" style="width: 400px;" /></a>
 </div>
 </div>
+<div class="section" id="genbeta">
+<h2><code class="docutils literal notranslate"><span class="pre">GenBeta</span></code><a class="headerlink" href="#genbeta" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="distributions.GenBeta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GenBeta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shape1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#GenBeta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.GenBeta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generalized Beta (GB) distribution, also refer to as Generalized Beta
+of the second kind, or the Generalized Beta Prime distribution.
+If X is a GB distributed r.v., its cumulative distribution function can
+be expressed as:</p>
+<p>Pr[X &lt;= x] = Pr[Y &lt;= (x/scale)^shape3], 0 &lt; x &lt; scale,</p>
+<p>where Y has a Beta distribution, with parameters shape1 and shape2.
+Refer to Appendix A of Klugman, Panjer &amp; Willmot, Loss Models, Wiley.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="distributions.GenBeta.cdf">
+<span class="sig-name descname"><span class="pre">cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#GenBeta.cdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.GenBeta.cdf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cumulative distribution function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – cumulative distribution function will be computed in x.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>cumulative distribution function will in x.</p>
+</dd>
+</dl>
+<p>:rtype:<code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="distributions.GenBeta.den">
+<span class="sig-name descname"><span class="pre">den</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#GenBeta.den"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.GenBeta.den" title="Permalink to this definition">¶</a></dt>
+<dd><p>It returns the denominator of the local moments discretization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>low</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower priority.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>denominator to compute the local moments discrete sequence.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="distributions.GenBeta.isf">
+<span class="sig-name descname"><span class="pre">isf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">q</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#GenBeta.isf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.GenBeta.isf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inverse survival function (inverse of sf).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>q</strong> – Inverse survival function computed in q.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>inverse sf</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="distributions.GenBeta.lev">
+<span class="sig-name descname"><span class="pre">lev</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#GenBeta.lev"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.GenBeta.lev" title="Permalink to this definition">¶</a></dt>
+<dd><p>Limited expected value, i.e. expected value of the function min(x, v).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>v</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.float</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – values with respect to the minimum.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>expected value of the minimum function.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="distributions.GenBeta.logcdf">
+<span class="sig-name descname"><span class="pre">logcdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#GenBeta.logcdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.GenBeta.logcdf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Natural logarithm of the cumulative distribution function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – natural logarithm of the cumulative density function computed in x.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>natural logarithm of the cumulative density function in x.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="distributions.GenBeta.logpdf">
+<span class="sig-name descname"><span class="pre">logpdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#GenBeta.logpdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.GenBeta.logpdf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Natural logarithm of the probability distribution function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – natural logarithm of the probability distribution function computed in x.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>natural logarithm of the probability distribution function computed in x.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="distributions.GenBeta.logsf">
+<span class="sig-name descname"><span class="pre">logsf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#GenBeta.logsf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.GenBeta.logsf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Natural logarithm of the survival function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – natural logarithm of the survival function computed in x.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>natural logarithm of the survival function in x</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="distributions.GenBeta.mean">
+<span class="sig-name descname"><span class="pre">mean</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#GenBeta.mean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.GenBeta.mean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mean of the distribution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>mean.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="distributions.GenBeta.median">
+<span class="sig-name descname"><span class="pre">median</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#GenBeta.median"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.GenBeta.median" title="Permalink to this definition">¶</a></dt>
+<dd><p>Median of the distribution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>median</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="distributions.GenBeta.moment">
+<span class="sig-name descname"><span class="pre">moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#GenBeta.moment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.GenBeta.moment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Non-central moment of order n.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>n</strong> – moment of order n</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>non-central moment of order n</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="distributions.GenBeta.pdf">
+<span class="sig-name descname"><span class="pre">pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#GenBeta.pdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.GenBeta.pdf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Probability density function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – quantile where probability density function is evaluated.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>probability density function in x.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="distributions.GenBeta.ppf">
+<span class="sig-name descname"><span class="pre">ppf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">q</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#GenBeta.ppf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.GenBeta.ppf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Percent point function, a.k.a. the quantile function, inverse of cumulative distribution function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>q</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – level at which the percent point function is evaluated.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>percent point function.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.int</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="distributions.GenBeta.rvs">
+<span class="sig-name descname"><span class="pre">rvs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#GenBeta.rvs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.GenBeta.rvs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Random variates.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>size</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – random variates sample size (default is 1).</p></li>
+<li><p><strong>random_state</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – random state for the random number generator.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Random variates.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="distributions.GenBeta.sf">
+<span class="sig-name descname"><span class="pre">sf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#GenBeta.sf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.GenBeta.sf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Survival function, 1 - cumulative distribution function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – survival function will be computed in x.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>survival function in x</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="distributions.GenBeta.stats">
+<span class="sig-name descname"><span class="pre">stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">moments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mv'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#GenBeta.stats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.GenBeta.stats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mean(‘m’), variance(‘v’), skew(‘s’), and/or kurtosis(‘k’).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>moments</strong> – moments to be returned.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>moments.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="distributions.GenBeta.std">
+<span class="sig-name descname"><span class="pre">std</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#GenBeta.std"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.GenBeta.std" title="Permalink to this definition">¶</a></dt>
+<dd><p>Standard deviation of the distribution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>standard deviation.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="distributions.GenBeta.var">
+<span class="sig-name descname"><span class="pre">var</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#GenBeta.var"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.GenBeta.var" title="Permalink to this definition">¶</a></dt>
+<dd><p>Variance of the distribution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>variance.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="id79">
+<h3>Parametrization<a class="headerlink" href="#id79" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight" id="equation-genbeta">
+<span class="eqno">(38)<a class="headerlink" href="#equation-genbeta" title="Permalink to this equation">¶</a></span>\[f(x)=\frac{\Gamma(shape_1+shape_2)}{\Gamma(shape_1) \Gamma(shape_2)}(\frac{x}{scale})^{shape_1 shape_3}\left(1-(\frac{x}{scale})^{shape_3}\right)^{shape_2-1} \frac{shape_3}{x}\]</div>
+<p>Given <span class="math notranslate nohighlight">\(0&lt;=x&lt;=scale, shape_1&gt;0, shape_2&gt;0\)</span> , <span class="math notranslate nohighlight">\(\Gamma\)</span> is the gamma function.</p>
+<p>Example code on the usage of the GenBeta class:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gemact</span> <span class="kn">import</span> <span class="n">distributions</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">shape1</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">shape2</span><span class="o">=</span><span class="mi">2</span>
+<span class="n">shape3</span><span class="o">=</span><span class="mi">3</span>
+<span class="n">scale</span><span class="o">=</span><span class="mi">4</span>
+
+<span class="n">dist</span><span class="o">=</span><span class="n">GenBeta</span><span class="p">(</span><span class="n">shape1</span><span class="o">=</span><span class="n">shape1</span><span class="p">,</span>
+             <span class="n">shape2</span><span class="o">=</span><span class="n">shape2</span><span class="p">,</span>
+             <span class="n">shape3</span><span class="o">=</span><span class="n">shape3</span><span class="p">,</span>
+             <span class="n">scale</span><span class="o">=</span><span class="n">scale</span><span class="p">)</span>
+
+<span class="n">seq</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">.001</span><span class="p">)</span>
+<span class="n">nsim</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mf">1e+05</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Theorical mean&#39;</span><span class="p">,</span><span class="n">dist</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Theorical variance&#39;</span><span class="p">,</span><span class="n">dist</span><span class="o">.</span><span class="n">var</span><span class="p">())</span>
+<span class="c1">#compare with simulations</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Simulated mean&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">nsim</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Simulated variance&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">nsim</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p>Then, use <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> library to print the pmf and the cdf of a GenBeta:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1">#pmf</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">nsim</span><span class="p">),</span>
+         <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+         <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Probability density function, ~GenBeta(shape1=1,shape2=2,shape3=3,scale=4)&#39;</span><span class="p">)</span>
+<span class="c1">#cdf</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mf">.001</span><span class="p">),</span><span class="n">dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mf">.001</span><span class="p">)))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Cumulative distribution function,  ~GenBeta(shape1=1,shape2=2,shape3=3,scale=4)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/pdfGenBeta.png"><img alt="_images/pdfGenBeta.png" src="_images/pdfGenBeta.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="_images/cdfGenBeta.png"><img alt="_images/cdfGenBeta.png" src="_images/cdfGenBeta.png" style="width: 400px;" /></a>
+</div>
+</div>
 </div>
 <div class="section" id="references">
 <h1>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h1>
-<p id="id79"><dl class="citation">
-<dt class="label" id="id81"><span class="brackets"><a class="fn-backref" href="#id9">AEP11</a></span></dt>
+<p id="id80"><dl class="citation">
+<dt class="label" id="id82"><span class="brackets"><a class="fn-backref" href="#id9">AEP11</a></span></dt>
 <dd><p>Philipp Arbenz, Paul Embrechts, and Giovanni Puccetti. The aep algorithm for the fast computation of the distribution of the sum of dependent random variables. <em>Bernoulli</em>, 17:562–591, 2011.</p>
 </dd>
-<dt class="label" id="id82"><span class="brackets"><a class="fn-backref" href="#id4">EF08</a></span></dt>
+<dt class="label" id="id83"><span class="brackets"><a class="fn-backref" href="#id4">EF08</a></span></dt>
 <dd><p>P. Embrechts and M. Frei. Panjer recursion versus fft for compound distributions. <em>Mathematical Methods of Operations Research</em>, 2008.</p>
 </dd>
-<dt class="label" id="id89"><span class="brackets"><a class="fn-backref" href="#id7">FLB99</a></span></dt>
+<dt class="label" id="id90"><span class="brackets"><a class="fn-backref" href="#id7">FLB99</a></span></dt>
 <dd><p>Wayne H. Fisher, Jeffrey T. Lange, and John Balcarek. Loss reserve testing: a report year approach. 1999.</p>
 </dd>
-<dt class="label" id="id86"><span class="brackets">KP19</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id3">2</a>,<a href="#id5">3</a>)</span></dt>
+<dt class="label" id="id87"><span class="brackets">KP19</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id3">2</a>,<a href="#id5">3</a>)</span></dt>
 <dd><p>P. Klugman and H.H. Panjer. <em>Loss models from data to decisions</em>. Wiley, SOA, 2019.</p>
 </dd>
-<dt class="label" id="id90"><span class="brackets"><a class="fn-backref" href="#id8">RC16</a></span></dt>
+<dt class="label" id="id91"><span class="brackets"><a class="fn-backref" href="#id8">RC16</a></span></dt>
 <dd><p>Alessandro Ricotta and Gian Paolo Clemente. An extension of collective risk model for stochastic claim reserving. 2016.</p>
 </dd>
-<dt class="label" id="id88"><span class="brackets"><a class="fn-backref" href="#id2">Sun91</a></span></dt>
+<dt class="label" id="id89"><span class="brackets"><a class="fn-backref" href="#id2">Sun91</a></span></dt>
 <dd><p>B. Sundt. On excess of loss reinsurance with reinstatements. <em>Insurance: Mathematics and Economics</em>, 1991.</p>
 </dd>
-<dt class="label" id="id85"><span class="brackets">VGO+20</span><span class="fn-backref">(<a href="#id11">1</a>,<a href="#id14">2</a>,<a href="#id17">3</a>,<a href="#id20">4</a>,<a href="#id47">5</a>,<a href="#id50">6</a>,<a href="#id52">7</a>,<a href="#id57">8</a>,<a href="#id62">9</a>,<a href="#id65">10</a>,<a href="#id70">11</a>,<a href="#id73">12</a>,<a href="#id75">13</a>,<a href="#id78">14</a>)</span></dt>
+<dt class="label" id="id86"><span class="brackets">VGO+20</span><span class="fn-backref">(<a href="#id11">1</a>,<a href="#id14">2</a>,<a href="#id17">3</a>,<a href="#id20">4</a>,<a href="#id47">5</a>,<a href="#id50">6</a>,<a href="#id52">7</a>,<a href="#id57">8</a>,<a href="#id62">9</a>,<a href="#id65">10</a>,<a href="#id70">11</a>,<a href="#id73">12</a>,<a href="#id75">13</a>,<a href="#id78">14</a>)</span></dt>
 <dd><p>Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. <em>Nature Methods</em>, 17:261–272, 2020. <a class="reference external" href="https://doi.org/10.1038/s41592-019-0686-2">doi:10.1038/s41592-019-0686-2</a>.</p>
 </dd>
 </dl>

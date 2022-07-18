@@ -90,11 +90,6 @@
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../introduction.html">
-   Introduction
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="../usage.html">
    Installation
   </a>
@@ -625,7 +620,7 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">u</span> <span class="o">==</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sv</span><span class="o">.</span><span class="n">Emv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">u</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">loc_</span><span class="p">)</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">sv</span><span class="o">.</span><span class="n">Emv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">u</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">loc_</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">sv</span><span class="o">.</span><span class="n">den</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">,</span><span class="n">loc</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">loc_</span><span class="p">))</span>
+            <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sv</span><span class="o">.</span><span class="n">lev</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">u</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">loc_</span><span class="p">)</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">sv</span><span class="o">.</span><span class="n">lev</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">u</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">loc_</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">sv</span><span class="o">.</span><span class="n">den</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">,</span><span class="n">loc</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">loc_</span><span class="p">))</span>
 
 
 <div class="viewcode-block" id="Severity.localMoments"><a class="viewcode-back" href="../api.html#lossmodel.Severity.localMoments">[docs]</a>    <span class="k">def</span> <span class="nf">localMoments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -637,10 +632,10 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">v_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__umhoverd</span><span class="p">()</span>
-        <span class="n">n</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sv</span><span class="o">.</span><span class="n">Emv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">d</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">h</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">loc_</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">sv</span><span class="o">.</span><span class="n">Emv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">d</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">loc_</span><span class="p">)</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sv</span><span class="o">.</span><span class="n">lev</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">d</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">h</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">loc_</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">sv</span><span class="o">.</span><span class="n">lev</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">d</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">loc_</span><span class="p">)</span>
         <span class="n">den</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">sv</span><span class="o">.</span><span class="n">den</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">,</span><span class="n">loc</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">loc_</span><span class="p">)</span>
-        <span class="n">nj</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sv</span><span class="o">.</span><span class="n">Emv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">d</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">loc_</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">sv</span><span class="o">.</span><span class="n">Emv</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">d</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">loc_</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">sv</span><span class="o">.</span><span class="n">Emv</span><span class="p">(</span>
+        <span class="n">nj</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sv</span><span class="o">.</span><span class="n">lev</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">d</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">loc_</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">sv</span><span class="o">.</span><span class="n">lev</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">d</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">loc_</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">sv</span><span class="o">.</span><span class="n">lev</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">d</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">loc_</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="p">)</span>
 
         <span class="c1">## keep the following two lines outside the if cycles</span>
@@ -1211,44 +1206,61 @@
 
 
 
+
+<span class="n">sdist</span> <span class="o">=</span> <span class="s1">&#39;genbeta&#39;</span>
+<span class="n">spar</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;shape1&#39;</span> <span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s1">&#39;shape2&#39;</span> <span class="p">:</span> <span class="mf">.2</span><span class="p">,</span>
+        <span class="s1">&#39;shape3&#39;</span> <span class="p">:</span> <span class="mf">.3</span><span class="p">,</span>
+        <span class="s1">&#39;scale&#39;</span> <span class="p">:</span> <span class="mf">1.2</span><span class="p">}</span>
+<span class="n">fdist</span><span class="o">=</span> <span class="s1">&#39;poisson&#39;</span>
+<span class="n">fpar</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;mu&#39;</span><span class="p">:</span><span class="mi">2</span><span class="p">}</span>
 <span class="c1">#</span>
-<span class="c1"># sdist = &#39;genbeta&#39;</span>
-<span class="c1"># spar = {&#39;shape1&#39; : 2,</span>
-<span class="c1">#         &#39;shape2&#39; : .2,</span>
-<span class="c1">#         &#39;shape3&#39; : .3,</span>
-<span class="c1">#         &#39;scale&#39; : 1.2}</span>
-<span class="c1"># fdist= &#39;poisson&#39;</span>
-<span class="c1"># fpar={&#39;mu&#39;:2}</span>
-<span class="c1">#</span>
-<span class="c1"># pties= Severity(sdist=sdist,</span>
-<span class="c1">#                 spar=spar,</span>
-<span class="c1">#                 h=.01,</span>
-<span class="c1">#                 m=int(1e+05)).massDispersal()</span>
-<span class="c1">#</span>
-<span class="c1"># pties= Severity(sdist=sdist,</span>
-<span class="c1">#                 spar=spar,</span>
-<span class="c1">#                 h=.01,</span>
-<span class="c1">#                 m=int(1e+06)).localMoments()</span>
+<span class="n">pties</span><span class="o">=</span> <span class="n">Severity</span><span class="p">(</span><span class="n">sdist</span><span class="o">=</span><span class="n">sdist</span><span class="p">,</span>
+                <span class="n">spar</span><span class="o">=</span><span class="n">spar</span><span class="p">,</span>
+                <span class="n">h</span><span class="o">=</span><span class="mf">.01</span><span class="p">,</span>
+                <span class="n">m</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mf">1e+05</span><span class="p">))</span><span class="o">.</span><span class="n">massDispersal</span><span class="p">()</span>
+
+<span class="n">pties</span><span class="o">=</span> <span class="n">Severity</span><span class="p">(</span><span class="n">sdist</span><span class="o">=</span><span class="n">sdist</span><span class="p">,</span>
+                <span class="n">spar</span><span class="o">=</span><span class="n">spar</span><span class="p">,</span>
+                <span class="n">h</span><span class="o">=</span><span class="mf">.01</span><span class="p">,</span>
+                <span class="n">m</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mf">1e+06</span><span class="p">))</span><span class="o">.</span><span class="n">localMoments</span><span class="p">()</span>
 <span class="c1">#</span>
 <span class="c1"># np.sum(.01*np.arange(0,int(1e+06))*pties[&#39;fj&#39;])</span>
 <span class="c1">#</span>
-<span class="c1"># lm_=LossModel(</span>
-<span class="c1">#     sdist=sdist,</span>
-<span class="c1">#     spar=spar,</span>
-<span class="c1">#     fdist=fdist,</span>
-<span class="c1">#     fpar=fpar,</span>
-<span class="c1">#     discretizationmethod=&#39;massdispersal&#39;,</span>
-<span class="c1">#     method=&#39;fft&#39;,</span>
-<span class="c1">#     m=int(1e+06),</span>
-<span class="c1">#     h=.01,</span>
-<span class="c1">#     n=int(5e+06)</span>
-<span class="c1"># )</span>
-<span class="c1">#</span>
-<span class="c1"># print(</span>
-<span class="c1">#     &#39;Aggregate cost mean: &#39;,</span>
-<span class="c1">#     lm_.empiricalmoments()</span>
-<span class="c1"># )</span>
+<span class="n">lm_</span><span class="o">=</span><span class="n">LossModel</span><span class="p">(</span>
+    <span class="n">sdist</span><span class="o">=</span><span class="n">sdist</span><span class="p">,</span>
+    <span class="n">spar</span><span class="o">=</span><span class="n">spar</span><span class="p">,</span>
+    <span class="n">fdist</span><span class="o">=</span><span class="n">fdist</span><span class="p">,</span>
+    <span class="n">fpar</span><span class="o">=</span><span class="n">fpar</span><span class="p">,</span>
+    <span class="n">discretizationmethod</span><span class="o">=</span><span class="s1">&#39;massdispersal&#39;</span><span class="p">,</span>
+    <span class="n">method</span><span class="o">=</span><span class="s1">&#39;fft&#39;</span><span class="p">,</span>
+    <span class="n">m</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mf">1e+06</span><span class="p">),</span>
+    <span class="n">h</span><span class="o">=</span><span class="mf">.01</span><span class="p">,</span>
+    <span class="n">n</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mf">5e+06</span><span class="p">)</span>
+<span class="p">)</span>
 
+<span class="nb">print</span><span class="p">(</span>
+    <span class="s1">&#39;Aggregate cost mean: &#39;</span><span class="p">,</span>
+    <span class="n">lm_</span><span class="o">.</span><span class="n">empiricalmoments</span><span class="p">()</span>
+<span class="p">)</span>
+
+
+<span class="n">lm_</span><span class="o">=</span><span class="n">LossModel</span><span class="p">(</span>
+    <span class="n">sdist</span><span class="o">=</span><span class="n">sdist</span><span class="p">,</span>
+    <span class="n">spar</span><span class="o">=</span><span class="n">spar</span><span class="p">,</span>
+    <span class="n">fdist</span><span class="o">=</span><span class="n">fdist</span><span class="p">,</span>
+    <span class="n">fpar</span><span class="o">=</span><span class="n">fpar</span><span class="p">,</span>
+    <span class="n">discretizationmethod</span><span class="o">=</span><span class="s1">&#39;localmoments&#39;</span><span class="p">,</span>
+    <span class="n">method</span><span class="o">=</span><span class="s1">&#39;fft&#39;</span><span class="p">,</span>
+    <span class="n">m</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mf">1e+06</span><span class="p">),</span>
+    <span class="n">h</span><span class="o">=</span><span class="mf">.01</span><span class="p">,</span>
+    <span class="n">n</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mf">5e+06</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span>
+    <span class="s1">&#39;Aggregate cost mean: &#39;</span><span class="p">,</span>
+    <span class="n">lm_</span><span class="o">.</span><span class="n">empiricalmoments</span><span class="p">()</span>
+<span class="p">)</span>
 </pre></div>
 
               </div>

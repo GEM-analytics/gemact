@@ -326,7 +326,9 @@ The following table summarizes the distribution supported by GemAct and Scipy.
 +--------------------------------------------------+-------------+--------+--------+
 |The Pareto IV Distribution.                       |  continuous |    v   |   v    |                           
 +--------------------------------------------------+-------------+--------+--------+
-|The Beta distribution.                            |continuous   |    v   |   v    |                           
+|The Beta distribution.                            |continuous   |    v   |   v    |
++--------------------------------------------------+-------------+--------+--------+
+|The Generalized Beta distribution.                |continuous   |    x   |   v    |
 +--------------------------------------------------+-------------+--------+--------+
 |The Poisson Distribution.                         | discrete    |    v   |   v    |                           
 +--------------------------------------------------+-------------+--------+--------+
@@ -1581,6 +1583,65 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a Beta::
   :width: 400
 
 
+``GenBeta``
+------------------
+
+.. autoclass:: distributions.GenBeta
+   :members:
+
+Parametrization
+~~~~~~~~~~~~~~~~~~~~
+
+
+.. math:: f(x)=\frac{\Gamma(shape_1+shape_2)}{\Gamma(shape_1) \Gamma(shape_2)}(\frac{x}{scale})^{shape_1 shape_3}\left(1-(\frac{x}{scale})^{shape_3}\right)^{shape_2-1} \frac{shape_3}{x}
+   :label: genbeta
+
+Given :math:`0<=x<=scale, shape_1>0, shape_2>0` , :math:`\Gamma` is the gamma function.
+
+Example code on the usage of the GenBeta class::
+
+    from gemact import distributions
+    import numpy as np
+
+    shape1=1
+    shape2=2
+    shape3=3
+    scale=4
+
+    dist=GenBeta(shape1=shape1,
+                 shape2=shape2,
+                 shape3=shape3,
+                 scale=scale)
+
+    seq=np.arange(0,1,.001)
+    nsim=int(1e+05)
+
+    print('Theorical mean',dist.mean())
+    print('Theorical variance',dist.var())
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+
+
+Then, use ``matplotlib`` library to print the pmf and the cdf of a GenBeta::
+
+    import matplotlib.pyplot as plt
+
+    #pmf
+    plt.hist(dist.rvs(nsim),
+             bins=100,
+             density=True)
+    plt.title('Probability density function, ~GenBeta(shape1=1,shape2=2,shape3=3,scale=4)')
+    #cdf
+    plt.plot(np.arange(-1,8,.001),dist.cdf(np.arange(-1,8,.001)))
+    plt.title('Cumulative distribution function,  ~GenBeta(shape1=1,shape2=2,shape3=3,scale=4)')
+
+
+.. image:: images/pdfGenBeta.png
+  :width: 400
+
+.. image:: images/cdfGenBeta.png
+  :width: 400
 
 
 References

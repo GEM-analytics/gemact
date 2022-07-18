@@ -5,9 +5,10 @@
 
 GEMAct 
 ==================================
+
 .. toctree::
    :caption: Table of Contents
-   
+
    introduction.rst
    usage.rst
    api.rst
