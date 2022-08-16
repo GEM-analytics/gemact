@@ -1252,113 +1252,143 @@
 <h2><code class="docutils literal notranslate"><span class="pre">LossModel</span></code><a class="headerlink" href="#lossmodel" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="lossmodel.LossModel">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LossModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nsim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tilt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">setseed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">42</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">discretizationmethod</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'localmoments'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alphaqs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lossmodel.html#LossModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lossmodel.LossModel" title="Permalink to this definition">¶</a></dt>
-<dd><p>It computes the collective risk model given the frequency and severity assumptions.
-It allows for (re)insurance pricing and risk modeling.</p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LossModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">aggr_loss_dist_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_sim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tilt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tilt_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_aggr_dist_nodes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aggr_n_deductible</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_reinst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reinst_loading</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha_qs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lossmodel.html#LossModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lossmodel.LossModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Aggregate loss model for (re)insurance pricing and risk modeling using a collective risk model framework.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>method</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – computational method for the aggregate cost. Available choices are Fast Fourier Transform (‘fft’), recursive method (‘recursive’) and Monte Carlo simulation (‘mcsimulation’).</p></li>
-<li><p><strong>nsim</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – number of simulations, MC.</p></li>
-<li><p><strong>tilt</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>) – whether tilting is present or not when computing the discrete Fourier transform.</p></li>
-<li><p><strong>setseed</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – seed parameter for MC.</p></li>
-<li><p><strong>discretizationmethod</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – discretization method for the severity. Default is ‘localmoments’.</p></li>
-<li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – number of final points in the aggregate cost sequence.</p></li>
-<li><p><strong>L</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – stop loss priority.</p></li>
-<li><p><strong>K</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – number of reinstatements layers.</p></li>
-<li><p><strong>c</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – reinstatements layers loading.</p></li>
-<li><p><strong>alphaqs</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – quota share.</p></li>
+<li><p><strong>aggr_loss_dist_method</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – computational method to approximate the aggregate loss distribution.
+One of Fast Fourier Transform (‘fft’),
+Panjer recursion (‘recursion’) and Monte Carlo simulation (‘mc’).</p></li>
+<li><p><strong>aggr_n_deductible</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – number of deductible (default = 1) in the stop loss (aggregate) deductible, also referred
+to as priority or retention.
+Namely, <code class="docutils literal notranslate"><span class="pre">aggr_n_deductible</span> <span class="pre">*</span> <span class="pre">deductible</span></code> =  aggregate priority.</p></li>
+<li><p><strong>n_reinst</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – number of reinstatements layers.
+Alternative parametrization to aggregate limit cover,
+i.e. aggregate cover = number of reinstatement * cover</p></li>
+<li><p><strong>reinst_loading</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – reinstatements layers loading.</p></li>
+<li><p><strong>alpha_qs</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – quota share ceded portion.</p></li>
+<li><p><strong>n_sim</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – number of simulations of Monte Carlo (mc) method for the aggregate loss distribution approximation.</p></li>
+<li><p><strong>tilt</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>) – whether tilting of FFT is present or not (default is 0).</p></li>
+<li><p><strong>tilt_value</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – tilting parameter value of FFT method for the aggregate loss distribution approximation.</p></li>
+<li><p><strong>random_state</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, optional) – random state for the random number generator in MC.</p></li>
+<li><p><strong>n_aggr_dist_nodes</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – number of nodes in the approximated aggregate loss distribution.</p></li>
+<li><p><strong>**kwargs</strong> – See below</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><em>fq_dist</em> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) –
+Frequency model distribution name.</p></li>
+<li><p><em>fq_par</em> (<code class="docutils literal notranslate"><span class="pre">dict</span></code>) –
+Frequency model distribution parameters.</p></li>
+<li><p><em>sev_dist</em> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) –
+Severity model distribution name.</p></li>
+<li><p><em>sev_par</em> (<code class="docutils literal notranslate"><span class="pre">dict</span></code>) –
+Severity model distribution parameters.</p></li>
+<li><p><em>sev_discr_method</em> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) –
+Severity discretization method (default value is ‘localmoments’).</p></li>
+<li><p><em>sev_discr_step</em> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) –
+Severity model discretization step.</p></li>
+<li><p><em>n_sev_discr_nodes</em> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) –
+Number of nodes of the discretized severity.</p></li>
+<li><p><em>deductible</em> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>) –
+Contract deductible, also referred to as retention or priority (default value is 0).</p></li>
+<li><p><em>cover</em> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>) –
+Contract cover (deductible plus cover is the contract upper priority or severity ‘exit point’).</p></li>
 </ul>
 </dd>
 </dl>
-<p>Inherits from Frequency:</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>fdist</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – name of the frequency distribution. See the distributions module for the discrete distributions supported in GEMAct.</p></li>
-<li><p><strong>fpar</strong> (<code class="docutils literal notranslate"><span class="pre">dict</span></code>) – parameters of the frequency distribution.</p></li>
-</ul>
-</dd>
-</dl>
-<p>Inherits from Severity:</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>h</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – severity discretization step.</p></li>
-<li><p><strong>m</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – number of points of the discrete severity.</p></li>
-<li><p><strong>d</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>) – deductible, it is set to zero when not present.</p></li>
-<li><p><strong>u</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>) – upper priority, individual.</p></li>
-<li><p><strong>sdist</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – name of the severity distribution. See the distribution module for the continuous distributions supported in GEMAct.</p></li>
-<li><p><strong>spar</strong> (<code class="docutils literal notranslate"><span class="pre">dict</span></code>) – parameters of the severity distribution.</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="lossmodel.LossModel.Pricing">
-<span class="sig-name descname"><span class="pre">Pricing</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lossmodel.html#LossModel.Pricing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lossmodel.LossModel.Pricing" title="Permalink to this definition">¶</a></dt>
-<dd><p>It allows to price contracts with proportional and non-proportional reinsurance.
-GemAct supports quota share, excess of loss, deductibles, stop-loss and reinstatements.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>treaty final pricing.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="lossmodel.LossModel.Reinstatements">
-<span class="sig-name descname"><span class="pre">Reinstatements</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lossmodel.html#LossModel.Reinstatements"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lossmodel.LossModel.Reinstatements" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reinstatements pricing.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>final reinstatements pricing.</p>
-</dd>
-<dt class="field-even">Rtupe</dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="lossmodel.LossModel.StopLoss">
-<span class="sig-name descname"><span class="pre">StopLoss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lossmodel.html#LossModel.StopLoss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lossmodel.LossModel.StopLoss" title="Permalink to this definition">¶</a></dt>
-<dd><p>It computes the expected value of a stop loss treaty with priority t.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>t</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – priority.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>expected value of the SL treaty.</p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py method">
 <dt class="sig sig-object py" id="lossmodel.LossModel.abp0g0">
 <span class="sig-name descname"><span class="pre">abp0g0</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lossmodel.LossModel.abp0g0" title="Permalink to this definition">¶</a></dt>
-<dd><p>It returns the parameters of the discrete distribution according to the (a,b,k) parametrization,
-the probability generating function computed in zero given the discrete severity fj,
+<dd><p>Parameters of the frequency distribution according to the (a, b, k) parametrization,
+the probability generating function computed in zero given the discrete severity probs,
 and the probability of the distribution in zero.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>fj</strong> (<em>numpy.ndarray</em>) – discretized severity distribution probabilities.</p>
+<dd class="field-odd"><p><strong>fj</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – discretized severity distribution probabilities.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a, b, probability in zero and aggregate cost probability in zero.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">tuple</span></code></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="lossmodel.LossModel.empiricalmoments">
-<span class="sig-name descname"><span class="pre">empiricalmoments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">central</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lossmodel.html#LossModel.empiricalmoments"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lossmodel.LossModel.empiricalmoments" title="Permalink to this definition">¶</a></dt>
-<dd><p>Empirical moments computed on the aggregate cost.</p>
+<dt class="sig sig-object py" id="lossmodel.LossModel.aggr_loss_cdf">
+<span class="sig-name descname"><span class="pre">aggr_loss_cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lossmodel.html#LossModel.aggr_loss_cdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lossmodel.LossModel.aggr_loss_cdf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Aggregate loss distribution cumulative distribution function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code> or <code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – quantile where the cumulative distribution function is evaluated.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>cumulative distribution function.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lossmodel.LossModel.aggr_loss_dist_calculate">
+<span class="sig-name descname"><span class="pre">aggr_loss_dist_calculate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">aggr_loss_dist_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_aggr_dist_nodes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_sim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tilt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tilt_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sev_discr_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lossmodel.html#LossModel.aggr_loss_dist_calculate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lossmodel.LossModel.aggr_loss_dist_calculate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Approximate the aggregate loss distribution.
+Calculate aggregate loss empirical pdf, empirical cdf and node values and
+Void method that updates aggr_loss_dist object property.
+If an argument is not provided (<code class="docutils literal notranslate"><span class="pre">None</span></code>) the respective property getter is called.
+If an argument is provided, the respective property setter is called.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>central</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>) – whether the moment is central or not.</p></li>
-<li><p><strong>order</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – order of the moment</p></li>
+<li><p><strong>aggr_loss_dist_method</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – computational method to approximate the aggregate loss distribution.
+One of Fast Fourier Transform (‘FFT’), Panjer recursion (‘Recursion’)
+and Monte Carlo simulation (‘mc’), optional (default ‘mc’).</p></li>
+<li><p><strong>n_aggr_dist_nodes</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – number of nodes in the approximated aggregate loss distribution.</p></li>
+<li><p><strong>n_sim</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – number of simulations of Monte Carlo (mc) method
+for the aggregate loss distribution approximation, optional (default is 10000).</p></li>
+<li><p><strong>random_state</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – random state for the random number generator in MC, optional.</p></li>
+<li><p><strong>sev_discr_method</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – severity discretization method, optional (default is ‘localmoments’).</p></li>
+<li><p><strong>tilt</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>) – whether tilting of FFT is present or not, optional (default is 0).</p></li>
+<li><p><strong>tilt_value</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – tilting parameter value of FFT method for the aggregate loss distribution approximation,
+optional.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lossmodel.LossModel.aggr_loss_mean">
+<span class="sig-name descname"><span class="pre">aggr_loss_mean</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lossmodel.html#LossModel.aggr_loss_mean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lossmodel.LossModel.aggr_loss_mean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mean of the aggregate loss.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>mean of the aggregate loss.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lossmodel.LossModel.aggr_loss_moment">
+<span class="sig-name descname"><span class="pre">aggr_loss_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">central</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lossmodel.html#LossModel.aggr_loss_moment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lossmodel.LossModel.aggr_loss_moment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Aggregate loss distribution moment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>central</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>) – True if the moment is central, False if the moment is raw.</p></li>
+<li><p><strong>order</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – order of the moment, optional (default is 1).</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>emprical moment.</p>
+<dd class="field-even"><p>approximated moment.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code></p>
@@ -1367,75 +1397,124 @@ and the probability of the distribution in zero.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="lossmodel.LossModel.localMoments">
-<span class="sig-name descname"><span class="pre">localMoments</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lossmodel.LossModel.localMoments" title="Permalink to this definition">¶</a></dt>
-<dd><p>Severity discretization according to the local moments method.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>discrete severity.</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="lossmodel.LossModel.lossModelComputation">
-<span class="sig-name descname"><span class="pre">lossModelComputation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lossmodel.html#LossModel.lossModelComputation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lossmodel.LossModel.lossModelComputation" title="Permalink to this definition">¶</a></dt>
-<dd><p>It returns the aggregate cost computed with the proper method.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>aggregate cost empirical pdf, aggregate cost empirical cdf,aggregate cost values sequence</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">dict</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="lossmodel.LossModel.massDispersal">
-<span class="sig-name descname"><span class="pre">massDispersal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lossmodel.LossModel.massDispersal" title="Permalink to this definition">¶</a></dt>
-<dd><p>Severity discretization according to the mass dispersal method.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>discrete severity</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="lossmodel.LossModel.plot">
-<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quantiles</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[0.05,</span> <span class="pre">0.5,</span> <span class="pre">0.995]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lossmodel.html#LossModel.plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lossmodel.LossModel.plot" title="Permalink to this definition">¶</a></dt>
-<dd><p>Plot of the aggregate cost empirical cdf and the aggregate cost empirical pdf.
-Quantiles are added to both plots.</p>
+<dt class="sig sig-object py" id="lossmodel.LossModel.aggr_loss_ppf">
+<span class="sig-name descname"><span class="pre">aggr_loss_ppf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">q</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lossmodel.html#LossModel.aggr_loss_ppf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lossmodel.LossModel.aggr_loss_ppf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Aggregate loss distribution percent point function, a.k.a. the quantile function,
+inverse of the cumulative distribution function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>quantiles</strong> – probabilities in which to compute the quantiles.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>cdf and pdf plots.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="lossmodel.LossModel.ppf">
-<span class="sig-name descname"><span class="pre">ppf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">probs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lossmodel.html#LossModel.ppf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lossmodel.LossModel.ppf" title="Permalink to this definition">¶</a></dt>
-<dd><p>Quantiles of the aggregate cost distribution computed in probs.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>probs</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – vector of probabilities.</p>
+<dd class="field-odd"><p><strong>q</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – vector of probabilities.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>vector of quantiles.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lossmodel.LossModel.aggr_loss_rvs">
+<span class="sig-name descname"><span class="pre">aggr_loss_rvs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lossmodel.html#LossModel.aggr_loss_rvs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lossmodel.LossModel.aggr_loss_rvs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Random variates generator function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>size</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – random variates sample size, optional (default is 1).</p></li>
+<li><p><strong>random_state</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – random state for the random number generator, optional (no default).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>random variates.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.int</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lossmodel.LossModel.aggr_loss_skewness">
+<span class="sig-name descname"><span class="pre">aggr_loss_skewness</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lossmodel.html#LossModel.aggr_loss_skewness"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lossmodel.LossModel.aggr_loss_skewness" title="Permalink to this definition">¶</a></dt>
+<dd><p>Skewness of the aggregate loss.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>skewness of the aggregate loss.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lossmodel.LossModel.aggr_loss_std">
+<span class="sig-name descname"><span class="pre">aggr_loss_std</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lossmodel.html#LossModel.aggr_loss_std"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lossmodel.LossModel.aggr_loss_std" title="Permalink to this definition">¶</a></dt>
+<dd><p>Standard deviation of the aggregate loss.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>standard deviation of the aggregate loss.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lossmodel.LossModel.pricing">
+<span class="sig-name descname"><span class="pre">pricing</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lossmodel.html#LossModel.pricing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lossmodel.LossModel.pricing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Actuarial pricing (also referred to as costing) for proportional and non-proportional reinsurance contracts,
+such as quota share, excess-of-loss, excess-of-loss with reinstatements, stop loss.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Void</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lossmodel.LossModel.print_aggr_loss_specs">
+<span class="sig-name descname"><span class="pre">print_aggr_loss_specs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lossmodel.html#LossModel.print_aggr_loss_specs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lossmodel.LossModel.print_aggr_loss_specs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print aggregate loss distribution approximation specifications.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Void</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lossmodel.LossModel.print_contract_specs">
+<span class="sig-name descname"><span class="pre">print_contract_specs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lossmodel.html#LossModel.print_contract_specs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lossmodel.LossModel.print_contract_specs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print contract specifications.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Void</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lossmodel.LossModel.severity_discretization">
+<span class="sig-name descname"><span class="pre">severity_discretization</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lossmodel.LossModel.severity_discretization" title="Permalink to this definition">¶</a></dt>
+<dd><p>Severity discretization according to the severity discretization method selected by the user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>discrete severity, nodes sequence and discrete probabilities</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">dict</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1553,59 +1632,6 @@ Quantiles are added to both plots.</p>
 </div>
 <div class="section" id="severity">
 <h2><code class="docutils literal notranslate"><span class="pre">Severity</span></code><a class="headerlink" href="#severity" title="Permalink to this headline">¶</a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="lossmodel.Severity">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Severity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">h</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lossmodel.html#Severity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lossmodel.Severity" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes the severity distribution of the underlying collective risk model.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>h</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – severity discretization step.</p></li>
-<li><p><strong>m</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – number of points of the discrete severity.</p></li>
-<li><p><strong>d</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>) – deductible, it is set to zero when not present.</p></li>
-<li><p><strong>u</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>) – upper priority, individual.</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
-</ul>
-</dd>
-<dt class="field-even">Keyword Arguments</dt>
-<dd class="field-even"><ul class="simple">
-<li><p><em>sdist</em> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) –
-Name of the severity distribution. See the distribution module for the continuous distributions supported in GEMAct.</p></li>
-<li><p><em>spar</em> (<code class="docutils literal notranslate"><span class="pre">dict</span></code>) –
-parameters of the severity distribution.</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="lossmodel.Severity.localMoments">
-<span class="sig-name descname"><span class="pre">localMoments</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lossmodel.html#Severity.localMoments"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lossmodel.Severity.localMoments" title="Permalink to this definition">¶</a></dt>
-<dd><p>Severity discretization according to the local moments method.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>discrete severity.</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="lossmodel.Severity.massDispersal">
-<span class="sig-name descname"><span class="pre">massDispersal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lossmodel.html#Severity.massDispersal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lossmodel.Severity.massDispersal" title="Permalink to this definition">¶</a></dt>
-<dd><p>Severity discretization according to the mass dispersal method.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>discrete severity</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
 <div class="section" id="severity-discretization">
 <h3>Severity discretization<a class="headerlink" href="#severity-discretization" title="Permalink to this headline">¶</a></h3>
 <p>In order to pass from a continuous distribution to an arithmetic distribution, it is important to preserve the distribution properties either locally or globally. Given a span <span class="math notranslate nohighlight">\(h\)</span> and <span class="math notranslate nohighlight">\(M\)</span> the last available point, in <span id="id5">Klugman and Panjer [<a class="reference internal" href="#id87" title="P. Klugman and H.H. Panjer. Loss models from data to decisions. Wiley, SOA, 2019.">KP19</a>]</span> there are two available solutions.</p>
@@ -1665,10 +1691,10 @@ parameters of the severity distribution.</p></li>
 <span id="lossreserve"></span><h2><code class="docutils literal notranslate"><span class="pre">LossReserve</span></code><a class="headerlink" href="#module-lossreserve" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="lossreserve.LossReserve">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LossReserve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tail</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">claims_inflation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_alphas</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_ss</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reserving_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'fisherlange'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ntr_sim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mixingfpar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">czj</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">setseed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">42</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cumulatives_tr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mixingspar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lossreserve.html#LossReserve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lossreserve.LossReserve" title="Permalink to this definition">¶</a></dt>
-<dd><p>Class to compute the loss reserve. The available models are the deterministic Fisher-Lange and the collective risk model.
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LossReserve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tail</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">claims_inflation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_alphas</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_ss</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reserving_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'fisher_lange'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ntr_sim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mixing_fq_par</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">czj</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">42</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cumulative_tr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mixing_sev_par</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lossreserve.html#LossReserve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lossreserve.LossReserve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Claims reserving. The available reserving models are the deterministic Fisher-Lange and the collective risk model.
 Input company data must be <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> data on numbers and payments must be in triangular form:
-two dimensional <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> with shape (I,J) with I=J.</p>
+two-dimensional <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> with shape (I,J) with I=J.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -1681,9 +1707,9 @@ J dimensional. In case no tail is present it must be J-1 dimensional.</p></li>
 reserving method. When a tail estimate is required, it must be J dimensional.
 In case no tail is present it must be J-1 dimensional.</p></li>
 <li><p><strong>ntr_sim</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – Number of simulated triangles in the c.r.m reserving method.</p></li>
-<li><p><strong>setseed</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – Simulation seed to make the c.r.m reserving method results reproducible.</p></li>
-<li><p><strong>mixingfpar</strong> (<code class="docutils literal notranslate"><span class="pre">dict</span></code>) – Mixing frequency parameters.</p></li>
-<li><p><strong>mixingspar</strong> (<code class="docutils literal notranslate"><span class="pre">dict</span></code>) – Mixing severity parameters.</p></li>
+<li><p><strong>set_seed</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – Simulation seed to make the c.r.m reserving method results reproducible.</p></li>
+<li><p><strong>mixing_fq_par</strong> (<code class="docutils literal notranslate"><span class="pre">dict</span></code>) – Mixing frequency parameters.</p></li>
+<li><p><strong>mixing_sev_par</strong> (<code class="docutils literal notranslate"><span class="pre">dict</span></code>) – Mixing severity parameters.</p></li>
 <li><p><strong>custom_alphas</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – optional, custom values for the alpha parameters.</p></li>
 <li><p><strong>custom_ss</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – optional, custom values for the settlement speed.</p></li>
 <li><p><strong>**kwargs</strong> – See below</p></li>
@@ -1692,12 +1718,12 @@ In case no tail is present it must be J-1 dimensional.</p></li>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
 <li><dl class="simple">
-<dt><em>ip_tr</em> = (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) –</dt><dd><p>Incremental payments triangle</p>
+<dt><em>ip_tr</em> = (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) –</dt><dd><p>Incremental payments’ triangle</p>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><em>cumulatives_tr</em> = (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) –</dt><dd><p>Cumulative payments triangle</p>
+<dt><em>cumulative_tr</em> = (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) –</dt><dd><p>Cumulative payments’ triangle</p>
 </dd>
 </dl>
 </li>
@@ -1720,30 +1746,34 @@ In case no tail is present it must be J-1 dimensional.</p></li>
 </dd>
 </dl>
 <dl class="py method">
-<dt class="sig sig-object py" id="lossreserve.LossReserve.AlphaPlot">
-<span class="sig-name descname"><span class="pre">AlphaPlot</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lossreserve.html#LossReserve.AlphaPlot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lossreserve.LossReserve.AlphaPlot" title="Permalink to this definition">¶</a></dt>
-<dd><p>It plots the Fisher-Lange alpha.</p>
+<dt class="sig sig-object py" id="lossreserve.LossReserve.alpha_plot">
+<span class="sig-name descname"><span class="pre">alpha_plot</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lossreserve.html#LossReserve.alpha_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lossreserve.LossReserve.alpha_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the Fisher-Lange alpha.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="lossreserve.LossReserve.AverageCostPlot">
-<span class="sig-name descname"><span class="pre">AverageCostPlot</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lossreserve.html#LossReserve.AverageCostPlot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lossreserve.LossReserve.AverageCostPlot" title="Permalink to this definition">¶</a></dt>
-<dd><p>It plots the mean average cost for each development year.</p>
+<dt class="sig sig-object py" id="lossreserve.LossReserve.average_cost_plot">
+<span class="sig-name descname"><span class="pre">average_cost_plot</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lossreserve.html#LossReserve.average_cost_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lossreserve.LossReserve.average_cost_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the mean average cost for each development year.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="lossreserve.LossReserve.SSPlot">
-<span class="sig-name descname"><span class="pre">SSPlot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lossreserve.html#LossReserve.SSPlot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lossreserve.LossReserve.SSPlot" title="Permalink to this definition">¶</a></dt>
-<dd><p>It plots the settlement speed vector for each accident year.
-:param <a href="#id92"><span class="problematic" id="id93">start_</span></a>: starting accident year from which to plot.
-:type <a href="#id94"><span class="problematic" id="id95">start_</span></a>: <code class="docutils literal notranslate"><span class="pre">int</span></code></p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="lossreserve.LossReserve.claimsreserving">
-<span class="sig-name descname"><span class="pre">claimsreserving</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lossreserve.html#LossReserve.claimsreserving"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lossreserve.LossReserve.claimsreserving" title="Permalink to this definition">¶</a></dt>
-<dd><p>Table with claims reserve results. When the stochastic reserve according to the collective risk model is computed the results
+<dt class="sig sig-object py" id="lossreserve.LossReserve.claims_reserving">
+<span class="sig-name descname"><span class="pre">claims_reserving</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lossreserve.html#LossReserve.claims_reserving"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lossreserve.LossReserve.claims_reserving" title="Permalink to this definition">¶</a></dt>
+<dd><p>Table with claims reserve results.
+When the stochastic reserve according to the collective risk model is computed the results
 are compared with the Fisher-Lange.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lossreserve.LossReserve.ss_plot">
+<span class="sig-name descname"><span class="pre">ss_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lossreserve.html#LossReserve.ss_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lossreserve.LossReserve.ss_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the settlement speed vector for each accident year.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>start</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – starting accident year from which to plot.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -1800,6 +1830,25 @@ are compared with the Fisher-Lange.</p>
 </div>
 <div class="section" id="lossaggregation">
 <h2><code class="docutils literal notranslate"><span class="pre">LossAggregation</span></code><a class="headerlink" href="#lossaggregation" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="lossaggregation.LossAggregation">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LossAggregation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lossaggregation.html#LossAggregation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lossaggregation.LossAggregation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class representing the sum of random variables
+with a dependence structure specified by a copula and a set of given marginals.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>copula</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – Name of the copula that describes the dependence structure.</p></li>
+<li><p><strong>copula_par</strong> (<code class="docutils literal notranslate"><span class="pre">dict</span></code>) – Parameters of the copula.</p></li>
+<li><p><strong>margins</strong> (<code class="docutils literal notranslate"><span class="pre">list</span></code>) – List of the marginal distributions.</p></li>
+<li><p><strong>margins_pars</strong> (<code class="docutils literal notranslate"><span class="pre">list</span></code>) – List of the marginal distributions parameters. It must be a list of dictionaries.</p></li>
+<li><p><strong>random_state</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – random state for the random number generator in MC.</p></li>
+<li><p><strong>sample_size</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – number of simulations of Monte Carlo (mc) method.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
 <div class="section" id="risks-aggregation">
 <h3>Risks aggregation<a class="headerlink" href="#risks-aggregation" title="Permalink to this headline">¶</a></h3>
 <div class="math notranslate nohighlight" id="equation-pty">
@@ -1814,21 +1863,25 @@ are compared with the Fisher-Lange.</p>
 </div>
 <div class="section" id="id10">
 <h3>Examples<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
-<p>Example code under a gumbel assumption:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">la</span><span class="o">=</span><span class="n">gemact</span><span class="o">.</span><span class="n">LossAggregation</span><span class="p">(</span><span class="n">s_la</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-                  <span class="n">n_la</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
-                  <span class="n">m1</span><span class="o">=</span><span class="s1">&#39;genpareto&#39;</span><span class="p">,</span>
-                  <span class="n">m1par</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;loc&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
-                        <span class="s1">&#39;scale&#39;</span><span class="p">:</span><span class="mi">1</span><span class="o">/</span><span class="mf">.9</span><span class="p">,</span>
-                        <span class="s1">&#39;c&#39;</span><span class="p">:</span><span class="mi">1</span><span class="o">/</span><span class="mf">.9</span><span class="p">},</span>
-                  <span class="n">m2</span><span class="o">=</span><span class="s1">&#39;genpareto&#39;</span><span class="p">,</span>
-                  <span class="n">m2par</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;loc&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
-                        <span class="s1">&#39;scale&#39;</span><span class="p">:</span><span class="mi">1</span><span class="o">/</span><span class="mf">1.8</span><span class="p">,</span>
-                        <span class="s1">&#39;c&#39;</span><span class="p">:</span><span class="mi">1</span><span class="o">/</span><span class="mf">1.8</span><span class="p">},</span>
-                  <span class="n">copdist</span><span class="o">=</span><span class="s1">&#39;gumbel&#39;</span><span class="p">,</span>
-                  <span class="n">coppar</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="mf">1.2</span><span class="p">})</span>
+<p>Example code under a clayton assumption:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">la</span><span class="o">=</span><span class="n">gemact</span><span class="o">.</span><span class="n">LossAggregation</span><span class="p">(</span>
+                <span class="n">margins</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;genpareto&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;genpareto&#39;</span><span class="p">],</span>
+                <span class="n">margins_pars</span><span class="o">=</span><span class="p">[</span>
+                    <span class="p">{</span><span class="s1">&#39;loc&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                     <span class="s1">&#39;scale&#39;</span><span class="p">:</span><span class="mi">1</span><span class="o">/</span><span class="mf">.9</span><span class="p">,</span>
+                     <span class="s1">&#39;c&#39;</span><span class="p">:</span><span class="mi">1</span><span class="o">/</span><span class="mf">.9</span><span class="p">},</span>
+                     <span class="p">{</span><span class="s1">&#39;loc&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                       <span class="s1">&#39;scale&#39;</span><span class="p">:</span><span class="mi">1</span><span class="o">/</span><span class="mf">1.8</span><span class="p">,</span>
+                       <span class="s1">&#39;c&#39;</span><span class="p">:</span><span class="mi">1</span><span class="o">/</span><span class="mf">1.8</span><span class="p">}</span>
+                       <span class="p">],</span>
+                <span class="n">copula</span><span class="o">=</span><span class="s1">&#39;clayton&#39;</span><span class="p">,</span>
+                <span class="n">copula_par</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="mf">1.2</span><span class="p">,</span>
+                            <span class="s1">&#39;dim&#39;</span><span class="p">:</span><span class="mi">2</span><span class="p">})</span>
 <span class="c1">#output is kept in the out attribute</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">la</span><span class="o">.</span><span class="n">out</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;cdf via AEP algorithm: </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">la</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                                      <span class="n">n_iter</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
+                                      <span class="n">method</span><span class="o">=</span><span class="s1">&#39;aep&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -2024,6 +2077,30 @@ Poisson distribution parameter mu (rate).</p></li>
 </ul>
 </dd>
 </dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="distributions.Poisson.a">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">a</span></span><a class="headerlink" href="#distributions.Poisson.a" title="Permalink to this definition">¶</a></dt>
+<dd><p>Void property to be overridden</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="distributions.Poisson.b">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">b</span></span><a class="headerlink" href="#distributions.Poisson.b" title="Permalink to this definition">¶</a></dt>
+<dd><p>Void property to be overridden</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="distributions.Poisson.dist">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dist</span></span><a class="headerlink" href="#distributions.Poisson.dist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Void property to be overridden</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="distributions.Poisson.p0">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">p0</span></span><a class="headerlink" href="#distributions.Poisson.p0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Void property to be overridden</p>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="distributions.Poisson.par_franchise_adjuster">
 <span class="sig-name descname"><span class="pre">par_franchise_adjuster</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nu</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#Poisson.par_franchise_adjuster"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.Poisson.par_franchise_adjuster" title="Permalink to this definition">¶</a></dt>
@@ -2132,6 +2209,30 @@ Probability of a success, parameter of the binomial distribution.</p></li>
 </ul>
 </dd>
 </dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="distributions.Binom.a">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">a</span></span><a class="headerlink" href="#distributions.Binom.a" title="Permalink to this definition">¶</a></dt>
+<dd><p>Void property to be overridden</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="distributions.Binom.b">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">b</span></span><a class="headerlink" href="#distributions.Binom.b" title="Permalink to this definition">¶</a></dt>
+<dd><p>Void property to be overridden</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="distributions.Binom.dist">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dist</span></span><a class="headerlink" href="#distributions.Binom.dist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Void property to be overridden</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="distributions.Binom.p0">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">p0</span></span><a class="headerlink" href="#distributions.Binom.p0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Void property to be overridden</p>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="distributions.Binom.par_franchise_adjuster">
 <span class="sig-name descname"><span class="pre">par_franchise_adjuster</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nu</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#Binom.par_franchise_adjuster"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.Binom.par_franchise_adjuster" title="Permalink to this definition">¶</a></dt>
@@ -2242,6 +2343,30 @@ Probability parameter of the geometric distribution.</p></li>
 </ul>
 </dd>
 </dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="distributions.Geom.a">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">a</span></span><a class="headerlink" href="#distributions.Geom.a" title="Permalink to this definition">¶</a></dt>
+<dd><p>Void property to be overridden</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="distributions.Geom.b">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">b</span></span><a class="headerlink" href="#distributions.Geom.b" title="Permalink to this definition">¶</a></dt>
+<dd><p>Void property to be overridden</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="distributions.Geom.dist">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dist</span></span><a class="headerlink" href="#distributions.Geom.dist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Void property to be overridden</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="distributions.Geom.p0">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">p0</span></span><a class="headerlink" href="#distributions.Geom.p0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Void property to be overridden</p>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="distributions.Geom.par_franchise_adjuster">
 <span class="sig-name descname"><span class="pre">par_franchise_adjuster</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nu</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#Geom.par_franchise_adjuster"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.Geom.par_franchise_adjuster" title="Permalink to this definition">¶</a></dt>
@@ -2350,6 +2475,30 @@ Probability parameter of the negative binomial distribution.</p></li>
 </ul>
 </dd>
 </dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="distributions.NegBinom.a">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">a</span></span><a class="headerlink" href="#distributions.NegBinom.a" title="Permalink to this definition">¶</a></dt>
+<dd><p>Void property to be overridden</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="distributions.NegBinom.b">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">b</span></span><a class="headerlink" href="#distributions.NegBinom.b" title="Permalink to this definition">¶</a></dt>
+<dd><p>Void property to be overridden</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="distributions.NegBinom.dist">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dist</span></span><a class="headerlink" href="#distributions.NegBinom.dist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Void property to be overridden</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="distributions.NegBinom.p0">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">p0</span></span><a class="headerlink" href="#distributions.NegBinom.p0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Void property to be overridden</p>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="distributions.NegBinom.par_franchise_adjuster">
 <span class="sig-name descname"><span class="pre">par_franchise_adjuster</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nu</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#NegBinom.par_franchise_adjuster"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.NegBinom.par_franchise_adjuster" title="Permalink to this definition">¶</a></dt>
@@ -2496,7 +2645,7 @@ Zero-truncated Poisson distribution parameter mu (rate).</p></li>
 <dd><p>Natural logarithm of the cumulative distribution function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>x</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – quantile where log of the cumulative density function is evaluated.</p>
+<dd class="field-odd"><p><strong>x</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – quantile where log of the cumulative distribution function is evaluated.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>natural logarithm of the cumulative distribution function.</p>
@@ -2719,7 +2868,7 @@ Zero-modified Poisson mixing parameter. Resulting probability mass in zero.</p><
 <dd><p>Natural logarithm of the cumulative distribution function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>x</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – quantile where log of the cumulative density function is evaluated.</p>
+<dd class="field-odd"><p><strong>x</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – quantile where log of the cumulative distribution function is evaluated.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>natural logarithm of the cumulative distribution function.</p>
@@ -2939,7 +3088,7 @@ Zero-truncated binomial distribution probability parameter p.</p></li>
 <dd><p>Natural logarithm of the cumulative distribution function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>x</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – quantile where log of the cumulative density function is evaluated.</p>
+<dd class="field-odd"><p><strong>x</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – quantile where log of the cumulative distribution function is evaluated.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>natural logarithm of the cumulative distribution function.</p>
@@ -3164,7 +3313,7 @@ Zero-modified binomial mixing parameter.</p></li>
 <dd><p>Natural lograithm of the cumulative distribution function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>x</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – quantile where log of the cumulative density function is evaluated.</p>
+<dd class="field-odd"><p><strong>x</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – quantile where log of the cumulative distribution function is evaluated.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>natural logarithm of the cumulative distribution function.</p>
@@ -3383,7 +3532,7 @@ Zero-truncated geometric distribution probability parameter p.</p></li>
 <dd><p>Natural logarithm of the cumulative distribution function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>x</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – quantile where log of the cumulative density function is evaluated.</p>
+<dd class="field-odd"><p><strong>x</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – quantile where log of the cumulative distribution function is evaluated.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>natural logarithm of the cumulative distribution function.</p>
@@ -3647,7 +3796,7 @@ Zero-truncated negative binomial distribution probability parameter p.</p></li>
 <dd><p>Natural logarithm of the cumulative distribution function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>x</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – quantile where log of the cumulative density function is evaluated.</p>
+<dd class="field-odd"><p><strong>x</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – quantile where log of the cumulative distribution function is evaluated.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>natural logarithm of the cumulative distribution function.</p>
@@ -3867,7 +4016,7 @@ Zero-truncated negative binomial distribution probability parameter p.</p></li>
 <dd><p>Natural logarithm of the cumulative distribution function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>x</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – quantile where log of the cumulative density function is evaluated.</p>
+<dd class="field-odd"><p><strong>x</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – quantile where log of the cumulative distribution function is evaluated.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>natural logarithm of the cumulative distribution function.</p>
@@ -4039,7 +4188,7 @@ ZM discrete logarithmic mixing parameter.</p></li>
 <dd><p>Natural logarithm of the cumulative distribution function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>x</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – quantile where log of the cumulative density function is evaluated.</p>
+<dd class="field-odd"><p><strong>x</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – quantile where log of the cumulative distribution function is evaluated.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>natural logarithm of the cumulative distribution function.</p>
@@ -4210,6 +4359,12 @@ shape parameter a.</p></li>
 </dl>
 </dd></dl>
 
+<dl class="py property">
+<dt class="sig sig-object py" id="distributions.Gamma.dist">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dist</span></span><a class="headerlink" href="#distributions.Gamma.dist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Void property to be overridden</p>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="distributions.Gamma.lev">
 <span class="sig-name descname"><span class="pre">lev</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#Gamma.lev"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.Gamma.lev" title="Permalink to this definition">¶</a></dt>
@@ -4320,6 +4475,12 @@ scipy reference distribution: <code class="docutils literal notranslate"><span c
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="distributions.Exponential.dist">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dist</span></span><a class="headerlink" href="#distributions.Exponential.dist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Void property to be overridden</p>
 </dd></dl>
 
 <dl class="py method">
@@ -4616,6 +4777,12 @@ shape parameter mu.</p></li>
 </dl>
 </dd></dl>
 
+<dl class="py property">
+<dt class="sig sig-object py" id="distributions.InvGauss.dist">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dist</span></span><a class="headerlink" href="#distributions.InvGauss.dist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Void property to be overridden</p>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="distributions.InvGauss.lev">
 <span class="sig-name descname"><span class="pre">lev</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#InvGauss.lev"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.InvGauss.lev" title="Permalink to this definition">¶</a></dt>
@@ -4685,6 +4852,12 @@ shape parameter a.</p></li>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="distributions.InvGamma.dist">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dist</span></span><a class="headerlink" href="#distributions.InvGamma.dist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Void property to be overridden</p>
 </dd></dl>
 
 <dl class="py method">
@@ -4763,6 +4936,12 @@ shape parameter c.</p></li>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="distributions.GenPareto.dist">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dist</span></span><a class="headerlink" href="#distributions.GenPareto.dist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Void property to be overridden</p>
 </dd></dl>
 
 <dl class="py method">
@@ -4878,6 +5057,12 @@ shape parameter s.</p></li>
 </dl>
 </dd></dl>
 
+<dl class="py property">
+<dt class="sig sig-object py" id="distributions.Lognormal.dist">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dist</span></span><a class="headerlink" href="#distributions.Lognormal.dist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Void property to be overridden</p>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="distributions.Lognormal.lev">
 <span class="sig-name descname"><span class="pre">lev</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#Lognormal.lev"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.Lognormal.lev" title="Permalink to this definition">¶</a></dt>
@@ -4983,6 +5168,12 @@ shape parameter d.</p></li>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="distributions.Burr12.dist">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dist</span></span><a class="headerlink" href="#distributions.Burr12.dist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Void property to be overridden</p>
 </dd></dl>
 
 <dl class="py method">
@@ -5096,6 +5287,12 @@ shape parameter s.</p></li>
 </dl>
 </dd></dl>
 
+<dl class="py property">
+<dt class="sig sig-object py" id="distributions.Dagum.dist">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dist</span></span><a class="headerlink" href="#distributions.Dagum.dist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Void property to be overridden</p>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="distributions.Dagum.lev">
 <span class="sig-name descname"><span class="pre">lev</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#Dagum.lev"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.Dagum.lev" title="Permalink to this definition">¶</a></dt>
@@ -5203,6 +5400,12 @@ shape parameter c.</p></li>
 </dl>
 </dd></dl>
 
+<dl class="py property">
+<dt class="sig sig-object py" id="distributions.Weibull.dist">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dist</span></span><a class="headerlink" href="#distributions.Weibull.dist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Void property to be overridden</p>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="distributions.Weibull.lev">
 <span class="sig-name descname"><span class="pre">lev</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#Weibull.lev"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.Weibull.lev" title="Permalink to this definition">¶</a></dt>
@@ -5306,6 +5509,12 @@ shape parameter c.</p></li>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="distributions.InvWeibull.dist">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dist</span></span><a class="headerlink" href="#distributions.InvWeibull.dist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Void property to be overridden</p>
 </dd></dl>
 
 <dl class="py method">
@@ -5414,6 +5623,12 @@ shape parameter b.</p></li>
 </dl>
 </dd></dl>
 
+<dl class="py property">
+<dt class="sig sig-object py" id="distributions.Beta.dist">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dist</span></span><a class="headerlink" href="#distributions.Beta.dist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Void property to be overridden</p>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="distributions.Beta.lev">
 <span class="sig-name descname"><span class="pre">lev</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#Beta.lev"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.Beta.lev" title="Permalink to this definition">¶</a></dt>
@@ -5496,7 +5711,7 @@ Refer to Appendix A of Klugman, Panjer &amp; Willmot, Loss Models, Wiley.</p>
 <dd class="field-odd"><p><strong>x</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – cumulative distribution function will be computed in x.</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>cumulative distribution function will in x.</p>
+<dd class="field-even"><p>cumulative distribution function in x.</p>
 </dd>
 </dl>
 <p>:rtype:<code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
@@ -5504,7 +5719,7 @@ Refer to Appendix A of Klugman, Panjer &amp; Willmot, Loss Models, Wiley.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="distributions.GenBeta.den">
-<span class="sig-name descname"><span class="pre">den</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#GenBeta.den"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.GenBeta.den" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">den</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">low</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#GenBeta.den"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.GenBeta.den" title="Permalink to this definition">¶</a></dt>
 <dd><p>It returns the denominator of the local moments discretization.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -5559,10 +5774,10 @@ Refer to Appendix A of Klugman, Panjer &amp; Willmot, Loss Models, Wiley.</p>
 <dd><p>Natural logarithm of the cumulative distribution function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>x</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – natural logarithm of the cumulative density function computed in x.</p>
+<dd class="field-odd"><p><strong>x</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – natural logarithm of the cumulative distribution function computed in x.</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>natural logarithm of the cumulative density function in x.</p>
+<dd class="field-even"><p>natural logarithm of the cumulative distribution function in x.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
