@@ -1,7 +1,7 @@
-Summary of distributions supported
+Actuarial modeling with GEMAct
 ====================================
 
-The distributions module
+GEMAct distributions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following table summarizes the distribution supported by GEMAct and Scipy.
@@ -70,7 +70,7 @@ The following table summarizes the distribution supported by GEMAct and Scipy.
 +--------------------------------------------------+-------------+--------+--------+
 
 
-The copulas module
+GEMAct copulas
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 +--------------------------------------------------+-------------+--------+
@@ -87,6 +87,27 @@ The copulas module
 +--------------------------------------------------+-------------+--------+
 |The Student T copula.                             | elliptical  |    v   |
 +--------------------------------------------------+-------------+--------+
+
+
+Tutorials
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Practitioners who want to start using GEMAct might be interested in the Jupyter notebooks we have available on `GitHub <https://github.com/gpitt71/gemact-code/tree/main/vignette>`_ . 
+We provide examples on all GEMAct functionalities.
+
+* Click `here <https://github.com/gpitt71/gemact-code/blob/main/vignette/lossreserve.ipynb>`_ to understand how to compute loss reserves in GEMAct. 
+* Click `here <https://github.com/gpitt71/gemact-code/blob/main/vignette/lossaggregation.ipynb>`_ to understand how to perform risks aggregation in GEMAct. 
+* Click `here <https://github.com/gpitt71/gemact-code/blob/main/vignette/copulas.ipynb>`_ to understand how to use the copula functions supported in GEMAct. 
+
+
+
+
+
+
+
+
+
+
 
 
 

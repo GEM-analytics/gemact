@@ -1,5 +1,5 @@
 API reference guide
-=================
+========================
 
 ``LossModel``
 ---------------
@@ -12,7 +12,7 @@ API reference guide
 (Re)insurance pricing
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-GEMAct pricing model is based on the collective risk theory. 
+GEMAct pricing model is based on the collective risk theory.
 
 .. math:: \widetilde{X}=\sum_{i=1}^{\widetilde{N}} \widetilde{{Z_i}}
    :label: crm
@@ -47,86 +47,60 @@ GEMAct pricing model is based on  :cite:t:`b:kp` and  :cite:t:`sundt`.
 
 Refer again to :cite:t:`b:kp` for the recursive formula to compute the collective risk model and to :cite:t:`embrechts` for the Fast Fourier transform to approximate the Discrete Fourier Transform of the collective risk model.
 
-
-Examples
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Example
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ``LossModel`` can be used to price reinsurance contracts.
 
 An example of pricing with reinstatements::
 
    from gemact import LossModel
-   lossm=LossModel(
-             method='fft',
-             fpar={'mu':.5},
-             fdist= 'poisson',
-             spar={'loc':0,'scale': 83.33, 'c’: 0.833}, 
-             sdist='genpareto',
-             u=100,
-             discretizationmethod='massdispersal',
-             m=int(10000),
-             h=.01,
-             n=int(100000),
-             L=0,
-             K=1,
-             c=1)
+   lossm=gemact.LossModel(aggr_loss_dist_method='fft',
+             fq_par={'mu':.5},
+             fq_dist= 'poisson',
+             sev_par={'loc':0,
+                      'scale': 83,
+                      'c': 0.83},
+             sev_dist='genpareto',
+             sev_discr_method='localmoments',
+             n_sev_discr_nodes = int(10000),
+             sev_discr_step = .01,
+             n_aggr_dist_nodes = int(100000),
+             deductible=0,
+             aggr_n_deductible=0,
+             reinst_loading=1,
+             n_reinst=1)
 
-The output of ``lossm.Pricing()``:
+   lossm.pricing()
 
-+--------------------------------------------------+-------------+--------+
-| Contractual limits                               | parameter   | value  | 
-|                                                  |             |        |                                   
-+==================================================+=============+========+
-| deductible                                       |  d          |    0   |       
-+--------------------------------------------------+-------------+--------+
-| priority (severity)                              |  u          |  100   |    
-+--------------------------------------------------+-------------+--------+
-| priority (aggregate)                             |  L          |    0   |       
-+--------------------------------------------------+-------------+--------+
-| alpha(qs)                                        |  qs         |    1   |
-+--------------------------------------------------+-------------+--------+
-| reinstatements                                   |  K          |    1   |
-+--------------------------------------------------+-------------+--------+
-| Pure premium                                     |  P          | 24.98  |
-+--------------------------------------------------+-------------+--------+
 
 ``LossModel`` can be used to model the aggregate cost of claims::
+
    
       from gemact LossModel
-      lm_fft=LossModel(
-                 method='fft',
-                 fpar=fpar,
-                 fdist=frequency_,
-                 spar=spar,
-                 sdist=severity_,
-                 d=d_,
-                 u=u_,
-                 m=int(1e+03),
-                 h=1,
-                 n=int(1e+05)
-               )
+      lm_fft= LossModel(aggr_loss_dist_method='fft',
+                 fq_par = fq_par,
+                 fq_dist = fq_dist,
+                 sev_par = sev_par,
+                 sev_dist = sev_dist,
+                 n_sev_discr_nodes = int(1000),
+                 sev_discr_step = 1,
+                 n_aggr_dist_nodes = int(10000))
 
-      print('FFT',lm_fft.empiricalmoments())
-      # FFT 7.192555408630492
-
-
-``Severity``
-----------------
-
-.. autoclass:: lossmodel.Severity
-   :members:
+      print('FFT',lm_fft.aggr_loss_mean())
+      #4.9999999846531935
 
 Severity discretization
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In order to pass from a continuous distribution to an arithmetic distribution, it is important to preserve the distribution properties either locally or globally. Given a span :math:`h` and :math:`M` the last available point, in :cite:t:`b:kp` there are two available solutions. 
+In order to pass from a continuous distribution to an arithmetic distribution, it is important to preserve the distribution properties either locally or globally. Given a span :math:`h` and :math:`M` the last available point, in :cite:t:`b:kp` there are two available solutions.
 
 **Method of mass dispersal**
 
-.. math:: f_{0}=\operatorname{Pr}\left(\widetilde{Y}<\frac{h}{2}\right)=F_{\widetilde{Y}}\left(\frac{h}{2}-0\right) 
+.. math:: f_{0}=\operatorname{Pr}\left(\widetilde{Y}<\frac{h}{2}\right)=F_{\widetilde{Y}}\left(\frac{h}{2}-0\right)
    :label: md1
 
-.. math:: f_{j}=F_{\widetilde{Y}}\left(j h+\frac{h}{2}-0\right)-F_{\widetilde{Y}}\left(j h-\frac{h}{2}-0\right), \quad j=1,2, \ldots, M-1  
+.. math:: f_{j}=F_{\widetilde{Y}}\left(j h+\frac{h}{2}-0\right)-F_{\widetilde{Y}}\left(j h-\frac{h}{2}-0\right), \quad j=1,2, \ldots, M-1
    :label: md2
 
 
@@ -150,39 +124,46 @@ The following approach is applied to preserve the global mean of the distributio
    :label: lm4
 
 
-Examples
-~~~~~~~~~~
+Example
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-A simple code implementation of ``Severity``. How to make a distribution discrete according to local moment matching or mass dispersal::
+A simple code implementation of severity discretization::
 
-   from gemact import Severity
    import numpy as np
 
-   m_= 80000 
-   h_= 1. 
-   d_= 100 
-   u_= 4500 
-   spar_ = {'a' : 3000, 'scale' : 1/3} 
-   severity_ = 'gamma'
-   mysv = Severity(
-      spar=spar_, 				
-         d=d_,
-         u=u_,
-         sdist=severity_,
-         m=m_,
-         h=h_
-   ) 
+    lossm_md=gemact.LossModel(aggr_loss_dist_method='fft',
+                 fq_par={'mu':.5},
+                 fq_dist= 'poisson',
+                 sev_par={'loc':0,'scale': 83, 'c': 0.83},
+                 sev_dist='genpareto',
+                 cover=100,
+                 sev_discr_method='massdispersal',
+                 n_sev_discr_nodes = int(10000),
+                 sev_discr_step = .01,
+                 n_aggr_dist_nodes = int(100000))
 
-   massD = mysv.massDispersal()
-   localM = mysv.localMoments()
-   massD = mysv.massDispersal()
-   localM = mysv.localMoments()
+    lossm_lm=gemact.LossModel(aggr_loss_dist_method='fft',
+                 fq_par={'mu':.5},
+                 fq_dist= 'poisson',
+                 sev_par={'loc':0,'scale': 83, 'c': 0.83},
+                 sev_dist='genpareto',
+                 cover=100,
+                 sev_discr_method='localmoments',
+                 n_sev_discr_nodes = int(10000),
+                 sev_discr_step = .01,
+                 n_aggr_dist_nodes = int(100000))
 
-   #mean mass dispersal
-   meanMD = np.sum(massD['severity_seq']*massD['fj'])
-   #mean local moments matching
-   meanLM = np.sum(localM['severity_seq']*localM['fj'])
 
+    massD=lossm_md.severity_discretization()
+    localM=lossm_lm.severity_discretization()
+
+    meanMD = np.sum(massD['sev_nodes']*massD['fj'])
+    meanLM = np.sum(localM['sev_nodes']*localM['fj'])
+
+    print('Mean (mass dispersal): ',meanMD)
+    print('Mean (local moments): ',meanLM)
+    #Mean (mass dispersal):  64.61227417939517
+    #Mean (local moments):  64.61227421887484
 
 ``LossReserve``
 ------------------
@@ -208,7 +189,7 @@ The aim of average cost methods is to model incremental payments as in equation 
 where :math:`n_{i,j}` is the number of payments in the cell :math:`i,j` and :math:`m_{i,j}` is the average cost in the cell :math:`i,j`.
 
 Example
-~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 It is possible to use the module ``gemdata`` to test GEMAct average cost methods::
 
@@ -270,8 +251,8 @@ Assuming:
 Refer to :cite:t:`arbenz11` for an extensive explanation on the AEP algorithm.
 It is possible to use a MC simulation for comparison.
 
-Examples
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Example
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Example code under a clayton assumption::
 
@@ -302,15 +283,17 @@ Example code under a clayton assumption::
 
 The ``distributions`` module
 ------------------------------------
+
 ``Poisson``
-------------------
+~~~~~~~~~~~~~~~~~~~~
 
 .. autoclass:: distributions.Poisson
    :members:
 
 
 Parametrization
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 
 For a better explanation refer to the `SciPy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.poisson.html>`_, see :cite:t:`scipy`.
 
@@ -360,13 +343,14 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a Poisson::
   :width: 400
 
 ``Binom``
-------------------
+~~~~~~~~~~~~~~~~~~~~
 
 .. autoclass:: distributions.Binom
    :members:
 
 Parametrization
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 
 For a better explanation refer to the `SciPy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.binom.html>`_, see :cite:t:`scipy`.
 
@@ -420,13 +404,13 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a Poisson::
   :width: 400
 
 ``Geom``
-------------------
+~~~~~~~~~~~~~~~~~~~~
 
 .. autoclass:: distributions.Geom
    :members:
 
 Parametrization
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 For a better explanation refer to the `SciPy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.geom.html>`_, see :cite:t:`scipy`..
 
@@ -476,13 +460,13 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a Geom::
   :width: 400
 
 ``NegBinom``
-------------------
+~~~~~~~~~~~~~~~~~~~~
 
 .. autoclass:: distributions.NegBinom
    :members:
 
 Parametrization
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 For a better explanation refer to the `SciPy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.nbinom.html>`_, see :cite:t:`scipy`.
 
@@ -535,13 +519,13 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a NBinom::
   :width: 400
 
 ``ZTpoisson``
-------------------
+~~~~~~~~~~~~~~~~~~~~
 
 .. autoclass:: distributions.ZTPoisson
    :members:
 
 Parametrization
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Let :math:`P(z)` denote the probability generating function of a Poisson distribution. 
 
@@ -592,13 +576,13 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a ZTPoisson::
 
 
 ``ZMPoisson``
-------------------
+~~~~~~~~~~~~~~~~~~~~
 
 .. autoclass:: distributions.ZMPoisson
    :members:
 
 Parametrization
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Let :math:`P(z)` denote the probability generating function of a Poisson distribution. 
 
@@ -649,13 +633,13 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a ZMPoisson::
   :width: 400
 
 ``ZTBinom``
-------------------
+~~~~~~~~~~~~~~~~~~~~
 
 .. autoclass:: distributions.ZTBinom
    :members:
 
 Parametrization
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Let :math:`P(z)` denote the probability generating function of a binomial distribution. 
 
@@ -709,13 +693,13 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a ZTBinom::
 
 
 ``ZMBinom``
-------------------
+~~~~~~~~~~~~~~~~~~~~
 
 .. autoclass:: distributions.ZMBinom
    :members:
 
 Parametrization
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Let :math:`P(z)` denote the probability generating function of a binomial distribution. 
 
@@ -767,13 +751,13 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a ZMPoisson::
   :width: 400
 
 ``ZTGeom``
-------------------
+~~~~~~~~~~~~~~~~~~~~
 
 .. autoclass:: distributions.ZTGeom
    :members:
 
 Parametrization
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Let :math:`P(z)` denote the probability generating function of a geometric distribution. 
 
@@ -822,13 +806,13 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a ZTGeom::
   :width: 400
 
 ``ZMGeom``
-------------------
+~~~~~~~~~~~~~~~~~~~~
 
-.. autoclass:: distributions.ZMgeom
+.. autoclass:: distributions.ZMGeom
    :members:
 
 Parametrization
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Let :math:`P(z)` denote the probability generating function of a geometric distribution. 
 
@@ -879,13 +863,13 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a ZMGeom::
   :width: 400
 
 ``ZTNegBinom``
-------------------
+~~~~~~~~~~~~~~~~~~~~
 
 .. autoclass:: distributions.ZTNegBinom
    :members:
 
 Parametrization
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Let :math:`P(z)` denote the probability generating function of a negative binomial distribution. 
 
@@ -937,13 +921,13 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a ZTNbinom::
 
 
 ``ZMNegBinom``
-------------------
+~~~~~~~~~~~~~~~~~~~~
 
 .. autoclass:: distributions.ZTNegBinom
    :members:
 
 Parametrization
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Let :math:`P(z)` denote the probability generating function of a negative binomial distribution. 
 
@@ -955,13 +939,13 @@ The probability generating function of a Zero-Modified negative binomial is defi
    :label: zmnbinom
 
 ``ZMLogser``
-------------------
+~~~~~~~~~~~~~~~~~~~~
 
 .. autoclass:: distributions.ZMLogser
    :members:
 
 Parametrization
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Let :math:`P(z)` denote the probability generating function of a logarithmic distribution. 
 
@@ -1013,13 +997,13 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a ZMlogser::
 
 
 ``Gamma``
-------------------
+~~~~~~~~~~~~~~~~~~~~
 
 .. autoclass:: distributions.Gamma
    :members:
 
 Parametrization
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 For a better explanation refer to the `SciPy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.gamma.html>`_, see :cite:t:`scipy`.
 
@@ -1066,13 +1050,13 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a Gamma::
   :width: 400
 
 ``Exponential``
-------------------
+~~~~~~~~~~~~~~~~~~~~
 
 .. autoclass:: distributions.Exponential
    :members:
 
 Parametrization
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. math:: f(x, \theta)=\theta \cdot e^{-\theta x}
    :label: exponential
@@ -1115,13 +1099,13 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of an Exponential:
   :width: 400
 
 ``InvGauss``
-------------------
+~~~~~~~~~~~~~~~~~~~~
 
 .. autoclass:: distributions.InvGauss
    :members:
 
 Parametrization
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 For a better explanation refer to :cite:t:`scipy` documentation.
 
@@ -1130,13 +1114,13 @@ For a better explanation refer to :cite:t:`scipy` documentation.
 
 
 ``InvGamma``
-------------------
+~~~~~~~~~~~~~~~~~~~~
 
 .. autoclass:: distributions.InvGamma
    :members:
 
 Parametrization
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 For a better explanation refer to :cite:t:`scipy` documentation.
 
@@ -1146,13 +1130,13 @@ For a better explanation refer to :cite:t:`scipy` documentation.
 Given :math:`x>=0, a>0 `. :math:`\Gamma(a)` refers to the gamma function.
 
 ``GenPareto``
-------------------
+~~~~~~~~~~~~~~~~~~~~
 
 .. autoclass:: distributions.GenPareto
    :members:
 
 Parametrization
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 For a better explanation refer to the `SciPy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.genpareto.html>`_, see :cite:t:`scipy`.
 
@@ -1205,13 +1189,12 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a GenPareto::
   :width: 400
 
 ``Lognormal``
-------------------
+~~~~~~~~~~~~~~~~~~~~
 
 .. autoclass:: distributions.Lognormal
    :members:
 
-Parametrization
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 For a better explanation refer to the `SciPy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.lognorm.html>`_, see :cite:t:`scipy`.
 
@@ -1249,20 +1232,20 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a LogNorm::
     plt.plot(seq,dist.cdf(seq))
     plt.title('Cumulative distribution function, ~LogNormal(s=2)')
 
-.. image:: images/pdfLogNorm.png
+.. image:: images/pdfLogNormal.png
   :width: 400
 
-.. image:: images/cdfLogNorm.png
+.. image:: images/cdfLogNormal.png
   :width: 400
 
 ``Burr12``
-------------------
+~~~~~~~~~~~~~~~~~~~~
 
 .. autoclass:: distributions.Burr12
    :members:
 
 Parametrization
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 For a better explanation refer to the `Scipy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.burr12.html>`_ , see :cite:t:`scipy`.
 
@@ -1313,13 +1296,13 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a Burr12::
 
 
 ``Dagum``
-------------------
+~~~~~~~~~~~~~~~~~~~~
 
 .. autoclass:: distributions.Dagum
    :members:
 
 Parametrization
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 For a better explanation refer to the `SciPy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.mielke.html>`_ ,see :cite:t:`scipy`.
 
@@ -1370,13 +1353,13 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a Dagum::
 
 
 ``Weibull``
-------------------
+~~~~~~~~~~~~~~~~~~~~
 
 .. autoclass:: distributions.Weibull
    :members:
 
 Parametrization
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 For a better explanation refer to the `SciPy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.weibull_min.html>`_ , see :cite:t:`scipy`.
 
@@ -1426,13 +1409,13 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a Weibull_min::
   :width: 400
 
 ``InvWeibull``
-------------------
+~~~~~~~~~~~~~~~~~~~~
 
 .. autoclass:: distributions.InvWeibull
    :members:
 
 Parametrization
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 For a better explanation refer to :cite:t:`scipy` `documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.invweibull.html>`_.
 
@@ -1480,13 +1463,13 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a Invweibull::
 
 
 ``Beta``
-------------------
+~~~~~~~~~~~~~~~~~~~~
 
 .. autoclass:: distributions.Beta
    :members:
 
 Parametrization
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 For a better explanation refer to the `SciPy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.beta.html>`_, :cite:t:`scipy` .
 
@@ -1535,14 +1518,13 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a Beta::
 
 
 ``GenBeta``
-------------------
+~~~~~~~~~~~~~~~~~~~~
 
 .. autoclass:: distributions.GenBeta
    :members:
 
 Parametrization
-~~~~~~~~~~~~~~~~~~~~
-
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. math:: f(x)=\frac{\Gamma(shape_1+shape_2)}{\Gamma(shape_1) \Gamma(shape_2)}(\frac{x}{scale})^{shape_1 shape_3}\left(1-(\frac{x}{scale})^{shape_3}\right)^{shape_2-1} \frac{shape_3}{x}
    :label: genbeta
@@ -1595,16 +1577,18 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a GenBeta::
   :width: 400
 
 The ``copulas`` module
-------------------------------------
+---------------------------
+
+Guide to copulas
 
 ``ClaytonCopula``
-------------------
+~~~~~~~~~~~~~~~~~~~~
 
 .. autoclass:: copulas.ClaytonCopula
    :members:
 
 Parametrization
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^
 
 Clayton copula cumulative density function:
 
@@ -1625,13 +1609,16 @@ Example code on the usage of the ClaytonCopula class::
 
 
 ``FrankCopula``
-------------------
+~~~~~~~~~~~~~~~~~~~~
+
 
 .. autoclass:: copulas.FrankCopula
    :members:
 
 Parametrization
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
 
 Frank copula cumulative density function:
 
@@ -1649,13 +1636,13 @@ Example code on the usage of the FrankCopula class::
                   random_state= 42)
 
 ``GumbelCopula``
-------------------
+~~~~~~~~~~~~~~~~~~~~
 
 .. autoclass:: copulas.GumbelCopula
    :members:
 
 Parametrization
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Gumbel copula cumulative density function:
 
@@ -1673,14 +1660,17 @@ Example code on the usage of the GumbelCopula class::
     gumbel_c.rvs(size=100,
                   random_state= 42)
 
+
 ``GaussCopula``
-------------------
+~~~~~~~~~~~~~~~~~~~
+
+
 
 .. autoclass:: copulas.GaussCopula
    :members:
 
 Parametrization
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Gauss copula cumulative density function is based on the scipy function multivariate_normal.
 For a better explanation refer to the `SciPy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.multivariate_normal.html>`_, :cite:t:`scipy` .
@@ -1699,13 +1689,14 @@ Example code on the usage of the GaussCopula class::
                   random_state= 42)
 
 ``TCopula``
-------------------
+~~~~~~~~~~~~~~~~~~~
 
 .. autoclass:: copulas.TCopula
    :members:
 
 Parametrization
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 
 T copula cumulative density function:
 

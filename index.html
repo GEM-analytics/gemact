@@ -102,7 +102,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="modeling.html">
-   Summary of distributions supported
+   Actuarial modeling with GEMAct
   </a>
  </li>
  <li class="toctree-l1">
@@ -251,163 +251,22 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="introduction.html#scope">Scope</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="introduction.html#reinsurance-treaties">Reinsurance treaties</a></li>
-<li class="toctree-l3"><a class="reference internal" href="introduction.html#computational-methods-for-pricing">Computational methods for pricing</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#scope">Scope</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="modeling.html">Summary of distributions supported</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="modeling.html#the-distributions-module">The distributions module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modeling.html#the-copulas-module">The copulas module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modeling.html">Actuarial modeling with GEMAct</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modeling.html#gemact-distributions">GEMAct distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modeling.html#gemact-copulas">GEMAct copulas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modeling.html#tutorials">Tutorials</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API reference guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api.html#lossmodel"><code class="docutils literal notranslate"><span class="pre">LossModel</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#re-insurance-pricing">(Re)insurance pricing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api.html#pricing-models">Pricing models</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api.html#examples">Examples</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#severity"><code class="docutils literal notranslate"><span class="pre">Severity</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#severity-discretization">Severity discretization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api.html#id6">Examples</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#module-lossreserve"><code class="docutils literal notranslate"><span class="pre">LossReserve</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#claims-reserving">Claims reserving</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api.html#example">Example</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#lossaggregation"><code class="docutils literal notranslate"><span class="pre">LossAggregation</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#risks-aggregation">Risks aggregation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api.html#id10">Examples</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#lossmodel"><code class="docutils literal notranslate"><span class="pre">LossModel</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-lossreserve"><code class="docutils literal notranslate"><span class="pre">LossReserve</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#lossaggregation"><code class="docutils literal notranslate"><span class="pre">LossAggregation</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#the-distributions-module">The <code class="docutils literal notranslate"><span class="pre">distributions</span></code> module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#poisson"><code class="docutils literal notranslate"><span class="pre">Poisson</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#parametrization">Parametrization</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#binom"><code class="docutils literal notranslate"><span class="pre">Binom</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#id12">Parametrization</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#geom"><code class="docutils literal notranslate"><span class="pre">Geom</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#id15">Parametrization</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#negbinom"><code class="docutils literal notranslate"><span class="pre">NegBinom</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#id18">Parametrization</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#ztpoisson"><code class="docutils literal notranslate"><span class="pre">ZTpoisson</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#id21">Parametrization</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#zmpoisson"><code class="docutils literal notranslate"><span class="pre">ZMPoisson</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#id22">Parametrization</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#ztbinom"><code class="docutils literal notranslate"><span class="pre">ZTBinom</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#id25">Parametrization</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#zmbinom"><code class="docutils literal notranslate"><span class="pre">ZMBinom</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#id26">Parametrization</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#ztgeom"><code class="docutils literal notranslate"><span class="pre">ZTGeom</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#id27">Parametrization</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#zmgeom"><code class="docutils literal notranslate"><span class="pre">ZMGeom</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#id28">Parametrization</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#ztnegbinom"><code class="docutils literal notranslate"><span class="pre">ZTNegBinom</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#id29">Parametrization</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#zmnegbinom"><code class="docutils literal notranslate"><span class="pre">ZMNegBinom</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#id39">Parametrization</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#zmlogser"><code class="docutils literal notranslate"><span class="pre">ZMLogser</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#id40">Parametrization</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#gamma"><code class="docutils literal notranslate"><span class="pre">Gamma</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#id45">Parametrization</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#exponential"><code class="docutils literal notranslate"><span class="pre">Exponential</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#id48">Parametrization</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#invgauss"><code class="docutils literal notranslate"><span class="pre">InvGauss</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#id49">Parametrization</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#invgamma"><code class="docutils literal notranslate"><span class="pre">InvGamma</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#id51">Parametrization</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#genpareto"><code class="docutils literal notranslate"><span class="pre">GenPareto</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#id55">Parametrization</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#lognormal"><code class="docutils literal notranslate"><span class="pre">Lognormal</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#id60">Parametrization</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#burr12"><code class="docutils literal notranslate"><span class="pre">Burr12</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#id63">Parametrization</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#dagum"><code class="docutils literal notranslate"><span class="pre">Dagum</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#id68">Parametrization</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#weibull"><code class="docutils literal notranslate"><span class="pre">Weibull</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#id71">Parametrization</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#invweibull"><code class="docutils literal notranslate"><span class="pre">InvWeibull</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#id74">Parametrization</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#beta"><code class="docutils literal notranslate"><span class="pre">Beta</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#id76">Parametrization</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#genbeta"><code class="docutils literal notranslate"><span class="pre">GenBeta</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#id79">Parametrization</a></li>
-</ul>
-</li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#the-copulas-module">The <code class="docutils literal notranslate"><span class="pre">copulas</span></code> module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#claytoncopula"><code class="docutils literal notranslate"><span class="pre">ClaytonCopula</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#id80">Parametrization</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#frankcopula"><code class="docutils literal notranslate"><span class="pre">FrankCopula</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#id81">Parametrization</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#gumbelcopula"><code class="docutils literal notranslate"><span class="pre">GumbelCopula</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#id82">Parametrization</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#gausscopula"><code class="docutils literal notranslate"><span class="pre">GaussCopula</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#id83">Parametrization</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#tcopula"><code class="docutils literal notranslate"><span class="pre">TCopula</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#id86">Parametrization</a></li>
-</ul>
-</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api.html#references">References</a></li>
