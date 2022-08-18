@@ -11,6 +11,7 @@ GEMAct
 
    introduction.rst
    usage.rst
+   modeling.rst
    api.rst
 
 Indices and tables

@@ -210,7 +210,7 @@ where :math:`n_{i,j}` is the number of payments in the cell :math:`i,j` and :mat
 Example
 ~~~~~~~~~
 
-It is possible to use the module ``gemdata`` to test GEMAct average cost methods:: 
+It is possible to use the module ``gemdata`` to test GEMAct average cost methods::
 
    ip_= gemact.gemdata.IPtriangle 
    in_= gemact.gemdata.in_triangle 
@@ -221,9 +221,9 @@ It is possible to use the module ``gemdata`` to test GEMAct average cost methods
    rm_='fisherlange' 
    tail_=True 
 
-An example of Fisher-Lange implementation::  
+An example of Fisher-Lange implementation::
 
-   lr = gemact.LossReserve(tail=tail_,
+    lr = gemact.LossReserve(tail=tail_,
                incremental_payments=ip_,
                cased_payments=cp_,
                cased_number=cn_,
@@ -232,19 +232,20 @@ An example of Fisher-Lange implementation::
                reserving_method=rm_,
                claims_inflation=infl_)
 
-An example of CRM implementation. Observe the CRM for reserving requires additional parameters:: 
 
-   lr = gemact.LossReserve(tail=tail_,
-               incremental_payments=ip_,
-               cased_payments=cp_,
-               cased_number=cn_,
-               reported_claims=reported_,
-               incurred_number=in_,
-               ntr_sim=int(1000),
-               reserving_method="crm",
-               mixingfpar={'a':1/.08**2,'scale':.08**2},
-               mixingspar={'a':1/.08**2,'scale':.08**2},
-               claims_inflation=infl_)
+An example of CRM implementation. Observe the CRM for reserving requires additional parameters::
+
+    lr = gemact.LossReserve(tail=tail_,
+                   incremental_payments=ip_,
+                   cased_payments=cp_,
+                   cased_number=cn_,
+                   reported_claims=reported_,
+                   incurred_number=in_,
+                   ntr_sim=int(1000),
+                   reserving_method="crm",
+                   mixingfpar={'a':1/.08**2,'scale':.08**2},
+                   mixingspar={'a':1/.08**2,'scale':.08**2},
+                   claims_inflation=infl_)
 
 ``LossAggregation``
 ---------------------
@@ -267,6 +268,7 @@ Assuming:
 * The joint c.d.f. :math:`H(x_1,…,x_d )=P\left[ X_1 +\ldots +X_d \right]` is known or it can be computed numerically.
 
 Refer to :cite:t:`arbenz11` for an extensive explanation on the AEP algorithm.
+It is possible to use a MC simulation for comparison.
 
 Examples
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -287,81 +289,19 @@ Example code under a clayton assumption::
                    copula='clayton',
                    copula_par={'par':1.2,
                                'dim':2})
-   #output is kept in the out attribute
-   print('cdf via AEP algorithm: \n',la.cdf(k=1,
+
+   print('cdf via AEP algorithm: \n',la.cdf(1,
                                          n_iter=7,
                                          method='aep'))
 
+   print('cdf via MC: \n',la.cdf(1,
+                                 method='mc'))
+
+
+
+
 The ``distributions`` module
 ------------------------------------
-
-
-The following table summarizes the distribution supported by GemAct and Scipy.
-
-+--------------------------------------------------+-------------+--------+--------+
-| Distribution                                     | Support     | GemAct | SciPy  | 
-|                                                  |             |        |        |
-+==================================================+=============+========+========+
-| The Burr Distribution.                           |  continuous |    v   |   v    |                           
-+--------------------------------------------------+-------------+--------+--------+ 
-| The Generalized Pareto Distribution.             |  continuous |    v   |   v    |                           
-+--------------------------------------------------+-------------+--------+--------+ 
-| The Inverse Burr Distribution (Dagum).           |  continuous |    v   |   v    |                           
-+--------------------------------------------------+-------------+--------+--------+ 
-| The Inverse Gamma Distribution.                  |  continuous |    v   |   v    |                            
-+--------------------------------------------------+-------------+--------+--------+ 
-|The Inverse Gaussian Distribution.                |  continuous |    v   |   v    |
-+--------------------------------------------------+-------------+--------+--------+ 
-|The Inverse Paralogistic Distribution.            |  continuous |    v   |   v    |                           
-+--------------------------------------------------+-------------+--------+--------+ 
-|The Weibull Distribution.                         |  continuous |    v   |   v    |                         
-+--------------------------------------------------+-------------+--------+--------+
-|The Inverse Weibull Distribution.                 |  continuous |    v   |   v    |                         
-+--------------------------------------------------+-------------+--------+--------+
-|The Paralogistic Distribution.                    |  continuous |    v   |   v    |                      
-+--------------------------------------------------+-------------+--------+--------+
-|The Pareto Distribution.                          |  continuous |    v   |   v    |                      
-+--------------------------------------------------+-------------+--------+--------+
-|The Single-parameter Pareto Distribution.         |  continuous |    v   |   v    |                           
-+--------------------------------------------------+-------------+--------+--------+
-|The Pareto II Distribution.                       |  continuous |    v   |   v    |                           
-+--------------------------------------------------+-------------+--------+--------+
-|The Pareto III Distribution.                      |  continuous |    v   |   v    |                           
-+--------------------------------------------------+-------------+--------+--------+
-|The Pareto IV Distribution.                       |  continuous |    v   |   v    |                           
-+--------------------------------------------------+-------------+--------+--------+
-|The Beta distribution.                            |continuous   |    v   |   v    |
-+--------------------------------------------------+-------------+--------+--------+
-|The Generalized Beta distribution.                |continuous   |    x   |   v    |
-+--------------------------------------------------+-------------+--------+--------+
-|The Poisson Distribution.                         | discrete    |    v   |   v    |                           
-+--------------------------------------------------+-------------+--------+--------+
-|The Binomial Distribution.                        | discrete    |    v   |   v    |                           
-+--------------------------------------------------+-------------+--------+--------+
-|The Geometric Distribution.                       | discrete    |    v   |   v    |                           
-+--------------------------------------------------+-------------+--------+--------+
-|The Negative Binomial Distribution.               | discrete    |    v   |   v    |                           
-+--------------------------------------------------+-------------+--------+--------+
-|The Zero-Modified Binomial Distribution.          | discrete    |    v   |   x    |                           
-+--------------------------------------------------+-------------+--------+--------+
-|The Zero-Modified Geometric Distribution.         | discrete    |    v   |   x    |                           
-+--------------------------------------------------+-------------+--------+--------+
-|The Zero-Modified Logarithmic Distribution.       | discrete    |    v   |   x    |                           
-+--------------------------------------------------+-------------+--------+--------+
-|The Zero-Modified Negative Binomial Distribution  | discrete    |    v   |   x    |                           
-+--------------------------------------------------+-------------+--------+--------+
-|The Zero-Modified Poisson Distribution            | discrete    |    v   |   x    |                           
-+--------------------------------------------------+-------------+--------+--------+
-|The Zero-Truncated Binomial Distribution          | discrete    |    v   |   x    |
-+--------------------------------------------------+-------------+--------+--------+
-|The Zero-Truncated Geometric Distribution         | discrete    |    v   |   x    |                           
-+--------------------------------------------------+-------------+--------+--------+
-|The Zero-Truncated Negative Binomial Distribution | discrete    |    v   |   x    |                           
-+--------------------------------------------------+-------------+--------+--------+
-|The Zero-Truncated Poisson Distribution           | discrete    |    v   |   x    |                            
-+--------------------------------------------------+-------------+--------+--------+
-
-
 ``Poisson``
 ------------------
 
@@ -1654,6 +1594,136 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a GenBeta::
 .. image:: images/cdfGenBeta.png
   :width: 400
 
+The ``copulas`` module
+------------------------------------
+
+``ClaytonCopula``
+------------------
+
+.. autoclass:: copulas.ClaytonCopula
+   :members:
+
+Parametrization
+~~~~~~~~~~~~~~~~~~~~
+
+Clayton copula cumulative density function:
+
+.. math:: C_{\delta}^{C l}\left(u_{1}, \ldots, u_{d}\right)=\left(u_{1}^{-\delta}+u_{2}^{-\delta}+\cdots+u_{d}^{-\delta}-d+1\right)^{-1 / \delta}
+
+Given :math:`u_{k} \in[0,1], k=1, \ldots, d` , :math:`\delta > 0` .
+
+
+Example code on the usage of the ClaytonCopula class::
+
+    from gemact import copulas
+
+    clayton_c=copulas.ClaytonCopula(par=1.4,
+                                    dim=2)
+    clayton_c.rvs(size=100,
+                  random_state= 42)
+
+
+
+``FrankCopula``
+------------------
+
+.. autoclass:: copulas.FrankCopula
+   :members:
+
+Parametrization
+~~~~~~~~~~~~~~~~~~~~
+
+Frank copula cumulative density function:
+
+.. math:: C_{\theta}^{F r}\left(u_{1}, \ldots, u_{d}\right)=-\frac{1}{\delta} \log \left(1+\frac{\prod_{i}\left(\exp \left(-\delta u_{i}\right)-1\right)}{\exp (-\delta)-1}\right)
+
+Given :math:`u_{k} \in[0,1], k=1, \ldots, d` , :math:`\delta >= 0` .
+
+
+Example code on the usage of the FrankCopula class::
+
+    from gemact import copulas
+    frank_c=copulas.FrankCopula(par=1.4,
+                                dim=2)
+    frank_c.rvs(size=100,
+                  random_state= 42)
+
+``GumbelCopula``
+------------------
+
+.. autoclass:: copulas.GumbelCopula
+   :members:
+
+Parametrization
+~~~~~~~~~~~~~~~~~~~~
+
+Gumbel copula cumulative density function:
+
+.. math:: C_{\theta}^{G u}\left(u_{1}, \ldots, u_{d}\right)=\exp \left(-\left(\sum_{i}\left(-\log u_{i}\right)^{\delta}\right)^{1 / \delta}\right)
+
+Given :math:`u_{k} \in[0,1], k=1, \ldots, d` , :math:`\delta >= 1` .
+
+
+Example code on the usage of the GumbelCopula class::
+
+    from gemact import copulas
+
+    gumbel_c=copulas.GumbelCopula(par=1.4,
+                                  dim=2)
+    gumbel_c.rvs(size=100,
+                  random_state= 42)
+
+``GaussCopula``
+------------------
+
+.. autoclass:: copulas.GaussCopula
+   :members:
+
+Parametrization
+~~~~~~~~~~~~~~~~~~~~
+
+Gauss copula cumulative density function is based on the scipy function multivariate_normal.
+For a better explanation refer to the `SciPy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.multivariate_normal.html>`_, :cite:t:`scipy` .
+
+.. math:: f(x)=\frac{1}{\sqrt{(2 \pi)^{k} \operatorname{det} \Sigma}} \exp \left(-\frac{1}{2}(x-\mu)^{T} \Sigma^{-1}(x-\mu)\right)
+
+
+Example code on the usage of the GaussCopula class::
+
+    from gemact import copulas
+
+    corr_mx=np.array([[1,.4],[.4,1]])
+
+    gauss_c=copulas.GaussCopula(corr=corr_mx)
+    gauss_c.rvs(size=100,
+                  random_state= 42)
+
+``TCopula``
+------------------
+
+.. autoclass:: copulas.TCopula
+   :members:
+
+Parametrization
+~~~~~~~~~~~~~~~~~~~~
+
+T copula cumulative density function:
+
+.. math:: C_{v, C}^{t}\left(u_{1}, \ldots, u_{d}\right)=\boldsymbol{t}_{v, C}\left(t_{v}^{-1}\left(u_{1}\right), \ldots, t_{v}^{-1}\left(u_{d}\right)\right)
+
+Given :math:`u_{k} \in[0,1], k=1, \ldots, d`. :math:`t_{v}^{-1}` is the inverse student’s t function and :math:`\boldsymbol{t}_{v, C}` is the cumulative distribution function of the multivariate student’s t distribution with a given mean and correlation matrix C.
+Degrees of freedom :math:`v>0` .
+
+Example code on the usage of the TCopula class::
+
+    from gemact import copulas
+
+    corr_mx=np.array([[1,.4],[.4,1]])
+
+    t_c=copulas.TCopula(corr=corr_mx,
+                        df=5)
+    t_c.rvs(size=100,
+            random_state= 42)
 
 References
 =================
