@@ -99,7 +99,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="usage.html">
-   Installation
+   Usage
   </a>
  </li>
  <li class="toctree-l1">
@@ -2043,41 +2043,28 @@ Refer to :py:class:’~_DiscreteDistribution’ for additional details.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>loc</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, optional) – location parameter (default=0), to shift the support of the distribution.</p></li>
-<li><p><strong>**kwargs</strong> – </p></li>
+<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
-</dl>
-<p>See below</p>
-<dl class="field-list simple">
-<dt class="field-odd">Keyword Arguments</dt>
-<dd class="field-odd"><ul class="simple">
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
 <li><p><em>mu</em> (<code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code>) –
 Poisson distribution parameter mu (rate).</p></li>
 </ul>
 </dd>
 </dl>
-<dl class="py property">
-<dt class="sig sig-object py" id="distributions.Poisson.a">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">a</span></span><a class="headerlink" href="#distributions.Poisson.a" title="Permalink to this definition">¶</a></dt>
-<dd><p>Void property to be overridden</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="distributions.Poisson.b">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">b</span></span><a class="headerlink" href="#distributions.Poisson.b" title="Permalink to this definition">¶</a></dt>
-<dd><p>Void property to be overridden</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="distributions.Poisson.dist">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dist</span></span><a class="headerlink" href="#distributions.Poisson.dist" title="Permalink to this definition">¶</a></dt>
-<dd><p>Void property to be overridden</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="distributions.Poisson.p0">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">p0</span></span><a class="headerlink" href="#distributions.Poisson.p0" title="Permalink to this definition">¶</a></dt>
-<dd><p>Void property to be overridden</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="distributions.Poisson.abk">
+<span class="sig-name descname"><span class="pre">abk</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#Poisson.abk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.Poisson.abk" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function returning (a, b, x) parametrization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a, b, probability in zero</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">numpy.array</span></code></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -2173,14 +2160,11 @@ Refer to :py:class:’~_DiscreteDistribution’ for additional details.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>loc</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, optional) – location parameter (default=0), to shift the support of the distribution.</p></li>
-<li><p><strong>**kwargs</strong> – </p></li>
+<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
-</dl>
-<p>See below</p>
-<dl class="field-list simple">
-<dt class="field-odd">Keyword Arguments</dt>
-<dd class="field-odd"><ul class="simple">
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
 <li><p><em>n</em> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) –
 Number of trials.</p></li>
 <li><p><em>p</em> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) –
@@ -2188,28 +2172,18 @@ Probability of a success, parameter of the binomial distribution.</p></li>
 </ul>
 </dd>
 </dl>
-<dl class="py property">
-<dt class="sig sig-object py" id="distributions.Binom.a">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">a</span></span><a class="headerlink" href="#distributions.Binom.a" title="Permalink to this definition">¶</a></dt>
-<dd><p>Void property to be overridden</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="distributions.Binom.b">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">b</span></span><a class="headerlink" href="#distributions.Binom.b" title="Permalink to this definition">¶</a></dt>
-<dd><p>Void property to be overridden</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="distributions.Binom.dist">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dist</span></span><a class="headerlink" href="#distributions.Binom.dist" title="Permalink to this definition">¶</a></dt>
-<dd><p>Void property to be overridden</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="distributions.Binom.p0">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">p0</span></span><a class="headerlink" href="#distributions.Binom.p0" title="Permalink to this definition">¶</a></dt>
-<dd><p>Void property to be overridden</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="distributions.Binom.abk">
+<span class="sig-name descname"><span class="pre">abk</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#Binom.abk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.Binom.abk" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function returning (a, b, x) parametrization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a, b, probability in zero</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">numpy.array</span></code></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -2309,41 +2283,28 @@ Refer to :py:class:’~_DiscreteDistribution’ for additional details.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>loc</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, optional) – location parameter (default=0), to shift the support of the distribution.</p></li>
-<li><p><strong>**kwargs</strong> – </p></li>
+<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
-</dl>
-<p>See below</p>
-<dl class="field-list simple">
-<dt class="field-odd">Keyword Arguments</dt>
-<dd class="field-odd"><ul class="simple">
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
 <li><p><em>p</em> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) –
 Probability parameter of the geometric distribution.</p></li>
 </ul>
 </dd>
 </dl>
-<dl class="py property">
-<dt class="sig sig-object py" id="distributions.Geom.a">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">a</span></span><a class="headerlink" href="#distributions.Geom.a" title="Permalink to this definition">¶</a></dt>
-<dd><p>Void property to be overridden</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="distributions.Geom.b">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">b</span></span><a class="headerlink" href="#distributions.Geom.b" title="Permalink to this definition">¶</a></dt>
-<dd><p>Void property to be overridden</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="distributions.Geom.dist">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dist</span></span><a class="headerlink" href="#distributions.Geom.dist" title="Permalink to this definition">¶</a></dt>
-<dd><p>Void property to be overridden</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="distributions.Geom.p0">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">p0</span></span><a class="headerlink" href="#distributions.Geom.p0" title="Permalink to this definition">¶</a></dt>
-<dd><p>Void property to be overridden</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="distributions.Geom.abk">
+<span class="sig-name descname"><span class="pre">abk</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#Geom.abk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.Geom.abk" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function returning (a, b, x) parametrization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a, b, probability in zero</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">numpy.array</span></code></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -2439,14 +2400,11 @@ Refer to :py:class:’~_DiscreteDistribution’ for additional details.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>loc</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, optional) – location parameter (default=0), to shift the support of the distribution.</p></li>
-<li><p><strong>**kwargs</strong> – </p></li>
+<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
-</dl>
-<p>See below</p>
-<dl class="field-list simple">
-<dt class="field-odd">Keyword Arguments</dt>
-<dd class="field-odd"><ul class="simple">
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
 <li><p><em>n</em> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) –
 Size parameter of the negative binomial distribution.</p></li>
 <li><p><em>p</em> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) –
@@ -2454,28 +2412,18 @@ Probability parameter of the negative binomial distribution.</p></li>
 </ul>
 </dd>
 </dl>
-<dl class="py property">
-<dt class="sig sig-object py" id="distributions.NegBinom.a">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">a</span></span><a class="headerlink" href="#distributions.NegBinom.a" title="Permalink to this definition">¶</a></dt>
-<dd><p>Void property to be overridden</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="distributions.NegBinom.b">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">b</span></span><a class="headerlink" href="#distributions.NegBinom.b" title="Permalink to this definition">¶</a></dt>
-<dd><p>Void property to be overridden</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="distributions.NegBinom.dist">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dist</span></span><a class="headerlink" href="#distributions.NegBinom.dist" title="Permalink to this definition">¶</a></dt>
-<dd><p>Void property to be overridden</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="distributions.NegBinom.p0">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">p0</span></span><a class="headerlink" href="#distributions.NegBinom.p0" title="Permalink to this definition">¶</a></dt>
-<dd><p>Void property to be overridden</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="distributions.NegBinom.abk">
+<span class="sig-name descname"><span class="pre">abk</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#NegBinom.abk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.NegBinom.abk" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function returning (a, b, x) parametrization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a, b, probability in zero</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">numpy.array</span></code></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -2574,14 +2522,11 @@ scipy reference non-zero-truncated distribution: <code class="docutils literal n
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>loc</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, optional) – location parameter (default=0), to shift the support of the distribution.</p></li>
-<li><p><strong>**kwargs</strong> – </p></li>
+<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
-</dl>
-<p>See below</p>
-<dl class="field-list simple">
-<dt class="field-odd">Keyword Arguments</dt>
-<dd class="field-odd"><ul class="simple">
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
 <li><p><em>mu</em> (<code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code>) –
 Zero-truncated Poisson distribution parameter mu (rate).</p></li>
 </ul>
@@ -4513,12 +4458,6 @@ shape parameter a.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="py property">
-<dt class="sig sig-object py" id="distributions.Gamma.dist">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dist</span></span><a class="headerlink" href="#distributions.Gamma.dist" title="Permalink to this definition">¶</a></dt>
-<dd><p>Void property to be overridden</p>
-</dd></dl>
-
 <dl class="py method">
 <dt class="sig sig-object py" id="distributions.Gamma.lev">
 <span class="sig-name descname"><span class="pre">lev</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#Gamma.lev"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.Gamma.lev" title="Permalink to this definition">¶</a></dt>
@@ -4629,12 +4568,6 @@ scipy reference distribution: <code class="docutils literal notranslate"><span c
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="distributions.Exponential.dist">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dist</span></span><a class="headerlink" href="#distributions.Exponential.dist" title="Permalink to this definition">¶</a></dt>
-<dd><p>Void property to be overridden</p>
 </dd></dl>
 
 <dl class="py method">
@@ -4897,15 +4830,12 @@ scipy reference distribution: <code class="docutils literal notranslate"><span c
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>scale</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – scale parameter.</p></li>
-<li><p><strong>loc</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>
-:param **kwargs:) – location parameter.</p></li>
+<li><p><strong>loc</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – location parameter.</p></li>
+<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
-</dl>
-<p>See below</p>
-<dl class="field-list simple">
-<dt class="field-odd">Keyword Arguments</dt>
-<dd class="field-odd"><ul class="simple">
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
 <li><p><em>mu</em> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>) –
 shape parameter mu.</p></li>
 </ul>
@@ -4929,12 +4859,6 @@ shape parameter mu.</p></li>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="distributions.InvGauss.dist">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dist</span></span><a class="headerlink" href="#distributions.InvGauss.dist" title="Permalink to this definition">¶</a></dt>
-<dd><p>Void property to be overridden</p>
 </dd></dl>
 
 <dl class="py method">
@@ -4974,15 +4898,12 @@ shape parameter mu.</p></li>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>scale</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – scale parameter.</p></li>
-<li><p><strong>loc</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>
-:param **kwargs:) – location parameter.</p></li>
+<li><p><strong>loc</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – location parameter.</p></li>
+<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
-</dl>
-<p>See below</p>
-<dl class="field-list simple">
-<dt class="field-odd">Keyword Arguments</dt>
-<dd class="field-odd"><ul class="simple">
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
 <li><p><em>a</em> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>) –
 shape parameter a.</p></li>
 </ul>
@@ -5006,12 +4927,6 @@ shape parameter a.</p></li>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="distributions.InvGamma.dist">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dist</span></span><a class="headerlink" href="#distributions.InvGamma.dist" title="Permalink to this definition">¶</a></dt>
-<dd><p>Void property to be overridden</p>
 </dd></dl>
 
 <dl class="py method">
@@ -5090,12 +5005,6 @@ shape parameter c.</p></li>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="distributions.GenPareto.dist">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dist</span></span><a class="headerlink" href="#distributions.GenPareto.dist" title="Permalink to this definition">¶</a></dt>
-<dd><p>Void property to be overridden</p>
 </dd></dl>
 
 <dl class="py method">
@@ -5211,12 +5120,6 @@ shape parameter s.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="py property">
-<dt class="sig sig-object py" id="distributions.Lognormal.dist">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dist</span></span><a class="headerlink" href="#distributions.Lognormal.dist" title="Permalink to this definition">¶</a></dt>
-<dd><p>Void property to be overridden</p>
-</dd></dl>
-
 <dl class="py method">
 <dt class="sig sig-object py" id="distributions.Lognormal.lev">
 <span class="sig-name descname"><span class="pre">lev</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#Lognormal.lev"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.Lognormal.lev" title="Permalink to this definition">¶</a></dt>
@@ -5287,14 +5190,11 @@ scipy reference distribution: <code class="docutils literal notranslate"><span c
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>scale</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – burr scale parameter.</p></li>
 <li><p><strong>loc</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – burr location parameter.</p></li>
-<li><p><strong>**kwargs</strong> – </p></li>
+<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
-</dl>
-<p>See below</p>
-<dl class="field-list simple">
-<dt class="field-odd">Keyword Arguments</dt>
-<dd class="field-odd"><ul class="simple">
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
 <li><p><em>c</em> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>) –
 shape parameter c.</p></li>
 <li><p><em>d</em> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>) –
@@ -5320,12 +5220,6 @@ shape parameter d.</p></li>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="distributions.Burr12.dist">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dist</span></span><a class="headerlink" href="#distributions.Burr12.dist" title="Permalink to this definition">¶</a></dt>
-<dd><p>Void property to be overridden</p>
 </dd></dl>
 
 <dl class="py method">
@@ -5404,14 +5298,11 @@ When d=s, this is an inverse paralogistic.
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>scale</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – dagum scale parameter.</p></li>
 <li><p><strong>loc</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – dagum location parameter.</p></li>
-<li><p><strong>**kwargs</strong> – </p></li>
+<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
-</dl>
-<p>See below</p>
-<dl class="field-list simple">
-<dt class="field-odd">Keyword Arguments</dt>
-<dd class="field-odd"><ul class="simple">
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
 <li><p><em>d</em> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>) –
 shape parameter d.</p></li>
 <li><p><em>s</em> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>) –
@@ -5437,12 +5328,6 @@ shape parameter s.</p></li>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="distributions.Dagum.dist">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dist</span></span><a class="headerlink" href="#distributions.Dagum.dist" title="Permalink to this definition">¶</a></dt>
-<dd><p>Void property to be overridden</p>
 </dd></dl>
 
 <dl class="py method">
@@ -5519,14 +5404,11 @@ shape parameter s.</p></li>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>scale</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – scale parameter.</p></li>
 <li><p><strong>loc</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – location parameter.</p></li>
-<li><p><strong>**kwargs</strong> – </p></li>
+<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
-</dl>
-<p>See below</p>
-<dl class="field-list simple">
-<dt class="field-odd">Keyword Arguments</dt>
-<dd class="field-odd"><ul class="simple">
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
 <li><p><em>c</em> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>) –
 shape parameter c.</p></li>
 </ul>
@@ -5550,12 +5432,6 @@ shape parameter c.</p></li>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="distributions.Weibull.dist">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dist</span></span><a class="headerlink" href="#distributions.Weibull.dist" title="Permalink to this definition">¶</a></dt>
-<dd><p>Void property to be overridden</p>
 </dd></dl>
 
 <dl class="py method">
@@ -5630,14 +5506,11 @@ shape parameter c.</p></li>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>scale</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – scale parameter.</p></li>
 <li><p><strong>loc</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – location parameter.</p></li>
-<li><p><strong>**kwargs</strong> – </p></li>
+<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
-</dl>
-<p>See below</p>
-<dl class="field-list simple">
-<dt class="field-odd">Keyword Arguments</dt>
-<dd class="field-odd"><ul class="simple">
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
 <li><p><em>c</em> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>) –
 shape parameter c.</p></li>
 </ul>
@@ -5661,12 +5534,6 @@ shape parameter c.</p></li>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="distributions.InvWeibull.dist">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dist</span></span><a class="headerlink" href="#distributions.InvWeibull.dist" title="Permalink to this definition">¶</a></dt>
-<dd><p>Void property to be overridden</p>
 </dd></dl>
 
 <dl class="py method">
@@ -5740,14 +5607,11 @@ shape parameter c.</p></li>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>scale</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – beta scale parameter.</p></li>
 <li><p><strong>loc</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – beta location parameter.</p></li>
-<li><p><strong>**kwargs</strong> – </p></li>
+<li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
-</dl>
-<p>See below</p>
-<dl class="field-list simple">
-<dt class="field-odd">Keyword Arguments</dt>
-<dd class="field-odd"><ul class="simple">
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
 <li><p><em>a</em> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>) –
 shape parameter a.</p></li>
 <li><p><em>b</em> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>) –
@@ -5773,12 +5637,6 @@ shape parameter b.</p></li>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="distributions.Beta.dist">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dist</span></span><a class="headerlink" href="#distributions.Beta.dist" title="Permalink to this definition">¶</a></dt>
-<dd><p>Void property to be overridden</p>
 </dd></dl>
 
 <dl class="py method">
@@ -6439,7 +6297,7 @@ Refer to Appendix A of Klugman, Panjer &amp; Willmot, Loss Models, Wiley.</p>
 
 <div class="section" id="id83">
 <h4>Parametrization<a class="headerlink" href="#id83" title="Permalink to this headline">¶</a></h4>
-<p>Gauss copula cumulative density function is based on the scipy function multivariate_normal.
+<p>Gauss copula cumulative density function is based on the scipy function <cite>multivariate_normal</cite>.
 For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.multivariate_normal.html">SciPy documentation</a>, <span id="id85">Virtanen <em>et al.</em> [<a class="reference internal" href="#id93" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span> .</p>
 <div class="math notranslate nohighlight">
 \[f(x)=\frac{1}{\sqrt{(2 \pi)^{k} \operatorname{det} \Sigma}} \exp \left(-\frac{1}{2}(x-\mu)^{T} \Sigma^{-1}(x-\mu)\right)\]</div>

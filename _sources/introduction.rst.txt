@@ -12,9 +12,9 @@ Scope
 * Extend the set of distributions available in scipy to actuarial scientists.
   GEMAct provides the first Python implementation of the (a,b,k) family.
 * New copulas available to statisticians.
-  For the first time in Python, the Student-T Copula cdf can be computed in GEMAct.
+  The Student-T Copula cdf can be numerically approximated in GEMAct.
 * Tools to estimate the loss reserves. 
-* The first Python implementation of the AEP algorithm. 
+* The first publicly available Python implementation of the AEP algorithm.
 
 Reinsurance treaties
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~

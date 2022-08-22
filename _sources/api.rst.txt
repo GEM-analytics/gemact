@@ -294,8 +294,9 @@ The ``distributions`` module
 Parametrization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-
 For a better explanation refer to the `SciPy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.poisson.html>`_, see :cite:t:`scipy`.
+
+
 
 .. math:: f(k)=\exp (-\mu) \frac{\mu^{k}}{k !}
    :label: poisson
@@ -1672,7 +1673,7 @@ Example code on the usage of the GumbelCopula class::
 Parametrization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Gauss copula cumulative density function is based on the scipy function multivariate_normal.
+Gauss copula cumulative density function is based on the scipy function `multivariate_normal`.
 For a better explanation refer to the `SciPy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.multivariate_normal.html>`_, :cite:t:`scipy` .
 
 .. math:: f(x)=\frac{1}{\sqrt{(2 \pi)^{k} \operatorname{det} \Sigma}} \exp \left(-\frac{1}{2}(x-\mu)^{T} \Sigma^{-1}(x-\mu)\right)
