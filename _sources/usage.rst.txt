@@ -1,6 +1,8 @@
 Usage
 =============
 
+Installation
+---------------
 In order to install GEMAct::
 
    pip install gemact

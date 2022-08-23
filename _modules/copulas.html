@@ -96,12 +96,12 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../usage.html">
-   Installation
+   Usage
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../modeling.html">
-   Summary of distributions supported
+   Actuarial modeling with GEMAct
   </a>
  </li>
  <li class="toctree-l1">
@@ -149,7 +149,7 @@
         aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
     <div class="dropdown-buttons sourcebuttons">
         <a class="repository-button"
-            href="https://github.com//GEM-analytics"><button type="button" class="btn btn-secondary topbarbtn"
+            href="https://github.com/gpitt71/gemact-code"><button type="button" class="btn btn-secondary topbarbtn"
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         
@@ -577,11 +577,26 @@
     <span class="k">def</span> <span class="nf">error_cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__error_cdf</span>
 
-    <span class="k">def</span> <span class="nf">cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">max_evaluations</span><span class="o">=</span><span class="mf">1e+6</span><span class="p">,</span> <span class="n">n_repetitions</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
+<div class="viewcode-block" id="TCopula.cdf"><a class="viewcode-back" href="../api.html#copulas.TCopula.cdf">[docs]</a>    <span class="k">def</span> <span class="nf">cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">max_evaluations</span><span class="o">=</span><span class="mf">1e+6</span><span class="p">,</span> <span class="n">n_repetitions</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Cumulative distribution function.</span>
+
+<span class="sd">        :param x: Array with shape (N, d) where N is the number of points and d the dimension.</span>
+<span class="sd">        :type x: ``numpy.ndarray``</span>
+<span class="sd">        :param tolerance: Tolerance threshold in cdf computation.</span>
+<span class="sd">        :type tolerance: ``float``</span>
+<span class="sd">        :param max_evaluations: Maximum number of iterations.</span>
+<span class="sd">        :type max_evaluations: ``int``</span>
+<span class="sd">        :param n_repetitions: Array with shape (N, d) where N is the number of points and d the dimension.</span>
+<span class="sd">        :type n_repetitions: ``int``</span>
+
+<span class="sd">        :return: Cumulative distribution function in x.</span>
+<span class="sd">        :rtype: ``numpy.ndarray``</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">q</span> <span class="o">=</span> <span class="n">t</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="p">(</span><span class="n">prob</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span> <span class="o">=</span> <span class="n">hf</span><span class="o">.</span><span class="n">multivariate_t_cdf</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">corr</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">,</span> <span class="n">max_evaluations</span><span class="p">,</span> <span class="n">n_repetitions</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__error_cdf</span> <span class="o">=</span> <span class="n">err</span>
-        <span class="k">return</span> <span class="n">prob</span>
+        <span class="k">return</span> <span class="n">prob</span></div>
 
 <div class="viewcode-block" id="TCopula.rvs"><a class="viewcode-back" href="../api.html#copulas.TCopula.rvs">[docs]</a>    <span class="k">def</span> <span class="nf">rvs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>

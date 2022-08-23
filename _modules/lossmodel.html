@@ -96,7 +96,12 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../usage.html">
-   Installation
+   Usage
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../modeling.html">
+   Actuarial modeling with GEMAct
   </a>
  </li>
  <li class="toctree-l1">
@@ -144,7 +149,7 @@
         aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
     <div class="dropdown-buttons sourcebuttons">
         <a class="repository-button"
-            href="https://github.com//GEM-analytics"><button type="button" class="btn btn-secondary topbarbtn"
+            href="https://github.com/gpitt71/gemact-code"><button type="button" class="btn btn-secondary topbarbtn"
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         
@@ -248,7 +253,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">p0</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fq_par</span><span class="p">[</span><span class="s1">&#39;p0M&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;zm&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fq_model</span><span class="o">.</span><span class="n">category</span><span class="p">()</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fq_par</span><span class="p">[</span><span class="s1">&#39;p0m&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;zm&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fq_model</span><span class="o">.</span><span class="n">category</span><span class="p">()</span> <span class="k">else</span> <span class="kc">None</span>
         <span class="k">return</span> <span class="n">output</span>
 
     <span class="nd">@property</span>

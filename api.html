@@ -1711,6 +1711,38 @@ such as quota share, excess-of-loss, excess-of-loss with reinstatements, stop lo
 </div>
 <div class="section" id="pricing-models">
 <h3>Pricing models<a class="headerlink" href="#pricing-models" title="Permalink to this headline">¶</a></h3>
+<p>The following table gives the correspondence between the <code class="docutils literal notranslate"><span class="pre">LossModel</span></code> class attributes and our pricing model as presented below.</p>
+<table class="table">
+<colgroup>
+<col style="width: 37%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Pricing model notation</p></th>
+<th class="head"><p>Parametrization in <code class="docutils literal notranslate"><span class="pre">LossModel</span></code></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(d\)</span></p></td>
+<td><p>deductible</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(u\)</span></p></td>
+<td><p>deductible+cover</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(L\)</span></p></td>
+<td><p>aggr_n_deductible * deductible</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(K\)</span></p></td>
+<td><p>n_reinst</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(c_{k}\)</span></p></td>
+<td><p>reinst_loading</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\alpha\)</span></p></td>
+<td><p>alpha_qs</p></td>
+</tr>
+</tbody>
+</table>
 <p>Assume:</p>
 <div class="math notranslate nohighlight" id="equation-crmre">
 <span class="eqno">(2)<a class="headerlink" href="#equation-crmre" title="Permalink to this equation">¶</a></span>\[X^{\prime}=\min (\max (0, X-L), (K+1) \cdot u)\]</div>
@@ -2552,7 +2584,7 @@ Zero-truncated Poisson distribution parameter mu (rate).</p></li>
 <dd><p>Cumulative distribution function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>x</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – quantile where the cumulative distribution function is evaluated.</p>
+<dd class="field-odd"><p><strong>x</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – quantile where the cumulative distribution function is evaluated.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>cumulative distribution function.</p>
@@ -2734,7 +2766,7 @@ of the random variable given the (a, b, x) parametrization.</p>
 <h3><code class="docutils literal notranslate"><span class="pre">ZMPoisson</span></code><a class="headerlink" href="#zmpoisson" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="distributions.ZMPoisson">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ZMPoisson</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">loc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxDiff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.95</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#ZMPoisson"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.ZMPoisson" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ZMPoisson</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">loc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxdiff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.95</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#ZMPoisson"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.ZMPoisson" title="Permalink to this definition">¶</a></dt>
 <dd><p>Zero-modified Poisson distribution. Discrete mixture between a degenerate distribution
 at zero and a non-modified Poisson distribution.
 scipy reference non-zero-modified distribution: <code class="docutils literal notranslate"><span class="pre">scipy.stats._discrete_distns.poisson_gen</span></code></p>
@@ -2750,7 +2782,7 @@ scipy reference non-zero-modified distribution: <code class="docutils literal no
 <dd class="field-even"><ul class="simple">
 <li><p><em>mu</em> (<code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code>) –
 Zero-modified Poisson distribution rate parameter.</p></li>
-<li><p><em>p0M</em> (<code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code>) –
+<li><p><em>p0m</em> (<code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code>) –
 Zero-modified Poisson mixing parameter. Resulting probability mass in zero.</p></li>
 </ul>
 </dd>
@@ -3195,7 +3227,7 @@ scipy reference non-zero-modified distribution: <code class="docutils literal no
 Zero-modified binomial distribution size parameter n.</p></li>
 <li><p><em>p</em> (<code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code>) –
 Zero-modified binomial distribution probability parameter p.</p></li>
-<li><p><em>p0M</em> (<code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code>) –
+<li><p><em>p0m</em> (<code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code>) –
 Zero-modified binomial mixing parameter.</p></li>
 </ul>
 </dd>
@@ -3633,7 +3665,7 @@ scipy reference non-zero-modified distribution: <cite>scipy.stats._discrete_dist
 <dd class="field-even"><ul class="simple">
 <li><p><em>p</em> (<code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code>) –
 Zero-modified geometric distribution probability parameter p.</p></li>
-<li><p><em>p0M</em> (<code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code>) –
+<li><p><em>p0m</em> (<code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code>) –
 Zero-modified geometric mixing parameter.</p></li>
 </ul>
 </dd>
@@ -4248,7 +4280,8 @@ of the random variable given the (a, b, x) parametrization.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="distributions.ZMLogser">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ZMLogser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#ZMLogser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.ZMLogser" title="Permalink to this definition">¶</a></dt>
-<dd><p>Zero-modified (discrete) logarithmic (log-series, series) distribution. Discrete mixture between a degenerate distribution
+<dd><p>Zero-modified (discrete) logarithmic (log-series, series) distribution.
+Discrete mixture between a degenerate distribution
 at zero and a non-modified logarithmic distribution.
 scipy reference non-zero-modified distribution: <code class="docutils literal notranslate"><span class="pre">scipy.stats._discrete_distns.logser_gen</span></code></p>
 <dl class="field-list simple">
@@ -4259,7 +4292,7 @@ scipy reference non-zero-modified distribution: <code class="docutils literal no
 <dd class="field-even"><ul class="simple">
 <li><p><em>p</em> (<code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code>) –
 ZM discrete logarithmic distribution probability parameter p.</p></li>
-<li><p><em>p0M</em> (<code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code>) –
+<li><p><em>p0m</em> (<code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code>) –
 ZM discrete logarithmic mixing parameter.</p></li>
 </ul>
 </dd>
@@ -4418,7 +4451,7 @@ ZM discrete logarithmic mixing parameter.</p></li>
 <h3><code class="docutils literal notranslate"><span class="pre">Gamma</span></code><a class="headerlink" href="#gamma" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="distributions.Gamma">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Gamma</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">loc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#Gamma"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.Gamma" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Gamma</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">loc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#Gamma"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.Gamma" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gamma distribution.
 When a is an integer it reduces to an Erlang distribution.
 When a=1 it reduces to an Exponential distribution.
@@ -4960,7 +4993,7 @@ shape parameter a.</p></li>
 <h3><code class="docutils literal notranslate"><span class="pre">GenPareto</span></code><a class="headerlink" href="#genpareto" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="distributions.GenPareto">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GenPareto</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">loc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#GenPareto"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.GenPareto" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GenPareto</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">loc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#GenPareto"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.GenPareto" title="Permalink to this definition">¶</a></dt>
 <dd><p>Wrapper to scipy genpareto distribution.
 When c=0 it reduces to an Exponential distribution.
 When c=-1 it reduces to a uniform distribution.
@@ -5076,7 +5109,7 @@ shape parameter c.</p></li>
 <h3><code class="docutils literal notranslate"><span class="pre">Lognormal</span></code><a class="headerlink" href="#lognormal" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="distributions.Lognormal">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Lognormal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">loc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#Lognormal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.Lognormal" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Lognormal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">loc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#Lognormal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.Lognormal" title="Permalink to this definition">¶</a></dt>
 <dd><p>Lognormal distribution.
 scipy reference distribution: <a href="#id59"><span class="problematic" id="id60">``</span></a>scipy.stats._continuous_distns.lognorm_gen ``</p>
 <dl class="field-list simple">
@@ -5704,7 +5737,7 @@ shape parameter b.</p></li>
 <h3><code class="docutils literal notranslate"><span class="pre">GenBeta</span></code><a class="headerlink" href="#genbeta" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="distributions.GenBeta">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GenBeta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shape1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#GenBeta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.GenBeta" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GenBeta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shape1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/distributions.html#GenBeta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#distributions.GenBeta" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generalized Beta (GB) distribution, also refer to as Generalized Beta
 of the second kind, or the Generalized Beta Prime distribution.
 If X is a GB distributed r.v., its cumulative distribution function can
@@ -6327,6 +6360,28 @@ For a better explanation refer to the <a class="reference external" href="https:
 </ul>
 </dd>
 </dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="copulas.TCopula.cdf">
+<span class="sig-name descname"><span class="pre">cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tolerance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_evaluations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_repetitions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">30</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/copulas.html#TCopula.cdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#copulas.TCopula.cdf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cumulative distribution function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – Array with shape (N, d) where N is the number of points and d the dimension.</p></li>
+<li><p><strong>tolerance</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – Tolerance threshold in cdf computation.</p></li>
+<li><p><strong>max_evaluations</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – Maximum number of iterations.</p></li>
+<li><p><strong>n_repetitions</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – Array with shape (N, d) where N is the number of points and d the dimension.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Cumulative distribution function in x.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="copulas.TCopula.rvs">
 <span class="sig-name descname"><span class="pre">rvs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/copulas.html#TCopula.rvs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#copulas.TCopula.rvs" title="Permalink to this definition">¶</a></dt>

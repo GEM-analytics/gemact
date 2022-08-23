@@ -28,6 +28,25 @@ In order to price our (re)insurance contracts we model the company aggregate cla
 Pricing models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+The following table gives the correspondence between the ``LossModel`` class attributes and our pricing model as presented below.
+
++------------------------+-----------------------------------------+
+| Pricing model notation | Parametrization in ``LossModel``        |
+|                        |                                         |
++========================+=========================================+
+|:math:`d`               |      deductible                         |
++------------------------+-----------------------------------------+
+| :math:`u`              | deductible+cover                        |
++------------------------+-----------------------------------------+
+| :math:`L`              | aggr_n_deductible * deductible          |
++------------------------+-----------------------------------------+
+| :math:`K`              |       n_reinst                          |
++------------------------+-----------------------------------------+
+|:math:`c_{k}`           |      reinst_loading                     |
++------------------------+-----------------------------------------+
+| :math:`\alpha`         | alpha_qs                                |
++------------------------+-----------------------------------------+
+
 Assume: 
 
 .. math:: X^{\prime}=\min (\max (0, X-L), (K+1) \cdot u)
