@@ -1889,7 +1889,7 @@ In case no tail is present it must be J-1 dimensional.</p></li>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
 <li><dl class="simple">
-<dt><em>ip_tr</em> = (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) –</dt><dd><p>Incremental payments’ triangle</p>
+<dt><em>incremental_payments</em> = (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) –</dt><dd><p>Incremental payments’ triangle</p>
 </dd>
 </dl>
 </li>
@@ -1899,17 +1899,17 @@ In case no tail is present it must be J-1 dimensional.</p></li>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><em>cp_tr</em> = (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) –</dt><dd><p>Cased payments triangle</p>
+<dt><em>cased_payments</em> = (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) –</dt><dd><p>Cased payments triangle</p>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><em>in_tr</em> = (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) –</dt><dd><p>Incurred number</p>
+<dt><em>incurred_number</em> = (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) –</dt><dd><p>Incurred number</p>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><em>cn_tr</em> = (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) –</dt><dd><p>Cased number</p>
+<dt><em>cased_number</em> = (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) –</dt><dd><p>Cased number</p>
 </dd>
 </dl>
 </li>
@@ -1983,17 +1983,20 @@ are compared with the Fisher-Lange.</p>
 </pre></div>
 </div>
 <p>An example of CRM implementation. Observe the CRM for reserving requires additional parameters:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lr</span> <span class="o">=</span> <span class="n">gemact</span><span class="o">.</span><span class="n">LossReserve</span><span class="p">(</span><span class="n">tail</span><span class="o">=</span><span class="n">tail_</span><span class="p">,</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#Loss reserving: instance lr</span>
+<span class="n">lr</span> <span class="o">=</span> <span class="n">gemact</span><span class="o">.</span><span class="n">LossReserve</span><span class="p">(</span><span class="n">tail</span><span class="o">=</span><span class="n">tail_</span><span class="p">,</span>
                <span class="n">incremental_payments</span><span class="o">=</span><span class="n">ip_</span><span class="p">,</span>
                <span class="n">cased_payments</span><span class="o">=</span><span class="n">cp_</span><span class="p">,</span>
                <span class="n">cased_number</span><span class="o">=</span><span class="n">cn_</span><span class="p">,</span>
                <span class="n">reported_claims</span><span class="o">=</span><span class="n">reported_</span><span class="p">,</span>
                <span class="n">incurred_number</span><span class="o">=</span><span class="n">in_</span><span class="p">,</span>
-               <span class="n">ntr_sim</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mi">1000</span><span class="p">),</span>
-               <span class="n">reserving_method</span><span class="o">=</span><span class="s2">&quot;crm&quot;</span><span class="p">,</span>
-               <span class="n">mixingfpar</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="mi">1</span><span class="o">/</span><span class="mf">.08</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;scale&#39;</span><span class="p">:</span><span class="mf">.08</span><span class="o">**</span><span class="mi">2</span><span class="p">},</span>
-               <span class="n">mixingspar</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="mi">1</span><span class="o">/</span><span class="mf">.08</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;scale&#39;</span><span class="p">:</span><span class="mf">.08</span><span class="o">**</span><span class="mi">2</span><span class="p">},</span>
+               <span class="n">ntr_sim</span><span class="o">=</span><span class="n">ntr_sim_</span><span class="p">,</span>
+               <span class="n">reserving_method</span><span class="o">=</span><span class="n">rm_</span><span class="p">,</span>
+               <span class="n">mixing_fq_par</span><span class="o">=</span><span class="n">mixing_fq_par</span><span class="p">,</span>
+               <span class="n">mixing_sev_par</span><span class="o">=</span><span class="n">mixing_sev_par</span><span class="p">,</span>
                <span class="n">claims_inflation</span><span class="o">=</span><span class="n">infl_</span><span class="p">)</span>
+
+<span class="c1">#The progress bar below gives insights on the simulation</span>
 </pre></div>
 </div>
 </div>
@@ -2955,8 +2958,8 @@ of the random variable given the (a, b, x) parametrization.</p>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="n">mu</span><span class="o">=</span><span class="mi">2</span>
-<span class="n">p0M</span><span class="o">=</span><span class="mf">0.1</span>
-<span class="n">dist</span><span class="o">=</span><span class="n">distributions</span><span class="o">.</span><span class="n">ZMpoisson</span><span class="p">(</span><span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span><span class="n">p0M</span><span class="o">=</span><span class="n">p0M</span><span class="p">)</span>
+<span class="n">p0m</span><span class="o">=</span><span class="mf">0.1</span>
+<span class="n">dist</span><span class="o">=</span><span class="n">distributions</span><span class="o">.</span><span class="n">ZMpoisson</span><span class="p">(</span><span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span><span class="n">p0m</span><span class="o">=</span><span class="n">p0m</span><span class="p">)</span>
 <span class="n">seq</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mf">.001</span><span class="p">)</span>
 <span class="n">nsim</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mf">1e+05</span><span class="p">)</span>
 
@@ -2976,11 +2979,11 @@ of the random variable given the (a, b, x) parametrization.</p>
 
 <span class="c1">#pmf</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">seq</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Probability mass function, ~ZMPois(mu=2,p0M=.1)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Probability mass function, ~ZMPois(mu=2,p0m=.1)&#39;</span><span class="p">)</span>
 
 <span class="c1">#cdf</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">),</span><span class="n">dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">)),</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;pre&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Cumulative distribution function,  ~ZMPois(mu=2,p0M=.1)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Cumulative distribution function,  ~ZMPois(mu=2,p0m=.1)&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/pmfZMPois.png"><img alt="_images/pmfZMPois.png" src="_images/pmfZMPois.png" style="width: 400px;" /></a>
@@ -3401,8 +3404,8 @@ of the random variable given the (a, b, x) parametrization.</p>
 
 <span class="n">n</span><span class="o">=</span><span class="mi">10</span>
 <span class="n">p</span><span class="o">=</span><span class="mf">.2</span>
-<span class="n">p0M</span><span class="o">=</span><span class="mf">.05</span>
-<span class="n">dist</span><span class="o">=</span><span class="n">distributions</span><span class="o">.</span><span class="n">ZMbinom</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span><span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="n">p0M</span><span class="o">=</span><span class="n">p0M</span><span class="p">)</span>
+<span class="n">p0m</span><span class="o">=</span><span class="mf">.05</span>
+<span class="n">dist</span><span class="o">=</span><span class="n">distributions</span><span class="o">.</span><span class="n">ZMbinom</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span><span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="n">p0m</span><span class="o">=</span><span class="n">p0m</span><span class="p">)</span>
 <span class="n">seq</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mf">.001</span><span class="p">)</span>
 <span class="n">nsim</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mf">1e+05</span><span class="p">)</span>
 
@@ -3422,11 +3425,11 @@ of the random variable given the (a, b, x) parametrization.</p>
 
 <span class="c1">#pmf</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">seq</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Probability mass function, ~ZMBinom(n=10,p=.5,p0M=.05)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Probability mass function, ~ZMBinom(n=10,p=.5,p0m=.05)&#39;</span><span class="p">)</span>
 
 <span class="c1">#cdf</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">),</span><span class="n">dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">)),</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;pre&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Cumulative distribution function,  ~ZMBinom(n=10,p=.5,p0M=.05)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Cumulative distribution function,  ~ZMBinom(n=10,p=.5,p0m=.05)&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/pmfZMBinom.png"><img alt="_images/pmfZMBinom.png" src="_images/pmfZMBinom.png" style="width: 400px;" /></a>
@@ -3838,8 +3841,8 @@ of the random variable given the (a, b, x) parametrization.</p>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="n">p</span><span class="o">=</span><span class="mf">.2</span>
-<span class="n">p0M</span><span class="o">=</span><span class="mf">.01</span>
-<span class="n">dist</span><span class="o">=</span><span class="n">distributions</span><span class="o">.</span><span class="n">ZMgeom</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="n">p0M</span><span class="o">=</span><span class="n">p0M</span><span class="p">)</span>
+<span class="n">p0m</span><span class="o">=</span><span class="mf">.01</span>
+<span class="n">dist</span><span class="o">=</span><span class="n">distributions</span><span class="o">.</span><span class="n">ZMgeom</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="n">p0m</span><span class="o">=</span><span class="n">p0m</span><span class="p">)</span>
 <span class="n">seq</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mf">.001</span><span class="p">)</span>
 <span class="n">nsim</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mf">1e+05</span><span class="p">)</span>
 
@@ -3859,11 +3862,11 @@ of the random variable given the (a, b, x) parametrization.</p>
 
 <span class="c1">#pmf</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">seq</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Probability mass function, ~ZMGeom(p=.2,p0M=.01)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Probability mass function, ~ZMGeom(p=.2,p0m=.01)&#39;</span><span class="p">)</span>
 
 <span class="c1">#cdf</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">),</span><span class="n">dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">)),</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;pre&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Cumulative distribution function,  ~ZMGeom(p=.2,p0M=.01)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Cumulative distribution function,  ~ZMGeom(p=.2,p0m=.01)&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/pmfZMGeom.png"><img alt="_images/pmfZMGeom.png" src="_images/pmfZMGeom.png" style="width: 400px;" /></a>
@@ -4416,8 +4419,8 @@ ZM discrete logarithmic mixing parameter.</p></li>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="n">p</span><span class="o">=</span><span class="mf">.2</span>
-<span class="n">p0M</span><span class="o">=</span><span class="mf">.01</span>
-<span class="n">dist</span><span class="o">=</span><span class="n">distributions</span><span class="o">.</span><span class="n">ZMlogser</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="n">p0M</span><span class="o">=</span><span class="n">p0M</span><span class="p">)</span>
+<span class="n">p0m</span><span class="o">=</span><span class="mf">.01</span>
+<span class="n">dist</span><span class="o">=</span><span class="n">distributions</span><span class="o">.</span><span class="n">ZMlogser</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="n">p0m</span><span class="o">=</span><span class="n">p0m</span><span class="p">)</span>
 <span class="n">seq</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mf">.001</span><span class="p">)</span>
 <span class="n">nsim</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mf">1e+05</span><span class="p">)</span>
 
@@ -4437,10 +4440,10 @@ ZM discrete logarithmic mixing parameter.</p></li>
 
 <span class="c1">#pmf</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">seq</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Probability mass function, ~ZMlogser(p=.2, p0M=.01)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Probability mass function, ~ZMlogser(p=.2, p0m=.01)&#39;</span><span class="p">)</span>
 <span class="c1">#cdf</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span><span class="n">dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">)),</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;pre&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Cumulative distribution function,  ~ZMlogser(p=.2, p0M=.01)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Cumulative distribution function,  ~ZMlogser(p=.2, p0m=.01)&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/pmfZMLogser.png"><img alt="_images/pmfZMLogser.png" src="_images/pmfZMLogser.png" style="width: 400px;" /></a>

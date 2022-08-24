@@ -235,17 +235,20 @@ An example of Fisher-Lange implementation::
 
 An example of CRM implementation. Observe the CRM for reserving requires additional parameters::
 
+    #Loss reserving: instance lr
     lr = gemact.LossReserve(tail=tail_,
                    incremental_payments=ip_,
                    cased_payments=cp_,
                    cased_number=cn_,
                    reported_claims=reported_,
                    incurred_number=in_,
-                   ntr_sim=int(1000),
-                   reserving_method="crm",
-                   mixingfpar={'a':1/.08**2,'scale':.08**2},
-                   mixingspar={'a':1/.08**2,'scale':.08**2},
+                   ntr_sim=ntr_sim_,
+                   reserving_method=rm_,
+                   mixing_fq_par=mixing_fq_par,
+                   mixing_sev_par=mixing_sev_par,
                    claims_inflation=infl_)
+
+    #The progress bar below gives insights on the simulation
 
 ``LossAggregation``
 ---------------------
@@ -619,8 +622,8 @@ Example code on the usage of the ZMPoisson class::
     import numpy as np
 
     mu=2
-    p0M=0.1
-    dist=distributions.ZMpoisson(mu=mu,p0M=p0M)
+    p0m=0.1
+    dist=distributions.ZMpoisson(mu=mu,p0m=p0m)
     seq=np.arange(0,30,.001)
     nsim=int(1e+05)
 
@@ -640,11 +643,11 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a ZMPoisson::
 
     #pmf
     plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
-    plt.title('Probability mass function, ~ZMPois(mu=2,p0M=.1)')
+    plt.title('Probability mass function, ~ZMPois(mu=2,p0m=.1)')
 
     #cdf
     plt.step(np.arange(0,20),dist.cdf(np.arange(0,20)),'-', where='pre')
-    plt.title('Cumulative distribution function,  ~ZMPois(mu=2,p0M=.1)')
+    plt.title('Cumulative distribution function,  ~ZMPois(mu=2,p0m=.1)')
 
 .. image:: images/pmfZMPois.png
   :width: 400
@@ -737,8 +740,8 @@ Example code on the usage of the ZMBinom class::
 
     n=10
     p=.2
-    p0M=.05
-    dist=distributions.ZMbinom(n=n,p=p,p0M=p0M)
+    p0m=.05
+    dist=distributions.ZMbinom(n=n,p=p,p0m=p0m)
     seq=np.arange(0,100,.001)
     nsim=int(1e+05)
 
@@ -758,11 +761,11 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a ZMPoisson::
 
     #pmf
     plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
-    plt.title('Probability mass function, ~ZMBinom(n=10,p=.5,p0M=.05)')
+    plt.title('Probability mass function, ~ZMBinom(n=10,p=.5,p0m=.05)')
 
     #cdf
     plt.step(np.arange(0,20),dist.cdf(np.arange(0,20)),'-', where='pre')
-    plt.title('Cumulative distribution function,  ~ZMBinom(n=10,p=.5,p0M=.05)')
+    plt.title('Cumulative distribution function,  ~ZMBinom(n=10,p=.5,p0m=.05)')
 
 .. image:: images/pmfZMBinom.png
   :width: 400
@@ -849,8 +852,8 @@ Example code on the usage of the ZMGeom class::
     import numpy as np
 
     p=.2
-    p0M=.01
-    dist=distributions.ZMgeom(p=p,p0M=p0M)
+    p0m=.01
+    dist=distributions.ZMgeom(p=p,p0m=p0m)
     seq=np.arange(0,100,.001)
     nsim=int(1e+05)
 
@@ -870,11 +873,11 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a ZMGeom::
 
     #pmf
     plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
-    plt.title('Probability mass function, ~ZMGeom(p=.2,p0M=.01)')
+    plt.title('Probability mass function, ~ZMGeom(p=.2,p0m=.01)')
 
     #cdf
     plt.step(np.arange(0,20),dist.cdf(np.arange(0,20)),'-', where='pre')
-    plt.title('Cumulative distribution function,  ~ZMGeom(p=.2,p0M=.01)')
+    plt.title('Cumulative distribution function,  ~ZMGeom(p=.2,p0m=.01)')
 
 .. image:: images/pmfZMGeom.png
   :width: 400
@@ -983,8 +986,8 @@ Example code on the usage of the ZMLogser class::
     import numpy as np
 
     p=.2
-    p0M=.01
-    dist=distributions.ZMlogser(p=p,p0M=p0M)
+    p0m=.01
+    dist=distributions.ZMlogser(p=p,p0m=p0m)
     seq=np.arange(0,100,.001)
     nsim=int(1e+05)
 
@@ -1004,10 +1007,10 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a ZMlogser::
 
     #pmf
     plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
-    plt.title('Probability mass function, ~ZMlogser(p=.2, p0M=.01)')
+    plt.title('Probability mass function, ~ZMlogser(p=.2, p0m=.01)')
     #cdf
     plt.step(np.arange(0,10),dist.cdf(np.arange(0,10)),'-', where='pre')
-    plt.title('Cumulative distribution function,  ~ZMlogser(p=.2, p0M=.01)')
+    plt.title('Cumulative distribution function,  ~ZMlogser(p=.2, p0m=.01)')
 
 .. image:: images/pmfZMLogser.png
   :width: 400
