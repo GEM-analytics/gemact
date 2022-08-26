@@ -13,7 +13,7 @@ API reference guide
 
 GEMAct pricing model is based on the collective risk theory.
 
-.. math:: X=\sum_{i=1}^{N} Z_i}
+.. math:: X=\sum_{i=1}^{N} Z_i
    :label: crm
 
 Denote the pure reinsurance premium as :math:`P= \mathbb{E}\left( X \right)`
