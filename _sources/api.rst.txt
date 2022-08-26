@@ -8,22 +8,21 @@ API reference guide
    :members:
    :inherited-members:
 
-
 (Re)insurance pricing
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 GEMAct pricing model is based on the collective risk theory.
 
-.. math:: \widetilde{X}=\sum_{i=1}^{\widetilde{N}} \widetilde{{Z_i}}
+.. math:: X=\sum_{i=1}^{N} Z_i}
    :label: crm
 
 Denote the pure reinsurance premium as :math:`P= \mathbb{E}\left( X \right)`
 
 In order to price our (re)insurance contracts we model the company aggregate claim cost under the following assumptions.
 
-* :math:`\widetilde{X} \sim g(X)` and :math:`\widetilde{Z_i} \sim f(Z)`
-*  Given :math:`\widetilde{N}=n`,  the severity :math:`\widetilde{Z_1},\ldots,\widetilde{Z_n}` is i.i.d and does not depend on :math:`n`.
-* :math:`\widetilde{N}` does not depend on :math:`\widetilde{Z_1},\ldots,\widetilde{Z_n}` in any way.
+* :math:`X \sim g(X)` and :math:`Z_i \sim f(Z)`
+*  Given :math:`N=n`,  the severity :math:`Z_1,\ldots,Z_n` is i.i.d and does not depend on :math:`n`.
+* :math:`N` does not depend on :math:`Z_1,\ldots,Z_n` in any way.
 
 Pricing models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -52,9 +51,9 @@ Assume:
 .. math:: X^{\prime}=\min (\max (0, X-L), (K+1) \cdot u)
    :label: crmRE
 
-Given :math:`\widetilde{X}=\sum_{i=1}^{\widetilde{N}} \widetilde{Y}_{i}`, where :math:`\widetilde{Y}_i` is defined in equation :eq:`crmRE`.
+Given :math:`X=\sum_{i=1}^{N} Y_{i}`, where :math:`Y_i` is defined in equation :eq:`crmRE`.
 
-.. math:: \widetilde{Y}_{i}=\min \left(\max \left(0, \widetilde{Z}_{i}-d\right), u\right)
+.. math:: Y_{i}=\min \left(\max \left(0, Z_{i}-d\right), u\right)
    :label: XLpremium
 
 Equation :eq:`XLpremium` shows the reinsurance premium for excess of loss treaties. It is possible to obtain a plain-vanilla XL with :math:`L=0`, :math:`K=+\infty` and :math:`c=0`.
@@ -116,10 +115,10 @@ In order to pass from a continuous distribution to an arithmetic distribution, i
 
 **Method of mass dispersal**
 
-.. math:: f_{0}=\operatorname{Pr}\left(\widetilde{Y}<\frac{h}{2}\right)=F_{\widetilde{Y}}\left(\frac{h}{2}-0\right)
+.. math:: f_{0}=\operatorname{Pr}\left(Y<\frac{h}{2}\right)=F_{Y}\left(\frac{h}{2}-0\right)
    :label: md1
 
-.. math:: f_{j}=F_{\widetilde{Y}}\left(j h+\frac{h}{2}-0\right)-F_{\widetilde{Y}}\left(j h-\frac{h}{2}-0\right), \quad j=1,2, \ldots, M-1
+.. math:: f_{j}=F_{Y}\left(j h+\frac{h}{2}-0\right)-F_{Y}\left(j h-\frac{h}{2}-0\right), \quad j=1,2, \ldots, M-1
    :label: md2
 
 
@@ -497,7 +496,7 @@ For a better explanation refer to the `SciPy documentation <https://docs.scipy.o
       k+n-1 \\
       n-1
    \end{array}\right) p^{n}(1-p)^{k}
-   :label: geom
+   :label: nbinomial
 
 for :math:`k \geq 0,0<p \leq 1`
 
@@ -508,7 +507,7 @@ Example code on the usage of the NegBinom class::
 
     n=10
     p=.5
-    dist=distributions.Nbinom(n=n,p=p)
+    dist=distributions.NegBinom(n=n,p=p)
     seq=np.arange(0,100,.001)
     nsim=int(1e+05)
 
@@ -524,16 +523,16 @@ Example code on the usage of the NegBinom class::
     print('Simulated mean',np.mean(dist.rvs(nsim)))
     print('Simulated variance',np.var(dist.rvs(nsim)))
 
-Then, use ``matplotlib`` library to print the pmf and the cdf of a NBinom::
+Then, use ``matplotlib`` library to print the pmf and the cdf of a NegBinom::
 
     import matplotlib.pyplot as plt
     #pmf
     plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
-    plt.title('Probability mass function, ~NBinom(n=10,p=0.8)')
+    plt.title('Probability mass function, ~NegBinom(n=10,p=0.8)')
 
     #cdf
     plt.step(np.arange(-2,20),dist.cdf(np.arange(-2,20)),'-', where='pre')
-    plt.title('Cumulative distribution function, ~NBinom(n=10,p=0.8)')
+    plt.title('Cumulative distribution function, ~NegBinom(n=10,p=0.8)')
 
 .. image:: images/pmfNBinom.png
   :width: 400
@@ -541,7 +540,62 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a NBinom::
 .. image:: images/cdfNBinom.png
   :width: 400
 
-``ZTpoisson``
+``Logser``
+~~~~~~~~~~~~~~~~~~~~
+
+.. autoclass:: distributions.Logser
+   :members:
+
+Parametrization
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+For a better explanation refer to the `SciPy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.logser.html>`_, see :cite:t:`scipy`.
+
+
+.. math:: f(k)=-\frac{p^{k}}{k \log (1-p)}
+   :label: logser
+
+Given :math:`0 < p < 1` and :math:`k \geq 1`.
+
+Example code on the usage of the Logser class::
+
+    from gemact import distributions
+    import numpy as np
+
+    dist=distributions.Logser(p=.5)
+    seq=np.arange(0,30,.001)
+    nsim=int(1e+05)
+
+    # Compute the mean via pmf
+    mean=np.sum(dist.pmf(seq)*seq)
+    variance=np.sum(dist.pmf(seq)*(seq-mean)**2)
+
+    print('Mean',mean)
+    print('Variance',variance)
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+
+Then, use ``matplotlib`` library to print the pmf and the cdf of a Logser::
+
+    import matplotlib.pyplot as plt
+
+    #pmf
+    plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
+    plt.title('Probability mass function, ~Logser(p=.5)')
+
+    #cdf
+    plt.step(np.arange(0,20),dist.cdf(np.arange(0,20)),'-', where='pre')
+    plt.title('Cumulative distribution function,  ~Logser(p=.5)')
+
+
+.. image:: images/pmfLogser.png
+  :width: 400
+
+.. image:: images/cdfLogser.png
+  :width: 400
+
+``ZTPoisson``
 ~~~~~~~~~~~~~~~~~~~~
 
 .. autoclass:: distributions.ZTPoisson
@@ -586,10 +640,10 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a ZTPoisson::
 
     #pmf
     plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
-    plt.title('Probability mass function, ~ZTPois(mu=2)')
+    plt.title('Probability mass function, ~ZTPoisson(mu=2)')
     #cdf
     plt.step(np.arange(0,20),dist.cdf(np.arange(0,20)),'-', where='pre')
-    plt.title('Cumulative distribution function,  ~ZTPois(mu=2)')
+    plt.title('Cumulative distribution function,  ~ZTPoisson(mu=2)')
 
 .. image:: images/pmfZTPois.png
   :width: 400
@@ -623,7 +677,7 @@ Example code on the usage of the ZMPoisson class::
 
     mu=2
     p0m=0.1
-    dist=distributions.ZMpoisson(mu=mu,p0m=p0m)
+    dist=distributions.ZMPoisson(mu=mu,p0m=p0m)
     seq=np.arange(0,30,.001)
     nsim=int(1e+05)
 
@@ -643,11 +697,11 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a ZMPoisson::
 
     #pmf
     plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
-    plt.title('Probability mass function, ~ZMPois(mu=2,p0m=.1)')
+    plt.title('Probability mass function, ~ZMPoisson(mu=2,p0m=.1)')
 
     #cdf
     plt.step(np.arange(0,20),dist.cdf(np.arange(0,20)),'-', where='pre')
-    plt.title('Cumulative distribution function,  ~ZMPois(mu=2,p0m=.1)')
+    plt.title('Cumulative distribution function,  ~ZMPoisson(mu=2,p0m=.1)')
 
 .. image:: images/pmfZMPois.png
   :width: 400
@@ -680,7 +734,7 @@ Example code on the usage of the ZTBinom class::
 
     n=10
     p=.2
-    dist=distributions.ZTbinom(n=n,
+    dist=distributions.ZTBinom(n=n,
                                p=p)
     seq=np.arange(0,30,.001)
     nsim=int(1e+05)
@@ -741,7 +795,7 @@ Example code on the usage of the ZMBinom class::
     n=10
     p=.2
     p0m=.05
-    dist=distributions.ZMbinom(n=n,p=p,p0m=p0m)
+    dist=distributions.ZMBinom(n=n,p=p,p0m=p0m)
     seq=np.arange(0,100,.001)
     nsim=int(1e+05)
 
@@ -797,7 +851,7 @@ Example code on the usage of the ZTGeom class::
     import numpy as np
 
     p=.2
-    dist=distributions.ZTgeom(p=p)
+    dist=distributions.ZTGeom(p=p)
     seq=np.arange(0,100,.001)
     nsim=int(1e+05)
 
@@ -853,7 +907,7 @@ Example code on the usage of the ZMGeom class::
 
     p=.2
     p0m=.01
-    dist=distributions.ZMgeom(p=p,p0m=p0m)
+    dist=distributions.ZMGeom(p=p,p0m=p0m)
     seq=np.arange(0,100,.001)
     nsim=int(1e+05)
 
@@ -910,7 +964,7 @@ Example code on the usage of the ZTNegBinom class::
 
     p=.2
     n=10
-    dist=distributions.ZTnbinom(p=p,n=n)
+    dist=distributions.ZTNegBinom(p=p,n=n)
     seq=np.arange(0,100,.001)
     nsim=int(1e+05)
 
@@ -930,11 +984,11 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a ZTNbinom::
 
     #pmf
     plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
-    plt.title('Probability mass function, ~ZTNbinom(p=.2,n=10)')
+    plt.title('Probability mass function, ~ZTNegBinom(p=.2,n=10)')
 
     #cdf
     plt.step(np.arange(0,100),dist.cdf(np.arange(0,100)),'-', where='pre')
-    plt.title('Cumulative distribution function,  ~ZTNbinom(p=.2,n=10)')
+    plt.title('Cumulative distribution function,  ~ZTNegBinom(p=.2,n=10)')
 
 .. image:: images/pmfZTnbinom.png
   :width: 400
@@ -946,7 +1000,7 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a ZTNbinom::
 ``ZMNegBinom``
 ~~~~~~~~~~~~~~~~~~~~
 
-.. autoclass:: distributions.ZTNegBinom
+.. autoclass:: distributions.ZMNegBinom
    :members:
 
 Parametrization
@@ -960,6 +1014,48 @@ The probability generating function of a Zero-Modified negative binomial is defi
 
 .. math:: P^{M}(z)=p_{0}^{M}+\frac{1-p_{0}^{M}}{1-p_{0}}\left[P(z)-p_{0}\right]
    :label: zmnbinom
+
+Example code on the usage of the ZMNegBinom class::
+
+    from gemact import distributions
+    import numpy as np
+
+    p=.2
+    n=100
+    p0M=.2
+    dist=distributions.ZMNegBinom(n=50,
+                                p=.8,
+                                p0m=.01)
+    seq=np.arange(0,100,.001)
+    nsim=int(1e+05)
+
+    # Compute the mean via pmf
+    mean=np.sum(dist.pmf(seq)*seq)
+    variance=np.sum(dist.pmf(seq)*(seq-mean)**2)
+
+    print('Mean',mean)
+    print('Variance',variance)
+    #compare with simulations
+    print('Simulated mean',np.mean(dist.rvs(nsim)))
+    print('Simulated variance',np.var(dist.rvs(nsim)))
+
+Then, use ``matplotlib`` library to print the pmf and the cdf of a ZMNbinom::
+
+    import matplotlib.pyplot as plt
+
+    #pmf
+    plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
+    plt.title('Probability mass function, ~ZMNegBinom(p=.2,n=10)')
+
+    #cdf
+    plt.step(np.arange(0,100),dist.cdf(np.arange(0,100)),'-', where='pre')
+    plt.title('Cumulative distribution function,  ~ZMNegBinom(p=.2,n=10)')
+
+.. image:: images/pmfZMNegBinom.png
+  :width: 400
+
+.. image:: images/cdfZMNegBinom.png
+  :width: 400
 
 ``ZMLogser``
 ~~~~~~~~~~~~~~~~~~~~
@@ -1217,6 +1313,7 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a GenPareto::
 .. autoclass:: distributions.Lognormal
    :members:
 
+Parametrization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 For a better explanation refer to the `SciPy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.lognorm.html>`_, see :cite:t:`scipy`.

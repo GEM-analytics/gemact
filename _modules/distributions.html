@@ -425,9 +425,15 @@
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">_Distribution</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">_dist</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">_Distribution</span><span class="o">.</span><span class="n">_dist</span><span class="o">.</span><span class="n">fget</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="c1"># @property</span>
+    <span class="c1"># def _dist(self):</span>
+    <span class="c1">#     return _Distribution._dist.fget(self)</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">category</span><span class="p">():</span>
@@ -469,9 +475,15 @@
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">_Distribution</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">_dist</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">_Distribution</span><span class="o">.</span><span class="n">_dist</span><span class="o">.</span><span class="n">fget</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    <span class="c1"># @property</span>
+    <span class="c1"># def _dist(self):</span>
+    <span class="c1">#     return _Distribution._dist.fget(self)</span>
+
+    <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">category</span><span class="p">():</span>
@@ -921,7 +933,7 @@
 
 
 <span class="c1"># Logser</span>
-<span class="k">class</span> <span class="nc">Logser</span><span class="p">(</span><span class="n">_DiscreteDistribution</span><span class="p">):</span>
+<div class="viewcode-block" id="Logser"><a class="viewcode-back" href="../api.html#distributions.Logser">[docs]</a><span class="k">class</span> <span class="nc">Logser</span><span class="p">(</span><span class="n">_DiscreteDistribution</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Logarithmic (Log-Series, Series) discrete distribution.</span>
 <span class="sd">    Wrapper to scipy logser distribution (``scipy.stats._discrete_distns.logser_gen``)</span>
@@ -973,7 +985,7 @@
     <span class="k">def</span> <span class="nf">name</span><span class="p">():</span>
         <span class="k">return</span> <span class="s1">&#39;logser&#39;</span>
 
-    <span class="k">def</span> <span class="nf">pgf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+<div class="viewcode-block" id="Logser.pgf"><a class="viewcode-back" href="../api.html#distributions.Logser.pgf">[docs]</a>    <span class="k">def</span> <span class="nf">pgf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Probability generating function. It computes the probability generating function</span>
 <span class="sd">        of the random variable given the (a, b, x) parametrization.</span>
@@ -984,7 +996,7 @@
 <span class="sd">        :rtype: ``numpy.ndarray``</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">p</span><span class="p">,</span> <span class="s2">&quot;f modulus cannot exceed </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">p</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">p</span> <span class="o">*</span> <span class="n">f</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">p</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">p</span> <span class="o">*</span> <span class="n">f</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">p</span><span class="p">)</span></div></div>
 
 
 <span class="c1"># Zero-truncated Poisson</span>
@@ -1444,7 +1456,6 @@
 <span class="sd">          Zero-trincated binomial distribution size parameter n.</span>
 <span class="sd">        * *p*(``float``) --</span>
 <span class="sd">          Zero-truncated binomial distribution probability parameter p.</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -2403,7 +2414,7 @@
 
 
 <span class="c1"># Zero-modified negative binomial</span>
-<span class="k">class</span> <span class="nc">ZMNegBinom</span><span class="p">:</span>
+<div class="viewcode-block" id="ZMNegBinom"><a class="viewcode-back" href="../api.html#distributions.ZMNegBinom">[docs]</a><span class="k">class</span> <span class="nc">ZMNegBinom</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Zero-modified negative binomial distribution. Discrete mixture between a degenerate distribution</span>
 <span class="sd">    at zero and a non-modified negative binomial distribution.</span>
@@ -2485,7 +2496,7 @@
     <span class="k">def</span> <span class="nf">name</span><span class="p">():</span>
         <span class="k">return</span> <span class="s1">&#39;zmnbinom&#39;</span>
 
-    <span class="k">def</span> <span class="nf">pmf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<div class="viewcode-block" id="ZMNegBinom.pmf"><a class="viewcode-back" href="../api.html#distributions.ZMNegBinom.pmf">[docs]</a>    <span class="k">def</span> <span class="nf">pmf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Probability mass function.</span>
 
@@ -2495,9 +2506,9 @@
 <span class="sd">        :return: probability mass function.</span>
 <span class="sd">        :rtype: ``numpy.float64`` or ``numpy.ndarray``</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">p0m</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">p0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">p0m</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">p0</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">logpmf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<div class="viewcode-block" id="ZMNegBinom.logpmf"><a class="viewcode-back" href="../api.html#distributions.ZMNegBinom.logpmf">[docs]</a>    <span class="k">def</span> <span class="nf">logpmf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Natural logarithm of the cumulative distribution function.</span>
 
@@ -2507,9 +2518,9 @@
 <span class="sd">        :rtype: ``numpy.float64`` or ``numpy.ndarray``</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">x</span><span class="p">))</span></div>
 
-    <span class="k">def</span> <span class="nf">cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<div class="viewcode-block" id="ZMNegBinom.cdf"><a class="viewcode-back" href="../api.html#distributions.ZMNegBinom.cdf">[docs]</a>    <span class="k">def</span> <span class="nf">cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Cumulative distribution function.</span>
 
@@ -2519,9 +2530,9 @@
 <span class="sd">        :rtype: numpy.float64 or numpy.ndarray</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">p0m</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">p0m</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">p0m</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">p0m</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span></div>
 
-    <span class="k">def</span> <span class="nf">logcdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<div class="viewcode-block" id="ZMNegBinom.logcdf"><a class="viewcode-back" href="../api.html#distributions.ZMNegBinom.logcdf">[docs]</a>    <span class="k">def</span> <span class="nf">logcdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Natural logarithm of the cumulative distribution function.</span>
 
@@ -2530,9 +2541,9 @@
 <span class="sd">        :return: natural logarithm of the cumulative distribution function.</span>
 <span class="sd">        :rtype: ``numpy.float64`` or ``numpy.ndarray``</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">))</span></div>
 
-    <span class="k">def</span> <span class="nf">rvs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="ZMNegBinom.rvs"><a class="viewcode-back" href="../api.html#distributions.ZMNegBinom.rvs">[docs]</a>    <span class="k">def</span> <span class="nf">rvs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Random variates generator function.</span>
 
@@ -2558,9 +2569,9 @@
         <span class="n">c_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">r_</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">c_</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">r_</span><span class="p">[</span><span class="n">c_</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_distzt</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">c_</span><span class="p">)))</span>
-        <span class="k">return</span> <span class="n">r_</span>
+        <span class="k">return</span> <span class="n">r_</span></div>
 
-    <span class="k">def</span> <span class="nf">ppf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
+<div class="viewcode-block" id="ZMNegBinom.ppf"><a class="viewcode-back" href="../api.html#distributions.ZMNegBinom.ppf">[docs]</a>    <span class="k">def</span> <span class="nf">ppf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Percent point function, a.k.a. the quantile function, inverse of cumulative distribution function.</span>
 
@@ -2572,9 +2583,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">p_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dist</span><span class="o">.</span><span class="n">ppf</span><span class="p">((</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="n">p_</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">p0m</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">p0m</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dist</span><span class="o">.</span><span class="n">ppf</span><span class="p">((</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="n">p_</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">p0m</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">p0m</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span></div>
 
-    <span class="k">def</span> <span class="nf">pgf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+<div class="viewcode-block" id="ZMNegBinom.pgf"><a class="viewcode-back" href="../api.html#distributions.ZMNegBinom.pgf">[docs]</a>    <span class="k">def</span> <span class="nf">pgf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Probability generating function. It computes the probability generating function</span>
 <span class="sd">        of the random variable given the (a, b, x) parametrization.</span>
@@ -2587,18 +2598,18 @@
         <span class="n">c_</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span>
         <span class="n">d_</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">p0m</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">p0m</span><span class="p">)</span> <span class="o">*</span> <span class="p">((</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">f</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">/</span> <span class="n">c_</span><span class="p">))</span> <span class="o">**</span> <span class="n">d_</span> <span class="o">-</span> <span class="n">c_</span> <span class="o">**</span> <span class="n">d_</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">c_</span> <span class="o">**</span> <span class="n">d_</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">p0m</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">p0m</span><span class="p">)</span> <span class="o">*</span> <span class="p">((</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">f</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">/</span> <span class="n">c_</span><span class="p">))</span> <span class="o">**</span> <span class="n">d_</span> <span class="o">-</span> <span class="n">c_</span> <span class="o">**</span> <span class="n">d_</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">c_</span> <span class="o">**</span> <span class="n">d_</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">abk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ZMNegBinom.abk"><a class="viewcode-back" href="../api.html#distributions.ZMNegBinom.abk">[docs]</a>    <span class="k">def</span> <span class="nf">abk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Function returning (a, b, x) parametrization.</span>
 
 <span class="sd">        :return: a, b, probability in zero</span>
 <span class="sd">        :rtype: ``numpy.array``</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">p0m</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">p0m</span></div>
 
-    <span class="k">def</span> <span class="nf">par_franchise_adjuster</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nu</span><span class="p">):</span>
+<div class="viewcode-block" id="ZMNegBinom.par_franchise_adjuster"><a class="viewcode-back" href="../api.html#distributions.ZMNegBinom.par_franchise_adjuster">[docs]</a>    <span class="k">def</span> <span class="nf">par_franchise_adjuster</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nu</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Parameter correction in case of deductible (franchise).</span>
 
@@ -2610,7 +2621,7 @@
         <span class="n">beta</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">p</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">p</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">p0m</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">p0m</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">beta</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">nu</span> <span class="o">*</span> <span class="n">beta</span><span class="p">)</span> <span class="o">**</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">p0m</span> <span class="o">*</span> <span class="p">(</span>
                 <span class="mi">1</span> <span class="o">+</span> <span class="n">nu</span> <span class="o">*</span> <span class="n">beta</span><span class="p">)</span> <span class="o">**</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">beta</span><span class="p">)</span> <span class="o">**</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">p</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">nu</span> <span class="o">*</span> <span class="n">beta</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">p</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">nu</span> <span class="o">*</span> <span class="n">beta</span><span class="p">)</span></div></div>
 
 
 <span class="c1"># Zero-modified discrete logarithmic</span>

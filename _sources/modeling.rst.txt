@@ -50,6 +50,8 @@ The following table summarizes the distribution supported by GEMAct and Scipy.
 +--------------------------------------------------+-------------+--------+--------+
 |The Negative Binomial Distribution.               | discrete    |    v   |   v    |
 +--------------------------------------------------+-------------+--------+--------+
+|The Log-Series Distribution.                      | discrete    |    v   |   v    |
++--------------------------------------------------+-------------+--------+--------+
 |The Zero-Modified Binomial Distribution.          | discrete    |    v   |   x    |
 +--------------------------------------------------+-------------+--------+--------+
 |The Zero-Modified Geometric Distribution.         | discrete    |    v   |   x    |
