@@ -2067,6 +2067,82 @@ with a dependence structure specified by a copula and a set of given marginals.<
 </ul>
 </dd>
 </dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="lossaggregation.LossAggregation.cdf">
+<span class="sig-name descname"><span class="pre">cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mc'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lossaggregation.html#LossAggregation.cdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lossaggregation.LossAggregation.cdf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cumulative distribution function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – quantile where the cumulative distribution function is evaluated.</p></li>
+<li><p><strong>method</strong> (<code class="docutils literal notranslate"><span class="pre">string</span></code>) – method to approximate the cdf of the aggregate loss random variable
+(i.e. the sum of random variables with a dependence structure specified by a copula).
+One of AEP (‘aep’) and Monte Carlo simulation (‘mc’).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>cumulative distribution function.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lossaggregation.LossAggregation.moment">
+<span class="sig-name descname"><span class="pre">moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lossaggregation.html#LossAggregation.moment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lossaggregation.LossAggregation.moment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Non-central moment of order n.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment of order n</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>non-central moment of order n</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lossaggregation.LossAggregation.ppf">
+<span class="sig-name descname"><span class="pre">ppf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">q</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lossaggregation.html#LossAggregation.ppf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lossaggregation.LossAggregation.ppf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Percent point function, a.k.a. the quantile function, inverse of cumulative distribution function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>q</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – level at which the percent point function is evaluated.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>percent point function.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.int</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lossaggregation.LossAggregation.rvs">
+<span class="sig-name descname"><span class="pre">rvs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lossaggregation.html#LossAggregation.rvs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lossaggregation.LossAggregation.rvs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Random variates. Based on Monte Carlo simulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>size</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – random variates sample size (default is 1).</p></li>
+<li><p><strong>random_state</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – random state for the random number generator.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Random variates.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 <div class="section" id="risks-aggregation">

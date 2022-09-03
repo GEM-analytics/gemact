@@ -253,7 +253,7 @@ An example of CRM implementation. Observe the CRM for reserving requires additio
 ---------------------
 
 .. autoclass:: lossaggregation.LossAggregation
-   :members: None
+   :members:
 
 Risks aggregation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
