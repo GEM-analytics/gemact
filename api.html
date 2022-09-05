@@ -1485,8 +1485,11 @@ Panjer recursion (‘recursion’) and Monte Carlo simulation (‘mc’).</p></l
 to as priority or retention.
 Namely, <code class="docutils literal notranslate"><span class="pre">aggr_n_deductible</span> <span class="pre">*</span> <span class="pre">deductible</span></code> =  aggregate priority.</p></li>
 <li><p><strong>n_reinst</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – number of reinstatements layers.
-Alternative parametrization to aggregate limit cover,
-i.e. aggregate cover = number of reinstatement * cover</p></li>
+Alternative parametrization to aggregate cover (a.k.a. aggregate limit),
+namely aggregate cover = (number of reinstatement +1) * cover.
+E.g. When the number of reinstatements = 0, the aggregate cover is equal to the cover,
+when number of reinstatements is infinity there is no aggregate cover
+(the aggregate cover is infinity).</p></li>
 <li><p><strong>reinst_loading</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – reinstatements layers loading.</p></li>
 <li><p><strong>alpha_qs</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – quota share ceded portion.</p></li>
 <li><p><strong>n_sim</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – number of simulations of Monte Carlo (mc) method for the aggregate loss distribution approximation.</p></li>

@@ -571,8 +571,11 @@
 <span class="sd">                              Namely, ``aggr_n_deductible * deductible`` =  aggregate priority.</span>
 <span class="sd">    :type aggr_n_deductible: ``int``</span>
 <span class="sd">    :param n_reinst: number of reinstatements layers.</span>
-<span class="sd">                     Alternative parametrization to aggregate limit cover,</span>
-<span class="sd">                     i.e. aggregate cover = number of reinstatement * cover</span>
+<span class="sd">                     Alternative parametrization to aggregate cover (a.k.a. aggregate limit),</span>
+<span class="sd">                     namely aggregate cover = (number of reinstatement +1) * cover.</span>
+<span class="sd">                     E.g. When the number of reinstatements = 0, the aggregate cover is equal to the cover,</span>
+<span class="sd">                     when number of reinstatements is infinity there is no aggregate cover</span>
+<span class="sd">                     (the aggregate cover is infinity).</span>
 <span class="sd">    :type n_reinst: ``int``</span>
 <span class="sd">    :param reinst_loading: reinstatements layers loading.</span>
 <span class="sd">    :type reinst_loading: ``float``</span>
