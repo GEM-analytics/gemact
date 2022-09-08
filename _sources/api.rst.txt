@@ -310,6 +310,7 @@ The ``distributions`` module
 
 .. autoclass:: distributions.Poisson
    :members:
+   :inherited-members:
 
 
 Parametrization
@@ -369,6 +370,7 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a Poisson::
 
 .. autoclass:: distributions.Binom
    :members:
+   :inherited-members:
 
 Parametrization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -430,6 +432,7 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a Poisson::
 
 .. autoclass:: distributions.Geom
    :members:
+   :inherited-members:
 
 Parametrization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -486,6 +489,7 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a Geom::
 
 .. autoclass:: distributions.NegBinom
    :members:
+   :inherited-members:
 
 Parametrization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -545,6 +549,7 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a NegBinom::
 
 .. autoclass:: distributions.Logser
    :members:
+   :inherited-members:
 
 Parametrization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
