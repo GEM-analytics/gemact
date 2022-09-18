@@ -231,6 +231,12 @@
 
     <span class="nd">@dim</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">dim</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="p">(</span><span class="n">value</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Dimension must be &gt; 1&quot;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Please provide dimension as an integer&#39;</span><span class="p">)</span>
+            <span class="k">raise</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__dim</span> <span class="o">=</span> <span class="n">value</span>
 
 <div class="viewcode-block" id="ClaytonCopula.cdf"><a class="viewcode-back" href="../api.html#copulas.ClaytonCopula.cdf">[docs]</a>    <span class="k">def</span> <span class="nf">cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
@@ -270,7 +276,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">random_state</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span> <span class="k">if</span> <span class="n">random_state</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">random_state</span>
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">random_state</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%r</span><span class="s2"> is not an integer&quot;</span> <span class="o">%</span> <span class="n">random_state</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">random_state</span><span class="p">)</span>
 
+        <span class="k">assert</span> <span class="p">(</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Size must be &gt; 0&quot;</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
@@ -314,7 +322,12 @@
 
     <span class="nd">@dim</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">dim</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%r</span><span class="s1"> is not an integer&#39;</span> <span class="o">%</span> <span class="n">value</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="p">(</span><span class="n">value</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Dimension must be &gt; 1&quot;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Please provide dimension as an integer&#39;</span><span class="p">)</span>
+            <span class="k">raise</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__dim</span> <span class="o">=</span> <span class="n">value</span>
 
 <div class="viewcode-block" id="FrankCopula.cdf"><a class="viewcode-back" href="../api.html#copulas.FrankCopula.cdf">[docs]</a>    <span class="k">def</span> <span class="nf">cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
@@ -358,7 +371,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">random_state</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span> <span class="k">if</span> <span class="n">random_state</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">random_state</span>
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">random_state</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%r</span><span class="s2"> is not an integer&quot;</span> <span class="o">%</span> <span class="n">random_state</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">random_state</span><span class="p">)</span>
 
+        <span class="k">assert</span> <span class="p">(</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Size must be &gt; 0&quot;</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
@@ -402,7 +417,12 @@
 
     <span class="nd">@dim</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">dim</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%r</span><span class="s1"> is not an integer&#39;</span> <span class="o">%</span> <span class="n">value</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="p">(</span><span class="n">value</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Dimension must be &gt; 1&quot;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Please provide dimension as an integer&#39;</span><span class="p">)</span>
+            <span class="k">raise</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__dim</span> <span class="o">=</span> <span class="n">value</span>
 
 <div class="viewcode-block" id="GumbelCopula.cdf"><a class="viewcode-back" href="../api.html#copulas.GumbelCopula.cdf">[docs]</a>    <span class="k">def</span> <span class="nf">cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
@@ -441,7 +461,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">random_state</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span> <span class="k">if</span> <span class="n">random_state</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">random_state</span>
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">random_state</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%r</span><span class="s2"> is not an integer&quot;</span> <span class="o">%</span> <span class="n">random_state</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">random_state</span><span class="p">)</span>
 
+        <span class="k">assert</span> <span class="p">(</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Size must be &gt; 0&quot;</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
@@ -452,8 +474,8 @@
         <span class="n">uniform_sim</span> <span class="o">=</span> <span class="p">(</span><span class="n">uniform</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">[</span><span class="n">size</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
         <span class="n">exp_sim</span> <span class="o">=</span> <span class="n">gamma</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">[</span><span class="n">size</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">)</span>
         <span class="n">stable_sim</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">a_</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">uniform_sim</span><span class="p">))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span>
-                    <span class="n">uniform_sim</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">a_</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span>
-                                 <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">uniform_sim</span> <span class="o">-</span> <span class="n">a_</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">uniform_sim</span><span class="p">))</span> <span class="o">/</span> <span class="n">exp_sim</span><span class="p">)</span> <span class="o">**</span> <span class="p">((</span><span class="mi">1</span> <span class="o">-</span> <span class="n">a_</span><span class="p">)</span> <span class="o">/</span> <span class="n">a_</span><span class="p">)</span>
+            <span class="n">uniform_sim</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">a_</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span>
+                             <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">uniform_sim</span> <span class="o">-</span> <span class="n">a_</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">uniform_sim</span><span class="p">))</span> <span class="o">/</span> <span class="n">exp_sim</span><span class="p">)</span> <span class="o">**</span> <span class="p">((</span><span class="mi">1</span> <span class="o">-</span> <span class="n">a_</span><span class="p">)</span> <span class="o">/</span> <span class="n">a_</span><span class="p">)</span>
         <span class="n">exp_sim</span> <span class="o">=</span> <span class="n">gamma</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">[</span><span class="n">size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">],</span> <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
         <span class="n">output</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">exp_sim</span> <span class="o">/</span> <span class="n">stable_sim</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">par</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">output</span></div></div>
@@ -463,6 +485,7 @@
 <div class="viewcode-block" id="GaussCopula"><a class="viewcode-back" href="../api.html#copulas.GaussCopula">[docs]</a><span class="k">class</span> <span class="nc">GaussCopula</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Gaussian copula.</span>
+
 <span class="sd">    :param corr: Correlation matrix.</span>
 <span class="sd">    :type corr: ``numpy.ndarray``</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -514,6 +537,7 @@
         <span class="n">random_state</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span> <span class="k">if</span> <span class="n">random_state</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">random_state</span>
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">random_state</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%r</span><span class="s2"> has to be an integer&quot;</span> <span class="o">%</span> <span class="n">random_state</span><span class="p">)</span>
 
+        <span class="k">assert</span> <span class="p">(</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Size must be &gt; 0&quot;</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
@@ -577,24 +601,23 @@
     <span class="k">def</span> <span class="nf">error_cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__error_cdf</span>
 
-<div class="viewcode-block" id="TCopula.cdf"><a class="viewcode-back" href="../api.html#copulas.TCopula.cdf">[docs]</a>    <span class="k">def</span> <span class="nf">cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">max_evaluations</span><span class="o">=</span><span class="mf">1e+6</span><span class="p">,</span> <span class="n">n_repetitions</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
+<div class="viewcode-block" id="TCopula.cdf"><a class="viewcode-back" href="../api.html#copulas.TCopula.cdf">[docs]</a>    <span class="k">def</span> <span class="nf">cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">n_iterations</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Cumulative distribution function.</span>
 
-<span class="sd">        :param x: Array with shape (N, d) where N is the number of points and d the dimension.</span>
+<span class="sd">        :param x: quantile where the cumulative distribution function is evaluated.</span>
+<span class="sd">                    Array with shape (n, d) where n is the number of data points and d the dimension.</span>
 <span class="sd">        :type x: ``numpy.ndarray``</span>
-<span class="sd">        :param tolerance: Tolerance threshold in cdf computation.</span>
-<span class="sd">        :type tolerance: ``float``</span>
-<span class="sd">        :param max_evaluations: Maximum number of iterations.</span>
-<span class="sd">        :type max_evaluations: ``int``</span>
-<span class="sd">        :param n_repetitions: Array with shape (N, d) where N is the number of points and d the dimension.</span>
-<span class="sd">        :type n_repetitions: ``int``</span>
+<span class="sd">        :param tolerance: tolerance threshold of approximation (default is 1e-4).</span>
+<span class="sd">        :type tolerance: ``float``, optional</span>
+<span class="sd">        :param n_iterations: number of iteration (default is 30).</span>
+<span class="sd">        :type n_iterations: ``int``, optional</span>
 
 <span class="sd">        :return: Cumulative distribution function in x.</span>
 <span class="sd">        :rtype: ``numpy.ndarray``</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">q</span> <span class="o">=</span> <span class="n">t</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="p">(</span><span class="n">prob</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span> <span class="o">=</span> <span class="n">hf</span><span class="o">.</span><span class="n">multivariate_t_cdf</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">corr</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">,</span> <span class="n">max_evaluations</span><span class="p">,</span> <span class="n">n_repetitions</span><span class="p">)</span>
+        <span class="p">(</span><span class="n">prob</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span> <span class="o">=</span> <span class="n">hf</span><span class="o">.</span><span class="n">multivariate_t_cdf</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">corr</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">,</span> <span class="n">n_iterations</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__error_cdf</span> <span class="o">=</span> <span class="n">err</span>
         <span class="k">return</span> <span class="n">prob</span></div>
 
@@ -603,9 +626,9 @@
 <span class="sd">        Random variates.</span>
 
 <span class="sd">        :param size: random variates sample size (default is 1).</span>
-<span class="sd">        :type size: ``int``</span>
+<span class="sd">        :type size: ``int``, optional</span>
 <span class="sd">        :param random_state: random state for the random number generator.</span>
-<span class="sd">        :type random_state: ``int``</span>
+<span class="sd">        :type random_state: ``int``, optional</span>
 
 <span class="sd">        :return: Random variates.</span>
 <span class="sd">        :rtype: ``numpy.float64`` or ``numpy.ndarray``</span>
@@ -613,6 +636,7 @@
         <span class="n">random_state</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span> <span class="k">if</span> <span class="n">random_state</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">random_state</span>
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">random_state</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%r</span><span class="s2"> has to be an integer&quot;</span> <span class="o">%</span> <span class="n">random_state</span><span class="p">)</span>
 
+        <span class="k">assert</span> <span class="p">(</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Size must be &gt; 0&quot;</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
@@ -626,6 +650,200 @@
             <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">sim</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">)</span></div></div>
+
+
+<span class="c1"># Independent</span>
+<span class="k">class</span> <span class="nc">IndependentCopula</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Independent copula.</span>
+
+<span class="sd">    :param dim: copula dimension.</span>
+<span class="sd">    :type dim: ``int``</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dim</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dim</span> <span class="o">=</span> <span class="n">dim</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">dim</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dim</span>
+
+    <span class="nd">@dim</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">dim</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="p">(</span><span class="n">value</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Dimension must be &gt; 1&quot;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Please provide dimension as an integer&#39;</span><span class="p">)</span>
+            <span class="k">raise</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__dim</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="k">def</span> <span class="nf">cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Cumulative distribution function.</span>
+
+<span class="sd">        :param x: Array with shape (N, d) where N is the number of points and d the dimension.</span>
+<span class="sd">        :type x: ``numpy.ndarray``</span>
+<span class="sd">        :return: Cumulative distribution function in x.</span>
+<span class="sd">        :rtype: ``numpy.ndarray``</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Please make sure x dimension is the same as copula dimension&#39;</span><span class="p">)</span>
+            <span class="k">raise</span>
+
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">rvs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Random variates.</span>
+
+<span class="sd">        :param size: random variates sample size (default is 1).</span>
+<span class="sd">        :type size: ``int``</span>
+<span class="sd">        :param random_state: random state for the random number generator.</span>
+<span class="sd">        :type random_state: ``int``</span>
+
+<span class="sd">        :return: Random variates.</span>
+<span class="sd">        :rtype: ``numpy.float64`` or ``numpy.ndarray``</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">random_state</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span> <span class="k">if</span> <span class="n">random_state</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">random_state</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">random_state</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%r</span><span class="s2"> is not an integer&quot;</span> <span class="o">%</span> <span class="n">random_state</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">random_state</span><span class="p">)</span>
+
+        <span class="k">assert</span> <span class="p">(</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Size must be &gt; 0&quot;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Please make sure random_state is provided correctly&#39;</span><span class="p">)</span>
+            <span class="k">raise</span>
+
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">))</span>
+
+
+<span class="c1"># Fréchet–Hoeffding Lower Bound</span>
+<span class="k">class</span> <span class="nc">FHLowerCopula</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Fréchet–Hoeffding lower bound bidimensional copula.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">dim</span><span class="p">():</span>
+        <span class="k">return</span> <span class="mi">2</span>
+
+    <span class="k">def</span> <span class="nf">cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Cumulative distribution function.</span>
+
+<span class="sd">        :param x: Array with shape (N, 2) where N is the number of points.</span>
+<span class="sd">        :type x: ``numpy.ndarray``</span>
+<span class="sd">        :return: Cumulative distribution function in x.</span>
+<span class="sd">        :rtype: ``numpy.ndarray``</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;x shape second dimension set to 2&#39;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Please make sure x shape second dimension is 2&#39;</span><span class="p">)</span>
+            <span class="k">raise</span>
+
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">rvs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Random variates.</span>
+
+<span class="sd">        :param size: random variates sample size (default is 1).</span>
+<span class="sd">        :type size: ``int``</span>
+<span class="sd">        :param random_state: random state for the random number generator.</span>
+<span class="sd">        :type random_state: ``int``</span>
+
+<span class="sd">        :return: Random variates.</span>
+<span class="sd">        :rtype: ``numpy.float64`` or ``numpy.ndarray``</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">random_state</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span> <span class="k">if</span> <span class="n">random_state</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">random_state</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">random_state</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%r</span><span class="s2"> is not an integer&quot;</span> <span class="o">%</span> <span class="n">random_state</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">random_state</span><span class="p">)</span>
+
+        <span class="k">assert</span> <span class="p">(</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Size must be &gt; 0&quot;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Please make sure random_state is provided correctly&#39;</span><span class="p">)</span>
+            <span class="k">raise</span>
+
+        <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">u</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">u</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+
+<span class="c1"># Fréchet–Hoeffding Upper Bound</span>
+<span class="k">class</span> <span class="nc">FHUpperCopula</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Fréchet–Hoeffding upper bound copula.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dim</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dim</span> <span class="o">=</span> <span class="n">dim</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">dim</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dim</span>
+
+    <span class="nd">@dim</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">dim</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="p">(</span><span class="n">value</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Dimension must be &gt; 1&quot;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Please provide dimension as an integer&#39;</span><span class="p">)</span>
+            <span class="k">raise</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__dim</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="k">def</span> <span class="nf">cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Cumulative distribution function.</span>
+
+<span class="sd">        :param x: Array with shape (N, d) where N is the number of points and d the dimension.</span>
+<span class="sd">        :type x: ``numpy.ndarray``</span>
+<span class="sd">        :return: Cumulative distribution function in x.</span>
+<span class="sd">        :rtype: ``numpy.ndarray``</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Please make sure x dimension is the same as copula dimension&#39;</span><span class="p">)</span>
+            <span class="k">raise</span>
+
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">rvs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Random variates.</span>
+
+<span class="sd">        :param size: random variates sample size (default is 1).</span>
+<span class="sd">        :type size: ``int``</span>
+<span class="sd">        :param random_state: random state for the random number generator.</span>
+<span class="sd">        :type random_state: ``int``</span>
+
+<span class="sd">        :return: Random variates.</span>
+<span class="sd">        :rtype: ``numpy.float64`` or ``numpy.ndarray``</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">random_state</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span> <span class="k">if</span> <span class="n">random_state</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">random_state</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">random_state</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%r</span><span class="s2"> is not an integer&quot;</span> <span class="o">%</span> <span class="n">random_state</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">random_state</span><span class="p">)</span>
+
+        <span class="k">assert</span> <span class="p">(</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Size must be &gt; 0&quot;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Please make sure random_state is provided correctly&#39;</span><span class="p">)</span>
+            <span class="k">raise</span>
+
+        <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">))</span>
 </pre></div>
 
               </div>

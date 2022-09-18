@@ -33,6 +33,8 @@
     <script src="_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="canonical" href="https://github.com/GEM-analytics/gemact/modeling.html" />
     <link rel="shortcut icon" href="_static/webtab.png"/>
     <link rel="index" title="Index" href="genindex.html" />
@@ -253,10 +255,10 @@
 <p>The following table summarizes the distribution supported by GEMAct and Scipy.</p>
 <table class="table">
 <colgroup>
-<col style="width: 63%" />
-<col style="width: 16%" />
-<col style="width: 10%" />
-<col style="width: 10%" />
+<col style="width: 49%" />
+<col style="width: 13%" />
+<col style="width: 19%" />
+<col style="width: 19%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Distribution</p></th>
@@ -268,153 +270,153 @@
 <tbody>
 <tr class="row-even"><td><p>The Burr Distribution.</p></td>
 <td><p>continuous</p></td>
-<td><p>v</p></td>
-<td><p>v</p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
 <tr class="row-odd"><td><p>The Generalized Pareto Distribution.</p></td>
 <td><p>continuous</p></td>
-<td><p>v</p></td>
-<td><p>v</p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
 <tr class="row-even"><td><p>The Inverse Burr Distribution (Dagum).</p></td>
 <td><p>continuous</p></td>
-<td><p>v</p></td>
-<td><p>v</p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
 <tr class="row-odd"><td><p>The Inverse Gamma Distribution.</p></td>
 <td><p>continuous</p></td>
-<td><p>v</p></td>
-<td><p>v</p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
 <tr class="row-even"><td><p>The Inverse Gaussian Distribution.</p></td>
 <td><p>continuous</p></td>
-<td><p>v</p></td>
-<td><p>v</p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
 <tr class="row-odd"><td><p>The Inverse Paralogistic Distribution.</p></td>
 <td><p>continuous</p></td>
-<td><p>v</p></td>
-<td><p>v</p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
 <tr class="row-even"><td><p>The Weibull Distribution.</p></td>
 <td><p>continuous</p></td>
-<td><p>v</p></td>
-<td><p>v</p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
 <tr class="row-odd"><td><p>The Inverse Weibull Distribution.</p></td>
 <td><p>continuous</p></td>
-<td><p>v</p></td>
-<td><p>v</p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
 <tr class="row-even"><td><p>The Paralogistic Distribution.</p></td>
 <td><p>continuous</p></td>
-<td><p>v</p></td>
-<td><p>v</p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
 <tr class="row-odd"><td><p>The Pareto Distribution.</p></td>
 <td><p>continuous</p></td>
-<td><p>v</p></td>
-<td><p>v</p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
 <tr class="row-even"><td><p>The Single-parameter Pareto Distribution.</p></td>
 <td><p>continuous</p></td>
-<td><p>v</p></td>
-<td><p>v</p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
 <tr class="row-odd"><td><p>The Pareto II Distribution.</p></td>
 <td><p>continuous</p></td>
-<td><p>v</p></td>
-<td><p>v</p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
 <tr class="row-even"><td><p>The Pareto III Distribution.</p></td>
 <td><p>continuous</p></td>
-<td><p>v</p></td>
-<td><p>v</p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
 <tr class="row-odd"><td><p>The Pareto IV Distribution.</p></td>
 <td><p>continuous</p></td>
-<td><p>v</p></td>
-<td><p>v</p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
 <tr class="row-even"><td><p>The Beta distribution.</p></td>
 <td><p>continuous</p></td>
-<td><p>v</p></td>
-<td><p>v</p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
 <tr class="row-odd"><td><p>The Generalized Beta distribution.</p></td>
 <td><p>continuous</p></td>
-<td><p>x</p></td>
-<td><p>v</p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\times\)</span></p></td>
 </tr>
 <tr class="row-even"><td><p>The Poisson Distribution.</p></td>
 <td><p>discrete</p></td>
-<td><p>v</p></td>
-<td><p>v</p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
 <tr class="row-odd"><td><p>The Binomial Distribution.</p></td>
 <td><p>discrete</p></td>
-<td><p>v</p></td>
-<td><p>v</p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
 <tr class="row-even"><td><p>The Geometric Distribution.</p></td>
 <td><p>discrete</p></td>
-<td><p>v</p></td>
-<td><p>v</p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
 <tr class="row-odd"><td><p>The Negative Binomial Distribution.</p></td>
 <td><p>discrete</p></td>
-<td><p>v</p></td>
-<td><p>v</p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
 <tr class="row-even"><td><p>The Log-Series Distribution.</p></td>
 <td><p>discrete</p></td>
-<td><p>v</p></td>
-<td><p>v</p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
 <tr class="row-odd"><td><p>The Zero-Modified Binomial Distribution.</p></td>
 <td><p>discrete</p></td>
-<td><p>v</p></td>
-<td><p>x</p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\times\)</span></p></td>
 </tr>
 <tr class="row-even"><td><p>The Zero-Modified Geometric Distribution.</p></td>
 <td><p>discrete</p></td>
-<td><p>v</p></td>
-<td><p>x</p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\times\)</span></p></td>
 </tr>
 <tr class="row-odd"><td><p>The Zero-Modified Logarithmic Distribution.</p></td>
 <td><p>discrete</p></td>
-<td><p>v</p></td>
-<td><p>x</p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\times\)</span></p></td>
 </tr>
 <tr class="row-even"><td><p>The Zero-Modified Negative Binomial Distribution</p></td>
 <td><p>discrete</p></td>
-<td><p>v</p></td>
-<td><p>x</p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\times\)</span></p></td>
 </tr>
 <tr class="row-odd"><td><p>The Zero-Modified Poisson Distribution</p></td>
 <td><p>discrete</p></td>
-<td><p>v</p></td>
-<td><p>x</p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\times\)</span></p></td>
 </tr>
 <tr class="row-even"><td><p>The Zero-Truncated Binomial Distribution</p></td>
 <td><p>discrete</p></td>
-<td><p>v</p></td>
-<td><p>x</p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\times\)</span></p></td>
 </tr>
 <tr class="row-odd"><td><p>The Zero-Truncated Geometric Distribution</p></td>
 <td><p>discrete</p></td>
-<td><p>v</p></td>
-<td><p>x</p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\times\)</span></p></td>
 </tr>
 <tr class="row-even"><td><p>The Zero-Truncated Negative Binomial Distribution</p></td>
 <td><p>discrete</p></td>
-<td><p>v</p></td>
-<td><p>x</p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\times\)</span></p></td>
 </tr>
 <tr class="row-odd"><td><p>The Zero-Truncated Poisson Distribution</p></td>
 <td><p>discrete</p></td>
-<td><p>v</p></td>
-<td><p>x</p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\times\)</span></p></td>
 </tr>
 </tbody>
 </table>
@@ -423,9 +425,9 @@
 <h2>Copulas<a class="headerlink" href="#copulas" title="Permalink to this headline">¶</a></h2>
 <table class="table">
 <colgroup>
-<col style="width: 70%" />
-<col style="width: 18%" />
-<col style="width: 11%" />
+<col style="width: 60%" />
+<col style="width: 16%" />
+<col style="width: 24%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Copula</p></th>
@@ -436,23 +438,39 @@
 <tbody>
 <tr class="row-even"><td><p>The Clayton copula.</p></td>
 <td><p>archimedean</p></td>
-<td><p>v</p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
 <tr class="row-odd"><td><p>The Frank copula.</p></td>
 <td><p>archimedean</p></td>
-<td><p>v</p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
 <tr class="row-even"><td><p>The Gumbel copula.</p></td>
 <td><p>archimedean</p></td>
-<td><p>v</p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
 <tr class="row-odd"><td><p>The Gaussian copula.</p></td>
 <td><p>elliptical</p></td>
-<td><p>v</p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
 <tr class="row-even"><td><p>The Student T copula.</p></td>
 <td><p>elliptical</p></td>
-<td><p>v</p></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>The Independent copula.</p></td>
+<td></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>The Fréchet-Hoeffding upper (M)</p></td>
+<td></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><dl class="field-list simple">
+<dt class="field-odd">white_check_mark</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</td>
+<td></td>
+<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
 </tbody>
 </table>

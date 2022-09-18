@@ -915,7 +915,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">ay_reserveFL</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">ay_reserveFL</span><span class="p">,</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">v_</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">j</span> <span class="o">-</span> <span class="n">ay</span><span class="p">):])]))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ay_ultimateFL</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">ay_ultimateFL</span><span class="p">,</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">v_</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]))</span>
 
-<div class="viewcode-block" id="LossReserve.claims_reserving"><a class="viewcode-back" href="../api.html#lossreserve.LossReserve.claims_reserving">[docs]</a>    <span class="k">def</span> <span class="nf">claims_reserving</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="LossReserve.loss_reserving"><a class="viewcode-back" href="../api.html#lossreserve.LossReserve.loss_reserving">[docs]</a>    <span class="k">def</span> <span class="nf">loss_reserving</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Table with claims reserve results.</span>
 <span class="sd">        When the stochastic reserve according to the collective risk model is computed the results</span>
@@ -944,7 +944,51 @@
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> FL reserve: &#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fl_reserve</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reserving_method</span> <span class="o">==</span> <span class="s1">&#39;crm&#39;</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> CRM reserve: &#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">crm_reserve</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> CRM m_sep: &#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_sep</span><span class="p">)</span></div></div>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> CRM m_sep: &#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_sep</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="LossReserve.loss_reserve_mean"><a class="viewcode-back" href="../api.html#lossreserve.LossReserve.loss_reserve_mean">[docs]</a>    <span class="k">def</span> <span class="nf">loss_reserve_mean</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Mean of the loss reserve.</span>
+<span class="sd">        Depending on the selected reserving method, it returns either the attribute crm_reserve or fl_reserve.</span>
+
+<span class="sd">        :return: mean of the loss reserve.</span>
+<span class="sd">        :rtype: ``numpy.float64``</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reserving_method</span> <span class="o">==</span> <span class="s1">&#39;crm&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">crm_reserve</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fl_reserve</span></div>
+
+<div class="viewcode-block" id="LossReserve.loss_reserve_std"><a class="viewcode-back" href="../api.html#lossreserve.LossReserve.loss_reserve_std">[docs]</a>    <span class="k">def</span> <span class="nf">loss_reserve_std</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Standard deviation of the loss reserve (not available for claims reserving with the fisher lange).</span>
+
+<span class="sd">        :return: standard deviation of the loss reserve.</span>
+<span class="sd">        :rtype: ``numpy.float64``</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reserving_method</span> <span class="o">==</span> <span class="s1">&#39;crm&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_sep</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="LossReserve.loss_reserve_skewness"><a class="viewcode-back" href="../api.html#lossreserve.LossReserve.loss_reserve_skewness">[docs]</a>    <span class="k">def</span> <span class="nf">loss_reserve_skewness</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Skewness of the loss reserve (not available for claims reserving with the fisher lange).</span>
+
+<span class="sd">        :return: skewness of the loss loss.</span>
+<span class="sd">        :rtype: ``numpy.float64``</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">skewness</span></div></div>
+
+
+
+
+
+
+
+
+
+
 </pre></div>
 
               </div>

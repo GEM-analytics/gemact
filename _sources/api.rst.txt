@@ -606,6 +606,7 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a Logser::
 .. autoclass:: distributions.ZTPoisson
    :members:
 
+
 Parametrization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -1125,6 +1126,7 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a ZMlogser::
 
 .. autoclass:: distributions.Gamma
    :members:
+   :inherited-members:
 
 Parametrization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1178,6 +1180,7 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a Gamma::
 
 .. autoclass:: distributions.Exponential
    :members:
+   :inherited-members:
 
 Parametrization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1227,6 +1230,7 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of an Exponential:
 
 .. autoclass:: distributions.InvGauss
    :members:
+   :inherited-members:
 
 Parametrization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1242,6 +1246,7 @@ For a better explanation refer to :cite:t:`scipy` documentation.
 
 .. autoclass:: distributions.InvGamma
    :members:
+   :inherited-members:
 
 Parametrization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1258,6 +1263,7 @@ Given :math:`x>=0, a>0 `. :math:`\Gamma(a)` refers to the gamma function.
 
 .. autoclass:: distributions.GenPareto
    :members:
+   :inherited-members:
 
 Parametrization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1317,6 +1323,7 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a GenPareto::
 
 .. autoclass:: distributions.Lognormal
    :members:
+   :inherited-members:
 
 Parametrization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1368,6 +1375,7 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a LogNorm::
 
 .. autoclass:: distributions.Burr12
    :members:
+   :inherited-members:
 
 Parametrization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1425,6 +1433,7 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a Burr12::
 
 .. autoclass:: distributions.Dagum
    :members:
+   :inherited-members:
 
 Parametrization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1482,6 +1491,7 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a Dagum::
 
 .. autoclass:: distributions.Weibull
    :members:
+   :inherited-members:
 
 Parametrization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1538,6 +1548,7 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a Weibull_min::
 
 .. autoclass:: distributions.InvWeibull
    :members:
+   :inherited-members:
 
 Parametrization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1592,6 +1603,7 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a Invweibull::
 
 .. autoclass:: distributions.Beta
    :members:
+   :inherited-members:
 
 Parametrization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1647,6 +1659,7 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a Beta::
 
 .. autoclass:: distributions.GenBeta
    :members:
+   :inherited-members:
 
 Parametrization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^

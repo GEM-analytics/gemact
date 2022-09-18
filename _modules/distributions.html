@@ -229,7 +229,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">random_state</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span> <span class="k">if</span> <span class="n">random_state</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">random_state</span>
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">random_state</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;random_state has to be an integer&quot;</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">random_state</span><span class="p">)</span>
 
+        <span class="k">assert</span> <span class="p">(</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Size must be &gt; 0&quot;</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
@@ -243,7 +245,7 @@
 <span class="sd">        Cumulative distribution function.</span>
 
 <span class="sd">        :param x: quantile where the cumulative distribution function is evaluated.</span>
-<span class="sd">        :type x: ``int``</span>
+<span class="sd">        :type x: ``int`` or ``float``</span>
 <span class="sd">        :return: cumulative distribution function.</span>
 <span class="sd">        :rtype: ``numpy.float64`` or ``numpy.ndarray``</span>
 
@@ -255,7 +257,7 @@
 <span class="sd">        Natural logarithm of the cumulative distribution function.</span>
 
 <span class="sd">        :param x: quantile where log of the cumulative distribution function is evaluated.</span>
-<span class="sd">        :type x: ``int``</span>
+<span class="sd">        :type x: ``int`` or ``float``</span>
 <span class="sd">        :return: natural logarithm of the cumulative distribution function.</span>
 <span class="sd">        :rtype: ``numpy.float64`` or ``numpy.ndarray``</span>
 
@@ -267,7 +269,7 @@
 <span class="sd">        Survival function, 1 - cumulative distribution function.</span>
 
 <span class="sd">        :param x: quantile where the survival function is evaluated.</span>
-<span class="sd">        :type x: ``int``</span>
+<span class="sd">        :type x: ``int`` or ``float``</span>
 <span class="sd">        :return: survival function</span>
 <span class="sd">        :rtype: ``numpy.float64`` or ``numpy.ndarray``</span>
 
@@ -279,7 +281,7 @@
 <span class="sd">        Natural logarithm of the survival function.</span>
 
 <span class="sd">        :param x: quantile where the logarithm of the survival function is evaluated.</span>
-<span class="sd">        :type x: ``int``</span>
+<span class="sd">        :type x: ``int`` or ``float``</span>
 <span class="sd">        :return: natural logarithm of the survival function</span>
 <span class="sd">        :rtype: ``numpy.float64`` or ``numpy.ndarray``</span>
 
@@ -325,7 +327,6 @@
 
 <span class="sd">        :return: entropy</span>
 <span class="sd">        :rtype: ``numpy.ndarray``</span>
-
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dist</span><span class="o">.</span><span class="n">entropy</span><span class="p">()</span>
 
@@ -407,11 +408,12 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Non-central moment of order n.</span>
 
-<span class="sd">        :param n: moment of order n</span>
+<span class="sd">        :param n: moment order.</span>
 <span class="sd">        :type n: ``int``</span>
-<span class="sd">        :return: non-central moment of order n</span>
+<span class="sd">        :return: raw moment of order n.</span>
 <span class="sd">        :rtype: ``float``</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="p">(</span><span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;n must be &gt; 0&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dist</span><span class="o">.</span><span class="n">moment</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
 
 
@@ -430,10 +432,6 @@
 
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span>
-
-    <span class="c1"># @property</span>
-    <span class="c1"># def _dist(self):</span>
-    <span class="c1">#     return _Distribution._dist.fget(self)</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">category</span><span class="p">():</span>
@@ -474,10 +472,6 @@
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">_Distribution</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-
-    <span class="c1"># @property</span>
-    <span class="c1"># def _dist(self):</span>
-    <span class="c1">#     return _Distribution._dist.fget(self)</span>
 
     <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span>
@@ -594,7 +588,7 @@
 <div class="viewcode-block" id="Poisson.pgf"><a class="viewcode-back" href="../api.html#distributions.Poisson.pgf">[docs]</a>    <span class="k">def</span> <span class="nf">pgf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Probability generating function. It computes the probability generating function</span>
-<span class="sd">        of the random variable given the (a, b, x) parametrization.</span>
+<span class="sd">        of the random variable given the (a, b, k) parametrization.</span>
 
 <span class="sd">        :param f: point where the function is evaluated.</span>
 <span class="sd">        :type f: ``numpy array``</span>
@@ -1139,14 +1133,15 @@
 
         <span class="n">random_state</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span> <span class="k">if</span> <span class="n">random_state</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">random_state</span>
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">random_state</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;random_state has to be an integer&quot;</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">random_state</span><span class="p">)</span>
 
+        <span class="k">assert</span> <span class="p">(</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Size must be &gt; 0&quot;</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Please provide size as an integer&#39;</span><span class="p">)</span>
             <span class="k">raise</span>
 
-        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">random_state</span><span class="p">)</span>
         <span class="n">q_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">high</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dist</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">q_</span><span class="p">)</span></div>
 
@@ -1167,7 +1162,7 @@
 <div class="viewcode-block" id="ZTPoisson.pgf"><a class="viewcode-back" href="../api.html#distributions.ZTPoisson.pgf">[docs]</a>    <span class="k">def</span> <span class="nf">pgf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Probability generating function. It computes the probability generating function</span>
-<span class="sd">        of the random variable given the (a, b, k) parametrization.</span>
+<span class="sd">        of the random variable given the (a, b, x) parametrization.</span>
 
 <span class="sd">        :param f: point where the function is evaluated</span>
 <span class="sd">        :type f: ``numpy array``</span>
@@ -1359,6 +1354,7 @@
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">random_state</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;random_state has to be an integer&quot;</span><span class="p">)</span>
         <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">random_state</span><span class="p">)</span>
 
+        <span class="k">assert</span> <span class="p">(</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Size must be &gt; 0&quot;</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
@@ -1456,6 +1452,7 @@
 <span class="sd">          Zero-trincated binomial distribution size parameter n.</span>
 <span class="sd">        * *p*(``float``) --</span>
 <span class="sd">          Zero-truncated binomial distribution probability parameter p.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -1582,6 +1579,7 @@
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">random_state</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;random_state has to be an integer&quot;</span><span class="p">)</span>
         <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">random_state</span><span class="p">)</span>
 
+        <span class="k">assert</span> <span class="p">(</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Size must be &gt; 0&quot;</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
@@ -1782,7 +1780,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">random_state</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span> <span class="k">if</span> <span class="n">random_state</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">random_state</span>
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">random_state</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;random_state has to be an integer&quot;</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">random_state</span><span class="p">)</span>
 
+        <span class="k">assert</span> <span class="p">(</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Size must be &gt; 0&quot;</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
@@ -1973,7 +1973,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">random_state</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span> <span class="k">if</span> <span class="n">random_state</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">random_state</span>
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">random_state</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;random_state has to be an integer&quot;</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">random_state</span><span class="p">)</span>
 
+        <span class="k">assert</span> <span class="p">(</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Size must be &gt; 0&quot;</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
@@ -2158,6 +2160,12 @@
 <span class="sd">        :rtype: ``numpy.int`` or ``numpy.ndarray``</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">random_state</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span> <span class="k">if</span> <span class="n">random_state</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">random_state</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">random_state</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;random_state has to be an integer&quot;</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">random_state</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="p">(</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Size must be &gt; 0&quot;</span><span class="p">)</span>
+
         <span class="k">try</span><span class="p">:</span>
             <span class="n">size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
@@ -2356,6 +2364,7 @@
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">random_state</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;random_state has to be an integer&quot;</span><span class="p">)</span>
         <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">random_state</span><span class="p">)</span>
 
+        <span class="k">assert</span> <span class="p">(</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Size must be &gt; 0&quot;</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
@@ -2559,6 +2568,7 @@
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">random_state</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;random_state has to be an integer&quot;</span><span class="p">)</span>
         <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">random_state</span><span class="p">)</span>
 
+        <span class="k">assert</span> <span class="p">(</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Size must be &gt; 0&quot;</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
@@ -2746,6 +2756,7 @@
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">random_state</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;random_state has to be an integer&quot;</span><span class="p">)</span>
         <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">random_state</span><span class="p">)</span>
 
+        <span class="k">assert</span> <span class="p">(</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Size must be &gt; 0&quot;</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
@@ -3019,7 +3030,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">random_state</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span> <span class="k">if</span> <span class="n">random_state</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">random_state</span>
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">random_state</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;random_state has to be an integer&quot;</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">random_state</span><span class="p">)</span>
 
+        <span class="k">assert</span> <span class="p">(</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Size must be &gt; 0&quot;</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
@@ -3495,14 +3508,17 @@
 <span class="sd">        :rtype: ``numpy.float64`` or ``numpy.ndarray``</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">random_state</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span> <span class="k">if</span> <span class="n">random_state</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">random_state</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">random_state</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;random_state has to be an integer&quot;</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">random_state</span><span class="p">)</span>
+
+        <span class="k">assert</span> <span class="p">(</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Size must be &gt; 0&quot;</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Please provide size as an integer&#39;</span><span class="p">)</span>
             <span class="k">raise</span>
-
-        <span class="n">random_state</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span> <span class="k">if</span> <span class="p">(</span><span class="n">random_state</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">)</span> <span class="k">else</span> <span class="n">random_state</span>
-        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">random_state</span><span class="p">)</span>
 
         <span class="n">tmp_</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">shape1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">shape2</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale</span> <span class="o">*</span> <span class="nb">pow</span><span class="p">(</span><span class="n">tmp_</span><span class="p">,</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape3</span><span class="p">)</span></div>
@@ -3644,9 +3660,13 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Non-central moment of order n.</span>
 
-<span class="sd">        :param n: moment of order n</span>
-<span class="sd">        :return: non-central moment of order n</span>
+<span class="sd">        :param n: moment order.</span>
+<span class="sd">        :type n: ``int``</span>
+<span class="sd">        :return: raw moment of order n.</span>
+<span class="sd">        :rtype: ``float``</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">assert</span> <span class="p">(</span><span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;n must be &gt; 0&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape1</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape3</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">n</span> <span class="o">&lt;</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">shape2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape3</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
         <span class="n">tmp_</span> <span class="o">=</span> <span class="n">n</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape3</span>

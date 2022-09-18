@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Introduction &#8212; gemact</title>
+    <title>About us &#8212; gemact</title>
     
   <link href="_static/css/theme.css" rel="stylesheet">
   <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -33,12 +33,11 @@
     <script src="_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
-    <link rel="canonical" href="https://github.com/GEM-analytics/gemact/introduction.html" />
+    <link rel="canonical" href="https://github.com/GEM-analytics/gemact/gemanalytics.html" />
     <link rel="shortcut icon" href="_static/webtab.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Usage" href="usage.html" />
-    <link rel="prev" title="GEMAct" href="index.html" />
+    <link rel="prev" title="API reference guide" href="api.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -91,8 +90,8 @@
  </span>
 </p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="introduction.html">
    Introduction
   </a>
  </li>
@@ -109,6 +108,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="api.html">
    API reference guide
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   About us
   </a>
  </li>
 </ul>
@@ -152,7 +156,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/introduction.rst.txt"><button type="button"
+        <a class="dropdown-buttons" href="_sources/gemanalytics.rst.txt"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.rst</button></a>
         <!-- Download PDF via print -->
@@ -172,7 +176,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         
-        <a class="edit-button" href="https://github.com/gpitt71/gemact-code/edit/master/introduction.rst"><button
+        <a class="edit-button" href="https://github.com/gpitt71/gemact-code/edit/master/gemanalytics.rst"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -192,31 +196,6 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#scope">
-   Scope
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#reinsurance-treaties">
-     Reinsurance treaties
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#computational-methods-for-pricing">
-     Computational methods for pricing
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -224,83 +203,37 @@
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Introduction</h1>
+                <h1>About us</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#scope">
-   Scope
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#reinsurance-treaties">
-     Reinsurance treaties
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#computational-methods-for-pricing">
-     Computational methods for pricing
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
-
-                        </nav>
                     </div>
                 </div>
             </div>
             
               <div>
                 
-  <div class="section" id="introduction">
-<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
-<p>GEMAct is an <strong>actuarial package</strong>, based on the collective risk theory framework, that offers a comprehensive set of tools for <strong>non-life</strong> (re)insurance <strong>pricing</strong>, stochastic <strong>claims reserving</strong>, and <strong>risk aggregation</strong>.</p>
-<p>The variety of available functionalities makes GEMAct modeling very flexible and provides actuarial scientists and practitioners with a powerful tool that fits into the expanding community of <strong>Python</strong> programming language.</p>
-<div class="section" id="scope">
-<h2>Scope<a class="headerlink" href="#scope" title="Permalink to this headline">¶</a></h2>
+  <div class="section" id="about-us">
+<h1>About us<a class="headerlink" href="#about-us" title="Permalink to this headline">¶</a></h1>
+<p><strong>Gabriele Pittarello</strong> (<em>Owner, Developer</em>)</p>
+<p>I am a PhD student in Statistical Sciences at Università ‘La Sapienza’ di Roma. Currently, I am a visiting researcher at the University of Copenhagen.</p>
+<p>I attained a bachelor’s degree in business economics from Università di Milano-Bicocca and a master’s degree in statistical and Actuarial Sciences from Università Cattolica del Sacro Cuore di Milano.</p>
+<p>My research interests are primarily claims reserving in non-life insurance and computational methods for non-life insurance.</p>
+<p>Contacts:</p>
 <ul class="simple">
-<li><p>A collective risk model apparatus to price non-life (re)insurance contracts.</p></li>
-<li><p>Extend the set of distributions available in scipy to actuarial scientists.
-GEMAct provides the first Python implementation of the (a,b,k) family.</p></li>
-<li><p>New copulas available to statisticians.
-The Student-T Copula cdf can be numerically approximated in GEMAct.</p></li>
-<li><p>Tools to estimate the loss reserves.</p></li>
-<li><p>The first publicly available Python implementation of the AEP algorithm.</p></li>
+<li><p>e-mail: gabriele(dot)pittarello(at)uniroma1(dot)it</p></li>
+<li><p><a class="reference external" href="https://github.com/gpitt71">GitHub</a></p></li>
+<li><p><a class="reference external" href="https://www.linkedin.com/in/gabrielepittarello/">LinkedIN</a></p></li>
 </ul>
-<div class="section" id="reinsurance-treaties">
-<h3>Reinsurance treaties<a class="headerlink" href="#reinsurance-treaties" title="Permalink to this headline">¶</a></h3>
-<p>The GEMAct package can be used for pricing the following reinsurance contracts and their combinations.</p>
+<p><strong>Edoardo Luini</strong> (<em>Project lead, Developer</em>)</p>
+<p>I work as a quantitative developer in the insurance industry. I am currently Teaching fellow in Actuarial Non-life Insurance at Università Cattolica del Sacro Cuore, Milano. I earned a PhD in Statistical Sciences, Università ‘La Sapienza’ di Roma. I have been visiting student at ETH Zürich.</p>
+<p>I hold a master’s degree in Statistical and Actuarial Sciences from Università Cattolica del Sacro Cuore di Milano.</p>
+<p>contacts:</p>
 <ul class="simple">
-<li><dl class="simple">
-<dt>Excess-of-Loss (XL) including:</dt><dd><ul>
-<li><p>aggregate conditions (cover and deductible),</p></li>
-<li><p>reinstatements.</p></li>
+<li><p>e-mail: edoardo(dot)glaucoluini(at)unicatt(dot)it</p></li>
+<li><p><a class="reference external" href="https://github.com/EdoLu">GitHub</a></p></li>
 </ul>
-</dd>
-</dl>
-</li>
-<li><p>Quota-share (QS).</p></li>
-<li><p>Stop-loss (SL).</p></li>
-</ul>
-</div>
-<div class="section" id="computational-methods-for-pricing">
-<h3>Computational methods for pricing<a class="headerlink" href="#computational-methods-for-pricing" title="Permalink to this headline">¶</a></h3>
-<p>The computational methods offered by the GEMAct package for the collective risk model computation are either simulative or non-simulative.</p>
-<ul class="simple">
-<li><p>Recursive method (Panjer recursion).</p></li>
-<li><p>Discrete Fourier transform, via the Fast Fourier Transform (FFT) algorithm.</p></li>
-<li><p>Monte Carlo simulation.</p></li>
-</ul>
-</div>
-</div>
 </div>
 
 
@@ -309,19 +242,12 @@ The Student-T Copula cdf can be numerically approximated in GEMAct.</p></li>
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="index.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="api.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">GEMAct</p>
+            <p class="prev-next-title">API reference guide</p>
         </div>
-    </a>
-    <a class='right-next' id="next-link" href="usage.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Usage</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             

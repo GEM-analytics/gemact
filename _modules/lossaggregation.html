@@ -190,10 +190,10 @@
               <div>
                 
   <h1>Source code for lossaggregation</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">factorial</span>
 <span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">interp1d</span>
-<span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">config</span>
 <span class="kn">import</span> <span class="nn">helperfunctions</span> <span class="k">as</span> <span class="nn">hf</span>
 
@@ -206,8 +206,8 @@
 
 <div class="viewcode-block" id="LossAggregation"><a class="viewcode-back" href="../api.html#lossaggregation.LossAggregation">[docs]</a><span class="k">class</span> <span class="nc">LossAggregation</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Class representing the sum of random variables</span>
-<span class="sd">        with a dependence structure specified by a copula and a set of given marginals.</span>
+<span class="sd">        Class representing the sum of positive countinuous random variables.</span>
+<span class="sd">        Dependence structure is specified by a copula and a set of given marginals.</span>
 
 <span class="sd">        :param copula: Name of the copula that describes the dependence structure.</span>
 <span class="sd">        :type copula: ``str``</span>
@@ -217,18 +217,23 @@
 <span class="sd">        :type margins: ``list``</span>
 <span class="sd">        :param margins_pars: List of the marginal distributions parameters. It must be a list of dictionaries.</span>
 <span class="sd">        :type margins_pars: ``list``</span>
-<span class="sd">        :param random_state: random state for the random number generator in MC.</span>
-<span class="sd">        :type random_state: ``int``</span>
-<span class="sd">        :param sample_size: number of simulations of Monte Carlo (mc) method.</span>
-<span class="sd">        :type sample_size: ``int``</span>
+
+<span class="sd">        :param \\**kwargs:</span>
+<span class="sd">            See below</span>
+
+<span class="sd">        :Keyword Arguments:</span>
+<span class="sd">            * *random_state* (``int``) --</span>
+<span class="sd">                Random state for the random number generator in MC.</span>
+<span class="sd">            * *sample_size* (``int``) --</span>
+<span class="sd">                Number of simulations of Monte Carlo (mc) method.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">copula</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;copula&#39;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">copula_par</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;copula_par&#39;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">margins</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;margins&#39;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">margins_pars</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;margins_pars&#39;</span><span class="p">]</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">copula</span><span class="p">,</span> <span class="n">copula_par</span><span class="p">,</span> <span class="n">margins</span><span class="p">,</span> <span class="n">margins_pars</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">copula</span> <span class="o">=</span> <span class="n">copula</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">copula_par</span> <span class="o">=</span> <span class="n">copula_par</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">margins</span> <span class="o">=</span> <span class="n">margins</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">margins_pars</span> <span class="o">=</span> <span class="n">margins_pars</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">random_state</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;random_state&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sample_size</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sample_size&#39;</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__dist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dist_calculate</span><span class="p">()</span>
@@ -361,6 +366,11 @@
         <span class="k">return</span> <span class="n">output</span>
 
     <span class="k">def</span> <span class="nf">_private_prop_aep_initiate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        AEP algorithm helper function.</span>
+<span class="sd">        See Arbenz P., Embrechts P., and Puccetti G.</span>
+<span class="sd">        &quot;The AEP algorithm for the fast computation of the distribution of the sum of dependent random variables.&quot; Bernoulli (2011): 562-591.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">)</span>  <span class="c1"># Vector b of the AEP algorithm.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">x</span><span class="p">]])</span>  <span class="c1"># Vector h of the AEP algorithm.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__sn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># Array of +1,-1, 0 indicating whether a volume must be summed,</span>
@@ -368,6 +378,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__vols</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># sum of &#39;volumes&#39; * &#39;sn&#39; used in AEP iteration</span>
 
     <span class="k">def</span> <span class="nf">_private_prop_aep_delete</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        AEP algorithm helper function.</span>
+<span class="sd">        See Arbenz P., Embrechts P., and Puccetti G.</span>
+<span class="sd">        &quot;The AEP algorithm for the fast computation of the distribution of the sum of dependent random variables.&quot; Bernoulli (2011): 562-591.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">__b</span>
         <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">__h</span>
         <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">__sn</span>
@@ -390,6 +405,11 @@
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_volume_calc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        AEP algorithm helper function.</span>
+<span class="sd">        See Arbenz P., Embrechts P., and Puccetti G.</span>
+<span class="sd">        &quot;The AEP algorithm for the fast computation of the distribution of the sum of dependent random variables.&quot; Bernoulli (2011): 562-591.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">mat_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mat</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
         <span class="n">h_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">__h</span>
         <span class="n">b_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__b</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -400,14 +420,29 @@
         <span class="k">return</span> <span class="n">result</span>
 
     <span class="k">def</span> <span class="nf">_sn_update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        AEP algorithm helper function.</span>
+<span class="sd">        See Arbenz P., Embrechts P., and Puccetti G.</span>
+<span class="sd">        &quot;The AEP algorithm for the fast computation of the distribution of the sum of dependent random variables.&quot; Bernoulli (2011): 562-591.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__sn</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_simpleces</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__sn</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">result</span>
 
     <span class="k">def</span> <span class="nf">_h_update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        AEP algorithm helper function.</span>
+<span class="sd">        See Arbenz P., Embrechts P., and Puccetti G.</span>
+<span class="sd">        &quot;The AEP algorithm for the fast computation of the distribution of the sum of dependent random variables.&quot; Bernoulli (2011): 562-591.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">card</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__h</span><span class="p">))</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__h</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">card</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">result</span>
 
     <span class="k">def</span> <span class="nf">_b_update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        AEP algorithm helper function.</span>
+<span class="sd">        See Arbenz P., Embrechts P., and Puccetti G.</span>
+<span class="sd">        &quot;The AEP algorithm for the fast computation of the distribution of the sum of dependent random variables.&quot; Bernoulli (2011): 562-591.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">mat_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mat</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="p">:]</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
         <span class="n">h_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__h</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_simpleces</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
         <span class="n">times_</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">h_</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">mat_</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
@@ -416,6 +451,19 @@
         <span class="k">return</span> <span class="n">result</span>
 
     <span class="k">def</span> <span class="nf">_aep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">n_iter</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        AEP algorithm to approximate cdf.</span>
+<span class="sd">        See Arbenz P., Embrechts P., and Puccetti G.</span>
+<span class="sd">        &quot;The AEP algorithm for the fast computation of the distribution of the sum of dependent random variables.&quot; Bernoulli (2011): 562-591.</span>
+
+<span class="sd">        :param x: quantile where the cumulative distribution function is evaluated.</span>
+<span class="sd">        :type x: ``float``</span>
+<span class="sd">        :param n_iter: number of algorithm iterations.</span>
+<span class="sd">        :type n_iter: ``int``</span>
+
+<span class="sd">        :return: cumulative distribution function.</span>
+<span class="sd">        :rtype: ``numpy.float64`` or ``numpy.ndarray``</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_private_prop_aep_initiate</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="n">cdf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_volume_calc</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_iter</span><span class="p">):</span>
@@ -444,13 +492,21 @@
 <span class="sd">        Cumulative distribution function.</span>
 
 <span class="sd">        :param x: quantile where the cumulative distribution function is evaluated.</span>
-<span class="sd">        :type x: ``int``</span>
+<span class="sd">        :type x: ``float``</span>
 <span class="sd">        :param method: method to approximate the cdf of the aggregate loss random variable</span>
 <span class="sd">                        (i.e. the sum of random variables with a dependence structure specified by a copula).</span>
 <span class="sd">                        One of AEP (&#39;aep&#39;) and Monte Carlo simulation (&#39;mc&#39;).</span>
 <span class="sd">        :type method: ``string``</span>
+
 <span class="sd">        :return: cumulative distribution function.</span>
-<span class="sd">        :rtype: ``float``</span>
+<span class="sd">        :rtype: ``numpy.float64`` or ``numpy.ndarray``</span>
+
+<span class="sd">        :param \\**kwargs:</span>
+<span class="sd">            See below</span>
+
+<span class="sd">        :Keyword Arguments:</span>
+<span class="sd">            * *n_iter* (``int``) --</span>
+<span class="sd">                Number of iteration of AEP algorithm.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">method</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">LOSS_AGGREGATION_METHOD_LIST</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;results: method must be one of </span><span class="si">%r</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="n">config</span><span class="o">.</span><span class="n">LOSS_AGGREGATION_METHOD_LIST</span><span class="p">)</span>
@@ -469,6 +525,12 @@
     <span class="k">def</span> <span class="nf">_mc_cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Cumulative distribution function from Monte Carlo simulation.</span>
+
+<span class="sd">        :param x: quantile where the cumulative distribution function is evaluated.</span>
+<span class="sd">        :type x: ``int`` or ``float``</span>
+
+<span class="sd">        :return: cumulative distribution function.</span>
+<span class="sd">        :rtype: ``numpy.float64`` or ``numpy.ndarray``</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="n">y_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dist</span><span class="p">[</span><span class="s1">&#39;nodes&#39;</span><span class="p">])</span>
@@ -480,12 +542,14 @@
 
 <div class="viewcode-block" id="LossAggregation.ppf"><a class="viewcode-back" href="../api.html#lossaggregation.LossAggregation.ppf">[docs]</a>    <span class="k">def</span> <span class="nf">ppf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Percent point function, a.k.a. the quantile function, inverse of cumulative distribution function.</span>
+<span class="sd">        Percent point function, a.k.a. the quantile function,</span>
+<span class="sd">        inverse of cumulative distribution function from Monte Carlo simulation.</span>
 
 <span class="sd">        :param q: level at which the percent point function is evaluated.</span>
 <span class="sd">        :type q: ``float``</span>
+
 <span class="sd">        :return: percent point function.</span>
-<span class="sd">        :rtype: ``numpy.int`` or ``numpy.ndarray``</span>
+<span class="sd">        :rtype: ``numpy.float64`` or ``numpy.int`` or ``numpy.ndarray``</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
         <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">q</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;q cannot exceed 1&quot;</span><span class="p">)</span>
@@ -499,12 +563,14 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Non-central moment of order n.</span>
 
-<span class="sd">        :param n: moment of order n</span>
+<span class="sd">        :param n: moment order.</span>
 <span class="sd">        :type n: ``int``</span>
-<span class="sd">        :return: non-central moment of order n</span>
+
+<span class="sd">        :return: raw moment of order n.</span>
 <span class="sd">        :rtype: ``float``</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
+        <span class="k">assert</span> <span class="p">(</span><span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;n must be &gt; 0&quot;</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
@@ -527,14 +593,15 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">random_state</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span> <span class="k">if</span> <span class="n">random_state</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">random_state</span>
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">random_state</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;random_state has to be an integer&quot;</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">random_state</span><span class="p">)</span>
 
+        <span class="k">assert</span> <span class="p">(</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;size must be &gt; 0&quot;</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Please provide size as an integer&#39;</span><span class="p">)</span>
             <span class="k">raise</span>
 
-        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">random_state</span><span class="p">)</span>
         <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">output</span></div></div>
 </pre></div>

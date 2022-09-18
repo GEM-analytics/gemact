@@ -190,12 +190,12 @@
               <div>
                 
   <h1>Source code for lossmodel</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">config</span>
-<span class="kn">import</span> <span class="nn">helperfunctions</span> <span class="k">as</span> <span class="nn">hf</span>
-<span class="kn">from</span> <span class="nn">twiggy</span> <span class="kn">import</span> <span class="n">quick_setup</span><span class="p">,</span> <span class="n">log</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">scipy.fft</span> <span class="kn">import</span> <span class="n">fft</span><span class="p">,</span> <span class="n">ifft</span>
-<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">helperfunctions</span> <span class="k">as</span> <span class="nn">hf</span>
+<span class="kn">import</span> <span class="nn">config</span>
+<span class="kn">from</span> <span class="nn">twiggy</span> <span class="kn">import</span> <span class="n">quick_setup</span><span class="p">,</span> <span class="n">log</span>
+<span class="kn">import</span> <span class="nn">time</span>  <span class="c1"># used for setting random number generator seed if None</span>
 
 <span class="n">quick_setup</span><span class="p">()</span>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">log</span><span class="o">.</span><span class="n">name</span><span class="p">(</span><span class="s1">&#39;lossmodel&#39;</span><span class="p">)</span>
@@ -236,8 +236,8 @@
 
     <span class="nd">@fq_par</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">fq_par</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">dict</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Type error in fq_par. </span><span class="se">\n</span><span class="s1">&#39;</span>
-                                                     <span class="s1">&#39;Please make sure that the frequency parameters are a dictionary&#39;</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">dict</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Type error in fq_par. </span><span class="se">\n</span><span class="s1">&#39;</span>
+                                                    <span class="s1">&#39;Please make sure that the frequency parameters are a dictionary&#39;</span><span class="p">)</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">fq_dist</span><span class="p">(</span><span class="o">**</span><span class="n">value</span><span class="p">)</span>
@@ -253,7 +253,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">p0</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fq_par</span><span class="p">[</span><span class="s1">&#39;p0m&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;zm&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fq_model</span><span class="o">.</span><span class="n">category</span><span class="p">()</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fq_par</span><span class="p">[</span><span class="s1">&#39;p0M&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;zm&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fq_model</span><span class="o">.</span><span class="n">category</span><span class="p">()</span> <span class="k">else</span> <span class="kc">None</span>
         <span class="k">return</span> <span class="n">output</span>
 
     <span class="nd">@property</span>
@@ -305,6 +305,7 @@
 <span class="sd">                  deductible plus cover is the contract upper priority or severity &#39;exit point&#39;</span>
 <span class="sd">                  (default value is infinity).</span>
 <span class="sd">    :type cover: ``int`` or ``float``</span>
+
 <span class="sd">    :param \\**kwargs:</span>
 <span class="sd">        See below</span>
 
@@ -313,7 +314,7 @@
 <span class="sd">          Name of the severity distribution.</span>
 <span class="sd">          See the distribution module for the continuous distributions supported in GEMAct.</span>
 <span class="sd">        * *sev_par* (``dict``) --</span>
-<span class="sd">          parameters of the severity distribution.</span>
+<span class="sd">          Parameters of the severity distribution.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
@@ -536,7 +537,6 @@
 
 <span class="sd">        :return: discrete severity, nodes sequence and discrete probabilities.</span>
 <span class="sd">        :rtype: ``dict``</span>
-
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">last_node_prob</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_upper_discr_point_prob_adjuster</span><span class="p">()</span>
@@ -591,6 +591,7 @@
 <span class="sd">    :type random_state: ``int``, optional</span>
 <span class="sd">    :param n_aggr_dist_nodes: number of nodes in the approximated aggregate loss distribution.</span>
 <span class="sd">    :type n_aggr_dist_nodes: ``int``</span>
+
 <span class="sd">    :param \\**kwargs:</span>
 <span class="sd">        See below</span>
 
@@ -1008,27 +1009,15 @@
 <span class="sd">        Aggregate loss distribution percent point function, a.k.a. the quantile function,</span>
 <span class="sd">        inverse of the cumulative distribution function.</span>
 
-<span class="sd">        :param q: vector of probabilities.</span>
+<span class="sd">        :param q: probability.</span>
 <span class="sd">        :type q: ``float`` or ``numpy.ndarray``</span>
-<span class="sd">        :return: vector of quantiles.</span>
-<span class="sd">        :rtype: ``numpy.ndarray``</span>
-
+<span class="sd">        :return: quantile.</span>
+<span class="sd">        :rtype: ``numpy.float64`` or ``numpy.ndarray``</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_aggr_loss_dist_check</span><span class="p">()</span>
-
-        <span class="k">try</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">aggr_loss_dist_method</span> <span class="o">!=</span> <span class="s1">&#39;mc&#39;</span><span class="p">:</span>
-                <span class="n">q_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
-                <span class="n">q</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
-                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">q</span><span class="p">:</span>
-                    <span class="n">q_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">q_</span><span class="p">,</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">aggr_loss_dist</span><span class="p">[</span><span class="s1">&#39;nodes&#39;</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">aggr_loss_dist</span><span class="p">[</span><span class="s1">&#39;ecdf&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]])</span>
-                <span class="k">return</span> <span class="n">q_</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">aggr_loss_dist</span><span class="p">[</span><span class="s1">&#39;nodes&#39;</span><span class="p">],</span> <span class="n">q</span><span class="o">=</span><span class="n">q</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Please make sure q is a list&#39;</span><span class="p">)</span>
-            <span class="k">raise</span></div>
+        <span class="n">q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">aggr_loss_dist</span><span class="p">[</span><span class="s1">&#39;nodes&#39;</span><span class="p">],</span> <span class="n">q</span><span class="o">=</span><span class="n">q</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="LossModel.aggr_loss_cdf"><a class="viewcode-back" href="../api.html#lossmodel.LossModel.aggr_loss_cdf">[docs]</a>    <span class="k">def</span> <span class="nf">aggr_loss_cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -1042,9 +1031,10 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_aggr_loss_dist_check</span><span class="p">()</span>
 
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="n">y_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">aggr_loss_dist</span><span class="p">[</span><span class="s1">&#39;ecdf&#39;</span><span class="p">]))</span>
-        <span class="n">x_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">aggr_loss_dist</span><span class="p">[</span><span class="s1">&#39;nodes&#39;</span><span class="p">]))</span>
+        <span class="n">y_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">aggr_loss_dist</span><span class="p">[</span><span class="s1">&#39;ecdf&#39;</span><span class="p">])</span>
+        <span class="n">x_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">aggr_loss_dist</span><span class="p">[</span><span class="s1">&#39;nodes&#39;</span><span class="p">])</span>
         <span class="n">output</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 
         <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)):</span>
@@ -1067,21 +1057,21 @@
 <span class="sd">        :return: random variates.</span>
 <span class="sd">        :rtype: ``numpy.int`` or ``numpy.ndarray``</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">_aggr_loss_dist_check</span><span class="p">()</span>
 
         <span class="n">random_state</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span> <span class="k">if</span> <span class="n">random_state</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">random_state</span>
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">random_state</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Please make sure random_state is as an integer&quot;</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">random_state</span><span class="p">)</span>
 
+        <span class="k">assert</span> <span class="p">(</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">),</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Size must be &gt; 0&quot;</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Please make sure size is an integer&#39;</span><span class="p">)</span>
             <span class="k">raise</span>
 
-        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">random_state</span><span class="p">)</span>
-
         <span class="n">output</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">aggr_loss_dist</span><span class="p">[</span><span class="s1">&#39;nodes&#39;</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">aggr_loss_dist</span><span class="p">[</span><span class="s1">&#39;epdf&#39;</span><span class="p">])</span>
-
         <span class="k">return</span> <span class="n">output</span></div>
 
 <div class="viewcode-block" id="LossModel.aggr_loss_mean"><a class="viewcode-back" href="../api.html#lossmodel.LossModel.aggr_loss_mean">[docs]</a>    <span class="k">def</span> <span class="nf">aggr_loss_mean</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1118,7 +1108,6 @@
 <span class="sd">        :param t: deductible.</span>
 <span class="sd">        :type t: ``float``</span>
 <span class="sd">        :return: stop loss contract expected value.</span>
-
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">([</span><span class="n">t</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
         <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">aggr_loss_dist</span><span class="p">[</span><span class="s1">&#39;nodes&#39;</span><span class="p">]</span>
@@ -1228,13 +1217,18 @@
                 <span class="p">[</span><span class="s1">&#39;tilt_value&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tilt_value</span><span class="p">],</span>
             <span class="p">])</span>
 
+        <span class="n">n_sev2print</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_sev_discr_nodes</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cover</span> <span class="o">!=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">):</span>
+            <span class="n">n_sev2print</span> <span class="o">+=</span> <span class="mi">1</span>
+
         <span class="n">data</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span>
             <span class="p">[</span><span class="s1">&#39;sev_discr_method&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sev_discr_method</span><span class="p">],</span>
             <span class="p">[</span><span class="s1">&#39;sev_discr_step&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sev_discr_step</span><span class="p">],</span>
-            <span class="p">[</span><span class="s1">&#39;n_sev_discr_nodes&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_sev_discr_nodes</span><span class="p">]</span>
+            <span class="p">[</span><span class="s1">&#39;n_sev_discr_nodes&#39;</span><span class="p">,</span> <span class="n">n_sev2print</span><span class="p">]</span>
         <span class="p">])</span>
 
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{: &gt;20}</span><span class="s1"> </span><span class="si">{: &gt;20}</span><span class="s1"> </span><span class="si">{: &gt;20}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="o">*</span><span class="p">[</span><span class="s1">&#39;Contract specification&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">]))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{: &gt;20}</span><span class="s1"> </span><span class="si">{: &gt;20}</span><span class="s1"> </span><span class="si">{: &gt;20}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="o">*</span><span class="p">[</span><span class="s1">&#39;         &#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">]))</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{: &gt;20}</span><span class="s1"> </span><span class="si">{: &gt;20}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="o">*</span><span class="p">[</span><span class="s1">&#39; ==================================================================&#39;</span><span class="p">]))</span>
         <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{: &gt;20}</span><span class="s1"> </span><span class="si">{: &gt;20}</span><span class="s1"> </span><span class="si">{: &gt;20}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="o">*</span><span class="n">row</span><span class="p">))</span>
@@ -1248,20 +1242,19 @@
 <span class="sd">        :rtype: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">data</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="p">[</span><span class="s1">&#39;deductible&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">deductible</span><span class="p">],</span>
-            <span class="p">[</span><span class="s1">&#39;cover&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cover</span><span class="p">],</span>
-            <span class="p">[</span><span class="s1">&#39;aggr_deductible&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">aggr_deductible</span><span class="p">],</span>
-            <span class="p">[</span><span class="s1">&#39;alpha_qs&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha_qs</span><span class="p">],</span>
-            <span class="p">[</span><span class="s1">&#39;n_reinst&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_reinst</span><span class="p">]</span>
+            <span class="p">[</span><span class="s1">&#39;Deductible&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">deductible</span><span class="p">],</span>
+            <span class="p">[</span><span class="s1">&#39;Cover&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cover</span><span class="p">],</span>
+            <span class="p">[</span><span class="s1">&#39;Aggregate deductible&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">aggr_deductible</span><span class="p">],</span>
+            <span class="p">[</span><span class="s1">&#39;Quota share portion&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha_qs</span><span class="p">],</span>
+            <span class="p">[</span><span class="s1">&#39;Reinstatements (no.)&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_reinst</span><span class="p">]</span>
         <span class="p">]</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reinst_loading</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">data</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="s1">&#39;reinst_loading&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">reinst_loading</span><span class="p">])</span>
+
 
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{: &gt;20}</span><span class="s1"> </span><span class="si">{: &gt;20}</span><span class="s1"> </span><span class="si">{: &gt;20}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="o">*</span><span class="p">[</span><span class="s1">&#39;Contract specification&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">]))</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{: &gt;20}</span><span class="s1"> </span><span class="si">{: &gt;20}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="o">*</span><span class="p">[</span><span class="s1">&#39; ==================================================================&#39;</span><span class="p">]))</span>
         <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{: &gt;20}</span><span class="s1"> </span><span class="si">{: &gt;20}</span><span class="s1"> </span><span class="si">{: &gt;20}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="o">*</span><span class="n">row</span><span class="p">))</span>
-
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{: &gt;20}</span><span class="s1"> </span><span class="si">{: &gt;20}</span><span class="s1"> </span><span class="si">{: &gt;20}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="o">*</span><span class="n">row</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> Reinstatement layer loading c: &#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">reinst_loading</span><span class="p">)</span>
         <span class="k">return</span></div>
 
     <span class="k">def</span> <span class="nf">_aggr_loss_dist_check</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
