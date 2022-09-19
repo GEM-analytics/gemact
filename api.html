@@ -39,6 +39,7 @@
     <link rel="shortcut icon" href="_static/webtab.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="About us" href="gemanalytics.html" />
     <link rel="prev" title="Actuarial modeling with GEMAct" href="modeling.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -110,6 +111,11 @@
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    API reference guide
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="gemanalytics.html">
+   About us
   </a>
  </li>
 </ul>
@@ -1502,24 +1508,51 @@ when number of reinstatements is infinity there is no aggregate cover
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><em>fq_dist</em> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) –
-Frequency model distribution name.</p></li>
-<li><p><em>fq_par</em> (<code class="docutils literal notranslate"><span class="pre">dict</span></code>) –
-Frequency model distribution parameters.</p></li>
-<li><p><em>sev_dist</em> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) –
-Severity model distribution name.</p></li>
-<li><p><em>sev_par</em> (<code class="docutils literal notranslate"><span class="pre">dict</span></code>) –
-Severity model distribution parameters.</p></li>
-<li><p><em>sev_discr_method</em> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) –
-Severity discretization method (default value is ‘localmoments’).</p></li>
-<li><p><em>sev_discr_step</em> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) –
-Severity model discretization step.</p></li>
-<li><p><em>n_sev_discr_nodes</em> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) –
-Number of nodes of the discretized severity.</p></li>
-<li><p><em>deductible</em> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>) –
-Contract deductible, also referred to as retention or priority (default value is 0).</p></li>
-<li><p><em>cover</em> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>) –
-Contract cover (deductible plus cover is the contract upper priority or severity ‘exit point’).</p></li>
+<li><dl class="simple">
+<dt><em>fq_dist</em> = (<code class="docutils literal notranslate"><span class="pre">str</span></code>)–</dt><dd><p>Frequency model distribution name.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><em>fq_par</em> = (<code class="docutils literal notranslate"><span class="pre">dict</span></code>) –</dt><dd><p>Frequency model distribution parameters.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><em>sev_dist</em> = (<code class="docutils literal notranslate"><span class="pre">str</span></code>) –</dt><dd><p>Severity model distribution name.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><em>sev_par</em> = (<code class="docutils literal notranslate"><span class="pre">dict</span></code>) –</dt><dd><p>Severity model distribution parameters.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><em>sev_discr_method</em> = (<code class="docutils literal notranslate"><span class="pre">float</span></code>) –</dt><dd><p>Severity discretization method (default value is ‘localmoments’).</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><em>sev_discr_step</em> = (<code class="docutils literal notranslate"><span class="pre">float</span></code>) –</dt><dd><p>Severity model discretization step.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><em>n_sev_discr_nodes</em> = (<code class="docutils literal notranslate"><span class="pre">int</span></code>) –</dt><dd><p>Number of nodes of the discretized severity.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><em>deductible</em> = (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>) –</dt><dd><p>Contract deductible, also referred to as retention or priority (default value is 0).</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><em>cover</em> = (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>) –</dt><dd><p>Contract cover (deductible plus cover is the contract upper priority or severity ‘exit point’).</p>
+</dd>
+</dl>
+</li>
 </ul>
 </dd>
 </dl>
@@ -1938,7 +1971,7 @@ In case no tail is present it must be J-1 dimensional.</p></li>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
 <li><dl class="simple">
-<dt><em>incremental_payments</em> = (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) –</dt><dd><p>Incremental payments’ triangle</p>
+<dt><em>incremental_payments</em> = (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) –</dt><dd><p>Incremental payments’ triangle.</p>
 </dd>
 </dl>
 </li>
@@ -1948,17 +1981,17 @@ In case no tail is present it must be J-1 dimensional.</p></li>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><em>cased_payments</em> = (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) –</dt><dd><p>Cased payments triangle</p>
+<dt><em>cased_payments</em> = (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) –</dt><dd><p>Cased payments triangle.</p>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><em>incurred_number</em> = (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) –</dt><dd><p>Incurred number</p>
+<dt><em>incurred_number</em> = (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) –</dt><dd><p>Incurred number.</p>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><em>cased_number</em> = (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) –</dt><dd><p>Cased number</p>
+<dt><em>cased_number</em> = (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) –</dt><dd><p>Cased number.</p>
 </dd>
 </dl>
 </li>
@@ -2114,12 +2147,12 @@ Dependence structure is specified by a copula and a set of given marginals.</p>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
 <li><dl class="simple">
-<dt><em>random_state</em> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) –</dt><dd><p>Random state for the random number generator in MC.</p>
+<dt><em>random_state</em> = (<code class="docutils literal notranslate"><span class="pre">int</span></code>) –</dt><dd><p>Random state for the random number generator in MC.</p>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><em>sample_size</em> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) –</dt><dd><p>Number of simulations of Monte Carlo (mc) method.</p>
+<dt><em>sample_size</em> = (<code class="docutils literal notranslate"><span class="pre">int</span></code>) –</dt><dd><p>Number of simulations of Monte Carlo (mc) method.</p>
 </dd>
 </dl>
 </li>
@@ -11660,6 +11693,13 @@ Degrees of freedom <span class="math notranslate nohighlight">\(v&gt;0\)</span> 
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title">Actuarial modeling with GEMAct</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="gemanalytics.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">About us</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             

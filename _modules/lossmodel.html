@@ -109,6 +109,11 @@
    API reference guide
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../gemanalytics.html">
+   About us
+  </a>
+ </li>
 </ul>
 
     </div>
@@ -210,9 +215,9 @@
 <span class="sd">    See below</span>
 
 <span class="sd">    :Keyword Arguments:</span>
-<span class="sd">        * *fq_dist* (``str``) --</span>
+<span class="sd">        * *fq_dist* = (``str``) --</span>
 <span class="sd">          Name of the frequency distribution.</span>
-<span class="sd">        * *fq_par* (``dict``) --</span>
+<span class="sd">        * *fq_par* = (``dict``) --</span>
 <span class="sd">          parameters of the frequency distribution.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -310,11 +315,12 @@
 <span class="sd">        See below</span>
 
 <span class="sd">    :Keyword Arguments:</span>
-<span class="sd">        * *sev_dist* (``str``) --</span>
+<span class="sd">        * *sev_dist* = (``str``) --</span>
 <span class="sd">          Name of the severity distribution.</span>
 <span class="sd">          See the distribution module for the continuous distributions supported in GEMAct.</span>
-<span class="sd">        * *sev_par* (``dict``) --</span>
+<span class="sd">        * *sev_par* = (``dict``) --</span>
 <span class="sd">          Parameters of the severity distribution.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
@@ -596,24 +602,24 @@
 <span class="sd">        See below</span>
 
 <span class="sd">    :Keyword Arguments:</span>
-<span class="sd">        * *fq_dist* (``str``) --</span>
-<span class="sd">          Frequency model distribution name.</span>
-<span class="sd">        * *fq_par* (``dict``) --</span>
-<span class="sd">          Frequency model distribution parameters.</span>
-<span class="sd">        * *sev_dist* (``str``) --</span>
-<span class="sd">          Severity model distribution name.</span>
-<span class="sd">        * *sev_par* (``dict``) --</span>
-<span class="sd">          Severity model distribution parameters.</span>
-<span class="sd">        * *sev_discr_method* (``float``) --</span>
-<span class="sd">          Severity discretization method (default value is &#39;localmoments&#39;).</span>
-<span class="sd">        * *sev_discr_step* (``float``) --</span>
-<span class="sd">          Severity model discretization step.</span>
-<span class="sd">        * *n_sev_discr_nodes* (``int``) --</span>
-<span class="sd">          Number of nodes of the discretized severity.</span>
-<span class="sd">        * *deductible* (``int`` or ``float``) --</span>
-<span class="sd">          Contract deductible, also referred to as retention or priority (default value is 0).</span>
-<span class="sd">        * *cover* (``int`` or ``float``) --</span>
-<span class="sd">          Contract cover (deductible plus cover is the contract upper priority or severity &#39;exit point&#39;).</span>
+<span class="sd">        * *fq_dist* = (``str``)--</span>
+<span class="sd">            Frequency model distribution name.</span>
+<span class="sd">        * *fq_par* = (``dict``) --</span>
+<span class="sd">            Frequency model distribution parameters.</span>
+<span class="sd">        * *sev_dist* = (``str``) --</span>
+<span class="sd">            Severity model distribution name.</span>
+<span class="sd">        * *sev_par* = (``dict``) --</span>
+<span class="sd">            Severity model distribution parameters.</span>
+<span class="sd">        * *sev_discr_method* = (``float``) --</span>
+<span class="sd">            Severity discretization method (default value is &#39;localmoments&#39;).</span>
+<span class="sd">        * *sev_discr_step* = (``float``) --</span>
+<span class="sd">            Severity model discretization step.</span>
+<span class="sd">        * *n_sev_discr_nodes* = (``int``) --</span>
+<span class="sd">            Number of nodes of the discretized severity.</span>
+<span class="sd">        * *deductible* = (``int`` or ``float``) --</span>
+<span class="sd">            Contract deductible, also referred to as retention or priority (default value is 0).</span>
+<span class="sd">        * *cover* = (``int`` or ``float``) --</span>
+<span class="sd">            Contract cover (deductible plus cover is the contract upper priority or severity &#39;exit point&#39;).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
