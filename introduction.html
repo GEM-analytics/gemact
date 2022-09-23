@@ -269,10 +269,9 @@
 <ul class="simple">
 <li><p>A collective risk model apparatus to price non-life (re)insurance contracts.</p></li>
 <li><p>Extend the set of distributions available in scipy to actuarial scientists.
-GEMAct provides the first Python implementation of the <em>(a, b, k)</em> family.</p></li>
-<li><p>New copulas available to statisticians.
-The Student-T Copula cdf can be numerically approximated in GEMAct.</p></li>
-<li><p>Tools to estimate the loss reserves.</p></li>
+GEMAct provides the first Python implementation of the <a class="reference external" href="https://en.wikipedia.org/wiki/(a,b,0)_class_of_distributions">(a, b, k)</a> distribution class.</p></li>
+<li><p>Popular copulas with improved functionalities, e.g. the Student-T Copula cumulative distribution function can be numerically approximated.</p></li>
+<li><p>A loss reserve estimation tool.</p></li>
 <li><p>The first publicly available Python implementation of the AEP algorithm.</p></li>
 </ul>
 <div class="section" id="reinsurance-treaties">
@@ -290,11 +289,17 @@ The Student-T Copula cdf can be numerically approximated in GEMAct.</p></li>
 </div>
 <div class="section" id="computational-methods-for-pricing">
 <h3>Computational methods for pricing<a class="headerlink" href="#computational-methods-for-pricing" title="Permalink to this headline">¶</a></h3>
-<p>GEMAct package offers numerical methods for the collective risk model computations.</p>
+<p>GEMAct package offers multiple numerical methods used within the context of loss distributions approximation.</p>
 <ul class="simple">
-<li><p>Recursive method (Panjer recursion).</p></li>
-<li><p>Discrete Fourier transform, via the Fast Fourier Transform (FFT) algorithm.</p></li>
-<li><p>Monte Carlo simulation.</p></li>
+<li><p>Collective risk model:</p></li><ul>
+    <li><p>Recursive method (Panjer recursion),</p></li>
+    <li><p>Discrete Fourier transform, via the Fast Fourier Transform (FFT) algorithm,</p></li>
+    <li><p>Monte Carlo simulation.</p></li>
+    </ul>
+<li><p>Loss (model) aggregation:</p></li><ul>
+    <li><p>AEP algorithm,</p></li>
+    <li><p>Monte Carlo simulation.</p></li>
+    </ul>
 </ul>
 </div>
 </div>
