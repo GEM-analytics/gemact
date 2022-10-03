@@ -4,7 +4,7 @@ Actuarial modeling with GEMAct
 Distributions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following table summarizes the distribution supported by GEMAct and Scipy.
+The following table summarizes the distribution supported by GEMAct and `SciPy <https://docs.scipy.org>`_.
 
 +--------------------------------------------------+-------------+--------------------+--------------------+
 | Distribution                                     | Support     | GEMAct             | SciPy              |
