@@ -113,11 +113,6 @@
    API reference guide
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="gemanalytics.html">
-   About us
-  </a>
- </li>
 </ul>
 
     </div>
@@ -257,7 +252,7 @@
 <h1>Actuarial modeling with GEMAct<a class="headerlink" href="#actuarial-modeling-with-gemact" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="distributions">
 <h2>Distributions<a class="headerlink" href="#distributions" title="Permalink to this headline">¶</a></h2>
-<p>The following table summarizes the distribution supported by GEMAct and <a class="reference external" href="https://docs.scipy.org">SciPy</a>.</p>
+<p>The following table lists the distributions supported by GEMAct and makes a comparison with SciPy.</p>
 <table class="table">
 <colgroup>
 <col style="width: 49%" />
@@ -272,162 +267,165 @@
 <th class="head"><p>SciPy</p></th>
 </tr>
 </thead>
+<body>
 <tbody>
-<tr class="row-even"><td><p>The Burr Distribution.</p></td>
-<td><p>continuous</p></td>
+<tr class="row-even"><td><p>Burr</p></td>
+<td><p>Continuous</p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p>The Generalized Pareto Distribution.</p></td>
-<td><p>continuous</p></td>
+<tr class="row-odd"><td><p>Generalized Pareto</p></td>
+<td><p>Continuous</p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
-<tr class="row-even"><td><p>The Inverse Burr Distribution (Dagum).</p></td>
-<td><p>continuous</p></td>
+<tr class="row-even"><td><p>Inverse Burr (Dagum)</p></td>
+<td><p>Continuous</p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p>The Inverse Gamma Distribution.</p></td>
-<td><p>continuous</p></td>
+<tr class="row-odd"><td><p>Inverse Gamma</p></td>
+<td><p>Continuous</p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
-<tr class="row-even"><td><p>The Inverse Gaussian Distribution.</p></td>
-<td><p>continuous</p></td>
+<tr class="row-even"><td><p>Inverse Gaussian</p></td>
+<td><p>Continuous</p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p>The Inverse Paralogistic Distribution.</p></td>
-<td><p>continuous</p></td>
+<tr class="row-odd"><td><p>Inverse Paralogistic</p></td>
+<td><p>Continuous</p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
-<tr class="row-even"><td><p>The Weibull Distribution.</p></td>
-<td><p>continuous</p></td>
+<tr class="row-even"><td><p>Weibull</p></td>
+<td><p>Continuous</p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p>The Inverse Weibull Distribution.</p></td>
-<td><p>continuous</p></td>
+<tr class="row-odd"><td><p>Inverse Weibull</p></td>
+<td><p>Continuous</p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
-<tr class="row-even"><td><p>The Paralogistic Distribution.</p></td>
-<td><p>continuous</p></td>
+<tr class="row-even"><td><p>Paralogistic</p></td>
+<td><p>Continuous</p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p>The Pareto Distribution.</p></td>
-<td><p>continuous</p></td>
+<tr class="row-odd"><td><p>Pareto</p></td>
+<td><p>Continuous</p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
-<tr class="row-even"><td><p>The Single-parameter Pareto Distribution.</p></td>
-<td><p>continuous</p></td>
+<tr class="row-even"><td><p>Single-parameter Pareto</p></td>
+<td><p>Continuous</p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p>The Pareto II Distribution.</p></td>
-<td><p>continuous</p></td>
+<tr class="row-odd"><td><p>Pareto II</p></td>
+<td><p>Continuous</p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
-<tr class="row-even"><td><p>The Pareto III Distribution.</p></td>
-<td><p>continuous</p></td>
+<tr class="row-even"><td><p>Pareto III</p></td>
+<td><p>Continuous</p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p>The Pareto IV Distribution.</p></td>
-<td><p>continuous</p></td>
+<tr class="row-odd"><td><p>Pareto IV</p></td>
+<td><p>Continuous</p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
-<tr class="row-even"><td><p>The Beta distribution.</p></td>
-<td><p>continuous</p></td>
+<tr class="row-even"><td><p>Beta</p></td>
+<td><p>Continuous</p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p>The Generalized Beta distribution.</p></td>
-<td><p>continuous</p></td>
+<tr class="row-odd"><td><p>Generalized Beta</p></td>
+<td><p>Continuous</p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\times\)</span></p></td>
 </tr>
-<tr class="row-even"><td><p>The Poisson Distribution.</p></td>
-<td><p>discrete</p></td>
+<tr class="row-even"><td><p>Poisson</p></td>
+<td><p>Discrete</p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p>The Binomial Distribution.</p></td>
-<td><p>discrete</p></td>
+<tr class="row-odd"><td><p>Binomial</p></td>
+<td><p>Discrete</p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
-<tr class="row-even"><td><p>The Geometric Distribution.</p></td>
-<td><p>discrete</p></td>
+<tr class="row-even"><td><p>Geometric</p></td>
+<td><p>Discrete</p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p>The Negative Binomial Distribution.</p></td>
-<td><p>discrete</p></td>
+<tr class="row-odd"><td><p>Negative Binomial</p></td>
+<td><p>Discrete</p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
-<tr class="row-even"><td><p>The Log-Series Distribution.</p></td>
-<td><p>discrete</p></td>
+<tr class="row-even"><td><p>Log-Series</p></td>
+<td><p>Discrete</p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p>The Zero-Modified Binomial Distribution.</p></td>
-<td><p>discrete</p></td>
+<tr class="row-odd"><td><p>Zero-Modified Binomial</p></td>
+<td><p>Discrete</p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\times\)</span></p></td>
 </tr>
-<tr class="row-even"><td><p>The Zero-Modified Geometric Distribution.</p></td>
-<td><p>discrete</p></td>
+<tr class="row-even"><td><p>Zero-Modified Geometric</p></td>
+<td><p>Discrete</p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\times\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p>The Zero-Modified Logarithmic Distribution.</p></td>
-<td><p>discrete</p></td>
+<tr class="row-odd"><td><p>Zero-Modified Logarithmic</p></td>
+<td><p>Discrete</p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\times\)</span></p></td>
 </tr>
-<tr class="row-even"><td><p>The Zero-Modified Negative Binomial Distribution</p></td>
-<td><p>discrete</p></td>
+<tr class="row-even"><td><p>Zero-Modified Negative Binomial</p></td>
+<td><p>Discrete</p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\times\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p>The Zero-Modified Poisson Distribution</p></td>
-<td><p>discrete</p></td>
+<tr class="row-odd"><td><p>Zero-Modified Poisson</p></td>
+<td><p>Discrete</p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\times\)</span></p></td>
 </tr>
-<tr class="row-even"><td><p>The Zero-Truncated Binomial Distribution</p></td>
-<td><p>discrete</p></td>
+<tr class="row-even"><td><p>Zero-Truncated Binomial</p></td>
+<td><p>Discrete</p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\times\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p>The Zero-Truncated Geometric Distribution</p></td>
-<td><p>discrete</p></td>
+<tr class="row-odd"><td><p>Zero-Truncated Geometric</p></td>
+<td><p>Discrete</p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\times\)</span></p></td>
 </tr>
-<tr class="row-even"><td><p>The Zero-Truncated Negative Binomial Distribution</p></td>
-<td><p>discrete</p></td>
+<tr class="row-even"><td><p>Zero-Truncated Negative Binomial</p></td>
+<td><p>Discrete</p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\times\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p>The Zero-Truncated Poisson Distribution</p></td>
-<td><p>discrete</p></td>
+<tr class="row-odd"><td><p>Zero-Truncated Poisson</p></td>
+<td><p>Discrete</p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\times\)</span></p></td>
 </tr>
 </tbody>
+</body>
 </table>
 </div>
 <div class="section" id="copulas">
 <h2>Copulas<a class="headerlink" href="#copulas" title="Permalink to this headline">¶</a></h2>
+<p>The following table lists the copulas supported by GEMAct.</p>
 <table class="table">
 <colgroup>
 <col style="width: 60%" />
@@ -440,45 +438,43 @@
 <th class="head"><p>GEMAct</p></th>
 </tr>
 </thead>
+<body>
 <tbody>
-<tr class="row-even"><td><p>The Clayton copula.</p></td>
-<td><p>archimedean</p></td>
+<tr class="row-even"><td><p>Clayton</p></td>
+<td><p>Archimedean</p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p>The Frank copula.</p></td>
-<td><p>archimedean</p></td>
+<tr class="row-odd"><td><p>Frank</p></td>
+<td><p>Archimedean</p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
-<tr class="row-even"><td><p>The Gumbel copula.</p></td>
-<td><p>archimedean</p></td>
+<tr class="row-even"><td><p>Gumbel</p></td>
+<td><p>Archimedean</p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p>The Gaussian copula.</p></td>
-<td><p>elliptical</p></td>
+<tr class="row-odd"><td><p>Gaussian</p></td>
+<td><p>Elliptical</p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
-<tr class="row-even"><td><p>The Student T copula.</p></td>
-<td><p>elliptical</p></td>
+<tr class="row-even"><td><p>Student T</p></td>
+<td><p>Elliptical</p></td>
 <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p>The Independent copula.</p></td>
-<td></td>
-<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
-</tr>
-<tr class="row-even"><td><p>The Fréchet-Hoeffding upper (M)</p></td>
-<td></td>
-<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
-</tr>
-<tr class="row-odd"><td><dl class="field-list simple">
-<dt class="field-odd">white_check_mark</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-</td>
-<td></td>
-<td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
-</tr>
+<tr class="row-odd"><td><p>Independent</p></td>
+    <td><p>Fundamental</p></td>
+    <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
+    </tr>
+<tr class="row-even"><td><p>Fréchet-Hoeffding upper bound (M)</p></td>
+    <td><p>Fundamental</p></td>
+    <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
+    </tr>
+<tr class="row-odd"><td><p>Fréchet-Hoeffding upper lower (W)</p></td>
+    <td><p>Fundamental</p></td>
+    <td><p><span class="math notranslate nohighlight">\(\checkmark\)</span></p></td>
+    </tr>
 </tbody>
 </table>
+</body>
 </div>
 </div>
 
