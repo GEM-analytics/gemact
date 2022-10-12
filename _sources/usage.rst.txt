@@ -3,17 +3,17 @@ Usage
 
 Installation
 ---------------
-In order to install GEMAct::
+GEMAct can be easily installed via ``pip``:
 
    pip install gemact
 
-In case you are installing the GEMAct package in Google Colab, please make sure restart the kernel or to refresh the page before using GEMAct.
+In case you are installing GEMAct within Google Colab, please make sure to restart the kernel or to refresh the page before using it.
 
 Tutorials
 ---------------
 
-Practitioners who want to start using GEMAct might be interested in the Jupyter notebooks we have available on `GitHub <https://github.com/gpitt71/gemact-code/tree/main/vignette>`_ .
-We provide examples on all GEMAct functionalities.
+Users might be interested in the following Jupyter notebooks available on `GitHub <https://github.com/gpitt71/gemact-code/tree/main/vignette>`_.
+We provide several examples to familiarize with GEMAct functionalities.
 
 * Click `here <https://github.com/gpitt71/gemact-code/blob/main/vignette/lossmodel.ipynb>`_ to understand how to price (re)insurance contracts.
 * Click `here <https://github.com/gpitt71/gemact-code/blob/main/vignette/lossaggregation.ipynb>`_ to understand how to perform risks aggregation.

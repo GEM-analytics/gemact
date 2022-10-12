@@ -37,7 +37,7 @@ The following table gives the correspondence between the ``LossModel`` class att
 +------------------------+-----------------------------------------+
 | :math:`u`              | deductible+cover                        |
 +------------------------+-----------------------------------------+
-| :math:`L`              | aggr_n_deductible * deductible          |
+| :math:`L`              | aggr_deductible                         |
 +------------------------+-----------------------------------------+
 | :math:`K`              |       n_reinst                          |
 +------------------------+-----------------------------------------+
@@ -73,7 +73,8 @@ Example
 An example of pricing with reinstatements::
 
    from gemact import LossModel
-   lossm=gemact.LossModel(aggr_loss_dist_method='fft',
+   lossm = gemact.LossModel(
+             aggr_loss_dist_method='fft',
              fq_par={'mu':.5},
              fq_dist= 'poisson',
              sev_par={'loc':0,
@@ -96,17 +97,19 @@ An example of pricing with reinstatements::
 
    
       from gemact LossModel
-      lm_fft= LossModel(aggr_loss_dist_method='fft',
-                 fq_par = fq_par,
-                 fq_dist = fq_dist,
-                 sev_par = sev_par,
-                 sev_dist = sev_dist,
-                 n_sev_discr_nodes = int(1000),
-                 sev_discr_step = 1,
-                 n_aggr_dist_nodes = int(10000))
+      lm_fft = LossModel(
+         aggr_loss_dist_method='fft',
+         fq_par = fq_par,
+         fq_dist = fq_dist,
+         sev_par = sev_par,
+         sev_dist = sev_dist,
+         n_sev_discr_nodes = int(1000),
+         sev_discr_step = 1,
+         n_aggr_dist_nodes = int(10000)
+         )
 
-      print('FFT',lm_fft.aggr_loss_mean())
-      #4.9999999846531935
+      print('FFT', lm_fft.aggr_loss_mean())
+      # 4.9999999846531935
 
 Severity discretization
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -149,39 +152,43 @@ A simple code implementation of severity discretization::
 
    import numpy as np
 
-    lossm_md=gemact.LossModel(aggr_loss_dist_method='fft',
-                 fq_par={'mu':.5},
-                 fq_dist= 'poisson',
-                 sev_par={'loc':0,'scale': 83, 'c': 0.83},
-                 sev_dist='genpareto',
-                 cover=100,
-                 sev_discr_method='massdispersal',
-                 n_sev_discr_nodes = int(10000),
-                 sev_discr_step = .01,
-                 n_aggr_dist_nodes = int(100000))
+    lossm_md = gemact.LossModel(
+      aggr_loss_dist_method='fft',
+      fq_par={'mu':.5},
+      fq_dist='poisson',
+      sev_par={'loc':0,'scale': 83, 'c': 0.83},
+      sev_dist='genpareto',
+      cover=100,
+      sev_discr_method='massdispersal',
+      n_sev_discr_nodes=int(10000),
+      sev_discr_step=.01,
+      n_aggr_dist_nodes=int(100000)
+      )
 
-    lossm_lm=gemact.LossModel(aggr_loss_dist_method='fft',
-                 fq_par={'mu':.5},
-                 fq_dist= 'poisson',
-                 sev_par={'loc':0,'scale': 83, 'c': 0.83},
-                 sev_dist='genpareto',
-                 cover=100,
-                 sev_discr_method='localmoments',
-                 n_sev_discr_nodes = int(10000),
-                 sev_discr_step = .01,
-                 n_aggr_dist_nodes = int(100000))
+    lossm_lm = gemact.LossModel(
+      aggr_loss_dist_method='fft',
+      fq_par={'mu':.5},
+      fq_dist='poisson',
+      sev_par={'loc':0,'scale': 83, 'c': 0.83},
+      sev_dist='genpareto',
+      cover=100,
+      sev_discr_method='localmoments',
+      n_sev_discr_nodes=int(10000),
+      sev_discr_step=.01,
+      n_aggr_dist_nodes=int(100000)
+      )
 
 
-    massD=lossm_md.severity_discretization()
-    localM=lossm_lm.severity_discretization()
+    massD = lossm_md.severity_discretization()
+    localM = lossm_lm.severity_discretization()
 
     meanMD = np.sum(massD['sev_nodes']*massD['fj'])
     meanLM = np.sum(localM['sev_nodes']*localM['fj'])
 
     print('Mean (mass dispersal): ',meanMD)
     print('Mean (local moments): ',meanLM)
-    #Mean (mass dispersal):  64.61227417939517
-    #Mean (local moments):  64.61227421887484
+    # Mean (mass dispersal): 64.61227417939517
+    # Mean (local moments): 64.61227421887484
 
 ``LossReserve``
 ------------------
@@ -222,32 +229,36 @@ It is possible to use the module ``gemdata`` to test GEMAct average cost methods
 
 An example of Fisher-Lange implementation::
 
-    lr = gemact.LossReserve(tail=tail_,
-               incremental_payments=ip_,
-               cased_payments=cp_,
-               cased_number=cn_,
-               reported_claims=reported_,
-               incurred_number=in_,
-               reserving_method=rm_,
-               claims_inflation=infl_)
+    lr = gemact.LossReserve(
+      tail=tail_,
+      incremental_payments=ip_,
+      cased_payments=cp_,
+      cased_number=cn_,
+      reported_claims=reported_,
+      incurred_number=in_,
+      reserving_method=rm_,
+      claims_inflation=infl_
+      )
 
 
 An example of CRM implementation. Observe the CRM for reserving requires additional parameters::
 
     #Loss reserving: instance lr
-    lr = gemact.LossReserve(tail=tail_,
-                   incremental_payments=ip_,
-                   cased_payments=cp_,
-                   cased_number=cn_,
-                   reported_claims=reported_,
-                   incurred_number=in_,
-                   ntr_sim=ntr_sim_,
-                   reserving_method=rm_,
-                   mixing_fq_par=mixing_fq_par,
-                   mixing_sev_par=mixing_sev_par,
-                   claims_inflation=infl_)
+    lr = gemact.LossReserve(
+      tail=tail_,
+      incremental_payments=ip_,
+      cased_payments=cp_,
+      cased_number=cn_,
+      reported_claims=reported_,
+      incurred_number=in_,
+      ntr_sim=ntr_sim_,
+      reserving_method=rm_,
+      mixing_fq_par=mixing_fq_par,
+      mixing_sev_par=mixing_sev_par,
+      claims_inflation=infl_
+      )
 
-    #The progress bar below gives insights on the simulation
+    # The progress bar below gives insights on the simulation
 
 ``LossAggregation``
 ---------------------
@@ -277,7 +288,7 @@ Example
 
 Example code under a clayton assumption::
 
-   la=gemact.LossAggregation(
+   la = gemact.LossAggregation(
                    margins=['genpareto',
                             'genpareto'],
                    margins_pars=[
@@ -292,12 +303,8 @@ Example code under a clayton assumption::
                    copula_par={'par':1.2,
                                'dim':2})
 
-   print('cdf via AEP algorithm: \n',la.cdf(1,
-                                         n_iter=7,
-                                         method='aep'))
-
-   print('cdf via MC: \n',la.cdf(1,
-                                 method='mc'))
+   print('cdf via AEP algorithm: \n',la.cdf(1, n_iter=7, method='aep'))
+   print('cdf via MC: \n',la.cdf(1, method='mc'))
 
 
 
@@ -330,22 +337,22 @@ Example code on the usage of the Poisson class::
     from gemact import distributions
     import numpy as np
 
-    mu=4
-    dist=distributions.Poisson(mu=mu)
-    seq=np.arange(0,20)
-    nsim=int(1e+05)
+    mu = 4
+    dist = distributions.Poisson(mu=mu)
+    seq = np.arange(0,20)
+    nsim = int(1e+05)
 
     # Compute the mean via pmf
-    mean=np.sum(dist.pmf(seq)*seq)
-    variance=np.sum(dist.pmf(seq)*(seq-mean)**2)
+    mean = np.sum(dist.pmf(seq)*seq)
+    variance = np.sum(dist.pmf(seq)*(seq-mean)**2)
 
     print('Mean',mean)
-    print('Theoretical mean',dist.mean())
-    print('Variance',variance)
-    print('Theoretical variance',dist.var())
+    print('Theoretical mean', dist.mean())
+    print('Variance', variance)
+    print('Theoretical variance', dist.var())
     #compare with simulations
-    print('Simulated mean',np.mean(dist.rvs(nsim)))
-    print('Simulated variance',np.var(dist.rvs(nsim)))
+    print('Simulated mean', np.mean(dist.rvs(nsim)))
+    print('Simulated variance', np.var(dist.rvs(nsim)))
 
 Then, use ``matplotlib`` library to print the pmf and the cdf of a Poisson::
 
@@ -356,7 +363,7 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a Poisson::
     plt.title('Probability mass function, ~Poisson(mu=4)')
 
     #cdf
-    plt.step(np.arange(-2,20),dist.cdf(np.arange(-2,20)),'-', where='pre')
+    plt.step(np.arange(-2,20), dist.cdf(np.arange(-2,20)),'-', where='pre')
     plt.title('Cumulative distribution function, ~ Poisson(mu=4)')
 
 .. image:: images/pmfPois.png
@@ -392,11 +399,11 @@ Example code on the usage of the Binom class::
     from gemact import distributions
     import numpy as np
 
-    n=10
-    p=0.5
-    dist=distributions.Binom(n=n,p=p)
-    seq=np.arange(0,20)
-    nsim=int(1e+05)
+    n = 10
+    p = 0.5
+    dist = distributions.Binom(n=n, p=p)
+    seq = np.arange(0,20)
+    nsim = int(1e+05)
 
     # Compute the mean via pmf
     mean=np.sum(dist.pmf(seq)*seq)
@@ -509,23 +516,23 @@ Example code on the usage of the NegBinom class::
     from gemact import distributions
     import numpy as np
 
-    n=10
-    p=.5
-    dist=distributions.NegBinom(n=n,p=p)
-    seq=np.arange(0,100,.001)
-    nsim=int(1e+05)
+    n = 10
+    p = .5
+    dist = distributions.NegBinom(n=n, p=p)
+    seq = np.arange(0,100,.001)
+    nsim = int(1e+05)
 
     # Compute the mean via pmf
-    mean=np.sum(dist.pmf(seq)*seq)
-    variance=np.sum(dist.pmf(seq)*(seq-mean)**2)
+    mean = np.sum(dist.pmf(seq)*seq)
+    variance = np.sum(dist.pmf(seq)*(seq-mean)**2)
 
-    print('Mean',mean)
-    print('Theoretical mean',dist.mean())
-    print('Variance',variance)
-    print('Theoretical variance',dist.var())
+    print('Mean', mean)
+    print('Theoretical mean', dist.mean())
+    print('Variance', variance)
+    print('Theoretical variance', dist.var())
     #compare with simulations
-    print('Simulated mean',np.mean(dist.rvs(nsim)))
-    print('Simulated variance',np.var(dist.rvs(nsim)))
+    print('Simulated mean', np.mean(dist.rvs(nsim)))
+    print('Simulated variance', np.var(dist.rvs(nsim)))
 
 Then, use ``matplotlib`` library to print the pmf and the cdf of a NegBinom::
 
@@ -554,7 +561,7 @@ Then, use ``matplotlib`` library to print the pmf and the cdf of a NegBinom::
 Parametrization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-For a better explanation refer to the `SciPy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.logser.html>`_, see :cite:t:`scipy`.
+For a more detailed explanation refer to the `SciPy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.logser.html>`_, see :cite:t:`scipy`.
 
 
 .. math:: f(k)=-\frac{p^{k}}{k \log (1-p)}

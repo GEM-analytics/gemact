@@ -4,110 +4,97 @@ Actuarial modeling with GEMAct
 Distributions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following table summarizes the distribution supported by GEMAct and Scipy.
+The following table lists the distributions supported by GEMAct and makes a comparison with `SciPy <https://scipy.org/>`_.
 
 +--------------------------------------------------+-------------+--------------------+--------------------+
 | Distribution                                     | Support     | GEMAct             | SciPy              |
 |                                                  |             |                    |                    |
 +==================================================+=============+====================+====================+
-| The Burr Distribution.                           |  continuous | :math:`\checkmark` | :math:`\checkmark` |
+| Burr                                             |  Continuous | :math:`\checkmark` | :math:`\checkmark` |
 +--------------------------------------------------+-------------+--------------------+--------------------+
-| The Generalized Pareto Distribution.             |  continuous | :math:`\checkmark` | :math:`\checkmark` |
+| Generalized Pareto                               |  Continuous | :math:`\checkmark` | :math:`\checkmark` |
 +--------------------------------------------------+-------------+--------------------+--------------------+
-| The Inverse Burr Distribution (Dagum).           |  continuous | :math:`\checkmark` | :math:`\checkmark` |
+|  Inverse Burr (Dagum)                            |  Continuous | :math:`\checkmark` | :math:`\checkmark` |
 +--------------------------------------------------+-------------+--------------------+--------------------+
-| The Inverse Gamma Distribution.                  |  continuous | :math:`\checkmark` | :math:`\checkmark` |
+|  Inverse Gamma                                   |  Continuous | :math:`\checkmark` | :math:`\checkmark` |
 +--------------------------------------------------+-------------+--------------------+--------------------+
-|The Inverse Gaussian Distribution.                |  continuous | :math:`\checkmark` | :math:`\checkmark` |
+| Inverse Gaussian                                 |  Continuous | :math:`\checkmark` | :math:`\checkmark` |
 +--------------------------------------------------+-------------+--------------------+--------------------+
-|The Inverse Paralogistic Distribution.            |  continuous | :math:`\checkmark` | :math:`\checkmark` |
+| Inverse Paralogistic                             |  Continuous | :math:`\checkmark` | :math:`\checkmark` |
 +--------------------------------------------------+-------------+--------------------+--------------------+
-|The Weibull Distribution.                         |  continuous | :math:`\checkmark` | :math:`\checkmark` |
+| Weibull                                          |  Continuous | :math:`\checkmark` | :math:`\checkmark` |
 +--------------------------------------------------+-------------+--------------------+--------------------+
-|The Inverse Weibull Distribution.                 |  continuous | :math:`\checkmark` | :math:`\checkmark` |
+| Inverse Weibull                                  |  Continuous | :math:`\checkmark` | :math:`\checkmark` |
 +--------------------------------------------------+-------------+--------------------+--------------------+
-|The Paralogistic Distribution.                    |  continuous | :math:`\checkmark` | :math:`\checkmark` |
+| Paralogistic                                     |  Continuous | :math:`\checkmark` | :math:`\checkmark` |
 +--------------------------------------------------+-------------+--------------------+--------------------+
-|The Pareto Distribution.                          |  continuous | :math:`\checkmark` | :math:`\checkmark` |
+| Pareto                                           |  Continuous | :math:`\checkmark` | :math:`\checkmark` |
 +--------------------------------------------------+-------------+--------------------+--------------------+
-|The Single-parameter Pareto Distribution.         |  continuous | :math:`\checkmark` | :math:`\checkmark` |
+| Single-parameter Pareto                          |  Continuous | :math:`\checkmark` | :math:`\checkmark` |
 +--------------------------------------------------+-------------+--------------------+--------------------+
-|The Pareto II Distribution.                       |  continuous | :math:`\checkmark` | :math:`\checkmark` |
+| Pareto II                                        |  Continuous | :math:`\checkmark` | :math:`\checkmark` |
 +--------------------------------------------------+-------------+--------------------+--------------------+
-|The Pareto III Distribution.                      |  continuous | :math:`\checkmark` | :math:`\checkmark` |
+| Pareto III                                       |  Continuous | :math:`\checkmark` | :math:`\checkmark` |
 +--------------------------------------------------+-------------+--------------------+--------------------+
-|The Pareto IV Distribution.                       |  continuous | :math:`\checkmark` | :math:`\checkmark` |
+| Pareto IV                                        |  Continuous | :math:`\checkmark` | :math:`\checkmark` |
 +--------------------------------------------------+-------------+--------------------+--------------------+
-|The Beta distribution.                            |continuous   | :math:`\checkmark` | :math:`\checkmark` |
+| Beta                                             |  Continuous | :math:`\checkmark` | :math:`\checkmark` |
 +--------------------------------------------------+-------------+--------------------+--------------------+
-|The Generalized Beta distribution.                |continuous   | :math:`\checkmark` | :math:`\times`     |
+| Generalized Beta                                 |  Continuous | :math:`\checkmark` | :math:`\xmark`     |
 +--------------------------------------------------+-------------+--------------------+--------------------+
-|The Poisson Distribution.                         | discrete    | :math:`\checkmark` | :math:`\checkmark` |
+| Poisson                                          | Discrete    | :math:`\checkmark` | :math:`\checkmark` |
 +--------------------------------------------------+-------------+--------------------+--------------------+
-|The Binomial Distribution.                        | discrete    | :math:`\checkmark` | :math:`\checkmark` |
+| Binomial                                         | Discrete    | :math:`\checkmark` | :math:`\checkmark` |
 +--------------------------------------------------+-------------+--------------------+--------------------+
-|The Geometric Distribution.                       | discrete    | :math:`\checkmark` | :math:`\checkmark` |
+| Geometric                                        | Discrete    | :math:`\checkmark` | :math:`\checkmark` |
 +--------------------------------------------------+-------------+--------------------+--------------------+
-|The Negative Binomial Distribution.               | discrete    | :math:`\checkmark` | :math:`\checkmark` |
+| Negative Binomial                                | Discrete    | :math:`\checkmark` | :math:`\checkmark` |
 +--------------------------------------------------+-------------+--------------------+--------------------+
-|The Log-Series Distribution.                      | discrete    | :math:`\checkmark` | :math:`\checkmark` |
+| Log-Series                                       | Discrete    | :math:`\checkmark` | :math:`\checkmark` |
 +--------------------------------------------------+-------------+--------------------+--------------------+
-|The Zero-Modified Binomial Distribution.          | discrete    | :math:`\checkmark` | :math:`\times`     |
+| Zero-Modified Binomial                           | Discrete    | :math:`\checkmark` | :math:`\xmark`     |
 +--------------------------------------------------+-------------+--------------------+--------------------+
-|The Zero-Modified Geometric Distribution.         | discrete    | :math:`\checkmark` | :math:`\times`     |
+| Zero-Modified Geometric                          | Discrete    | :math:`\checkmark` | :math:`\xmark`     |
 +--------------------------------------------------+-------------+--------------------+--------------------+
-|The Zero-Modified Logarithmic Distribution.       | discrete    | :math:`\checkmark` | :math:`\times`     |
+| Zero-Modified Logarithmic                        | Discrete    | :math:`\checkmark` | :math:`\xmark`     |
 +--------------------------------------------------+-------------+--------------------+--------------------+
-|The Zero-Modified Negative Binomial Distribution  | discrete    | :math:`\checkmark` | :math:`\times`     |
+| Zero-Modified Negative Binomial                  | Discrete    | :math:`\checkmark` | :math:`\xmark`     |
 +--------------------------------------------------+-------------+--------------------+--------------------+
-|The Zero-Modified Poisson Distribution            | discrete    | :math:`\checkmark` | :math:`\times`     |
+| Zero-Modified Poisson                            | Discrete    | :math:`\checkmark` | :math:`\xmark`     |
 +--------------------------------------------------+-------------+--------------------+--------------------+
-|The Zero-Truncated Binomial Distribution          | discrete    | :math:`\checkmark` | :math:`\times`     |
+| Zero-Truncated Binomial                          | Discrete    | :math:`\checkmark` | :math:`\xmark`     |
 +--------------------------------------------------+-------------+--------------------+--------------------+
-|The Zero-Truncated Geometric Distribution         | discrete    | :math:`\checkmark` | :math:`\times`     |
+| Zero-Truncated Geometric                         | Discrete    | :math:`\checkmark` | :math:`\xmark`     |
 +--------------------------------------------------+-------------+--------------------+--------------------+
-|The Zero-Truncated Negative Binomial Distribution | discrete    | :math:`\checkmark` |  :math:`\times`    |
+| Zero-Truncated Negative Binomial                 | Discrete    | :math:`\checkmark` |  :math:`\xmark`    |
 +--------------------------------------------------+-------------+--------------------+--------------------+
-|The Zero-Truncated Poisson Distribution           | discrete    | :math:`\checkmark` | :math:`\times`     |
+| Zero-Truncated Poisson                           | Discrete    | :math:`\checkmark` | :math:`\xmark`     |
 +--------------------------------------------------+-------------+--------------------+--------------------+
 
 
 Copulas
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+The following table lists the copulas supported by GEMAct.
 
 
-+--------------------------------------------------+-------------+--------------------+
-| Copula                                           | Family      | GEMAct             |
-|                                                  |             |                    |
-+==================================================+=============+====================+
-| The Clayton copula.                              | archimedean | :math:`\checkmark` |
-+--------------------------------------------------+-------------+--------------------+
-| The Frank copula.                                | archimedean |  :math:`\checkmark`|
-+--------------------------------------------------+-------------+--------------------+
-| The Gumbel copula.                               | archimedean |  :math:`\checkmark`|
-+--------------------------------------------------+-------------+--------------------+
-| The Gaussian copula.                             | elliptical  |  :math:`\checkmark`|
-+--------------------------------------------------+-------------+--------------------+
-|The Student T copula.                             | elliptical  |  :math:`\checkmark`|
-+--------------------------------------------------+-------------+--------------------+
-|The Independent copula.                           |             |  :math:`\checkmark`|
-+--------------------------------------------------+-------------+--------------------+
-|The Fréchet-Hoeffding upper (M)                   |             |  :math:`\checkmark`|
-+--------------------------------------------------+-------------+--------------------+
-|:white_check_mark:                                |             |  :math:`\checkmark`|
-+--------------------------------------------------+-------------+--------------------+
-
-
-
-
-
-
-
-
-
-
-
-
-
-
++--------------------------------------------------+-------------+
+| Copula                                           | Family      |
+|                                                  |             |
++==================================================+=============+
+|                 Clayton                          | archimedean |
++--------------------------------------------------+-------------+
+|                 Frank                            | Archimedean |
++--------------------------------------------------+-------------+
+|  Gumbel                                          | Archimedean |
++--------------------------------------------------+-------------+
+|  Gaussian                                        | Elliptical  |
++--------------------------------------------------+-------------+
+| Student T                                        | Elliptical  |
++--------------------------------------------------+-------------+
+| Independent                                      | Fundamental |
++--------------------------------------------------+-------------+
+| Fréchet-Hoeffding upper bound (M)                | Fundamental |
++--------------------------------------------------+-------------+
+| Fréchet-Hoeffding lower bound (W)                | Fundamental |
++--------------------------------------------------+-------------+
