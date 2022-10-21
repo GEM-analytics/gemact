@@ -1479,7 +1479,7 @@
 <h2><code class="docutils literal notranslate"><span class="pre">LossModel</span></code><a class="headerlink" href="#lossmodel" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="lossmodel.LossModel">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LossModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">aggr_loss_dist_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_sim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tilt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tilt_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_aggr_dist_nodes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aggr_n_deductible</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_reinst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reinst_loading</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha_qs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lossmodel.html#LossModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lossmodel.LossModel" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LossModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">aggr_loss_dist_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_sim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tilt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tilt_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_aggr_dist_nodes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aggr_deductible</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_reinst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reinst_loading</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha_qs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lossmodel.html#LossModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lossmodel.LossModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Aggregate loss model for (re)insurance pricing and risk modeling using a collective risk model framework.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1487,9 +1487,7 @@
 <li><p><strong>aggr_loss_dist_method</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – computational method to approximate the aggregate loss distribution.
 One of Fast Fourier Transform (‘fft’),
 Panjer recursion (‘recursion’) and Monte Carlo simulation (‘mc’).</p></li>
-<li><p><strong>aggr_n_deductible</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – number of deductible (default = 1) in the stop loss (aggregate) deductible, also referred
-to as priority or retention.
-Namely, <code class="docutils literal notranslate"><span class="pre">aggr_n_deductible</span> <span class="pre">*</span> <span class="pre">deductible</span></code> =  aggregate priority.</p></li>
+<li><p><strong>aggr_deductible</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – aggregate deductible, also referred to as aggregate priority or retention.</p></li>
 <li><p><strong>n_reinst</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – number of reinstatements layers.
 Alternative parametrization to aggregate cover (a.k.a. aggregate limit),
 namely aggregate cover = (number of reinstatement +1) * cover.
@@ -1508,51 +1506,24 @@ when number of reinstatements is infinity there is no aggregate cover
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
-<li><dl class="simple">
-<dt><em>fq_dist</em> = (<code class="docutils literal notranslate"><span class="pre">str</span></code>)–</dt><dd><p>Frequency model distribution name.</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt><em>fq_par</em> = (<code class="docutils literal notranslate"><span class="pre">dict</span></code>) –</dt><dd><p>Frequency model distribution parameters.</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt><em>sev_dist</em> = (<code class="docutils literal notranslate"><span class="pre">str</span></code>) –</dt><dd><p>Severity model distribution name.</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt><em>sev_par</em> = (<code class="docutils literal notranslate"><span class="pre">dict</span></code>) –</dt><dd><p>Severity model distribution parameters.</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt><em>sev_discr_method</em> = (<code class="docutils literal notranslate"><span class="pre">float</span></code>) –</dt><dd><p>Severity discretization method (default value is ‘localmoments’).</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt><em>sev_discr_step</em> = (<code class="docutils literal notranslate"><span class="pre">float</span></code>) –</dt><dd><p>Severity model discretization step.</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt><em>n_sev_discr_nodes</em> = (<code class="docutils literal notranslate"><span class="pre">int</span></code>) –</dt><dd><p>Number of nodes of the discretized severity.</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt><em>deductible</em> = (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>) –</dt><dd><p>Contract deductible, also referred to as retention or priority (default value is 0).</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt><em>cover</em> = (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>) –</dt><dd><p>Contract cover (deductible plus cover is the contract upper priority or severity ‘exit point’).</p>
-</dd>
-</dl>
-</li>
+<li><p><em>fq_dist</em> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) –
+Frequency model distribution name.</p></li>
+<li><p><em>fq_par</em> (<code class="docutils literal notranslate"><span class="pre">dict</span></code>) –
+Frequency model distribution parameters.</p></li>
+<li><p><em>sev_dist</em> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) –
+Severity model distribution name.</p></li>
+<li><p><em>sev_par</em> (<code class="docutils literal notranslate"><span class="pre">dict</span></code>) –
+Severity model distribution parameters.</p></li>
+<li><p><em>sev_discr_method</em> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) –
+Severity discretization method (default value is ‘localmoments’).</p></li>
+<li><p><em>sev_discr_step</em> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) –
+Severity model discretization step.</p></li>
+<li><p><em>n_sev_discr_nodes</em> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) –
+Number of nodes of the discretized severity.</p></li>
+<li><p><em>deductible</em> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>) –
+Contract deductible, also referred to as retention or priority (default value is 0).</p></li>
+<li><p><em>cover</em> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>) –
+Contract cover, also referred to as contract limit. Namely cover plus deductible is the contract upper priority or severity ‘exit point’.</p></li>
 </ul>
 </dd>
 </dl>
@@ -1809,10 +1780,10 @@ such as quota share, excess-of-loss, excess-of-loss with reinstatements, stop lo
 <td><p>deductible</p></td>
 </tr>
 <tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(u\)</span></p></td>
-<td><p>cover</p></td>
+<td><p>deductible+cover</p></td>
 </tr>
 <tr class="row-even"><td><p><span class="math notranslate nohighlight">\(L\)</span></p></td>
-<td><p>aggr_n_deductible * deductible</p></td>
+<td><p>aggr_deductible</p></td>
 </tr>
 <tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(K\)</span></p></td>
 <td><p>n_reinst</p></td>
@@ -1841,7 +1812,8 @@ such as quota share, excess-of-loss, excess-of-loss with reinstatements, stop lo
 <p><code class="docutils literal notranslate"><span class="pre">LossModel</span></code> can be used to price reinsurance contracts.</p>
 <p>An example of pricing with reinstatements:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gemact</span> <span class="kn">import</span> <span class="n">LossModel</span>
-<span class="n">lossm</span><span class="o">=</span><span class="n">gemact</span><span class="o">.</span><span class="n">LossModel</span><span class="p">(</span><span class="n">aggr_loss_dist_method</span><span class="o">=</span><span class="s1">&#39;fft&#39;</span><span class="p">,</span>
+<span class="n">lossm</span> <span class="o">=</span> <span class="n">gemact</span><span class="o">.</span><span class="n">LossModel</span><span class="p">(</span>
+          <span class="n">aggr_loss_dist_method</span><span class="o">=</span><span class="s1">&#39;fft&#39;</span><span class="p">,</span>
           <span class="n">fq_par</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;mu&#39;</span><span class="p">:</span><span class="mf">.5</span><span class="p">},</span>
           <span class="n">fq_dist</span><span class="o">=</span> <span class="s1">&#39;poisson&#39;</span><span class="p">,</span>
           <span class="n">sev_par</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;loc&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
@@ -1862,17 +1834,19 @@ such as quota share, excess-of-loss, excess-of-loss with reinstatements, stop lo
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">LossModel</span></code> can be used to model the aggregate cost of claims:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gemact</span> <span class="n">LossModel</span>
-<span class="n">lm_fft</span><span class="o">=</span> <span class="n">LossModel</span><span class="p">(</span><span class="n">aggr_loss_dist_method</span><span class="o">=</span><span class="s1">&#39;fft&#39;</span><span class="p">,</span>
-           <span class="n">fq_par</span> <span class="o">=</span> <span class="n">fq_par</span><span class="p">,</span>
-           <span class="n">fq_dist</span> <span class="o">=</span> <span class="n">fq_dist</span><span class="p">,</span>
-           <span class="n">sev_par</span> <span class="o">=</span> <span class="n">sev_par</span><span class="p">,</span>
-           <span class="n">sev_dist</span> <span class="o">=</span> <span class="n">sev_dist</span><span class="p">,</span>
-           <span class="n">n_sev_discr_nodes</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">1000</span><span class="p">),</span>
-           <span class="n">sev_discr_step</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
-           <span class="n">n_aggr_dist_nodes</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">10000</span><span class="p">))</span>
+<span class="n">lm_fft</span> <span class="o">=</span> <span class="n">LossModel</span><span class="p">(</span>
+   <span class="n">aggr_loss_dist_method</span><span class="o">=</span><span class="s1">&#39;fft&#39;</span><span class="p">,</span>
+   <span class="n">fq_par</span> <span class="o">=</span> <span class="n">fq_par</span><span class="p">,</span>
+   <span class="n">fq_dist</span> <span class="o">=</span> <span class="n">fq_dist</span><span class="p">,</span>
+   <span class="n">sev_par</span> <span class="o">=</span> <span class="n">sev_par</span><span class="p">,</span>
+   <span class="n">sev_dist</span> <span class="o">=</span> <span class="n">sev_dist</span><span class="p">,</span>
+   <span class="n">n_sev_discr_nodes</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">1000</span><span class="p">),</span>
+   <span class="n">sev_discr_step</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+   <span class="n">n_aggr_dist_nodes</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+   <span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;FFT&#39;</span><span class="p">,</span><span class="n">lm_fft</span><span class="o">.</span><span class="n">aggr_loss_mean</span><span class="p">())</span>
-<span class="c1">#4.9999999846531935</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;FFT&#39;</span><span class="p">,</span> <span class="n">lm_fft</span><span class="o">.</span><span class="n">aggr_loss_mean</span><span class="p">())</span>
+<span class="c1"># 4.9999999846531935</span>
 </pre></div>
 </div>
 </div>
@@ -1902,39 +1876,43 @@ such as quota share, excess-of-loss, excess-of-loss with reinstatements, stop lo
 <p>A simple code implementation of severity discretization:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
- <span class="n">lossm_md</span><span class="o">=</span><span class="n">gemact</span><span class="o">.</span><span class="n">LossModel</span><span class="p">(</span><span class="n">aggr_loss_dist_method</span><span class="o">=</span><span class="s1">&#39;fft&#39;</span><span class="p">,</span>
-              <span class="n">fq_par</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;mu&#39;</span><span class="p">:</span><span class="mf">.5</span><span class="p">},</span>
-              <span class="n">fq_dist</span><span class="o">=</span> <span class="s1">&#39;poisson&#39;</span><span class="p">,</span>
-              <span class="n">sev_par</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;loc&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;scale&#39;</span><span class="p">:</span> <span class="mi">83</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mf">0.83</span><span class="p">},</span>
-              <span class="n">sev_dist</span><span class="o">=</span><span class="s1">&#39;genpareto&#39;</span><span class="p">,</span>
-              <span class="n">cover</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
-              <span class="n">sev_discr_method</span><span class="o">=</span><span class="s1">&#39;massdispersal&#39;</span><span class="p">,</span>
-              <span class="n">n_sev_discr_nodes</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">10000</span><span class="p">),</span>
-              <span class="n">sev_discr_step</span> <span class="o">=</span> <span class="mf">.01</span><span class="p">,</span>
-              <span class="n">n_aggr_dist_nodes</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">100000</span><span class="p">))</span>
+ <span class="n">lossm_md</span> <span class="o">=</span> <span class="n">gemact</span><span class="o">.</span><span class="n">LossModel</span><span class="p">(</span>
+   <span class="n">aggr_loss_dist_method</span><span class="o">=</span><span class="s1">&#39;fft&#39;</span><span class="p">,</span>
+   <span class="n">fq_par</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;mu&#39;</span><span class="p">:</span><span class="mf">.5</span><span class="p">},</span>
+   <span class="n">fq_dist</span><span class="o">=</span><span class="s1">&#39;poisson&#39;</span><span class="p">,</span>
+   <span class="n">sev_par</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;loc&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;scale&#39;</span><span class="p">:</span> <span class="mi">83</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mf">0.83</span><span class="p">},</span>
+   <span class="n">sev_dist</span><span class="o">=</span><span class="s1">&#39;genpareto&#39;</span><span class="p">,</span>
+   <span class="n">cover</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+   <span class="n">sev_discr_method</span><span class="o">=</span><span class="s1">&#39;massdispersal&#39;</span><span class="p">,</span>
+   <span class="n">n_sev_discr_nodes</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mi">10000</span><span class="p">),</span>
+   <span class="n">sev_discr_step</span><span class="o">=</span><span class="mf">.01</span><span class="p">,</span>
+   <span class="n">n_aggr_dist_nodes</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mi">100000</span><span class="p">)</span>
+   <span class="p">)</span>
 
- <span class="n">lossm_lm</span><span class="o">=</span><span class="n">gemact</span><span class="o">.</span><span class="n">LossModel</span><span class="p">(</span><span class="n">aggr_loss_dist_method</span><span class="o">=</span><span class="s1">&#39;fft&#39;</span><span class="p">,</span>
-              <span class="n">fq_par</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;mu&#39;</span><span class="p">:</span><span class="mf">.5</span><span class="p">},</span>
-              <span class="n">fq_dist</span><span class="o">=</span> <span class="s1">&#39;poisson&#39;</span><span class="p">,</span>
-              <span class="n">sev_par</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;loc&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;scale&#39;</span><span class="p">:</span> <span class="mi">83</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mf">0.83</span><span class="p">},</span>
-              <span class="n">sev_dist</span><span class="o">=</span><span class="s1">&#39;genpareto&#39;</span><span class="p">,</span>
-              <span class="n">cover</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
-              <span class="n">sev_discr_method</span><span class="o">=</span><span class="s1">&#39;localmoments&#39;</span><span class="p">,</span>
-              <span class="n">n_sev_discr_nodes</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">10000</span><span class="p">),</span>
-              <span class="n">sev_discr_step</span> <span class="o">=</span> <span class="mf">.01</span><span class="p">,</span>
-              <span class="n">n_aggr_dist_nodes</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">100000</span><span class="p">))</span>
+ <span class="n">lossm_lm</span> <span class="o">=</span> <span class="n">gemact</span><span class="o">.</span><span class="n">LossModel</span><span class="p">(</span>
+   <span class="n">aggr_loss_dist_method</span><span class="o">=</span><span class="s1">&#39;fft&#39;</span><span class="p">,</span>
+   <span class="n">fq_par</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;mu&#39;</span><span class="p">:</span><span class="mf">.5</span><span class="p">},</span>
+   <span class="n">fq_dist</span><span class="o">=</span><span class="s1">&#39;poisson&#39;</span><span class="p">,</span>
+   <span class="n">sev_par</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;loc&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;scale&#39;</span><span class="p">:</span> <span class="mi">83</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mf">0.83</span><span class="p">},</span>
+   <span class="n">sev_dist</span><span class="o">=</span><span class="s1">&#39;genpareto&#39;</span><span class="p">,</span>
+   <span class="n">cover</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+   <span class="n">sev_discr_method</span><span class="o">=</span><span class="s1">&#39;localmoments&#39;</span><span class="p">,</span>
+   <span class="n">n_sev_discr_nodes</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mi">10000</span><span class="p">),</span>
+   <span class="n">sev_discr_step</span><span class="o">=</span><span class="mf">.01</span><span class="p">,</span>
+   <span class="n">n_aggr_dist_nodes</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mi">100000</span><span class="p">)</span>
+   <span class="p">)</span>
 
 
- <span class="n">massD</span><span class="o">=</span><span class="n">lossm_md</span><span class="o">.</span><span class="n">severity_discretization</span><span class="p">()</span>
- <span class="n">localM</span><span class="o">=</span><span class="n">lossm_lm</span><span class="o">.</span><span class="n">severity_discretization</span><span class="p">()</span>
+ <span class="n">massD</span> <span class="o">=</span> <span class="n">lossm_md</span><span class="o">.</span><span class="n">severity_discretization</span><span class="p">()</span>
+ <span class="n">localM</span> <span class="o">=</span> <span class="n">lossm_lm</span><span class="o">.</span><span class="n">severity_discretization</span><span class="p">()</span>
 
  <span class="n">meanMD</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">massD</span><span class="p">[</span><span class="s1">&#39;sev_nodes&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">massD</span><span class="p">[</span><span class="s1">&#39;fj&#39;</span><span class="p">])</span>
  <span class="n">meanLM</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">localM</span><span class="p">[</span><span class="s1">&#39;sev_nodes&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">localM</span><span class="p">[</span><span class="s1">&#39;fj&#39;</span><span class="p">])</span>
 
  <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mean (mass dispersal): &#39;</span><span class="p">,</span><span class="n">meanMD</span><span class="p">)</span>
  <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mean (local moments): &#39;</span><span class="p">,</span><span class="n">meanLM</span><span class="p">)</span>
- <span class="c1">#Mean (mass dispersal):  64.61227417939517</span>
- <span class="c1">#Mean (local moments):  64.61227421887484</span>
+ <span class="c1"># Mean (mass dispersal): 64.61227417939517</span>
+ <span class="c1"># Mean (local moments): 64.61227421887484</span>
 </pre></div>
 </div>
 </div>
@@ -1956,7 +1934,7 @@ two-dimensional <code class="docutils literal notranslate"><span class="pre">num
 <li><p><strong>claims_inflation</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – claims inflation. In case no tail is present and the triangular data IxJ matrices,
 claims_inflation must be J-1 dimensional. When a tail estimate is required, it must be
 J dimensional. In case no tail is present it must be J-1 dimensional.</p></li>
-<li><p><strong>czj</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – severity coefficient of variation by development year. It is set to None in case the crm is selected as
+<li><p><strong>czj</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – severity coefficient of variation by development period. It is set to None in case the crm is selected as
 reserving method. When a tail estimate is required, it must be J dimensional.
 In case no tail is present it must be J-1 dimensional.</p></li>
 <li><p><strong>ntr_sim</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – Number of simulated triangles in the c.r.m reserving method.</p></li>
@@ -1971,7 +1949,7 @@ In case no tail is present it must be J-1 dimensional.</p></li>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
 <li><dl class="simple">
-<dt><em>incremental_payments</em> = (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) –</dt><dd><p>Incremental payments’ triangle.</p>
+<dt><em>incremental_payments</em> = (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) –</dt><dd><p>Incremental payments’ triangle</p>
 </dd>
 </dl>
 </li>
@@ -1981,17 +1959,23 @@ In case no tail is present it must be J-1 dimensional.</p></li>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><em>cased_payments</em> = (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) –</dt><dd><p>Cased payments triangle.</p>
+<dt><em>cased_payments</em> = (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) –</dt><dd><p>Cased payments triangle</p>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><em>incurred_number</em> = (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) –</dt><dd><p>Incurred number.</p>
+<dt><em>incurred_number</em> = (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) –</dt><dd><p>Incurred number</p>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><em>cased_number</em> = (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) –</dt><dd><p>Cased number.</p>
+<dt><em>cased_number</em> = (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) –</dt><dd><p>Cased number</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><em>reported_claims</em> = (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) –</dt><dd><p>Number of reported claims by accident period.
+Data must be provided from old to recent.</p>
 </dd>
 </dl>
 </li>
@@ -2007,7 +1991,7 @@ In case no tail is present it must be J-1 dimensional.</p></li>
 <dl class="py method">
 <dt class="sig sig-object py" id="lossreserve.LossReserve.average_cost_plot">
 <span class="sig-name descname"><span class="pre">average_cost_plot</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lossreserve.html#LossReserve.average_cost_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lossreserve.LossReserve.average_cost_plot" title="Permalink to this definition">¶</a></dt>
-<dd><p>Plot the mean average cost for each development year.</p>
+<dd><p>Plot the mean average cost for each development period.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -2064,10 +2048,10 @@ are compared with the Fisher-Lange.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="lossreserve.LossReserve.ss_plot">
 <span class="sig-name descname"><span class="pre">ss_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lossreserve.html#LossReserve.ss_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lossreserve.LossReserve.ss_plot" title="Permalink to this definition">¶</a></dt>
-<dd><p>Plot the settlement speed vector for each accident year.</p>
+<dd><p>Plot the settlement speed vector for each accident period.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>start</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – starting accident year from which to plot.</p>
+<dd class="field-odd"><p><strong>start</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – starting accident period from which to plot.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -2097,31 +2081,35 @@ are compared with the Fisher-Lange.</p>
 </pre></div>
 </div>
 <p>An example of Fisher-Lange implementation:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lr</span> <span class="o">=</span> <span class="n">gemact</span><span class="o">.</span><span class="n">LossReserve</span><span class="p">(</span><span class="n">tail</span><span class="o">=</span><span class="n">tail_</span><span class="p">,</span>
-           <span class="n">incremental_payments</span><span class="o">=</span><span class="n">ip_</span><span class="p">,</span>
-           <span class="n">cased_payments</span><span class="o">=</span><span class="n">cp_</span><span class="p">,</span>
-           <span class="n">cased_number</span><span class="o">=</span><span class="n">cn_</span><span class="p">,</span>
-           <span class="n">reported_claims</span><span class="o">=</span><span class="n">reported_</span><span class="p">,</span>
-           <span class="n">incurred_number</span><span class="o">=</span><span class="n">in_</span><span class="p">,</span>
-           <span class="n">reserving_method</span><span class="o">=</span><span class="n">rm_</span><span class="p">,</span>
-           <span class="n">claims_inflation</span><span class="o">=</span><span class="n">infl_</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lr</span> <span class="o">=</span> <span class="n">gemact</span><span class="o">.</span><span class="n">LossReserve</span><span class="p">(</span>
+  <span class="n">tail</span><span class="o">=</span><span class="n">tail_</span><span class="p">,</span>
+  <span class="n">incremental_payments</span><span class="o">=</span><span class="n">ip_</span><span class="p">,</span>
+  <span class="n">cased_payments</span><span class="o">=</span><span class="n">cp_</span><span class="p">,</span>
+  <span class="n">cased_number</span><span class="o">=</span><span class="n">cn_</span><span class="p">,</span>
+  <span class="n">reported_claims</span><span class="o">=</span><span class="n">reported_</span><span class="p">,</span>
+  <span class="n">incurred_number</span><span class="o">=</span><span class="n">in_</span><span class="p">,</span>
+  <span class="n">reserving_method</span><span class="o">=</span><span class="n">rm_</span><span class="p">,</span>
+  <span class="n">claims_inflation</span><span class="o">=</span><span class="n">infl_</span>
+  <span class="p">)</span>
 </pre></div>
 </div>
 <p>An example of CRM implementation. Observe the CRM for reserving requires additional parameters:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#Loss reserving: instance lr</span>
-<span class="n">lr</span> <span class="o">=</span> <span class="n">gemact</span><span class="o">.</span><span class="n">LossReserve</span><span class="p">(</span><span class="n">tail</span><span class="o">=</span><span class="n">tail_</span><span class="p">,</span>
-               <span class="n">incremental_payments</span><span class="o">=</span><span class="n">ip_</span><span class="p">,</span>
-               <span class="n">cased_payments</span><span class="o">=</span><span class="n">cp_</span><span class="p">,</span>
-               <span class="n">cased_number</span><span class="o">=</span><span class="n">cn_</span><span class="p">,</span>
-               <span class="n">reported_claims</span><span class="o">=</span><span class="n">reported_</span><span class="p">,</span>
-               <span class="n">incurred_number</span><span class="o">=</span><span class="n">in_</span><span class="p">,</span>
-               <span class="n">ntr_sim</span><span class="o">=</span><span class="n">ntr_sim_</span><span class="p">,</span>
-               <span class="n">reserving_method</span><span class="o">=</span><span class="n">rm_</span><span class="p">,</span>
-               <span class="n">mixing_fq_par</span><span class="o">=</span><span class="n">mixing_fq_par</span><span class="p">,</span>
-               <span class="n">mixing_sev_par</span><span class="o">=</span><span class="n">mixing_sev_par</span><span class="p">,</span>
-               <span class="n">claims_inflation</span><span class="o">=</span><span class="n">infl_</span><span class="p">)</span>
+<span class="n">lr</span> <span class="o">=</span> <span class="n">gemact</span><span class="o">.</span><span class="n">LossReserve</span><span class="p">(</span>
+  <span class="n">tail</span><span class="o">=</span><span class="n">tail_</span><span class="p">,</span>
+  <span class="n">incremental_payments</span><span class="o">=</span><span class="n">ip_</span><span class="p">,</span>
+  <span class="n">cased_payments</span><span class="o">=</span><span class="n">cp_</span><span class="p">,</span>
+  <span class="n">cased_number</span><span class="o">=</span><span class="n">cn_</span><span class="p">,</span>
+  <span class="n">reported_claims</span><span class="o">=</span><span class="n">reported_</span><span class="p">,</span>
+  <span class="n">incurred_number</span><span class="o">=</span><span class="n">in_</span><span class="p">,</span>
+  <span class="n">ntr_sim</span><span class="o">=</span><span class="n">ntr_sim_</span><span class="p">,</span>
+  <span class="n">reserving_method</span><span class="o">=</span><span class="n">rm_</span><span class="p">,</span>
+  <span class="n">mixing_fq_par</span><span class="o">=</span><span class="n">mixing_fq_par</span><span class="p">,</span>
+  <span class="n">mixing_sev_par</span><span class="o">=</span><span class="n">mixing_sev_par</span><span class="p">,</span>
+  <span class="n">claims_inflation</span><span class="o">=</span><span class="n">infl_</span>
+  <span class="p">)</span>
 
-<span class="c1">#The progress bar below gives insights on the simulation</span>
+<span class="c1"># The progress bar below gives insights on the simulation</span>
 </pre></div>
 </div>
 </div>
@@ -2147,12 +2135,12 @@ Dependence structure is specified by a copula and a set of given marginals.</p>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
 <li><dl class="simple">
-<dt><em>random_state</em> = (<code class="docutils literal notranslate"><span class="pre">int</span></code>) –</dt><dd><p>Random state for the random number generator in MC.</p>
+<dt><em>random_state</em> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) –</dt><dd><p>Random state for the random number generator in MC.</p>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><em>sample_size</em> = (<code class="docutils literal notranslate"><span class="pre">int</span></code>) –</dt><dd><p>Number of simulations of Monte Carlo (mc) method.</p>
+<dt><em>sample_size</em> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) –</dt><dd><p>Number of simulations of Monte Carlo (mc) method.</p>
 </dd>
 </dl>
 </li>
@@ -2263,7 +2251,7 @@ It is possible to use a MC simulation for comparison.</p>
 <div class="section" id="id11">
 <h4>Example<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h4>
 <p>Example code under a clayton assumption:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">la</span><span class="o">=</span><span class="n">gemact</span><span class="o">.</span><span class="n">LossAggregation</span><span class="p">(</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">la</span> <span class="o">=</span> <span class="n">gemact</span><span class="o">.</span><span class="n">LossAggregation</span><span class="p">(</span>
                 <span class="n">margins</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;genpareto&#39;</span><span class="p">,</span>
                          <span class="s1">&#39;genpareto&#39;</span><span class="p">],</span>
                 <span class="n">margins_pars</span><span class="o">=</span><span class="p">[</span>
@@ -2278,12 +2266,8 @@ It is possible to use a MC simulation for comparison.</p>
                 <span class="n">copula_par</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span><span class="mf">1.2</span><span class="p">,</span>
                             <span class="s1">&#39;dim&#39;</span><span class="p">:</span><span class="mi">2</span><span class="p">})</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;cdf via AEP algorithm: </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">la</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span>
-                                      <span class="n">n_iter</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
-                                      <span class="n">method</span><span class="o">=</span><span class="s1">&#39;aep&#39;</span><span class="p">))</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;cdf via MC: </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">la</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span>
-                              <span class="n">method</span><span class="o">=</span><span class="s1">&#39;mc&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;cdf via AEP algorithm: </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">la</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;aep&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;cdf via MC: </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">la</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;mc&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -2677,22 +2661,22 @@ of the random variable given the (a, b, k) parametrization.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gemact</span> <span class="kn">import</span> <span class="n">distributions</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="n">mu</span><span class="o">=</span><span class="mi">4</span>
-<span class="n">dist</span><span class="o">=</span><span class="n">distributions</span><span class="o">.</span><span class="n">Poisson</span><span class="p">(</span><span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">)</span>
-<span class="n">seq</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
-<span class="n">nsim</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mf">1e+05</span><span class="p">)</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">dist</span> <span class="o">=</span> <span class="n">distributions</span><span class="o">.</span><span class="n">Poisson</span><span class="p">(</span><span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">)</span>
+<span class="n">seq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">nsim</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">1e+05</span><span class="p">)</span>
 
 <span class="c1"># Compute the mean via pmf</span>
-<span class="n">mean</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span><span class="o">*</span><span class="n">seq</span><span class="p">)</span>
-<span class="n">variance</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">seq</span><span class="o">-</span><span class="n">mean</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span><span class="o">*</span><span class="n">seq</span><span class="p">)</span>
+<span class="n">variance</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">seq</span><span class="o">-</span><span class="n">mean</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mean&#39;</span><span class="p">,</span><span class="n">mean</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Theoretical mean&#39;</span><span class="p">,</span><span class="n">dist</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Variance&#39;</span><span class="p">,</span><span class="n">variance</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Theoretical variance&#39;</span><span class="p">,</span><span class="n">dist</span><span class="o">.</span><span class="n">var</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Theoretical mean&#39;</span><span class="p">,</span> <span class="n">dist</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Variance&#39;</span><span class="p">,</span> <span class="n">variance</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Theoretical variance&#39;</span><span class="p">,</span> <span class="n">dist</span><span class="o">.</span><span class="n">var</span><span class="p">())</span>
 <span class="c1">#compare with simulations</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Simulated mean&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">nsim</span><span class="p">)))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Simulated variance&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">nsim</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Simulated mean&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">nsim</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Simulated variance&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">nsim</span><span class="p">)))</span>
 </pre></div>
 </div>
 <p>Then, use <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> library to print the pmf and the cdf of a Poisson:</p>
@@ -2703,7 +2687,7 @@ of the random variable given the (a, b, k) parametrization.</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Probability mass function, ~Poisson(mu=4)&#39;</span><span class="p">)</span>
 
 <span class="c1">#cdf</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">20</span><span class="p">),</span><span class="n">dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">20</span><span class="p">)),</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;pre&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">20</span><span class="p">),</span> <span class="n">dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">20</span><span class="p">)),</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;pre&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Cumulative distribution function, ~ Poisson(mu=4)&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -3103,11 +3087,11 @@ of the random variable given the (a, b, x) parametrization.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gemact</span> <span class="kn">import</span> <span class="n">distributions</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="n">n</span><span class="o">=</span><span class="mi">10</span>
-<span class="n">p</span><span class="o">=</span><span class="mf">0.5</span>
-<span class="n">dist</span><span class="o">=</span><span class="n">distributions</span><span class="o">.</span><span class="n">Binom</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span><span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">)</span>
-<span class="n">seq</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
-<span class="n">nsim</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mf">1e+05</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">dist</span> <span class="o">=</span> <span class="n">distributions</span><span class="o">.</span><span class="n">Binom</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">)</span>
+<span class="n">seq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">nsim</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">1e+05</span><span class="p">)</span>
 
 <span class="c1"># Compute the mean via pmf</span>
 <span class="n">mean</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span><span class="o">*</span><span class="n">seq</span><span class="p">)</span>
@@ -3948,23 +3932,23 @@ of the random variable given the (a, b, x) parametrization.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gemact</span> <span class="kn">import</span> <span class="n">distributions</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="n">n</span><span class="o">=</span><span class="mi">10</span>
-<span class="n">p</span><span class="o">=</span><span class="mf">.5</span>
-<span class="n">dist</span><span class="o">=</span><span class="n">distributions</span><span class="o">.</span><span class="n">NegBinom</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span><span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">)</span>
-<span class="n">seq</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mf">.001</span><span class="p">)</span>
-<span class="n">nsim</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mf">1e+05</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mf">.5</span>
+<span class="n">dist</span> <span class="o">=</span> <span class="n">distributions</span><span class="o">.</span><span class="n">NegBinom</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">)</span>
+<span class="n">seq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mf">.001</span><span class="p">)</span>
+<span class="n">nsim</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">1e+05</span><span class="p">)</span>
 
 <span class="c1"># Compute the mean via pmf</span>
-<span class="n">mean</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span><span class="o">*</span><span class="n">seq</span><span class="p">)</span>
-<span class="n">variance</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">seq</span><span class="o">-</span><span class="n">mean</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span><span class="o">*</span><span class="n">seq</span><span class="p">)</span>
+<span class="n">variance</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">seq</span><span class="o">-</span><span class="n">mean</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mean&#39;</span><span class="p">,</span><span class="n">mean</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Theoretical mean&#39;</span><span class="p">,</span><span class="n">dist</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Variance&#39;</span><span class="p">,</span><span class="n">variance</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Theoretical variance&#39;</span><span class="p">,</span><span class="n">dist</span><span class="o">.</span><span class="n">var</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mean&#39;</span><span class="p">,</span> <span class="n">mean</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Theoretical mean&#39;</span><span class="p">,</span> <span class="n">dist</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Variance&#39;</span><span class="p">,</span> <span class="n">variance</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Theoretical variance&#39;</span><span class="p">,</span> <span class="n">dist</span><span class="o">.</span><span class="n">var</span><span class="p">())</span>
 <span class="c1">#compare with simulations</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Simulated mean&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">nsim</span><span class="p">)))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Simulated variance&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">nsim</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Simulated mean&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">nsim</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Simulated variance&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">nsim</span><span class="p">)))</span>
 </pre></div>
 </div>
 <p>Then, use <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> library to print the pmf and the cdf of a NegBinom:</p>
@@ -4329,7 +4313,7 @@ of the random variable given the (a, b, x) parametrization.</p>
 
 <div class="section" id="id22">
 <h4>Parametrization<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h4>
-<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.logser.html">SciPy documentation</a>, see <span id="id24">Virtanen <em>et al.</em> [<a class="reference internal" href="#id88" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span>.</p>
+<p>For a more detailed explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.logser.html">SciPy documentation</a>, see <span id="id24">Virtanen <em>et al.</em> [<a class="reference internal" href="#id88" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span>.</p>
 <div class="math notranslate nohighlight" id="equation-logser">
 <span class="eqno">(18)<a class="headerlink" href="#equation-logser" title="Permalink to this equation">¶</a></span>\[f(k)=-\frac{p^{k}}{k \log (1-p)}\]</div>
 <p>Given <span class="math notranslate nohighlight">\(0 &lt; p &lt; 1\)</span> and <span class="math notranslate nohighlight">\(k \geq 1\)</span>.</p>

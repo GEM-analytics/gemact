@@ -111,6 +111,11 @@
    API reference guide
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="gemanalytics.html">
+   About us
+  </a>
+ </li>
 </ul>
 
     </div>
@@ -203,13 +208,13 @@
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#reinsurance-treaties">
-     Reinsurance treaties
+    <a class="reference internal nav-link" href="#reinsurance-contracs">
+     Reinsurance Contracs
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#computational-methods-for-pricing">
-     Computational methods for pricing
+    <a class="reference internal nav-link" href="#computational-methods">
+     Computational methods
     </a>
    </li>
   </ul>
@@ -240,13 +245,13 @@
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#reinsurance-treaties">
-     Reinsurance treaties
+    <a class="reference internal nav-link" href="#reinsurance-contracs">
+     Reinsurance Contracs
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#computational-methods-for-pricing">
-     Computational methods for pricing
+    <a class="reference internal nav-link" href="#computational-methods">
+     Computational methods
     </a>
    </li>
   </ul>
@@ -263,43 +268,53 @@
   <div class="section" id="introduction">
 <h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
 <p>GEMAct is an <strong>actuarial package</strong>, based on the collective risk theory framework, that offers a comprehensive set of tools for <strong>non-life</strong> (re)insurance <strong>pricing</strong>, stochastic <strong>claims reserving</strong>, and <strong>risk aggregation</strong>.</p>
-<p>The variety of available functionalities makes GEMAct modeling very flexible and provides actuarial scientists and practitioners with a powerful tool that fits into the expanding community of <strong>Python</strong> programming language.</p>
+<p>The variety of available functionalities makes GEMAct modeling very flexible and provides users with a powerful tool that fits into the expanding community of <strong>Python</strong> programming language.</p>
 <div class="section" id="scope">
 <h2>Scope<a class="headerlink" href="#scope" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>A collective risk model apparatus to price non-life (re)insurance contracts.</p></li>
-<li><p>Extend the set of distributions available in scipy to actuarial scientists.
-GEMAct provides the first Python implementation of the <a class="reference external" href="https://en.wikipedia.org/wiki/(a,b,0)_class_of_distributions">(a, b, k)</a> distribution class.</p></li>
+<li><p>Extend the set of distributions available in scipy to actuarial scientists. GEMAct provides the first Python implementation of the <a class="reference external" href="https://en.wikipedia.org/wiki/(a,b,0)_class_of_distributions">(a, b, k)</a> distribution class.</p></li>
 <li><p>Popular copulas with improved functionalities, e.g. the Student-T Copula cumulative distribution function can be numerically approximated.</p></li>
 <li><p>A loss reserve estimation tool.</p></li>
 <li><p>The first publicly available Python implementation of the AEP algorithm.</p></li>
 </ul>
-<div class="section" id="reinsurance-treaties">
-<h3>Reinsurance treaties<a class="headerlink" href="#reinsurance-treaties" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="reinsurance-contracs">
+<h3>Reinsurance Contracs<a class="headerlink" href="#reinsurance-contracs" title="Permalink to this headline">¶</a></h3>
 <p>GEMAct can be used for pricing the following reinsurance contracts and their combinations.</p>
 <ul class="simple">
 <li><dl class="simple">
-<li><p>Excess-of-Loss (XL) including:</p></li><ul>
+<dt>Excess-of-Loss (XL) including:</dt><dd><ul>
 <li><p>aggregate conditions (cover and deductible),</p></li>
 <li><p>reinstatements.</p></li>
 </ul>
+</dd>
+</dl>
+</li>
 <li><p>Quota-share (QS).</p></li>
 <li><p>Stop-loss (SL).</p></li>
 </ul>
 </div>
-<div class="section" id="computational-methods-for-pricing">
-<h3>Computational methods for pricing<a class="headerlink" href="#computational-methods-for-pricing" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="computational-methods">
+<h3>Computational methods<a class="headerlink" href="#computational-methods" title="Permalink to this headline">¶</a></h3>
 <p>GEMAct offers multiple numerical methods used within the context of loss distributions approximation.</p>
 <ul class="simple">
-<li><p>Collective risk model:</p></li><ul>
-    <li><p>Recursive method (Panjer recursion),</p></li>
-    <li><p>Discrete Fourier transform, via the Fast Fourier Transform (FFT) algorithm,</p></li>
-    <li><p>Monte Carlo simulation.</p></li>
-    </ul>
-<li><p>Loss (model) aggregation:</p></li><ul>
-    <li><p>AEP algorithm,</p></li>
-    <li><p>Monte Carlo simulation.</p></li>
-    </ul>
+<li><dl class="simple">
+<dt>Collective risk model:</dt><dd><ul>
+<li><p>Recursive method (Panjer recursion),</p></li>
+<li><p>Discrete Fourier transform, via the Fast Fourier Transform (FFT) algorithm,</p></li>
+<li><p>Monte Carlo simulation.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Loss (model) aggregation:</dt><dd><ul>
+<li><p>AEP algorithm,</p></li>
+<li><p>Monte Carlo simulation.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
 </ul>
 </div>
 </div>

@@ -46,7 +46,7 @@ The following table gives the correspondence between the ``LossModel`` class att
 | :math:`\alpha`         | alpha_qs                                |
 +------------------------+-----------------------------------------+
 
-Assume: 
+Assume:
 
 .. math:: X^{\prime}=\min (\max (0, X-L), (K+1) \cdot u)
    :label: crmRE
@@ -61,7 +61,7 @@ Equation :eq:`XLpremium` shows the reinsurance premium for excess of loss treati
 .. math:: P=\frac{D_{L K}}{1+\frac{1}{m} \sum_{k=1}^{K} c_{k} d_{L, k-1}}
    :label: reinstatementsLayer
 
-GEMAct pricing model is based on  :cite:t:`b:kp` and  :cite:t:`sundt`. 
+GEMAct pricing model is based on  :cite:t:`b:kp` and  :cite:t:`sundt`.
 
 Refer again to :cite:t:`b:kp` for the recursive formula to compute the collective risk model and to :cite:t:`embrechts` for the Fast Fourier transform to approximate the Discrete Fourier Transform of the collective risk model.
 
@@ -95,7 +95,7 @@ An example of pricing with reinstatements::
 
 ``LossModel`` can be used to model the aggregate cost of claims::
 
-   
+
       from gemact LossModel
       lm_fft = LossModel(
          aggr_loss_dist_method='fft',
@@ -197,10 +197,10 @@ A simple code implementation of severity discretization::
    :members:
 
 
-Claims reserving 
+Claims reserving
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-GEMAct provides a software implementation of average cost methods for claims reserving based on the collective risk model framework. 
+GEMAct provides a software implementation of average cost methods for claims reserving based on the collective risk model framework.
 
 The methods implemented in GEMAct are the Fisher-Lange in :cite:t:`fisher99` the collective risk model for claims reserving in :cite:t:`ricotta16`.
 
@@ -218,14 +218,14 @@ Example
 
 It is possible to use the module ``gemdata`` to test GEMAct average cost methods::
 
-   ip_= gemact.gemdata.IPtriangle 
-   in_= gemact.gemdata.in_triangle 
-   cp_= gemact.gemdata.cased_amount_triangle 
-   cn_= gemact.gemdata.cased_number_triangle 
-   reported_= gemact.gemdata.reported_ 
-   infl_= gemact.gemdata.claims_inflation 
-   rm_='fisherlange' 
-   tail_=True 
+   ip_= gemact.gemdata.IPtriangle
+   in_= gemact.gemdata.in_triangle
+   cp_= gemact.gemdata.cased_amount_triangle
+   cn_= gemact.gemdata.cased_number_triangle
+   reported_= gemact.gemdata.reported_
+   infl_= gemact.gemdata.claims_inflation
+   rm_='fisherlange'
+   tail_=True
 
 An example of Fisher-Lange implementation::
 
