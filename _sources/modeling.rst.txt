@@ -40,7 +40,7 @@ The following table lists the distributions supported by GEMAct and makes a comp
 +--------------------------------------------------+-------------+--------------------+--------------------+
 | Beta                                             |  Continuous | :math:`\checkmark` | :math:`\checkmark` |
 +--------------------------------------------------+-------------+--------------------+--------------------+
-| Generalized Beta                                 |  Continuous | :math:`\checkmark` | :math:`X`          |
+| Generalized Beta                                 |  Continuous | :math:`\checkmark` | :math:`\xmark`     |
 +--------------------------------------------------+-------------+--------------------+--------------------+
 | Poisson                                          | Discrete    | :math:`\checkmark` | :math:`\checkmark` |
 +--------------------------------------------------+-------------+--------------------+--------------------+
@@ -52,23 +52,23 @@ The following table lists the distributions supported by GEMAct and makes a comp
 +--------------------------------------------------+-------------+--------------------+--------------------+
 | Log-Series                                       | Discrete    | :math:`\checkmark` | :math:`\checkmark` |
 +--------------------------------------------------+-------------+--------------------+--------------------+
-| Zero-Modified Binomial                           | Discrete    | :math:`\checkmark` | :math:`X`          |
+| Zero-Modified Binomial                           | Discrete    | :math:`\checkmark` | :math:`\xmark`     |
 +--------------------------------------------------+-------------+--------------------+--------------------+
-| Zero-Modified Geometric                          | Discrete    | :math:`\checkmark` | :math:`X`          |
+| Zero-Modified Geometric                          | Discrete    | :math:`\checkmark` | :math:`\xmark`     |
 +--------------------------------------------------+-------------+--------------------+--------------------+
-| Zero-Modified Logarithmic                        | Discrete    | :math:`\checkmark` | :math:`X`          |
+| Zero-Modified Logarithmic                        | Discrete    | :math:`\checkmark` | :math:`\xmark`     |
 +--------------------------------------------------+-------------+--------------------+--------------------+
-| Zero-Modified Negative Binomial                  | Discrete    | :math:`\checkmark` | :math:`X`          |
+| Zero-Modified Negative Binomial                  | Discrete    | :math:`\checkmark` | :math:`\xmark`     |
 +--------------------------------------------------+-------------+--------------------+--------------------+
-| Zero-Modified Poisson                            | Discrete    | :math:`\checkmark` | :math:`X`          |
+| Zero-Modified Poisson                            | Discrete    | :math:`\checkmark` | :math:`\xmark`     |
 +--------------------------------------------------+-------------+--------------------+--------------------+
-| Zero-Truncated Binomial                          | Discrete    | :math:`\checkmark` | :math:`X`          |
+| Zero-Truncated Binomial                          | Discrete    | :math:`\checkmark` | :math:`\xmark`     |
 +--------------------------------------------------+-------------+--------------------+--------------------+
-| Zero-Truncated Geometric                         | Discrete    | :math:`\checkmark` | :math:`X`          |
+| Zero-Truncated Geometric                         | Discrete    | :math:`\checkmark` | :math:`\xmark`     |
 +--------------------------------------------------+-------------+--------------------+--------------------+
-| Zero-Truncated Negative Binomial                 | Discrete    | :math:`\checkmark` |  :math:`X`         |
+| Zero-Truncated Negative Binomial                 | Discrete    | :math:`\checkmark` |  :math:`\xmark`    |
 +--------------------------------------------------+-------------+--------------------+--------------------+
-| Zero-Truncated Poisson                           | Discrete    | :math:`\checkmark` | :math:`X`          |
+| Zero-Truncated Poisson                           | Discrete    | :math:`\checkmark` | :math:`\crossmark` |
 +--------------------------------------------------+-------------+--------------------+--------------------+
 
 

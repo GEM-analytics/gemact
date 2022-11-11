@@ -195,16 +195,7 @@
               <div>
                 
   <h1>Source code for lossreserve</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">special</span>
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
-<span class="kn">from</span> <span class="nn">scipy.fft</span> <span class="kn">import</span> <span class="n">fft</span><span class="p">,</span> <span class="n">ifft</span>
-<span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">interp1d</span>
-<span class="kn">from</span> <span class="nn">scipy.linalg</span> <span class="kn">import</span> <span class="n">cholesky</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">from</span> <span class="nn">twiggy</span> <span class="kn">import</span> <span class="n">quick_setup</span><span class="p">,</span> <span class="n">log</span>
+<span></span><span class="kn">from</span> <span class="nn">libraries</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">import</span> <span class="nn">config</span>
 <span class="kn">import</span> <span class="nn">helperfunctions</span> <span class="k">as</span> <span class="nn">hf</span>
 
@@ -226,7 +217,8 @@
 <span class="sd">                            claims_inflation must be J-1 dimensional. When a tail estimate is required, it must be</span>
 <span class="sd">                            J dimensional. In case no tail is present it must be J-1 dimensional.</span>
 <span class="sd">    :type claims_inflation: ``numpy.ndarray``</span>
-<span class="sd">    :param czj: severity coefficient of variation by development period. It is set to None in case the crm is selected as</span>
+<span class="sd">    :param czj: severity coefficient of variation by development period.</span>
+<span class="sd">                It is set to None in case the crm is selected as</span>
 <span class="sd">                reserving method. When a tail estimate is required, it must be J dimensional.</span>
 <span class="sd">                In case no tail is present it must be J-1 dimensional.</span>
 <span class="sd">    :type czj: ``numpy.ndarray``</span>
@@ -882,7 +874,7 @@
         <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Development period&#39;</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Settlement speed&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">j</span><span class="p">):</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ss_tr</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:],</span> <span class="s1">&#39;-.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;AY </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">i</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ss_tr</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:],</span> <span class="s1">&#39;-.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;AP </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">i</span><span class="p">)</span>
             <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
 
@@ -933,10 +925,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_reserve_by_ay_fl</span><span class="p">()</span>
         <span class="n">ay_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">predicted_i_payments</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dstack</span><span class="p">((</span><span class="n">ay_</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ay_ultimateFL</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ay_reserveFL</span><span class="p">)))</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dstack</span><span class="p">((</span><span class="n">ay_</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ay_ultimateFL</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ay_reserveFL</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reserving_method</span> <span class="o">==</span> <span class="s1">&#39;crm&#39;</span><span class="p">:</span>
-            <span class="n">data2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dstack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">crm_ul_ay</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ay_reserve_crm</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">crm_sep_ay</span><span class="p">)))</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+            <span class="n">data2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dstack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">crm_ul_ay</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ay_reserve_crm</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">crm_sep_ay</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
             <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">((</span><span class="n">data</span><span class="p">,</span> <span class="n">data2</span><span class="p">))</span>
         <span class="n">l_</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;ultimate FL&#39;</span><span class="p">,</span> <span class="s1">&#39;reserve FL&#39;</span><span class="p">]</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reserving_method</span> <span class="o">==</span> <span class="s1">&#39;crm&#39;</span><span class="p">:</span>
@@ -951,10 +943,10 @@
             <span class="s2">&quot;====================================================================&quot;</span><span class="p">]))</span>
         <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">s_</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">row</span><span class="p">))</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> FL reserve: &#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fl_reserve</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> FL reserve: &#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fl_reserve</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reserving_method</span> <span class="o">==</span> <span class="s1">&#39;crm&#39;</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> CRM reserve: &#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">crm_reserve</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> CRM m_sep: &#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_sep</span><span class="p">)</span></div>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> CRM reserve: &#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">crm_reserve</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> CRM m_sep: &#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m_sep</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="LossReserve.loss_reserve_mean"><a class="viewcode-back" href="../api.html#lossreserve.LossReserve.loss_reserve_mean">[docs]</a>    <span class="k">def</span> <span class="nf">loss_reserve_mean</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -989,16 +981,6 @@
 <span class="sd">        :rtype: ``numpy.float64``</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">skewness</span></div></div>
-
-
-
-
-
-
-
-
-
-
 </pre></div>
 
               </div>

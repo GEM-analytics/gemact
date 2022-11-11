@@ -195,16 +195,7 @@
               <div>
                 
   <h1>Source code for lossaggregation</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">special</span>
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
-<span class="kn">from</span> <span class="nn">scipy.fft</span> <span class="kn">import</span> <span class="n">fft</span><span class="p">,</span> <span class="n">ifft</span>
-<span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">interp1d</span>
-<span class="kn">from</span> <span class="nn">scipy.linalg</span> <span class="kn">import</span> <span class="n">cholesky</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">from</span> <span class="nn">twiggy</span> <span class="kn">import</span> <span class="n">quick_setup</span><span class="p">,</span> <span class="n">log</span>
+<span></span><span class="kn">from</span> <span class="nn">libraries</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">import</span> <span class="nn">config</span>
 <span class="kn">import</span> <span class="nn">helperfunctions</span> <span class="k">as</span> <span class="nn">hf</span>
 
@@ -338,7 +329,7 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">ext</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Probability correction of the AEP</span>
-        <span class="k">return</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">d</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">**</span> <span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">**</span> <span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">d</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">**</span> <span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">special</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">**</span> <span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">mat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

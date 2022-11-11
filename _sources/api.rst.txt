@@ -1861,6 +1861,41 @@ Example code on the usage of the TCopula class::
     t_c.rvs(size=100,
             random_state= 42)
 
+``Independence Copula``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. autoclass:: copulas.IndependentCopula
+   :members:
+
+Parametrization
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+Independence Copula.
+
+.. math:: C^{U}\left(u_{1}, \ldots, u_{d}\right)=\prod^d_{k=1} u_k
+
+Given :math:`u_{k} \in[0,1], k=1, \ldots, d`.
+
+Example code on the usage of the IndependentCopula class::
+
+    from gemact import copulas
+
+    i_c = copulas.IndependentCopula(dim=2)
+    i_c.rvs(1,random_state=42)
+
+``Fréchet–Hoeffding Lower Bound``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. autoclass:: copulas.FHLowerCopula
+   :members:
+
+``Fréchet–Hoeffding Upper Bound``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. autoclass:: copulas.FHUpperCopula
+   :members:
+
 References
 =================
 .. bibliography::

@@ -195,16 +195,7 @@
               <div>
                 
   <h1>Source code for copulas</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">special</span>
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
-<span class="kn">from</span> <span class="nn">scipy.fft</span> <span class="kn">import</span> <span class="n">fft</span><span class="p">,</span> <span class="n">ifft</span>
-<span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">interp1d</span>
-<span class="kn">from</span> <span class="nn">scipy.linalg</span> <span class="kn">import</span> <span class="n">cholesky</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">from</span> <span class="nn">twiggy</span> <span class="kn">import</span> <span class="n">quick_setup</span><span class="p">,</span> <span class="n">log</span>
+<span></span><span class="kn">from</span> <span class="nn">libraries</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">import</span> <span class="nn">helperfunctions</span> <span class="k">as</span> <span class="nn">hf</span>
 
 <span class="n">quick_setup</span><span class="p">()</span>
@@ -663,7 +654,7 @@
         <span class="k">return</span> <span class="n">stats</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">sim</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">)</span></div></div>
 
 <span class="c1"># Independent</span>
-<span class="k">class</span> <span class="nc">IndependentCopula</span><span class="p">:</span>
+<div class="viewcode-block" id="IndependentCopula"><a class="viewcode-back" href="../api.html#copulas.IndependentCopula">[docs]</a><span class="k">class</span> <span class="nc">IndependentCopula</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Independent copula.</span>
 
@@ -688,7 +679,7 @@
             <span class="k">raise</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__dim</span> <span class="o">=</span> <span class="n">value</span>
 
-    <span class="k">def</span> <span class="nf">cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<div class="viewcode-block" id="IndependentCopula.cdf"><a class="viewcode-back" href="../api.html#copulas.IndependentCopula.cdf">[docs]</a>    <span class="k">def</span> <span class="nf">cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Cumulative distribution function.</span>
 
@@ -703,9 +694,9 @@
             <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Please make sure x dimension is the same as copula dimension&#39;</span><span class="p">)</span>
             <span class="k">raise</span>
 
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">rvs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="IndependentCopula.rvs"><a class="viewcode-back" href="../api.html#copulas.IndependentCopula.rvs">[docs]</a>    <span class="k">def</span> <span class="nf">rvs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Random variates.</span>
 
@@ -728,10 +719,10 @@
             <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Please make sure random_state is provided correctly&#39;</span><span class="p">)</span>
             <span class="k">raise</span>
 
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">))</span></div></div>
 
 <span class="c1"># Fréchet–Hoeffding Lower Bound </span>
-<span class="k">class</span> <span class="nc">FHLowerCopula</span><span class="p">:</span>
+<div class="viewcode-block" id="FHLowerCopula"><a class="viewcode-back" href="../api.html#copulas.FHLowerCopula">[docs]</a><span class="k">class</span> <span class="nc">FHLowerCopula</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Fréchet–Hoeffding lower bound bidimensional copula.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -743,7 +734,7 @@
     <span class="k">def</span> <span class="nf">dim</span><span class="p">():</span>
         <span class="k">return</span> <span class="mi">2</span>
 
-    <span class="k">def</span> <span class="nf">cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<div class="viewcode-block" id="FHLowerCopula.cdf"><a class="viewcode-back" href="../api.html#copulas.FHLowerCopula.cdf">[docs]</a>    <span class="k">def</span> <span class="nf">cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Cumulative distribution function.</span>
 
@@ -759,9 +750,9 @@
             <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Please make sure x shape second dimension is 2&#39;</span><span class="p">)</span>
             <span class="k">raise</span>
 
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">rvs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="FHLowerCopula.rvs"><a class="viewcode-back" href="../api.html#copulas.FHLowerCopula.rvs">[docs]</a>    <span class="k">def</span> <span class="nf">rvs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Random variates.</span>
 
@@ -785,10 +776,10 @@
             <span class="k">raise</span>
 
         <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">u</span><span class="p">,</span> <span class="mi">1</span><span class="o">-</span><span class="n">u</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">u</span><span class="p">,</span> <span class="mi">1</span><span class="o">-</span><span class="n">u</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></div></div>
 
 <span class="c1"># Fréchet–Hoeffding Upper Bound </span>
-<span class="k">class</span> <span class="nc">FHUpperCopula</span><span class="p">:</span>
+<div class="viewcode-block" id="FHUpperCopula"><a class="viewcode-back" href="../api.html#copulas.FHUpperCopula">[docs]</a><span class="k">class</span> <span class="nc">FHUpperCopula</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Fréchet–Hoeffding upper bound copula.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -810,7 +801,7 @@
             <span class="k">raise</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__dim</span> <span class="o">=</span> <span class="n">value</span>
 
-    <span class="k">def</span> <span class="nf">cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<div class="viewcode-block" id="FHUpperCopula.cdf"><a class="viewcode-back" href="../api.html#copulas.FHUpperCopula.cdf">[docs]</a>    <span class="k">def</span> <span class="nf">cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Cumulative distribution function.</span>
 
@@ -825,9 +816,9 @@
             <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Please make sure x dimension is the same as copula dimension&#39;</span><span class="p">)</span>
             <span class="k">raise</span>
 
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">rvs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="FHUpperCopula.rvs"><a class="viewcode-back" href="../api.html#copulas.FHUpperCopula.rvs">[docs]</a>    <span class="k">def</span> <span class="nf">rvs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Random variates.</span>
 
@@ -851,7 +842,7 @@
             <span class="k">raise</span>
 
         <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">))</span></div></div>
 </pre></div>
 
               </div>
