@@ -848,6 +848,13 @@
         </span>
        </code>
       </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#id83">
+         Parametrization
+        </a>
+       </li>
+      </ul>
      </li>
      <li class="toc-h3 nav-item toc-entry">
       <a class="reference internal nav-link" href="#frechethoeffding-upper-bound">
@@ -863,6 +870,13 @@
         </span>
        </code>
       </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#id84">
+         Parametrization
+        </a>
+       </li>
+      </ul>
      </li>
     </ul>
    </li>
@@ -1537,6 +1551,13 @@
         </span>
        </code>
       </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#id83">
+         Parametrization
+        </a>
+       </li>
+      </ul>
      </li>
      <li class="toc-h3 nav-item toc-entry">
       <a class="reference internal nav-link" href="#frechethoeffding-upper-bound">
@@ -1552,6 +1573,13 @@
         </span>
        </code>
       </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#id84">
+         Parametrization
+        </a>
+       </li>
+      </ul>
      </li>
     </ul>
    </li>
@@ -1903,8 +1931,8 @@ such as quota share, excess-of-loss, excess-of-loss with reinstatements, stop lo
 <p>Equation <a class="reference internal" href="#equation-xlpremium">(3)</a> shows the reinsurance premium for excess of loss treaties. It is possible to obtain a plain-vanilla XL with <span class="math notranslate nohighlight">\(L=0\)</span>, <span class="math notranslate nohighlight">\(K=+\infty\)</span> and <span class="math notranslate nohighlight">\(c=0\)</span>.</p>
 <div class="math notranslate nohighlight" id="equation-reinstatementslayer">
 <span class="eqno">(4)<a class="headerlink" href="#equation-reinstatementslayer" title="Permalink to this equation">¶</a></span>\[P=\frac{D_{L K}}{1+\frac{1}{m} \sum_{k=1}^{K} c_{k} d_{L, k-1}}\]</div>
-<p>GEMAct pricing model is based on  <span id="id1">Klugman and Panjer [<a class="reference internal" href="#id90" title="P. Klugman and H.H. Panjer. Loss models from data to decisions. Wiley, SOA, 2019.">KP19</a>]</span> and  <span id="id2">Sundt [<a class="reference internal" href="#id92" title="B. Sundt. On excess of loss reinsurance with reinstatements. Insurance: Mathematics and Economics, 1991.">Sun91</a>]</span>.</p>
-<p>Refer again to <span id="id3">Klugman and Panjer [<a class="reference internal" href="#id90" title="P. Klugman and H.H. Panjer. Loss models from data to decisions. Wiley, SOA, 2019.">KP19</a>]</span> for the recursive formula to compute the collective risk model and to <span id="id4">Embrechts and Frei [<a class="reference internal" href="#id86" title="P. Embrechts and M. Frei. Panjer recursion versus fft for compound distributions. Mathematical Methods of Operations Research, 2008.">EF08</a>]</span> for the Fast Fourier transform to approximate the Discrete Fourier Transform of the collective risk model.</p>
+<p>GEMAct pricing model is based on  <span id="id1">Klugman and Panjer [<a class="reference internal" href="#id92" title="P. Klugman and H.H. Panjer. Loss models from data to decisions. Wiley, SOA, 2019.">KP19</a>]</span> and  <span id="id2">Sundt [<a class="reference internal" href="#id94" title="B. Sundt. On excess of loss reinsurance with reinstatements. Insurance: Mathematics and Economics, 1991.">Sun91</a>]</span>.</p>
+<p>Refer again to <span id="id3">Klugman and Panjer [<a class="reference internal" href="#id92" title="P. Klugman and H.H. Panjer. Loss models from data to decisions. Wiley, SOA, 2019.">KP19</a>]</span> for the recursive formula to compute the collective risk model and to <span id="id4">Embrechts and Frei [<a class="reference internal" href="#id88" title="P. Embrechts and M. Frei. Panjer recursion versus fft for compound distributions. Mathematical Methods of Operations Research, 2008.">EF08</a>]</span> for the Fast Fourier transform to approximate the Discrete Fourier Transform of the collective risk model.</p>
 <div class="section" id="example">
 <h4>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">LossModel</span></code> can be used to price reinsurance contracts.</p>
@@ -1951,7 +1979,7 @@ such as quota share, excess-of-loss, excess-of-loss with reinstatements, stop lo
 </div>
 <div class="section" id="severity-discretization">
 <h3>Severity discretization<a class="headerlink" href="#severity-discretization" title="Permalink to this headline">¶</a></h3>
-<p>In order to pass from a continuous distribution to an arithmetic distribution, it is important to preserve the distribution properties either locally or globally. Given a span <span class="math notranslate nohighlight">\(h\)</span> and <span class="math notranslate nohighlight">\(M\)</span> the last available point, in <span id="id5">Klugman and Panjer [<a class="reference internal" href="#id90" title="P. Klugman and H.H. Panjer. Loss models from data to decisions. Wiley, SOA, 2019.">KP19</a>]</span> there are two available solutions.</p>
+<p>In order to pass from a continuous distribution to an arithmetic distribution, it is important to preserve the distribution properties either locally or globally. Given a span <span class="math notranslate nohighlight">\(h\)</span> and <span class="math notranslate nohighlight">\(M\)</span> the last available point, in <span id="id5">Klugman and Panjer [<a class="reference internal" href="#id92" title="P. Klugman and H.H. Panjer. Loss models from data to decisions. Wiley, SOA, 2019.">KP19</a>]</span> there are two available solutions.</p>
 <p><strong>Method of mass dispersal</strong></p>
 <div class="math notranslate nohighlight" id="equation-md1">
 <span class="eqno">(5)<a class="headerlink" href="#equation-md1" title="Permalink to this equation">¶</a></span>\[f_{0}=\operatorname{Pr}\left(Y&lt;\frac{h}{2}\right)=F_{Y}\left(\frac{h}{2}-0\right)\]</div>
@@ -2160,7 +2188,7 @@ are compared with the Fisher-Lange.</p>
 <div class="section" id="claims-reserving">
 <h3>Claims reserving<a class="headerlink" href="#claims-reserving" title="Permalink to this headline">¶</a></h3>
 <p>GEMAct provides a software implementation of average cost methods for claims reserving based on the collective risk model framework.</p>
-<p>The methods implemented in GEMAct are the Fisher-Lange in <span id="id7">Fisher <em>et al.</em> [<a class="reference internal" href="#id93" title="Wayne H. Fisher, Jeffrey T. Lange, and John Balcarek. Loss reserve testing: a report year approach. 1999.">FLB99</a>]</span> the collective risk model for claims reserving in <span id="id8">Ricotta and Clemente [<a class="reference internal" href="#id94" title="Alessandro Ricotta and Gian Paolo Clemente. An extension of collective risk model for stochastic claim reserving. 2016.">RC16</a>]</span>.</p>
+<p>The methods implemented in GEMAct are the Fisher-Lange in <span id="id7">Fisher <em>et al.</em> [<a class="reference internal" href="#id95" title="Wayne H. Fisher, Jeffrey T. Lange, and John Balcarek. Loss reserve testing: a report year approach. 1999.">FLB99</a>]</span> the collective risk model for claims reserving in <span id="id8">Ricotta and Clemente [<a class="reference internal" href="#id96" title="Alessandro Ricotta and Gian Paolo Clemente. An extension of collective risk model for stochastic claim reserving. 2016.">RC16</a>]</span>.</p>
 <p>GEMAct allows for tail estimates and assumes the triangular inputs to be provided as a <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> with two equal dimensions <code class="docutils literal notranslate"><span class="pre">(I,J)</span></code>, where <code class="docutils literal notranslate"><span class="pre">I=J</span></code>.</p>
 <p>The aim of average cost methods is to model incremental payments as in equation <a class="reference internal" href="#equation-acmethods">(12)</a>.</p>
 <div class="math notranslate nohighlight" id="equation-acmethods">
@@ -2345,7 +2373,7 @@ inverse of cumulative distribution function from Monte Carlo simulation.</p>
 <li><p><span class="math notranslate nohighlight">\(𝑋=(X_i, \ldots, X_d)\)</span> vector of strictly positive random components.</p></li>
 <li><p>The joint c.d.f. <span class="math notranslate nohighlight">\(H(x_1,…,x_d )=P\left[ X_1 +\ldots +X_d \right]\)</span> is known or it can be computed numerically.</p></li>
 </ul>
-<p>Refer to <span id="id10">Arbenz <em>et al.</em> [<a class="reference internal" href="#id85" title="Philipp Arbenz, Paul Embrechts, and Giovanni Puccetti. The aep algorithm for the fast computation of the distribution of the sum of dependent random variables. Bernoulli, 17:562-591, 2011.">AEP11</a>]</span> for an extensive explanation on the AEP algorithm.
+<p>Refer to <span id="id10">Arbenz <em>et al.</em> [<a class="reference internal" href="#id87" title="Philipp Arbenz, Paul Embrechts, and Giovanni Puccetti. The aep algorithm for the fast computation of the distribution of the sum of dependent random variables. Bernoulli, 17:562-591, 2011.">AEP11</a>]</span> for an extensive explanation on the AEP algorithm.
 It is possible to use a MC simulation for comparison.</p>
 <div class="section" id="id11">
 <h4>Example<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h4>
@@ -2752,7 +2780,7 @@ of the random variable given the (a, b, k) parametrization.</p>
 
 <div class="section" id="parametrization">
 <h4>Parametrization<a class="headerlink" href="#parametrization" title="Permalink to this headline">¶</a></h4>
-<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.poisson.html">SciPy documentation</a>, see <span id="id12">Virtanen <em>et al.</em> [<a class="reference internal" href="#id89" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span>.</p>
+<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.poisson.html">SciPy documentation</a>, see <span id="id12">Virtanen <em>et al.</em> [<a class="reference internal" href="#id91" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span>.</p>
 <div class="math notranslate nohighlight" id="equation-poisson">
 <span class="eqno">(14)<a class="headerlink" href="#equation-poisson" title="Permalink to this equation">¶</a></span>\[f(k)=\exp (-\mu) \frac{\mu^{k}}{k !}\]</div>
 <p>Given <span class="math notranslate nohighlight">\(\mu \geq 0\)</span> and <span class="math notranslate nohighlight">\(k \geq 0\)</span>.</p>
@@ -3174,7 +3202,7 @@ of the random variable given the (a, b, x) parametrization.</p>
 
 <div class="section" id="id13">
 <h4>Parametrization<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h4>
-<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.binom.html">SciPy documentation</a>, see <span id="id15">Virtanen <em>et al.</em> [<a class="reference internal" href="#id89" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span>.</p>
+<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.binom.html">SciPy documentation</a>, see <span id="id15">Virtanen <em>et al.</em> [<a class="reference internal" href="#id91" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span>.</p>
 <div class="math notranslate nohighlight" id="equation-binomial">
 <span class="eqno">(15)<a class="headerlink" href="#equation-binomial" title="Permalink to this equation">¶</a></span>\[\begin{split}f(k)=\left(
 \begin{array}{l}
@@ -3598,7 +3626,7 @@ of the random variable given the (a, b, x) parametrization.</p>
 
 <div class="section" id="id16">
 <h4>Parametrization<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h4>
-<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.geom.html">SciPy documentation</a>, see <span id="id18">Virtanen <em>et al.</em> [<a class="reference internal" href="#id89" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span>..</p>
+<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.geom.html">SciPy documentation</a>, see <span id="id18">Virtanen <em>et al.</em> [<a class="reference internal" href="#id91" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span>..</p>
 <div class="math notranslate nohighlight" id="equation-geom">
 <span class="eqno">(16)<a class="headerlink" href="#equation-geom" title="Permalink to this equation">¶</a></span>\[f(k)=(1-p)^{k-1} p\]</div>
 <p>for <span class="math notranslate nohighlight">\(k \geq 1,0&lt;p \leq 1\)</span></p>
@@ -4020,7 +4048,7 @@ of the random variable given the (a, b, x) parametrization.</p>
 
 <div class="section" id="id19">
 <h4>Parametrization<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h4>
-<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.nbinom.html">SciPy documentation</a>, see <span id="id21">Virtanen <em>et al.</em> [<a class="reference internal" href="#id89" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span>.</p>
+<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.nbinom.html">SciPy documentation</a>, see <span id="id21">Virtanen <em>et al.</em> [<a class="reference internal" href="#id91" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span>.</p>
 <div class="math notranslate nohighlight" id="equation-nbinomial">
 <span class="eqno">(17)<a class="headerlink" href="#equation-nbinomial" title="Permalink to this equation">¶</a></span>\[\begin{split}f(k)=\left(\begin{array}{c}
    k+n-1 \\
@@ -4412,7 +4440,7 @@ of the random variable given the (a, b, x) parametrization.</p>
 
 <div class="section" id="id22">
 <h4>Parametrization<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h4>
-<p>For a more detailed explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.logser.html">SciPy documentation</a>, see <span id="id24">Virtanen <em>et al.</em> [<a class="reference internal" href="#id89" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span>.</p>
+<p>For a more detailed explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.logser.html">SciPy documentation</a>, see <span id="id24">Virtanen <em>et al.</em> [<a class="reference internal" href="#id91" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span>.</p>
 <div class="math notranslate nohighlight" id="equation-logser">
 <span class="eqno">(18)<a class="headerlink" href="#equation-logser" title="Permalink to this equation">¶</a></span>\[f(k)=-\frac{p^{k}}{k \log (1-p)}\]</div>
 <p>Given <span class="math notranslate nohighlight">\(0 &lt; p &lt; 1\)</span> and <span class="math notranslate nohighlight">\(k \geq 1\)</span>.</p>
@@ -6786,7 +6814,7 @@ followed by those for location and scale.</p>
 
 <div class="section" id="id40">
 <h4>Parametrization<a class="headerlink" href="#id40" title="Permalink to this headline">¶</a></h4>
-<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.gamma.html">SciPy documentation</a>, see <span id="id42">Virtanen <em>et al.</em> [<a class="reference internal" href="#id89" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span>.</p>
+<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.gamma.html">SciPy documentation</a>, see <span id="id42">Virtanen <em>et al.</em> [<a class="reference internal" href="#id91" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span>.</p>
 <div class="math notranslate nohighlight" id="equation-gamma">
 <span class="eqno">(28)<a class="headerlink" href="#equation-gamma" title="Permalink to this equation">¶</a></span>\[f(x, a)=\frac{x^{a-1} e^{-x}}{\Gamma(a)}\]</div>
 <p>Given <span class="math notranslate nohighlight">\(f(x, a)=\frac{x^{a-1} e^{-x}}{\Gamma(a)}\)</span> and <span class="math notranslate nohighlight">\(x \geq 0, a&gt;0\)</span>. <span class="math notranslate nohighlight">\(\Gamma(a)\)</span> refers to the gamma function.</p>
@@ -7625,7 +7653,7 @@ followed by those for location and scale.</p>
 
 <div class="section" id="id44">
 <h4>Parametrization<a class="headerlink" href="#id44" title="Permalink to this headline">¶</a></h4>
-<p>For a better explanation refer to <span id="id45">Virtanen <em>et al.</em> [<a class="reference internal" href="#id89" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span> documentation.</p>
+<p>For a better explanation refer to <span id="id45">Virtanen <em>et al.</em> [<a class="reference internal" href="#id91" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span> documentation.</p>
 <div class="math notranslate nohighlight" id="equation-invgamma">
 <span class="eqno">(30)<a class="headerlink" href="#equation-invgamma" title="Permalink to this equation">¶</a></span>\[f(x, \mu)=\frac{1}{\sqrt{2 \pi x^{3}}} \exp \left(-\frac{(x-\mu)^{2}}{2 x \mu^{2}}\right)\]</div>
 </div>
@@ -8017,7 +8045,7 @@ followed by those for location and scale.</p>
 
 <div class="section" id="id46">
 <h4>Parametrization<a class="headerlink" href="#id46" title="Permalink to this headline">¶</a></h4>
-<p>For a better explanation refer to <span id="id47">Virtanen <em>et al.</em> [<a class="reference internal" href="#id89" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span> documentation.</p>
+<p>For a better explanation refer to <span id="id47">Virtanen <em>et al.</em> [<a class="reference internal" href="#id91" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span> documentation.</p>
 <div class="math notranslate nohighlight" id="equation-invgamma">
 <span class="eqno">(31)<a class="headerlink" href="#equation-invgamma" title="Permalink to this equation">¶</a></span>\[f(x, a)=\frac{x^{-a-1}}{\Gamma(a)} \exp \left(-\frac{1}{x}\right)\]</div>
 <p>Given <span class="math notranslate nohighlight">\(x&gt;=0, a&gt;0 \)</span>Gamma(a)` refers to the gamma function.</p>
@@ -8419,7 +8447,7 @@ followed by those for location and scale.</p>
 
 <div class="section" id="id50">
 <h4>Parametrization<a class="headerlink" href="#id50" title="Permalink to this headline">¶</a></h4>
-<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.genpareto.html">SciPy documentation</a>, see <span id="id52">Virtanen <em>et al.</em> [<a class="reference internal" href="#id89" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span>.</p>
+<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.genpareto.html">SciPy documentation</a>, see <span id="id52">Virtanen <em>et al.</em> [<a class="reference internal" href="#id91" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span>.</p>
 <div class="math notranslate nohighlight" id="equation-genpareto">
 <span class="eqno">(32)<a class="headerlink" href="#equation-genpareto" title="Permalink to this equation">¶</a></span>\[f(x, c)=(1+c x)^{-1-1 / c}\]</div>
 <p>Given <span class="math notranslate nohighlight">\(x \geq 0\)</span> if <span class="math notranslate nohighlight">\(c \geq 0\)</span>. <span class="math notranslate nohighlight">\(0 \leq x \leq-1 / c if c&lt;0\)</span>.</p>
@@ -8856,7 +8884,7 @@ followed by those for location and scale.</p>
 
 <div class="section" id="id55">
 <h4>Parametrization<a class="headerlink" href="#id55" title="Permalink to this headline">¶</a></h4>
-<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.lognorm.html">SciPy documentation</a>, see <span id="id57">Virtanen <em>et al.</em> [<a class="reference internal" href="#id89" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span>.</p>
+<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.lognorm.html">SciPy documentation</a>, see <span id="id57">Virtanen <em>et al.</em> [<a class="reference internal" href="#id91" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span>.</p>
 <div class="math notranslate nohighlight" id="equation-lognorm">
 <span class="eqno">(33)<a class="headerlink" href="#equation-lognorm" title="Permalink to this equation">¶</a></span>\[f(x, s)=\frac{1}{s x \sqrt{2 \pi}} \exp \left(-\frac{\log ^{2}(x)}{2 s^{2}}\right)\]</div>
 <p>Given <span class="math notranslate nohighlight">\(x&gt;0, s&gt;0\)</span>.</p>
@@ -9284,7 +9312,7 @@ followed by those for location and scale.</p>
 
 <div class="section" id="id58">
 <h4>Parametrization<a class="headerlink" href="#id58" title="Permalink to this headline">¶</a></h4>
-<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.burr12.html">Scipy documentation</a> , see <span id="id60">Virtanen <em>et al.</em> [<a class="reference internal" href="#id89" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span>.</p>
+<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.burr12.html">Scipy documentation</a> , see <span id="id60">Virtanen <em>et al.</em> [<a class="reference internal" href="#id91" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span>.</p>
 <div class="math notranslate nohighlight" id="equation-burr12">
 <span class="eqno">(34)<a class="headerlink" href="#equation-burr12" title="Permalink to this equation">¶</a></span>\[f(x, c, d)=c d x^{c-1} /\left(1+x^{c}\right)^{d+1}\]</div>
 <p>Given <span class="math notranslate nohighlight">\(x&gt;=0 and c, d&gt;0\)</span>.</p>
@@ -9716,7 +9744,7 @@ followed by those for location and scale.</p>
 
 <div class="section" id="id63">
 <h4>Parametrization<a class="headerlink" href="#id63" title="Permalink to this headline">¶</a></h4>
-<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.mielke.html">SciPy documentation</a> ,see <span id="id65">Virtanen <em>et al.</em> [<a class="reference internal" href="#id89" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span>.</p>
+<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.mielke.html">SciPy documentation</a> ,see <span id="id65">Virtanen <em>et al.</em> [<a class="reference internal" href="#id91" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span>.</p>
 <div class="math notranslate nohighlight" id="equation-dagum">
 <span class="eqno">(35)<a class="headerlink" href="#equation-dagum" title="Permalink to this equation">¶</a></span>\[f(x, k, s)=\frac{k x^{k-1}}{\left(1+x^{s}\right)^{1+k / s}}\]</div>
 <p>Given <span class="math notranslate nohighlight">\(x&gt;0\)</span> , <span class="math notranslate nohighlight">\(k,s&gt;0\)</span>.</p>
@@ -10144,7 +10172,7 @@ followed by those for location and scale.</p>
 
 <div class="section" id="id66">
 <h4>Parametrization<a class="headerlink" href="#id66" title="Permalink to this headline">¶</a></h4>
-<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.weibull_min.html">SciPy documentation</a> , see <span id="id68">Virtanen <em>et al.</em> [<a class="reference internal" href="#id89" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span>.</p>
+<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.weibull_min.html">SciPy documentation</a> , see <span id="id68">Virtanen <em>et al.</em> [<a class="reference internal" href="#id91" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span>.</p>
 <div class="math notranslate nohighlight" id="equation-weibull-min">
 <span class="eqno">(36)<a class="headerlink" href="#equation-weibull-min" title="Permalink to this equation">¶</a></span>\[f(x, c)=c x^{c-1} \exp \left(-x^{c}\right)\]</div>
 <p>Given <span class="math notranslate nohighlight">\(x&gt;0\)</span> , <span class="math notranslate nohighlight">\(c&gt;0\)</span>.</p>
@@ -10570,7 +10598,7 @@ followed by those for location and scale.</p>
 
 <div class="section" id="id69">
 <h4>Parametrization<a class="headerlink" href="#id69" title="Permalink to this headline">¶</a></h4>
-<p>For a better explanation refer to <span id="id70">Virtanen <em>et al.</em> [<a class="reference internal" href="#id89" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span> <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.invweibull.html">documentation</a>.</p>
+<p>For a better explanation refer to <span id="id70">Virtanen <em>et al.</em> [<a class="reference internal" href="#id91" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span> <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.invweibull.html">documentation</a>.</p>
 <div class="math notranslate nohighlight" id="equation-invweibull">
 <span class="eqno">(37)<a class="headerlink" href="#equation-invweibull" title="Permalink to this equation">¶</a></span>\[f(x, c)=c x^{-c-1} \exp \left(-x^{-c}\right)\]</div>
 <p>Given <span class="math notranslate nohighlight">\(x&gt;0\)</span> , <span class="math notranslate nohighlight">\(c&gt;0\)</span>.</p>
@@ -10997,7 +11025,7 @@ followed by those for location and scale.</p>
 
 <div class="section" id="id71">
 <h4>Parametrization<a class="headerlink" href="#id71" title="Permalink to this headline">¶</a></h4>
-<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.beta.html">SciPy documentation</a>, <span id="id73">Virtanen <em>et al.</em> [<a class="reference internal" href="#id89" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span> .</p>
+<p>For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.beta.html">SciPy documentation</a>, <span id="id73">Virtanen <em>et al.</em> [<a class="reference internal" href="#id91" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span> .</p>
 <div class="math notranslate nohighlight" id="equation-beta">
 <span class="eqno">(38)<a class="headerlink" href="#equation-beta" title="Permalink to this equation">¶</a></span>\[f(x, a, b)=\frac{\Gamma(a+b) x^{a-1}(1-x)^{b-1}}{\Gamma(a) \Gamma(b)}\]</div>
 <p>Given <span class="math notranslate nohighlight">\(0&lt;=x&lt;=1, a&gt;0, b&gt;0\)</span> , <span class="math notranslate nohighlight">\(\Gamma\)</span> is the gamma function.</p>
@@ -11641,7 +11669,7 @@ Refer to Appendix A of Klugman, Panjer &amp; Willmot, Loss Models, Wiley.</p>
 <div class="section" id="id78">
 <h4>Parametrization<a class="headerlink" href="#id78" title="Permalink to this headline">¶</a></h4>
 <p>Gauss copula cumulative density function is based on the scipy function <cite>multivariate_normal</cite>.
-For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.multivariate_normal.html">SciPy documentation</a>, <span id="id80">Virtanen <em>et al.</em> [<a class="reference internal" href="#id89" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span> .</p>
+For a better explanation refer to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.multivariate_normal.html">SciPy documentation</a>, <span id="id80">Virtanen <em>et al.</em> [<a class="reference internal" href="#id91" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">VGO+20</a>]</span> .</p>
 <div class="math notranslate nohighlight">
 \[f(x)=\frac{1}{\sqrt{(2 \pi)^{k} \operatorname{det} \Sigma}} \exp \left(-\frac{1}{2}(x-\mu)^{T} \Sigma^{-1}(x-\mu)\right)\]</div>
 <p>Example code on the usage of the GaussCopula class:</p>
@@ -11844,6 +11872,21 @@ Degrees of freedom <span class="math notranslate nohighlight">\(v&gt;0\)</span> 
 
 </dd></dl>
 
+<div class="section" id="id83">
+<h4>Parametrization<a class="headerlink" href="#id83" title="Permalink to this headline">¶</a></h4>
+<p>The Fréchet–Hoeffding Lower Bound Copula.</p>
+<div class="math notranslate nohighlight">
+\[C^{FHL}\left(u_{1},u_{2}\right)=\max (u+v-1,0)\]</div>
+<p>Given <span class="math notranslate nohighlight">\(u_{k} \in[0,1], k=1, 2\)</span>.</p>
+<p>Example code on the usage of the FHLowerCopula class:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gemact</span> <span class="kn">import</span> <span class="n">copulas</span>
+
+<span class="n">fhl_c</span> <span class="o">=</span> <span class="n">copulas</span><span class="o">.</span><span class="n">FHLowerCopula</span>
+<span class="n">fhl_c</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span>
+        <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="frechethoeffding-upper-bound">
 <h3><code class="docutils literal notranslate"><span class="pre">Fréchet–Hoeffding</span> <span class="pre">Upper</span> <span class="pre">Bound</span></code><a class="headerlink" href="#frechethoeffding-upper-bound" title="Permalink to this headline">¶</a></h3>
@@ -11890,31 +11933,46 @@ Degrees of freedom <span class="math notranslate nohighlight">\(v&gt;0\)</span> 
 
 </dd></dl>
 
+<div class="section" id="id84">
+<h4>Parametrization<a class="headerlink" href="#id84" title="Permalink to this headline">¶</a></h4>
+<p>The Fréchet–Hoeffding Upper Bound Copula.</p>
+<div class="math notranslate nohighlight">
+\[C^{FHU}\left(u_{1},u_{2}\right)=\min (u,v)\]</div>
+<p>Given <span class="math notranslate nohighlight">\(u_{k} \in[0,1], k=1, 2\)</span>.</p>
+<p>Example code on the usage of the FHUpperCopula class:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gemact</span> <span class="kn">import</span> <span class="n">copulas</span>
+
+<span class="n">fhu_c</span> <span class="o">=</span> <span class="n">copulas</span><span class="o">.</span><span class="n">FHUpperCopula</span>
+<span class="n">fhu_c</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span>
+        <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div class="section" id="references">
 <h1>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h1>
-<p id="id83"><dl class="citation">
-<dt class="label" id="id85"><span class="brackets"><a class="fn-backref" href="#id10">AEP11</a></span></dt>
+<p id="id85"><dl class="citation">
+<dt class="label" id="id87"><span class="brackets"><a class="fn-backref" href="#id10">AEP11</a></span></dt>
 <dd><p>Philipp Arbenz, Paul Embrechts, and Giovanni Puccetti. The aep algorithm for the fast computation of the distribution of the sum of dependent random variables. <em>Bernoulli</em>, 17:562–591, 2011.</p>
 </dd>
-<dt class="label" id="id86"><span class="brackets"><a class="fn-backref" href="#id4">EF08</a></span></dt>
+<dt class="label" id="id88"><span class="brackets"><a class="fn-backref" href="#id4">EF08</a></span></dt>
 <dd><p>P. Embrechts and M. Frei. Panjer recursion versus fft for compound distributions. <em>Mathematical Methods of Operations Research</em>, 2008.</p>
 </dd>
-<dt class="label" id="id93"><span class="brackets"><a class="fn-backref" href="#id7">FLB99</a></span></dt>
+<dt class="label" id="id95"><span class="brackets"><a class="fn-backref" href="#id7">FLB99</a></span></dt>
 <dd><p>Wayne H. Fisher, Jeffrey T. Lange, and John Balcarek. Loss reserve testing: a report year approach. 1999.</p>
 </dd>
-<dt class="label" id="id90"><span class="brackets">KP19</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id3">2</a>,<a href="#id5">3</a>)</span></dt>
+<dt class="label" id="id92"><span class="brackets">KP19</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id3">2</a>,<a href="#id5">3</a>)</span></dt>
 <dd><p>P. Klugman and H.H. Panjer. <em>Loss models from data to decisions</em>. Wiley, SOA, 2019.</p>
 </dd>
-<dt class="label" id="id94"><span class="brackets"><a class="fn-backref" href="#id8">RC16</a></span></dt>
+<dt class="label" id="id96"><span class="brackets"><a class="fn-backref" href="#id8">RC16</a></span></dt>
 <dd><p>Alessandro Ricotta and Gian Paolo Clemente. An extension of collective risk model for stochastic claim reserving. 2016.</p>
 </dd>
-<dt class="label" id="id92"><span class="brackets"><a class="fn-backref" href="#id2">Sun91</a></span></dt>
+<dt class="label" id="id94"><span class="brackets"><a class="fn-backref" href="#id2">Sun91</a></span></dt>
 <dd><p>B. Sundt. On excess of loss reinsurance with reinstatements. <em>Insurance: Mathematics and Economics</em>, 1991.</p>
 </dd>
-<dt class="label" id="id89"><span class="brackets">VGO+20</span><span class="fn-backref">(<a href="#id12">1</a>,<a href="#id15">2</a>,<a href="#id18">3</a>,<a href="#id21">4</a>,<a href="#id24">5</a>,<a href="#id42">6</a>,<a href="#id45">7</a>,<a href="#id47">8</a>,<a href="#id52">9</a>,<a href="#id57">10</a>,<a href="#id60">11</a>,<a href="#id65">12</a>,<a href="#id68">13</a>,<a href="#id70">14</a>,<a href="#id73">15</a>,<a href="#id80">16</a>)</span></dt>
+<dt class="label" id="id91"><span class="brackets">VGO+20</span><span class="fn-backref">(<a href="#id12">1</a>,<a href="#id15">2</a>,<a href="#id18">3</a>,<a href="#id21">4</a>,<a href="#id24">5</a>,<a href="#id42">6</a>,<a href="#id45">7</a>,<a href="#id47">8</a>,<a href="#id52">9</a>,<a href="#id57">10</a>,<a href="#id60">11</a>,<a href="#id65">12</a>,<a href="#id68">13</a>,<a href="#id70">14</a>,<a href="#id73">15</a>,<a href="#id80">16</a>)</span></dt>
 <dd><p>Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. <em>Nature Methods</em>, 17:261–272, 2020. <a class="reference external" href="https://doi.org/10.1038/s41592-019-0686-2">doi:10.1038/s41592-019-0686-2</a>.</p>
 </dd>
 </dl>

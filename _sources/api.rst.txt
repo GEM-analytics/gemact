@@ -1890,11 +1890,51 @@ Example code on the usage of the IndependentCopula class::
 .. autoclass:: copulas.FHLowerCopula
    :members:
 
+Parametrization
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The Fréchet–Hoeffding Lower Bound Copula.
+
+.. math:: C^{FHL}\left(u_{1},u_{2}\right)=\max (u+v-1,0)
+
+Given :math:`u_{k} \in[0,1], k=1, 2`.
+
+Example code on the usage of the FHLowerCopula class::
+
+    from gemact import copulas
+
+    fhl_c = copulas.FHLowerCopula
+    fhl_c.rvs(10,
+            random_state=42)
+
+
+
 ``Fréchet–Hoeffding Upper Bound``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. autoclass:: copulas.FHUpperCopula
    :members:
+
+Parametrization
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The Fréchet–Hoeffding Upper Bound Copula.
+
+.. math:: C^{FHU}\left(u_{1},u_{2}\right)=\min (u,v)
+
+Given :math:`u_{k} \in[0,1], k=1, 2`.
+
+Example code on the usage of the FHUpperCopula class::
+
+    from gemact import copulas
+
+    fhu_c = copulas.FHUpperCopula
+    fhu_c.rvs(10,
+            random_state=42)
+
+
+
+
 
 References
 =================
