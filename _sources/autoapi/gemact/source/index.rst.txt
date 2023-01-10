@@ -1,0 +1,1395 @@
+:py:mod:`gemact.source`
+=======================
+
+.. py:module:: gemact.source
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   calculators/index.rst
+   conf/index.rst
+   config/index.rst
+   copulas/index.rst
+   distributions/index.rst
+   gemdata/index.rst
+   helperfunctions/index.rst
+   libraries/index.rst
+   lossaggregation/index.rst
+   lossmodel/index.rst
+   lossreserve/index.rst
+
+
+Package Contents
+----------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   gemact.source.Calculator
+   gemact.source.PolicyStructure
+   gemact.source.Layer
+   gemact.source.LayerTower
+   gemact.source.Frequency
+   gemact.source.Severity
+   gemact.source.LossModel
+   gemact.source.AggregateData
+   gemact.source.ReservingModel
+   gemact.source.LossReserve
+   gemact.source.LossAggregation
+
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   gemact.source.__version__
+   gemact.source.__doc__
+   gemact.source.SITE_LINK
+   gemact.source.DCEILING
+   gemact.source.PROB_TOLERANCE
+   gemact.source.LOSS_AGGREGATION_METHOD
+   gemact.source.SEV_DISCRETIZATION_METHOD
+   gemact.source.AGGREGATE_LOSS_APPROX_METHOD
+   gemact.source.POLICY_LAYER_BASIS
+   gemact.source.POLICY_LAYER_CATEGORY
+   gemact.source.RESERVING_METHOD
+   gemact.source.COP_DICT
+   gemact.source.DIST_DICT
+   gemact.source.logger
+   gemact.source.logger
+   gemact.source.logger
+
+
+.. py:data:: __version__
+   :annotation: = 0.3.1
+
+   
+
+.. py:data:: __doc__
+   :annotation: = Multiline-String
+
+    .. raw:: html
+
+        <details><summary>Show Value</summary>
+
+    .. code-block:: text
+        :linenos:
+
+        GEMAct is an **actuarial package**, 
+        based on the collective risk theory framework, 
+        that offers actuarial scientists a comprehensive set of tools for 
+        **non-life** (re)insurance **pricing**, stochastic **claims reserving**, 
+        **risk aggregation** and extends the set of probability distributions already available in Python. 
+
+        The broad and flexible GEMAct apparatus fits into the expanding community of **Python** programming language. 
+
+        Please visit our [website](https://gem-analytics.github.io/gemact/) to see our documentation and tutorials.
+
+    .. raw:: html
+
+        </details>
+
+   
+
+.. py:data:: SITE_LINK
+   :annotation: = https://gem-analytics.github.io/gemact/
+
+   
+
+.. py:data:: DCEILING
+   :annotation: = 5
+
+   
+
+.. py:data:: PROB_TOLERANCE
+   
+
+   
+
+.. py:data:: LOSS_AGGREGATION_METHOD
+   
+
+   
+
+.. py:data:: SEV_DISCRETIZATION_METHOD
+   
+
+   
+
+.. py:data:: AGGREGATE_LOSS_APPROX_METHOD
+   
+
+   
+
+.. py:data:: POLICY_LAYER_BASIS
+   
+
+   
+
+.. py:data:: POLICY_LAYER_CATEGORY
+   
+
+   
+
+.. py:data:: RESERVING_METHOD
+   
+
+   
+
+.. py:data:: COP_DICT
+   
+
+   
+
+.. py:data:: DIST_DICT
+   
+
+   
+
+.. py:class:: Calculator
+
+   Calculation methods used in LossModel and Severity classes. 
+   Python informal static class.
+
+   .. py:method:: fast_fourier_transform(severity, frequency, n_aggr_dist_nodes, discr_step, tilt, tilt_value, normalize=False)
+      :staticmethod:
+
+      Aggregate loss distribution via Fast Fourier Transform.
+
+      :param severity: discretized severity, nodes sequence and discrete probabilities.
+      :type severity: ``dict``
+      :param frequency: frequency model (adjusted).
+      :type frequency: ``Frequency``
+      :param n_aggr_dist_nodes: number of nodes in the approximated aggregate loss distribution.
+      :type n_aggr_dist_nodes: ``int``
+      :param discr_step: severity discretization step.
+      :type discr_step: ``float``
+      :param tilt_value: tilting parameter value of FFT method for the aggregate loss distribution approximation.
+      :type tilt_value: ``float``
+      :param tilt: whether tilting of FFT is present or not.
+      :type tilt: ``bool``
+      :return: aggregate loss distribution empirical pmf, cdf, nodes
+      :rtype: ``dict``
+
+
+   .. py:method:: panjer_recursion(frequency, severity, n_aggr_dist_nodes, discr_step, normalize=False)
+      :staticmethod:
+
+      Aggregate loss distribution via Panjer recursion.
+
+      :param severity: discretized severity, nodes sequence and discrete probabilities.
+      :type severity: ``dict``
+      :param frequency: frequency model (adjusted).
+      :type frequency: ``Frequency``
+      :param n_aggr_dist_nodes: number of nodes in the approximated aggregate loss distribution.
+      :type n_aggr_dist_nodes: ``int``
+      :param discr_step: severity discretization step.
+      :type discr_step: ``float``
+      :return: aggregate loss distribution empirical pdf, cdf, nodes
+      :rtype: ``dict``
+
+
+   .. py:method:: mc_simulation(severity, frequency, cover, deductible, n_sim, random_state)
+      :staticmethod:
+
+      Aggregate loss distribution via Monte Carlo simulation.
+
+      :param severity: severity model.
+      :type severity: ``Severity``
+      :param frequency: frequency model (adjusted).
+      :type frequency: ``Frequency``
+      :param cover: cover, also referred to as limit.
+      :type cover: ``int`` or ``float``
+      :param deductible: deductible, also referred to as retention or priority.
+      :type deductible: ``int`` or ``float``
+      :param n_sim: number of simulations.
+      :type n_sim: ``int``
+      :param random_state: random state for the random number generator.
+      :type random_state: ``int``
+      :return: aggregate loss distribution empirical pdf, cdf, nodes.
+      :rtype: ``dict``
+
+
+   .. py:method:: mass_dispersal(severity, deductible, exit_point, discr_step, n_discr_nodes)
+      :staticmethod:
+
+      Severity discretization according to the mass dispersal method.
+
+      :param severity: severity model.
+      :type severity: ``Severity``
+      :param deductible: deductible, also referred to as retention or priority.
+      :type deductible: ``int`` or ``float``
+      :param exit_point: severity 'exit point', deductible plus cover.
+      :type cover: ``int`` or ``float``
+      :param discr_step: severity discretization step.
+      :type discr_step: ``float``
+      :param n_discr_nodes: number of nodes of the discretized severity.
+      :type n_discr_nodes: ``int``
+      :return: discrete severity, nodes sequence and discrete probabilities.
+      :rtype: ``dict``
+
+
+   .. py:method:: upper_discr_point_prob_adjuster(severity, deductible, exit_point, discr_step)
+      :staticmethod:
+
+      Probability of the discretization upper point in the local moment.
+      In case an upper priority on the severity is provided, the probability of the node sequence upper point
+      is adjusted to be coherent with discretization step size and number of nodes.
+
+      :param severity: severity model.
+      :type severity: ``Severity``
+      :param deductible: deductible, also referred to as retention or priority.
+      :type deductible: ``int`` or ``float``
+      :param exit_point: severity 'exit point', deductible plus cover.
+      :type cover: ``int`` or ``float``
+      :param discr_step: severity discretization step.
+      :type discr_step: ``float``
+      :return: probability mass in (u-d/h)*m
+      :rtype: ``numpy.ndarray``
+
+
+   .. py:method:: local_moments(severity, deductible, exit_point, discr_step, n_discr_nodes)
+      :staticmethod:
+
+      Severity discretization according to the local moments method.
+
+      :param severity: severity model.
+      :type severity: ``Severity``
+      :param deductible: deductible, also referred to as retention or priority.
+      :type deductible: ``int`` or ``float``
+      :param exit_point: severity 'exit point', deductible plus cover.
+      :type cover: ``int`` or ``float``
+      :param discr_step: severity discretization step.
+      :type discr_step: ``float``
+      :param n_discr_nodes: number of nodes of the discretized severity.
+      :type n_discr_nodes: ``int``
+      :return: discrete severity, nodes sequence and discrete probabilities.
+      :rtype: ``dict``
+
+
+
+.. py:data:: logger
+   
+
+   
+
+.. py:class:: PolicyStructure(layers=None)
+
+   Policy structure component of a loss model.
+
+   :param layers: Non-proportional layer (default is infinity-xs-0 layer).
+   :type layers: ``Layer``, ``LayerTower``, ``list``
+
+   .. py:property:: layers
+
+
+   .. py:property:: length
+
+
+   .. py:method:: index_to_layer_name(idx)
+
+
+   .. py:method:: layer_name_to_index(name)
+
+
+
+.. py:class:: Layer(cover=float('inf'), deductible=0, aggr_cover=float('inf'), aggr_deductible=0, n_reinst=float('inf'), reinst_loading=0, maintenance_deductible=0, share=1, basis='regular')
+
+   Policy structure non-proportional layer.
+
+   :param deductible: each-and-every-loss (non-ranking) deductible, also referred to as retention or priority (default value is 0).
+   :type deductible: ``int`` or ``float``
+   :param cover: each-and-every-loss cover, also referred to as limit (default value is infinity). Cover plus deductible is the upper priority or severity 'exit point'.
+   :type cover: ``int`` or ``float``
+   :param aggr_deductible: aggregate deductible (default value is 0). 
+   :type aggr_deductible: ``int`` or ``float``
+   :param aggr_cover: aggregate cover, also referred to as aggregate limit (default is infinity).
+   :type aggr_cover: ``int`` or ``float``
+   :param n_reinst: Number of reinstatements (default value is infinity).
+                   When reinstatements are free (loadings = 0), an alternative parametrization is aggregate cover = (number of reinstatement + 1) * cover.
+                   E.g. When the number of reinstatements = 0, the aggregate cover is equal to the cover,
+                   when number of reinstatements is infinity there is no aggregate cover
+                   (the aggregate cover is infinity).
+   :type n_reinst: ``int``
+   :param reinst_loading: loadings of reinstatements layers (default value is 0), typically a value in [0, 1].
+   :type reinst_loading: ``int`` or ``float`` or ``np.array``
+   :param maintenance_deductible: maintenance deductible, sometimes referred to as residual each-and-every-loss deductible (default is 0). Non-zero maintenance deductible applies to retention layers only.
+   :type maintenance_deductible: ``int`` or ``float``
+   :param share: Partecipation share of the layer (default is 1).
+   :type share: ``float``
+   :param basis: layer basis (default is 'regular'). One of 'regular', 'drop-down', 'stretch-down'. 
+   :type basis: ``string``
+
+   .. py:property:: name
+
+
+   .. py:property:: deductible
+
+
+   .. py:property:: cover
+
+
+   .. py:property:: aggr_deductible
+
+
+   .. py:property:: n_reinst
+
+
+   .. py:property:: reinst_loading
+
+
+   .. py:property:: aggr_cover
+
+
+   .. py:property:: manteinance_deductible
+
+
+   .. py:property:: share
+
+
+   .. py:property:: basis
+
+
+   .. py:property:: category
+
+
+   .. py:property:: exit_point
+
+
+   .. py:property:: identifier
+
+
+   .. py:method:: specs()
+      :staticmethod:
+
+      Method (static) returning layer specifications names.
+
+      :return: layer specifications names.
+      :rtype: ``set``
+
+
+   .. py:method:: _check_and_set_category()
+
+      Method that check and set the category of the layer.
+
+      :return: Void.
+      :rtype: ``None``
+
+
+
+.. py:class:: LayerTower(*args)
+
+   Bases: :py:obj:`list`
+
+   Policy structure tower of non-proportional layers.
+
+   :param \**args:
+       See below
+
+   :Keyword Arguments:
+       * *args* (``Layers``) --
+         Layer tower elements.
+
+   .. py:method:: append(item)
+
+      Append object to the end of the list.
+
+
+   .. py:method:: insert(item)
+
+      Insert object before index.
+
+
+   .. py:method:: extend(*args)
+
+      Extend list by appending elements from the iterable.
+
+
+   .. py:method:: sort(key='deductible')
+
+      Stable sort *IN PLACE*.
+
+
+   .. py:method:: remove_layer_loading()
+
+
+   .. py:method:: set_and_check_tower()
+
+
+   .. py:method:: remove_duplicates()
+
+
+
+.. py:class:: Frequency(dist, par)
+
+   Frequency component of the loss models underlying the collective risk model.
+
+   :param dist: name of the frequency distribution.
+   :type dist: ``str``
+   :param par: parameters of the frequency distribution.
+   :type par: ``dict``
+
+   .. py:property:: dist
+
+
+   .. py:property:: par
+
+
+   .. py:property:: p0
+
+
+   .. py:property:: model
+
+
+   .. py:method:: abp0g0(fj)
+
+      Parameters of the frequency distribution according to the (a, b, k) parametrization,
+      the probability generating function computed in zero given the discrete severity probs,
+      and the probability of the distribution in zero.
+
+      :param fj: discretized severity distribution probabilities.
+      :type fj: ``numpy.ndarray``
+
+      :return: a, b, probability in zero and aggregate cost probability in zero.
+      :rtype: ``tuple``
+
+
+
+.. py:class:: Severity(dist, par)
+
+   Severity component of the loss models underlying the collective risk model.
+
+   :param dist: name of the frequency distribution.
+   :type dist: ``str``
+   :param par: parameters of the frequency distribution.
+   :type par: ``dict``
+
+   .. py:property:: dist
+
+
+   .. py:property:: par
+
+
+   .. py:property:: loc
+
+
+   .. py:property:: model
+
+
+   .. py:method:: excess_frequency(x, base_frequency=100)
+
+      Expected excess frequency function, i.e. expected frequency in excess of a given threshold.
+
+      :param x: value where excess frequency is evaluated.
+      :type x: ``float``
+      :param base_frequency: frequency at origin (default is 100). Optional.
+      :type base_frequency: ``int``, ``float``
+      :return: excess frequency.
+      :rtype: ``numpy.float`` or ``float``
+
+
+   .. py:method:: return_period(x, base_frequency=100)
+
+      Expected return period, given a base frequency.
+
+      :param x: value whose return period is evaluated.
+      :type x: ``float``
+      :param base_frequency: frequency at origin (default is 100). Optional.
+      :type base_frequency: ``int``, ``float``
+      :return: return period.
+      :rtype: ``numpy.float`` or ``float``
+
+
+   .. py:method:: stop_loss_transformation(cover, deductible, size=50000)
+
+      Approximated stop loss transformation function.
+      General method for severity class, overridden by distribution specific implementation if available.
+
+      :param cover: cover, also referred to as limit. cover plus deductible is the upper priority or severity 'exit point'.
+      :type cover: ``int``, ``float``
+      :param deductible: deductible, also referred to as retention or priority.
+      :type deductible: ``int``, ``float``
+      :param size: inner random variates sample size to approximate the integral (default is 50000).
+      :type size: ``int``, optional
+      :return: stop_loss_transformation value.
+      :rtype: ``numpy.float``
+
+
+   .. py:method:: discretize(discr_method, n_discr_nodes, discr_step, cover, deductible)
+
+      Severity discretization according to the discretization method selected by the user.
+
+      :param deductible: deductible, also referred to as retention or priority.
+      :type deductible: ``int`` or ``float``
+      :param cover: cover, also referred to as limit.
+      :type cover: ``int`` or ``float``
+      :param discr_method: severity discretization method. One of 'massdispersal', 'localmoments'.
+      :type discr_method: ``str``
+      :param discr_step: severity discretization step.
+      :type discr_step: ``float``
+      :param n_discr_nodes: number of nodes of the discretized severity.
+      :type n_discr_nodes: ``int``
+      :return: discrete severity, nodes sequence and discrete probabilities.
+      :rtype: ``dict``
+
+
+
+.. py:class:: LossModel(severity, frequency, policystructure=PolicyStructure(), aggr_loss_dist_method=None, n_sim=10000, tilt=False, tilt_value=0, random_state=None, n_aggr_dist_nodes=20000, sev_discr_method='localmoments', n_sev_discr_nodes=None, sev_discr_step=None)
+
+   Loss model for (re)insurance costing and risk modeling using a collective risk model framework.
+
+   :param aggr_loss_dist_method: computational method to approximate the aggregate loss distribution.
+                                 One of Fast Fourier Transform ('fft'),
+                                 Panjer recursion ('recursion') and Monte Carlo simulation ('mc').
+   :type aggr_loss_dist_method: ``str``
+   :param n_sim: number of simulations of Monte Carlo (mc) method for the aggregate loss distribution approximation.
+   :type n_sim: ``int``
+   :param tilt: whether tilting of fft is present or not (default is 0).
+   :type tilt: ``bool``
+   :param tilt_value: tilting parameter value of fft method for the aggregate loss distribution approximation.
+   :type tilt_value: ``float``
+   :param random_state: random state for the random number generator in mc.
+   :type random_state: ``int``, optional
+   :param n_aggr_dist_nodes: number of nodes in the approximated aggregate loss distribution.
+   :type n_aggr_dist_nodes: ``int``
+   :param sev_discr_method: severity discretization method. One of 'massdispersal', 'localmoments'.
+   :type sev_discr_method: ``str``
+   :param sev_discr_step: severity discretization step.
+   :type sev_discr_step: ``float``
+   :param n_sev_discr_nodes: number of nodes of the discretized severity.
+   :type n_sev_discr_nodes: ``int``
+
+   .. py:property:: severity
+
+
+   .. py:property:: frequency
+
+
+   .. py:property:: policystructure
+
+
+   .. py:property:: aggr_loss_dist_method
+
+
+   .. py:property:: n_sim
+
+
+   .. py:property:: random_state
+
+
+   .. py:property:: n_aggr_dist_nodes
+
+
+   .. py:property:: tilt
+
+
+   .. py:property:: tilt_value
+
+
+   .. py:property:: sev_discr_method
+
+
+   .. py:property:: n_sev_discr_nodes
+
+
+   .. py:property:: sev_discr_step
+
+
+   .. py:property:: dist
+
+
+   .. py:property:: pure_premium
+
+
+   .. py:method:: dist_calculate(aggr_loss_dist_method=None, n_aggr_dist_nodes=None, n_sim=None, random_state=None, sev_discr_method=None, sev_discr_step=None, n_sev_discr_nodes=None, tilt=None, tilt_value=None)
+
+      Approximate the aggregate loss distributions of each policystructure layer.
+      Distributions can be accessed via the ``dist`` property,
+      which is a list of ``distributions.PWC`` objects, each one representing a aggregate loss distribution.
+
+      :param aggr_loss_dist_method: computational method to approximate the aggregate loss distribution.
+                                    One of Fast Fourier Transform ('fft'), Panjer recursion ('recursion')
+                                    and Monte Carlo simulation ('mc'), optional (default 'mc').
+      :type aggr_loss_dist_method: ``str``
+      :param n_aggr_dist_nodes: number of nodes in the approximated aggregate loss distribution.
+                                Remark: before application of eventual aggregate conditions.
+      :type n_aggr_dist_nodes: ``int``
+      :param n_sim: number of simulations of Monte Carlo (mc) method
+                    for the aggregate loss distribution approximation, optional (default is 10000).
+      :type n_sim: ``int``
+      :param random_state: random state for the random number generator in MC, optional.
+      :type random_state: ``int``
+      :param sev_discr_method: severity discretization method, optional (default is 'localmoments').
+      :type sev_discr_method: ``str``
+      :param sev_discr_step: severity discretization step.
+      :type sev_discr_step: ``float``
+      :param n_sev_discr_nodes: number of nodes of the discretized severity.
+      :type n_sev_discr_nodes: ``int``
+      :param tilt: whether tilting of fft is present or not, optional (default is 0).
+      :type tilt: ``bool``
+      :param tilt_value: tilting parameter value of fft method for the aggregate loss distribution approximation,
+                         optional.
+      :type tilt_value: ``float``
+      :return: void
+      :rtype: ``None``
+
+
+   .. py:method:: _apply_aggr_conditions(dist, cover, deductible)
+
+      Apply aggregate conditions, i.e. aggregate deductble and aggregate cover, to a aggregate loss distribution.
+
+      :param dist: aggregate loss distribution (before aggregate conditions).
+      :type dist: ``dict``
+      :param cover: (aggregate) cover.
+      :type cover: ``int`` or ``float``
+      :param deductible: (aggregate) deductible.
+      :type deductible: ``int`` or ``float``
+      :return: aggregate loss distribution after aggregate conditions.
+      :rtype: ``dict``
+
+
+   .. py:method:: moment(central=False, n=1, idx=0)
+
+      Aggregate loss distribution moment of order n.
+
+      :param central: ``True`` if the moment is central, ``False`` if the moment is raw.
+      :type central: ``bool``
+      :param n: order of the moment, optional (default is 1).
+      :type n: ``int``
+      :param idx: list index corresponding to the layer loss distribution of interest (default is 0).
+                  See 'index_to_layer_name' and 'layer_name_to_index' PolicyStructure methods.
+      :type idx: ``int``
+      :return: moment of order n.
+      :rtype: ``numpy.float64``
+
+
+   .. py:method:: ppf(q, idx=0)
+
+      Aggregate loss distribution percent point function, a.k.a. the quantile function,
+      inverse of the cumulative distribution function.
+
+      :param q: probability.
+      :type q: ``float`` or ``numpy.ndarray``
+      :param idx: list index corresponding to the layer loss distribution of interest (default is 0).
+                  See 'index_to_layer_name' and 'layer_name_to_index' PolicyStructure methods.
+      :type idx: ``int``
+      :return: quantile.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: cdf(x, idx=0)
+
+      Aggregate loss distribution cumulative distribution function.
+
+      :param x: quantiles where the cumulative distribution function is evaluated.
+      :type x: ``float`` or ``int`` or ``numpy.ndarray``
+      :param idx: list index corresponding to the layer loss distribution of interest (default is 0).
+                  See 'index_to_layer_name' and 'layer_name_to_index' PolicyStructure methods.
+      :type idx: ``int``
+      :return: cumulative distribution function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: rvs(size=1, random_state=None, idx=0)
+
+      Random variates generator function.
+
+      :param size: random variates sample size, optional (default is 1).
+      :type size: ``int``
+      :param random_state: random state for the random number generator, optional (no default).
+      :type random_state: ``int``
+      :param idx: list index corresponding to the layer loss distribution of interest (default is 0).
+                  See 'index_to_layer_name' and 'layer_name_to_index' PolicyStructure methods.
+      :type idx: ``int``
+      :return: random variates.
+      :rtype: ``numpy.int`` or ``numpy.ndarray``
+
+
+   .. py:method:: mean(idx=0)
+
+      Mean of the aggregate loss.
+
+      :param idx: list index corresponding to the layer loss distribution of interest (default is 0).
+                  See 'index_to_layer_name' and 'layer_name_to_index' PolicyStructure methods.
+      :type idx: ``int``
+      :return: mean of the aggregate loss.
+      :rtype: ``numpy.float64``
+
+
+   .. py:method:: std(idx=0)
+
+      Standard deviation of the aggregate loss.
+
+      :param n: list index corresponding to the layer loss distribution of interest (default is 0).
+                See 'index_to_layer_name' and 'layer_name_to_index' PolicyStructure methods.
+      :type n: ``idx``
+      :return: standard deviation of the aggregate loss.
+      :rtype: ``numpy.float64``
+
+
+   .. py:method:: skewness(idx=0)
+
+      Skewness of the aggregate loss.
+
+      :param idx: list index corresponding to the layer loss distribution of interest (default is 0).
+                  See 'index_to_layer_name' and 'layer_name_to_index' PolicyStructure methods.
+      :type idx: ``int``
+      :return: skewness of the aggregate loss.
+      :rtype: ``numpy.float64``
+
+
+   .. py:method:: _reinstatements_costing_adjuster(dist, aggr_deductible, n_reinst, cover, reinst_loading)
+
+      Reinstatements costing premium adjustment. Multiplicative factor.
+
+      :param dist: aggregate loss distribution (before aggregate conditions).
+      :type dist: ``dict``
+      :param aggr_deductible: aggregate deductible.
+      :type aggr_deductible: ``int`` or ``float``
+      :param n_reinst: Number of reinstatements.
+      :type n_reinst: ``int``
+      :param cover: cover.
+      :type cover: ``int`` or ``float``
+      :param reinst_loading: loadings of reinstatements layers (default value is 0), typically a value in [0, 1].
+      :type reinst_loading: ``int`` or ``float`` or ``np.array``
+      :return: reinstatements costing adjustment.
+      :rtype: ``float`` or ``numpy.ndarray``
+
+
+   .. py:method:: _stop_loss_costing(dist, cover, deductible)
+
+      Stop loss costing via stop loss transformation.
+      Compute the expected value of layer transformed aggregate loss distribution.
+
+      :param dist: aggregate loss distribution (before aggregate conditions).
+      :type dist: ``dict``
+      :param cover: cover.
+      :type cover: ``int`` or ``float`` or ``numpy.ndarray``
+      :param deductible: deductible.
+      :type deductible: ``int`` or ``float`` or ``numpy.ndarray``
+      :return: expected value of layer transformed aggregate loss distribution.
+      :rtype: ``numpy.ndarray``
+
+
+   .. py:method:: costing()
+
+      Actuarial costing (also referred to as risk costing) of (re)insurance covers,
+      such as quota share, excess-of-loss (including reinstatements or aggregate conditions) and stop loss.
+
+      :return: Void
+      :rtype: ``None``
+
+
+   .. py:method:: print_costing_specs(idx=0)
+
+      Print costing information of a given layer (specified via its index).
+
+      :param idx: index corresponding to the policystructure layer of interest (default is 0).
+                  See 'index_to_layer_name' and 'layer_name_to_index' PolicyStructure methods.
+      :type idx: ``int``
+      :return: Void
+      :rtype: ``None``
+
+
+   .. py:method:: print_aggr_loss_method_specs(idx=0)
+
+      Print information of the aggregate loss distribution approximation for a given layer (specified via its index).
+
+      :param idx: index corresponding to the policystructure layer of interest (default is 0).
+                  See 'index_to_layer_name' and 'layer_name_to_index' PolicyStructure methods.
+      :type idx: ``int``
+      :return: Void
+      :rtype: None
+
+
+   .. py:method:: print_policy_layer_specs(idx=0)
+
+      Print policy structure information of a given layer (specified via its index).
+
+      :param idx: index corresponding to the policystructure layer of interest (default is 0).
+                  See 'index_to_layer_name' and 'layer_name_to_index' PolicyStructure methods.
+      :type idx: ``int``
+      :return: Void
+      :rtype: None
+
+
+   .. py:method:: _check_dist(idx=0)
+
+      Check that the aggregate loss distribution is not missing.
+      Helper method called before executing other methods based on ``dist`` property.
+
+      :param idx: index corresponding to the policystructure layer of interest (default is 0).
+                  See 'index_to_layer_name' and 'layer_name_to_index' PolicyStructure methods.
+      :type idx: ``int``
+      :return: Void
+      :rtype: None
+
+
+
+.. py:data:: logger
+   
+
+   
+
+.. py:class:: AggregateData(incremental_payments, cased_payments, incurred_number, cased_number, reported_claims)
+
+   Triangular data sets.
+
+   :param incremental_payments: Incremental payments' triangle.
+   :type incremental_payments: ``numpy.ndarray``
+   :param cased_payments: Cased payments triangle.
+   :type cased_payments: ``numpy.ndarray``
+   :param incurred_number:  Number of incurred claims.
+   :type incurred_number: ``numpy.ndarray``
+   :param cased_number:  Number of cased claims.
+   :type cased_number: ``numpy.ndarray``
+   :param reported_claims:  Number of reported claims by accident period. Data must be provided from old to recent.
+   :type reported_claims: ``numpy.ndarray``
+
+
+
+   .. py:property:: ip_tr
+
+
+   .. py:property:: cp_tr
+
+
+   .. py:property:: in_tr
+
+
+   .. py:property:: cn_tr
+
+
+   .. py:property:: reported_claims
+
+
+   .. py:method:: _ix_setter()
+
+
+   .. py:method:: _j_setter()
+
+
+
+.. py:class:: ReservingModel(tail=False, reserving_method='fisher_lange', claims_inflation=None, mixing_fq_par=None, mixing_sev_par=None, czj=None)
+
+   Reserving model assumptions.
+
+   :param tail: set it to True when the tail estimate is required. Default False.
+   :type tail: ``bool``
+   :param reserving_method: one of the reserving methods supported by the GemAct package.
+   :type reserving_method: ``str``
+   :param claims_inflation: claims inflation. In case no tail is present and the triangular data IxJ matrices,
+                           claims_inflation must be J-1 dimensional. When a tail estimate is required, it must be
+                           J dimensional. In case no tail is present it must be J-1 dimensional.
+   :type claims_inflation: ``numpy.ndarray``
+   :param czj: severity coefficient of variation by development period.
+               It is set to None in case the crm is selected as
+               reserving method. When a tail estimate is required, it must be J dimensional.
+               In case no tail is present it must be J-1 dimensional.
+   :type czj: ``numpy.ndarray``
+
+   :param mixing_fq_par: Mixing frequency parameters.
+   :type mixing_fq_par: ``dict``
+   :param mixing_sev_par: Mixing severity parameters.
+   :type mixing_sev_par: ``dict``
+
+
+   .. py:property:: tail
+
+
+   .. py:property:: reserving_method
+
+
+   .. py:property:: mixing_fq_par
+
+
+   .. py:property:: mixing_sev_par
+
+
+   .. py:method:: _model_class()
+
+
+   .. py:method:: _noise_variable_setup(parameters)
+
+
+
+.. py:class:: LossReserve(data, reservingmodel, custom_alphas=None, custom_ss=None, ntr_sim=1000, random_state=42)
+
+   Claims loss reserving. The available reserving models are the deterministic Fisher-Lange and the collective risk model.
+   Input company data must be ``numpy.ndarray`` data on numbers and payments must be in triangular form:
+   two-dimensional ``numpy.ndarray`` with shape (I, J) where I=J.
+
+   :param ntr_sim: Number of simulated triangles in the c.r.m reserving method.
+   :type ntr_sim: ``int``
+   :param random_state: Simulation seed to make the c.r.m reserving method results reproducible.
+   :type random_state: ``int``
+   :param custom_alphas: optional, custom values for the alpha parameters.
+   :type custom_alphas: ``numpy.ndarray``
+   :param custom_ss: optional, custom values for the settlement speed.
+   :type custom_ss: ``numpy.ndarray``
+
+
+   .. py:property:: czj
+
+
+   .. py:property:: ntr_sim
+
+
+   .. py:property:: random_state
+
+
+   .. py:property:: ap_tr
+
+
+   .. py:property:: alpha_fl
+
+
+   .. py:property:: ss_fl_
+
+
+   .. py:method:: _triangular_czj()
+
+      Triangle of the severity coefficients of variation for the stochastic crm.
+
+      :return: czj in a triangular shape
+      :rtype: ``numpy.ndarray``
+
+
+
+   .. py:method:: _alpha_computer()
+
+      Fisher-Lange alpha. Given a JxJ triangle, this is going to be
+      J-1 dimensional in case no tail is present and J dimensional in case of tail estimates.
+
+      :return: vectors of alpha
+      :rtype: ``numpy.ndarray``
+
+
+   .. py:method:: _ss_computer()
+
+      Fisher-Lange settlement speeds. Given a JxJ triangle, this is going to be
+      J-1 dimensional in case no tail is present and J dimensional in case of tail estimates.
+
+      :return: settlement speed
+      :rtype: ``numpy.ndarray``
+
+
+   .. py:method:: _ss_triangle()
+
+      Fisher-Lange settlement speed array into a triangle. Given a JxJ triangle, this is going to be
+      JxJ-1 dimensional in case no tail is present and JxJ dimensional in case of tail estimates.
+
+      :return: settlement speed triangle
+      :rtype: ``numpy.ndarray``
+
+
+   .. py:method:: _fill_numbers()
+
+      Lower triangle of numbers. Given a JxJ triangle, this is going to be
+      JxJ dimensional in case no tail is present and Jx(J+1) dimensional in case of tail estimates.
+
+      :return: number of payments
+      :rtype: ``numpy.ndarray``
+
+
+   .. py:method:: _fisherlange()
+
+      Loss reserve computed with the fisher-lange reserving model.
+
+      :return: fisher-lange reserve
+      :rtype: ``numpy.float64``
+
+
+   .. py:method:: _stochastic_crm()
+
+      Loss reserve computed with the collective risk model based on the fisher-lange.
+
+      :return: reserve prediction (simulations mean), reserve m_sep prediction, reserve skewness
+      :rtype:``numpy.float64``,``numpy.float64``,``numpy.float64``
+
+
+
+   .. py:method:: _lossreserving()
+
+      Loss reserve computed with the specified reserving method. Mean squared error and skewness will not be computed
+      for deterministic methods.
+
+      :return: reserve, reserve mean squared error of prediction, reserve skewness
+      :rtype:``numpy.float64``,``numpy.float64``,``numpy.float64``
+
+
+
+   .. py:method:: ss_plot(start_=0)
+
+      Plot the settlement speed vector for each accident period.
+
+      :param start_: starting accident period from which to plot.
+      :type start_: ``int``
+
+
+   .. py:method:: alpha_plot()
+
+      Plot the Fisher-Lange alpha.
+
+
+   .. py:method:: _reserve_by_ay_fl()
+
+      The fisher-lange reserve computed for each accident period and
+      the fisher-lange ultimate cost for each accident period.
+
+      :return: reserve for each accident period,ultimate cost for each accident period
+      :rtype: ``numpy.ndarray``, ``numpy.ndarray``
+
+
+   .. py:method:: _build_base_print()
+
+      Basic print for the underlying model.
+
+
+
+
+   .. py:method:: _build_graphic_parameters()
+
+      Return the graphical parameters for printing the reserves.
+
+
+
+   .. py:method:: _build_comparison_print(data, l_, s_)
+
+      In case the reserving method has an underlying model, it creates the data to print the comparison.
+
+
+
+   .. py:method:: _print_total_reserve()
+
+      Print the total reserve amount.
+
+
+
+   .. py:method:: print_loss_reserve()
+
+      Table with claims reserve results.
+      When the stochastic reserve according to the collective risk model is computed the results
+      are compared with the Fisher-Lange.
+
+
+
+   .. py:method:: mean()
+
+      Mean of the loss reserve.
+      Depending on the selected reserving method, it returns either the attribute crm_reserve or fl_reserve.
+
+      :return: mean of the loss reserve.
+      :rtype: ``numpy.float64``
+
+
+   .. py:method:: std()
+
+      Standard deviation of the loss reserve (not available for claims reserving with the fisher lange).
+
+      :return: standard deviation of the loss reserve.
+      :rtype: ``numpy.float64``
+
+
+   .. py:method:: skewness()
+
+      Skewness of the loss reserve (not available for claims reserving with the fisher lange).
+
+      :return: skewness of the loss loss.
+      :rtype: ``numpy.float64``
+
+
+
+.. py:data:: logger
+   
+
+   
+
+.. py:class:: LossAggregation(copula, copula_par, margins, margins_pars, **kwargs)
+
+   Class representing the sum of positive countinuous random variables.
+   Dependence structure is specified by a copula and a set of given marginals.
+
+   :param copula: Name of the copula that describes the dependence structure.
+   :type copula: ``str``
+   :param copula_par: Parameters of the copula.
+   :type copula_par: ``dict``
+   :param margins: List of the marginal distributions.
+   :type margins: ``list``
+   :param margins_pars: List of the marginal distributions parameters. It must be a list of dictionaries.
+   :type margins_pars: ``list``
+
+   :param \**kwargs:
+       See below
+
+   :Keyword Arguments:
+       * *random_state* (``int``) --
+           Random state for the random number generator in MC.
+       * *sample_size* (``int``) --
+           Number of simulations of Monte Carlo (mc) method.
+
+
+   .. py:property:: random_state
+
+
+   .. py:property:: sample_size
+
+
+   .. py:property:: margins_pars
+
+
+   .. py:property:: margins
+
+
+   .. py:property:: copula
+
+
+   .. py:property:: copula_par
+
+
+   .. py:property:: d
+
+
+   .. py:property:: a
+
+
+   .. py:property:: ext
+
+
+   .. py:property:: mat
+
+
+   .. py:property:: n_simpleces
+
+
+   .. py:property:: card
+
+
+   .. py:property:: s
+
+
+   .. py:property:: m
+
+
+   .. py:property:: dist
+
+
+   .. py:method:: _dist_calculate()
+
+      Approximation of the distribution by calculating nodes, pdf, and cdf.
+
+      :return: Void.
+      :rtype: ``None``
+
+
+   .. py:method:: _private_prop_aep_initiate(x)
+
+      AEP algorithm helper function.
+      See Arbenz P., Embrechts P., and Puccetti G.
+      "The AEP algorithm for the fast computation of the distribution of the sum of dependent random variables." Bernoulli (2011): 562-591.
+
+      :param x: initial value for the quantile where the cumulative distribution function is evaluated.
+      :type x: ``float``
+      :return: void
+      :rtype: ``None``
+
+
+   .. py:method:: _private_prop_aep_delete()
+
+      AEP algorithm helper function.
+      See Arbenz P., Embrechts P., and Puccetti G.
+      "The AEP algorithm for the fast computation of the distribution of the sum of dependent random variables." Bernoulli (2011): 562-591.
+
+      :return: void
+      :rtype: ``None``
+
+
+   .. py:method:: _copula_rvs(size, random_state)
+
+      Copula random variates generator function.
+
+      :param size: random variates sample size.
+      :type size: ``int``
+      :param random_state: random state for the random number generator.
+      :type random_state: ``int``
+      :return: random variates.
+      :rtype: ``numpy.int`` or ``numpy.ndarray``
+
+
+   .. py:method:: _copula_cdf(k)
+
+      Copula cumulative distribution function.
+
+      :param x: quantiles where the cumulative distribution function is evaluated.
+      :type x: ``float`` or ``int`` or ``numpy.ndarray``
+      :return: cumulative distribution function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: _margins_ppf(k)
+
+      Margin percent point function, a.k.a. the quantile function,
+      inverse of the cumulative distribution function.
+
+      :param k: probability.
+      :type k: ``float`` or ``numpy.ndarray``
+      :return: quantile.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: _margins_cdf(k)
+
+      Margin cumulative distribution function.
+
+      :param k: quantiles where the cumulative distribution function is evaluated.
+      :type k: ``float`` or ``int`` or ``numpy.ndarray``
+      :return: cumulative distribution function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: _volume_calc()
+
+      AEP algorithm helper function.
+      See Arbenz P., Embrechts P., and Puccetti G.
+      "The AEP algorithm for the fast computation of the distribution of the sum of dependent random variables." Bernoulli (2011): 562-591.
+
+
+   .. py:method:: _sn_update()
+
+      AEP algorithm helper function.
+      See Arbenz P., Embrechts P., and Puccetti G.
+      "The AEP algorithm for the fast computation of the distribution of the sum of dependent random variables." Bernoulli (2011): 562-591.
+
+
+   .. py:method:: _h_update()
+
+      AEP algorithm helper function.
+      See Arbenz P., Embrechts P., and Puccetti G.
+      "The AEP algorithm for the fast computation of the distribution of the sum of dependent random variables." Bernoulli (2011): 562-591.
+
+
+   .. py:method:: _b_update()
+
+      AEP algorithm helper function.
+      See Arbenz P., Embrechts P., and Puccetti G.
+      "The AEP algorithm for the fast computation of the distribution of the sum of dependent random variables." Bernoulli (2011): 562-591.
+
+
+   .. py:method:: _aep_cdf(x, n_iter)
+
+      AEP algorithm to approximate cdf.
+      See Arbenz P., Embrechts P., and Puccetti G.
+      "The AEP algorithm for the fast computation of the distribution of the sum of dependent random variables." Bernoulli (2011): 562-591.
+
+      :param x: quantile where the cumulative distribution function is evaluated.
+      :type x: ``float``
+      :param n_iter: number of algorithm iterations.
+      :type n_iter: ``int``
+
+      :return: cumulative distribution function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: _mc_cdf(x)
+
+      Cumulative distribution function from Monte Carlo simulation.
+
+      :param x: quantile where the cumulative distribution function is evaluated.
+      :type x: ``int`` or ``float``
+
+      :return: cumulative distribution function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: cdf(x, method='mc', **kwargs)
+
+      Cumulative distribution function.
+
+      :param x: quantile where the cumulative distribution function is evaluated.
+      :type x: ``float``
+      :param method: method to approximate the cdf of the aggregate loss random variable
+                      (i.e. the sum of random variables with a dependence structure specified by a copula).
+                      One of AEP ('aep') and Monte Carlo simulation ('mc').
+      :type method: ``string``
+
+      :return: cumulative distribution function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+      :param \**kwargs:
+          See below
+
+      :Keyword Arguments:
+          * *n_iter* (``int``) --
+              Number of iteration of AEP algorithm.
+
+
+   .. py:method:: ppf(q)
+
+      Percent point function, a.k.a. the quantile function,
+      inverse of cumulative distribution function from Monte Carlo simulation.
+
+      :param q: level at which the percent point function is evaluated.
+      :type q: ``float``, ``numpy.ndarray``, ``numpy.floating``
+
+      :return: percent point function.
+      :rtype: ``numpy.float64`` or ``numpy.int`` or ``numpy.ndarray``
+
+
+   .. py:method:: moment(central=False, n=1)
+
+      Non-central moment of order n.
+
+      :param n: moment order.
+      :type n: ``int``
+
+      :return: raw moment of order n.
+      :rtype: ``float``
+
+
+   .. py:method:: rvs(size=1, random_state=None)
+
+      Random variates. Based on Monte Carlo simulation.
+
+      :param size: random variates sample size (default is 1).
+      :type size: ``int``
+      :param random_state: random state for the random number generator.
+      :type random_state: ``int``
+
+      :return: Random variates.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: mean()
+
+      Mean of the aggregated loss.
+
+      :return: mean of the aggregated loss.
+      :rtype: ``numpy.float64``
+
+
+   .. py:method:: skewness()
+
+      Skewness of the aggregated loss.
+
+      :return: skewness of the aggregated loss.
+      :rtype: ``numpy.float64``
+
+
+   .. py:method:: std()
+
+      Standard deviation of the aggregated loss.
+
+      :return: standard deviation of the aggregated loss.
+      :rtype: ``numpy.float64``
+
+
+

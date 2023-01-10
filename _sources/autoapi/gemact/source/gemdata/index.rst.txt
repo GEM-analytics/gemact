@@ -1,0 +1,47 @@
+:py:mod:`gemact.source.gemdata`
+===============================
+
+.. py:module:: gemact.source.gemdata
+
+
+Module Contents
+---------------
+
+.. py:data:: incremental_payments
+   
+
+   Triangle of claim payments numbers
+
+
+.. py:data:: incurred_number
+   
+
+   Triangle of incurred numbers
+
+
+.. py:data:: cased_number
+   
+
+   Triangle of cased amounts
+
+
+.. py:data:: cased_payments
+   
+
+   
+
+.. py:data:: reported_claims
+   
+
+   
+
+.. py:data:: claims_inflation
+   
+
+   
+
+.. py:data:: czj
+   
+
+   
+

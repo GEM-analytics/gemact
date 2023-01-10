@@ -1,0 +1,20 @@
+:py:mod:`gemact.tests`
+======================
+
+.. py:module:: gemact.tests
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   test_copulas/index.rst
+   test_distributions/index.rst
+   test_lossaggregation/index.rst
+   test_lossmodel/index.rst
+   test_lossreserve/index.rst
+   test_paperscripts/index.rst
+
+

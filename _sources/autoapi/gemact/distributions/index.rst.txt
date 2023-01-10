@@ -1,0 +1,3476 @@
+:py:mod:`gemact.distributions`
+==============================
+
+.. py:module:: gemact.distributions
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   gemact.distributions._Distribution
+   gemact.distributions._DiscreteDistribution
+   gemact.distributions._ContinuousDistribution
+   gemact.distributions.Poisson
+   gemact.distributions.Binom
+   gemact.distributions.Geom
+   gemact.distributions.NegBinom
+   gemact.distributions.Logser
+   gemact.distributions.ZTPoisson
+   gemact.distributions.ZMPoisson
+   gemact.distributions.ZTBinom
+   gemact.distributions.ZMBinom
+   gemact.distributions.ZTGeom
+   gemact.distributions.ZMGeom
+   gemact.distributions.ZTNegBinom
+   gemact.distributions.ZMNegBinom
+   gemact.distributions.ZMLogser
+   gemact.distributions.Beta
+   gemact.distributions.Exponential
+   gemact.distributions.Gamma
+   gemact.distributions.InvGamma
+   gemact.distributions.GenPareto
+   gemact.distributions.Pareto2
+   gemact.distributions.Pareto1
+   gemact.distributions.Lognormal
+   gemact.distributions.GenBeta
+   gemact.distributions.Burr12
+   gemact.distributions.Paralogistic
+   gemact.distributions.Dagum
+   gemact.distributions.InvParalogistic
+   gemact.distributions.Weibull
+   gemact.distributions.InvWeibull
+   gemact.distributions.InvGauss
+   gemact.distributions.Fisk
+   gemact.distributions.PWL
+   gemact.distributions.PWC
+
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   gemact.distributions.logger
+
+
+.. py:data:: logger
+   
+
+   
+
+.. py:class:: _Distribution
+
+   Class representing a probability distribution.
+   Python informal private alike class to be inherited.
+
+   .. py:method:: rvs(size=1, random_state=None)
+
+      Random variates generator function.
+
+      :param size: random variates sample size (default is 1).
+      :type size: ``int``, optional
+      :param random_state: random state for the random number generator (default=None).
+      :type random_state: ``int``, optional
+      :return: random variates.
+      :rtype: ``numpy.int`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: cdf(x)
+
+      Cumulative distribution function.
+
+      :param x: quantile where the cumulative distribution function is evaluated.
+      :type x: ``int`` or ``float``
+      :return: cumulative distribution function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: logcdf(x)
+
+      Natural logarithm of the cumulative distribution function.
+
+      :param x: quantile where log of the cumulative distribution function is evaluated.
+      :type x: ``int`` or ``float``
+      :return: natural logarithm of the cumulative distribution function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: sf(x)
+
+      Survival function, 1 - cumulative distribution function.
+
+      :param x: quantile where the survival function is evaluated.
+      :type x: ``int`` or ``float``
+      :return: survival function
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: logsf(x)
+
+      Natural logarithm of the survival function.
+
+      :param x: quantile where the logarithm of the survival function is evaluated.
+      :type x: ``int`` or ``float``
+      :return: natural logarithm of the survival function
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: ppf(q)
+
+      Percent point function, a.k.a. the quantile function, inverse of the cumulative distribution function.
+
+      :param q: level at which the percent point function is evaluated.
+      :type q: ``float``
+      :return: percent point function.
+      :rtype: ``numpy.float64`` or ``numpy.int`` or ``numpy.ndarray``
+
+
+   .. py:method:: isf(q)
+
+      Inverse survival function (inverse of sf).
+
+      :param q: level at which the inverse survival function is evaluated.
+      :type q: ``float``
+      :return: inverse survival function.
+      :rtype: ``numpy.float64`` or ``numpy.int`` or ``numpy.ndarray``
+
+
+   .. py:method:: stats(moments='mv')
+
+      Mean(‘m’), variance(‘v’), skew(‘s’), and/or kurtosis(‘k’) function.
+
+      :param moments: moments to be returned.
+      :type moments: string, optional
+      :return: moments.
+      :rtype: tuple
+
+
+   .. py:method:: entropy()
+
+      (Differential) entropy of the random variable.
+
+      :return: entropy
+      :rtype: ``numpy.ndarray``
+
+
+   .. py:method:: expect(func, lb=None, ub=None, conditional=False)
+
+      Expected value of a function (of one argument) with respect to the distribution.
+
+      :param func: function for which integral is calculated. Takes only one argument.
+                  The default is the identity mapping f(x) = x.
+      :type func: ``callable``, optional
+      :param lb: Lower bound for integration. Default is set to the support of the distribution.
+      :type lb: ``float``, optional
+      :param ub: Upper bound for integration. Default is set to the support of the distribution.
+      :type ub: ``float``, optional
+      :param conditional: If True, the integral is corrected by the conditional probability of the integration
+                      interval.
+                      The return value is the expectation of the function, conditional on being in the given interval.
+                      Default is False.
+      :type conditional: ``bool``, optional
+      :return: the calculated expected value.
+      :rtype: ``float``
+
+
+
+   .. py:method:: median()
+
+      Median of the distribution.
+
+      :return: median.
+      :rtype: ``float``
+
+
+
+   .. py:method:: mean()
+
+      Mean of the distribution.
+
+      :return: mean.
+      :rtype: ``float``
+
+
+   .. py:method:: var()
+
+      Variance of the distribution.
+
+      :return: variance.
+      :rtype: ``float``
+
+
+
+   .. py:method:: std()
+
+      Standard deviation of the distribution.
+
+      :return: standard deviation.
+      :rtype: ``float``
+
+
+
+   .. py:method:: interval(alpha)
+
+      Endpoints of the range that contains fraction alpha [0, 1] of the distribution.
+
+      :param alpha: fraction alpha
+      :type alpha: ``float``
+      :return: Endpoints
+      :rtype: tuple
+
+
+
+   .. py:method:: moment(n)
+
+      Non-central moment of order n.
+
+      :param n: moment order.
+      :type n: ``int``
+      :return: raw moment of order n.
+      :rtype: ``float``
+
+
+
+.. py:class:: _DiscreteDistribution
+
+   Bases: :py:obj:`_Distribution`
+
+   Class representing a discrete probability distribution. To be inherited.
+   Child class of ``_Distribution`` class.
+
+   .. py:method:: category()
+      :staticmethod:
+
+
+   .. py:method:: pmf(x)
+
+      Probability mass function.
+
+      :param x: quantile where probability mass function is evaluated.
+      :type x: ``int``
+
+      :return: probability mass function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: logpmf(x)
+
+      Natural logarithm of the probability mass function.
+
+      :param x: quantile where the (natural) probability mass function logarithm is evaluated.
+      :type x: ``int``
+      :return: natural logarithm of the probability mass function
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+
+
+.. py:class:: _ContinuousDistribution
+
+   Bases: :py:obj:`_Distribution`
+
+   Class representing a continuous probability distribution. To be inherited.
+   Child class of ``_Distribution`` class.
+
+   .. py:method:: category()
+      :staticmethod:
+
+
+   .. py:method:: pdf(x)
+
+      Probability density function.
+
+      :param x: quantile where probability denisty function is evaluated.
+      :type x: ``numpy.ndarray``, ``list``, ``float``, ``int``
+
+      :return: probability density function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: logpdf(x)
+
+      Natural logarithm of the probability denisty function.
+
+      :param x: quantile where the (natural) probability mass function logarithm is evaluated.
+      :type x: ``float``
+      :return: natural logarithm of the probability mass function
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: fit(data)
+
+      Return estimates of shape (if applicable), location, and scale parameters from data.
+      The default estimation method is Maximum Likelihood Estimation (MLE),
+      but Method of Moments (MM) is also available.
+      Refer to ``scipy.stats.rv_continuous.fit``
+
+      :param data: data to use in estimating the distribution parameters.
+      :type data: array_like
+      :return: parameter_tuple. Estimates for any shape parameters (if applicable),
+              followed by those for location and scale.
+      :rtype: tuple of floats
+
+
+
+
+.. py:class:: Poisson(loc=0, **kwargs)
+
+   Bases: :py:obj:`_DiscreteDistribution`
+
+   Poisson distribution.
+   Wrapper to scipy poisson distribution (``scipy.stats._discrete_distns.poisson_gen``)
+   Refer to :py:class:'~_DiscreteDistribution' for additional details.
+
+   :param loc: location parameter (default=0), to shift the support of the distribution.
+   :type loc: ``int``, optional
+   :param \**kwargs:
+       See below
+
+   :Keyword Arguments:
+       * *mu* (``numpy.float64``) --
+         Poisson distribution parameter mu (rate).
+
+
+   .. py:property:: mu
+
+
+   .. py:property:: loc
+
+
+   .. py:property:: _dist
+
+
+   .. py:property:: a
+
+
+   .. py:property:: b
+
+
+   .. py:property:: p0
+
+
+   .. py:method:: name()
+      :staticmethod:
+
+
+   .. py:method:: pgf(f)
+
+      Probability generating function. It computes the probability generating function
+      of the random variable given the (a, b, k) parametrization.
+
+      :param f: point where the function is evaluated.
+      :type f: ``numpy array``
+      :return: probability generated in f.
+      :rtype: ``numpy.ndarray``
+
+
+   .. py:method:: par_deductible_adjuster(nu)
+
+      Parameter correction in case of deductible.
+
+      :param nu: severity model survival function at the deductible.
+      :type nu: ``float``
+      :return: Void
+      :rtype: None
+
+
+   .. py:method:: par_deductible_reverter(nu)
+
+      Undo parameter correction in case of deductible.
+
+      :param nu: severity model survival function at the deductible.
+      :type nu: ``float``
+      :return: Void
+      :rtype: None
+
+
+   .. py:method:: abk()
+
+      Function returning (a, b, k) parametrization.
+
+      :return: a, b, probability in zero
+      :rtype: ``numpy.array``
+
+
+
+.. py:class:: Binom(loc=0, **kwargs)
+
+   Bases: :py:obj:`_DiscreteDistribution`
+
+   Binomial distribution.
+   Wrapper to scipy binomial distribution (``scipy.stats._discrete_distns.binom_gen``).
+   Refer to :py:class:'~_DiscreteDistribution' for additional details.
+
+   :param loc: location parameter (default=0), to shift the support of the distribution.
+   :type loc: ``int``, optional
+   :param \**kwargs:
+       See below
+
+   :Keyword Arguments:
+       * *n* (``int``) --
+         Number of trials.
+       * *p* (``float``) --
+         Probability of a success, parameter of the binomial distribution.
+
+
+   .. py:property:: n
+
+
+   .. py:property:: p
+
+
+   .. py:property:: loc
+
+
+   .. py:property:: _dist
+
+
+   .. py:property:: a
+
+
+   .. py:property:: b
+
+
+   .. py:property:: p0
+
+
+   .. py:method:: name()
+      :staticmethod:
+
+
+   .. py:method:: pgf(f)
+
+      Probability generating function. It computes the probability generating function
+      of the random variable given the (a, b, k) parametrization.
+
+      :param f: point where the function is evaluated
+      :type f: ``numpy array``
+      :return: probability generated in f.
+      :rtype: ``numpy.ndarray``
+
+
+   .. py:method:: par_deductible_adjuster(nu)
+
+      Parameter correction in case of deductible.
+
+      :param nu: severity model survival function at the deductible.
+      :type nu: ``float``
+      :return: Void
+      :rtype: None
+
+
+   .. py:method:: par_deductible_reverter(nu)
+
+      Undo parameter correction in case of deductible.
+
+      :param nu: severity model survival function at the deductible.
+      :type nu: ``float``
+      :return: Void
+      :rtype: None
+
+
+   .. py:method:: abk()
+
+      Function returning (a, b, k) parametrization.
+
+      :return: a, b, probability in zero
+      :rtype: ``numpy.array``
+
+
+
+.. py:class:: Geom(loc=0, **kwargs)
+
+   Bases: :py:obj:`_DiscreteDistribution`
+
+   Geometric distribution.
+   Wrapper to scipy geometric distribution (``scipy.stats._discrete_distns.geom_gen``).
+   Refer to :py:class:'~_DiscreteDistribution' for additional details.
+
+   :param loc: location parameter (default=0), to shift the support of the distribution.
+   :type loc: ``int``, optional
+   :param \**kwargs:
+       See below
+
+   :Keyword Arguments:
+       * *p* (``float``) --
+         Probability parameter of the geometric distribution.
+
+
+   .. py:property:: p
+
+
+   .. py:property:: loc
+
+
+   .. py:property:: _dist
+
+
+   .. py:property:: a
+
+
+   .. py:property:: b
+
+
+   .. py:property:: p0
+
+
+   .. py:method:: name()
+      :staticmethod:
+
+
+   .. py:method:: pgf(f)
+
+      Probability generating function. It computes the probability generating function
+      of the random variable given the (a, b, k) parametrization.
+
+      :param f: point where the function is evaluated
+      :type f: ``numpy array``
+      :return: probability generated in f.
+      :rtype: ``numpy.ndarray``
+
+
+   .. py:method:: par_deductible_adjuster(nu)
+
+      Parameter correction in case of deductible.
+
+      :param nu: severity model survival function at the deductible.
+      :type nu: ``float``
+      :return: Void
+      :rtype: None
+
+
+   .. py:method:: par_deductible_reverter(nu)
+
+      Undo parameter correction in case of deductible.
+
+      :param nu: severity model survival function at the deductible.
+      :type nu: ``float``
+      :return: Void
+      :rtype: None
+
+
+   .. py:method:: abk()
+
+      Function returning (a, b, k) parametrization.
+
+      :return: a, b, probability in zero
+      :rtype: ``numpy.array``
+
+
+
+.. py:class:: NegBinom(loc=0, **kwargs)
+
+   Bases: :py:obj:`_DiscreteDistribution`
+
+   Negative Binomial distribution.
+   Wrapper to scipy negative binomial distribution (``scipy.stats._discrete_distns.nbinom_gen``).
+   Refer to :py:class:'~_DiscreteDistribution' for additional details.
+
+   :param loc: location parameter (default=0), to shift the support of the distribution.
+   :type loc: ``int``, optional
+   :param \**kwargs:
+       See below
+
+   :Keyword Arguments:
+       * *n* (``int``) --
+         Size parameter of the negative binomial distribution.
+       * *p* (``float``) --
+         Probability parameter of the negative binomial distribution.
+
+
+   .. py:property:: n
+
+
+   .. py:property:: p
+
+
+   .. py:property:: loc
+
+
+   .. py:property:: _dist
+
+
+   .. py:property:: a
+
+
+   .. py:property:: b
+
+
+   .. py:property:: p0
+
+
+   .. py:method:: name()
+      :staticmethod:
+
+
+   .. py:method:: pgf(f)
+
+      Probability generating function. It computes the probability generating function
+      of the random variable given the (a, b, k) parametrization.
+
+      :param f: point where the function is evaluated.
+      :type f: ``numpy array``
+      :return: probability generated in f.
+      :rtype: ``numpy.ndarray``
+
+
+   .. py:method:: par_deductible_adjuster(nu)
+
+      Parameter correction in case of deductible.
+
+      :param nu: severity model survival function at the deductible.
+      :type nu: ``float``
+      :return: Void
+      :rtype: None
+
+
+   .. py:method:: par_deductible_reverter(nu)
+
+      Undo parameter correction in case of deductible.
+
+      :param nu: severity model survival function at the deductible.
+      :type nu: ``float``
+      :return: Void
+      :rtype: None
+
+
+   .. py:method:: abk()
+
+      Function returning (a, b, k) parametrization.
+
+      :return: a, b, probability in zero
+      :rtype: ``numpy.array``
+
+
+
+.. py:class:: Logser(loc=0, **kwargs)
+
+   Bases: :py:obj:`_DiscreteDistribution`
+
+   Logarithmic (Log-Series, Series) discrete distribution.
+   Wrapper to scipy logser distribution (``scipy.stats._discrete_distns.logser_gen``)
+   Refer to :py:class:'~_DiscreteDistribution' for additional details.
+
+   :param loc: location parameter (default=0), to shift the support of the distribution.
+   :type loc: ``int``, optional
+   :param \**kwargs:
+       See below
+
+   :Keyword Arguments:
+       * *p* (``float``) --
+         Probability parameter of the logser distribution.
+
+
+   .. py:property:: p
+
+
+   .. py:property:: loc
+
+
+   .. py:property:: a
+
+
+   .. py:property:: b
+
+
+   .. py:property:: p0
+
+
+   .. py:property:: _dist
+
+
+   .. py:method:: category()
+      :staticmethod:
+
+
+   .. py:method:: name()
+      :staticmethod:
+
+
+   .. py:method:: pgf(f)
+
+      Probability generating function. It computes the probability generating function
+      of the random variable given the (a, b, k) parametrization.
+
+      :param f: point where the function is evaluated.
+      :type f: ``numpy array``
+      :return: probability generated in f.
+      :rtype: ``numpy.ndarray``
+
+
+   .. py:method:: abk()
+
+      Function returning (a, b, k) parametrization.
+
+      :return: a, b, probability in zero
+      :rtype: ``numpy.array``
+
+
+
+.. py:class:: ZTPoisson(loc=0, **kwargs)
+
+   Zero-truncated Poisson distribution.
+   Poisson distribution with no mass (truncated) in 0.
+   scipy reference non-zero-truncated distribution: ``scipy.stats._discrete_distns.poisson_gen``
+
+   :param loc: location parameter (default=0), to shift the support of the distribution.
+   :type loc: ``int``, optional
+   :param \**kwargs:
+       See below
+
+   :Keyword Arguments:
+       * *mu* (``numpy.float64``) --
+         Zero-truncated Poisson distribution parameter mu (rate).
+
+
+   .. py:property:: mu
+
+
+   .. py:property:: loc
+
+
+   .. py:property:: _dist
+
+
+   .. py:property:: a
+
+
+   .. py:property:: b
+
+
+   .. py:property:: p0
+
+
+   .. py:method:: category()
+      :staticmethod:
+
+
+   .. py:method:: name()
+      :staticmethod:
+
+
+   .. py:method:: pmf(x)
+
+      Probability mass function.
+
+      :param x: quantile where probability mass function is evaluated.
+      :type x: ``int``
+
+      :return: probability mass function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: logpmf(x)
+
+      Natural logarithm of the probability mass function.
+
+      :param x: quantile where the (natural) probability mass function logarithm is evaluated.
+      :type x: ``int``
+
+      :return: natural logarithm of the probability mass function
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: cdf(x)
+
+      Cumulative distribution function.
+
+      :param x: quantile where the cumulative distribution function is evaluated.
+      :type x: ``float``
+      :return: cumulative distribution function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: logcdf(x)
+
+      Natural logarithm of the cumulative distribution function.
+
+      :param x: quantile where log of the cumulative distribution function is evaluated.
+      :type x: ``int``
+      :return: natural logarithm of the cumulative distribution function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: rvs(size=1, random_state=None)
+
+      Random variates generator function.
+
+      :param size: random variates sample size (default is 1).
+      :type size: ``int``, optional
+      :param random_state: random state for the random number generator.
+      :type random_state: ``int``, optional
+      :return: random variates.
+      :rtype: ``numpy.int`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: ppf(q)
+
+      Percent point function, a.k.a. the quantile function, inverse of cumulative distribution function.
+
+      :param q: level at which the percent point function is evaluated.
+      :type q: ``float``
+      :return: percent point function.
+      :rtype: ``numpy.int`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: pgf(f)
+
+      Probability generating function. It computes the probability generating function
+      of the random variable given the (a, b, k) parametrization.
+
+      :param f: point where the function is evaluated
+      :type f: ``numpy array``
+      :return: probability generated in f.
+      :rtype: ``numpy.ndarray``
+
+
+   .. py:method:: abk()
+
+      Function returning (a, b, k) parametrization.
+
+      :return: a, b, probability in zero
+      :rtype: ``numpy.array``
+
+
+   .. py:method:: par_deductible_adjuster(nu)
+
+      Parameter correction in case of deductible.
+
+      :param nu: severity model survival function at the deductible.
+      :type nu: ``float``
+      :return: Void
+      :rtype: None
+
+
+   .. py:method:: par_deductible_reverter(nu)
+
+      Undo parameter correction in case of deductible.
+
+      :param nu: severity model survival function at the deductible.
+      :type nu: ``float``
+      :return: Void
+      :rtype: None
+
+
+
+.. py:class:: ZMPoisson(loc=0, maxdiff=0.95, **kwargs)
+
+   Zero-modified Poisson distribution. Discrete mixture between a degenerate distribution
+   at zero and a non-modified Poisson distribution.
+   scipy reference non-zero-modified distribution: ``scipy.stats._discrete_distns.poisson_gen``
+
+   :param loc: location parameter (default=0).
+   :type loc: ``int``, optional
+   :param maxdiff: threshold to determine which method to generate random variates (default=0.95).
+   :type maxdiff: ``float``, optional
+   :param \**kwargs:
+       See below
+
+   :Keyword Arguments:
+       * *mu* (``numpy.float64``) --
+         Zero-modified Poisson distribution rate parameter.
+       * *p0m* (``numpy.float64``) --
+         Zero-modified Poisson mixing parameter. Resulting probability mass in zero.
+
+
+   .. py:property:: loc
+
+
+   .. py:property:: mu
+
+
+   .. py:property:: p0m
+
+
+   .. py:property:: maxdiff
+
+
+   .. py:property:: _dist
+
+
+   .. py:property:: a
+
+
+   .. py:property:: b
+
+
+   .. py:property:: p0
+
+
+   .. py:method:: category()
+      :staticmethod:
+
+
+   .. py:method:: name()
+      :staticmethod:
+
+
+   .. py:method:: pmf(x)
+
+      Probability mass function.
+
+      :param x: quantile where probability mass function is evaluated.
+      :type x: ``int``
+
+      :return: probability mass function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: logpmf(x)
+
+      Natural logarithm of the probability mass function.
+
+      :param x: quantile where the (natural) probability mass function logarithm is evaluated.
+      :type x: ``int``
+
+      :return: natural logarithm of the probability mass function
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: cdf(x)
+
+      Cumulative distribution function.
+
+      :param x: quantile where the cumulative distribution function is evaluated.
+      :type x: ``int``
+      :return: cumulative distribution function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: logcdf(x)
+
+      Natural logarithm of the cumulative distribution function.
+
+      :param x: quantile where log of the cumulative distribution function is evaluated.
+      :type x: ``int``
+      :return: natural logarithm of the cumulative distribution function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: rvs(size=1, random_state=None)
+
+      Random variates generator function.
+
+      :param size: random variates sample size (default is 1).
+      :type size: ``int``, optional
+      :param random_state: random state for the random number generator.
+      :type random_state: ``int``, optional
+      :return: random variates.
+      :rtype: ``numpy.int`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: ppf(q)
+
+      Percent point function, a.k.a. the quantile function, inverse of cumultaive distribution function.
+
+      :param q: level at which the percent point function is evaluated.
+      :type q: ``float``
+      :return: percent point function.
+      :rtype: ``numpy.int`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: pgf(f)
+
+      Probability generating function. It computes the probability generating function
+      of the random variable given the (a, b, k) parametrization.
+
+      :param f: point where the function is evaluated
+      :type f: ``numpy array``
+      :return: probability generated in f.
+      :rtype: ``numpy.ndarray``
+
+
+   .. py:method:: abk()
+
+      Function returning (a, b, k) parametrization.
+
+      :return: a, b, probability in zero
+      :rtype: ``numpy.array``
+
+
+   .. py:method:: par_deductible_adjuster(nu)
+
+      Parameter correction in case of deductible.
+
+      :param nu: severity model survival function at the deductible.
+      :type nu: ``float``
+      :return: Void
+      :rtype: None
+
+
+   .. py:method:: par_deductible_reverter(nu)
+
+      Undo parameter correction in case of deductible.
+
+      :param nu: severity model survival function at the deductible.
+      :type nu: ``float``
+      :return: Void
+      :rtype: None
+
+
+
+.. py:class:: ZTBinom(**kwargs)
+
+   Zero-truncated binomial distribution. Binomial distribution with no mass (truncated) in 0.
+   scipy reference non-zero-truncated distribution: ``scipy.stats._discrete_distns.binom_gen`` .
+
+   :param \**kwargs:
+       See below
+
+   :Keyword Arguments:
+       * *n* (``int``) --
+         Zero-truncated binomial distribution size parameter n.
+       * *p* (``float``) --
+         Zero-truncated binomial distribution probability parameter p.
+
+   .. py:property:: n
+
+
+   .. py:property:: p
+
+
+   .. py:property:: _dist
+
+
+   .. py:property:: a
+
+
+   .. py:property:: b
+
+
+   .. py:property:: p0
+
+
+   .. py:method:: category()
+      :staticmethod:
+
+
+   .. py:method:: name()
+      :staticmethod:
+
+
+   .. py:method:: pmf(x)
+
+      Probability mass function.
+
+      :param x: quantile where probability mass function is evaluated.
+      :type x: ``int``
+
+      :return: probability mass function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: logpmf(x)
+
+      Natural logarithm of the probability mass function.
+
+      :param x: quantile where the (natural) probability mass function logarithm is evaluated.
+      :type x: ``int``
+
+      :return: natural logarithm of the probability mass function
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: cdf(x)
+
+      Cumulative distribution function.
+
+      :param x: quantile where the cumulative distribution function is evaluated.
+      :type x: ``int``
+      :return: cumulative distribution function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: logcdf(x)
+
+      Natural logarithm of the cumulative distribution function.
+
+      :param x: quantile where log of the cumulative distribution function is evaluated.
+      :type x: ``int``
+      :return: natural logarithm of the cumulative distribution function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: rvs(size=1, random_state=None)
+
+      Random variates generator function.
+
+      :param size: random variates sample size (default is 1).
+      :type size: ``int``, optional
+      :param random_state: random state for the random number generator.
+      :type random_state: ``int``, optional
+      :return: random variates.
+      :rtype: ``numpy.int`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: ppf(q)
+
+      Percent point function, a.k.a. the quantile function, inverse of cumulative distribution function.
+
+      :param q: level at which the percent point function is evaluated.
+      :type q: ``float``
+      :return: percent point function.
+      :rtype: ``numpy.int`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: pgf(f)
+
+      Probability generating function. It computes the probability generating function
+      of the random variable given the (a, b, k) parametrization.
+
+      :param f: point where the function is evaluated
+      :type f: ``numpy array``
+      :return: probability generated in f.
+      :rtype: ``numpy.ndarray``
+
+
+   .. py:method:: abk()
+
+      Function returning (a, b, k) parametrization.
+
+      :return: a, b, probability in zero
+      :rtype: ``numpy.array``
+
+
+   .. py:method:: par_deductible_adjuster(nu)
+
+      Parameter correction in case of deductible.
+
+      :param nu: severity model survival function at the deductible.
+      :type nu: ``float``
+      :return: Void
+      :rtype: None
+
+
+   .. py:method:: par_deductible_reverter(nu)
+
+      Undo parameter correction in case of deductible.
+
+      :param nu: severity model survival function at the deductible.
+      :type nu: ``float``
+      :return: Void
+      :rtype: None
+
+
+
+.. py:class:: ZMBinom(**kwargs)
+
+   Zero-modified binomial distribution. Discrete mixture between a degenerate distribution
+   at zero and a non-modified binomial distribution.
+   scipy reference non-zero-modified distribution: ``scipy.stats._discrete_distns.binom_gen``.
+
+   :param \**kwargs:
+       See below
+
+   :Keyword Arguments:
+       * *n* (``numpy.float64``) --
+         Zero-modified binomial distribution size parameter n.
+       * *p* (``numpy.float64``) --
+         Zero-modified binomial distribution probability parameter p.
+       * *p0m* (``numpy.float64``) --
+         Zero-modified binomial mixing parameter.
+
+
+   .. py:property:: n
+
+
+   .. py:property:: p
+
+
+   .. py:property:: p0m
+
+
+   .. py:property:: _dist
+
+
+   .. py:property:: _distzt
+
+
+   .. py:property:: a
+
+
+   .. py:property:: b
+
+
+   .. py:property:: p0
+
+
+   .. py:method:: category()
+      :staticmethod:
+
+
+   .. py:method:: name()
+      :staticmethod:
+
+
+   .. py:method:: pmf(x)
+
+      Probability mass function.
+
+      :param x: quantile where probability mass function is evaluated.
+      :type x: ``int``
+
+      :return: probability mass function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: logpmf(x)
+
+      Natural logarithm of the probability mass function.
+
+      :param x: quantile where the (natural) probability mass function logarithm is evaluated.
+      :type x: ``int``
+
+      :return: natural logarithm of the probability mass function
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: cdf(x)
+
+      Cumulative distribution function.
+
+      :param x: quantile where the cumulative distribution function is evaluated.
+      :type x: ``int``
+      :return: cumulative distribution function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: logcdf(x)
+
+      Natural lograithm of the cumulative distribution function.
+
+      :param x: quantile where log of the cumulative distribution function is evaluated.
+      :type x: ``int``
+      :return: natural logarithm of the cumulative distribution function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: rvs(size=1, random_state=None)
+
+      Random variates generator function.
+
+      :param size: random variates sample size (default is 1).
+      :type size: ``int``, optional
+      :param random_state: random state for the random number generator.
+      :type random_state: ``int``, optional
+      :return: random variates.
+      :rtype: ``numpy.int`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: ppf(q)
+
+      Percent point function, a.k.a. the quantile function, inverse of cumulative distribution function.
+
+      :param q: level at which the percent point function is evaluated.
+      :type q: ``float``
+      :return: percent point function.
+      :rtype: ``numpy.int`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: pgf(f)
+
+      Probability generating function. It computes the probability generating function
+      of the random variable given the (a, b, k) parametrization.
+
+      :param f: point where the function is evaluated
+      :type f: ``numpy array``
+      :return: probability generated in f.
+      :rtype: ``numpy.ndarray``
+
+
+   .. py:method:: abk()
+
+      Function returning (a, b, k) parametrization.
+
+      :return: a, b, probability in zero
+      :rtype: ``numpy.array``
+
+
+   .. py:method:: par_deductible_adjuster(nu)
+
+      Parameter correction in case of deductible.
+
+      :param nu: severity model survival function at the deductible.
+      :type nu: ``float``
+      :return: Void
+      :rtype: None
+
+
+   .. py:method:: par_deductible_reverter(nu)
+
+      Undo parameter correction in case of deductible.
+
+      :param nu: severity model survival function at the deductible.
+      :type nu: ``float``
+      :return: Void
+      :rtype: None
+
+
+
+.. py:class:: ZTGeom(**kwargs)
+
+   Zero-truncated geometric distribution. Geometric distribution with no mass (truncated) in 0.
+   scipy reference non-zero-truncated distribution: ``scipy.stats._discrete_distns.geom_gen``
+
+   :param \**kwargs:
+       See below
+
+   :Keyword Arguments:
+       * *p* (``numpy.float64``) --
+         Zero-truncated geometric distribution probability parameter p.
+
+
+   .. py:property:: p
+
+
+   .. py:property:: _dist
+
+
+   .. py:property:: a
+
+
+   .. py:property:: b
+
+
+   .. py:property:: p0
+
+
+   .. py:method:: category()
+      :staticmethod:
+
+
+   .. py:method:: name()
+      :staticmethod:
+
+
+   .. py:method:: pmf(x)
+
+      Probability mass function.
+
+      :param x: quantile where probability mass function is evaluated.
+      :type x: ``int``
+
+      :return: probability mass function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: logpmf(x)
+
+      Natural logarithm of the probability mass function.
+
+      :param x: quantile where the (natural) probability mass function logarithm is evaluated.
+      :type x: ``int``
+
+      :return: natural logarithm of the probability mass function
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: cdf(x)
+
+      Cumulative distribution function.
+
+      :param x: quantile where the cumulative distribution function is evaluated.
+      :type x: ``int``
+      :return: cumulative distribution function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: logcdf(x)
+
+      Natural logarithm of the cumulative distribution function.
+
+      :param x: quantile where log of the cumulative distribution function is evaluated.
+      :type x: ``int``
+      :return: natural logarithm of the cumulative distribution function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: rvs(size=1, random_state=None)
+
+      Random variates generator function.
+
+      :param size: random variates sample size (default is 1).
+      :type size: ``int``, optional
+      :param random_state: random state for the random number generator.
+      :type random_state: ``int``, optional
+      :return: random variates.
+      :rtype: ``numpy.int`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: ppf(q)
+
+      Percent point function, a.k.a. the quantile function, inverse of cumulative distribution function.
+
+      :param q: level at which the percent point function is evaluated.
+      :type q: ``float``
+      :return: percent point function.
+      :rtype: ``numpy.int`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: pgf(f)
+
+      Probability generating function. It computes the probability generating function
+      of the random variable given the (a, b, k) parametrization.
+
+      :param f: point where the function is evaluated
+      :type f: ``numpy array``
+      :return: probability generated in f.
+      :rtype: ``numpy.ndarray``
+
+
+   .. py:method:: abk()
+
+      Function returning (a, b, k) parametrization.
+
+      :return: a, b, probability in zero
+      :rtype: ``numpy.array``
+
+
+   .. py:method:: par_deductible_adjuster(nu)
+
+      Parameter correction in case of deductible.
+
+      :param nu: severity model survival function at the deductible.
+      :type nu: ``float``
+      :return: Void
+      :rtype: None
+
+
+   .. py:method:: par_deductible_reverter(nu)
+
+      Undo parameter correction in case of deductible.
+
+      :param nu: severity model survival function at the deductible.
+      :type nu: ``float``
+      :return: Void
+      :rtype: None
+
+
+
+.. py:class:: ZMGeom(**kwargs)
+
+   Zero-modified geometric distribution. Discrete mixture between a degenerate distribution
+   at zero and a non-modified geometric distribution.
+   scipy reference non-zero-modified distribution: `scipy.stats._discrete_distns.geom_gen``
+
+   :param \**kwargs:
+       See below
+
+   :Keyword Arguments:
+       * *p* (``numpy.float64``) --
+         Zero-modified geometric distribution probability parameter p.
+       * *p0m* (``numpy.float64``) --
+         Zero-modified geometric mixing parameter.
+
+   .. py:property:: p
+
+
+   .. py:property:: p0m
+
+
+   .. py:property:: a
+
+
+   .. py:property:: b
+
+
+   .. py:property:: p0
+
+
+   .. py:property:: _dist
+
+
+   .. py:property:: _distzt
+
+
+   .. py:method:: category()
+      :staticmethod:
+
+
+   .. py:method:: name()
+      :staticmethod:
+
+
+   .. py:method:: pmf(x)
+
+      Probability mass function.
+
+      :param x: quantile where probability mass function is evaluated.
+      :type x: ``int``
+
+      :return: probability mass function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: logpmf(x)
+
+      Natural logarithm of the probability mass function.
+
+      :param x: quantile where the (natural) probability mass function logarithm is evaluated.
+      :type x: ``int``
+
+      :return: natural logarithm of the probability mass function
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: cdf(x)
+
+      Cumulative distribution function.
+
+      :param x: quantile where the cumulative distribution function is evaluated.
+      :type x: ``int``
+      :return: cumulative distribution function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: logcdf(x)
+
+      Natural logarithm of the cumulative distribution function.
+
+      :param x: quantile where log of the cumulative distribution function is evaluated.
+      :type x: ``int``
+      :return: natural logarithm of the cumulative distribution function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: rvs(size=1, random_state=None)
+
+      Random variates generator function.
+
+      :param size: random variates sample size (default is 1).
+      :type size: ``int``, optional
+      :param random_state: random state for the random number generator.
+      :type random_state: ``int``, optional
+      :return: random variates.
+      :rtype: ``numpy.int`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: ppf(q)
+
+      Percent point function, a.k.a. the quantile function, inverse of cumulative distribution function.
+
+      :param q: level at which the percent point function is evaluated.
+      :type q: ``float``
+      :return: percent point function.
+      :rtype: ``numpy.int`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: pgf(f)
+
+      Probability generating function. It computes the probability generating function
+      of the random variable given the (a, b, k) parametrization.
+
+      :param f: point where the function is evaluated
+      :type f: ``numpy array``
+      :return: probability generated in f.
+      :rtype: ``numpy.ndarray``
+
+
+   .. py:method:: abk()
+
+      Function returning (a, b, k) parametrization.
+
+      :return: a, b, probability in zero
+      :rtype: ``numpy.array``
+
+
+   .. py:method:: par_deductible_adjuster(nu)
+
+      Parameter correction in case of deductible.
+
+      :param nu: severity model survival function at the deductible.
+      :type nu: ``float``
+      :return: Void
+      :rtype: None
+
+
+   .. py:method:: par_deductible_reverter(nu)
+
+      Undo parameter correction in case of deductible.
+
+      :param nu: severity model survival function at the deductible.
+      :type nu: ``float``
+      :return: Void
+      :rtype: None
+
+
+
+.. py:class:: ZTNegBinom(**kwargs)
+
+   Zero-truncated negative binomial distribution. Negative binomial distribution with no mass (truncated) in 0.
+   scipy reference non-zero-truncated distribution: ``scipy.stats._discrete_distns.nbinom_gen``.
+
+   :param \**kwargs:
+       See below
+
+   :Keyword Arguments:
+       * *n* (``int``) --
+         Zero-truncated negative binomial distribution size parameter n.
+       * *p* (``numpy.float64``) --
+         Zero-truncated negative binomial distribution probability parameter p.
+
+   .. py:property:: n
+
+
+   .. py:property:: p
+
+
+   .. py:property:: a
+
+
+   .. py:property:: b
+
+
+   .. py:property:: p0
+
+
+   .. py:property:: _dist
+
+
+   .. py:method:: category()
+      :staticmethod:
+
+
+   .. py:method:: name()
+      :staticmethod:
+
+
+   .. py:method:: pmf(x)
+
+      Probability mass function.
+
+      :param x: quantile where probability mass function is evaluated.
+      :type x: ``int``
+
+      :return: probability mass function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: logpmf(x)
+
+      Natural logarithm of the probability mass function.
+
+      :param x: quantile where the (natural) probability mass function logarithm is evaluated.
+      :type x: ``int``
+
+      :return: natural logarithm of the probability mass function
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: cdf(x)
+
+      Cumulative distribution function.
+
+      :param x: quantile where the cumulative distribution function is evaluated.
+      :type x: ``int``
+      :return: cumulative distribution function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: logcdf(x)
+
+      Natural logarithm of the cumulative distribution function.
+
+      :param x: quantile where log of the cumulative distribution function is evaluated.
+      :type x: ``int``
+      :return: natural logarithm of the cumulative distribution function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: rvs(size=1, random_state=None)
+
+      Random variates generator function.
+
+      :param size: random variates sample size (default is 1).
+      :type size: ``int``, optional
+      :param random_state: random state for the random number generator.
+      :type random_state: ``int``, optional
+      :return: random variates.
+      :rtype: ``numpy.int`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: ppf(q)
+
+      Percent point function, a.k.a. the quantile function, inverse of cumulative distribution function.
+
+      :param q: level at which the percent point function is evaluated.
+      :type q: ``float``
+      :return: percent point function.
+      :rtype: ``numpy.int`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: pgf(f)
+
+      Probability generating function. It computes the probability generating function
+      of the random variable given the (a, b, k) parametrization.
+
+      :param f: point where the function is evaluated
+      :type f: ``numpy array``
+      :return: probability generated in f.
+      :rtype: ``numpy.ndarray``
+
+
+   .. py:method:: abk()
+
+      Function returning (a, b, k) parametrization.
+
+      :return: a, b, probability in zero
+      :rtype: ``numpy.array``
+
+
+   .. py:method:: par_deductible_adjuster(nu)
+
+      Parameter correction in case of deductible.
+
+      :param nu: severity model survival function at the deductible.
+      :type nu: ``float``
+      :return: Void
+      :rtype: None
+
+
+   .. py:method:: par_deductible_reverter(nu)
+
+      Undo parameter correction in case of deductible.
+
+      :param nu: severity model survival function at the deductible.
+      :type nu: ``float``
+      :return: Void
+      :rtype: None
+
+
+
+.. py:class:: ZMNegBinom(**kwargs)
+
+   Zero-modified negative binomial distribution. Discrete mixture between a degenerate distribution
+   at zero and a non-modified negative binomial distribution.
+   scipy reference non-zero-modified distribution: ``scipy.stats._discrete_distns.nbinom_gen``.
+
+   :param \**kwargs:
+       See below
+
+   :Keyword Arguments:
+       * *n* (``int``) --
+         Zero-modified negative binomial distribution size parameter n.
+       * *p* (``numpy.float64``) --
+         Zero-modified negative binomial distribution probability parameter p.
+       * *p0m* (``numpy.float64``) --
+         Zero-modified negative binomial mixing parameter.
+
+
+   .. py:property:: n
+
+
+   .. py:property:: p
+
+
+   .. py:property:: p0m
+
+
+   .. py:property:: a
+
+
+   .. py:property:: b
+
+
+   .. py:property:: p0
+
+
+   .. py:property:: _dist
+
+
+   .. py:property:: _distzt
+
+
+   .. py:method:: category()
+      :staticmethod:
+
+
+   .. py:method:: name()
+      :staticmethod:
+
+
+   .. py:method:: pmf(x)
+
+      Probability mass function.
+
+      :param x: quantile where probability mass function is evaluated.
+      :type x: ``int``
+
+      :return: probability mass function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: logpmf(x)
+
+      Natural logarithm of the cumulative distribution function.
+
+      :param x: quantile where log of the cumulative distribution function is evaluated.
+      :type x: ``int``
+      :return: natural logarithm of the cumulative distribution function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: cdf(x)
+
+      Cumulative distribution function.
+
+      :param x: quantile where the cumulative distribution function is evaluated.
+      :type x: int
+      :return: cumulative distribution function.
+      :rtype: numpy.float64 or numpy.ndarray
+
+
+
+   .. py:method:: logcdf(x)
+
+      Natural logarithm of the cumulative distribution function.
+
+      :param x: quantile where log of the cumulative distribution function is evaluated.
+      :type x: ``int``
+      :return: natural logarithm of the cumulative distribution function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: rvs(size=1, random_state=None)
+
+      Random variates generator function.
+
+      :param size: random variates sample size (default is 1).
+      :type size: ``int``, optional
+      :param random_state: random state for the random number generator.
+      :type random_state: ``int``, optional
+      :return: random variates.
+      :rtype: ``numpy.int`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: ppf(q)
+
+      Percent point function, a.k.a. the quantile function, inverse of cumulative distribution function.
+
+      :param q: level at which the percent point function is evaluated.
+      :type q: ``float``
+      :return: percent point function.
+      :rtype: ``numpy.int`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: pgf(f)
+
+      Probability generating function. It computes the probability generating function
+      of the random variable given the (a, b, k) parametrization.
+
+      :param f: point where the function is evaluated
+      :type f: ``numpy array``
+      :return: probability generated in f.
+      :rtype: ``numpy.ndarray``
+
+
+   .. py:method:: abk()
+
+      Function returning (a, b, k) parametrization.
+
+      :return: a, b, probability in zero
+      :rtype: ``numpy.array``
+
+
+   .. py:method:: par_deductible_adjuster(nu)
+
+      Parameter correction in case of deductible.
+
+      :param nu: severity model survival function at the deductible.
+      :type nu: ``float``
+      :return: Void
+      :rtype: None
+
+
+   .. py:method:: par_deductible_reverter(nu)
+
+      Undo parameter correction in case of deductible.
+
+      :param nu: severity model survival function at the deductible.
+      :type nu: ``float``
+      :return: Void
+      :rtype: None
+
+
+
+.. py:class:: ZMLogser(**kwargs)
+
+   Zero-modified (discrete) logarithmic (log-series) distribution.
+   Discrete mixture between a degenerate distribution
+   at zero and a non-modified logarithmic distribution.
+   scipy reference non-zero-modified distribution: ``scipy.stats._discrete_distns.logser_gen``
+
+   :param \**kwargs:
+       See below
+
+   :Keyword Arguments:
+       * *p* (``numpy.float64``) --
+         ZM discrete logarithmic distribution probability parameter p.
+       * *p0m* (``numpy.float64``) --
+         ZM discrete logarithmic mixing parameter.
+
+   .. py:property:: p
+
+
+   .. py:property:: p0m
+
+
+   .. py:property:: p0
+
+
+   .. py:property:: a
+
+
+   .. py:property:: b
+
+
+   .. py:property:: _dist
+
+
+   .. py:method:: category()
+      :staticmethod:
+
+
+   .. py:method:: name()
+      :staticmethod:
+
+
+   .. py:method:: pmf(x)
+
+      Probability mass function.
+
+      :param x: quantile where probability mass function is evaluated.
+      :type x: ``int``
+
+      :return: probability mass function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: logpmf(x)
+
+      Natural logarithm of the probability mass function.
+
+      :param x: quantile where the (natural) probability mass function logarithm is evaluated.
+      :type x: ``int``
+
+      :return: natural logarithm of the probability mass function
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: cdf(x)
+
+      Cumulative distribution function.
+
+      :param x: quantile where the cumulative distribution function is evaluated.
+      :type x: ``int``
+      :return: cumulative distribution function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: logcdf(x)
+
+      Natural logarithm of the cumulative distribution function.
+
+      :param x: quantile where log of the cumulative distribution function is evaluated.
+      :type x: ``int``
+      :return: natural logarithm of the cumulative distribution function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: rvs(size=1, random_state=None)
+
+      Random variates generator function.
+
+      :param size: random variates sample size (default is 1).
+      :type size: ``int``, optional
+      :param random_state: random state for the random number generator.
+      :type random_state: ``int``, optional
+      :return: random variates.
+      :rtype: ``numpy.int`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: ppf(q)
+
+      Percent point function, a.k.a. the quantile function, inverse of cumulative distribution function.
+
+      :param q: level at which the percent point function is evaluated.
+      :type q: ``float``
+      :return: percent point function.
+      :rtype: ``numpy.int`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: abk()
+
+      Function returning (a, b, k) parametrization.
+
+      :return: a, b, probability in zero
+      :rtype: ``numpy.array``
+
+
+
+.. py:class:: Beta(loc=0, scale=1, **kwargs)
+
+   Bases: :py:obj:`_ContinuousDistribution`
+
+   Wrapper to scipy beta distribution.
+   ``scipy.stats._continuous_distns.beta_gen``
+
+   :param scale: beta scale parameter.
+   :type scale: ``float``
+   :param loc: beta location parameter.
+   :type loc: ``float``
+   :param \**kwargs:
+       See below
+
+   :Keyword Arguments:
+       * *a* (``int`` or ``float``) --
+         shape parameter a.
+       * *b* (``int`` or ``float``) --
+         shape parameter b.
+
+   .. py:property:: a
+
+
+   .. py:property:: b
+
+
+   .. py:property:: loc
+
+
+   .. py:property:: _dist
+
+
+   .. py:method:: name()
+      :staticmethod:
+
+
+   .. py:method:: lev(v)
+
+      Limited expected value, i.e. expected value of the function min(x, v).
+
+      :param v: values with respect to the minimum.
+      :type v: ``numpy.float`` or ``numpy.ndarray``
+      :return: expected value of the minimum function.
+      :rtype: ``numpy.float`` or ``numpy.ndarray``
+
+
+   .. py:method:: den(low, loc)
+
+      It returns the denominator of the local moments discretization.
+
+      :param low: lower priority.
+      :type low: ``float``
+      :param loc: location parameter.
+      :type loc: ``float``
+      :return: denominator to compute the local moments discrete sequence.
+      :rtype: ``numpy.ndarray``
+
+
+
+.. py:class:: Exponential(loc=0, theta=1)
+
+   Bases: :py:obj:`_ContinuousDistribution`
+
+   Expontential distribution.
+   scipy reference distribution: ``scipy.stats._continuous_distns.expon_gen``
+
+   :param theta: exponential distribution theta parameter.
+   :type theta: ``float``
+   :param loc: location parameter
+   :type loc: ``float``
+
+   .. py:property:: theta
+
+
+   .. py:property:: loc
+
+
+   .. py:property:: _dist
+
+
+   .. py:method:: name()
+      :staticmethod:
+
+
+   .. py:method:: pdf(x)
+
+      Probability density function.
+
+      :param x: quantile where probability density function is evaluated.
+      :type x: ``numpy.ndarray``, ``list``, ``float``, ``int``
+
+      :return: probability density function
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: logpdf(x)
+
+      Natural logarithm of the probability density function.
+
+      :param x: the log of the probability function will be computed in x.
+      :type x: ``numpy.ndarray``
+      :return: logpdf
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: cdf(x)
+
+      Cumulative distribution function.
+
+      :param x: the cumulative distribution function will be computed in x.
+      :type x: ``numpy.ndarray``
+      :return: cumulative distribution function
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: logcdf(x)
+
+      Natural logarithm of the cumulative distribution function.
+
+      :param x: point where the natural logarithm of the cumulative distribution function is evaluated.
+      :type x: ``int``
+      :return: natural logarithm of the cumulative distribution function
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: sf(x)
+
+      Survival function, 1 - cumulative distribution function.
+
+      :param x: point where the survival is evaluated.
+      :type x: ``int``
+      :return: survival function
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: logsf(x)
+
+      Natural logarithm of the survival function.
+
+      :param x: point where the natural logarithm of the survival function is evaluated.
+      :type x: ``int``
+      :return: natural logarithm of the survival function
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: isf(x)
+
+      Inverse survival function (inverse of sf).
+
+      :param x: point where the inverse of the survival function is evaluated.
+      :type x: ``numpy.ndarray``
+      :return: inverse of the survival function
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: rvs(size=1, random_state=None)
+
+      Random variates.
+
+      :param size: random variates sample size (default is 1).
+      :type size: ``int``
+      :param random_state: random state for the random number generator.
+      :type random_state: ``int``
+
+      :return: Random variates.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: entropy()
+
+      (Differential) entropy of the RV.
+
+      :return: (differential) entropy.
+      :rtype: ``numpy.float64``
+
+
+   .. py:method:: mean()
+
+      Mean of the distribution.
+
+      :return: mean.
+      :rtype: ``numpy.float64``
+
+
+   .. py:method:: var()
+
+      Variance of the distribution.
+
+      :return: variance.
+      :rtype: ``numpy.float64``
+
+
+   .. py:method:: std()
+
+      Standard deviation of the distribution.
+
+      :return: standard deviation.
+      :rtype: ``numpy.float64``
+
+
+   .. py:method:: ppf(q)
+
+      Percent point function, a.k.a. the quantile function, inverse of the cumulative distribution function.
+
+      :param q: level at which the percent point function is evaluated.
+      :type q: ``float``
+      :return: percent point function.
+      :rtype: ``numpy.float64`` or ``numpy.int`` or ``numpy.ndarray``
+
+
+   .. py:method:: lev(v)
+
+      Limited expected value, i.e. expected value of the function min(x, v).
+
+      :param v: values with respect to the minimum.
+      :type v: ``numpy.float`` or ``numpy.ndarray``
+      :return: expected value of the minimum function.
+      :rtype: ``numpy.float`` or ``numpy.ndarray``
+
+
+   .. py:method:: den(low, loc)
+
+      It returns the denominator of the local moments discretization.
+
+      :param low: lower priority.
+      :type low: ``float``
+      :param loc: location parameter.
+      :type loc: ``float``
+      :return: denominator to compute the local moments discrete sequence.
+      :rtype: ``numpy.ndarray``
+
+
+
+.. py:class:: Gamma(loc=0, scale=1.0, **kwargs)
+
+   Bases: :py:obj:`_ContinuousDistribution`
+
+   Gamma distribution.
+   When a is an integer it reduces to an Erlang distribution.
+   When a=1 it reduces to an Exponential distribution.
+   Wrapper to scipy gamma distribution ( ``scipy.stats._continuous_distns.gamma_gen`` ).
+
+   :param scale: scale parameter (inverse of the rate parameter).
+   :type scale: ``float``
+   :param loc: location parameter.
+   :type loc: ``float``
+   :param \**kwargs:
+       See below
+
+   :Keyword Arguments:
+       * *a* (``int`` or ``float``) --
+         shape parameter a.
+
+
+   .. py:property:: a
+
+
+   .. py:property:: loc
+
+
+   .. py:property:: scale
+
+
+   .. py:property:: _dist
+
+
+   .. py:method:: name()
+      :staticmethod:
+
+
+   .. py:method:: lev(v)
+
+      Limited expected value, i.e. expected value of the function min(x, v).
+
+      :param v: values with respect to the minimum.
+      :type v: ``numpy.float`` or ``numpy.ndarray``
+      :return: expected value of the minimum function.
+      :rtype: ``numpy.float`` or ``numpy.ndarray``
+
+
+   .. py:method:: den(low, loc)
+
+      It returns the denominator of the local moments discretization.
+
+      :param low: lower priority.
+      :type low: ``float``
+      :param loc: location parameter.
+      :type loc: ``float``
+      :return: denominator to compute the local moments discrete sequence.
+      :rtype: ``numpy.ndarray``
+
+
+
+.. py:class:: InvGamma(loc=0, scale=1, **kwargs)
+
+   Bases: :py:obj:`_ContinuousDistribution`
+
+   Wrapper to scipy inverse gamma distribution.
+   ``scipy.stats._continuous_distns.invgamma_gen object``
+
+   :param scale: scale parameter.
+   :type scale: ``float``
+   :param loc: location parameter.
+   :type loc: ``float``
+   :param \**kwargs:
+       See below
+
+   :Keyword Arguments:
+       * *a* (``int`` or ``float``) --
+         shape parameter a.
+
+   .. py:property:: a
+
+
+   .. py:property:: scale
+
+
+   .. py:property:: loc
+
+
+   .. py:property:: _dist
+
+
+   .. py:method:: name()
+      :staticmethod:
+
+
+   .. py:method:: lev(v)
+
+      Limited expected value, i.e. expected value of the function min(x, v).
+
+      :param v: values with respect to the minimum.
+      :type v: ``numpy.float`` or ``numpy.ndarray``
+      :return: expected value of the minimum function.
+      :rtype: ``numpy.float`` or ``numpy.ndarray``
+
+
+   .. py:method:: den(low, loc)
+
+      It returns the denominator of the local moments discretization.
+
+      :param low: lower priority.
+      :type low: ``float``
+      :param loc: location parameter.
+      :type loc: ``float``
+      :return: denominator to compute the local moments discrete sequence.
+      :rtype: ``numpy.ndarray``
+
+
+
+.. py:class:: GenPareto(loc=0, scale=1.0, **kwargs)
+
+   Bases: :py:obj:`_ContinuousDistribution`
+
+   Wrapper to scipy genpareto distribution.
+   When c=0 it reduces to an Exponential distribution.
+   When c=-1 it reduces to a uniform distribution.
+   When the correct parametrization is adopted, it is possible to fit all the Pareto types.
+   scipy reference distribution: ``scipy.stats._continuous_distns.genpareto_gen`` .
+
+   :param scale: scale parameter.
+   :type scale: ``float``
+   :param loc: location parameter.
+   :type loc: ``float``
+   :param \**kwargs:
+       See below
+
+   :Keyword Arguments:
+       * *c* (``int`` or ``float``) --
+         shape parameter c.
+
+
+   .. py:property:: c
+
+
+   .. py:property:: scale
+
+
+   .. py:property:: loc
+
+
+   .. py:property:: _dist
+
+
+   .. py:method:: name()
+      :staticmethod:
+
+
+   .. py:method:: lev(v)
+
+      Limited expected value, i.e. expected value of the function min(x, v).
+
+      :param v: values with respect to the minimum.
+      :type v: ``numpy.float`` or ``numpy.ndarray``
+      :return: expected value of the minimum function.
+      :rtype: ``numpy.float`` or ``numpy.ndarray``
+
+
+   .. py:method:: den(low, loc)
+
+      It returns the denominator of the local moments discretization.
+
+      :param low: lower priority.
+      :type low: ``float``
+      :param loc: location parameter.
+      :type loc: ``float``
+      :return: denominator to compute the local moments discrete sequence.
+      :rtype: ``numpy.ndarray``
+
+
+
+.. py:class:: Pareto2(min=0, scale=1, **kwargs)
+
+   Bases: :py:obj:`GenPareto`
+
+   Pareto TypeII distribution.
+   This is a Genpareto distribution with parameter loc= min; scale=scale/s and c=1/s.
+   ``scipy.stats._continuous_distns.genpareto``
+
+   :param min: pareto 2 location parameter.
+   :type min: ``float``
+   :param scale: pareto 2 scale parameter.
+   :type scale: ``float``
+   :param \**kwargs:
+       See below
+
+   :Keyword Arguments:
+       * *s* (``int`` or ``float``) --
+         distribution parameter s.
+
+
+   .. py:property:: s
+
+
+   .. py:property:: min
+
+
+   .. py:property:: scale
+
+
+   .. py:method:: name()
+      :staticmethod:
+
+
+
+.. py:class:: Pareto1(min=0, **kwargs)
+
+   Bases: :py:obj:`Pareto2`
+
+   Single-parameter Pareto distribution.
+   This is a Pareto II distribution with parameter scale = min.
+   ``scipy.stats._continuous_distns.genpareto``
+
+   :param min: pareto 1 location parameter.
+   :type min: ``float``
+   :param \**kwargs:
+       See below
+
+   :Keyword Arguments:
+       * *s* (``int`` or ``float``) --
+         distribution parameter s.
+
+
+   .. py:property:: s
+
+
+   .. py:property:: min
+
+
+   .. py:property:: scale
+
+
+   .. py:method:: name()
+      :staticmethod:
+
+
+
+.. py:class:: Lognormal(loc=0, scale=1.0, **kwargs)
+
+   Bases: :py:obj:`_ContinuousDistribution`
+
+   Lognormal distribution.
+   scipy reference distribution: ``scipy.stats._continuous_distns.lognorm_gen``
+
+   :param scale: lognormal scale parameter.
+   :type scale: ``float``
+   :param loc: lognormal location parameter.
+   :type loc: ``float``
+   :param \**kwargs:
+       See below
+
+   :Keyword Arguments:
+       * *shape* (``int`` or ``float``) --
+         shape parameter.
+
+   .. py:property:: shape
+
+
+   .. py:property:: scale
+
+
+   .. py:property:: loc
+
+
+   .. py:property:: _dist
+
+
+   .. py:method:: name()
+      :staticmethod:
+
+
+   .. py:method:: lev(v)
+
+      Limited expected value, i.e. expected value of the function min(x, v).
+
+      :param v: values with respect to the minimum.
+      :type v: ``numpy.float`` or ``numpy.ndarray``
+      :return: expected value of the minimum function.
+      :rtype: ``numpy.float`` or ``numpy.ndarray``
+
+
+   .. py:method:: den(low, loc)
+
+      It returns the denominator of the local moments discretization.
+
+      :param low: lower priority.
+      :type low: ``float``
+      :param loc: location parameter.
+      :type loc: ``float``
+      :return: denominator to compute the local moments discrete sequence.
+      :rtype: ``numpy.ndarray``
+
+
+
+.. py:class:: GenBeta(shape1, shape2, shape3, scale=1.0)
+
+   Generalized Beta (GB) distribution, also refer to as Generalized Beta
+   of the second kind, or the Generalized Beta Prime distribution.
+   If X is a GB distributed r.v., its cumulative distribution function can
+   be expressed as:
+
+   Pr[X <= x] = Pr[Y <= (x/scale)^shape3], 0 < x < scale,
+
+   where Y has a Beta distribution, with parameters shape1 and shape2.
+   Refer to Appendix A of Klugman, Panjer & Willmot, Loss Models, Wiley.
+
+
+   .. py:property:: shape1
+
+
+   .. py:property:: shape2
+
+
+   .. py:property:: shape3
+
+
+   .. py:property:: scale
+
+
+   .. py:property:: _dist
+
+
+   .. py:method:: category()
+      :staticmethod:
+
+
+   .. py:method:: name()
+      :staticmethod:
+
+
+   .. py:method:: rvs(size=1, random_state=None)
+
+      Random variates.
+
+      :param size: random variates sample size (default is 1).
+      :type size: ``int``
+      :param random_state: random state for the random number generator.
+      :type random_state: ``int``
+
+      :return: Random variates.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: pdf(x)
+
+      Probability density function.
+
+      :param x: quantile where probability density function is evaluated.
+      :type x: ``numpy.ndarray``, ``list``, ``float``, ``int``
+
+      :return: probability density function in x.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: cdf(x)
+
+      Cumulative distribution function.
+
+      :param x: cumulative distribution function will be computed in x.
+      :type x: ``float``
+      :return: cumulative distribution function in x.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: logpdf(x)
+
+      Natural logarithm of the probability distribution function.
+
+      :param x: natural logarithm of the probability distribution function computed in x.
+      :type x: ``float``
+      :return: natural logarithm of the probability distribution function computed in x.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: logcdf(x)
+
+      Natural logarithm of the cumulative distribution function.
+
+      :param x: natural logarithm of the cumulative distribution function computed in x.
+      :type x: ``float``
+      :return: natural logarithm of the cumulative distribution function in x.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: sf(x)
+
+      Survival function, 1 - cumulative distribution function.
+
+      :param x: survival function will be computed in x.
+      :type x: ``float``
+      :return: survival function in x
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: logsf(x)
+
+      Natural logarithm of the survival function.
+
+      :param x: natural logarithm of the survival function computed in x.
+      :type x: ``float``
+      :return: natural logarithm of the survival function in x
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: ppf(q)
+
+      Percent point function, a.k.a. the quantile function, inverse of cumulative distribution function.
+
+      :param q: level at which the percent point function is evaluated.
+      :type q: ``float``
+      :return: percent point function.
+      :rtype: ``numpy.float64`` or ``numpy.int`` or ``numpy.ndarray``
+
+
+   .. py:method:: isf(q)
+
+      Inverse survival function (inverse of sf).
+
+      :param q: Inverse survival function computed in q.
+      :return: inverse sf
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: moment(n)
+
+      Non-central moment of order n.
+
+      :param n: moment order.
+      :type n: ``int``
+      :return: raw moment of order n.
+      :rtype: ``float``
+
+
+   .. py:method:: stats(moments='mv')
+
+      Mean(‘m’), variance(‘v’), skew(‘s’), and/or kurtosis(‘k’).
+
+      :param moments: moments to be returned.
+      :return: moments.
+      :rtype: tuple
+
+
+   .. py:method:: median()
+
+      Median of the distribution.
+
+      :return: median
+      :rtype: ``numpy.float64``
+
+
+   .. py:method:: mean()
+
+      Mean of the distribution.
+
+      :return: mean.
+      :rtype: ``numpy.float64``
+
+
+   .. py:method:: var()
+
+      Variance of the distribution.
+
+      :return: variance.
+      :rtype: ``numpy.float64``
+
+
+   .. py:method:: std()
+
+      Standard deviation of the distribution.
+
+      :return: standard deviation.
+      :rtype: ``numpy.float64``
+
+
+   .. py:method:: lev(v)
+
+      Limited expected value, i.e. expected value of the function min(x, v).
+
+      :param v: values with respect to the minimum.
+      :type v: ``numpy.float`` or ``numpy.ndarray``
+      :return: expected value of the minimum function.
+      :rtype: ``numpy.float`` or ``numpy.ndarray``
+
+
+   .. py:method:: den(low)
+
+      It returns the denominator of the local moments discretization.
+
+      :param low: lower priority.
+      :type low: ``float``
+      :return: denominator to compute the local moments discrete sequence.
+      :rtype: ``numpy.ndarray``
+
+
+
+.. py:class:: Burr12(loc=0, scale=1, **kwargs)
+
+   Bases: :py:obj:`_ContinuousDistribution`
+
+   Burr distribution, also referred to as the Burr Type XII, Singh–Maddala distribution.
+   When d=1, this is a Fisk distribution.
+   When c=d, this is a Paralogistic distribution.
+   scipy reference distribution: ``scipy.stats._continuous_distns.burr_gen object``
+
+   :param scale: burr scale parameter.
+   :type scale: ``float``
+   :param loc: burr location parameter.
+   :type loc: ``float``
+   :param \**kwargs:
+       See below
+
+   :Keyword Arguments:
+       * *c* (``int`` or ``float``) --
+         shape parameter c.
+       * *d* (``int`` or ``float``) --
+         shape parameter d.
+
+   .. py:property:: c
+
+
+   .. py:property:: d
+
+
+   .. py:property:: loc
+
+
+   .. py:property:: scale
+
+
+   .. py:property:: _dist
+
+
+   .. py:method:: name()
+      :staticmethod:
+
+
+   .. py:method:: lev(v)
+
+      Limited expected value, i.e. expected value of the function min(x, v).
+
+      :param v: values with respect to the minimum.
+      :type v: ``numpy.float`` or ``numpy.ndarray``
+      :return: expected value of the minimum function.
+      :rtype: ``numpy.float`` or ``numpy.ndarray``
+
+
+   .. py:method:: den(low, loc)
+
+      It returns the denominator of the local moments discretization.
+
+      :param low: lower priority.
+      :type low: ``float``
+      :param loc: location parameter.
+      :type loc: ``float``
+      :return: denominator to compute the local moments discrete sequence.
+      :rtype: ``numpy.ndarray``
+
+
+
+.. py:class:: Paralogistic(loc=0, scale=1, **kwargs)
+
+   Bases: :py:obj:`Burr12`
+
+   Paralogistic distribution.
+   This is a Burr12 distribution with same parameters.
+   ``scipy.stats._continuous_distns.burr12``
+
+   :param scale: paralogistic scale parameter.
+   :type scale: ``float``
+   :param loc: paralogistic location parameter.
+   :type loc: ``float``
+   :param \**kwargs:
+       See below
+
+   :Keyword Arguments:
+       * *a* (``int`` or ``float``) --
+         distribution parameter a.
+
+
+   .. py:property:: a
+
+
+   .. py:property:: loc
+
+
+   .. py:property:: scale
+
+
+   .. py:method:: name()
+      :staticmethod:
+
+
+
+.. py:class:: Dagum(loc=0, scale=1, **kwargs)
+
+   Bases: :py:obj:`_ContinuousDistribution`
+
+   Wrapper to scipy mielke distribution.
+   It is referred to the Inverse Burr, Mielke Beta-Kappa.
+   When d=s, this is an inverse paralogistic.
+   ``scipy.stats._continuous_distns.mielke``
+
+   :param scale: dagum scale parameter.
+   :type scale: ``float``
+   :param loc: dagum location parameter.
+   :type loc: ``float``
+   :param \**kwargs:
+       See below
+
+   :Keyword Arguments:
+       * *d* (``int`` or ``float``) --
+         shape parameter d.
+       * *s* (``int`` or ``float``) --
+         shape parameter s.
+
+   .. py:property:: d
+
+
+   .. py:property:: s
+
+
+   .. py:property:: scale
+
+
+   .. py:property:: loc
+
+
+   .. py:property:: k
+
+
+   .. py:property:: _dist
+
+
+   .. py:method:: name()
+      :staticmethod:
+
+
+   .. py:method:: lev(v)
+
+      Limited expected value, i.e. expected value of the function min(x, v).
+
+      :param v: values with respect to the minimum.
+      :type v: ``numpy.float`` or ``numpy.ndarray``
+      :return: expected value of the minimum function.
+      :rtype: ``numpy.float`` or ``numpy.ndarray``
+
+
+   .. py:method:: den(low, loc)
+
+      It returns the denominator of the local moments discretization.
+
+      :param low: lower priority.
+      :type low: ``float``
+      :param loc: location parameter.
+      :type loc: ``float``
+      :return: denominator to compute the local moments discrete sequence.
+      :rtype: ``numpy.ndarray``
+
+
+
+.. py:class:: InvParalogistic(loc=0, scale=1, **kwargs)
+
+   Bases: :py:obj:`Dagum`
+
+   Inverse paralogistic distribution.
+   This is a Dagum distribution with same parameters.
+   ``scipy.stats._continuous_distns.mielke``
+
+   :param scale: inverse paralogistic scale parameter.
+   :type scale: ``float``
+   :param loc: inverse paralogistic location parameter.
+   :type loc: ``float``
+   :param \**kwargs:
+       See below
+
+   :Keyword Arguments:
+       * *b* (``int`` or ``float``) --
+         distribution parameter b.
+
+
+   .. py:property:: b
+
+
+   .. py:property:: loc
+
+
+   .. py:property:: scale
+
+
+   .. py:method:: name()
+      :staticmethod:
+
+
+
+.. py:class:: Weibull(loc=0, scale=1, **kwargs)
+
+   Bases: :py:obj:`_ContinuousDistribution`
+
+   Wrapper to scipy Weibull (Weibull_min) distribution.
+   ``scipy.stats._continuous_distns.weibull_min_gen object``
+
+   :param scale: scale parameter.
+   :type scale: ``float``
+   :param loc: location parameter.
+   :type loc: ``float``
+   :param \**kwargs:
+       See below
+
+   :Keyword Arguments:
+       * *c* (``int`` or ``float``) --
+         shape parameter c.
+
+
+   .. py:property:: c
+
+
+   .. py:property:: scale
+
+
+   .. py:property:: loc
+
+
+   .. py:property:: _dist
+
+
+   .. py:method:: name()
+      :staticmethod:
+
+
+   .. py:method:: lev(v)
+
+      Limited expected value, i.e. expected value of the function min(x, v).
+
+      :param v: values with respect to the minimum.
+      :type v: ``numpy.float`` or ``numpy.ndarray``
+      :return: expected value of the minimum function.
+      :rtype: ``numpy.float`` or ``numpy.ndarray``
+
+
+   .. py:method:: den(low, loc)
+
+      It returns the denominator of the local moments discretization.
+
+      :param low: lower priority.
+      :type low: ``float``
+      :param loc: location parameter.
+      :type loc: ``float``
+      :return: denominator to compute the local moments discrete sequence.
+      :rtype: ``numpy.ndarray``
+
+
+
+.. py:class:: InvWeibull(loc=0, scale=1, **kwargs)
+
+   Bases: :py:obj:`_ContinuousDistribution`
+
+   Wrapper to scipy inverse Weibull distribution.
+   ``scipy.stats._continuous_distns.invweibull_gen object``
+
+   :param scale: scale parameter.
+   :type scale: ``float``
+   :param loc: location parameter.
+   :type loc: ``float``
+   :param \**kwargs:
+       See below
+
+   :Keyword Arguments:
+       * *c* (``int`` or ``float``) --
+         shape parameter c.
+
+   .. py:property:: c
+
+
+   .. py:property:: scale
+
+
+   .. py:property:: loc
+
+
+   .. py:property:: _dist
+
+
+   .. py:method:: name()
+      :staticmethod:
+
+
+   .. py:method:: lev(v)
+
+      Limited expected value, i.e. expected value of the function min(x, v).
+
+      :param v: values with respect to the minimum.
+      :type v: ``numpy.float`` or ``numpy.ndarray``
+      :return: expected value of the minimum function.
+      :rtype: ``numpy.float`` or ``numpy.ndarray``
+
+
+   .. py:method:: den(low, loc)
+
+      It returns the denominator of the local moments discretization.
+
+      :param low: lower priority.
+      :type low: ``float``
+      :param loc: location parameter.
+      :type loc: ``float``
+      :return: denominator to compute the local moments discrete sequence.
+      :rtype: ``numpy.ndarray``
+
+
+
+.. py:class:: InvGauss(loc=0.0, scale=1.0, **kwargs)
+
+   Bases: :py:obj:`_ContinuousDistribution`
+
+   Wrapper to scipy inverse gaussian distribution.
+   ``scipy.stats._continuous_distns.invgauss_gen object``
+
+   :param scale: scale parameter.
+   :type scale: ``float``
+   :param loc: location parameter.
+   :type loc: ``float``
+   :param \**kwargs:
+       See below
+
+   :Keyword Arguments:
+       * *mu* (``int`` or ``float``) --
+         shape parameter mu.
+
+   .. py:property:: mu
+
+
+   .. py:property:: loc
+
+
+   .. py:property:: scale
+
+
+   .. py:property:: _dist
+
+
+   .. py:method:: name()
+      :staticmethod:
+
+
+   .. py:method:: lev(v)
+
+      Limited expected value, i.e. expected value of the function min(x, v).
+
+      :param v: values with respect to the minimum.
+      :type v: ``numpy.float`` or ``numpy.ndarray``
+      :return: expected value of the minimum function.
+      :rtype: ``numpy.float`` or ``numpy.ndarray``
+
+
+   .. py:method:: den(low, loc)
+
+      It returns the denominator of the local moments discretization.
+
+      :param low: lower priority.
+      :type low: ``float``
+      :param loc: location parameter.
+      :type loc: ``float``
+      :return: denominator to compute the local moments discrete sequence.
+      :rtype: ``numpy.ndarray``
+
+
+
+.. py:class:: Fisk(loc=0.0, scale=1.0, **kwargs)
+
+   Bases: :py:obj:`_ContinuousDistribution`
+
+   Wrapper to scipy Fisk distribution.
+   ``scipy.stats._continuous_distns.fisk_gen object``
+
+   :param scale: scale parameter.
+   :type scale: ``float``
+   :param loc: location parameter.
+   :type loc: ``float``
+   :param \**kwargs:
+       See below
+
+   :Keyword Arguments:
+       * *c* (``int`` or ``float``) --
+         shape parameter c.
+
+   .. py:property:: loc
+
+
+   .. py:property:: scale
+
+
+   .. py:property:: c
+
+
+   .. py:property:: _dist
+
+
+   .. py:method:: name()
+      :staticmethod:
+
+
+   .. py:method:: lev(v)
+
+      Limited expected value, i.e. expected value of the function min(x, v).
+
+      :param v: values with respect to the minimum.
+      :type v: ``numpy.float`` or ``numpy.ndarray``
+      :return: expected value of the minimum function.
+      :rtype: ``numpy.float`` or ``numpy.ndarray``
+
+
+   .. py:method:: den(low, loc)
+
+      It returns the denominator of the local moments discretization.
+
+      :param low: lower priority.
+      :type low: ``float``
+      :param loc: location parameter.
+      :type loc: ``float``
+      :return: denominator to compute the local moments discrete sequence.
+      :rtype: ``numpy.ndarray``
+
+
+
+.. py:class:: PWL(nodes, cumprobs)
+
+   Piecewise-linear distribution (a.k.a. mixture of continguous uniform distribution).
+   Distribution specified by a set of nodes and a set of cumulative probabilities (associated to the nodes).
+   Between two consecutive nodes, the random variable is uniformly distributed.
+
+   :param nodes: nodes of the distribution. At least the two nodes where cumulative probabilities are 0 and 1 needs to be provided. Its length must match ``cumprobs`` one.
+   :type nodes: ``list`` or ``np.ndarray`` of ``int`` or ``float``
+   :param cumprobs: cumulative probabilities associated to the nodes. At least cumulative probabilities of 0 and 1 needs to be provided. Its length must match ``nodes`` one.
+   :type cumprobs: ``list`` or ``np.ndarray`` of ``int`` or ``float``
+
+   .. py:property:: cumprobs
+
+
+   .. py:property:: nodes
+
+
+   .. py:property:: max
+
+
+   .. py:property:: min
+
+
+   .. py:property:: upper_nodes
+
+
+   .. py:property:: lower_nodes
+
+
+   .. py:property:: ranges
+
+
+   .. py:property:: weights
+
+
+   .. py:method:: name()
+      :staticmethod:
+
+
+   .. py:method:: category()
+      :staticmethod:
+
+
+   .. py:method:: _check_nodes_cumprobs_length()
+
+
+   .. py:method:: cdf(x)
+
+      Cumulative distribution function.
+
+      :param x: quantile where the cumulative distribution function is evaluated.
+      :type x: ``int`` or ``float``
+      :return: cumulative distribution function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: pdf(x)
+
+      Probability density function.
+
+      :param x: quantile where probability density function is evaluated.
+      :type x: ``numpy.ndarray``, ``list``, ``float``, ``int``
+
+      :return: probability mass function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: ppf(q)
+
+      Percent point function, a.k.a. the quantile function, inverse of the cumulative distribution function.
+
+      :param q: level at which the percent point function is evaluated.
+      :type q: ``float``
+      :return: percent point function.
+      :rtype: ``numpy.float64`` or ``numpy.int`` or ``numpy.ndarray``
+
+
+   .. py:method:: rvs(size=1, random_state=None)
+
+      Random variates generator function.
+
+      :param size: random variates sample size (default is 1).
+      :type size: ``int``, optional
+      :param random_state: random state for the random number generator (default=None).
+      :type random_state: ``int``, optional
+      :return: random variates.
+      :rtype: ``numpy.int`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: sf(x)
+
+      Survival function, 1 - cumulative distribution function.
+
+      :param x: quantile where the survival function is evaluated.
+      :type x: ``int`` or ``float``
+      :return: survival function
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: moment(central=False, n=1)
+
+      Moment of order n.
+
+      :param central: ``True`` if the moment is central, ``False`` if the moment is raw.
+      :type central: ``bool``
+      :param n: moment order.
+      :type n: ``int``
+      :return: moment of order n.
+      :rtype: ``float``
+
+
+   .. py:method:: mean()
+
+      Mean of the distribution.
+
+      :return: mean.
+      :rtype: ``float``
+
+
+   .. py:method:: std()
+
+      Standard deviation of the distribution.
+
+      :return: standard deviation.
+      :rtype: ``float``
+
+
+   .. py:method:: skewness()
+
+      Skewness.
+
+      :return: skewness.
+      :rtype: ``numpy.float64``
+
+
+
+.. py:class:: PWC(nodes, cumprobs)
+
+   Piecewise-constant distribution (a.k.a. empirical cumulative distribution).
+   Distribution specified by a set of nodes and a set of cumulative probabilities (associated to the nodes).
+       
+   :param nodes: nodes of the distribution. Its length must match ``cumprobs`` one.
+   :type nodes: ``list`` or ``np.ndarray`` of ``int`` or ``float``
+   :param cumprobs: cumulative probabilities associated to the nodes. Its length must match ``nodes`` one.
+   :type cumprobs: ``list`` or ``np.ndarray`` of ``int`` or ``float``
+
+   .. py:property:: cumprobs
+
+
+   .. py:property:: nodes
+
+
+   .. py:property:: max
+
+
+   .. py:property:: min
+
+
+   .. py:property:: pmf
+
+
+   .. py:method:: name()
+      :staticmethod:
+
+
+   .. py:method:: category()
+      :staticmethod:
+
+
+   .. py:method:: _check_nodes_cumprobs_length()
+
+
+   .. py:method:: cdf(x)
+
+      Cumulative distribution function.
+
+      :param x: quantile where the cumulative distribution function is evaluated.
+      :type x: ``int`` or ``float``
+      :return: cumulative distribution function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: ppf(q)
+
+      Percent point function, a.k.a. the quantile function, inverse of the cumulative distribution function.
+
+      :param q: level at which the percent point function is evaluated.
+      :type q: ``float``
+      :return: percent point function.
+      :rtype: ``numpy.float64`` or ``numpy.int`` or ``numpy.ndarray``
+
+
+   .. py:method:: rvs(size=1, random_state=None)
+
+      Random variates generator function.
+
+      :param size: random variates sample size (default is 1).
+      :type size: ``int``, optional
+      :param random_state: random state for the random number generator (default=None).
+      :type random_state: ``int``, optional
+      :return: random variates.
+      :rtype: ``numpy.int`` or ``numpy.ndarray``
+
+
+
+   .. py:method:: sf(x)
+
+      Survival function, 1 - cumulative distribution function.
+
+      :param x: quantile where the survival function is evaluated.
+      :type x: ``int`` or ``float``
+      :return: survival function
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: moment(central=False, n=1)
+
+      Moment of order n.
+
+      :param central: ``True`` if the moment is central, ``False`` if the moment is raw.
+      :type central: ``bool``
+      :param n: moment order.
+      :type n: ``int``
+      :return: moment of order n.
+      :rtype: ``float``
+
+
+   .. py:method:: mean()
+
+      Mean of the distribution.
+
+      :return: mean.
+      :rtype: ``float``
+
+
+   .. py:method:: std()
+
+      Standard deviation of the distribution.
+
+      :return: standard deviation.
+      :rtype: ``float``
+
+
+   .. py:method:: skewness()
+
+      Skewness.
+
+      :return: skewness.
+      :rtype: ``numpy.float64``
+
+
+

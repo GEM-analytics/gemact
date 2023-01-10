@@ -1,0 +1,2356 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>gemact.lossmodel &#8212; gemact</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="canonical" href="https://github.com/GEM-analytics/gemact/autoapi/gemact/lossmodel/index.html" />
+    <link rel="shortcut icon" href="../../../_static/webtab.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../../_static/GEMActlogo.png" class="logo" alt="logo">
+      
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../index.html">
+                    GEMAct
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Table of Contents
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../usage.html">
+   Usage
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../modeling.html">
+   Actuarial modeling with GEMAct
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../api.html">
+   API reference guide
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../gemanalytics.html">
+   About us
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../../index.html">
+   API Reference
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active has-children">
+    <a class="reference internal" href="../index.html">
+     <code class="xref py py-mod docutils literal notranslate">
+      <span class="pre">
+       gemact
+      </span>
+     </code>
+    </a>
+    <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+    <label for="toctree-checkbox-2">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul class="current">
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../tests/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         gemact.tests
+        </span>
+       </code>
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+      <label for="toctree-checkbox-3">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../tests/test_copulas/index.html">
+         <code class="xref py py-mod docutils literal notranslate">
+          <span class="pre">
+           gemact.tests.test_copulas
+          </span>
+         </code>
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../tests/test_distributions/index.html">
+         <code class="xref py py-mod docutils literal notranslate">
+          <span class="pre">
+           gemact.tests.test_distributions
+          </span>
+         </code>
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../tests/test_lossaggregation/index.html">
+         <code class="xref py py-mod docutils literal notranslate">
+          <span class="pre">
+           gemact.tests.test_lossaggregation
+          </span>
+         </code>
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../tests/test_lossmodel/index.html">
+         <code class="xref py py-mod docutils literal notranslate">
+          <span class="pre">
+           gemact.tests.test_lossmodel
+          </span>
+         </code>
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../tests/test_lossreserve/index.html">
+         <code class="xref py py-mod docutils literal notranslate">
+          <span class="pre">
+           gemact.tests.test_lossreserve
+          </span>
+         </code>
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../tests/test_paperscripts/index.html">
+         <code class="xref py py-mod docutils literal notranslate">
+          <span class="pre">
+           gemact.tests.test_paperscripts
+          </span>
+         </code>
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../vignette/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         gemact.vignette
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../calculators/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         gemact.calculators
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../config/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         gemact.config
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../copulas/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         gemact.copulas
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../distributions/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         gemact.distributions
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../gemdata/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         gemact.gemdata
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../helperfunctions/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         gemact.helperfunctions
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../libraries/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         gemact.libraries
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../lossaggregation/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         gemact.lossaggregation
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toctree-l3 current active">
+      <a class="current reference internal" href="#">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         gemact.lossmodel
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../lossreserve/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         gemact.lossreserve
+        </span>
+       </code>
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../../_static/index.html">
+     <code class="xref py py-mod docutils literal notranslate">
+      <span class="pre">
+       _static
+      </span>
+     </code>
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+    <label for="toctree-checkbox-4">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../_static/calculators/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         _static.calculators
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../_static/config/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         _static.config
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../_static/copulas/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         _static.copulas
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../_static/distributions/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         _static.distributions
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../_static/gemdata/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         _static.gemdata
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../_static/helperfunctions/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         _static.helperfunctions
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../_static/libraries/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         _static.libraries
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../_static/lossaggregation/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         _static.lossaggregation
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../_static/lossmodel/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         _static.lossmodel
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../_static/lossreserve/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         _static.lossreserve
+        </span>
+       </code>
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../conf/index.html">
+     <code class="xref py py-mod docutils literal notranslate">
+      <span class="pre">
+       conf
+      </span>
+     </code>
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/gpitt71/gemact-code"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/gpitt71/gemact-code/edit/master/autoapi/gemact/lossmodel/index.rst"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../../_sources/autoapi/gemact/lossmodel/index.rst.txt"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.rst</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-contents">
+   Module Contents
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#classes">
+     Classes
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#attributes">
+     Attributes
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#gemact.lossmodel.logger">
+       logger
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#gemact.lossmodel.PolicyStructure">
+       PolicyStructure
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.PolicyStructure.layers">
+         layers
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.PolicyStructure.length">
+         length
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.PolicyStructure.index_to_layer_name">
+         index_to_layer_name
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.PolicyStructure.layer_name_to_index">
+         layer_name_to_index
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#gemact.lossmodel.Layer">
+       Layer
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Layer.name">
+         name
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Layer.deductible">
+         deductible
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Layer.cover">
+         cover
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Layer.aggr_deductible">
+         aggr_deductible
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Layer.n_reinst">
+         n_reinst
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Layer.reinst_loading">
+         reinst_loading
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Layer.aggr_cover">
+         aggr_cover
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Layer.manteinance_deductible">
+         manteinance_deductible
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Layer.share">
+         share
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Layer.basis">
+         basis
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Layer.category">
+         category
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Layer.exit_point">
+         exit_point
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Layer.identifier">
+         identifier
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Layer.specs">
+         specs
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Layer._check_and_set_category">
+         _check_and_set_category
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#gemact.lossmodel.LayerTower">
+       LayerTower
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LayerTower.append">
+         append
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LayerTower.insert">
+         insert
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LayerTower.extend">
+         extend
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LayerTower.sort">
+         sort
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LayerTower.remove_layer_loading">
+         remove_layer_loading
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LayerTower.set_and_check_tower">
+         set_and_check_tower
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LayerTower.remove_duplicates">
+         remove_duplicates
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#gemact.lossmodel.Frequency">
+       Frequency
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Frequency.dist">
+         dist
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Frequency.par">
+         par
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Frequency.p0">
+         p0
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Frequency.model">
+         model
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Frequency.abp0g0">
+         abp0g0
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#gemact.lossmodel.Severity">
+       Severity
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Severity.dist">
+         dist
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Severity.par">
+         par
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Severity.loc">
+         loc
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Severity.model">
+         model
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Severity.excess_frequency">
+         excess_frequency
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Severity.return_period">
+         return_period
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Severity.stop_loss_transformation">
+         stop_loss_transformation
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Severity.discretize">
+         discretize
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel">
+       LossModel
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.severity">
+         severity
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.frequency">
+         frequency
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.policystructure">
+         policystructure
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.aggr_loss_dist_method">
+         aggr_loss_dist_method
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.n_sim">
+         n_sim
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.random_state">
+         random_state
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.n_aggr_dist_nodes">
+         n_aggr_dist_nodes
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.tilt">
+         tilt
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.tilt_value">
+         tilt_value
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.sev_discr_method">
+         sev_discr_method
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.n_sev_discr_nodes">
+         n_sev_discr_nodes
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.sev_discr_step">
+         sev_discr_step
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.dist">
+         dist
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.pure_premium">
+         pure_premium
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.dist_calculate">
+         dist_calculate
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel._apply_aggr_conditions">
+         _apply_aggr_conditions
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.moment">
+         moment
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.ppf">
+         ppf
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.cdf">
+         cdf
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.rvs">
+         rvs
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.mean">
+         mean
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.std">
+         std
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.skewness">
+         skewness
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel._reinstatements_costing_adjuster">
+         _reinstatements_costing_adjuster
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel._stop_loss_costing">
+         _stop_loss_costing
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.costing">
+         costing
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.print_costing_specs">
+         print_costing_specs
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.print_aggr_loss_method_specs">
+         print_aggr_loss_method_specs
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.print_policy_layer_specs">
+         print_policy_layer_specs
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel._check_dist">
+         _check_dist
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>gemact.lossmodel</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-contents">
+   Module Contents
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#classes">
+     Classes
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#attributes">
+     Attributes
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#gemact.lossmodel.logger">
+       logger
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#gemact.lossmodel.PolicyStructure">
+       PolicyStructure
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.PolicyStructure.layers">
+         layers
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.PolicyStructure.length">
+         length
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.PolicyStructure.index_to_layer_name">
+         index_to_layer_name
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.PolicyStructure.layer_name_to_index">
+         layer_name_to_index
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#gemact.lossmodel.Layer">
+       Layer
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Layer.name">
+         name
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Layer.deductible">
+         deductible
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Layer.cover">
+         cover
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Layer.aggr_deductible">
+         aggr_deductible
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Layer.n_reinst">
+         n_reinst
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Layer.reinst_loading">
+         reinst_loading
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Layer.aggr_cover">
+         aggr_cover
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Layer.manteinance_deductible">
+         manteinance_deductible
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Layer.share">
+         share
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Layer.basis">
+         basis
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Layer.category">
+         category
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Layer.exit_point">
+         exit_point
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Layer.identifier">
+         identifier
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Layer.specs">
+         specs
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Layer._check_and_set_category">
+         _check_and_set_category
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#gemact.lossmodel.LayerTower">
+       LayerTower
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LayerTower.append">
+         append
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LayerTower.insert">
+         insert
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LayerTower.extend">
+         extend
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LayerTower.sort">
+         sort
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LayerTower.remove_layer_loading">
+         remove_layer_loading
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LayerTower.set_and_check_tower">
+         set_and_check_tower
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LayerTower.remove_duplicates">
+         remove_duplicates
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#gemact.lossmodel.Frequency">
+       Frequency
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Frequency.dist">
+         dist
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Frequency.par">
+         par
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Frequency.p0">
+         p0
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Frequency.model">
+         model
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Frequency.abp0g0">
+         abp0g0
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#gemact.lossmodel.Severity">
+       Severity
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Severity.dist">
+         dist
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Severity.par">
+         par
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Severity.loc">
+         loc
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Severity.model">
+         model
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Severity.excess_frequency">
+         excess_frequency
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Severity.return_period">
+         return_period
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Severity.stop_loss_transformation">
+         stop_loss_transformation
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.Severity.discretize">
+         discretize
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel">
+       LossModel
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.severity">
+         severity
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.frequency">
+         frequency
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.policystructure">
+         policystructure
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.aggr_loss_dist_method">
+         aggr_loss_dist_method
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.n_sim">
+         n_sim
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.random_state">
+         random_state
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.n_aggr_dist_nodes">
+         n_aggr_dist_nodes
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.tilt">
+         tilt
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.tilt_value">
+         tilt_value
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.sev_discr_method">
+         sev_discr_method
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.n_sev_discr_nodes">
+         n_sev_discr_nodes
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.sev_discr_step">
+         sev_discr_step
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.dist">
+         dist
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.pure_premium">
+         pure_premium
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.dist_calculate">
+         dist_calculate
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel._apply_aggr_conditions">
+         _apply_aggr_conditions
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.moment">
+         moment
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.ppf">
+         ppf
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.cdf">
+         cdf
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.rvs">
+         rvs
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.mean">
+         mean
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.std">
+         std
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.skewness">
+         skewness
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel._reinstatements_costing_adjuster">
+         _reinstatements_costing_adjuster
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel._stop_loss_costing">
+         _stop_loss_costing
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.costing">
+         costing
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.print_costing_specs">
+         print_costing_specs
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.print_aggr_loss_method_specs">
+         print_aggr_loss_method_specs
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel.print_policy_layer_specs">
+         print_policy_layer_specs
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossmodel.LossModel._check_dist">
+         _check_dist
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section id="module-gemact.lossmodel">
+<span id="gemact-lossmodel"></span><h1><a class="reference internal" href="#module-gemact.lossmodel" title="gemact.lossmodel"><code class="xref py py-mod docutils literal notranslate"><span class="pre">gemact.lossmodel</span></code></a><a class="headerlink" href="#module-gemact.lossmodel" title="Permalink to this headline">#</a></h1>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">#</a></h2>
+<section id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#gemact.lossmodel.PolicyStructure" title="gemact.lossmodel.PolicyStructure"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PolicyStructure</span></code></a></p></td>
+<td><p>Policy structure component of a loss model.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#gemact.lossmodel.Layer" title="gemact.lossmodel.Layer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Layer</span></code></a></p></td>
+<td><p>Policy structure non-proportional layer.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#gemact.lossmodel.LayerTower" title="gemact.lossmodel.LayerTower"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LayerTower</span></code></a></p></td>
+<td><p>Policy structure tower of non-proportional layers.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#gemact.lossmodel.Frequency" title="gemact.lossmodel.Frequency"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Frequency</span></code></a></p></td>
+<td><p>Frequency component of the loss models underlying the collective risk model.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#gemact.lossmodel.Severity" title="gemact.lossmodel.Severity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Severity</span></code></a></p></td>
+<td><p>Severity component of the loss models underlying the collective risk model.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#gemact.lossmodel.LossModel" title="gemact.lossmodel.LossModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LossModel</span></code></a></p></td>
+<td><p>Loss model for (re)insurance costing and risk modeling using a collective risk model framework.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="attributes">
+<h3>Attributes<a class="headerlink" href="#attributes" title="Permalink to this headline">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#gemact.lossmodel.logger" title="gemact.lossmodel.logger"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logger</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py data">
+<dt class="sig sig-object py" id="gemact.lossmodel.logger">
+<span class="sig-name descname"><span class="pre">logger</span></span><a class="headerlink" href="#gemact.lossmodel.logger" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gemact.lossmodel.PolicyStructure">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">PolicyStructure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossmodel.html#PolicyStructure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.PolicyStructure" title="Permalink to this definition">#</a></dt>
+<dd><p>Policy structure component of a loss model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>layers</strong> (<code class="docutils literal notranslate"><span class="pre">Layer</span></code>, <code class="docutils literal notranslate"><span class="pre">LayerTower</span></code>, <code class="docutils literal notranslate"><span class="pre">list</span></code>) – Non-proportional layer (default is infinity-xs-0 layer).</p>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossmodel.PolicyStructure.layers">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">layers</span></span><a class="headerlink" href="#gemact.lossmodel.PolicyStructure.layers" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossmodel.PolicyStructure.length">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">length</span></span><a class="headerlink" href="#gemact.lossmodel.PolicyStructure.length" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossmodel.PolicyStructure.index_to_layer_name">
+<span class="sig-name descname"><span class="pre">index_to_layer_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossmodel.html#PolicyStructure.index_to_layer_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.PolicyStructure.index_to_layer_name" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossmodel.PolicyStructure.layer_name_to_index">
+<span class="sig-name descname"><span class="pre">layer_name_to_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossmodel.html#PolicyStructure.layer_name_to_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.PolicyStructure.layer_name_to_index" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gemact.lossmodel.Layer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Layer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cover</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">float('inf')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deductible</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aggr_cover</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">float('inf')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aggr_deductible</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_reinst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">float('inf')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reinst_loading</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maintenance_deductible</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">share</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'regular'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossmodel.html#Layer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.Layer" title="Permalink to this definition">#</a></dt>
+<dd><p>Policy structure non-proportional layer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>deductible</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>) – each-and-every-loss (non-ranking) deductible, also referred to as retention or priority (default value is 0).</p></li>
+<li><p><strong>cover</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>) – each-and-every-loss cover, also referred to as limit (default value is infinity). Cover plus deductible is the upper priority or severity ‘exit point’.</p></li>
+<li><p><strong>aggr_deductible</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>) – aggregate deductible (default value is 0).</p></li>
+<li><p><strong>aggr_cover</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>) – aggregate cover, also referred to as aggregate limit (default is infinity).</p></li>
+<li><p><strong>n_reinst</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – Number of reinstatements (default value is infinity).
+When reinstatements are free (loadings = 0), an alternative parametrization is aggregate cover = (number of reinstatement + 1) * cover.
+E.g. When the number of reinstatements = 0, the aggregate cover is equal to the cover,
+when number of reinstatements is infinity there is no aggregate cover
+(the aggregate cover is infinity).</p></li>
+<li><p><strong>reinst_loading</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code> or <code class="docutils literal notranslate"><span class="pre">np.array</span></code>) – loadings of reinstatements layers (default value is 0), typically a value in [0, 1].</p></li>
+<li><p><strong>maintenance_deductible</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>) – maintenance deductible, sometimes referred to as residual each-and-every-loss deductible (default is 0). Non-zero maintenance deductible applies to retention layers only.</p></li>
+<li><p><strong>share</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – Partecipation share of the layer (default is 1).</p></li>
+<li><p><strong>basis</strong> (<code class="docutils literal notranslate"><span class="pre">string</span></code>) – layer basis (default is ‘regular’). One of ‘regular’, ‘drop-down’, ‘stretch-down’.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossmodel.Layer.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#gemact.lossmodel.Layer.name" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossmodel.Layer.deductible">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">deductible</span></span><a class="headerlink" href="#gemact.lossmodel.Layer.deductible" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossmodel.Layer.cover">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cover</span></span><a class="headerlink" href="#gemact.lossmodel.Layer.cover" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossmodel.Layer.aggr_deductible">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">aggr_deductible</span></span><a class="headerlink" href="#gemact.lossmodel.Layer.aggr_deductible" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossmodel.Layer.n_reinst">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">n_reinst</span></span><a class="headerlink" href="#gemact.lossmodel.Layer.n_reinst" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossmodel.Layer.reinst_loading">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">reinst_loading</span></span><a class="headerlink" href="#gemact.lossmodel.Layer.reinst_loading" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossmodel.Layer.aggr_cover">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">aggr_cover</span></span><a class="headerlink" href="#gemact.lossmodel.Layer.aggr_cover" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossmodel.Layer.manteinance_deductible">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">manteinance_deductible</span></span><a class="headerlink" href="#gemact.lossmodel.Layer.manteinance_deductible" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossmodel.Layer.share">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">share</span></span><a class="headerlink" href="#gemact.lossmodel.Layer.share" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossmodel.Layer.basis">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">basis</span></span><a class="headerlink" href="#gemact.lossmodel.Layer.basis" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossmodel.Layer.category">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">category</span></span><a class="headerlink" href="#gemact.lossmodel.Layer.category" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossmodel.Layer.exit_point">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">exit_point</span></span><a class="headerlink" href="#gemact.lossmodel.Layer.exit_point" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossmodel.Layer.identifier">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">identifier</span></span><a class="headerlink" href="#gemact.lossmodel.Layer.identifier" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossmodel.Layer.specs">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">specs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossmodel.html#Layer.specs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.Layer.specs" title="Permalink to this definition">#</a></dt>
+<dd><p>Method (static) returning layer specifications names.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>layer specifications names.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">set</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossmodel.Layer._check_and_set_category">
+<span class="sig-name descname"><span class="pre">_check_and_set_category</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossmodel.html#Layer._check_and_set_category"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.Layer._check_and_set_category" title="Permalink to this definition">#</a></dt>
+<dd><p>Method that check and set the category of the layer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Void.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gemact.lossmodel.LayerTower">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LayerTower</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossmodel.html#LayerTower"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.LayerTower" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></p>
+<p>Policy structure tower of non-proportional layers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>**args</strong> – See below</p>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><em>args</em> (<code class="docutils literal notranslate"><span class="pre">Layers</span></code>) –
+Layer tower elements.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossmodel.LayerTower.append">
+<span class="sig-name descname"><span class="pre">append</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">item</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossmodel.html#LayerTower.append"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.LayerTower.append" title="Permalink to this definition">#</a></dt>
+<dd><p>Append object to the end of the list.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossmodel.LayerTower.insert">
+<span class="sig-name descname"><span class="pre">insert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">item</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossmodel.html#LayerTower.insert"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.LayerTower.insert" title="Permalink to this definition">#</a></dt>
+<dd><p>Insert object before index.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossmodel.LayerTower.extend">
+<span class="sig-name descname"><span class="pre">extend</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossmodel.html#LayerTower.extend"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.LayerTower.extend" title="Permalink to this definition">#</a></dt>
+<dd><p>Extend list by appending elements from the iterable.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossmodel.LayerTower.sort">
+<span class="sig-name descname"><span class="pre">sort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'deductible'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossmodel.html#LayerTower.sort"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.LayerTower.sort" title="Permalink to this definition">#</a></dt>
+<dd><p>Stable sort <em>IN PLACE</em>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossmodel.LayerTower.remove_layer_loading">
+<span class="sig-name descname"><span class="pre">remove_layer_loading</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossmodel.html#LayerTower.remove_layer_loading"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.LayerTower.remove_layer_loading" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossmodel.LayerTower.set_and_check_tower">
+<span class="sig-name descname"><span class="pre">set_and_check_tower</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossmodel.html#LayerTower.set_and_check_tower"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.LayerTower.set_and_check_tower" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossmodel.LayerTower.remove_duplicates">
+<span class="sig-name descname"><span class="pre">remove_duplicates</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossmodel.html#LayerTower.remove_duplicates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.LayerTower.remove_duplicates" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gemact.lossmodel.Frequency">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Frequency</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">par</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossmodel.html#Frequency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.Frequency" title="Permalink to this definition">#</a></dt>
+<dd><p>Frequency component of the loss models underlying the collective risk model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dist</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – name of the frequency distribution.</p></li>
+<li><p><strong>par</strong> (<code class="docutils literal notranslate"><span class="pre">dict</span></code>) – parameters of the frequency distribution.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossmodel.Frequency.dist">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dist</span></span><a class="headerlink" href="#gemact.lossmodel.Frequency.dist" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossmodel.Frequency.par">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">par</span></span><a class="headerlink" href="#gemact.lossmodel.Frequency.par" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossmodel.Frequency.p0">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">p0</span></span><a class="headerlink" href="#gemact.lossmodel.Frequency.p0" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossmodel.Frequency.model">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#gemact.lossmodel.Frequency.model" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossmodel.Frequency.abp0g0">
+<span class="sig-name descname"><span class="pre">abp0g0</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fj</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossmodel.html#Frequency.abp0g0"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.Frequency.abp0g0" title="Permalink to this definition">#</a></dt>
+<dd><p>Parameters of the frequency distribution according to the (a, b, k) parametrization,
+the probability generating function computed in zero given the discrete severity probs,
+and the probability of the distribution in zero.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fj</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – discretized severity distribution probabilities.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a, b, probability in zero and aggregate cost probability in zero.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">tuple</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gemact.lossmodel.Severity">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Severity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">par</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossmodel.html#Severity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.Severity" title="Permalink to this definition">#</a></dt>
+<dd><p>Severity component of the loss models underlying the collective risk model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dist</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – name of the frequency distribution.</p></li>
+<li><p><strong>par</strong> (<code class="docutils literal notranslate"><span class="pre">dict</span></code>) – parameters of the frequency distribution.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossmodel.Severity.dist">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dist</span></span><a class="headerlink" href="#gemact.lossmodel.Severity.dist" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossmodel.Severity.par">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">par</span></span><a class="headerlink" href="#gemact.lossmodel.Severity.par" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossmodel.Severity.loc">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">loc</span></span><a class="headerlink" href="#gemact.lossmodel.Severity.loc" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossmodel.Severity.model">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#gemact.lossmodel.Severity.model" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossmodel.Severity.excess_frequency">
+<span class="sig-name descname"><span class="pre">excess_frequency</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_frequency</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossmodel.html#Severity.excess_frequency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.Severity.excess_frequency" title="Permalink to this definition">#</a></dt>
+<dd><p>Expected excess frequency function, i.e. expected frequency in excess of a given threshold.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – value where excess frequency is evaluated.</p></li>
+<li><p><strong>base_frequency</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – frequency at origin (default is 100). Optional.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>excess frequency.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossmodel.Severity.return_period">
+<span class="sig-name descname"><span class="pre">return_period</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_frequency</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossmodel.html#Severity.return_period"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.Severity.return_period" title="Permalink to this definition">#</a></dt>
+<dd><p>Expected return period, given a base frequency.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – value whose return period is evaluated.</p></li>
+<li><p><strong>base_frequency</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – frequency at origin (default is 100). Optional.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>return period.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossmodel.Severity.stop_loss_transformation">
+<span class="sig-name descname"><span class="pre">stop_loss_transformation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cover</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deductible</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossmodel.html#Severity.stop_loss_transformation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.Severity.stop_loss_transformation" title="Permalink to this definition">#</a></dt>
+<dd><p>Approximated stop loss transformation function.
+General method for severity class, overridden by distribution specific implementation if available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cover</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – cover, also referred to as limit. cover plus deductible is the upper priority or severity ‘exit point’.</p></li>
+<li><p><strong>deductible</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – deductible, also referred to as retention or priority.</p></li>
+<li><p><strong>size</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, optional) – inner random variates sample size to approximate the integral (default is 50000).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>stop_loss_transformation value.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossmodel.Severity.discretize">
+<span class="sig-name descname"><span class="pre">discretize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">discr_method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_discr_nodes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">discr_step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cover</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deductible</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossmodel.html#Severity.discretize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.Severity.discretize" title="Permalink to this definition">#</a></dt>
+<dd><p>Severity discretization according to the discretization method selected by the user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>deductible</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>) – deductible, also referred to as retention or priority.</p></li>
+<li><p><strong>cover</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>) – cover, also referred to as limit.</p></li>
+<li><p><strong>discr_method</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – severity discretization method. One of ‘massdispersal’, ‘localmoments’.</p></li>
+<li><p><strong>discr_step</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – severity discretization step.</p></li>
+<li><p><strong>n_discr_nodes</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – number of nodes of the discretized severity.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>discrete severity, nodes sequence and discrete probabilities.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">dict</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gemact.lossmodel.LossModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LossModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">severity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frequency</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">policystructure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">PolicyStructure()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aggr_loss_dist_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_sim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tilt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tilt_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_aggr_dist_nodes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sev_discr_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'localmoments'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_sev_discr_nodes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sev_discr_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossmodel.html#LossModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.LossModel" title="Permalink to this definition">#</a></dt>
+<dd><p>Loss model for (re)insurance costing and risk modeling using a collective risk model framework.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aggr_loss_dist_method</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – computational method to approximate the aggregate loss distribution.
+One of Fast Fourier Transform (‘fft’),
+Panjer recursion (‘recursion’) and Monte Carlo simulation (‘mc’).</p></li>
+<li><p><strong>n_sim</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – number of simulations of Monte Carlo (mc) method for the aggregate loss distribution approximation.</p></li>
+<li><p><strong>tilt</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>) – whether tilting of fft is present or not (default is 0).</p></li>
+<li><p><strong>tilt_value</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – tilting parameter value of fft method for the aggregate loss distribution approximation.</p></li>
+<li><p><strong>random_state</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, optional) – random state for the random number generator in mc.</p></li>
+<li><p><strong>n_aggr_dist_nodes</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – number of nodes in the approximated aggregate loss distribution.</p></li>
+<li><p><strong>sev_discr_method</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – severity discretization method. One of ‘massdispersal’, ‘localmoments’.</p></li>
+<li><p><strong>sev_discr_step</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – severity discretization step.</p></li>
+<li><p><strong>n_sev_discr_nodes</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – number of nodes of the discretized severity.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossmodel.LossModel.severity">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">severity</span></span><a class="headerlink" href="#gemact.lossmodel.LossModel.severity" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossmodel.LossModel.frequency">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">frequency</span></span><a class="headerlink" href="#gemact.lossmodel.LossModel.frequency" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossmodel.LossModel.policystructure">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">policystructure</span></span><a class="headerlink" href="#gemact.lossmodel.LossModel.policystructure" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossmodel.LossModel.aggr_loss_dist_method">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">aggr_loss_dist_method</span></span><a class="headerlink" href="#gemact.lossmodel.LossModel.aggr_loss_dist_method" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossmodel.LossModel.n_sim">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">n_sim</span></span><a class="headerlink" href="#gemact.lossmodel.LossModel.n_sim" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossmodel.LossModel.random_state">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">random_state</span></span><a class="headerlink" href="#gemact.lossmodel.LossModel.random_state" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossmodel.LossModel.n_aggr_dist_nodes">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">n_aggr_dist_nodes</span></span><a class="headerlink" href="#gemact.lossmodel.LossModel.n_aggr_dist_nodes" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossmodel.LossModel.tilt">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tilt</span></span><a class="headerlink" href="#gemact.lossmodel.LossModel.tilt" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossmodel.LossModel.tilt_value">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tilt_value</span></span><a class="headerlink" href="#gemact.lossmodel.LossModel.tilt_value" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossmodel.LossModel.sev_discr_method">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sev_discr_method</span></span><a class="headerlink" href="#gemact.lossmodel.LossModel.sev_discr_method" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossmodel.LossModel.n_sev_discr_nodes">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">n_sev_discr_nodes</span></span><a class="headerlink" href="#gemact.lossmodel.LossModel.n_sev_discr_nodes" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossmodel.LossModel.sev_discr_step">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sev_discr_step</span></span><a class="headerlink" href="#gemact.lossmodel.LossModel.sev_discr_step" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossmodel.LossModel.dist">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dist</span></span><a class="headerlink" href="#gemact.lossmodel.LossModel.dist" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossmodel.LossModel.pure_premium">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pure_premium</span></span><a class="headerlink" href="#gemact.lossmodel.LossModel.pure_premium" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossmodel.LossModel.dist_calculate">
+<span class="sig-name descname"><span class="pre">dist_calculate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">aggr_loss_dist_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_aggr_dist_nodes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_sim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sev_discr_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sev_discr_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_sev_discr_nodes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tilt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tilt_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossmodel.html#LossModel.dist_calculate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.LossModel.dist_calculate" title="Permalink to this definition">#</a></dt>
+<dd><p>Approximate the aggregate loss distributions of each policystructure layer.
+Distributions can be accessed via the <code class="docutils literal notranslate"><span class="pre">dist</span></code> property,
+which is a list of <code class="docutils literal notranslate"><span class="pre">distributions.PWC</span></code> objects, each one representing a aggregate loss distribution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aggr_loss_dist_method</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – computational method to approximate the aggregate loss distribution.
+One of Fast Fourier Transform (‘fft’), Panjer recursion (‘recursion’)
+and Monte Carlo simulation (‘mc’), optional (default ‘mc’).</p></li>
+<li><p><strong>n_aggr_dist_nodes</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – number of nodes in the approximated aggregate loss distribution.
+Remark: before application of eventual aggregate conditions.</p></li>
+<li><p><strong>n_sim</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – number of simulations of Monte Carlo (mc) method
+for the aggregate loss distribution approximation, optional (default is 10000).</p></li>
+<li><p><strong>random_state</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – random state for the random number generator in MC, optional.</p></li>
+<li><p><strong>sev_discr_method</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – severity discretization method, optional (default is ‘localmoments’).</p></li>
+<li><p><strong>sev_discr_step</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – severity discretization step.</p></li>
+<li><p><strong>n_sev_discr_nodes</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – number of nodes of the discretized severity.</p></li>
+<li><p><strong>tilt</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>) – whether tilting of fft is present or not, optional (default is 0).</p></li>
+<li><p><strong>tilt_value</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – tilting parameter value of fft method for the aggregate loss distribution approximation,
+optional.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>void</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossmodel.LossModel._apply_aggr_conditions">
+<span class="sig-name descname"><span class="pre">_apply_aggr_conditions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cover</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deductible</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossmodel.html#LossModel._apply_aggr_conditions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.LossModel._apply_aggr_conditions" title="Permalink to this definition">#</a></dt>
+<dd><p>Apply aggregate conditions, i.e. aggregate deductble and aggregate cover, to a aggregate loss distribution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dist</strong> (<code class="docutils literal notranslate"><span class="pre">dict</span></code>) – aggregate loss distribution (before aggregate conditions).</p></li>
+<li><p><strong>cover</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>) – (aggregate) cover.</p></li>
+<li><p><strong>deductible</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>) – (aggregate) deductible.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>aggregate loss distribution after aggregate conditions.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">dict</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossmodel.LossModel.moment">
+<span class="sig-name descname"><span class="pre">moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">central</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossmodel.html#LossModel.moment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.LossModel.moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Aggregate loss distribution moment of order n.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>central</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>) – <code class="docutils literal notranslate"><span class="pre">True</span></code> if the moment is central, <code class="docutils literal notranslate"><span class="pre">False</span></code> if the moment is raw.</p></li>
+<li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – order of the moment, optional (default is 1).</p></li>
+<li><p><strong>idx</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – list index corresponding to the layer loss distribution of interest (default is 0).
+See ‘index_to_layer_name’ and ‘layer_name_to_index’ PolicyStructure methods.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>moment of order n.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossmodel.LossModel.ppf">
+<span class="sig-name descname"><span class="pre">ppf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">q</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossmodel.html#LossModel.ppf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.LossModel.ppf" title="Permalink to this definition">#</a></dt>
+<dd><p>Aggregate loss distribution percent point function, a.k.a. the quantile function,
+inverse of the cumulative distribution function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>q</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – probability.</p></li>
+<li><p><strong>idx</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – list index corresponding to the layer loss distribution of interest (default is 0).
+See ‘index_to_layer_name’ and ‘layer_name_to_index’ PolicyStructure methods.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>quantile.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossmodel.LossModel.cdf">
+<span class="sig-name descname"><span class="pre">cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossmodel.html#LossModel.cdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.LossModel.cdf" title="Permalink to this definition">#</a></dt>
+<dd><p>Aggregate loss distribution cumulative distribution function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code> or <code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – quantiles where the cumulative distribution function is evaluated.</p></li>
+<li><p><strong>idx</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – list index corresponding to the layer loss distribution of interest (default is 0).
+See ‘index_to_layer_name’ and ‘layer_name_to_index’ PolicyStructure methods.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>cumulative distribution function.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossmodel.LossModel.rvs">
+<span class="sig-name descname"><span class="pre">rvs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossmodel.html#LossModel.rvs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.LossModel.rvs" title="Permalink to this definition">#</a></dt>
+<dd><p>Random variates generator function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>size</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – random variates sample size, optional (default is 1).</p></li>
+<li><p><strong>random_state</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – random state for the random number generator, optional (no default).</p></li>
+<li><p><strong>idx</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – list index corresponding to the layer loss distribution of interest (default is 0).
+See ‘index_to_layer_name’ and ‘layer_name_to_index’ PolicyStructure methods.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>random variates.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.int</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossmodel.LossModel.mean">
+<span class="sig-name descname"><span class="pre">mean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossmodel.html#LossModel.mean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.LossModel.mean" title="Permalink to this definition">#</a></dt>
+<dd><p>Mean of the aggregate loss.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>idx</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – list index corresponding to the layer loss distribution of interest (default is 0).
+See ‘index_to_layer_name’ and ‘layer_name_to_index’ PolicyStructure methods.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>mean of the aggregate loss.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossmodel.LossModel.std">
+<span class="sig-name descname"><span class="pre">std</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossmodel.html#LossModel.std"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.LossModel.std" title="Permalink to this definition">#</a></dt>
+<dd><p>Standard deviation of the aggregate loss.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">idx</span></code>) – list index corresponding to the layer loss distribution of interest (default is 0).
+See ‘index_to_layer_name’ and ‘layer_name_to_index’ PolicyStructure methods.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>standard deviation of the aggregate loss.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossmodel.LossModel.skewness">
+<span class="sig-name descname"><span class="pre">skewness</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossmodel.html#LossModel.skewness"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.LossModel.skewness" title="Permalink to this definition">#</a></dt>
+<dd><p>Skewness of the aggregate loss.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>idx</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – list index corresponding to the layer loss distribution of interest (default is 0).
+See ‘index_to_layer_name’ and ‘layer_name_to_index’ PolicyStructure methods.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>skewness of the aggregate loss.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossmodel.LossModel._reinstatements_costing_adjuster">
+<span class="sig-name descname"><span class="pre">_reinstatements_costing_adjuster</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aggr_deductible</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_reinst</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cover</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reinst_loading</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossmodel.html#LossModel._reinstatements_costing_adjuster"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.LossModel._reinstatements_costing_adjuster" title="Permalink to this definition">#</a></dt>
+<dd><p>Reinstatements costing premium adjustment. Multiplicative factor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dist</strong> (<code class="docutils literal notranslate"><span class="pre">dict</span></code>) – aggregate loss distribution (before aggregate conditions).</p></li>
+<li><p><strong>aggr_deductible</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>) – aggregate deductible.</p></li>
+<li><p><strong>n_reinst</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – Number of reinstatements.</p></li>
+<li><p><strong>cover</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>) – cover.</p></li>
+<li><p><strong>reinst_loading</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code> or <code class="docutils literal notranslate"><span class="pre">np.array</span></code>) – loadings of reinstatements layers (default value is 0), typically a value in [0, 1].</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>reinstatements costing adjustment.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossmodel.LossModel._stop_loss_costing">
+<span class="sig-name descname"><span class="pre">_stop_loss_costing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cover</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deductible</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossmodel.html#LossModel._stop_loss_costing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.LossModel._stop_loss_costing" title="Permalink to this definition">#</a></dt>
+<dd><p>Stop loss costing via stop loss transformation.
+Compute the expected value of layer transformed aggregate loss distribution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dist</strong> (<code class="docutils literal notranslate"><span class="pre">dict</span></code>) – aggregate loss distribution (before aggregate conditions).</p></li>
+<li><p><strong>cover</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – cover.</p></li>
+<li><p><strong>deductible</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – deductible.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>expected value of layer transformed aggregate loss distribution.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossmodel.LossModel.costing">
+<span class="sig-name descname"><span class="pre">costing</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossmodel.html#LossModel.costing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.LossModel.costing" title="Permalink to this definition">#</a></dt>
+<dd><p>Actuarial costing (also referred to as risk costing) of (re)insurance covers,
+such as quota share, excess-of-loss (including reinstatements or aggregate conditions) and stop loss.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Void</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossmodel.LossModel.print_costing_specs">
+<span class="sig-name descname"><span class="pre">print_costing_specs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossmodel.html#LossModel.print_costing_specs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.LossModel.print_costing_specs" title="Permalink to this definition">#</a></dt>
+<dd><p>Print costing information of a given layer (specified via its index).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>idx</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – index corresponding to the policystructure layer of interest (default is 0).
+See ‘index_to_layer_name’ and ‘layer_name_to_index’ PolicyStructure methods.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Void</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossmodel.LossModel.print_aggr_loss_method_specs">
+<span class="sig-name descname"><span class="pre">print_aggr_loss_method_specs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossmodel.html#LossModel.print_aggr_loss_method_specs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.LossModel.print_aggr_loss_method_specs" title="Permalink to this definition">#</a></dt>
+<dd><p>Print information of the aggregate loss distribution approximation for a given layer (specified via its index).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>idx</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – index corresponding to the policystructure layer of interest (default is 0).
+See ‘index_to_layer_name’ and ‘layer_name_to_index’ PolicyStructure methods.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Void</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossmodel.LossModel.print_policy_layer_specs">
+<span class="sig-name descname"><span class="pre">print_policy_layer_specs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossmodel.html#LossModel.print_policy_layer_specs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.LossModel.print_policy_layer_specs" title="Permalink to this definition">#</a></dt>
+<dd><p>Print policy structure information of a given layer (specified via its index).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>idx</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – index corresponding to the policystructure layer of interest (default is 0).
+See ‘index_to_layer_name’ and ‘layer_name_to_index’ PolicyStructure methods.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Void</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossmodel.LossModel._check_dist">
+<span class="sig-name descname"><span class="pre">_check_dist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossmodel.html#LossModel._check_dist"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.LossModel._check_dist" title="Permalink to this definition">#</a></dt>
+<dd><p>Check that the aggregate loss distribution is not missing.
+Helper method called before executing other methods based on <code class="docutils literal notranslate"><span class="pre">dist</span></code> property.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>idx</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – index corresponding to the policystructure layer of interest (default is 0).
+See ‘index_to_layer_name’ and ‘layer_name_to_index’ PolicyStructure methods.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Void</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Gabriele Pittarello, Edoardo Luini, Manfred Marvin Marchione<br/>
+  
+      &copy; Copyright 2022, Gabriele Pittarello, Edoardo Luini, Manfred Marvin Marchione.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

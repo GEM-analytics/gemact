@@ -1,0 +1,1559 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>gemact.lossaggregation &#8212; gemact</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="canonical" href="https://github.com/GEM-analytics/gemact/autoapi/gemact/lossaggregation/index.html" />
+    <link rel="shortcut icon" href="../../../_static/webtab.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../../_static/GEMActlogo.png" class="logo" alt="logo">
+      
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../index.html">
+                    GEMAct
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Table of Contents
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../usage.html">
+   Usage
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../modeling.html">
+   Actuarial modeling with GEMAct
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../api.html">
+   API reference guide
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../gemanalytics.html">
+   About us
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../../index.html">
+   API Reference
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active has-children">
+    <a class="reference internal" href="../index.html">
+     <code class="xref py py-mod docutils literal notranslate">
+      <span class="pre">
+       gemact
+      </span>
+     </code>
+    </a>
+    <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+    <label for="toctree-checkbox-2">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul class="current">
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../tests/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         gemact.tests
+        </span>
+       </code>
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+      <label for="toctree-checkbox-3">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../tests/test_copulas/index.html">
+         <code class="xref py py-mod docutils literal notranslate">
+          <span class="pre">
+           gemact.tests.test_copulas
+          </span>
+         </code>
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../tests/test_distributions/index.html">
+         <code class="xref py py-mod docutils literal notranslate">
+          <span class="pre">
+           gemact.tests.test_distributions
+          </span>
+         </code>
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../tests/test_lossaggregation/index.html">
+         <code class="xref py py-mod docutils literal notranslate">
+          <span class="pre">
+           gemact.tests.test_lossaggregation
+          </span>
+         </code>
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../tests/test_lossmodel/index.html">
+         <code class="xref py py-mod docutils literal notranslate">
+          <span class="pre">
+           gemact.tests.test_lossmodel
+          </span>
+         </code>
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../tests/test_lossreserve/index.html">
+         <code class="xref py py-mod docutils literal notranslate">
+          <span class="pre">
+           gemact.tests.test_lossreserve
+          </span>
+         </code>
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../tests/test_paperscripts/index.html">
+         <code class="xref py py-mod docutils literal notranslate">
+          <span class="pre">
+           gemact.tests.test_paperscripts
+          </span>
+         </code>
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../vignette/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         gemact.vignette
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../calculators/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         gemact.calculators
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../config/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         gemact.config
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../copulas/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         gemact.copulas
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../distributions/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         gemact.distributions
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../gemdata/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         gemact.gemdata
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../helperfunctions/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         gemact.helperfunctions
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../libraries/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         gemact.libraries
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toctree-l3 current active">
+      <a class="current reference internal" href="#">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         gemact.lossaggregation
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../lossmodel/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         gemact.lossmodel
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../lossreserve/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         gemact.lossreserve
+        </span>
+       </code>
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../../_static/index.html">
+     <code class="xref py py-mod docutils literal notranslate">
+      <span class="pre">
+       _static
+      </span>
+     </code>
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+    <label for="toctree-checkbox-4">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../_static/calculators/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         _static.calculators
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../_static/config/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         _static.config
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../_static/copulas/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         _static.copulas
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../_static/distributions/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         _static.distributions
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../_static/gemdata/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         _static.gemdata
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../_static/helperfunctions/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         _static.helperfunctions
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../_static/libraries/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         _static.libraries
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../_static/lossaggregation/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         _static.lossaggregation
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../_static/lossmodel/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         _static.lossmodel
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../_static/lossreserve/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         _static.lossreserve
+        </span>
+       </code>
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../conf/index.html">
+     <code class="xref py py-mod docutils literal notranslate">
+      <span class="pre">
+       conf
+      </span>
+     </code>
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/gpitt71/gemact-code"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/gpitt71/gemact-code/edit/master/autoapi/gemact/lossaggregation/index.rst"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../../_sources/autoapi/gemact/lossaggregation/index.rst.txt"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.rst</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-contents">
+   Module Contents
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#classes">
+     Classes
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#attributes">
+     Attributes
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#gemact.lossaggregation.logger">
+       logger
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation">
+       LossAggregation
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation.random_state">
+         random_state
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation.sample_size">
+         sample_size
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation.margins_pars">
+         margins_pars
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation.margins">
+         margins
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation.copula">
+         copula
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation.copula_par">
+         copula_par
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation.d">
+         d
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation.a">
+         a
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation.ext">
+         ext
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation.mat">
+         mat
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation.n_simpleces">
+         n_simpleces
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation.card">
+         card
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation.s">
+         s
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation.m">
+         m
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation.dist">
+         dist
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation._dist_calculate">
+         _dist_calculate
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation._private_prop_aep_initiate">
+         _private_prop_aep_initiate
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation._private_prop_aep_delete">
+         _private_prop_aep_delete
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation._copula_rvs">
+         _copula_rvs
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation._copula_cdf">
+         _copula_cdf
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation._margins_ppf">
+         _margins_ppf
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation._margins_cdf">
+         _margins_cdf
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation._volume_calc">
+         _volume_calc
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation._sn_update">
+         _sn_update
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation._h_update">
+         _h_update
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation._b_update">
+         _b_update
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation._aep_cdf">
+         _aep_cdf
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation._mc_cdf">
+         _mc_cdf
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation.cdf">
+         cdf
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation.ppf">
+         ppf
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation.moment">
+         moment
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation.rvs">
+         rvs
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation.mean">
+         mean
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation.skewness">
+         skewness
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation.std">
+         std
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>gemact.lossaggregation</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-contents">
+   Module Contents
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#classes">
+     Classes
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#attributes">
+     Attributes
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#gemact.lossaggregation.logger">
+       logger
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation">
+       LossAggregation
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation.random_state">
+         random_state
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation.sample_size">
+         sample_size
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation.margins_pars">
+         margins_pars
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation.margins">
+         margins
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation.copula">
+         copula
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation.copula_par">
+         copula_par
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation.d">
+         d
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation.a">
+         a
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation.ext">
+         ext
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation.mat">
+         mat
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation.n_simpleces">
+         n_simpleces
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation.card">
+         card
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation.s">
+         s
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation.m">
+         m
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation.dist">
+         dist
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation._dist_calculate">
+         _dist_calculate
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation._private_prop_aep_initiate">
+         _private_prop_aep_initiate
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation._private_prop_aep_delete">
+         _private_prop_aep_delete
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation._copula_rvs">
+         _copula_rvs
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation._copula_cdf">
+         _copula_cdf
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation._margins_ppf">
+         _margins_ppf
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation._margins_cdf">
+         _margins_cdf
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation._volume_calc">
+         _volume_calc
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation._sn_update">
+         _sn_update
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation._h_update">
+         _h_update
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation._b_update">
+         _b_update
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation._aep_cdf">
+         _aep_cdf
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation._mc_cdf">
+         _mc_cdf
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation.cdf">
+         cdf
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation.ppf">
+         ppf
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation.moment">
+         moment
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation.rvs">
+         rvs
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation.mean">
+         mean
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation.skewness">
+         skewness
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#gemact.lossaggregation.LossAggregation.std">
+         std
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section id="module-gemact.lossaggregation">
+<span id="gemact-lossaggregation"></span><h1><a class="reference internal" href="#module-gemact.lossaggregation" title="gemact.lossaggregation"><code class="xref py py-mod docutils literal notranslate"><span class="pre">gemact.lossaggregation</span></code></a><a class="headerlink" href="#module-gemact.lossaggregation" title="Permalink to this headline">#</a></h1>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">#</a></h2>
+<section id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#gemact.lossaggregation.LossAggregation" title="gemact.lossaggregation.LossAggregation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LossAggregation</span></code></a></p></td>
+<td><p>Class representing the sum of positive countinuous random variables.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="attributes">
+<h3>Attributes<a class="headerlink" href="#attributes" title="Permalink to this headline">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#gemact.lossaggregation.logger" title="gemact.lossaggregation.logger"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logger</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py data">
+<dt class="sig sig-object py" id="gemact.lossaggregation.logger">
+<span class="sig-name descname"><span class="pre">logger</span></span><a class="headerlink" href="#gemact.lossaggregation.logger" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LossAggregation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">copula</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copula_par</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">margins</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">margins_pars</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossaggregation.html#LossAggregation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossaggregation.LossAggregation" title="Permalink to this definition">#</a></dt>
+<dd><p>Class representing the sum of positive countinuous random variables.
+Dependence structure is specified by a copula and a set of given marginals.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>copula</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – Name of the copula that describes the dependence structure.</p></li>
+<li><p><strong>copula_par</strong> (<code class="docutils literal notranslate"><span class="pre">dict</span></code>) – Parameters of the copula.</p></li>
+<li><p><strong>margins</strong> (<code class="docutils literal notranslate"><span class="pre">list</span></code>) – List of the marginal distributions.</p></li>
+<li><p><strong>margins_pars</strong> (<code class="docutils literal notranslate"><span class="pre">list</span></code>) – List of the marginal distributions parameters. It must be a list of dictionaries.</p></li>
+<li><p><strong>**kwargs</strong> – See below</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><dl class="simple">
+<dt><em>random_state</em> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) –</dt><dd><p>Random state for the random number generator in MC.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><em>sample_size</em> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) –</dt><dd><p>Number of simulations of Monte Carlo (mc) method.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation.random_state">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">random_state</span></span><a class="headerlink" href="#gemact.lossaggregation.LossAggregation.random_state" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation.sample_size">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sample_size</span></span><a class="headerlink" href="#gemact.lossaggregation.LossAggregation.sample_size" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation.margins_pars">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">margins_pars</span></span><a class="headerlink" href="#gemact.lossaggregation.LossAggregation.margins_pars" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation.margins">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">margins</span></span><a class="headerlink" href="#gemact.lossaggregation.LossAggregation.margins" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation.copula">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">copula</span></span><a class="headerlink" href="#gemact.lossaggregation.LossAggregation.copula" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation.copula_par">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">copula_par</span></span><a class="headerlink" href="#gemact.lossaggregation.LossAggregation.copula_par" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation.d">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">d</span></span><a class="headerlink" href="#gemact.lossaggregation.LossAggregation.d" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation.a">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">a</span></span><a class="headerlink" href="#gemact.lossaggregation.LossAggregation.a" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation.ext">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ext</span></span><a class="headerlink" href="#gemact.lossaggregation.LossAggregation.ext" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation.mat">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mat</span></span><a class="headerlink" href="#gemact.lossaggregation.LossAggregation.mat" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation.n_simpleces">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">n_simpleces</span></span><a class="headerlink" href="#gemact.lossaggregation.LossAggregation.n_simpleces" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation.card">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">card</span></span><a class="headerlink" href="#gemact.lossaggregation.LossAggregation.card" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation.s">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">s</span></span><a class="headerlink" href="#gemact.lossaggregation.LossAggregation.s" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation.m">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">m</span></span><a class="headerlink" href="#gemact.lossaggregation.LossAggregation.m" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation.dist">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dist</span></span><a class="headerlink" href="#gemact.lossaggregation.LossAggregation.dist" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation._dist_calculate">
+<span class="sig-name descname"><span class="pre">_dist_calculate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossaggregation.html#LossAggregation._dist_calculate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossaggregation.LossAggregation._dist_calculate" title="Permalink to this definition">#</a></dt>
+<dd><p>Approximation of the distribution by calculating nodes, pdf, and cdf.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Void.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation._private_prop_aep_initiate">
+<span class="sig-name descname"><span class="pre">_private_prop_aep_initiate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossaggregation.html#LossAggregation._private_prop_aep_initiate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossaggregation.LossAggregation._private_prop_aep_initiate" title="Permalink to this definition">#</a></dt>
+<dd><p>AEP algorithm helper function.
+See Arbenz P., Embrechts P., and Puccetti G.
+“The AEP algorithm for the fast computation of the distribution of the sum of dependent random variables.” Bernoulli (2011): 562-591.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – initial value for the quantile where the cumulative distribution function is evaluated.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>void</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation._private_prop_aep_delete">
+<span class="sig-name descname"><span class="pre">_private_prop_aep_delete</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossaggregation.html#LossAggregation._private_prop_aep_delete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossaggregation.LossAggregation._private_prop_aep_delete" title="Permalink to this definition">#</a></dt>
+<dd><p>AEP algorithm helper function.
+See Arbenz P., Embrechts P., and Puccetti G.
+“The AEP algorithm for the fast computation of the distribution of the sum of dependent random variables.” Bernoulli (2011): 562-591.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>void</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation._copula_rvs">
+<span class="sig-name descname"><span class="pre">_copula_rvs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossaggregation.html#LossAggregation._copula_rvs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossaggregation.LossAggregation._copula_rvs" title="Permalink to this definition">#</a></dt>
+<dd><p>Copula random variates generator function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>size</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – random variates sample size.</p></li>
+<li><p><strong>random_state</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – random state for the random number generator.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>random variates.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.int</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation._copula_cdf">
+<span class="sig-name descname"><span class="pre">_copula_cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossaggregation.html#LossAggregation._copula_cdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossaggregation.LossAggregation._copula_cdf" title="Permalink to this definition">#</a></dt>
+<dd><p>Copula cumulative distribution function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code> or <code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – quantiles where the cumulative distribution function is evaluated.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>cumulative distribution function.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation._margins_ppf">
+<span class="sig-name descname"><span class="pre">_margins_ppf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossaggregation.html#LossAggregation._margins_ppf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossaggregation.LossAggregation._margins_ppf" title="Permalink to this definition">#</a></dt>
+<dd><p>Margin percent point function, a.k.a. the quantile function,
+inverse of the cumulative distribution function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>k</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – probability.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>quantile.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation._margins_cdf">
+<span class="sig-name descname"><span class="pre">_margins_cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossaggregation.html#LossAggregation._margins_cdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossaggregation.LossAggregation._margins_cdf" title="Permalink to this definition">#</a></dt>
+<dd><p>Margin cumulative distribution function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>k</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code> or <code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – quantiles where the cumulative distribution function is evaluated.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>cumulative distribution function.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation._volume_calc">
+<span class="sig-name descname"><span class="pre">_volume_calc</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossaggregation.html#LossAggregation._volume_calc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossaggregation.LossAggregation._volume_calc" title="Permalink to this definition">#</a></dt>
+<dd><p>AEP algorithm helper function.
+See Arbenz P., Embrechts P., and Puccetti G.
+“The AEP algorithm for the fast computation of the distribution of the sum of dependent random variables.” Bernoulli (2011): 562-591.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation._sn_update">
+<span class="sig-name descname"><span class="pre">_sn_update</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossaggregation.html#LossAggregation._sn_update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossaggregation.LossAggregation._sn_update" title="Permalink to this definition">#</a></dt>
+<dd><p>AEP algorithm helper function.
+See Arbenz P., Embrechts P., and Puccetti G.
+“The AEP algorithm for the fast computation of the distribution of the sum of dependent random variables.” Bernoulli (2011): 562-591.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation._h_update">
+<span class="sig-name descname"><span class="pre">_h_update</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossaggregation.html#LossAggregation._h_update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossaggregation.LossAggregation._h_update" title="Permalink to this definition">#</a></dt>
+<dd><p>AEP algorithm helper function.
+See Arbenz P., Embrechts P., and Puccetti G.
+“The AEP algorithm for the fast computation of the distribution of the sum of dependent random variables.” Bernoulli (2011): 562-591.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation._b_update">
+<span class="sig-name descname"><span class="pre">_b_update</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossaggregation.html#LossAggregation._b_update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossaggregation.LossAggregation._b_update" title="Permalink to this definition">#</a></dt>
+<dd><p>AEP algorithm helper function.
+See Arbenz P., Embrechts P., and Puccetti G.
+“The AEP algorithm for the fast computation of the distribution of the sum of dependent random variables.” Bernoulli (2011): 562-591.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation._aep_cdf">
+<span class="sig-name descname"><span class="pre">_aep_cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_iter</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossaggregation.html#LossAggregation._aep_cdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossaggregation.LossAggregation._aep_cdf" title="Permalink to this definition">#</a></dt>
+<dd><p>AEP algorithm to approximate cdf.
+See Arbenz P., Embrechts P., and Puccetti G.
+“The AEP algorithm for the fast computation of the distribution of the sum of dependent random variables.” Bernoulli (2011): 562-591.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – quantile where the cumulative distribution function is evaluated.</p></li>
+<li><p><strong>n_iter</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – number of algorithm iterations.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>cumulative distribution function.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation._mc_cdf">
+<span class="sig-name descname"><span class="pre">_mc_cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossaggregation.html#LossAggregation._mc_cdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossaggregation.LossAggregation._mc_cdf" title="Permalink to this definition">#</a></dt>
+<dd><p>Cumulative distribution function from Monte Carlo simulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>) – quantile where the cumulative distribution function is evaluated.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>cumulative distribution function.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation.cdf">
+<span class="sig-name descname"><span class="pre">cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mc'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossaggregation.html#LossAggregation.cdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossaggregation.LossAggregation.cdf" title="Permalink to this definition">#</a></dt>
+<dd><p>Cumulative distribution function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – quantile where the cumulative distribution function is evaluated.</p></li>
+<li><p><strong>method</strong> (<code class="docutils literal notranslate"><span class="pre">string</span></code>) – method to approximate the cdf of the aggregate loss random variable
+(i.e. the sum of random variables with a dependence structure specified by a copula).
+One of AEP (‘aep’) and Monte Carlo simulation (‘mc’).</p></li>
+<li><p><strong>**kwargs</strong> – See below</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>cumulative distribution function.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><dl class="simple">
+<dt><em>n_iter</em> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) –</dt><dd><p>Number of iteration of AEP algorithm.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation.ppf">
+<span class="sig-name descname"><span class="pre">ppf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">q</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossaggregation.html#LossAggregation.ppf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossaggregation.LossAggregation.ppf" title="Permalink to this definition">#</a></dt>
+<dd><p>Percent point function, a.k.a. the quantile function,
+inverse of cumulative distribution function from Monte Carlo simulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>q</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>, <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>, <code class="docutils literal notranslate"><span class="pre">numpy.floating</span></code>) – level at which the percent point function is evaluated.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>percent point function.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.int</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation.moment">
+<span class="sig-name descname"><span class="pre">moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">central</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossaggregation.html#LossAggregation.moment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossaggregation.LossAggregation.moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central moment of order n.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>raw moment of order n.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation.rvs">
+<span class="sig-name descname"><span class="pre">rvs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossaggregation.html#LossAggregation.rvs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossaggregation.LossAggregation.rvs" title="Permalink to this definition">#</a></dt>
+<dd><p>Random variates. Based on Monte Carlo simulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>size</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – random variates sample size (default is 1).</p></li>
+<li><p><strong>random_state</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – random state for the random number generator.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Random variates.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation.mean">
+<span class="sig-name descname"><span class="pre">mean</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossaggregation.html#LossAggregation.mean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossaggregation.LossAggregation.mean" title="Permalink to this definition">#</a></dt>
+<dd><p>Mean of the aggregated loss.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>mean of the aggregated loss.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation.skewness">
+<span class="sig-name descname"><span class="pre">skewness</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossaggregation.html#LossAggregation.skewness"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossaggregation.LossAggregation.skewness" title="Permalink to this definition">#</a></dt>
+<dd><p>Skewness of the aggregated loss.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>skewness of the aggregated loss.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation.std">
+<span class="sig-name descname"><span class="pre">std</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/gemact/lossaggregation.html#LossAggregation.std"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossaggregation.LossAggregation.std" title="Permalink to this definition">#</a></dt>
+<dd><p>Standard deviation of the aggregated loss.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>standard deviation of the aggregated loss.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Gabriele Pittarello, Edoardo Luini, Manfred Marvin Marchione<br/>
+  
+      &copy; Copyright 2022, Gabriele Pittarello, Edoardo Luini, Manfred Marvin Marchione.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

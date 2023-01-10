@@ -1,0 +1,104 @@
+:py:mod:`gemact.source.conf`
+============================
+
+.. py:module:: gemact.source.conf
+
+
+Module Contents
+---------------
+
+.. py:data:: project
+   :annotation: = GEMAct
+
+   
+
+.. py:data:: copyright
+   :annotation: = 2022, Gabriele Pittarello, Edoardo Luini, Manfred Marvin Marchione
+
+   
+
+.. py:data:: author
+   :annotation: = Gabriele Pittarello, Edoardo Luini, Manfred Marvin Marchione
+
+   
+
+.. py:data:: release
+   :annotation: = 2022
+
+   
+
+.. py:data:: extensions
+   :annotation: = ['sphinx.ext.autodoc', 'autoapi.extension', 'sphinx.ext.intersphinx', 'sphinx.ext.ifconfig',...
+
+   
+
+.. py:data:: autoapi_type
+   :annotation: = python
+
+   
+
+.. py:data:: autoapi_dirs
+   :annotation: = ['C:/Users/gpitt/PycharmProjects/gemact-code/gemact/']
+
+   
+
+.. py:data:: exclude_patterns
+   :annotation: = ['_build']
+
+   
+
+.. py:data:: bibtex_bibfiles
+   :annotation: = ['refs.bib']
+
+   
+
+.. py:data:: sitemap_filename
+   :annotation: = sitemap.xml
+
+   
+
+.. py:data:: templates_path
+   :annotation: = ['_templates']
+
+   
+
+.. py:data:: html_baseurl
+   :annotation: = https://github.com/GEM-analytics/gemact/
+
+   
+
+.. py:data:: html_theme
+   :annotation: = sphinx_book_theme
+
+   
+
+.. py:data:: html_title
+   :annotation: = gemact
+
+   
+
+.. py:data:: html_logo
+   :annotation: = images/GEMActlogo.png
+
+   
+
+.. py:data:: html_favicon
+   :annotation: = images/webtab.png
+
+   
+
+.. py:data:: html_static_path
+   :annotation: = ['_static']
+
+   
+
+.. py:data:: html_theme_options
+   
+
+   
+
+.. py:data:: add_module_names
+   :annotation: = False
+
+   
+

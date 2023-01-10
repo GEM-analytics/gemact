@@ -1,0 +1,814 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>gemact.source.helperfunctions &#8212; gemact</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="canonical" href="https://github.com/GEM-analytics/gemact/_modules/gemact/source/helperfunctions.html" />
+    <link rel="shortcut icon" href="../../../_static/webtab.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../../_static/GEMActlogo.png" class="logo" alt="logo">
+      
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../index.html">
+                    GEMAct
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Table of Contents
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../usage.html">
+   Usage
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../modeling.html">
+   Actuarial modeling with GEMAct
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../api.html">
+   API reference guide
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../gemanalytics.html">
+   About us
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../../autoapi/index.html">
+   API Reference
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="simple">
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/gpitt71/gemact-code"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1></h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <h1>Source code for gemact.source.helperfunctions</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">.libraries</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">quick_setup</span><span class="p">()</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">log</span><span class="o">.</span><span class="n">name</span><span class="p">(</span><span class="s1">&#39;helperfunctions&#39;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="arg_type_handler"><a class="viewcode-back" href="../../../autoapi/gemact/source/helperfunctions/index.html#gemact.source.helperfunctions.arg_type_handler">[docs]</a><span class="k">def</span> <span class="nf">arg_type_handler</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Checks that arguments in distributions.py methods are managed correctly.</span>
+
+<span class="sd">    :param x: method input</span>
+<span class="sd">    :type x: any</span>
+
+<span class="sd">    :return: x</span>
+<span class="sd">    :rtype: ``numpy.ndarray``</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">type_tuple</span> <span class="o">=</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">)</span>
+    <span class="n">assert_type_value</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span> <span class="n">type_tuple</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span> <span class="ow">or</span> <span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">x</span></div>
+
+
+<div class="viewcode-block" id="ecdf"><a class="viewcode-back" href="../../../autoapi/gemact/source/helperfunctions/index.html#gemact.source.helperfunctions.ecdf">[docs]</a><span class="k">def</span> <span class="nf">ecdf</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Empirical cumulative distribution function.</span>
+
+<span class="sd">    :param x:  sequence of nodes basis of the ecdf.</span>
+<span class="sd">    :type x: ``numpy.ndarray``</span>
+
+<span class="sd">    :return: empirical cumulative distribution function.</span>
+<span class="sd">    :rtype: ``function``</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">result</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">side</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span> <span class="o">/</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span>
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="normalizernans"><a class="viewcode-back" href="../../../autoapi/gemact/source/helperfunctions/index.html#gemact.source.helperfunctions.normalizernans">[docs]</a><span class="k">def</span> <span class="nf">normalizernans</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Normalize a vector with nan values ignoring the nan values during the computation.</span>
+<span class="sd">    Used in the lossreserve.py script.</span>
+
+<span class="sd">    :param x: sequence to be normalized.</span>
+<span class="sd">    :type x: ``numpy.ndarray``</span>
+
+<span class="sd">    :return: normalized sequence.</span>
+<span class="sd">    :rtype: ``numpy.ndarray``</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">&lt;</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="n">x</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">x</span><span class="p">)]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">x</span><span class="p">)]</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">x</span><span class="p">)])</span>
+    <span class="k">return</span> <span class="n">x</span></div>
+
+
+<div class="viewcode-block" id="lrcrm_f1"><a class="viewcode-back" href="../../../autoapi/gemact/source/helperfunctions/index.html#gemact.source.helperfunctions.lrcrm_f1">[docs]</a><span class="k">def</span> <span class="nf">lrcrm_f1</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dist</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Simulate a random number from a distribution a poisson distribution with parameter mu.</span>
+<span class="sd">    Used in the lossreserve.py script.</span>
+
+<span class="sd">    :param x: distribution parameter.</span>
+<span class="sd">    :type x: ``float``</span>
+<span class="sd">    :param dist: poisson distribution.</span>
+<span class="sd">    :type dist: ``scipy.stats._discrete_distns.poisson_gen``</span>
+
+<span class="sd">    :return:simulated random number.</span>
+<span class="sd">    :rtype: ``numpy.ndarray``</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">dist</span><span class="p">(</span><span class="n">mu</span><span class="o">=</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="lrcrm_f2"><a class="viewcode-back" href="../../../autoapi/gemact/source/helperfunctions/index.html#gemact.source.helperfunctions.lrcrm_f2">[docs]</a><span class="k">def</span> <span class="nf">lrcrm_f2</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dist</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Simulates random values from a gamma.</span>
+<span class="sd">    Used in the lossreserve.py script.</span>
+
+<span class="sd">    :param x: it contains the gamma parameters and the number of random values to be simulated.</span>
+<span class="sd">    :type x: ``numpy.ndarray``</span>
+<span class="sd">    :param dist: gamma distribution.</span>
+<span class="sd">    :type dist: ``scipy.stats._discrete_distns.gamma_gen``</span>
+
+<span class="sd">    :return: sum of the simulated numbers.</span>
+<span class="sd">    :rtype: ``numpy.ndarray``</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dist</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">scale</span><span class="o">=</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span></div>
+
+
+<div class="viewcode-block" id="cartesian_product"><a class="viewcode-back" href="../../../autoapi/gemact/source/helperfunctions/index.html#gemact.source.helperfunctions.cartesian_product">[docs]</a><span class="k">def</span> <span class="nf">cartesian_product</span><span class="p">(</span><span class="o">*</span><span class="n">arrays</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generate the matrix points where copula is computed.</span>
+<span class="sd">    Used in the lossaggregation.py script.</span>
+
+<span class="sd">    :return: matrix of points.</span>
+<span class="sd">    :rtype:``numpy.ndarray``</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">broadcastable</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ix_</span><span class="p">(</span><span class="o">*</span><span class="n">arrays</span><span class="p">)</span>
+    <span class="n">broadcasted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">broadcast_arrays</span><span class="p">(</span><span class="o">*</span><span class="n">broadcastable</span><span class="p">)</span>
+    <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">broadcasted</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">broadcasted</span><span class="p">)</span>
+    <span class="n">dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">result_type</span><span class="p">(</span><span class="o">*</span><span class="n">arrays</span><span class="p">)</span>
+
+    <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">rows</span> <span class="o">*</span> <span class="n">cols</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+    <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">rows</span>
+    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">broadcasted</span><span class="p">:</span>
+        <span class="n">out</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">end</span><span class="p">,</span> <span class="n">end</span> <span class="o">+</span> <span class="n">rows</span>
+    <span class="k">return</span> <span class="n">out</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">cols</span><span class="p">,</span> <span class="n">rows</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="cov_to_corr"><a class="viewcode-back" href="../../../autoapi/gemact/source/helperfunctions/index.html#gemact.source.helperfunctions.cov_to_corr">[docs]</a><span class="k">def</span> <span class="nf">cov_to_corr</span><span class="p">(</span><span class="n">cov</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Covariance matrix to correlation matrix converter.</span>
+<span class="sd">    Equivalent to R &#39;cov2corr&#39; function.</span>
+
+<span class="sd">    Used in the copulas.py script.</span>
+
+<span class="sd">    :param cov: matrix of covariates</span>
+<span class="sd">    :type cov: ``numpy.ndarray``</span>
+
+<span class="sd">    :return: matrix of correlations.</span>
+<span class="sd">    :rtype: ``numpy.ndarray``</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">cov</span><span class="o">.</span><span class="n">diagonal</span><span class="p">())</span>
+    <span class="n">corr</span> <span class="o">=</span> <span class="p">(</span><span class="n">cov</span><span class="o">.</span><span class="n">T</span><span class="o">/</span><span class="n">cov</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="o">/</span><span class="n">d</span>
+    <span class="k">return</span> <span class="n">corr</span></div>
+
+
+<div class="viewcode-block" id="multivariate_t_cdf"><a class="viewcode-back" href="../../../autoapi/gemact/source/helperfunctions/index.html#gemact.source.helperfunctions.multivariate_t_cdf">[docs]</a><span class="k">def</span> <span class="nf">multivariate_t_cdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">corr</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">tol</span><span class="p">,</span> <span class="n">iterations</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Estimate the cdf of a multivariate t distribution using quasi-Monte Carlo algorithm.</span>
+<span class="sd">    Used in the copulas.py script.</span>
+
+<span class="sd">    See:</span>
+<span class="sd">    - Genz, A. and F. Bretz (1999) &quot;Numerical Computation of Multivariate</span>
+<span class="sd">    t Probabilities with Application to Power Calculation of Multiple</span>
+<span class="sd">    Contrasts&quot;, J.Statist.Comput.Simul., 63:361-378.</span>
+<span class="sd">    - Genz, A. and F. Bretz (2002) &quot;Comparison of Methods for the</span>
+<span class="sd">    Computation of Multivariate t Probabilities&quot;, J.Comp.Graph.Stat.,</span>
+<span class="sd">    11(4):950-971.</span>
+
+<span class="sd">    :param x: quantile where the cumulative distribution function is evaluated.</span>
+<span class="sd">    :type x: ``numpy.ndarray``</span>
+<span class="sd">    :param corr: correlation matrix of the distribution,must be symmetric and positive</span>
+<span class="sd">                 definite, with all elements of the diagonal being 1.</span>
+<span class="sd">    :type corr: ``numpy.ndarray``</span>
+<span class="sd">    :param df: degrees-of-freedom of the distribution, must be a positive real number.</span>
+<span class="sd">    :type df: ``float``</span>
+<span class="sd">    :param tol: tolerance for quasi-Monte Carlo algorithm.</span>
+<span class="sd">    :type tol: ``float``</span>
+<span class="sd">    :param iterations: number of iterations of quasi-Monte Carlo algorithm.</span>
+<span class="sd">    :type iterations: ``int``</span>
+
+<span class="sd">    :return: cumulative density function value and error estimate of the numerical approximation.</span>
+<span class="sd">    :rtype: ``tuple``</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+
+    <span class="n">chol</span> <span class="o">=</span> <span class="n">cholesky</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
+
+    <span class="n">primes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">31</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">107</span><span class="p">,</span> <span class="mi">163</span><span class="p">,</span>
+              <span class="mi">241</span><span class="p">,</span> <span class="mi">359</span><span class="p">,</span> <span class="mi">541</span><span class="p">,</span> <span class="mi">811</span><span class="p">,</span> <span class="mi">1217</span><span class="p">,</span>
+              <span class="mi">1823</span><span class="p">,</span> <span class="mi">2731</span><span class="p">,</span> <span class="mi">4099</span><span class="p">,</span> <span class="mi">6151</span><span class="p">,</span> <span class="mi">9227</span><span class="p">,</span>
+              <span class="mi">13841</span><span class="p">,</span> <span class="mi">20759</span><span class="p">,</span> <span class="mi">31139</span><span class="p">,</span> <span class="mi">46703</span><span class="p">,</span> <span class="mi">70051</span><span class="p">,</span>
+              <span class="mi">105071</span><span class="p">,</span> <span class="mi">157627</span><span class="p">,</span> <span class="mi">236449</span><span class="p">,</span> <span class="mi">354677</span><span class="p">,</span> <span class="mi">532009</span><span class="p">,</span>
+              <span class="mi">798023</span><span class="p">,</span> <span class="mi">1197037</span><span class="p">,</span> <span class="mi">1795559</span><span class="p">,</span> <span class="mi">2693329</span><span class="p">,</span> <span class="mi">4039991</span><span class="p">,</span>
+              <span class="mi">6059981</span><span class="p">,</span> <span class="mi">9089981</span><span class="p">]</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">chol</span><span class="p">)</span>
+    <span class="n">chol</span> <span class="o">=</span> <span class="n">chol</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">chol</span><span class="p">),</span> <span class="p">(</span><span class="n">chol</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">))</span>
+
+    <span class="n">t</span><span class="p">,</span> <span class="n">sigma_squared</span> <span class="o">=</span> <span class="n">_multivariate_t_cdf_qmc</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">chol</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">iterations</span><span class="p">,</span> <span class="n">primes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">err</span> <span class="o">=</span> <span class="mf">3.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">sigma_squared</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">prime</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+        <span class="n">t_hat</span><span class="p">,</span> <span class="n">sigma_squared_tau_hat</span> <span class="o">=</span> <span class="n">_multivariate_t_cdf_qmc</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">chol</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">iterations</span><span class="p">,</span> <span class="n">prime</span><span class="p">)</span>
+
+        <span class="n">t</span> <span class="o">+=</span> <span class="n">sigma_squared</span> <span class="o">*</span> <span class="p">(</span><span class="n">t_hat</span> <span class="o">-</span> <span class="n">t</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">sigma_squared</span> <span class="o">+</span> <span class="n">sigma_squared_tau_hat</span><span class="p">)</span>
+        <span class="n">sigma_squared</span> <span class="o">*=</span> <span class="n">sigma_squared_tau_hat</span> <span class="o">/</span> <span class="p">(</span><span class="n">sigma_squared_tau_hat</span> <span class="o">+</span> <span class="n">sigma_squared</span><span class="p">)</span>
+        <span class="n">err</span> <span class="o">=</span> <span class="mf">3.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">sigma_squared</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">err</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">err</span>
+
+    <span class="k">return</span> <span class="nb">tuple</span><span class="p">((</span><span class="n">t</span><span class="p">,</span> <span class="n">err</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="_multivariate_t_cdf_qmc"><a class="viewcode-back" href="../../../autoapi/gemact/source/helperfunctions/index.html#gemact.source.helperfunctions._multivariate_t_cdf_qmc">[docs]</a><span class="k">def</span> <span class="nf">_multivariate_t_cdf_qmc</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">chol</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">iterations</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Multivariate t cumulative density function computed via quasi-Monte Carlo.</span>
+<span class="sd">    References:</span>
+<span class="sd">    - Genz, A. and F. Bretz (1999) &quot;Numerical Computation of Multivariate t Probabilities with Application to Power Calculation of Multiple Contrasts&quot;, Journal of Statistical Computation and Simulation, 63:361-378.</span>
+<span class="sd">    - Genz, A. and F. Bretz (2002) &quot;Comparison of Methods for the Computation of Multivariate t Probabilities&quot;,  Journal of Computational and Graphical Statistics, 11(4):950-971.</span>
+
+<span class="sd">    :param x: quantile where the cumulative distribution function is evaluated.</span>
+<span class="sd">    :type x: ``numpy.ndarray``</span>
+<span class="sd">    :param chol: Cholesky decomposition of the correlation matrix of the distribution, must be symmetric and positive</span>
+<span class="sd">                 definite, with all elements of the diagonal being 1.</span>
+<span class="sd">    :type chol: ``numpy.ndarray``</span>
+<span class="sd">    :param df: degrees-of-freedom of the distribution.</span>
+<span class="sd">    :type df: float</span>
+<span class="sd">    :param iterations: number of iterations.</span>
+<span class="sd">    :type iterations: ``int``</span>
+<span class="sd">    :param size: sample size.</span>
+<span class="sd">    :type size: ``int``</span>
+
+<span class="sd">    :return: quasi-Monte Carlo estimate of the t distribution cumulative density function.</span>
+<span class="sd">    :rtype: ``float``</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">sampler</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">qmc</span><span class="o">.</span><span class="n">Halton</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="n">chol</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">scramble</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">size</span><span class="p">)</span>
+    <span class="n">t_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">iterations</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">rep</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iterations</span><span class="p">):</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">chol</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="p">((</span><span class="n">p</span> <span class="o">+</span> <span class="n">w</span><span class="p">)</span> <span class="o">%</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">t_</span><span class="p">[</span><span class="n">rep</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">_t_separation_variable</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">chol</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span> <span class="o">+</span>
+                    <span class="n">_t_separation_variable</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">chol</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="mi">1</span><span class="o">-</span><span class="n">w</span><span class="p">,</span> <span class="n">size</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">t_</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">t_</span><span class="p">)</span> <span class="o">/</span> <span class="n">iterations</span></div>
+
+
+<div class="viewcode-block" id="_t_separation_variable"><a class="viewcode-back" href="../../../autoapi/gemact/source/helperfunctions/index.html#gemact.source.helperfunctions._t_separation_variable">[docs]</a><span class="k">def</span> <span class="nf">_t_separation_variable</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">chol</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Separation of variables transformation helper function to estimate t distribution cumulative density function.</span>
+
+<span class="sd">    :param x: quantile where the cumulative distribution function is evaluated.</span>
+<span class="sd">    :type x: ``numpy.ndarray``</span>
+<span class="sd">    :param chol: Cholesky decomposition of the correlation matrix of the distribution, must be symmetric and positive</span>
+<span class="sd">                 definite, with all elements of the diagonal being 1.</span>
+<span class="sd">    :type chol: ``numpy.ndarray``</span>
+<span class="sd">    :param df: degrees-of-freedom of the distribution.</span>
+<span class="sd">    :type df: ``float``</span>
+<span class="sd">    :param w: transformed uniform variable.</span>
+<span class="sd">    :type w: ``float``</span>
+<span class="sd">    :param size: sample size.</span>
+<span class="sd">    :type size: ``int``</span>
+
+<span class="sd">    :return: helper estimate of the t distribution cumulative density function.</span>
+<span class="sd">    :rtype: ``float``</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">eps_tolerance</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">eps</span>
+    <span class="n">gam_inv</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">special</span><span class="o">.</span><span class="n">gammaincinv</span><span class="p">(</span><span class="n">df</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">w</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]))</span> <span class="o">**</span> <span class="mf">0.5</span> <span class="o">/</span> <span class="p">(</span><span class="n">df</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">norm_prob</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">gam_inv</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">norm_quant</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">size</span><span class="p">,</span> <span class="n">chol</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+    <span class="n">t_separate_hat</span> <span class="o">=</span> <span class="n">norm_prob</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">chol</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="n">max_min</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">norm_prob</span> <span class="o">*</span> <span class="n">w</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span> <span class="o">-</span> <span class="n">i</span><span class="p">],</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">eps_tolerance</span><span class="p">),</span> <span class="n">eps_tolerance</span><span class="p">)</span>
+        <span class="n">norm_quant</span><span class="p">[:,</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">max_min</span><span class="p">)</span>
+        <span class="n">norm_prob</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">gam_inv</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">norm_quant</span><span class="p">,</span> <span class="n">chol</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]))</span>
+        <span class="n">t_separate_hat</span> <span class="o">*=</span> <span class="n">norm_prob</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">t_separate_hat</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="assert_member"><a class="viewcode-back" href="../../../autoapi/gemact/source/helperfunctions/index.html#gemact.source.helperfunctions.assert_member">[docs]</a><span class="k">def</span> <span class="nf">assert_member</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">choice</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span> <span class="n">link</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Assert that a value is cointained in a reference set the value must belong to.</span>
+
+<span class="sd">    :param value: value whose membership of set is to be checked.</span>
+<span class="sd">    :type value: ``string``</span>
+<span class="sd">    :param choice: admissible values.</span>
+<span class="sd">    :type choice: ``set``</span>
+<span class="sd">    :param logger: error log.</span>
+<span class="sd">    :type logger: ``logger``</span>
+<span class="sd">    :param link: link where additional information about set memebers can be found (optional).</span>
+<span class="sd">    :type link: ``string``</span>
+<span class="sd">    :return: Void.</span>
+<span class="sd">    :rtype: None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">choice</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">set</span><span class="p">)):</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%r</span><span class="s1"> is not one of </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">choice</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">choice</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">choice</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%r</span><span class="s1"> is not supported.</span><span class="se">\n</span><span class="s1"> See </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">link</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">choice</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;choice must be a ``list``, ``set`` or ``dict``&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="assert_type_value"><a class="viewcode-back" href="../../../autoapi/gemact/source/helperfunctions/index.html#gemact.source.helperfunctions.assert_type_value">[docs]</a><span class="k">def</span> <span class="nf">assert_type_value</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">),</span> <span class="n">upper_bound</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lower_bound</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lower_close</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">upper_close</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Assert that a value match a given type and optional value criteria.</span>
+
+<span class="sd">    :param value: value whose type and criteria is to be checked.</span>
+<span class="sd">    :type value: ``object``</span>
+<span class="sd">    :param name: name associated to the value object.</span>
+<span class="sd">    :type name: ``string``</span>
+<span class="sd">    :param logger: error log.</span>
+<span class="sd">    :type logger: ``logger``</span>
+<span class="sd">    :param type: reference type to be matched.</span>
+<span class="sd">    :type type: ``tuple`` or ``type``</span>
+<span class="sd">    :param upper_bound: upper bound of value. Not ``None`` if value is a ``float`` or ``int``.</span>
+<span class="sd">    :type upper_bound: ``float``</span>
+<span class="sd">    :param lower_bound: lower bound of value. Not ``None`` if value is a ``float`` or ``int``.</span>
+<span class="sd">    :type lower_bound: ``float``</span>
+<span class="sd">    :param upper_close: if upper_bound value is included in the admissible range or not. Not ``None`` iff value is a ``float`` or ``int``.</span>
+<span class="sd">    :type upper_close: ``bool``</span>
+<span class="sd">    :param lower_close: if lower_bound value is included in the admissible range or not. Not ``None`` iff value is a ``float`` or ``int``.</span>
+<span class="sd">    :type lower_close: ``bool``</span>
+<span class="sd">    :return: Void.</span>
+<span class="sd">    :rtype: None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;TypeError in </span><span class="si">%s</span><span class="s1">.</span><span class="se">\n</span><span class="s1"> </span><span class="si">%s</span><span class="s1"> is not a </span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">type</span><span class="p">):</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">lower_bound</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">lower_close</span><span class="p">:</span>
+            <span class="n">check_condition</span><span class="p">(</span>
+                <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">,</span>
+                <span class="n">check</span><span class="o">=</span><span class="n">lower_bound</span><span class="p">,</span>
+                <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+                <span class="n">logger</span><span class="o">=</span><span class="n">logger</span><span class="p">,</span>
+                <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;&gt;=&#39;</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">check_condition</span><span class="p">(</span>
+                <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">,</span>
+                <span class="n">check</span><span class="o">=</span><span class="n">lower_bound</span><span class="p">,</span>
+                <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+                <span class="n">logger</span><span class="o">=</span><span class="n">logger</span><span class="p">,</span>
+                <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;&gt;&#39;</span>
+            <span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">upper_bound</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">upper_close</span><span class="p">:</span>
+            <span class="n">check_condition</span><span class="p">(</span>
+                <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">,</span>
+                <span class="n">check</span><span class="o">=</span><span class="n">upper_bound</span><span class="p">,</span>
+                <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+                <span class="n">logger</span><span class="o">=</span><span class="n">logger</span><span class="p">,</span>
+                <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;&lt;=&#39;</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">check_condition</span><span class="p">(</span>
+                <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">,</span>
+                <span class="n">check</span><span class="o">=</span><span class="n">upper_bound</span><span class="p">,</span>
+                <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+                <span class="n">logger</span><span class="o">=</span><span class="n">logger</span><span class="p">,</span>
+                <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;&lt;&#39;</span>
+            <span class="p">)</span></div>
+
+            
+<div class="viewcode-block" id="ndarray_try_convert"><a class="viewcode-back" href="../../../autoapi/gemact/source/helperfunctions/index.html#gemact.source.helperfunctions.ndarray_try_convert">[docs]</a><span class="k">def</span> <span class="nf">ndarray_try_convert</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert a given input value to a numpy array.</span>
+
+<span class="sd">    :param value: value to be converted into a numpy array.</span>
+<span class="sd">    :type value: ``float``, `np.floating``</span>
+<span class="sd">    :param name: name associated to the value object.</span>
+<span class="sd">    :type name: ``string``</span>
+<span class="sd">    :param logger: error log.</span>
+<span class="sd">    :type logger: ``logger``</span>
+<span class="sd">    :param type: dtype of the numpy array to be returned.</span>
+<span class="sd">    :type type: ``np.dtype``</span>
+<span class="sd">    :return: numpy array.</span>
+<span class="sd">    :rtype: ``np.ndarray``</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;TypeError in </span><span class="si">%s</span><span class="s1">.</span><span class="se">\n</span><span class="s1"> </span><span class="si">%s</span><span class="s1"> is not a numpy.ndarray.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+    <span class="nb">type</span> <span class="o">=</span> <span class="nb">type</span> <span class="k">if</span> <span class="nb">type</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="s1">&#39;float&#39;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">value</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">type</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">value</span>
+        <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+            <span class="n">e</span><span class="o">.</span><span class="n">args</span> <span class="o">+=</span> <span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="p">)</span>
+            <span class="k">raise</span></div>
+    
+
+<div class="viewcode-block" id="check_condition"><a class="viewcode-back" href="../../../autoapi/gemact/source/helperfunctions/index.html#gemact.source.helperfunctions.check_condition">[docs]</a><span class="k">def</span> <span class="nf">check_condition</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;==&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Check that a condition holds between two values.</span>
+
+<span class="sd">    :param value: value to assert equality.</span>
+<span class="sd">    :type value: ``float``, ``int``</span>
+<span class="sd">    :param check: reference to match value to assert equality.</span>
+<span class="sd">    :type check: ``float``, ``int``</span>
+<span class="sd">    :param name: name associated to the value object.</span>
+<span class="sd">    :type name: ``string``</span>
+<span class="sd">    :param logger: error log.</span>
+<span class="sd">    :type logger: ``logger``</span>
+<span class="sd">    :param type: condition type to check, one of &#39;==&#39;, &#39;!=&#39;, &#39;&lt;=&#39;, &#39;&lt;&#39;, &#39;&gt;=&#39;, &#39;&gt;&#39;.</span>
+<span class="sd">    :type type: ``string``</span>
+<span class="sd">    :return: Void.</span>
+<span class="sd">    :rtype: None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;==&#39;</span><span class="p">:</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;Make sure </span><span class="si">%s</span><span class="s1"> equals </span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">check</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span> <span class="o">==</span> <span class="n">check</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;!=&#39;</span><span class="p">:</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;Make sure </span><span class="si">%s</span><span class="s1"> is not equal to </span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">check</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span> <span class="o">!=</span> <span class="n">check</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;&lt;=&#39;</span><span class="p">:</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;Make sure </span><span class="si">%s</span><span class="s1"> is lower than or equal to </span><span class="si">%r</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">check</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="n">check</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;&lt;&#39;</span><span class="p">:</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;Make sure </span><span class="si">%s</span><span class="s1"> is lower than </span><span class="si">%r</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">check</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="n">check</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;&gt;=&#39;</span><span class="p">:</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;Make sure </span><span class="si">%s</span><span class="s1"> is greater than or equal to </span><span class="si">%r</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">check</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span> <span class="o">&gt;=</span> <span class="n">check</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;&gt;&#39;</span><span class="p">:</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;Make sure </span><span class="si">%s</span><span class="s1"> is greater than </span><span class="si">%r</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">check</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="n">check</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;and not&#39;</span><span class="p">:</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;Make sure </span><span class="si">%s</span><span class="s1"> is greater than </span><span class="si">%r</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">check</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">check</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;Wrong type argument selected.&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="handle_random_state"><a class="viewcode-back" href="../../../autoapi/gemact/source/helperfunctions/index.html#gemact.source.helperfunctions.handle_random_state">[docs]</a><span class="k">def</span> <span class="nf">handle_random_state</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">logger</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Assert and if missing set up a random state to use in a pseudo random simulation.</span>
+
+<span class="sd">    :param value: value of the random state provided by the user (a.k.a set random seed).</span>
+<span class="sd">    :type value: ``int`` or ``None``</span>
+<span class="sd">    :param logger: error log.</span>
+<span class="sd">    :type logger: ``logger``</span>
+<span class="sd">    :return: value of the random state.</span>
+<span class="sd">    :rtype: ``int``</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> is not an integer. </span><span class="se">\n</span><span class="s1"> Please make sure random_state is set correctly.&#39;</span> <span class="o">%</span> <span class="n">value</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span> <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">value</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="assert_not_none"><a class="viewcode-back" href="../../../autoapi/gemact/source/helperfunctions/index.html#gemact.source.helperfunctions.assert_not_none">[docs]</a><span class="k">def</span> <span class="nf">assert_not_none</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">logger</span><span class="p">):</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;Make sure </span><span class="si">%s</span><span class="s1"> is not None&#39;</span> <span class="o">%</span><span class="n">name</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">)):</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="layerFunc"><a class="viewcode-back" href="../../../autoapi/gemact/source/helperfunctions/index.html#gemact.source.helperfunctions.layerFunc">[docs]</a><span class="k">def</span> <span class="nf">layerFunc</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">cover</span><span class="p">,</span> <span class="n">deductible</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    layer transformation, i.e. min-max function. Vectorized version with respect to cover and deductible.</span>
+
+<span class="sd">    :param nodes: distribution nodes to which apply the layer transformation.</span>
+<span class="sd">    :type nodes: ``np.ndarray``, ``np.floating``</span>
+<span class="sd">    :param deductible: deductible.</span>
+<span class="sd">    :type deductible: ``np.ndarray``, ``np.floating``</span>
+<span class="sd">    :param cover: cover.</span>
+<span class="sd">    :type cover: ``np.ndarray``, ``np.floating``</span>
+<span class="sd">    :return: layer transformed array.</span>
+<span class="sd">    :rtype: ``np.ndarray``, ``np.floating``</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">nodes</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">nodes_</span> <span class="o">=</span> <span class="n">nodes</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="n">nodes</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">deductible</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">cover</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;wrong shape of input data!&quot;</span>
+        <span class="n">nodes_</span> <span class="o">=</span> <span class="n">nodes</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">nodes</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">nodes_</span> <span class="o">-</span> <span class="n">deductible</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">0</span><span class="p">),</span> <span class="n">cover</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="triangles_dimension"><a class="viewcode-back" href="../../../autoapi/gemact/source/helperfunctions/index.html#gemact.source.helperfunctions.triangles_dimension">[docs]</a><span class="k">def</span> <span class="nf">triangles_dimension</span><span class="p">(</span><span class="n">incremental_payments</span><span class="p">,</span> <span class="n">cased_payments</span><span class="p">,</span> <span class="n">incurred_number</span><span class="p">,</span> <span class="n">cased_number</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function to check that the dimension of the triangles provided is consistent.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">j1</span> <span class="o">=</span> <span class="n">incremental_payments</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">incremental_payments</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+    <span class="n">j2</span> <span class="o">=</span> <span class="n">cased_payments</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">cased_payments</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+    <span class="n">j3</span> <span class="o">=</span> <span class="n">incurred_number</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">incurred_number</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+    <span class="n">j4</span> <span class="o">=</span> <span class="n">cased_number</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">cased_number</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+    <span class="n">j</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">j1</span><span class="p">,</span> <span class="n">j2</span><span class="p">,</span> <span class="n">j3</span><span class="p">,</span> <span class="n">j4</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+
+    <span class="n">j</span> <span class="o">=</span> <span class="n">j</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">j</span><span class="p">)]</span>
+
+    <span class="n">g</span> <span class="o">=</span> <span class="n">groupby</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+
+    <span class="n">check_condition</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+                    <span class="n">check</span><span class="o">=</span><span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+                    <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;and not&#39;</span><span class="p">,</span>
+                    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;triangles shape&#39;</span><span class="p">,</span>
+                    <span class="n">logger</span><span class="o">=</span><span class="n">logger</span>
+                    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">j</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre></div>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Gabriele Pittarello, Edoardo Luini, Manfred Marvin Marchione<br/>
+  
+      &copy; Copyright 2022, Gabriele Pittarello, Edoardo Luini, Manfred Marvin Marchione.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

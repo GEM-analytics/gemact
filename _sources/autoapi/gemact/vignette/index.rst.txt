@@ -1,0 +1,6 @@
+:py:mod:`gemact.vignette`
+=========================
+
+.. py:module:: gemact.vignette
+
+

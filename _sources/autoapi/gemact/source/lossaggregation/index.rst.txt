@@ -1,0 +1,311 @@
+:py:mod:`gemact.source.lossaggregation`
+=======================================
+
+.. py:module:: gemact.source.lossaggregation
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   gemact.source.lossaggregation.LossAggregation
+
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   gemact.source.lossaggregation.logger
+
+
+.. py:data:: logger
+   
+
+   
+
+.. py:class:: LossAggregation(copula, copula_par, margins, margins_pars, **kwargs)
+
+   Class representing the sum of positive countinuous random variables.
+   Dependence structure is specified by a copula and a set of given marginals.
+
+   :param copula: Name of the copula that describes the dependence structure.
+   :type copula: ``str``
+   :param copula_par: Parameters of the copula.
+   :type copula_par: ``dict``
+   :param margins: List of the marginal distributions.
+   :type margins: ``list``
+   :param margins_pars: List of the marginal distributions parameters. It must be a list of dictionaries.
+   :type margins_pars: ``list``
+
+   :param \**kwargs:
+       See below
+
+   :Keyword Arguments:
+       * *random_state* (``int``) --
+           Random state for the random number generator in MC.
+       * *sample_size* (``int``) --
+           Number of simulations of Monte Carlo (mc) method.
+
+
+   .. py:property:: random_state
+
+
+   .. py:property:: sample_size
+
+
+   .. py:property:: margins_pars
+
+
+   .. py:property:: margins
+
+
+   .. py:property:: copula
+
+
+   .. py:property:: copula_par
+
+
+   .. py:property:: d
+
+
+   .. py:property:: a
+
+
+   .. py:property:: ext
+
+
+   .. py:property:: mat
+
+
+   .. py:property:: n_simpleces
+
+
+   .. py:property:: card
+
+
+   .. py:property:: s
+
+
+   .. py:property:: m
+
+
+   .. py:property:: dist
+
+
+   .. py:method:: _dist_calculate()
+
+      Approximation of the distribution by calculating nodes, pdf, and cdf.
+
+      :return: Void.
+      :rtype: ``None``
+
+
+   .. py:method:: _private_prop_aep_initiate(x)
+
+      AEP algorithm helper function.
+      See Arbenz P., Embrechts P., and Puccetti G.
+      "The AEP algorithm for the fast computation of the distribution of the sum of dependent random variables." Bernoulli (2011): 562-591.
+
+      :param x: initial value for the quantile where the cumulative distribution function is evaluated.
+      :type x: ``float``
+      :return: void
+      :rtype: ``None``
+
+
+   .. py:method:: _private_prop_aep_delete()
+
+      AEP algorithm helper function.
+      See Arbenz P., Embrechts P., and Puccetti G.
+      "The AEP algorithm for the fast computation of the distribution of the sum of dependent random variables." Bernoulli (2011): 562-591.
+
+      :return: void
+      :rtype: ``None``
+
+
+   .. py:method:: _copula_rvs(size, random_state)
+
+      Copula random variates generator function.
+
+      :param size: random variates sample size.
+      :type size: ``int``
+      :param random_state: random state for the random number generator.
+      :type random_state: ``int``
+      :return: random variates.
+      :rtype: ``numpy.int`` or ``numpy.ndarray``
+
+
+   .. py:method:: _copula_cdf(k)
+
+      Copula cumulative distribution function.
+
+      :param x: quantiles where the cumulative distribution function is evaluated.
+      :type x: ``float`` or ``int`` or ``numpy.ndarray``
+      :return: cumulative distribution function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: _margins_ppf(k)
+
+      Margin percent point function, a.k.a. the quantile function,
+      inverse of the cumulative distribution function.
+
+      :param k: probability.
+      :type k: ``float`` or ``numpy.ndarray``
+      :return: quantile.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: _margins_cdf(k)
+
+      Margin cumulative distribution function.
+
+      :param k: quantiles where the cumulative distribution function is evaluated.
+      :type k: ``float`` or ``int`` or ``numpy.ndarray``
+      :return: cumulative distribution function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: _volume_calc()
+
+      AEP algorithm helper function.
+      See Arbenz P., Embrechts P., and Puccetti G.
+      "The AEP algorithm for the fast computation of the distribution of the sum of dependent random variables." Bernoulli (2011): 562-591.
+
+
+   .. py:method:: _sn_update()
+
+      AEP algorithm helper function.
+      See Arbenz P., Embrechts P., and Puccetti G.
+      "The AEP algorithm for the fast computation of the distribution of the sum of dependent random variables." Bernoulli (2011): 562-591.
+
+
+   .. py:method:: _h_update()
+
+      AEP algorithm helper function.
+      See Arbenz P., Embrechts P., and Puccetti G.
+      "The AEP algorithm for the fast computation of the distribution of the sum of dependent random variables." Bernoulli (2011): 562-591.
+
+
+   .. py:method:: _b_update()
+
+      AEP algorithm helper function.
+      See Arbenz P., Embrechts P., and Puccetti G.
+      "The AEP algorithm for the fast computation of the distribution of the sum of dependent random variables." Bernoulli (2011): 562-591.
+
+
+   .. py:method:: _aep_cdf(x, n_iter)
+
+      AEP algorithm to approximate cdf.
+      See Arbenz P., Embrechts P., and Puccetti G.
+      "The AEP algorithm for the fast computation of the distribution of the sum of dependent random variables." Bernoulli (2011): 562-591.
+
+      :param x: quantile where the cumulative distribution function is evaluated.
+      :type x: ``float``
+      :param n_iter: number of algorithm iterations.
+      :type n_iter: ``int``
+
+      :return: cumulative distribution function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: _mc_cdf(x)
+
+      Cumulative distribution function from Monte Carlo simulation.
+
+      :param x: quantile where the cumulative distribution function is evaluated.
+      :type x: ``int`` or ``float``
+
+      :return: cumulative distribution function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: cdf(x, method='mc', **kwargs)
+
+      Cumulative distribution function.
+
+      :param x: quantile where the cumulative distribution function is evaluated.
+      :type x: ``float``
+      :param method: method to approximate the cdf of the aggregate loss random variable
+                      (i.e. the sum of random variables with a dependence structure specified by a copula).
+                      One of AEP ('aep') and Monte Carlo simulation ('mc').
+      :type method: ``string``
+
+      :return: cumulative distribution function.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+      :param \**kwargs:
+          See below
+
+      :Keyword Arguments:
+          * *n_iter* (``int``) --
+              Number of iteration of AEP algorithm.
+
+
+   .. py:method:: ppf(q)
+
+      Percent point function, a.k.a. the quantile function,
+      inverse of cumulative distribution function from Monte Carlo simulation.
+
+      :param q: level at which the percent point function is evaluated.
+      :type q: ``float``, ``numpy.ndarray``, ``numpy.floating``
+
+      :return: percent point function.
+      :rtype: ``numpy.float64`` or ``numpy.int`` or ``numpy.ndarray``
+
+
+   .. py:method:: moment(central=False, n=1)
+
+      Non-central moment of order n.
+
+      :param n: moment order.
+      :type n: ``int``
+
+      :return: raw moment of order n.
+      :rtype: ``float``
+
+
+   .. py:method:: rvs(size=1, random_state=None)
+
+      Random variates. Based on Monte Carlo simulation.
+
+      :param size: random variates sample size (default is 1).
+      :type size: ``int``
+      :param random_state: random state for the random number generator.
+      :type random_state: ``int``
+
+      :return: Random variates.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+   .. py:method:: mean()
+
+      Mean of the aggregated loss.
+
+      :return: mean of the aggregated loss.
+      :rtype: ``numpy.float64``
+
+
+   .. py:method:: skewness()
+
+      Skewness of the aggregated loss.
+
+      :return: skewness of the aggregated loss.
+      :rtype: ``numpy.float64``
+
+
+   .. py:method:: std()
+
+      Standard deviation of the aggregated loss.
+
+      :return: standard deviation of the aggregated loss.
+      :rtype: ``numpy.float64``
+
+
+

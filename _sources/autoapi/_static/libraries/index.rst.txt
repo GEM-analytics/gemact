@@ -1,0 +1,6 @@
+:py:mod:`_static.libraries`
+===========================
+
+.. py:module:: _static.libraries
+
+

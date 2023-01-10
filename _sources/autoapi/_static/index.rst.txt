@@ -1,0 +1,58 @@
+:py:mod:`_static`
+=================
+
+.. py:module:: _static
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   calculators/index.rst
+   config/index.rst
+   copulas/index.rst
+   distributions/index.rst
+   gemdata/index.rst
+   helperfunctions/index.rst
+   libraries/index.rst
+   lossaggregation/index.rst
+   lossmodel/index.rst
+   lossreserve/index.rst
+
+
+Package Contents
+----------------
+
+.. py:data:: __version__
+   :annotation: = 0.2.3
+
+   
+
+.. py:data:: __doc__
+   :annotation: = Multiline-String
+
+    .. raw:: html
+
+        <details><summary>Show Value</summary>
+
+    .. code-block:: text
+        :linenos:
+
+        GEMAct is an **actuarial package**, 
+        based on the collective risk theory framework, 
+        that offers actuarial scientists a comprehensive set of tools for 
+        **non-life** (re)insurance **pricing**, stochastic **claims reserving**, 
+        **risk aggregation** and extends the set of probability distributions already available in Python. 
+
+        The broad and flexible GEMAct apparatus fits into the expanding community of **Python** programming language. 
+
+        Please visit our [website](https://gem-analytics.github.io/gemact/) to see our documentation and tutorial.
+
+    .. raw:: html
+
+        </details>
+
+   
+

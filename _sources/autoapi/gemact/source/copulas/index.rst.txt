@@ -1,0 +1,341 @@
+:py:mod:`gemact.source.copulas`
+===============================
+
+.. py:module:: gemact.source.copulas
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   gemact.source.copulas.ClaytonCopula
+   gemact.source.copulas.FrankCopula
+   gemact.source.copulas.GumbelCopula
+   gemact.source.copulas.GaussCopula
+   gemact.source.copulas.TCopula
+   gemact.source.copulas.IndependenceCopula
+   gemact.source.copulas.FHLowerCopula
+   gemact.source.copulas.FHUpperCopula
+
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   gemact.source.copulas.logger
+
+
+.. py:data:: logger
+   
+
+   
+
+.. py:class:: ClaytonCopula(par, dim)
+
+   Clayton copula.
+
+   :param par: copula parameter.
+   :type par: ``float``
+   :param dim: copula dimension.
+   :type dim: ``int``
+
+   .. py:property:: par
+
+
+   .. py:property:: dim
+
+
+   .. py:method:: cdf(x)
+
+      Cumulative distribution function.
+
+      :param x: Array with shape (N, d) where N is the number of points and d the dimension.
+      :type x: ``numpy.ndarray``
+      :return: Cumulative distribution function in x.
+      :rtype: ``numpy.ndarray``
+
+
+   .. py:method:: rvs(size=1, random_state=None)
+
+      Random variates.
+
+      :param size: random variates sample size (default is 1).
+      :type size: ``int``
+      :param random_state: random state for the random number generator.
+      :type random_state: ``int``
+
+      :return: Random variates.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+
+.. py:class:: FrankCopula(par, dim)
+
+   Frank copula.
+
+   :param par: copula parameter.
+   :type par: ``float``
+   :param dim: copula dimension.
+   :type dim: ``int``
+
+   .. py:property:: par
+
+
+   .. py:property:: dim
+
+
+   .. py:method:: cdf(x)
+
+      Cumulative distribution function.
+
+      :param x: Array with shape (N, d) where N is the number of points and d the dimension.
+      :type x: ``numpy.ndarray``
+      :return: Cumulative distribution function in x.
+      :rtype: ``numpy.ndarray``
+
+
+   .. py:method:: rvs(size=1, random_state=None)
+
+      Random variates.
+
+      :param size: random variates sample size (default is 1).
+      :type size: ``int``
+      :param random_state: random state for the random number generator.
+      :type random_state: ``int``
+
+      :return: Random variates.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+
+.. py:class:: GumbelCopula(par, dim)
+
+   Gumbel copula.
+
+   :param par: copula parameter.
+   :type par: ``float``
+   :param dim: copula dimension.
+   :type dim: ``int``
+
+   .. py:property:: par
+
+
+   .. py:property:: dim
+
+
+   .. py:method:: cdf(x)
+
+      Cumulative distribution function.
+
+      :param x: Array with shape (N, d) where N is the number of points and d the dimension.
+      :type x: ``numpy.ndarray``
+      :return: Cumulative distribution function in x.
+      :rtype: ``numpy.ndarray``
+
+
+   .. py:method:: rvs(size=1, random_state=None)
+
+      Random variates.
+
+      :param size: random variates sample size (default is 1).
+      :type size: ``int``
+      :param random_state: random state for the random number generator.
+      :type random_state: ``int``
+
+      :return: Random variates.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+
+.. py:class:: GaussCopula(corr)
+
+   Gaussian copula.
+
+   :param corr: Correlation matrix.
+   :type corr: ``numpy.ndarray``
+
+   .. py:property:: corr
+
+
+   .. py:property:: dim
+
+
+   .. py:method:: cdf(x)
+
+      Cumulative distribution function.
+
+      :param x: Array with shape (N, d) where N is the number of points and d the dimension.
+      :type x: ``numpy.ndarray``
+      :return: Cumulative distribution function in x.
+      :rtype: ``numpy.ndarray``
+
+
+   .. py:method:: rvs(size=1, random_state=None)
+
+      Random variates.
+
+      :param size: random variates sample size (default is 1).
+      :type size: ``int``
+      :param random_state: random state for the random number generator.
+      :type random_state: ``int``
+
+      :return: Random variates.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+
+.. py:class:: TCopula(corr, df)
+
+   T-Student copula.
+
+   :param corr: Correlation matrix.
+   :type corr: ``numpy.ndarray``
+   :param df: Degree of freedom.
+   :type df: ``int``
+
+   .. py:property:: dim
+
+
+   .. py:property:: corr
+
+
+   .. py:property:: df
+
+
+   .. py:property:: error_cdf
+
+
+   .. py:method:: cdf(x, tolerance=0.0001, n_iterations=30)
+
+      Cumulative distribution function.
+
+      :param x: quantile where the cumulative distribution function is evaluated.
+                  Array with shape (n, d) where n is the number of data points and d the dimension.
+      :type x: ``numpy.ndarray``
+      :param tolerance: tolerance threshold of approximation (default is 1e-4).
+      :type tolerance: ``float``, optional
+      :param n_iterations: number of iteration (default is 30).
+      :type n_iterations: ``int``, optional
+
+      :return: Cumulative distribution function in x.
+      :rtype: ``numpy.ndarray``
+
+
+   .. py:method:: rvs(size=1, random_state=None)
+
+      Random variates.
+
+      :param size: random variates sample size (default is 1).
+      :type size: ``int``, optional
+      :param random_state: random state for the random number generator.
+      :type random_state: ``int``, optional
+
+      :return: Random variates.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+
+.. py:class:: IndependenceCopula(dim)
+
+   The product (independence) copula.
+
+   :param dim: copula dimension.
+   :type dim: ``int``
+
+   .. py:property:: dim
+
+
+   .. py:method:: cdf(x)
+
+      Cumulative distribution function.
+
+      :param x: Array with shape (N, d) where N is the number of points and d the dimension.
+      :type x: ``numpy.ndarray``
+      :return: Cumulative distribution function in x.
+      :rtype: ``numpy.ndarray``
+
+
+   .. py:method:: rvs(size=1, random_state=None)
+
+      Random variates.
+
+      :param size: random variates sample size (default is 1).
+      :type size: ``int``
+      :param random_state: random state for the random number generator.
+      :type random_state: ``int``
+
+      :return: Random variates.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+
+.. py:class:: FHLowerCopula
+
+   Fréchet–Hoeffding lower bound bidimensional copula.
+
+   .. py:method:: dim()
+      :staticmethod:
+
+
+   .. py:method:: cdf(x)
+
+      Cumulative distribution function.
+
+      :param x: Array with shape (N, 2) where N is the number of points.
+      :type x: ``numpy.ndarray``
+      :return: Cumulative distribution function in x.
+      :rtype: ``numpy.ndarray``
+
+
+   .. py:method:: rvs(size=1, random_state=None)
+
+      Random variates.
+
+      :param size: random variates sample size (default is 1).
+      :type size: ``int``
+      :param random_state: random state for the random number generator.
+      :type random_state: ``int``
+
+      :return: Random variates.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+
+.. py:class:: FHUpperCopula(dim)
+
+   Fréchet–Hoeffding upper bound copula.
+
+   .. py:property:: dim
+
+
+   .. py:method:: cdf(x)
+
+      Cumulative distribution function.
+
+      :param x: Array with shape (N, d) where N is the number of points and d the dimension.
+      :type x: ``numpy.ndarray``
+      :return: Cumulative distribution function in x.
+      :rtype: ``numpy.ndarray``
+
+
+   .. py:method:: rvs(size=1, random_state=None)
+
+      Random variates.
+
+      :param size: random variates sample size (default is 1).
+      :type size: ``int``
+      :param random_state: random state for the random number generator.
+      :type random_state: ``int``
+
+      :return: Random variates.
+      :rtype: ``numpy.float64`` or ``numpy.ndarray``
+
+
+

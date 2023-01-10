@@ -1,0 +1,154 @@
+:py:mod:`gemact.source.calculators`
+===================================
+
+.. py:module:: gemact.source.calculators
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   gemact.source.calculators.LossModelCalculator
+
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   gemact.source.calculators.logger
+
+
+.. py:data:: logger
+   
+
+   
+
+.. py:class:: LossModelCalculator
+
+   Calculation methods used in LossModel and Severity classes. 
+   Python informal static class.
+
+   .. py:method:: fast_fourier_transform(severity, frequency, n_aggr_dist_nodes, discr_step, tilt, tilt_value, normalize=False)
+      :staticmethod:
+
+      Aggregate loss distribution via Fast Fourier Transform.
+
+      :param severity: discretized severity, nodes sequence and discrete probabilities.
+      :type severity: ``dict``
+      :param frequency: frequency model (adjusted).
+      :type frequency: ``Frequency``
+      :param n_aggr_dist_nodes: number of nodes in the approximated aggregate loss distribution.
+      :type n_aggr_dist_nodes: ``int``
+      :param discr_step: severity discretization step.
+      :type discr_step: ``float``
+      :param tilt_value: tilting parameter value of FFT method for the aggregate loss distribution approximation.
+      :type tilt_value: ``float``
+      :param tilt: whether tilting of FFT is present or not.
+      :type tilt: ``bool``
+      :return: aggregate loss distribution empirical pmf, cdf, nodes
+      :rtype: ``dict``
+
+
+   .. py:method:: panjer_recursion(frequency, severity, n_aggr_dist_nodes, discr_step, normalize=False)
+      :staticmethod:
+
+      Aggregate loss distribution via Panjer recursion.
+
+      :param severity: discretized severity, nodes sequence and discrete probabilities.
+      :type severity: ``dict``
+      :param frequency: frequency model (adjusted).
+      :type frequency: ``Frequency``
+      :param n_aggr_dist_nodes: number of nodes in the approximated aggregate loss distribution.
+      :type n_aggr_dist_nodes: ``int``
+      :param discr_step: severity discretization step.
+      :type discr_step: ``float``
+      :return: aggregate loss distribution empirical pdf, cdf, nodes
+      :rtype: ``dict``
+
+
+   .. py:method:: mc_simulation(severity, frequency, cover, deductible, n_sim, random_state)
+      :staticmethod:
+
+      Aggregate loss distribution via Monte Carlo simulation.
+
+      :param severity: severity model.
+      :type severity: ``Severity``
+      :param frequency: frequency model (adjusted).
+      :type frequency: ``Frequency``
+      :param cover: cover, also referred to as limit.
+      :type cover: ``int`` or ``float``
+      :param deductible: deductible, also referred to as retention or priority.
+      :type deductible: ``int`` or ``float``
+      :param n_sim: number of simulations.
+      :type n_sim: ``int``
+      :param random_state: random state for the random number generator.
+      :type random_state: ``int``
+      :return: aggregate loss distribution empirical pdf, cdf, nodes.
+      :rtype: ``dict``
+
+
+   .. py:method:: mass_dispersal(severity, deductible, exit_point, discr_step, n_discr_nodes)
+      :staticmethod:
+
+      Severity discretization according to the mass dispersal method.
+
+      :param severity: severity model.
+      :type severity: ``Severity``
+      :param deductible: deductible, also referred to as retention or priority.
+      :type deductible: ``int`` or ``float``
+      :param exit_point: severity 'exit point', deductible plus cover.
+      :type cover: ``int`` or ``float``
+      :param discr_step: severity discretization step.
+      :type discr_step: ``float``
+      :param n_discr_nodes: number of nodes of the discretized severity.
+      :type n_discr_nodes: ``int``
+      :return: discrete severity, nodes sequence and discrete probabilities.
+      :rtype: ``dict``
+
+
+   .. py:method:: upper_discr_point_prob_adjuster(severity, deductible, exit_point, discr_step)
+      :staticmethod:
+
+      Probability of the discretization upper point in the local moment.
+      In case an upper priority on the severity is provided, the probability of the node sequence upper point
+      is adjusted to be coherent with discretization step size and number of nodes.
+
+      :param severity: severity model.
+      :type severity: ``Severity``
+      :param deductible: deductible, also referred to as retention or priority.
+      :type deductible: ``int`` or ``float``
+      :param exit_point: severity 'exit point', deductible plus cover.
+      :type cover: ``int`` or ``float``
+      :param discr_step: severity discretization step.
+      :type discr_step: ``float``
+      :return: probability mass in (u-d/h)*m
+      :rtype: ``numpy.ndarray``
+
+
+   .. py:method:: local_moments(severity, deductible, exit_point, discr_step, n_discr_nodes)
+      :staticmethod:
+
+      Severity discretization according to the local moments method.
+
+      :param severity: severity model.
+      :type severity: ``Severity``
+      :param deductible: deductible, also referred to as retention or priority.
+      :type deductible: ``int`` or ``float``
+      :param exit_point: severity 'exit point', deductible plus cover.
+      :type cover: ``int`` or ``float``
+      :param discr_step: severity discretization step.
+      :type discr_step: ``float``
+      :param n_discr_nodes: number of nodes of the discretized severity.
+      :type n_discr_nodes: ``int``
+      :return: discrete severity, nodes sequence and discrete probabilities.
+      :rtype: ``dict``
+
+
+

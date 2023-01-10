@@ -1,0 +1,303 @@
+:py:mod:`gemact.lossreserve`
+============================
+
+.. py:module:: gemact.lossreserve
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   gemact.lossreserve.AggregateData
+   gemact.lossreserve.ReservingModel
+   gemact.lossreserve.LossReserve
+
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   gemact.lossreserve.logger
+
+
+.. py:data:: logger
+   
+
+   
+
+.. py:class:: AggregateData(incremental_payments, cased_payments, incurred_number, cased_number, reported_claims)
+
+   Triangular data sets.
+
+   :param incremental_payments: Incremental payments' triangle.
+   :type incremental_payments: ``numpy.ndarray``
+   :param cased_payments: Cased payments triangle.
+   :type cased_payments: ``numpy.ndarray``
+   :param incurred_number:  Number of incurred claims.
+   :type incurred_number: ``numpy.ndarray``
+   :param cased_number:  Number of cased claims.
+   :type cased_number: ``numpy.ndarray``
+   :param reported_claims:  Number of reported claims by accident period. Data must be provided from old to recent.
+   :type reported_claims: ``numpy.ndarray``
+
+
+
+   .. py:property:: ip_tr
+
+
+   .. py:property:: cp_tr
+
+
+   .. py:property:: in_tr
+
+
+   .. py:property:: cn_tr
+
+
+   .. py:property:: reported_claims
+
+
+   .. py:method:: _ix_setter()
+
+
+   .. py:method:: _j_setter()
+
+
+
+.. py:class:: ReservingModel(tail=False, reserving_method='fisher_lange', claims_inflation=None, mixing_fq_par=None, mixing_sev_par=None, czj=None)
+
+   Reserving model assumptions.
+
+   :param tail: set it to True when the tail estimate is required. Default False.
+   :type tail: ``bool``
+   :param reserving_method: one of the reserving methods supported by the GemAct package.
+   :type reserving_method: ``str``
+   :param claims_inflation: claims inflation. In case no tail is present and the triangular data IxJ matrices,
+                           claims_inflation must be J-1 dimensional. When a tail estimate is required, it must be
+                           J dimensional. In case no tail is present it must be J-1 dimensional.
+   :type claims_inflation: ``numpy.ndarray``
+   :param czj: severity coefficient of variation by development period.
+               It is set to None in case the crm is selected as
+               reserving method. When a tail estimate is required, it must be J dimensional.
+               In case no tail is present it must be J-1 dimensional.
+   :type czj: ``numpy.ndarray``
+
+   :param mixing_fq_par: Mixing frequency parameters.
+   :type mixing_fq_par: ``dict``
+   :param mixing_sev_par: Mixing severity parameters.
+   :type mixing_sev_par: ``dict``
+
+
+   .. py:property:: tail
+
+
+   .. py:property:: reserving_method
+
+
+   .. py:property:: mixing_fq_par
+
+
+   .. py:property:: mixing_sev_par
+
+
+   .. py:method:: _model_class()
+
+
+   .. py:method:: _noise_variable_setup(parameters)
+
+
+
+.. py:class:: LossReserve(data, reservingmodel, custom_alphas=None, custom_ss=None, ntr_sim=1000, random_state=42)
+
+   Claims loss reserving. The available reserving models are the deterministic Fisher-Lange and the collective risk model.
+   Input company data must be ``numpy.ndarray`` data on numbers and payments must be in triangular form:
+   two-dimensional ``numpy.ndarray`` with shape (I, J) where I=J.
+
+   :param ntr_sim: Number of simulated triangles in the c.r.m reserving method.
+   :type ntr_sim: ``int``
+   :param random_state: Simulation seed to make the c.r.m reserving method results reproducible.
+   :type random_state: ``int``
+   :param custom_alphas: optional, custom values for the alpha parameters.
+   :type custom_alphas: ``numpy.ndarray``
+   :param custom_ss: optional, custom values for the settlement speed.
+   :type custom_ss: ``numpy.ndarray``
+
+
+   .. py:property:: czj
+
+
+   .. py:property:: ntr_sim
+
+
+   .. py:property:: random_state
+
+
+   .. py:property:: ap_tr
+
+
+   .. py:property:: alpha_fl
+
+
+   .. py:property:: ss_fl_
+
+
+   .. py:method:: _triangular_czj()
+
+      Triangle of the severity coefficients of variation for the stochastic crm.
+
+      :return: czj in a triangular shape
+      :rtype: ``numpy.ndarray``
+
+
+
+   .. py:method:: _alpha_computer()
+
+      Fisher-Lange alpha. Given a JxJ triangle, this is going to be
+      J-1 dimensional in case no tail is present and J dimensional in case of tail estimates.
+
+      :return: vectors of alpha
+      :rtype: ``numpy.ndarray``
+
+
+   .. py:method:: _ss_computer()
+
+      Fisher-Lange settlement speeds. Given a JxJ triangle, this is going to be
+      J-1 dimensional in case no tail is present and J dimensional in case of tail estimates.
+
+      :return: settlement speed
+      :rtype: ``numpy.ndarray``
+
+
+   .. py:method:: _ss_triangle()
+
+      Fisher-Lange settlement speed array into a triangle. Given a JxJ triangle, this is going to be
+      JxJ-1 dimensional in case no tail is present and JxJ dimensional in case of tail estimates.
+
+      :return: settlement speed triangle
+      :rtype: ``numpy.ndarray``
+
+
+   .. py:method:: _fill_numbers()
+
+      Lower triangle of numbers. Given a JxJ triangle, this is going to be
+      JxJ dimensional in case no tail is present and Jx(J+1) dimensional in case of tail estimates.
+
+      :return: number of payments
+      :rtype: ``numpy.ndarray``
+
+
+   .. py:method:: _fisherlange()
+
+      Loss reserve computed with the fisher-lange reserving model.
+
+      :return: fisher-lange reserve
+      :rtype: ``numpy.float64``
+
+
+   .. py:method:: _stochastic_crm()
+
+      Loss reserve computed with the collective risk model based on the fisher-lange.
+
+      :return: reserve prediction (simulations mean), reserve m_sep prediction, reserve skewness
+      :rtype:``numpy.float64``,``numpy.float64``,``numpy.float64``
+
+
+
+   .. py:method:: _lossreserving()
+
+      Loss reserve computed with the specified reserving method. Mean squared error and skewness will not be computed
+      for deterministic methods.
+
+      :return: reserve, reserve mean squared error of prediction, reserve skewness
+      :rtype:``numpy.float64``,``numpy.float64``,``numpy.float64``
+
+
+
+   .. py:method:: ss_plot(start_=0)
+
+      Plot the settlement speed vector for each accident period.
+
+      :param start_: starting accident period from which to plot.
+      :type start_: ``int``
+
+
+   .. py:method:: alpha_plot()
+
+      Plot the Fisher-Lange alpha.
+
+
+   .. py:method:: _reserve_by_ay_fl()
+
+      The fisher-lange reserve computed for each accident period and
+      the fisher-lange ultimate cost for each accident period.
+
+      :return: reserve for each accident period,ultimate cost for each accident period
+      :rtype: ``numpy.ndarray``, ``numpy.ndarray``
+
+
+   .. py:method:: _build_base_print()
+
+      Basic print for the underlying model.
+
+
+
+
+   .. py:method:: _build_graphic_parameters()
+
+      Return the graphical parameters for printing the reserves.
+
+
+
+   .. py:method:: _build_comparison_print(data, l_, s_)
+
+      In case the reserving method has an underlying model, it creates the data to print the comparison.
+
+
+
+   .. py:method:: _print_total_reserve()
+
+      Print the total reserve amount.
+
+
+
+   .. py:method:: print_loss_reserve()
+
+      Table with claims reserve results.
+      When the stochastic reserve according to the collective risk model is computed the results
+      are compared with the Fisher-Lange.
+
+
+
+   .. py:method:: mean()
+
+      Mean of the loss reserve.
+      Depending on the selected reserving method, it returns either the attribute crm_reserve or fl_reserve.
+
+      :return: mean of the loss reserve.
+      :rtype: ``numpy.float64``
+
+
+   .. py:method:: std()
+
+      Standard deviation of the loss reserve (not available for claims reserving with the fisher lange).
+
+      :return: standard deviation of the loss reserve.
+      :rtype: ``numpy.float64``
+
+
+   .. py:method:: skewness()
+
+      Skewness of the loss reserve (not available for claims reserving with the fisher lange).
+
+      :return: skewness of the loss loss.
+      :rtype: ``numpy.float64``
+
+
+

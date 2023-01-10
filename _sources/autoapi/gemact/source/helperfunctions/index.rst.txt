@@ -1,0 +1,316 @@
+:py:mod:`gemact.source.helperfunctions`
+=======================================
+
+.. py:module:: gemact.source.helperfunctions
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   gemact.source.helperfunctions.arg_type_handler
+   gemact.source.helperfunctions.ecdf
+   gemact.source.helperfunctions.normalizernans
+   gemact.source.helperfunctions.lrcrm_f1
+   gemact.source.helperfunctions.lrcrm_f2
+   gemact.source.helperfunctions.cartesian_product
+   gemact.source.helperfunctions.cov_to_corr
+   gemact.source.helperfunctions.multivariate_t_cdf
+   gemact.source.helperfunctions._multivariate_t_cdf_qmc
+   gemact.source.helperfunctions._t_separation_variable
+   gemact.source.helperfunctions.assert_member
+   gemact.source.helperfunctions.assert_type_value
+   gemact.source.helperfunctions.ndarray_try_convert
+   gemact.source.helperfunctions.check_condition
+   gemact.source.helperfunctions.handle_random_state
+   gemact.source.helperfunctions.assert_not_none
+   gemact.source.helperfunctions.layerFunc
+   gemact.source.helperfunctions.triangles_dimension
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   gemact.source.helperfunctions.logger
+
+
+.. py:data:: logger
+   
+
+   
+
+.. py:function:: arg_type_handler(x)
+
+   Checks that arguments in distributions.py methods are managed correctly.
+
+   :param x: method input
+   :type x: any
+
+   :return: x
+   :rtype: ``numpy.ndarray``
+
+
+.. py:function:: ecdf(x)
+
+   Empirical cumulative distribution function.
+
+   :param x:  sequence of nodes basis of the ecdf.
+   :type x: ``numpy.ndarray``
+
+   :return: empirical cumulative distribution function.
+   :rtype: ``function``
+
+
+.. py:function:: normalizernans(x)
+
+   Normalize a vector with nan values ignoring the nan values during the computation.
+   Used in the lossreserve.py script.
+
+   :param x: sequence to be normalized.
+   :type x: ``numpy.ndarray``
+
+   :return: normalized sequence.
+   :rtype: ``numpy.ndarray``
+
+
+
+.. py:function:: lrcrm_f1(x, dist)
+
+   Simulate a random number from a distribution a poisson distribution with parameter mu.
+   Used in the lossreserve.py script.
+
+   :param x: distribution parameter.
+   :type x: ``float``
+   :param dist: poisson distribution.
+   :type dist: ``scipy.stats._discrete_distns.poisson_gen``
+
+   :return:simulated random number.
+   :rtype: ``numpy.ndarray``
+
+
+.. py:function:: lrcrm_f2(x, dist)
+
+   Simulates random values from a gamma.
+   Used in the lossreserve.py script.
+
+   :param x: it contains the gamma parameters and the number of random values to be simulated.
+   :type x: ``numpy.ndarray``
+   :param dist: gamma distribution.
+   :type dist: ``scipy.stats._discrete_distns.gamma_gen``
+
+   :return: sum of the simulated numbers.
+   :rtype: ``numpy.ndarray``
+
+
+.. py:function:: cartesian_product(*arrays)
+
+   Generate the matrix points where copula is computed.
+   Used in the lossaggregation.py script.
+
+   :return: matrix of points.
+   :rtype:``numpy.ndarray``
+
+
+.. py:function:: cov_to_corr(cov)
+
+   Covariance matrix to correlation matrix converter.
+   Equivalent to R 'cov2corr' function.
+
+   Used in the copulas.py script.
+
+   :param cov: matrix of covariates
+   :type cov: ``numpy.ndarray``
+
+   :return: matrix of correlations.
+   :rtype: ``numpy.ndarray``
+
+
+.. py:function:: multivariate_t_cdf(x, corr, df, tol, iterations)
+
+   Estimate the cdf of a multivariate t distribution using quasi-Monte Carlo algorithm.
+   Used in the copulas.py script.
+
+   See:
+   - Genz, A. and F. Bretz (1999) "Numerical Computation of Multivariate
+   t Probabilities with Application to Power Calculation of Multiple
+   Contrasts", J.Statist.Comput.Simul., 63:361-378.
+   - Genz, A. and F. Bretz (2002) "Comparison of Methods for the
+   Computation of Multivariate t Probabilities", J.Comp.Graph.Stat.,
+   11(4):950-971.
+
+   :param x: quantile where the cumulative distribution function is evaluated.
+   :type x: ``numpy.ndarray``
+   :param corr: correlation matrix of the distribution,must be symmetric and positive
+                definite, with all elements of the diagonal being 1.
+   :type corr: ``numpy.ndarray``
+   :param df: degrees-of-freedom of the distribution, must be a positive real number.
+   :type df: ``float``
+   :param tol: tolerance for quasi-Monte Carlo algorithm.
+   :type tol: ``float``
+   :param iterations: number of iterations of quasi-Monte Carlo algorithm.
+   :type iterations: ``int``
+
+   :return: cumulative density function value and error estimate of the numerical approximation.
+   :rtype: ``tuple``
+
+
+.. py:function:: _multivariate_t_cdf_qmc(x, chol, df, iterations, size)
+
+   Multivariate t cumulative density function computed via quasi-Monte Carlo.
+   References:
+   - Genz, A. and F. Bretz (1999) "Numerical Computation of Multivariate t Probabilities with Application to Power Calculation of Multiple Contrasts", Journal of Statistical Computation and Simulation, 63:361-378.
+   - Genz, A. and F. Bretz (2002) "Comparison of Methods for the Computation of Multivariate t Probabilities",  Journal of Computational and Graphical Statistics, 11(4):950-971.
+
+   :param x: quantile where the cumulative distribution function is evaluated.
+   :type x: ``numpy.ndarray``
+   :param chol: Cholesky decomposition of the correlation matrix of the distribution, must be symmetric and positive
+                definite, with all elements of the diagonal being 1.
+   :type chol: ``numpy.ndarray``
+   :param df: degrees-of-freedom of the distribution.
+   :type df: float
+   :param iterations: number of iterations.
+   :type iterations: ``int``
+   :param size: sample size.
+   :type size: ``int``
+
+   :return: quasi-Monte Carlo estimate of the t distribution cumulative density function.
+   :rtype: ``float``
+
+
+.. py:function:: _t_separation_variable(x, chol, df, w, size)
+
+   Separation of variables transformation helper function to estimate t distribution cumulative density function.
+
+   :param x: quantile where the cumulative distribution function is evaluated.
+   :type x: ``numpy.ndarray``
+   :param chol: Cholesky decomposition of the correlation matrix of the distribution, must be symmetric and positive
+                definite, with all elements of the diagonal being 1.
+   :type chol: ``numpy.ndarray``
+   :param df: degrees-of-freedom of the distribution.
+   :type df: ``float``
+   :param w: transformed uniform variable.
+   :type w: ``float``
+   :param size: sample size.
+   :type size: ``int``
+
+   :return: helper estimate of the t distribution cumulative density function.
+   :rtype: ``float``
+
+
+.. py:function:: assert_member(value, choice, logger, link=None)
+
+   Assert that a value is cointained in a reference set the value must belong to.
+
+   :param value: value whose membership of set is to be checked.
+   :type value: ``string``
+   :param choice: admissible values.
+   :type choice: ``set``
+   :param logger: error log.
+   :type logger: ``logger``
+   :param link: link where additional information about set memebers can be found (optional).
+   :type link: ``string``
+   :return: Void.
+   :rtype: None
+
+
+.. py:function:: assert_type_value(value, name, logger, type=(int, float), upper_bound=None, lower_bound=None, lower_close=True, upper_close=True)
+
+   Assert that a value match a given type and optional value criteria.
+
+   :param value: value whose type and criteria is to be checked.
+   :type value: ``object``
+   :param name: name associated to the value object.
+   :type name: ``string``
+   :param logger: error log.
+   :type logger: ``logger``
+   :param type: reference type to be matched.
+   :type type: ``tuple`` or ``type``
+   :param upper_bound: upper bound of value. Not ``None`` if value is a ``float`` or ``int``.
+   :type upper_bound: ``float``
+   :param lower_bound: lower bound of value. Not ``None`` if value is a ``float`` or ``int``.
+   :type lower_bound: ``float``
+   :param upper_close: if upper_bound value is included in the admissible range or not. Not ``None`` iff value is a ``float`` or ``int``.
+   :type upper_close: ``bool``
+   :param lower_close: if lower_bound value is included in the admissible range or not. Not ``None`` iff value is a ``float`` or ``int``.
+   :type lower_close: ``bool``
+   :return: Void.
+   :rtype: None
+
+
+.. py:function:: ndarray_try_convert(value, name, logger, type=None)
+
+   Convert a given input value to a numpy array.
+
+   :param value: value to be converted into a numpy array.
+   :type value: ``float``, `np.floating``
+   :param name: name associated to the value object.
+   :type name: ``string``
+   :param logger: error log.
+   :type logger: ``logger``
+   :param type: dtype of the numpy array to be returned.
+   :type type: ``np.dtype``
+   :return: numpy array.
+   :rtype: ``np.ndarray``
+
+
+.. py:function:: check_condition(value, check, name, logger, type='==')
+
+   Check that a condition holds between two values.
+
+   :param value: value to assert equality.
+   :type value: ``float``, ``int``
+   :param check: reference to match value to assert equality.
+   :type check: ``float``, ``int``
+   :param name: name associated to the value object.
+   :type name: ``string``
+   :param logger: error log.
+   :type logger: ``logger``
+   :param type: condition type to check, one of '==', '!=', '<=', '<', '>=', '>'.
+   :type type: ``string``
+   :return: Void.
+   :rtype: None
+
+
+.. py:function:: handle_random_state(value, logger)
+
+   Assert and if missing set up a random state to use in a pseudo random simulation.
+
+   :param value: value of the random state provided by the user (a.k.a set random seed).
+   :type value: ``int`` or ``None``
+   :param logger: error log.
+   :type logger: ``logger``
+   :return: value of the random state.
+   :rtype: ``int``
+
+
+.. py:function:: assert_not_none(value, name, logger)
+
+
+.. py:function:: layerFunc(nodes, cover, deductible)
+
+   layer transformation, i.e. min-max function. Vectorized version with respect to cover and deductible.
+
+   :param nodes: distribution nodes to which apply the layer transformation.
+   :type nodes: ``np.ndarray``, ``np.floating``
+   :param deductible: deductible.
+   :type deductible: ``np.ndarray``, ``np.floating``
+   :param cover: cover.
+   :type cover: ``np.ndarray``, ``np.floating``
+   :return: layer transformed array.
+   :rtype: ``np.ndarray``, ``np.floating``
+
+
+.. py:function:: triangles_dimension(incremental_payments, cased_payments, incurred_number, cased_number)
+
+   Function to check that the dimension of the triangles provided is consistent.
+
+
+

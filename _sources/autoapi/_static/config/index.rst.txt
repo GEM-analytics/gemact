@@ -1,0 +1,64 @@
+:py:mod:`_static.config`
+========================
+
+.. py:module:: _static.config
+
+
+Module Contents
+---------------
+
+.. py:data:: SITE_LINK
+   :annotation: = https://gem-analytics.github.io/gemact/
+
+   
+
+.. py:data:: DCEILING
+   :annotation: = 5
+
+   
+
+.. py:data:: TOLERANCE
+   :annotation: = 0.0001
+
+   
+
+.. py:data:: LOSS_AGGREGATION_METHOD
+   
+
+   
+
+.. py:data:: SEV_DISCRETIZATION_METHOD
+   
+
+   
+
+.. py:data:: AGGREGATE_LOSS_APPROX_METHOD
+   
+
+   
+
+.. py:data:: POLICY_LAYER_BASIS
+   
+
+   
+
+.. py:data:: POLICY_LAYER_CATEGORY
+   
+
+   
+
+.. py:data:: RESERVING_METHOD
+   
+
+   
+
+.. py:data:: COP_DICT
+   
+
+   
+
+.. py:data:: DIST_DICT
+   
+
+   
+
