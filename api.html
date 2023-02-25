@@ -1897,53 +1897,15 @@ when number of reinstatements is infinity there is no aggregate cover
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="gemact.lossmodel.LayerTower">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LayerTower</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/lossmodel.html#LayerTower"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.LayerTower" title="Permalink to this definition">#</a></dt>
-<dd><p>Policy structure tower of non-proportional layers.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>**args</strong> – See below</p>
-</dd>
-<dt class="field-even">Keyword Arguments</dt>
-<dd class="field-even"><ul class="simple">
-<li><p><em>args</em> (<code class="docutils literal notranslate"><span class="pre">Layers</span></code>) –
-Layer tower elements.</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="gemact.lossmodel.LayerTower.append">
-<span class="sig-name descname"><span class="pre">append</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">item</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/lossmodel.html#LayerTower.append"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.LayerTower.append" title="Permalink to this definition">#</a></dt>
-<dd><p>Append object to the end of the list.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="gemact.lossmodel.LayerTower.extend">
-<span class="sig-name descname"><span class="pre">extend</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/lossmodel.html#LayerTower.extend"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.LayerTower.extend" title="Permalink to this definition">#</a></dt>
-<dd><p>Extend list by appending elements from the iterable.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="gemact.lossmodel.LayerTower.insert">
-<span class="sig-name descname"><span class="pre">insert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">item</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/lossmodel.html#LayerTower.insert"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.LayerTower.insert" title="Permalink to this definition">#</a></dt>
-<dd><p>Insert object before index.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="gemact.lossmodel.LayerTower.sort">
-<span class="sig-name descname"><span class="pre">sort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'deductible'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/lossmodel.html#LayerTower.sort"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.LayerTower.sort" title="Permalink to this definition">#</a></dt>
-<dd><p>Stable sort <em>IN PLACE</em>.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
 <dt class="sig sig-object py" id="gemact.lossmodel.LossModel">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LossModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">severity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frequency</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">policystructure=&lt;gemact.lossmodel.PolicyStructure</span> <span class="pre">object&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aggr_loss_dist_method=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_sim=10000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tilt=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tilt_value=0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_aggr_dist_nodes=20000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sev_discr_method='localmoments'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_sev_discr_nodes=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sev_discr_step=None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/lossmodel.html#LossModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.LossModel" title="Permalink to this definition">#</a></dt>
 <dd><p>Loss model for (re)insurance costing and risk modeling using a collective risk model framework.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
+<li><p><strong>severity</strong> (<code class="docutils literal notranslate"><span class="pre">Severity</span></code>) – severity model.</p></li>
+<li><p><strong>frequency</strong> (<code class="docutils literal notranslate"><span class="pre">Frequency</span></code>) – frequency model.</p></li>
+<li><p><strong>policystructure</strong> (<code class="docutils literal notranslate"><span class="pre">PolicyStructure</span></code>) – policy structure.</p></li>
 <li><p><strong>aggr_loss_dist_method</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – computational method to approximate the aggregate loss distribution.
 One of Fast Fourier Transform (‘fft’),
 Panjer recursion (‘recursion’) and Monte Carlo simulation (‘mc’).</p></li>
@@ -1952,7 +1914,8 @@ Panjer recursion (‘recursion’) and Monte Carlo simulation (‘mc’).</p></l
 <li><p><strong>tilt_value</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – tilting parameter value of fft method for the aggregate loss distribution approximation.</p></li>
 <li><p><strong>random_state</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, optional) – random state for the random number generator in mc.</p></li>
 <li><p><strong>n_aggr_dist_nodes</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – number of nodes in the approximated aggregate loss distribution.</p></li>
-<li><p><strong>sev_discr_method</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – severity discretization method. One of ‘massdispersal’, ‘localmoments’.</p></li>
+<li><p><strong>sev_discr_method</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – severity discretization method. One of ‘massdispersal’, ‘localmoments’,
+‘upperdiscretization’, ‘lowerdiscretization’.</p></li>
 <li><p><strong>sev_discr_step</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – severity discretization step.</p></li>
 <li><p><strong>n_sev_discr_nodes</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – number of nodes of the discretized severity.</p></li>
 </ul>
@@ -2069,6 +2032,27 @@ See ‘index_to_layer_name’ and ‘layer_name_to_index’ PolicyStructure meth
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossmodel.LossModel.plot_dist_cdf">
+<span class="sig-name descname"><span class="pre">plot_dist_cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/lossmodel.html#LossModel.plot_dist_cdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.LossModel.plot_dist_cdf" title="Permalink to this definition">#</a></dt>
+<dd><p>Plot the cumulative distribution function of the aggregate loss distribution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>idx</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – index corresponding to the policystructure layer of interest (default is 0).
+See ‘index_to_layer_name’ and ‘layer_name_to_index’ PolicyStructure methods.</p></li>
+<li><p><strong>**kwargs</strong> – Additional parameters are the same as those for ‘matplotlib.pyplot.plot’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Void</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="gemact.lossmodel.LossModel.ppf">
 <span class="sig-name descname"><span class="pre">ppf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">q</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/lossmodel.html#LossModel.ppf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.LossModel.ppf" title="Permalink to this definition">#</a></dt>
 <dd><p>Aggregate loss distribution percent point function, a.k.a. the quantile function,
@@ -2167,6 +2151,27 @@ See ‘index_to_layer_name’ and ‘layer_name_to_index’ PolicyStructure meth
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossmodel.LossModel.sf">
+<span class="sig-name descname"><span class="pre">sf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/lossmodel.html#LossModel.sf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.LossModel.sf" title="Permalink to this definition">#</a></dt>
+<dd><p>Aggregate loss distribution survival function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code> or <code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – quantiles where the survival functionis evaluated.</p></li>
+<li><p><strong>idx</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – list index corresponding to the layer loss distribution of interest (default is 0).
+See ‘index_to_layer_name’ and ‘layer_name_to_index’ PolicyStructure methods.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>survival function.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="gemact.lossmodel.LossModel.skewness">
 <span class="sig-name descname"><span class="pre">skewness</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/lossmodel.html#LossModel.skewness"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.LossModel.skewness" title="Permalink to this definition">#</a></dt>
 <dd><p>Skewness of the aggregate loss.</p>
@@ -2213,6 +2218,18 @@ See ‘index_to_layer_name’ and ‘layer_name_to_index’ PolicyStructure meth
 <dd class="field-odd"><p><strong>layers</strong> (<code class="docutils literal notranslate"><span class="pre">Layer</span></code>, <code class="docutils literal notranslate"><span class="pre">LayerTower</span></code>, <code class="docutils literal notranslate"><span class="pre">list</span></code>) – Non-proportional layer (default is infinity-xs-0 layer).</p>
 </dd>
 </dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossmodel.PolicyStructure.index_to_layer_name">
+<span class="sig-name descname"><span class="pre">index_to_layer_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/lossmodel.html#PolicyStructure.index_to_layer_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.PolicyStructure.index_to_layer_name" title="Permalink to this definition">#</a></dt>
+<dd><p>Return name of a layer given its index.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossmodel.PolicyStructure.layer_name_to_index">
+<span class="sig-name descname"><span class="pre">layer_name_to_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/lossmodel.html#PolicyStructure.layer_name_to_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.PolicyStructure.layer_name_to_index" title="Permalink to this definition">#</a></dt>
+<dd><p>Return index of a layer given its name.</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
@@ -2236,7 +2253,8 @@ See ‘index_to_layer_name’ and ‘layer_name_to_index’ PolicyStructure meth
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>deductible</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>) – deductible, also referred to as retention or priority.</p></li>
 <li><p><strong>cover</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>) – cover, also referred to as limit.</p></li>
-<li><p><strong>discr_method</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – severity discretization method. One of ‘massdispersal’, ‘localmoments’.</p></li>
+<li><p><strong>discr_method</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – severity discretization method. One of ‘massdispersal’, ‘localmoments’,
+‘upperdiscretization’, ‘lowerdiscretization’.</p></li>
 <li><p><strong>discr_step</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – severity discretization step.</p></li>
 <li><p><strong>n_discr_nodes</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – number of nodes of the discretized severity.</p></li>
 </ul>
@@ -2266,6 +2284,31 @@ See ‘index_to_layer_name’ and ‘layer_name_to_index’ PolicyStructure meth
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossmodel.Severity.plot_discr_sev_cdf">
+<span class="sig-name descname"><span class="pre">plot_discr_sev_cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">discr_method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_discr_nodes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">discr_step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cover</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deductible</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/lossmodel.html#Severity.plot_discr_sev_cdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.Severity.plot_discr_sev_cdf" title="Permalink to this definition">#</a></dt>
+<dd><p>Plot the cumulative distribution function of the discretized severity distribution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>discr_method</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – severity discretization method. One of ‘massdispersal’, ‘localmoments’,
+‘upperdiscretization’, ‘lowerdiscretization’.</p></li>
+<li><p><strong>n_discr_nodes</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – number of nodes of the discretized severity.</p></li>
+<li><p><strong>discr_step</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – severity discretization step.</p></li>
+<li><p><strong>deductible</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>) – deductible, also referred to as retention or priority.</p></li>
+<li><p><strong>cover</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>) – cover, also referred to as limit.</p></li>
+<li><p><strong>**kwargs</strong> – Additional parameters as per <code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot.plot</span></code> method.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Void</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -2514,7 +2557,7 @@ General method for severity class, overridden by distribution specific implement
 
 <dl class="py class">
 <dt class="sig sig-object py" id="gemact.lossreserve.LossReserve">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LossReserve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reservingmodel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_alphas</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_ss</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ntr_sim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">42</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/lossreserve.html#LossReserve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossreserve.LossReserve" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LossReserve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reservingmodel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_alphas</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_ss</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ntr_sim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/lossreserve.html#LossReserve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossreserve.LossReserve" title="Permalink to this definition">#</a></dt>
 <dd><p>Claims loss reserving. The available reserving models are the deterministic Fisher-Lange and the collective risk model.
 Input company data must be <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> data on numbers and payments must be in triangular form:
 two-dimensional <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> with shape (I, J) where I=J.</p>
@@ -2529,12 +2572,6 @@ two-dimensional <code class="docutils literal notranslate"><span class="pre">num
 </dd>
 </dl>
 <dl class="py method">
-<dt class="sig sig-object py" id="gemact.lossreserve.LossReserve.alpha_plot">
-<span class="sig-name descname"><span class="pre">alpha_plot</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/lossreserve.html#LossReserve.alpha_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossreserve.LossReserve.alpha_plot" title="Permalink to this definition">#</a></dt>
-<dd><p>Plot the Fisher-Lange alpha.</p>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="gemact.lossreserve.LossReserve.mean">
 <span class="sig-name descname"><span class="pre">mean</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/lossreserve.html#LossReserve.mean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossreserve.LossReserve.mean" title="Permalink to this definition">#</a></dt>
 <dd><p>Mean of the loss reserve.
@@ -2545,6 +2582,23 @@ Depending on the selected reserving method, it returns either the attribute crm_
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossreserve.LossReserve.plot_alpha_fl">
+<span class="sig-name descname"><span class="pre">plot_alpha_fl</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/lossreserve.html#LossReserve.plot_alpha_fl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossreserve.LossReserve.plot_alpha_fl" title="Permalink to this definition">#</a></dt>
+<dd><p>Plot the Fisher-Lange alpha.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossreserve.LossReserve.plot_ss_fl">
+<span class="sig-name descname"><span class="pre">plot_ss_fl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/lossreserve.html#LossReserve.plot_ss_fl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossreserve.LossReserve.plot_ss_fl" title="Permalink to this definition">#</a></dt>
+<dd><p>Plot the settlement speed vector for each accident period.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>start</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – starting accident period from which to plot.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -2567,17 +2621,6 @@ are compared with the Fisher-Lange.</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="gemact.lossreserve.LossReserve.ss_plot">
-<span class="sig-name descname"><span class="pre">ss_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/lossreserve.html#LossReserve.ss_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossreserve.LossReserve.ss_plot" title="Permalink to this definition">#</a></dt>
-<dd><p>Plot the settlement speed vector for each accident period.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>start</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – starting accident period from which to plot.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -2713,46 +2756,39 @@ In case no tail is present it must be J-1 dimensional.</p></li>
 <h2><code class="docutils literal notranslate"><span class="pre">LossAggregation</span></code><a class="headerlink" href="#lossaggregation" title="Permalink to this headline">#</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LossAggregation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">copula</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copula_par</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">margins</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">margins_pars</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/lossaggregation.html#LossAggregation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossaggregation.LossAggregation" title="Permalink to this definition">#</a></dt>
-<dd><p>Class representing the sum of positive countinuous random variables.
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LossAggregation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">copula</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copula_par</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">margins</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">margins_pars</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/lossaggregation.html#LossAggregation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossaggregation.LossAggregation" title="Permalink to this definition">#</a></dt>
+<dd><p>Class representing the sum of positive random variables.
 Dependence structure is specified by a copula and a set of given marginals.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>copula</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – Name of the copula that describes the dependence structure.</p></li>
-<li><p><strong>copula_par</strong> (<code class="docutils literal notranslate"><span class="pre">dict</span></code>) – Parameters of the copula.</p></li>
-<li><p><strong>margins</strong> (<code class="docutils literal notranslate"><span class="pre">list</span></code>) – List of the marginal distributions.</p></li>
-<li><p><strong>margins_pars</strong> (<code class="docutils literal notranslate"><span class="pre">list</span></code>) – List of the marginal distributions parameters. It must be a list of dictionaries.</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
-</ul>
-</dd>
-<dt class="field-even">Keyword Arguments</dt>
-<dd class="field-even"><ul class="simple">
-<li><dl class="simple">
-<dt><em>random_state</em> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) –</dt><dd><p>Random state for the random number generator in MC.</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt><em>sample_size</em> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) –</dt><dd><p>Number of simulations of Monte Carlo (mc) method.</p>
-</dd>
-</dl>
-</li>
+<li><p><strong>copula</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – name of the copula that describes the dependence structure.</p></li>
+<li><p><strong>copula_par</strong> (<code class="docutils literal notranslate"><span class="pre">dict</span></code>) – parameters of the copula.</p></li>
+<li><p><strong>margins</strong> (<code class="docutils literal notranslate"><span class="pre">list</span></code>) – list of the marginal distributions.</p></li>
+<li><p><strong>margins_pars</strong> (<code class="docutils literal notranslate"><span class="pre">list</span></code>) – list of the marginal distributions parameters. It must be a list of dictionaries.</p></li>
+<li><p><strong>method</strong> (<code class="docutils literal notranslate"><span class="pre">string</span></code>) – method to approximate the distribution of the aggregate loss random variable.
+One of AEP (‘aep’) and Monte Carlo simulation (‘mc’).</p></li>
+<li><p><strong>size</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – number of simulations for Monte Carlo method or number of (random) nodes where AEP algorithm is evaluated (optional).</p></li>
+<li><p><strong>n_iter</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – number of AEP algorithm iterations (optional).</p></li>
+<li><p><strong>random_state</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – random state for the random number generator (optional).</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation.cdf">
-<span class="sig-name descname"><span class="pre">cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mc'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/lossaggregation.html#LossAggregation.cdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossaggregation.LossAggregation.cdf" title="Permalink to this definition">#</a></dt>
-<dd><p>Cumulative distribution function.</p>
+<span class="sig-name descname"><span class="pre">cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mc'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">7</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/lossaggregation.html#LossAggregation.cdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossaggregation.LossAggregation.cdf" title="Permalink to this definition">#</a></dt>
+<dd><p>Cumulative distribution function of the random variable sum.
+If <code class="docutils literal notranslate"><span class="pre">method</span></code> is Monte Carlo (‘mc’) the function relies on the approximated distribution
+calculated when the LossAggregation class is initiated (accessed via the <code class="docutils literal notranslate"><span class="pre">dist</span></code> property of
+LossAggregation).
+If <code class="docutils literal notranslate"><span class="pre">method</span></code> is AEP (‘aep’) the cdf is evaluated on-the-fly regardless of the <code class="docutils literal notranslate"><span class="pre">dist</span></code> property).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>x</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – quantile where the cumulative distribution function is evaluated.</p></li>
-<li><p><strong>method</strong> (<code class="docutils literal notranslate"><span class="pre">string</span></code>) – method to approximate the cdf of the aggregate loss random variable
-(i.e. the sum of random variables with a dependence structure specified by a copula).
+<li><p><strong>method</strong> (<code class="docutils literal notranslate"><span class="pre">string</span></code>) – method to approximate the cdf of the sum of the random variables.
 One of AEP (‘aep’) and Monte Carlo simulation (‘mc’).</p></li>
-<li><p><strong>**kwargs</strong> – See below</p></li>
+<li><p><strong>n_iter</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – number of AEP algorithm iterations (optional).</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -2761,25 +2797,17 @@ One of AEP (‘aep’) and Monte Carlo simulation (‘mc’).</p></li>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
 </dd>
-<dt class="field-even">Keyword Arguments</dt>
-<dd class="field-even"><ul class="simple">
-<li><dl class="simple">
-<dt><em>n_iter</em> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) –</dt><dd><p>Number of iteration of AEP algorithm.</p>
-</dd>
-</dl>
-</li>
-</ul>
-</dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation.mean">
 <span class="sig-name descname"><span class="pre">mean</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/lossaggregation.html#LossAggregation.mean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossaggregation.LossAggregation.mean" title="Permalink to this definition">#</a></dt>
-<dd><p>Mean of the aggregated loss.</p>
+<dd><p>Mean of the random variable sum.
+Piecewise-constant approximation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>mean of the aggregated loss.</p>
+<dd class="field-odd"><p>mean.</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code></p>
@@ -2790,28 +2818,39 @@ One of AEP (‘aep’) and Monte Carlo simulation (‘mc’).</p></li>
 <dl class="py method">
 <dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation.moment">
 <span class="sig-name descname"><span class="pre">moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">central</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/lossaggregation.html#LossAggregation.moment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossaggregation.LossAggregation.moment" title="Permalink to this definition">#</a></dt>
-<dd><p>Non-central moment of order n.</p>
+<dd><p>Moment of order n of the random variable sum.
+Piecewise-constant approximation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>central</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>) – <code class="docutils literal notranslate"><span class="pre">True</span></code> if the moment is central, <code class="docutils literal notranslate"><span class="pre">False</span></code> if the moment is raw.</p></li>
+<li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – order of the moment, optional (default is 1).</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>raw moment of order n.</p>
+<dd class="field-even"><p>moment of order n.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation.ppf">
-<span class="sig-name descname"><span class="pre">ppf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">q</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/lossaggregation.html#LossAggregation.ppf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossaggregation.LossAggregation.ppf" title="Permalink to this definition">#</a></dt>
-<dd><p>Percent point function, a.k.a. the quantile function,
-inverse of cumulative distribution function from Monte Carlo simulation.</p>
+<span class="sig-name descname"><span class="pre">ppf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">q</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mc'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tolerance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_search_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/lossaggregation.html#LossAggregation.ppf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossaggregation.LossAggregation.ppf" title="Permalink to this definition">#</a></dt>
+<dd><p>Percent point function, a.k.a. the quantile function, of the random variable sum.
+Inverse of cumulative distribution function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>q</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>, <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>, <code class="docutils literal notranslate"><span class="pre">numpy.floating</span></code>) – level at which the percent point function is evaluated.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>q</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>, <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>, <code class="docutils literal notranslate"><span class="pre">numpy.floating</span></code>) – level at which the percent point function is evaluated.</p></li>
+<li><p><strong>method</strong> (<code class="docutils literal notranslate"><span class="pre">string</span></code>) – method to approximate the cdf of the sum of the random variables.
+One of AEP (‘aep’) and Monte Carlo simulation (‘mc’).</p></li>
+<li><p><strong>n_iter</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – number of AEP algorithm iterations (optional).</p></li>
+<li><p><strong>tolerance</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – tolerance for searching algorithm iterations to approximate the ppf via AEP method (optional).</p></li>
+<li><p><strong>max_search_iter</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – maximum number of searching algorithm iterations to approximate the ppf via AEP method (optional).</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>percent point function.</p>
@@ -2825,7 +2864,7 @@ inverse of cumulative distribution function from Monte Carlo simulation.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation.rvs">
 <span class="sig-name descname"><span class="pre">rvs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/lossaggregation.html#LossAggregation.rvs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossaggregation.LossAggregation.rvs" title="Permalink to this definition">#</a></dt>
-<dd><p>Random variates. Based on Monte Carlo simulation.</p>
+<dd><p>Random variates generator function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -2843,12 +2882,38 @@ inverse of cumulative distribution function from Monte Carlo simulation.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation.sf">
+<span class="sig-name descname"><span class="pre">sf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mc'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/lossaggregation.html#LossAggregation.sf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossaggregation.LossAggregation.sf" title="Permalink to this definition">#</a></dt>
+<dd><p>Survival function of the random variable sum.
+If <code class="docutils literal notranslate"><span class="pre">method</span></code> is Monte Carlo (‘mc’) the function relies on the approximated distribution
+calculated when the LossAggregation class is initiated (accessed via the <code class="docutils literal notranslate"><span class="pre">dist</span></code> property).
+If <code class="docutils literal notranslate"><span class="pre">method</span></code> is AEP (‘aep’) the survival function is evaluated pointwise on-the-fly regardless of the <code class="docutils literal notranslate"><span class="pre">dist</span></code> property.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – quantile where the survival function is evaluated.</p></li>
+<li><p><strong>method</strong> (<code class="docutils literal notranslate"><span class="pre">string</span></code>) – method to approximate the survival function of the sum of the random variables.
+One of AEP (‘aep’) and Monte Carlo simulation (‘mc’).</p></li>
+<li><p><strong>n_iter</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – number of AEP algorithm iterations (optional).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>survival function.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation.skewness">
 <span class="sig-name descname"><span class="pre">skewness</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/lossaggregation.html#LossAggregation.skewness"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossaggregation.LossAggregation.skewness" title="Permalink to this definition">#</a></dt>
-<dd><p>Skewness of the aggregated loss.</p>
+<dd><p>Skewness of the random variable sum.
+Piecewise-constant approximation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>skewness of the aggregated loss.</p>
+<dd class="field-odd"><p>skewness.</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code></p>
@@ -2859,10 +2924,11 @@ inverse of cumulative distribution function from Monte Carlo simulation.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation.std">
 <span class="sig-name descname"><span class="pre">std</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/lossaggregation.html#LossAggregation.std"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossaggregation.LossAggregation.std" title="Permalink to this definition">#</a></dt>
-<dd><p>Standard deviation of the aggregated loss.</p>
+<dd><p>Standard deviation of the random variable sum.
+Piecewise-constant approximation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>standard deviation of the aggregated loss.</p>
+<dd class="field-odd"><p>standard deviation.</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code></p>
@@ -4889,6 +4955,40 @@ Default is False.</p></li>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.distributions.Logser.par_deductible_adjuster">
+<span class="sig-name descname"><span class="pre">par_deductible_adjuster</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nu</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/distributions.html#Logser.par_deductible_adjuster"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.distributions.Logser.par_deductible_adjuster" title="Permalink to this definition">#</a></dt>
+<dd><p>Parameter correction in case of deductible.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>nu</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – severity model survival function at the deductible.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Void</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.distributions.Logser.par_deductible_reverter">
+<span class="sig-name descname"><span class="pre">par_deductible_reverter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nu</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/distributions.html#Logser.par_deductible_reverter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.distributions.Logser.par_deductible_reverter" title="Permalink to this definition">#</a></dt>
+<dd><p>Undo parameter correction in case of deductible.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>nu</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – severity model survival function at the deductible.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Void</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -7063,6 +7163,40 @@ ZM discrete logarithmic mixing parameter.</p></li>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.distributions.ZMLogser.par_deductible_adjuster">
+<span class="sig-name descname"><span class="pre">par_deductible_adjuster</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nu</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/distributions.html#ZMLogser.par_deductible_adjuster"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.distributions.ZMLogser.par_deductible_adjuster" title="Permalink to this definition">#</a></dt>
+<dd><p>Parameter correction in case of deductible.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>nu</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – severity model survival function at the deductible.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Void</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.distributions.ZMLogser.par_deductible_reverter">
+<span class="sig-name descname"><span class="pre">par_deductible_reverter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nu</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/distributions.html#ZMLogser.par_deductible_reverter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.distributions.ZMLogser.par_deductible_reverter" title="Permalink to this definition">#</a></dt>
+<dd><p>Undo parameter correction in case of deductible.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>nu</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – severity model survival function at the deductible.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Void</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
