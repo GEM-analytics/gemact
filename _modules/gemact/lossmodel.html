@@ -229,8 +229,7 @@ title="Source repository"
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">config</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">helperfunctions</span> <span class="k">as</span> <span class="n">hf</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">distributions</span> <span class="k">as</span> <span class="n">distributions</span>
-<span class="kn">from</span> <span class="nn">.calculators</span> <span class="kn">import</span> <span class="n">LossModelCalculator</span> <span class="k">as</span> <span class="n">Calculator</span> 
-
+<span class="kn">from</span> <span class="nn">.calculators</span> <span class="kn">import</span> <span class="n">LossModelCalculator</span> <span class="k">as</span> <span class="n">Calculator</span>
 
 <span class="n">quick_setup</span><span class="p">()</span>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">log</span><span class="o">.</span><span class="n">name</span><span class="p">(</span><span class="s1">&#39;lossmodel&#39;</span><span class="p">)</span>
@@ -831,6 +830,8 @@ title="Source repository"
             <span class="n">discr_step</span><span class="p">,</span>
             <span class="n">cover</span><span class="p">,</span>
             <span class="n">deductible</span><span class="p">,</span>
+            <span class="n">log_x_scale</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">log_y_scale</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
             <span class="o">**</span><span class="n">kwargs</span>
             <span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -847,13 +848,20 @@ title="Source repository"
 <span class="sd">        :type deductible: ``int`` or ``float``</span>
 <span class="sd">        :param cover: cover, also referred to as limit.</span>
 <span class="sd">        :type cover: ``int`` or ``float``</span>
-<span class="sd">        </span>
-<span class="sd">        :param \\**kwargs:</span>
-<span class="sd">            Additional parameters as per ``matplotlib.pyplot.plot`` method.</span>
+<span class="sd">        :param log_x_scale: if ``True`` the x-axis scale is logarithmic (optional).</span>
+<span class="sd">        :type log_x_scale: ``bool``</span>
+<span class="sd">        :param log_y_scale: if ``True`` the y-axis scale is logarithmic (optional).</span>
+<span class="sd">        :type log_y_scale: ``bool``</span>
 
-<span class="sd">        :return: Void</span>
-<span class="sd">        :rtype: None</span>
+<span class="sd">        :param \\**kwargs:</span>
+<span class="sd">            Additional parameters as those for ``matplotlib.axes.Axes.step``.</span>
+
+<span class="sd">        :return: plot of the cdf.</span>
+<span class="sd">        :rtype: ``matplotlib.figure.Figure``</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">hf</span><span class="o">.</span><span class="n">assert_type_value</span><span class="p">(</span><span class="n">log_x_scale</span><span class="p">,</span> <span class="s1">&#39;log_x_scale&#39;</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span>
+        <span class="n">hf</span><span class="o">.</span><span class="n">assert_type_value</span><span class="p">(</span><span class="n">log_y_scale</span><span class="p">,</span> <span class="s1">&#39;log_y_scale&#39;</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span>
 
         <span class="n">sevdict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">discretize</span><span class="p">(</span>
             <span class="n">discr_method</span><span class="o">=</span><span class="n">discr_method</span><span class="p">,</span>
@@ -863,19 +871,21 @@ title="Source repository"
             <span class="n">deductible</span><span class="o">=</span><span class="n">deductible</span>
         <span class="p">)</span>
 
-        <span class="k">if</span> <span class="p">(</span><span class="n">cover</span> <span class="o">+</span> <span class="n">deductible</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">):</span>
-            <span class="n">discr_step</span> <span class="o">=</span> <span class="n">cover</span> <span class="o">/</span>  <span class="nb">int</span><span class="p">(</span><span class="n">n_discr_nodes</span><span class="p">)</span>
-        <span class="n">discr_step</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">discr_step</span><span class="p">)</span>
+        <span class="n">x_</span> <span class="o">=</span> <span class="n">sevdict</span><span class="p">[</span><span class="s1">&#39;nodes&#39;</span><span class="p">]</span>
+        <span class="n">y_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">sevdict</span><span class="p">[</span><span class="s1">&#39;fj&#39;</span><span class="p">])</span>
 
-        <span class="n">x_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">sevdict</span><span class="p">[</span><span class="s1">&#39;nodes&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">discr_step</span><span class="p">]),</span> <span class="n">sevdict</span><span class="p">[</span><span class="s1">&#39;nodes&#39;</span><span class="p">]])</span>
-        <span class="n">y_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,),</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">sevdict</span><span class="p">[</span><span class="s1">&#39;fj&#39;</span><span class="p">])])</span>
+        <span class="n">figure</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">figure</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
 
-        <span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">x_</span><span class="p">,</span> <span class="n">y_</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Discretized severity cumulative distribution function&#39;</span><span class="p">)</span>
-
-        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;cdf&#39;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;nodes&#39;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div></div>
+        <span class="n">ax</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">x_</span><span class="p">,</span> <span class="n">y_</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">log_y_scale</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">log_x_scale</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Discretized severity cumulative distribution function&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;cdf&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;nodes&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ax</span></div></div>
 
 <div class="viewcode-block" id="LossModel"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel">[docs]</a><span class="k">class</span> <span class="nc">LossModel</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -1742,18 +1752,22 @@ title="Source repository"
             <span class="n">value</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dist</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;dist&#39;</span><span class="p">,</span> <span class="n">logger</span><span class="o">=</span><span class="n">logger</span>
         <span class="p">)</span>
 
-<div class="viewcode-block" id="LossModel.plot_dist_cdf"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.plot_dist_cdf">[docs]</a>    <span class="k">def</span> <span class="nf">plot_dist_cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="LossModel.plot_dist_cdf"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.plot_dist_cdf">[docs]</a>    <span class="k">def</span> <span class="nf">plot_dist_cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">log_x_scale</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">log_y_scale</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Plot the cumulative distribution function of the aggregate loss distribution.</span>
 
 <span class="sd">        :param idx: index corresponding to the policystructure layer of interest (default is 0).</span>
 <span class="sd">                    See &#39;index_to_layer_name&#39; and &#39;layer_name_to_index&#39; PolicyStructure methods.</span>
 <span class="sd">        :type idx: ``int``</span>
+<span class="sd">        :param log_x_scale: if ``True`` the x-axis scale is logarithmic (optional).</span>
+<span class="sd">        :type log_x_scale: ``bool``</span>
+<span class="sd">        :param log_y_scale: if ``True`` the y-axis scale is logarithmic (optional).</span>
+<span class="sd">        :type log_y_scale: ``bool``</span>
 <span class="sd">        :param \\**kwargs:</span>
-<span class="sd">            Additional parameters are the same as those for &#39;matplotlib.pyplot.plot&#39;.</span>
+<span class="sd">            Additional parameters as those for ``matplotlib.axes.Axes.step``.</span>
 
-<span class="sd">        :return: Void</span>
-<span class="sd">        :rtype: None</span>
+<span class="sd">        :return: plot of the cdf.</span>
+<span class="sd">        :rtype: ``matplotlib.figure.Figure``</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">hf</span><span class="o">.</span><span class="n">assert_type_value</span><span class="p">(</span>
@@ -1762,14 +1776,24 @@ title="Source repository"
             <span class="n">lower_bound</span><span class="o">=</span><span class="mi">0</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_dist</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+        <span class="n">hf</span><span class="o">.</span><span class="n">assert_type_value</span><span class="p">(</span><span class="n">log_x_scale</span><span class="p">,</span> <span class="s1">&#39;log_x_scale&#39;</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span>
+        <span class="n">hf</span><span class="o">.</span><span class="n">assert_type_value</span><span class="p">(</span><span class="n">log_y_scale</span><span class="p">,</span> <span class="s1">&#39;log_y_scale&#39;</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span>
 
-        <span class="n">x_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">dist</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">dist</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">dist</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="mi">1</span><span class="p">]]),</span> <span class="bp">self</span><span class="o">.</span><span class="n">dist</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">nodes</span><span class="p">])</span>
-        <span class="n">y_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dist</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x_</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">x_</span><span class="p">,</span> <span class="n">y_</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Aggregate loss cumulative distribution function&#39;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;cdf&#39;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;nodes&#39;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div></div>
+        <span class="n">x_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dist</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">nodes</span>
+        <span class="n">y_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dist</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">cumprobs</span>
+
+        <span class="n">figure</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">figure</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+
+        <span class="n">ax</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">x_</span><span class="p">,</span> <span class="n">y_</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">log_y_scale</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">log_x_scale</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Aggregate loss cumulative distribution function&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;cdf&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;nodes&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ax</span></div></div>
 </pre></div>
 
               </div>

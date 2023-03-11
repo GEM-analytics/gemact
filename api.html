@@ -325,8 +325,8 @@ title="Print to PDF"
       </a>
      </li>
      <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#pricing-models">
-       Pricing models
+      <a class="reference internal nav-link" href="#risk-costing">
+       Risk costing
       </a>
       <ul class="nav section-nav flex-column">
        <li class="toc-h4 nav-item toc-entry">
@@ -383,8 +383,8 @@ title="Print to PDF"
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#risks-aggregation">
-       Risks aggregation
+      <a class="reference internal nav-link" href="#loss-aggregation">
+       Loss aggregation
       </a>
       <ul class="nav section-nav flex-column">
        <li class="toc-h4 nav-item toc-entry">
@@ -1103,8 +1103,8 @@ title="Print to PDF"
       </a>
      </li>
      <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#pricing-models">
-       Pricing models
+      <a class="reference internal nav-link" href="#risk-costing">
+       Risk costing
       </a>
       <ul class="nav section-nav flex-column">
        <li class="toc-h4 nav-item toc-entry">
@@ -1161,8 +1161,8 @@ title="Print to PDF"
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#risks-aggregation">
-       Risks aggregation
+      <a class="reference internal nav-link" href="#loss-aggregation">
+       Loss aggregation
       </a>
       <ul class="nav section-nav flex-column">
        <li class="toc-h4 nav-item toc-entry">
@@ -2065,21 +2065,23 @@ See ‘index_to_layer_name’ and ‘layer_name_to_index’ PolicyStructure meth
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gemact.lossmodel.LossModel.plot_dist_cdf">
-<span class="sig-name descname"><span class="pre">plot_dist_cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/lossmodel.html#LossModel.plot_dist_cdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.LossModel.plot_dist_cdf" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">plot_dist_cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_x_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_y_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/lossmodel.html#LossModel.plot_dist_cdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.LossModel.plot_dist_cdf" title="Permalink to this definition">#</a></dt>
 <dd><p>Plot the cumulative distribution function of the aggregate loss distribution.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>idx</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – index corresponding to the policystructure layer of interest (default is 0).
 See ‘index_to_layer_name’ and ‘layer_name_to_index’ PolicyStructure methods.</p></li>
-<li><p><strong>**kwargs</strong> – Additional parameters are the same as those for ‘matplotlib.pyplot.plot’.</p></li>
+<li><p><strong>log_x_scale</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>) – if <code class="docutils literal notranslate"><span class="pre">True</span></code> the x-axis scale is logarithmic (optional).</p></li>
+<li><p><strong>log_y_scale</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>) – if <code class="docutils literal notranslate"><span class="pre">True</span></code> the y-axis scale is logarithmic (optional).</p></li>
+<li><p><strong>**kwargs</strong> – Additional parameters as those for <code class="docutils literal notranslate"><span class="pre">matplotlib.axes.Axes.step</span></code>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Void</p>
+<dd class="field-even"><p>plot of the cdf.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>None</p>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">matplotlib.figure.Figure</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2322,7 +2324,7 @@ See ‘index_to_layer_name’ and ‘layer_name_to_index’ PolicyStructure meth
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gemact.lossmodel.Severity.plot_discr_sev_cdf">
-<span class="sig-name descname"><span class="pre">plot_discr_sev_cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">discr_method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_discr_nodes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">discr_step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cover</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deductible</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/lossmodel.html#Severity.plot_discr_sev_cdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.Severity.plot_discr_sev_cdf" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">plot_discr_sev_cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">discr_method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_discr_nodes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">discr_step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cover</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deductible</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_x_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_y_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/lossmodel.html#Severity.plot_discr_sev_cdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.Severity.plot_discr_sev_cdf" title="Permalink to this definition">#</a></dt>
 <dd><p>Plot the cumulative distribution function of the discretized severity distribution.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -2333,14 +2335,16 @@ See ‘index_to_layer_name’ and ‘layer_name_to_index’ PolicyStructure meth
 <li><p><strong>discr_step</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – severity discretization step.</p></li>
 <li><p><strong>deductible</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>) – deductible, also referred to as retention or priority.</p></li>
 <li><p><strong>cover</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>) – cover, also referred to as limit.</p></li>
-<li><p><strong>**kwargs</strong> – Additional parameters as per <code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot.plot</span></code> method.</p></li>
+<li><p><strong>log_x_scale</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>) – if <code class="docutils literal notranslate"><span class="pre">True</span></code> the x-axis scale is logarithmic (optional).</p></li>
+<li><p><strong>log_y_scale</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>) – if <code class="docutils literal notranslate"><span class="pre">True</span></code> the y-axis scale is logarithmic (optional).</p></li>
+<li><p><strong>**kwargs</strong> – Additional parameters as those for <code class="docutils literal notranslate"><span class="pre">matplotlib.axes.Axes.step</span></code>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Void</p>
+<dd class="field-even"><p>plot of the cdf.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>None</p>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">matplotlib.figure.Figure</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2395,15 +2399,15 @@ General method for severity class, overridden by distribution specific implement
 <div class="math notranslate nohighlight" id="equation-crm">
 <span class="eqno">(1)<a class="headerlink" href="#equation-crm" title="Permalink to this equation">#</a></span>\[X=\sum_{i=1}^{N} Z_i\]</div>
 <p>Denote the pure reinsurance premium as <span class="math notranslate nohighlight">\(P= \mathbb{E}\left( X \right)\)</span></p>
-<p>In order to price our (re)insurance contracts we model the company aggregate claim cost under the following assumptions.</p>
+<p>In order to cost (re)insurance contracts we model the company aggregate claim cost under the following assumptions.</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(X \sim g(X)\)</span> and <span class="math notranslate nohighlight">\(Z_i \sim f(Z)\)</span></p></li>
 <li><p>Given <span class="math notranslate nohighlight">\(N=n\)</span>,  the severity <span class="math notranslate nohighlight">\(Z_1,\ldots,Z_n\)</span> is i.i.d and does not depend on <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
 <li><p><span class="math notranslate nohighlight">\(N\)</span> does not depend on <span class="math notranslate nohighlight">\(Z_1,\ldots,Z_n\)</span> in any way.</p></li>
 </ul>
 </section>
-<section id="pricing-models">
-<h3>Pricing models<a class="headerlink" href="#pricing-models" title="Permalink to this headline">#</a></h3>
+<section id="risk-costing">
+<h3>Risk costing<a class="headerlink" href="#risk-costing" title="Permalink to this headline">#</a></h3>
 <p>The following table gives the correspondence between the <code class="docutils literal notranslate"><span class="pre">LossModel</span></code> class attributes and our pricing model as presented below.</p>
 <table class="table">
 <colgroup>
@@ -2411,7 +2415,7 @@ General method for severity class, overridden by distribution specific implement
 <col style="width: 63%" />
 </colgroup>
 <thead>
-<tr class="row-odd"><th class="head"><p>Pricing model notation</p></th>
+<tr class="row-odd"><th class="head"><p>Costing model notation</p></th>
 <th class="head"><p>Parametrization in <code class="docutils literal notranslate"><span class="pre">LossModel</span></code></p></th>
 </tr>
 </thead>
@@ -2442,15 +2446,15 @@ General method for severity class, overridden by distribution specific implement
 <p>Given <span class="math notranslate nohighlight">\(X=\sum_{i=1}^{N} Y_{i}\)</span>, where <span class="math notranslate nohighlight">\(Y_i\)</span> is defined in equation <a class="reference internal" href="#equation-crmre">(2)</a>.</p>
 <div class="math notranslate nohighlight" id="equation-xlpremium">
 <span class="eqno">(3)<a class="headerlink" href="#equation-xlpremium" title="Permalink to this equation">#</a></span>\[Y_{i}=\min \left(\max \left(0, Z_{i}-d\right), u\right)\]</div>
-<p>Equation <a class="reference internal" href="#equation-xlpremium">(3)</a> shows the reinsurance premium for excess of loss treaties. It is possible to obtain a plain-vanilla XL with <span class="math notranslate nohighlight">\(L=0\)</span>, <span class="math notranslate nohighlight">\(K=+\infty\)</span> and <span class="math notranslate nohighlight">\(c=0\)</span>.</p>
+<p>Equation <a class="reference internal" href="#equation-xlpremium">(3)</a> shows the reinsurance premium for excess of loss treaties. It is possible to obtain a (plain-vanilla) XL with <span class="math notranslate nohighlight">\(L=0\)</span>, <span class="math notranslate nohighlight">\(K=+\infty\)</span> and <span class="math notranslate nohighlight">\(c=0\)</span>.</p>
 <div class="math notranslate nohighlight" id="equation-reinstatementslayer">
 <span class="eqno">(4)<a class="headerlink" href="#equation-reinstatementslayer" title="Permalink to this equation">#</a></span>\[P=\frac{D_{L K}}{1+\frac{1}{m} \sum_{k=1}^{K} c_{k} d_{L, k-1}}\]</div>
-<p>GEMAct pricing model is based on  <span id="id1">Klugman and Panjer [<a class="reference internal" href="#id73" title="P. Klugman and H.H. Panjer. Loss models from data to decisions. Wiley, SOA, 2019.">KP19</a>]</span> and  <span id="id2">Sundt [<a class="reference internal" href="#id75" title="B. Sundt. On excess of loss reinsurance with reinstatements. Insurance: Mathematics and Economics, 1991.">Sun91</a>]</span>.</p>
+<p>GEMAct costing approach is based on  <span id="id1">Klugman and Panjer [<a class="reference internal" href="#id73" title="P. Klugman and H.H. Panjer. Loss models from data to decisions. Wiley, SOA, 2019.">KP19</a>]</span> and  <span id="id2">Sundt [<a class="reference internal" href="#id75" title="B. Sundt. On excess of loss reinsurance with reinstatements. Insurance: Mathematics and Economics, 1991.">Sun91</a>]</span>.</p>
 <p>Refer again to <span id="id3">Klugman and Panjer [<a class="reference internal" href="#id73" title="P. Klugman and H.H. Panjer. Loss models from data to decisions. Wiley, SOA, 2019.">KP19</a>]</span> for the recursive formula to compute the collective risk model and to <span id="id4">Embrechts and Frei [<a class="reference internal" href="#id69" title="P. Embrechts and M. Frei. Panjer recursion versus fft for compound distributions. Mathematical Methods of Operations Research, 2008.">EF08</a>]</span> for the Fast Fourier transform to approximate the Discrete Fourier Transform of the collective risk model.</p>
 <section id="example">
 <h4>Example<a class="headerlink" href="#example" title="Permalink to this headline">#</a></h4>
-<p><code class="docutils literal notranslate"><span class="pre">LossModel</span></code> can be used to price reinsurance contracts.</p>
-<p>An example of pricing with reinstatements:</p>
+<p><code class="docutils literal notranslate"><span class="pre">LossModel</span></code> can be used for costing reinsurance contracts.</p>
+<p>An example of costing with reinstatements:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gemact.lossmodel</span> <span class="kn">import</span> <span class="n">Frequency</span><span class="p">,</span> <span class="n">Severity</span><span class="p">,</span> <span class="n">PolicyStructure</span><span class="p">,</span> <span class="n">LossModel</span>
 <span class="n">lossmodel_RS</span> <span class="o">=</span> <span class="n">LossModel</span><span class="p">(</span>
  <span class="n">frequency</span><span class="o">=</span><span class="n">Frequency</span><span class="p">(</span>
@@ -2510,7 +2514,8 @@ General method for severity class, overridden by distribution specific implement
 </section>
 <section id="severity-discretization">
 <h3>Severity discretization<a class="headerlink" href="#severity-discretization" title="Permalink to this headline">#</a></h3>
-<p>In order to pass from a continuous distribution to an arithmetic distribution, it is important to preserve the distribution properties either locally or globally. Given a span <span class="math notranslate nohighlight">\(h\)</span> and <span class="math notranslate nohighlight">\(M\)</span> the last available point, in <span id="id5">Klugman and Panjer [<a class="reference internal" href="#id73" title="P. Klugman and H.H. Panjer. Loss models from data to decisions. Wiley, SOA, 2019.">KP19</a>]</span> there are two available solutions.</p>
+<p>When passing from a continuous distribution to an arithmetic distribution, it is important to preserve the distribution properties either locally or globally.
+Given a span <span class="math notranslate nohighlight">\(h\)</span> and <span class="math notranslate nohighlight">\(M\)</span> the last available point, in <span id="id5">Klugman and Panjer [<a class="reference internal" href="#id73" title="P. Klugman and H.H. Panjer. Loss models from data to decisions. Wiley, SOA, 2019.">KP19</a>]</span> there are two available solutions.</p>
 <p><strong>Method of mass dispersal</strong></p>
 <div class="math notranslate nohighlight" id="equation-md1">
 <span class="eqno">(5)<a class="headerlink" href="#equation-md1" title="Permalink to this equation">#</a></span>\[f_{0}=\operatorname{Pr}\left(Y&lt;\frac{h}{2}\right)=F_{Y}\left(\frac{h}{2}-0\right)\]</div>
@@ -2699,7 +2704,7 @@ In case no tail is present it must be J-1 dimensional.</p></li>
 <section id="claims-reserving">
 <h3>Claims reserving<a class="headerlink" href="#claims-reserving" title="Permalink to this headline">#</a></h3>
 <p>GEMAct provides a software implementation of average cost methods for claims reserving based on the collective risk model framework.</p>
-<p>The methods implemented in GEMAct are the Fisher-Lange in <span id="id7">Fisher <em>et al.</em> [<a class="reference internal" href="#id76" title="Wayne H. Fisher, Jeffrey T. Lange, and John Balcarek. Loss reserve testing: a report year approach. 1999.">FLB99</a>]</span> the collective risk model for claims reserving in <span id="id8">Ricotta and Clemente [<a class="reference internal" href="#id77" title="Alessandro Ricotta and Gian Paolo Clemente. An extension of collective risk model for stochastic claim reserving. 2016.">RC16</a>]</span>.</p>
+<p>The methods implemented are the Fisher-Lange in <span id="id7">Fisher <em>et al.</em> [<a class="reference internal" href="#id76" title="Wayne H. Fisher, Jeffrey T. Lange, and John Balcarek. Loss reserve testing: a report year approach. 1999.">FLB99</a>]</span> the collective risk model for claims reserving in <span id="id8">Ricotta and Clemente [<a class="reference internal" href="#id77" title="Alessandro Ricotta and Gian Paolo Clemente. An extension of collective risk model for stochastic claim reserving. 2016.">RC16</a>]</span>.</p>
 <p>GEMAct allows for tail estimates and assumes the triangular inputs to be provided as a <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> with two equal dimensions <code class="docutils literal notranslate"><span class="pre">(I,J)</span></code>, where <code class="docutils literal notranslate"><span class="pre">I=J</span></code>.</p>
 <p>The aim of average cost methods is to model incremental payments as in equation <a class="reference internal" href="#equation-acmethods">(12)</a>.</p>
 <div class="math notranslate nohighlight" id="equation-acmethods">
@@ -2869,6 +2874,27 @@ Piecewise-constant approximation.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation.plot_cdf">
+<span class="sig-name descname"><span class="pre">plot_cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_x_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_y_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/lossaggregation.html#LossAggregation.plot_cdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossaggregation.LossAggregation.plot_cdf" title="Permalink to this definition">#</a></dt>
+<dd><p>Plot the cumulative distribution function of the random variable sum.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>log_x_scale</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>) – if <code class="docutils literal notranslate"><span class="pre">True</span></code> the x-axis scale is logarithmic (optional).</p></li>
+<li><p><strong>log_y_scale</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>) – if <code class="docutils literal notranslate"><span class="pre">True</span></code> the y-axis scale is logarithmic (optional).</p></li>
+<li><p><strong>**kwargs</strong> – Additional parameters as those for <code class="docutils literal notranslate"><span class="pre">matplotlib.axes.Axes.step</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>plot of the cdf.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">matplotlib.figure.Figure</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="gemact.lossaggregation.LossAggregation.ppf">
 <span class="sig-name descname"><span class="pre">ppf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">q</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mc'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tolerance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_search_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/lossaggregation.html#LossAggregation.ppf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossaggregation.LossAggregation.ppf" title="Permalink to this definition">#</a></dt>
 <dd><p>Percent point function, a.k.a. the quantile function, of the random variable sum.
@@ -2970,8 +2996,8 @@ Piecewise-constant approximation.</p>
 
 </dd></dl>
 
-<section id="risks-aggregation">
-<h3>Risks aggregation<a class="headerlink" href="#risks-aggregation" title="Permalink to this headline">#</a></h3>
+<section id="loss-aggregation">
+<h3>Loss aggregation<a class="headerlink" href="#loss-aggregation" title="Permalink to this headline">#</a></h3>
 <div class="math notranslate nohighlight" id="equation-pty">
 <span class="eqno">(13)<a class="headerlink" href="#equation-pty" title="Permalink to this equation">#</a></span>\[P\left[ X_1 +\ldots +X_d \right] \approx P_n(s)\]</div>
 <p>The probability in equation <a class="reference internal" href="#equation-pty">(13)</a> can be approximated iteratively via the AEP algorithm, which is implemented for the first time in the GEMAct package, under the following assumptions:</p>
@@ -13611,15 +13637,16 @@ followed by those for location and scale.</p>
 <h3><code class="docutils literal notranslate"><span class="pre">Loggamma</span></code><a class="headerlink" href="#loggamma" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="gemact.distributions.LogGamma">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LogGamma</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">loc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/distributions.html#LogGamma"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.distributions.LogGamma" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LogGamma</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/distributions.html#LogGamma"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.distributions.LogGamma" title="Permalink to this definition">#</a></dt>
 <dd><p>Log Gamma distribution.
 Random variable whose logarithm transformation is Gamma distributed. 
-Parameters (<code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">scale</span></code>) refer to the underlying log-transformed random variable.</p>
+Parameters (<code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">scale</span></code>) refer to the underlying log-transformed random variable.
+Remark: distribution form and parametrization differ from
+&lt;scipy.stats._continuous_distns.loggamma_gen object&gt;</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>scale</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – scale parameter (inverse of the rate parameter).</p></li>
-<li><p><strong>loc</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – location parameter.</p></li>
 <li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
