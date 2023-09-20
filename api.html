@@ -2580,10 +2580,10 @@ Also referred to as the stop-loss transformation function.</p>
 <td><p>n_reinst</p></td>
 </tr>
 <tr class="row-even"><td><p><span class="math notranslate nohighlight">\(c_{k}\)</span></p></td>
-<td><p>reinst_loading</p></td>
+<td><p>reinst_percentage</p></td>
 </tr>
 <tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\alpha\)</span></p></td>
-<td><p>alpha_qs</p></td>
+<td><p>share</p></td>
 </tr>
 </tbody>
 </table>
@@ -2593,11 +2593,11 @@ Also referred to as the stop-loss transformation function.</p>
 <p>Given <span class="math notranslate nohighlight">\(X=\sum_{i=1}^{N} Y_{i}\)</span>, where <span class="math notranslate nohighlight">\(Y_i\)</span> is defined in equation <a class="reference internal" href="#equation-crmre">(2)</a>.</p>
 <div class="math notranslate nohighlight" id="equation-xlpremium">
 <span class="eqno">(3)<a class="headerlink" href="#equation-xlpremium" title="Permalink to this equation">#</a></span>\[Y_{i}=\min \left(\max \left(0, Z_{i}-d\right), u\right)\]</div>
-<p>Equation <a class="reference internal" href="#equation-xlpremium">(3)</a> shows the reinsurance premium for excess of loss treaties. It is possible to obtain a (plain-vanilla) XL with <span class="math notranslate nohighlight">\(L=0\)</span>, <span class="math notranslate nohighlight">\(K=+\infty\)</span> and <span class="math notranslate nohighlight">\(c=0\)</span>.</p>
+<p>Equation <a class="reference internal" href="#equation-xlpremium">(3)</a> shows the pure premium for the excess of loss contract. It is possible to obtain a (plain-vanilla) XL with <span class="math notranslate nohighlight">\(L=0\)</span>, <span class="math notranslate nohighlight">\(K=+\infty\)</span> and <span class="math notranslate nohighlight">\(c=0\)</span>.</p>
 <div class="math notranslate nohighlight" id="equation-reinstatementslayer">
 <span class="eqno">(4)<a class="headerlink" href="#equation-reinstatementslayer" title="Permalink to this equation">#</a></span>\[P=\frac{D_{L K}}{1+\frac{1}{m} \sum_{k=1}^{K} c_{k} d_{L, k-1}}\]</div>
 <p>This costing approach is based on  <span id="id1">Klugman and Panjer [<a class="reference internal" href="#id73" title="P. Klugman and H.H. Panjer. Loss models from data to decisions. Wiley, SOA, 2019.">KP19</a>]</span> and  <span id="id2">Sundt [<a class="reference internal" href="#id75" title="B. Sundt. On excess of loss reinsurance with reinstatements. Insurance: Mathematics and Economics, 1991.">Sun91</a>]</span>.</p>
-<p>Refer to <span id="id3">Klugman and Panjer [<a class="reference internal" href="#id73" title="P. Klugman and H.H. Panjer. Loss models from data to decisions. Wiley, SOA, 2019.">KP19</a>]</span> for the recursive formula and to <span id="id4">Embrechts and Frei [<a class="reference internal" href="#id69" title="P. Embrechts and M. Frei. Panjer recursion versus fft for compound distributions. Mathematical Methods of Operations Research, 2008.">EF08</a>]</span> for the fast Fourier transform to approximate the Discrete Fourier Transform.</p>
+<p>Refer to <span id="id3">Klugman and Panjer [<a class="reference internal" href="#id73" title="P. Klugman and H.H. Panjer. Loss models from data to decisions. Wiley, SOA, 2019.">KP19</a>]</span> for the recursive formula and to <span id="id4">Embrechts and Frei [<a class="reference internal" href="#id69" title="P. Embrechts and M. Frei. Panjer recursion versus fft for compound distributions. Mathematical Methods of Operations Research, 2008.">EF08</a>]</span> for the fast Fourier transform to approximate the discrete Fourier transform.</p>
 <section id="example">
 <h4>Example<a class="headerlink" href="#example" title="Permalink to this headline">#</a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">LossModel</span></code> can be used for costing purposes.</p>
@@ -2619,7 +2619,7 @@ Also referred to as the stop-loss transformation function.</p>
          <span class="n">cover</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
          <span class="n">deductible</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
          <span class="n">aggr_deductible</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-         <span class="n">reinst_percentage</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+         <span class="n">reinst_share</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
          <span class="n">n_reinst</span><span class="o">=</span><span class="mi">1</span>
      <span class="p">)</span>
  <span class="p">),</span>
@@ -2642,7 +2642,6 @@ Also referred to as the stop-loss transformation function.</p>
     <span class="n">dist</span><span class="o">=</span><span class="s1">&#39;genpareto&#39;</span><span class="p">,</span>
     <span class="n">par</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mf">.2</span><span class="p">,</span> <span class="s1">&#39;scale&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
 
-
 <span class="n">lossmodel_dft</span> <span class="o">=</span> <span class="n">LossModel</span><span class="p">(</span>
 <span class="n">frequency</span><span class="o">=</span><span class="n">frequency</span><span class="p">,</span>
 <span class="n">severity</span><span class="o">=</span><span class="n">severity</span><span class="p">,</span>
@@ -2659,8 +2658,8 @@ Also referred to as the stop-loss transformation function.</p>
 </section>
 <section id="severity-discretization">
 <h3>Severity discretization<a class="headerlink" href="#severity-discretization" title="Permalink to this headline">#</a></h3>
-<p>When passing from a continuous distribution to an arithmetic distribution, it is important to preserve the distribution properties either locally or globally.
-Given a span <span class="math notranslate nohighlight">\(h\)</span> and <span class="math notranslate nohighlight">\(M\)</span> the last available point, in <span id="id5">Klugman and Panjer [<a class="reference internal" href="#id73" title="P. Klugman and H.H. Panjer. Loss models from data to decisions. Wiley, SOA, 2019.">KP19</a>]</span> there are two available solutions.</p>
+<p>When passing from a continuous distribution to an arithmetic distribution, it is important to preserve the distribution properties, either locally or globally.
+Given a bandiwith (or discretization step) <span class="math notranslate nohighlight">\(h\)</span> and a number of nodes <span class="math notranslate nohighlight">\(M\)</span>, in <span id="id5">Klugman and Panjer [<a class="reference internal" href="#id73" title="P. Klugman and H.H. Panjer. Loss models from data to decisions. Wiley, SOA, 2019.">KP19</a>]</span> the method of mass dispersal and the method of local moments matching work as follows.</p>
 <p><strong>Method of mass dispersal</strong></p>
 <div class="math notranslate nohighlight" id="equation-md1">
 <span class="eqno">(5)<a class="headerlink" href="#equation-md1" title="Permalink to this equation">#</a></span>\[f_{0}=\operatorname{Pr}\left(Y&lt;\frac{h}{2}\right)=F_{Y}\left(\frac{h}{2}-0\right)\]</div>
@@ -2678,16 +2677,15 @@ Given a span <span class="math notranslate nohighlight">\(h\)</span> and <span c
 <span class="eqno">(10)<a class="headerlink" href="#equation-lm3" title="Permalink to this equation">#</a></span>\[\sum_{j=0}^{1}\left(x_{k}+j h\right)^{r} m_{j}^{k}=\int_{x_{k}-0}^{x_{k}+ h-0} x^{r} d F_{X}(x), \quad r=0,1\]</div>
 <div class="math notranslate nohighlight" id="equation-lm4">
 <span class="eqno">(11)<a class="headerlink" href="#equation-lm4" title="Permalink to this equation">#</a></span>\[m_{j}^{k}=\int_{x_{k}-0}^{x_{k}+p h-0} \prod_{i \neq j} \frac{x-x_{k}-i h}{(j-i) h} d F_{X}(x), \quad j=0,1\]</div>
+<p>In addition to these two methods, our package also provides the methods of upper and lower discretizations.</p>
 <section id="id6">
 <h4>Example<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h4>
-<p>A simple code implementation of severity discretization:</p>
+<p>An example of code to implement severity discretization is given below:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gemact.lossmodel</span> <span class="kn">import</span> <span class="n">Severity</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="n">severity</span><span class="o">=</span><span class="n">Severity</span><span class="p">(</span>
-    <span class="n">par</span><span class="o">=</span> <span class="p">{</span><span class="s1">&#39;loc&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-          <span class="s1">&#39;scale&#39;</span><span class="p">:</span> <span class="mf">83.34</span><span class="p">,</span>
-          <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mf">0.834</span><span class="p">},</span>
+    <span class="n">par</span><span class="o">=</span> <span class="p">{</span><span class="s1">&#39;loc&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;scale&#39;</span><span class="p">:</span> <span class="mf">83.34</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mf">0.834</span><span class="p">},</span>
     <span class="n">dist</span><span class="o">=</span><span class="s1">&#39;genpareto&#39;</span>
 <span class="p">)</span>
 
@@ -2721,19 +2719,19 @@ Given a span <span class="math notranslate nohighlight">\(h\)</span> and <span c
 <dl class="py class">
 <dt class="sig sig-object py" id="gemact.lossreserve.AggregateData">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AggregateData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">incremental_payments</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cased_payments</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">payments_number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">open_claims_number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reported_claims</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cumulative_payments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/lossreserve.html#AggregateData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossreserve.AggregateData" title="Permalink to this definition">#</a></dt>
-<dd><p>Triangular data sets.
-:param cumulative_payments: Cumulative payments’ triangle.
-:type cumulative_payments: <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>
-:param incremental_payments: Incremental payments’ triangle.
-:type incremental_payments: <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>
-:param cased_payments: Cased payments triangle.
-:type cased_payments: <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>
-:param payments_number:  Number of paid claims.
-:type payments_number: <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>
-:param open_claims_number:  Number of open claims.
-:type open_claims_number: <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>
-:param reported_claims:  Number of reported claims by accident period. Data must be provided from old to recent.
-:type reported_claims: <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+<dd><p>Triangular data sets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cumulative_payments</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – cumulative payments triangle.</p></li>
+<li><p><strong>incremental_payments</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – incremental payments triangle.</p></li>
+<li><p><strong>cased_payments</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – cased payments triangle.</p></li>
+<li><p><strong>payments_number</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – number of paid claims.</p></li>
+<li><p><strong>open_claims_number</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – number of open claims.</p></li>
+<li><p><strong>reported_claims</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – number of reported claims by accident period. Data must be provided from old to recent.</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py class">
@@ -2905,7 +2903,7 @@ are compared with the Fisher-Lange.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>tail</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>) – set it to True when the tail estimate is required. Default False.</p></li>
+<li><p><strong>tail</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>) – True when the tail estimate is required else false (optional). Default False.</p></li>
 <li><p><strong>reserving_method</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – one of the reserving methods supported by the GemAct package.</p></li>
 <li><p><strong>claims_inflation</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – claims inflation. In case no tail is present and the triangular data IxJ matrices,
 claims_inflation must be J-1 dimensional. When a tail estimate is required, it must be
@@ -2954,18 +2952,23 @@ In case no tail is present it must be J-1 dimensional.</p></li>
 <span class="n">claims_inflation</span> <span class="o">=</span> <span class="n">gemdata</span><span class="o">.</span><span class="n">claims_inflation</span>
 
 <span class="n">ad</span> <span class="o">=</span> <span class="n">AggregateData</span><span class="p">(</span>
-    <span class="n">incremental_payments</span><span class="o">=</span><span class="n">ip_</span><span class="p">,</span>
-    <span class="n">cased_payments</span><span class="o">=</span><span class="n">cp_</span><span class="p">,</span>
-    <span class="n">cased_number</span><span class="o">=</span><span class="n">cn_</span><span class="p">,</span>
-    <span class="n">reported_claims</span><span class="o">=</span><span class="n">reported_</span><span class="p">,</span>
-    <span class="n">incurred_number</span><span class="o">=</span><span class="n">in_</span><span class="p">)</span>
+  <span class="n">incremental_payments</span><span class="o">=</span><span class="n">ip_</span><span class="p">,</span>
+  <span class="n">cased_payments</span><span class="o">=</span><span class="n">cp_</span><span class="p">,</span>
+  <span class="n">cased_number</span><span class="o">=</span><span class="n">cn_</span><span class="p">,</span>
+  <span class="n">reported_claims</span><span class="o">=</span><span class="n">reported_</span><span class="p">,</span>
+  <span class="n">incurred_number</span><span class="o">=</span><span class="n">in_</span>
+  <span class="p">)</span>
 
-<span class="n">rm</span> <span class="o">=</span> <span class="n">ReservingModel</span><span class="p">(</span><span class="n">tail</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-             <span class="n">reserving_method</span><span class="o">=</span><span class="s2">&quot;fisher_lange&quot;</span><span class="p">,</span>
-             <span class="n">claims_inflation</span><span class="o">=</span><span class="n">claims_inflation</span><span class="p">)</span>
+<span class="n">rm</span> <span class="o">=</span> <span class="n">ReservingModel</span><span class="p">(</span>
+  <span class="n">tail</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+  <span class="n">reserving_method</span><span class="o">=</span><span class="s2">&quot;fisher_lange&quot;</span><span class="p">,</span>
+  <span class="n">claims_inflation</span><span class="o">=</span><span class="n">claims_inflation</span>
+  <span class="p">)</span>
 
-<span class="n">lm</span> <span class="o">=</span> <span class="n">gemact</span><span class="o">.</span><span class="n">LossReserve</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">ad</span><span class="p">,</span>
-                        <span class="n">reservingmodel</span><span class="o">=</span><span class="n">rm</span><span class="p">)</span>
+<span class="n">lm</span> <span class="o">=</span> <span class="n">gemact</span><span class="o">.</span><span class="n">LossReserve</span><span class="p">(</span>
+  <span class="n">data</span><span class="o">=</span><span class="n">ad</span><span class="p">,</span>
+  <span class="n">reservingmodel</span><span class="o">=</span><span class="n">rm</span>
+  <span class="p">)</span>
 </pre></div>
 </div>
 <p>Observe the CRM for reserving requires different model assumptions:</p>
@@ -3315,30 +3318,27 @@ It is possible to use a MC simulation for comparison.</p>
 <section id="id11">
 <h4>Example<a class="headerlink" href="#id11" title="Permalink to this headline">#</a></h4>
 <p>Example code under a clayton assumption:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gemact.lossaggregation</span> <span class="kn">import</span> <span class="n">LossAggregation</span><span class="p">,</span> <span class="n">Copula</span><span class="p">,</span> <span class="n">Margins</span>
-<span class="n">la</span> <span class="o">=</span> <span class="n">LossAggregation</span><span class="p">(</span>
-        <span class="n">margins</span><span class="o">=</span><span class="n">Margins</span><span class="p">(</span>
-                 <span class="n">dist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;genpareto&#39;</span><span class="p">,</span> <span class="s1">&#39;lognormal&#39;</span><span class="p">],</span>
-                 <span class="n">par</span><span class="o">=</span><span class="p">[{</span><span class="s1">&#39;loc&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;scale&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="o">/</span><span class="mf">.9</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="o">/</span><span class="mf">.9</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;loc&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;scale&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;shape&#39;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">}],</span>
-        <span class="p">),</span>
-        <span class="n">copula</span><span class="o">=</span><span class="n">Copula</span><span class="p">(</span>
-        <span class="n">dist</span><span class="o">=</span><span class="s1">&#39;frank&#39;</span><span class="p">,</span>
-        <span class="n">par</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;par&#39;</span><span class="p">:</span> <span class="mf">1.2</span><span class="p">,</span> <span class="s1">&#39;dim&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
-        <span class="p">),</span>
-        <span class="n">n_sim</span><span class="o">=</span><span class="mi">500000</span><span class="p">,</span>
-        <span class="n">random_state</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
-        <span class="n">n_iter</span><span class="o">=</span><span class="mi">8</span>
-        <span class="p">)</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="mi">300</span> <span class="c1"># arbitrary value</span>
-        <span class="n">p_aep</span> <span class="o">=</span> <span class="n">lossaggregation</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">s</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;aep&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;P(X1+X2 &lt;= s) = &#39;</span><span class="p">,</span> <span class="n">p_aep</span><span class="p">)</span>
-        <span class="n">p_mc</span> <span class="o">=</span> <span class="n">lossaggregation</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">s</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;mc&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;P(X1+X2 &lt;= s) = &#39;</span><span class="p">,</span> <span class="n">p_mc</span><span class="p">)</span>
-
-        <span class="n">lossaggregation</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="n">p_aep</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;aep&#39;</span><span class="p">)</span>
-        <span class="n">lossaggregation</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="n">p_mc</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;mc&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
+<p>from gemact.lossaggregation import LossAggregation, Copula, Margins
+lossaggregation = LossAggregation(</p>
+<blockquote>
+<div><p>margins=Margins(
+dist=[‘genpareto’, ‘lognormal’],
+par=[{‘loc’: 0, ‘scale’: 1/.9, ‘c’: 1/.9}, {‘loc’: 0, ‘scale’: 10, ‘shape’: 1.5}],
+),
+copula=Copula(
+dist=’frank’,
+par={‘par’: 1.2, ‘dim’: 2}
+),
+n_sim=500000,
+random_state=10,
+n_iter=8
+)</p>
+</div></blockquote>
+<p>s = 300 # arbitrary value
+p_aep = lossaggregation.cdf(x=s, method=’aep’)
+print(‘P(X1+X2 &lt;= s) = ‘, p_aep)
+p_mc = lossaggregation.cdf(x=s, method=’mc’)
+print(‘P(X1+X2 &lt;= s) = ‘, p_mc)</p>
 </section>
 </section>
 </section>
