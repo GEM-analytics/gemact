@@ -2478,7 +2478,7 @@ Also referred to as the stop-loss transformation function.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="gemact.lossmodel.Severity.censored_var">
 <span class="sig-name descname"><span class="pre">censored_var</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cover</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deductible</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/lossmodel.html#Severity.censored_var"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.lossmodel.Severity.censored_var" title="Permalink to this definition">#</a></dt>
-<dd><p>Variance of the transformed severity min(max(x - u, 0), v).</p>
+<dd><p>Variance of the transformed severity min(max(x - d, 0), c).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -8015,20 +8015,20 @@ shape parameter a.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.Gamma.censored_moment">
-<span class="sig-name descname"><span class="pre">censored_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Gamma.censored_moment" title="Permalink to this definition">#</a></dt>
-<dd><p>Non-central moment of order n of the transformed random variable min(max(x - u, 0), v).
+<span class="sig-name descname"><span class="pre">censored_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Gamma.censored_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central moment of order n of the transformed random variable min(max(x - d, 0), c).
 When n = 1 it is the so-called stop loss transformation function.
 General method for continuous distributions, overridden by distribution specific implementation if available.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>u</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower censoring point.</p></li>
-<li><p><strong>v</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – difference between the upper and the lower censoring points, i.e. v + u is the upper censoring point.</p></li>
+<li><p><strong>d</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – deductible, or attachment point.</p></li>
+<li><p><strong>c</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – cover, deductible + cover is the detachment point.</p></li>
 <li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>censored raw moment of order n.</p>
+<dd class="field-even"><p>raw moment of order n.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
@@ -8259,6 +8259,27 @@ followed by those for location and scale.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="gemact.distributions.Gamma.partial_moment">
+<span class="sig-name descname"><span class="pre">partial_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">up</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/distributions.html#Gamma.partial_moment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.distributions.Gamma.partial_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Partial moment of order n.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
+<li><p><strong>low</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower limit of the partial moment.</p></li>
+<li><p><strong>up</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – upper limit of the partial moment.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>raw partial moment of order n.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.Gamma.pdf">
 <span class="sig-name descname"><span class="pre">pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Gamma.pdf" title="Permalink to this definition">#</a></dt>
 <dd><p>Probability density function.</p>
@@ -8375,6 +8396,28 @@ followed by those for location and scale.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="gemact.distributions.Gamma.truncated_moment">
+<span class="sig-name descname"><span class="pre">truncated_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">up</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Gamma.truncated_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central truncated moment of order n.
+General method for continuous distributions, overridden by distribution specific implementation if available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
+<li><p><strong>low</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower truncation point.</p></li>
+<li><p><strong>up</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – upper truncation point.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>raw truncated moment of order n.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.Gamma.var">
 <span class="sig-name descname"><span class="pre">var</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Gamma.var" title="Permalink to this definition">#</a></dt>
 <dd><p>Variance of the distribution.</p>
@@ -8465,20 +8508,20 @@ scipy reference distribution: <code class="docutils literal notranslate"><span c
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.Exponential.censored_moment">
-<span class="sig-name descname"><span class="pre">censored_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Exponential.censored_moment" title="Permalink to this definition">#</a></dt>
-<dd><p>Non-central moment of order n of the transformed random variable min(max(x - u, 0), v).
+<span class="sig-name descname"><span class="pre">censored_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Exponential.censored_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central moment of order n of the transformed random variable min(max(x - d, 0), c).
 When n = 1 it is the so-called stop loss transformation function.
 General method for continuous distributions, overridden by distribution specific implementation if available.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>u</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower censoring point.</p></li>
-<li><p><strong>v</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – difference between the upper and the lower censoring points, i.e. v + u is the upper censoring point.</p></li>
+<li><p><strong>d</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – deductible, or attachment point.</p></li>
+<li><p><strong>c</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – cover, deductible + cover is the detachment point.</p></li>
 <li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>censored raw moment of order n.</p>
+<dd class="field-even"><p>raw moment of order n.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
@@ -8709,6 +8752,27 @@ followed by those for location and scale.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="gemact.distributions.Exponential.partial_moment">
+<span class="sig-name descname"><span class="pre">partial_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">up</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/distributions.html#Exponential.partial_moment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.distributions.Exponential.partial_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Partial moment of order n.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
+<li><p><strong>low</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower limit of the partial moment.</p></li>
+<li><p><strong>up</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – upper limit of the partial moment.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>raw partial moment of order n.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.Exponential.pdf">
 <span class="sig-name descname"><span class="pre">pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/distributions.html#Exponential.pdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.distributions.Exponential.pdf" title="Permalink to this definition">#</a></dt>
 <dd><p>Probability density function.</p>
@@ -8825,6 +8889,28 @@ followed by those for location and scale.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="gemact.distributions.Exponential.truncated_moment">
+<span class="sig-name descname"><span class="pre">truncated_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">up</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Exponential.truncated_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central truncated moment of order n.
+General method for continuous distributions, overridden by distribution specific implementation if available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
+<li><p><strong>low</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower truncation point.</p></li>
+<li><p><strong>up</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – upper truncation point.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>raw truncated moment of order n.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.Exponential.var">
 <span class="sig-name descname"><span class="pre">var</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/distributions.html#Exponential.var"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.distributions.Exponential.var" title="Permalink to this definition">#</a></dt>
 <dd><p>Variance of the distribution.</p>
@@ -8919,20 +9005,20 @@ shape parameter mu.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.InvGauss.censored_moment">
-<span class="sig-name descname"><span class="pre">censored_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.InvGauss.censored_moment" title="Permalink to this definition">#</a></dt>
-<dd><p>Non-central moment of order n of the transformed random variable min(max(x - u, 0), v).
+<span class="sig-name descname"><span class="pre">censored_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.InvGauss.censored_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central moment of order n of the transformed random variable min(max(x - d, 0), c).
 When n = 1 it is the so-called stop loss transformation function.
 General method for continuous distributions, overridden by distribution specific implementation if available.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>u</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower censoring point.</p></li>
-<li><p><strong>v</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – difference between the upper and the lower censoring points, i.e. v + u is the upper censoring point.</p></li>
+<li><p><strong>d</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – deductible, or attachment point.</p></li>
+<li><p><strong>c</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – cover, deductible + cover is the detachment point.</p></li>
 <li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>censored raw moment of order n.</p>
+<dd class="field-even"><p>raw moment of order n.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
@@ -9163,6 +9249,28 @@ followed by those for location and scale.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="gemact.distributions.InvGauss.partial_moment">
+<span class="sig-name descname"><span class="pre">partial_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">up</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.InvGauss.partial_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central partial moment of order n.
+General method for continuous distributions, overridden by distribution specific implementation if available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
+<li><p><strong>low</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower limit of the partial moment.</p></li>
+<li><p><strong>up</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – upper limit of the partial moment.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>raw partial moment of order n.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.InvGauss.pdf">
 <span class="sig-name descname"><span class="pre">pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.InvGauss.pdf" title="Permalink to this definition">#</a></dt>
 <dd><p>Probability density function.</p>
@@ -9279,6 +9387,28 @@ followed by those for location and scale.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="gemact.distributions.InvGauss.truncated_moment">
+<span class="sig-name descname"><span class="pre">truncated_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">up</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.InvGauss.truncated_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central truncated moment of order n.
+General method for continuous distributions, overridden by distribution specific implementation if available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
+<li><p><strong>low</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower truncation point.</p></li>
+<li><p><strong>up</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – upper truncation point.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>raw truncated moment of order n.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.InvGauss.var">
 <span class="sig-name descname"><span class="pre">var</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.InvGauss.var" title="Permalink to this definition">#</a></dt>
 <dd><p>Variance of the distribution.</p>
@@ -9342,20 +9472,20 @@ shape parameter a.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.InvGamma.censored_moment">
-<span class="sig-name descname"><span class="pre">censored_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.InvGamma.censored_moment" title="Permalink to this definition">#</a></dt>
-<dd><p>Non-central moment of order n of the transformed random variable min(max(x - u, 0), v).
+<span class="sig-name descname"><span class="pre">censored_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.InvGamma.censored_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central moment of order n of the transformed random variable min(max(x - d, 0), c).
 When n = 1 it is the so-called stop loss transformation function.
 General method for continuous distributions, overridden by distribution specific implementation if available.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>u</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower censoring point.</p></li>
-<li><p><strong>v</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – difference between the upper and the lower censoring points, i.e. v + u is the upper censoring point.</p></li>
+<li><p><strong>d</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – deductible, or attachment point.</p></li>
+<li><p><strong>c</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – cover, deductible + cover is the detachment point.</p></li>
 <li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>censored raw moment of order n.</p>
+<dd class="field-even"><p>raw moment of order n.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
@@ -9586,6 +9716,28 @@ followed by those for location and scale.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="gemact.distributions.InvGamma.partial_moment">
+<span class="sig-name descname"><span class="pre">partial_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">up</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.InvGamma.partial_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central partial moment of order n.
+General method for continuous distributions, overridden by distribution specific implementation if available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
+<li><p><strong>low</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower limit of the partial moment.</p></li>
+<li><p><strong>up</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – upper limit of the partial moment.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>raw partial moment of order n.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.InvGamma.pdf">
 <span class="sig-name descname"><span class="pre">pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.InvGamma.pdf" title="Permalink to this definition">#</a></dt>
 <dd><p>Probability density function.</p>
@@ -9702,6 +9854,28 @@ followed by those for location and scale.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="gemact.distributions.InvGamma.truncated_moment">
+<span class="sig-name descname"><span class="pre">truncated_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">up</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.InvGamma.truncated_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central truncated moment of order n.
+General method for continuous distributions, overridden by distribution specific implementation if available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
+<li><p><strong>low</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower truncation point.</p></li>
+<li><p><strong>up</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – upper truncation point.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>raw truncated moment of order n.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.InvGamma.var">
 <span class="sig-name descname"><span class="pre">var</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.InvGamma.var" title="Permalink to this definition">#</a></dt>
 <dd><p>Variance of the distribution.</p>
@@ -9770,20 +9944,20 @@ shape parameter.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.GenPareto.censored_moment">
-<span class="sig-name descname"><span class="pre">censored_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.GenPareto.censored_moment" title="Permalink to this definition">#</a></dt>
-<dd><p>Non-central moment of order n of the transformed random variable min(max(x - u, 0), v).
+<span class="sig-name descname"><span class="pre">censored_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.GenPareto.censored_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central moment of order n of the transformed random variable min(max(x - d, 0), c).
 When n = 1 it is the so-called stop loss transformation function.
 General method for continuous distributions, overridden by distribution specific implementation if available.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>u</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower censoring point.</p></li>
-<li><p><strong>v</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – difference between the upper and the lower censoring points, i.e. v + u is the upper censoring point.</p></li>
+<li><p><strong>d</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – deductible, or attachment point.</p></li>
+<li><p><strong>c</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – cover, deductible + cover is the detachment point.</p></li>
 <li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>censored raw moment of order n.</p>
+<dd class="field-even"><p>raw moment of order n.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
@@ -10014,6 +10188,28 @@ followed by those for location and scale.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="gemact.distributions.GenPareto.partial_moment">
+<span class="sig-name descname"><span class="pre">partial_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">up</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.GenPareto.partial_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central partial moment of order n.
+General method for continuous distributions, overridden by distribution specific implementation if available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
+<li><p><strong>low</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower limit of the partial moment.</p></li>
+<li><p><strong>up</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – upper limit of the partial moment.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>raw partial moment of order n.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.GenPareto.pdf">
 <span class="sig-name descname"><span class="pre">pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.GenPareto.pdf" title="Permalink to this definition">#</a></dt>
 <dd><p>Probability density function.</p>
@@ -10130,6 +10326,28 @@ followed by those for location and scale.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="gemact.distributions.GenPareto.truncated_moment">
+<span class="sig-name descname"><span class="pre">truncated_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">up</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.GenPareto.truncated_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central truncated moment of order n.
+General method for continuous distributions, overridden by distribution specific implementation if available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
+<li><p><strong>low</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower truncation point.</p></li>
+<li><p><strong>up</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – upper truncation point.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>raw truncated moment of order n.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.GenPareto.var">
 <span class="sig-name descname"><span class="pre">var</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.GenPareto.var" title="Permalink to this definition">#</a></dt>
 <dd><p>Variance of the distribution.</p>
@@ -10236,20 +10454,20 @@ See <code class="docutils literal notranslate"><span class="pre">scipy.stats._co
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.Pareto2.censored_moment">
-<span class="sig-name descname"><span class="pre">censored_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Pareto2.censored_moment" title="Permalink to this definition">#</a></dt>
-<dd><p>Non-central moment of order n of the transformed random variable min(max(x - u, 0), v).
+<span class="sig-name descname"><span class="pre">censored_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Pareto2.censored_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central moment of order n of the transformed random variable min(max(x - d, 0), c).
 When n = 1 it is the so-called stop loss transformation function.
 General method for continuous distributions, overridden by distribution specific implementation if available.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>u</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower censoring point.</p></li>
-<li><p><strong>v</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – difference between the upper and the lower censoring points, i.e. v + u is the upper censoring point.</p></li>
+<li><p><strong>d</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – deductible, or attachment point.</p></li>
+<li><p><strong>c</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – cover, deductible + cover is the detachment point.</p></li>
 <li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>censored raw moment of order n.</p>
+<dd class="field-even"><p>raw moment of order n.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
@@ -10480,6 +10698,28 @@ followed by those for location and scale.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="gemact.distributions.Pareto2.partial_moment">
+<span class="sig-name descname"><span class="pre">partial_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">up</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Pareto2.partial_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central partial moment of order n.
+General method for continuous distributions, overridden by distribution specific implementation if available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
+<li><p><strong>low</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower limit of the partial moment.</p></li>
+<li><p><strong>up</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – upper limit of the partial moment.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>raw partial moment of order n.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.Pareto2.pdf">
 <span class="sig-name descname"><span class="pre">pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Pareto2.pdf" title="Permalink to this definition">#</a></dt>
 <dd><p>Probability density function.</p>
@@ -10596,6 +10836,28 @@ followed by those for location and scale.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="gemact.distributions.Pareto2.truncated_moment">
+<span class="sig-name descname"><span class="pre">truncated_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">up</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Pareto2.truncated_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central truncated moment of order n.
+General method for continuous distributions, overridden by distribution specific implementation if available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
+<li><p><strong>low</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower truncation point.</p></li>
+<li><p><strong>up</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – upper truncation point.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>raw truncated moment of order n.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.Pareto2.var">
 <span class="sig-name descname"><span class="pre">var</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Pareto2.var" title="Permalink to this definition">#</a></dt>
 <dd><p>Variance of the distribution.</p>
@@ -10673,20 +10935,20 @@ This is a Pareto II distribution with parameter scale = min.
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.Pareto1.censored_moment">
-<span class="sig-name descname"><span class="pre">censored_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Pareto1.censored_moment" title="Permalink to this definition">#</a></dt>
-<dd><p>Non-central moment of order n of the transformed random variable min(max(x - u, 0), v).
+<span class="sig-name descname"><span class="pre">censored_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Pareto1.censored_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central moment of order n of the transformed random variable min(max(x - d, 0), c).
 When n = 1 it is the so-called stop loss transformation function.
 General method for continuous distributions, overridden by distribution specific implementation if available.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>u</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower censoring point.</p></li>
-<li><p><strong>v</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – difference between the upper and the lower censoring points, i.e. v + u is the upper censoring point.</p></li>
+<li><p><strong>d</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – deductible, or attachment point.</p></li>
+<li><p><strong>c</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – cover, deductible + cover is the detachment point.</p></li>
 <li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>censored raw moment of order n.</p>
+<dd class="field-even"><p>raw moment of order n.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
@@ -10917,6 +11179,28 @@ followed by those for location and scale.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="gemact.distributions.Pareto1.partial_moment">
+<span class="sig-name descname"><span class="pre">partial_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">up</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Pareto1.partial_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central partial moment of order n.
+General method for continuous distributions, overridden by distribution specific implementation if available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
+<li><p><strong>low</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower limit of the partial moment.</p></li>
+<li><p><strong>up</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – upper limit of the partial moment.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>raw partial moment of order n.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.Pareto1.pdf">
 <span class="sig-name descname"><span class="pre">pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Pareto1.pdf" title="Permalink to this definition">#</a></dt>
 <dd><p>Probability density function.</p>
@@ -11033,6 +11317,28 @@ followed by those for location and scale.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="gemact.distributions.Pareto1.truncated_moment">
+<span class="sig-name descname"><span class="pre">truncated_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">up</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Pareto1.truncated_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central truncated moment of order n.
+General method for continuous distributions, overridden by distribution specific implementation if available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
+<li><p><strong>low</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower truncation point.</p></li>
+<li><p><strong>up</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – upper truncation point.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>raw truncated moment of order n.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.Pareto1.var">
 <span class="sig-name descname"><span class="pre">var</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Pareto1.var" title="Permalink to this definition">#</a></dt>
 <dd><p>Variance of the distribution.</p>
@@ -11053,16 +11359,15 @@ followed by those for location and scale.</p>
 <h3><code class="docutils literal notranslate"><span class="pre">Lognormal</span></code><a class="headerlink" href="#lognormal" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="gemact.distributions.Lognormal">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Lognormal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">loc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/distributions.html#Lognormal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.distributions.Lognormal" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Lognormal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/distributions.html#Lognormal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.distributions.Lognormal" title="Permalink to this definition">#</a></dt>
 <dd><p>Lognormal distribution.
 The more common parametrization lognormal(mu, sigma), where mu and sigma are the parameter of the underlying Normal distribution,
-is equivalent to lognormal(log(scale), shape, loc=0).
+is equivalent to lognormal(log(scale), shape).
 scipy reference distribution: <code class="docutils literal notranslate"><span class="pre">scipy.stats._continuous_distns.lognorm_gen</span></code></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>scale</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – lognormal scale parameter. The natural logarithm of scale is the mean of the underlying Normal distribution.</p></li>
-<li><p><strong>loc</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) – lognormal location parameter.</p></li>
 <li><p><strong>**kwargs</strong> – See below</p></li>
 </ul>
 </dd>
@@ -11092,20 +11397,20 @@ shape parameter. It corresponds to the standard deviation of the underlying Norm
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.Lognormal.censored_moment">
-<span class="sig-name descname"><span class="pre">censored_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Lognormal.censored_moment" title="Permalink to this definition">#</a></dt>
-<dd><p>Non-central moment of order n of the transformed random variable min(max(x - u, 0), v).
+<span class="sig-name descname"><span class="pre">censored_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Lognormal.censored_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central moment of order n of the transformed random variable min(max(x - d, 0), c).
 When n = 1 it is the so-called stop loss transformation function.
 General method for continuous distributions, overridden by distribution specific implementation if available.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>u</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower censoring point.</p></li>
-<li><p><strong>v</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – difference between the upper and the lower censoring points, i.e. v + u is the upper censoring point.</p></li>
+<li><p><strong>d</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – deductible, or attachment point.</p></li>
+<li><p><strong>c</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – cover, deductible + cover is the detachment point.</p></li>
 <li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>censored raw moment of order n.</p>
+<dd class="field-even"><p>raw moment of order n.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
@@ -11336,6 +11641,27 @@ followed by those for location and scale.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="gemact.distributions.Lognormal.partial_moment">
+<span class="sig-name descname"><span class="pre">partial_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">up</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/distributions.html#Lognormal.partial_moment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.distributions.Lognormal.partial_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Partial moment of order n.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
+<li><p><strong>low</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower limit of the partial moment.</p></li>
+<li><p><strong>up</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – upper limit of the partial moment.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>raw partial moment of order n.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.Lognormal.pdf">
 <span class="sig-name descname"><span class="pre">pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Lognormal.pdf" title="Permalink to this definition">#</a></dt>
 <dd><p>Probability density function.</p>
@@ -11452,6 +11778,28 @@ followed by those for location and scale.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="gemact.distributions.Lognormal.truncated_moment">
+<span class="sig-name descname"><span class="pre">truncated_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">up</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Lognormal.truncated_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central truncated moment of order n.
+General method for continuous distributions, overridden by distribution specific implementation if available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
+<li><p><strong>low</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower truncation point.</p></li>
+<li><p><strong>up</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – upper truncation point.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>raw truncated moment of order n.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.Lognormal.var">
 <span class="sig-name descname"><span class="pre">var</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Lognormal.var" title="Permalink to this definition">#</a></dt>
 <dd><p>Variance of the distribution.</p>
@@ -11551,20 +11899,20 @@ shape parameter d.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.Burr12.censored_moment">
-<span class="sig-name descname"><span class="pre">censored_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Burr12.censored_moment" title="Permalink to this definition">#</a></dt>
-<dd><p>Non-central moment of order n of the transformed random variable min(max(x - u, 0), v).
+<span class="sig-name descname"><span class="pre">censored_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Burr12.censored_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central moment of order n of the transformed random variable min(max(x - d, 0), c).
 When n = 1 it is the so-called stop loss transformation function.
 General method for continuous distributions, overridden by distribution specific implementation if available.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>u</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower censoring point.</p></li>
-<li><p><strong>v</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – difference between the upper and the lower censoring points, i.e. v + u is the upper censoring point.</p></li>
+<li><p><strong>d</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – deductible, or attachment point.</p></li>
+<li><p><strong>c</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – cover, deductible + cover is the detachment point.</p></li>
 <li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>censored raw moment of order n.</p>
+<dd class="field-even"><p>raw moment of order n.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
@@ -11795,6 +12143,28 @@ followed by those for location and scale.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="gemact.distributions.Burr12.partial_moment">
+<span class="sig-name descname"><span class="pre">partial_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">up</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Burr12.partial_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central partial moment of order n.
+General method for continuous distributions, overridden by distribution specific implementation if available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
+<li><p><strong>low</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower limit of the partial moment.</p></li>
+<li><p><strong>up</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – upper limit of the partial moment.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>raw partial moment of order n.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.Burr12.pdf">
 <span class="sig-name descname"><span class="pre">pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Burr12.pdf" title="Permalink to this definition">#</a></dt>
 <dd><p>Probability density function.</p>
@@ -11911,6 +12281,28 @@ followed by those for location and scale.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="gemact.distributions.Burr12.truncated_moment">
+<span class="sig-name descname"><span class="pre">truncated_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">up</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Burr12.truncated_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central truncated moment of order n.
+General method for continuous distributions, overridden by distribution specific implementation if available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
+<li><p><strong>low</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower truncation point.</p></li>
+<li><p><strong>up</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – upper truncation point.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>raw truncated moment of order n.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.Burr12.var">
 <span class="sig-name descname"><span class="pre">var</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Burr12.var" title="Permalink to this definition">#</a></dt>
 <dd><p>Variance of the distribution.</p>
@@ -12011,20 +12403,20 @@ distribution parameter a.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.Paralogistic.censored_moment">
-<span class="sig-name descname"><span class="pre">censored_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Paralogistic.censored_moment" title="Permalink to this definition">#</a></dt>
-<dd><p>Non-central moment of order n of the transformed random variable min(max(x - u, 0), v).
+<span class="sig-name descname"><span class="pre">censored_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Paralogistic.censored_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central moment of order n of the transformed random variable min(max(x - d, 0), c).
 When n = 1 it is the so-called stop loss transformation function.
 General method for continuous distributions, overridden by distribution specific implementation if available.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>u</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower censoring point.</p></li>
-<li><p><strong>v</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – difference between the upper and the lower censoring points, i.e. v + u is the upper censoring point.</p></li>
+<li><p><strong>d</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – deductible, or attachment point.</p></li>
+<li><p><strong>c</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – cover, deductible + cover is the detachment point.</p></li>
 <li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>censored raw moment of order n.</p>
+<dd class="field-even"><p>raw moment of order n.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
@@ -12255,6 +12647,28 @@ followed by those for location and scale.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="gemact.distributions.Paralogistic.partial_moment">
+<span class="sig-name descname"><span class="pre">partial_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">up</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Paralogistic.partial_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central partial moment of order n.
+General method for continuous distributions, overridden by distribution specific implementation if available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
+<li><p><strong>low</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower limit of the partial moment.</p></li>
+<li><p><strong>up</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – upper limit of the partial moment.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>raw partial moment of order n.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.Paralogistic.pdf">
 <span class="sig-name descname"><span class="pre">pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Paralogistic.pdf" title="Permalink to this definition">#</a></dt>
 <dd><p>Probability density function.</p>
@@ -12371,6 +12785,28 @@ followed by those for location and scale.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="gemact.distributions.Paralogistic.truncated_moment">
+<span class="sig-name descname"><span class="pre">truncated_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">up</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Paralogistic.truncated_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central truncated moment of order n.
+General method for continuous distributions, overridden by distribution specific implementation if available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
+<li><p><strong>low</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower truncation point.</p></li>
+<li><p><strong>up</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – upper truncation point.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>raw truncated moment of order n.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.Paralogistic.var">
 <span class="sig-name descname"><span class="pre">var</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Paralogistic.var" title="Permalink to this definition">#</a></dt>
 <dd><p>Variance of the distribution.</p>
@@ -12472,20 +12908,20 @@ shape parameter s.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.Dagum.censored_moment">
-<span class="sig-name descname"><span class="pre">censored_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Dagum.censored_moment" title="Permalink to this definition">#</a></dt>
-<dd><p>Non-central moment of order n of the transformed random variable min(max(x - u, 0), v).
+<span class="sig-name descname"><span class="pre">censored_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Dagum.censored_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central moment of order n of the transformed random variable min(max(x - d, 0), c).
 When n = 1 it is the so-called stop loss transformation function.
 General method for continuous distributions, overridden by distribution specific implementation if available.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>u</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower censoring point.</p></li>
-<li><p><strong>v</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – difference between the upper and the lower censoring points, i.e. v + u is the upper censoring point.</p></li>
+<li><p><strong>d</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – deductible, or attachment point.</p></li>
+<li><p><strong>c</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – cover, deductible + cover is the detachment point.</p></li>
 <li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>censored raw moment of order n.</p>
+<dd class="field-even"><p>raw moment of order n.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
@@ -12716,6 +13152,28 @@ followed by those for location and scale.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="gemact.distributions.Dagum.partial_moment">
+<span class="sig-name descname"><span class="pre">partial_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">up</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Dagum.partial_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central partial moment of order n.
+General method for continuous distributions, overridden by distribution specific implementation if available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
+<li><p><strong>low</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower limit of the partial moment.</p></li>
+<li><p><strong>up</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – upper limit of the partial moment.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>raw partial moment of order n.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.Dagum.pdf">
 <span class="sig-name descname"><span class="pre">pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Dagum.pdf" title="Permalink to this definition">#</a></dt>
 <dd><p>Probability density function.</p>
@@ -12832,6 +13290,28 @@ followed by those for location and scale.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="gemact.distributions.Dagum.truncated_moment">
+<span class="sig-name descname"><span class="pre">truncated_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">up</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Dagum.truncated_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central truncated moment of order n.
+General method for continuous distributions, overridden by distribution specific implementation if available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
+<li><p><strong>low</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower truncation point.</p></li>
+<li><p><strong>up</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – upper truncation point.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>raw truncated moment of order n.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.Dagum.var">
 <span class="sig-name descname"><span class="pre">var</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Dagum.var" title="Permalink to this definition">#</a></dt>
 <dd><p>Variance of the distribution.</p>
@@ -12935,20 +13415,20 @@ This is a Dagum distribution with same parameters.
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.InvParalogistic.censored_moment">
-<span class="sig-name descname"><span class="pre">censored_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.InvParalogistic.censored_moment" title="Permalink to this definition">#</a></dt>
-<dd><p>Non-central moment of order n of the transformed random variable min(max(x - u, 0), v).
+<span class="sig-name descname"><span class="pre">censored_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.InvParalogistic.censored_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central moment of order n of the transformed random variable min(max(x - d, 0), c).
 When n = 1 it is the so-called stop loss transformation function.
 General method for continuous distributions, overridden by distribution specific implementation if available.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>u</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower censoring point.</p></li>
-<li><p><strong>v</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – difference between the upper and the lower censoring points, i.e. v + u is the upper censoring point.</p></li>
+<li><p><strong>d</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – deductible, or attachment point.</p></li>
+<li><p><strong>c</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – cover, deductible + cover is the detachment point.</p></li>
 <li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>censored raw moment of order n.</p>
+<dd class="field-even"><p>raw moment of order n.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
@@ -13179,6 +13659,28 @@ followed by those for location and scale.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="gemact.distributions.InvParalogistic.partial_moment">
+<span class="sig-name descname"><span class="pre">partial_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">up</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.InvParalogistic.partial_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central partial moment of order n.
+General method for continuous distributions, overridden by distribution specific implementation if available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
+<li><p><strong>low</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower limit of the partial moment.</p></li>
+<li><p><strong>up</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – upper limit of the partial moment.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>raw partial moment of order n.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.InvParalogistic.pdf">
 <span class="sig-name descname"><span class="pre">pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.InvParalogistic.pdf" title="Permalink to this definition">#</a></dt>
 <dd><p>Probability density function.</p>
@@ -13295,6 +13797,28 @@ followed by those for location and scale.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="gemact.distributions.InvParalogistic.truncated_moment">
+<span class="sig-name descname"><span class="pre">truncated_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">up</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.InvParalogistic.truncated_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central truncated moment of order n.
+General method for continuous distributions, overridden by distribution specific implementation if available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
+<li><p><strong>low</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower truncation point.</p></li>
+<li><p><strong>up</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – upper truncation point.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>raw truncated moment of order n.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.InvParalogistic.var">
 <span class="sig-name descname"><span class="pre">var</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.InvParalogistic.var" title="Permalink to this definition">#</a></dt>
 <dd><p>Variance of the distribution.</p>
@@ -13391,20 +13915,20 @@ shape parameter c.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.Weibull.censored_moment">
-<span class="sig-name descname"><span class="pre">censored_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Weibull.censored_moment" title="Permalink to this definition">#</a></dt>
-<dd><p>Non-central moment of order n of the transformed random variable min(max(x - u, 0), v).
+<span class="sig-name descname"><span class="pre">censored_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Weibull.censored_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central moment of order n of the transformed random variable min(max(x - d, 0), c).
 When n = 1 it is the so-called stop loss transformation function.
 General method for continuous distributions, overridden by distribution specific implementation if available.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>u</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower censoring point.</p></li>
-<li><p><strong>v</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – difference between the upper and the lower censoring points, i.e. v + u is the upper censoring point.</p></li>
+<li><p><strong>d</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – deductible, or attachment point.</p></li>
+<li><p><strong>c</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – cover, deductible + cover is the detachment point.</p></li>
 <li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>censored raw moment of order n.</p>
+<dd class="field-even"><p>raw moment of order n.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
@@ -13635,6 +14159,28 @@ followed by those for location and scale.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="gemact.distributions.Weibull.partial_moment">
+<span class="sig-name descname"><span class="pre">partial_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">up</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Weibull.partial_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central partial moment of order n.
+General method for continuous distributions, overridden by distribution specific implementation if available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
+<li><p><strong>low</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower limit of the partial moment.</p></li>
+<li><p><strong>up</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – upper limit of the partial moment.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>raw partial moment of order n.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.Weibull.pdf">
 <span class="sig-name descname"><span class="pre">pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Weibull.pdf" title="Permalink to this definition">#</a></dt>
 <dd><p>Probability density function.</p>
@@ -13751,6 +14297,28 @@ followed by those for location and scale.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="gemact.distributions.Weibull.truncated_moment">
+<span class="sig-name descname"><span class="pre">truncated_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">up</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Weibull.truncated_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central truncated moment of order n.
+General method for continuous distributions, overridden by distribution specific implementation if available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
+<li><p><strong>low</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower truncation point.</p></li>
+<li><p><strong>up</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – upper truncation point.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>raw truncated moment of order n.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.Weibull.var">
 <span class="sig-name descname"><span class="pre">var</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Weibull.var" title="Permalink to this definition">#</a></dt>
 <dd><p>Variance of the distribution.</p>
@@ -13848,20 +14416,20 @@ shape parameter c.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.InvWeibull.censored_moment">
-<span class="sig-name descname"><span class="pre">censored_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.InvWeibull.censored_moment" title="Permalink to this definition">#</a></dt>
-<dd><p>Non-central moment of order n of the transformed random variable min(max(x - u, 0), v).
+<span class="sig-name descname"><span class="pre">censored_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.InvWeibull.censored_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central moment of order n of the transformed random variable min(max(x - d, 0), c).
 When n = 1 it is the so-called stop loss transformation function.
 General method for continuous distributions, overridden by distribution specific implementation if available.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>u</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower censoring point.</p></li>
-<li><p><strong>v</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – difference between the upper and the lower censoring points, i.e. v + u is the upper censoring point.</p></li>
+<li><p><strong>d</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – deductible, or attachment point.</p></li>
+<li><p><strong>c</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – cover, deductible + cover is the detachment point.</p></li>
 <li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>censored raw moment of order n.</p>
+<dd class="field-even"><p>raw moment of order n.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
@@ -14092,6 +14660,28 @@ followed by those for location and scale.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="gemact.distributions.InvWeibull.partial_moment">
+<span class="sig-name descname"><span class="pre">partial_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">up</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.InvWeibull.partial_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central partial moment of order n.
+General method for continuous distributions, overridden by distribution specific implementation if available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
+<li><p><strong>low</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower limit of the partial moment.</p></li>
+<li><p><strong>up</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – upper limit of the partial moment.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>raw partial moment of order n.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.InvWeibull.pdf">
 <span class="sig-name descname"><span class="pre">pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.InvWeibull.pdf" title="Permalink to this definition">#</a></dt>
 <dd><p>Probability density function.</p>
@@ -14208,6 +14798,28 @@ followed by those for location and scale.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="gemact.distributions.InvWeibull.truncated_moment">
+<span class="sig-name descname"><span class="pre">truncated_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">up</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.InvWeibull.truncated_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central truncated moment of order n.
+General method for continuous distributions, overridden by distribution specific implementation if available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
+<li><p><strong>low</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower truncation point.</p></li>
+<li><p><strong>up</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – upper truncation point.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>raw truncated moment of order n.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.InvWeibull.var">
 <span class="sig-name descname"><span class="pre">var</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.InvWeibull.var" title="Permalink to this definition">#</a></dt>
 <dd><p>Variance of the distribution.</p>
@@ -14306,20 +14918,20 @@ shape parameter b.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.Beta.censored_moment">
-<span class="sig-name descname"><span class="pre">censored_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Beta.censored_moment" title="Permalink to this definition">#</a></dt>
-<dd><p>Non-central moment of order n of the transformed random variable min(max(x - u, 0), v).
+<span class="sig-name descname"><span class="pre">censored_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Beta.censored_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central moment of order n of the transformed random variable min(max(x - d, 0), c).
 When n = 1 it is the so-called stop loss transformation function.
 General method for continuous distributions, overridden by distribution specific implementation if available.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>u</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower censoring point.</p></li>
-<li><p><strong>v</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – difference between the upper and the lower censoring points, i.e. v + u is the upper censoring point.</p></li>
+<li><p><strong>d</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – deductible, or attachment point.</p></li>
+<li><p><strong>c</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – cover, deductible + cover is the detachment point.</p></li>
 <li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>censored raw moment of order n.</p>
+<dd class="field-even"><p>raw moment of order n.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
@@ -14550,6 +15162,28 @@ followed by those for location and scale.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="gemact.distributions.Beta.partial_moment">
+<span class="sig-name descname"><span class="pre">partial_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">up</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Beta.partial_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central partial moment of order n.
+General method for continuous distributions, overridden by distribution specific implementation if available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
+<li><p><strong>low</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower limit of the partial moment.</p></li>
+<li><p><strong>up</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – upper limit of the partial moment.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>raw partial moment of order n.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.Beta.pdf">
 <span class="sig-name descname"><span class="pre">pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Beta.pdf" title="Permalink to this definition">#</a></dt>
 <dd><p>Probability density function.</p>
@@ -14666,6 +15300,28 @@ followed by those for location and scale.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="gemact.distributions.Beta.truncated_moment">
+<span class="sig-name descname"><span class="pre">truncated_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">up</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Beta.truncated_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central truncated moment of order n.
+General method for continuous distributions, overridden by distribution specific implementation if available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
+<li><p><strong>low</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower truncation point.</p></li>
+<li><p><strong>up</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – upper truncation point.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>raw truncated moment of order n.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.Beta.var">
 <span class="sig-name descname"><span class="pre">var</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gemact.distributions.Beta.var" title="Permalink to this definition">#</a></dt>
 <dd><p>Variance of the distribution.</p>
@@ -14766,20 +15422,19 @@ shape parameter a.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.LogGamma.censored_moment">
-<span class="sig-name descname"><span class="pre">censored_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/distributions.html#LogGamma.censored_moment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.distributions.LogGamma.censored_moment" title="Permalink to this definition">#</a></dt>
-<dd><p>Non-central moment of order n of the transformed random variable min(max(x - u, 0), v).
-When n = 1 it is the so-called stop loss transformation function.
-General method for continuous distributions, overridden by distribution specific implementation if available.</p>
+<span class="sig-name descname"><span class="pre">censored_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/distributions.html#LogGamma.censored_moment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.distributions.LogGamma.censored_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central moment of order n of the transformed random variable min(max(x - d, 0), c).
+When n = 1 it is the so-called stop loss transformation function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>u</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower censoring point.</p></li>
-<li><p><strong>v</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – difference between the upper and the lower censoring points, i.e. v + u is the upper censoring point.</p></li>
+<li><p><strong>d</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – deductible, or attachment point.</p></li>
+<li><p><strong>c</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – cover, deductible + cover is the detachment point.</p></li>
 <li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>censored raw moment of order n.</p>
+<dd class="field-even"><p>raw moment of order n.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
@@ -14932,6 +15587,27 @@ General method for continuous distributions, overridden by distribution specific
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="gemact.distributions.LogGamma.partial_moment">
+<span class="sig-name descname"><span class="pre">partial_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">up</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/distributions.html#LogGamma.partial_moment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.distributions.LogGamma.partial_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central partial moment of order n.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
+<li><p><strong>low</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower limit of the partial moment.</p></li>
+<li><p><strong>up</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – upper limit of the partial moment.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>raw partial moment of order n.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.LogGamma.pdf">
 <span class="sig-name descname"><span class="pre">pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/distributions.html#LogGamma.pdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.distributions.LogGamma.pdf" title="Permalink to this definition">#</a></dt>
 <dd><p>Probability density function.</p>
@@ -15048,6 +15724,27 @@ General method for continuous distributions, overridden by distribution specific
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="gemact.distributions.LogGamma.truncated_moment">
+<span class="sig-name descname"><span class="pre">truncated_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">up</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/distributions.html#LogGamma.truncated_moment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.distributions.LogGamma.truncated_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central truncated moment of order n.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
+<li><p><strong>low</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower truncation point.</p></li>
+<li><p><strong>up</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – upper truncation point.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>raw truncated moment of order n.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.LogGamma.var">
 <span class="sig-name descname"><span class="pre">var</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/distributions.html#LogGamma.var"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.distributions.LogGamma.var" title="Permalink to this definition">#</a></dt>
 <dd><p>Variance of the distribution.</p>
@@ -15101,20 +15798,19 @@ Refer to Appendix A of Klugman, Panjer &amp; Willmot, Loss Models, Wiley.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.GenBeta.censored_moment">
-<span class="sig-name descname"><span class="pre">censored_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/distributions.html#GenBeta.censored_moment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.distributions.GenBeta.censored_moment" title="Permalink to this definition">#</a></dt>
-<dd><p>Non-central moment of order n of the transformed random variable min(max(x - u, 0), v).
-When n = 1 it is the so-called stop loss transformation function.
-General method for continuous distributions, overridden by distribution specific implementation if available.</p>
+<span class="sig-name descname"><span class="pre">censored_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/distributions.html#GenBeta.censored_moment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.distributions.GenBeta.censored_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central moment of order n of the transformed random variable min(max(x - d, 0), c).
+When n = 1 it is the so-called stop loss transformation function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>u</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower censoring point.</p></li>
-<li><p><strong>v</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – difference between the upper and the lower censoring points, i.e. v + u is the upper censoring point.</p></li>
+<li><p><strong>d</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – deductible, or attachment point.</p></li>
+<li><p><strong>c</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – cover, deductible + cover is the detachment point.</p></li>
 <li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>censored raw moment of order n.</p>
+<dd class="field-even"><p>raw moment of order n.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
@@ -15267,6 +15963,27 @@ General method for continuous distributions, overridden by distribution specific
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="gemact.distributions.GenBeta.partial_moment">
+<span class="sig-name descname"><span class="pre">partial_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">up</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/distributions.html#GenBeta.partial_moment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.distributions.GenBeta.partial_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central partial moment of order n.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
+<li><p><strong>low</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower limit of the partial moment.</p></li>
+<li><p><strong>up</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – upper limit of the partial moment.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>raw partial moment of order n.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="gemact.distributions.GenBeta.pdf">
 <span class="sig-name descname"><span class="pre">pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/distributions.html#GenBeta.pdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.distributions.GenBeta.pdf" title="Permalink to this definition">#</a></dt>
 <dd><p>Probability density function.</p>
@@ -15378,6 +16095,27 @@ General method for continuous distributions, overridden by distribution specific
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gemact.distributions.GenBeta.truncated_moment">
+<span class="sig-name descname"><span class="pre">truncated_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">up</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemact/distributions.html#GenBeta.truncated_moment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gemact.distributions.GenBeta.truncated_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>Non-central truncated moment of order n.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – moment order.</p></li>
+<li><p><strong>low</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – lower truncation point.</p></li>
+<li><p><strong>up</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) – upper truncation point.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>raw truncated moment of order n.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p>
 </dd>
 </dl>
 </dd></dl>

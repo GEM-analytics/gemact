@@ -241,7 +241,7 @@ title="Source repository"
 <span class="n">logger</span> <span class="o">=</span> <span class="n">log</span><span class="o">.</span><span class="n">name</span><span class="p">(</span><span class="s1">&#39;lossmodel&#39;</span><span class="p">)</span>
 
 <div class="viewcode-block" id="PolicyStructure"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.PolicyStructure">[docs]</a><span class="k">class</span> <span class="nc">PolicyStructure</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Policy structure component of a loss model.</span>
 
 <span class="sd">    :param layers: Non-proportional layer (default is infinity-xs-0 layer).</span>
@@ -276,7 +276,7 @@ title="Source repository"
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layers</span><span class="p">)</span>
 
 <div class="viewcode-block" id="PolicyStructure.index_to_layer_name"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.PolicyStructure.index_to_layer_name">[docs]</a>    <span class="k">def</span> <span class="nf">index_to_layer_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return name of a layer given its index.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;ValueError.</span><span class="se">\n</span><span class="s1"> No Layer has index </span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">idx</span><span class="p">)</span>
@@ -289,7 +289,7 @@ title="Source repository"
         <span class="k">return</span> <span class="n">output</span></div>
     
 <div class="viewcode-block" id="PolicyStructure.layer_name_to_index"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.PolicyStructure.layer_name_to_index">[docs]</a>    <span class="k">def</span> <span class="nf">layer_name_to_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return index of a layer given its name.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">output</span> <span class="o">=</span> <span class="p">[</span><span class="n">idx</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">name</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
@@ -300,7 +300,7 @@ title="Source repository"
         <span class="k">return</span> <span class="n">output</span></div></div>
 
 <div class="viewcode-block" id="Layer"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.Layer">[docs]</a><span class="k">class</span> <span class="nc">Layer</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Policy structure non-proportional layer.</span>
 
 <span class="sd">    :param deductible: each-and-every-loss (non-ranking) deductible, also referred to as retention or priority (default value is 0).</span>
@@ -559,7 +559,7 @@ title="Source repository"
     
 <div class="viewcode-block" id="Layer.specs"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.Layer.specs">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">specs</span><span class="p">():</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Method (static) returning layer specifications names.</span>
 
 <span class="sd">        :return: layer specifications names.</span>
@@ -573,7 +573,7 @@ title="Source repository"
             <span class="p">}</span></div>
     
     <span class="k">def</span> <span class="nf">_check_presence_aggr_conditions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Method that check if aggregate conditions are present.</span>
 
 <span class="sd">        :return: True if aggregate conditions are present, else False.</span>
@@ -593,7 +593,7 @@ title="Source repository"
         <span class="k">return</span> <span class="kc">False</span>
 
     <span class="k">def</span> <span class="nf">_check_and_set_category</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Method that check and set the category of the layer.</span>
 
 <span class="sd">        :return: Void.</span>
@@ -612,7 +612,7 @@ title="Source repository"
         <span class="k">return</span></div>
 
 <div class="viewcode-block" id="LayerTower"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LayerTower">[docs]</a><span class="k">class</span> <span class="nc">LayerTower</span><span class="p">(</span><span class="nb">list</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Policy structure tower of non-proportional layers.</span>
 
 <span class="sd">    :param \\**args:</span>
@@ -630,14 +630,14 @@ title="Source repository"
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_tower</span><span class="p">()</span>
 
 <div class="viewcode-block" id="LayerTower.append"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LayerTower.append">[docs]</a>    <span class="k">def</span> <span class="nf">append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Append object to the end of the list.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">hf</span><span class="o">.</span><span class="n">assert_type_value</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="s1">&#39;item&#39;</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span> <span class="n">Layer</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">LayerTower</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span></div>
     
 <div class="viewcode-block" id="LayerTower.insert"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LayerTower.insert">[docs]</a>    <span class="k">def</span> <span class="nf">insert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Insert Layer at a given index.</span>
 
 <span class="sd">        :param index: the index where the Layer needs to be inserted.</span>
@@ -649,7 +649,7 @@ title="Source repository"
         <span class="nb">super</span><span class="p">(</span><span class="n">LayerTower</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span></div>
     
 <div class="viewcode-block" id="LayerTower.extend"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LayerTower.extend">[docs]</a>    <span class="k">def</span> <span class="nf">extend</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Extend by appending elements from the iterable.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
@@ -657,7 +657,7 @@ title="Source repository"
         <span class="nb">super</span><span class="p">(</span><span class="n">LayerTower</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">args</span><span class="p">)</span></div>
     
 <div class="viewcode-block" id="LayerTower.sort"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LayerTower.sort">[docs]</a>    <span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Stable sort in place by layer deductible.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">key</span><span class="o">=</span><span class="s1">&#39;deductible&#39;</span>
@@ -667,14 +667,14 @@ title="Source repository"
             <span class="p">)</span></div>
     
     <span class="k">def</span> <span class="nf">_remove_layer_percentage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set layer reinstatement percentage to 0.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">elt</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
             <span class="n">elt</span><span class="o">.</span><span class="n">reinst_percentage</span> <span class="o">=</span> <span class="mi">0</span>
 
     <span class="k">def</span> <span class="nf">_arrange_retention_layer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Arrange the retention layer</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">deductible</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -691,7 +691,7 @@ title="Source repository"
         <span class="k">return</span>
 
     <span class="k">def</span> <span class="nf">_check_tower</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Perform sanity check of LayerTower items by removing eventual</span>
 <span class="sd">        duplicates, sorting items by layer deductibles and checking</span>
 <span class="sd">        tower appropriateness condition.</span>
@@ -728,7 +728,7 @@ title="Source repository"
                 <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Having regular basis above first layer may generate noncontiguous layers.&#39;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_remove_duplicates</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Remove duplicates.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">memory</span> <span class="o">=</span> <span class="p">[]</span>
@@ -743,7 +743,7 @@ title="Source repository"
         <span class="k">return</span></div>
 
 <div class="viewcode-block" id="Frequency"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.Frequency">[docs]</a><span class="k">class</span> <span class="nc">Frequency</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Frequency component of the loss models underlying the collective risk model.</span>
 
 <span class="sd">    :param dist: name of the frequency distribution.</span>
@@ -818,7 +818,7 @@ title="Source repository"
         <span class="bp">self</span><span class="o">.</span><span class="n">__model</span> <span class="o">=</span> <span class="n">value</span>
 
 <div class="viewcode-block" id="Frequency.abp0g0"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.Frequency.abp0g0">[docs]</a>    <span class="k">def</span> <span class="nf">abp0g0</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fj</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Parameters of the frequency distribution according to the (a, b, k) parametrization,</span>
 <span class="sd">        the probability generating function computed in zero given the discrete severity probs,</span>
 <span class="sd">        and the probability of the distribution in zero.</span>
@@ -833,7 +833,7 @@ title="Source repository"
         <span class="k">return</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">p0</span><span class="p">,</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">pgf</span><span class="p">(</span><span class="n">fj</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span></div></div>
 
 <div class="viewcode-block" id="Severity"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.Severity">[docs]</a><span class="k">class</span> <span class="nc">Severity</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Severity component of the loss models underlying the collective risk model.</span>
 <span class="sd">    Severity model is always considered to start at (the relative) 0, i.e. the reporting threshold.</span>
 
@@ -892,7 +892,7 @@ title="Source repository"
         <span class="bp">self</span><span class="o">.</span><span class="n">__model</span> <span class="o">=</span> <span class="n">value</span>
     
 <div class="viewcode-block" id="Severity.excess_frequency"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.Severity.excess_frequency">[docs]</a>    <span class="k">def</span> <span class="nf">excess_frequency</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">base_frequency</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Expected excess frequency function, i.e. expected frequency in excess of a given threshold.</span>
 
 <span class="sd">        :param x: value where excess frequency is evaluated.</span>
@@ -906,7 +906,7 @@ title="Source repository"
         <span class="k">return</span> <span class="n">base_frequency</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Severity.return_period"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.Severity.return_period">[docs]</a>    <span class="k">def</span> <span class="nf">return_period</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">base_frequency</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Expected return period, given a base frequency.</span>
 
 <span class="sd">        :param x: value whose return period is evaluated.</span>
@@ -920,8 +920,8 @@ title="Source repository"
         <span class="k">return</span> <span class="mi">1</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">excess_frequency</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">base_frequency</span><span class="p">)</span> </div>
 
 <div class="viewcode-block" id="Severity.censored_var"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.Severity.censored_var">[docs]</a>    <span class="k">def</span> <span class="nf">censored_var</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cover</span><span class="p">,</span> <span class="n">deductible</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Variance of the transformed severity min(max(x - u, 0), v).</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Variance of the transformed severity min(max(x - d, 0), c).</span>
 <span class="sd">                </span>
 <span class="sd">        :param cover: cover, also referred to as limit. cover plus deductible is the upper priority or severity &#39;exit point&#39;.</span>
 <span class="sd">        :type cover: ``int``, ``float``</span>
@@ -930,12 +930,10 @@ title="Source repository"
 <span class="sd">        :return: variance of the transformed severity.</span>
 <span class="sd">        :rtype: ``numpy.float``</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">censored_moment</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">u</span><span class="o">=</span><span class="n">deductible</span><span class="p">,</span> <span class="n">v</span><span class="o">=</span><span class="n">cover</span><span class="p">)</span> <span class="o">-</span> \
-                    <span class="bp">self</span><span class="o">.</span><span class="n">censored_mean</span><span class="p">(</span><span class="n">deductible</span><span class="o">=</span><span class="n">deductible</span><span class="p">,</span> <span class="n">cover</span><span class="o">=</span><span class="n">cover</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
-        <span class="k">return</span> <span class="n">output</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">censored_std</span><span class="p">(</span><span class="n">cover</span><span class="p">,</span> <span class="n">deductible</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span></div>
 
 <div class="viewcode-block" id="Severity.censored_std"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.Severity.censored_std">[docs]</a>    <span class="k">def</span> <span class="nf">censored_std</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cover</span><span class="p">,</span> <span class="n">deductible</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Standard deviation of the transformed severity min(max(x - u, 0), v).</span>
 <span class="sd">                </span>
 <span class="sd">        :param cover: cover, also referred to as limit. cover plus deductible is the upper priority or severity &#39;exit point&#39;.</span>
@@ -945,10 +943,10 @@ title="Source repository"
 <span class="sd">        :return: standard deviation of the transformed severity.</span>
 <span class="sd">        :rtype: ``numpy.float``</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">censored_var</span><span class="p">(</span><span class="n">deductible</span><span class="o">=</span><span class="n">deductible</span><span class="p">,</span> <span class="n">cover</span><span class="o">=</span><span class="n">cover</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">censored_coeff_variation</span><span class="p">(</span><span class="n">cover</span><span class="p">,</span> <span class="n">deductible</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">censored_mean</span><span class="p">(</span><span class="n">cover</span><span class="p">,</span> <span class="n">deductible</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Severity.censored_mean"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.Severity.censored_mean">[docs]</a>    <span class="k">def</span> <span class="nf">censored_mean</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cover</span><span class="p">,</span> <span class="n">deductible</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Mean of the transformed severity min(max(x - u, 0), v).</span>
 <span class="sd">        Also referred to as the stop-loss transformation function.</span>
 <span class="sd">                </span>
@@ -959,10 +957,10 @@ title="Source repository"
 <span class="sd">        :return: mean of the transformed severity.</span>
 <span class="sd">        :rtype: ``numpy.float``</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">censored_moment</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">u</span><span class="o">=</span><span class="n">deductible</span><span class="p">,</span> <span class="n">v</span><span class="o">=</span><span class="n">cover</span><span class="p">)</span></div>
-    
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">censored_moment</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="n">deductible</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">cover</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="Severity.censored_skewness"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.Severity.censored_skewness">[docs]</a>    <span class="k">def</span> <span class="nf">censored_skewness</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cover</span><span class="p">,</span> <span class="n">deductible</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Skewness of the transformed severity min(max(x - u, 0), v).</span>
 <span class="sd">                </span>
 <span class="sd">        :param cover: cover, also referred to as limit. cover plus deductible is the upper priority or severity &#39;exit point&#39;.</span>
@@ -972,14 +970,14 @@ title="Source repository"
 <span class="sd">        :return: skewness of the transformed severity.</span>
 <span class="sd">        :rtype: ``numpy.float``</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">num1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">censored_moment</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">u</span><span class="o">=</span><span class="n">deductible</span><span class="p">,</span> <span class="n">v</span><span class="o">=</span><span class="n">cover</span><span class="p">)</span>
+        <span class="n">num1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">censored_moment</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="n">deductible</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">cover</span><span class="p">)</span>
         <span class="n">num2</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">censored_mean</span><span class="p">(</span><span class="n">deductible</span><span class="o">=</span><span class="n">deductible</span><span class="p">,</span> <span class="n">cover</span><span class="o">=</span><span class="n">cover</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">censored_var</span><span class="p">(</span><span class="n">deductible</span><span class="o">=</span><span class="n">deductible</span><span class="p">,</span> <span class="n">cover</span><span class="o">=</span><span class="n">cover</span><span class="p">)</span>
-        <span class="n">num3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">censored_mean</span><span class="p">(</span><span class="n">deductible</span><span class="o">=</span><span class="n">deductible</span><span class="p">,</span> <span class="n">cover</span><span class="o">=</span><span class="n">cover</span><span class="p">)</span> <span class="o">**</span> <span class="mi">3</span>
-        <span class="n">den</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">censored_std</span><span class="p">(</span><span class="n">deductible</span><span class="o">=</span><span class="n">deductible</span><span class="p">,</span> <span class="n">cover</span><span class="o">=</span><span class="n">cover</span><span class="p">)</span> <span class="o">**</span> <span class="mi">3</span>
+        <span class="n">num3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">censored_mean</span><span class="p">(</span><span class="n">deductible</span><span class="o">=</span><span class="n">deductible</span><span class="p">,</span> <span class="n">cover</span><span class="o">=</span><span class="n">cover</span><span class="p">)</span><span class="o">**</span><span class="mi">3</span>
+        <span class="n">den</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">censored_std</span><span class="p">(</span><span class="n">deductible</span><span class="o">=</span><span class="n">deductible</span><span class="p">,</span> <span class="n">cover</span><span class="o">=</span><span class="n">cover</span><span class="p">)</span><span class="o">**</span><span class="mi">3</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">num1</span> <span class="o">-</span> <span class="n">num2</span> <span class="o">-</span> <span class="n">num3</span><span class="p">)</span><span class="o">/</span><span class="n">den</span></div>
 
 <div class="viewcode-block" id="Severity.censored_coeff_variation"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.Severity.censored_coeff_variation">[docs]</a>    <span class="k">def</span> <span class="nf">censored_coeff_variation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cover</span><span class="p">,</span> <span class="n">deductible</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Coefficient of variation (CoV) of the transformed severity min(max(x - u, 0), v).</span>
 <span class="sd">                </span>
 <span class="sd">        :param cover: cover, also referred to as limit. cover plus deductible is the upper priority or severity &#39;exit point&#39;.</span>
@@ -989,7 +987,9 @@ title="Source repository"
 <span class="sd">        :return: CoV of the transformed severity.</span>
 <span class="sd">        :rtype: ``numpy.float``</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">censored_std</span><span class="p">(</span><span class="n">deductible</span><span class="o">=</span><span class="n">deductible</span><span class="p">,</span> <span class="n">cover</span><span class="o">=</span><span class="n">cover</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">censored_mean</span><span class="p">(</span><span class="n">deductible</span><span class="o">=</span><span class="n">deductible</span><span class="p">,</span> <span class="n">cover</span><span class="o">=</span><span class="n">cover</span><span class="p">)</span></div>
+        <span class="n">num</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">censored_moment</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="n">deductible</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">cover</span><span class="p">)</span>
+        <span class="n">den</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">censored_moment</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="n">deductible</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">cover</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+        <span class="k">return</span>  <span class="p">(</span><span class="n">num</span><span class="o">/</span><span class="n">den</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span></div>
 
 <div class="viewcode-block" id="Severity.discretize"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.Severity.discretize">[docs]</a>    <span class="k">def</span> <span class="nf">discretize</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -998,7 +998,7 @@ title="Source repository"
         <span class="n">discr_step</span><span class="p">,</span>
         <span class="n">deductible</span><span class="o">=</span><span class="mi">0</span>
         <span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Severity discretization according to the discretization method selected by the user.</span>
 
 <span class="sd">        :param deductible: deductible, also referred to as retention or priority.</span>
@@ -1063,7 +1063,7 @@ title="Source repository"
             <span class="n">log_y_scale</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
             <span class="o">**</span><span class="n">kwargs</span>
             <span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Plot the cumulative distribution function of the discretized severity distribution.</span>
 
 <span class="sd">        :param discr_method: severity discretization method. One of &#39;massdispersal&#39;, &#39;localmoments&#39;,</span>
@@ -1114,7 +1114,7 @@ title="Source repository"
         <span class="k">return</span> <span class="n">ax</span></div></div>
 
 <div class="viewcode-block" id="LossModel"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel">[docs]</a><span class="k">class</span> <span class="nc">LossModel</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Loss model for (re)insurance costing and risk modeling using a collective risk model framework.</span>
 
 <span class="sd">    :param severity: severity model.</span>
@@ -1331,7 +1331,7 @@ title="Source repository"
         <span class="n">tilt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">tilt_value</span><span class="o">=</span><span class="kc">None</span>
         <span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Approximate the aggregate loss distributions of each policystructure layer.</span>
 <span class="sd">        Distributions can be accessed via the ``dist`` property,</span>
 <span class="sd">        which is a list of ``distributions.PWC`` objects, each one representing a aggregate loss distribution.</span>
@@ -1535,7 +1535,7 @@ title="Source repository"
         <span class="n">tilt</span><span class="p">,</span>
         <span class="n">tilt_value</span>
         <span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Check correctness and set parameters of aggregate loss distribution calculation.</span>
 
 <span class="sd">        :param aggr_loss_dist_method: computational method to approximate the aggregate loss distribution.</span>
@@ -1645,7 +1645,7 @@ title="Source repository"
         <span class="k">return</span>
 
     <span class="k">def</span> <span class="nf">_apply_aggr_conditions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">cover</span><span class="p">,</span> <span class="n">deductible</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Apply aggregate conditions, i.e. aggregate deductble and aggregate cover, to a aggregate loss distribution.</span>
 
 <span class="sd">        :param dist: aggregate loss distribution (before aggregate conditions).</span>
@@ -1677,7 +1677,7 @@ title="Source repository"
         <span class="k">return</span> <span class="n">output</span>
 
 <div class="viewcode-block" id="LossModel.moment"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.moment">[docs]</a>    <span class="k">def</span> <span class="nf">moment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">central</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Approximated aggregate loss distribution moment of order n.</span>
 <span class="sd">        It is based on ``dist`` property.</span>
 
@@ -1702,7 +1702,7 @@ title="Source repository"
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dist</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">moment</span><span class="p">(</span><span class="n">central</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="LossModel.ppf"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.ppf">[docs]</a>    <span class="k">def</span> <span class="nf">ppf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Aggregate loss distribution percent point function, a.k.a. the quantile function,</span>
 <span class="sd">        inverse of the cumulative distribution function.</span>
 
@@ -1725,7 +1725,7 @@ title="Source repository"
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dist</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">q</span><span class="p">)</span> </div>
 
 <div class="viewcode-block" id="LossModel.cdf"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.cdf">[docs]</a>    <span class="k">def</span> <span class="nf">cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Aggregate loss distribution cumulative distribution function.</span>
 
 <span class="sd">        :param x: quantiles where the cumulative distribution function is evaluated.</span>
@@ -1747,7 +1747,7 @@ title="Source repository"
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dist</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="LossModel.sf"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.sf">[docs]</a>    <span class="k">def</span> <span class="nf">sf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Aggregate loss distribution survival function.</span>
 
 <span class="sd">        :param x: quantiles where the survival functionis evaluated.</span>
@@ -1769,7 +1769,7 @@ title="Source repository"
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dist</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="LossModel.rvs"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.rvs">[docs]</a>    <span class="k">def</span> <span class="nf">rvs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Random variates generator function.</span>
 
 <span class="sd">        :param size: random variates sample size, optional (default is 1).</span>
@@ -1794,7 +1794,7 @@ title="Source repository"
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dist</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">random_state</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="LossModel.mean"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.mean">[docs]</a>    <span class="k">def</span> <span class="nf">mean</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">use_dist</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Mean of the aggregate loss.</span>
 
 <span class="sd">        :param idx: list index corresponding to the layer loss distribution of interest (default is 0).</span>
@@ -1837,7 +1837,7 @@ title="Source repository"
                 <span class="bp">self</span><span class="o">.</span><span class="n">severity</span><span class="o">.</span><span class="n">censored_mean</span><span class="p">(</span><span class="n">deductible</span><span class="o">=</span><span class="n">ded</span><span class="p">,</span> <span class="n">cover</span><span class="o">=</span><span class="n">cover</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="LossModel.var"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.var">[docs]</a>    <span class="k">def</span> <span class="nf">var</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">use_dist</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Variance of the aggregate loss.</span>
 
 <span class="sd">        :param idx: list index corresponding to the layer loss distribution of interest (default is 0).</span>
@@ -1890,7 +1890,7 @@ title="Source repository"
             <span class="k">return</span> <span class="n">share</span> <span class="o">*</span> <span class="p">(</span><span class="n">output1</span> <span class="o">+</span> <span class="n">output2</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="LossModel.std"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.std">[docs]</a>    <span class="k">def</span> <span class="nf">std</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">use_dist</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Standard deviation of the aggregate loss.</span>
 
 <span class="sd">        :param idx: list index corresponding to the layer loss distribution of interest (default is 0).</span>
@@ -1906,7 +1906,7 @@ title="Source repository"
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">use_dist</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="LossModel.skewness"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.skewness">[docs]</a>    <span class="k">def</span> <span class="nf">skewness</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">use_dist</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Skewness of the aggregate loss.</span>
 
 <span class="sd">        :param idx: list index corresponding to the layer loss distribution of interest (default is 0).</span>
@@ -1954,8 +1954,8 @@ title="Source repository"
             <span class="k">if</span> <span class="n">factor</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="n">freq</span><span class="o">.</span><span class="n">par_deductible_reverter</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">factor</span><span class="p">)</span>
 
-            <span class="n">den1</span> <span class="o">=</span> <span class="n">freq</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">*</span> <span class="n">sev</span><span class="o">.</span><span class="n">censored_var</span><span class="p">(</span><span class="n">deductible</span><span class="o">=</span><span class="n">ded</span><span class="p">,</span> <span class="n">cover</span><span class="o">=</span><span class="n">cover</span><span class="p">)</span>
-            <span class="n">den2</span> <span class="o">=</span> <span class="n">freq</span><span class="o">.</span><span class="n">var</span><span class="p">()</span> <span class="o">*</span> <span class="n">sev</span><span class="o">.</span><span class="n">censored_mean</span><span class="p">(</span><span class="n">deductible</span><span class="o">=</span><span class="n">ded</span><span class="p">,</span> <span class="n">cover</span><span class="o">=</span><span class="n">cover</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+            <span class="n">den1</span> <span class="o">=</span> <span class="n">freq</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">*</span> <span class="n">sev_var</span>
+            <span class="n">den2</span> <span class="o">=</span> <span class="n">freq</span><span class="o">.</span><span class="n">var</span><span class="p">()</span> <span class="o">*</span> <span class="n">sev_mean</span><span class="o">**</span><span class="mi">2</span>
 
             <span class="n">num1</span> <span class="o">=</span> <span class="n">freq</span><span class="o">.</span><span class="n">skewness</span><span class="p">()</span> <span class="o">*</span> <span class="n">freq</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="o">**</span><span class="mi">3</span> <span class="o">*</span> <span class="n">sev_mean</span><span class="o">**</span><span class="mi">3</span>
             <span class="n">num2</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">freq</span><span class="o">.</span><span class="n">var</span><span class="p">()</span> <span class="o">*</span> <span class="n">sev_mean</span> <span class="o">*</span> <span class="n">sev_var</span>
@@ -1968,7 +1968,7 @@ title="Source repository"
             <span class="k">return</span> <span class="p">(</span><span class="n">num1</span> <span class="o">+</span> <span class="n">num2</span> <span class="o">+</span> <span class="n">num3</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">den1</span> <span class="o">+</span> <span class="n">den2</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">3</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="LossModel.coeff_variation"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.coeff_variation">[docs]</a>    <span class="k">def</span> <span class="nf">coeff_variation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">use_dist</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Coefficient of variation (CoV) of the aggregate loss.</span>
 
 <span class="sd">        :param idx: list index corresponding to the layer loss distribution of interest (default is 0).</span>
@@ -2030,7 +2030,7 @@ title="Source repository"
         <span class="n">cover</span><span class="p">,</span>
         <span class="n">reinst_percentage</span>
         <span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Reinstatements premium costing adjustment.</span>
 
 <span class="sd">        :param premium: premium without reinstatement adjustment.</span>
@@ -2064,7 +2064,7 @@ title="Source repository"
         <span class="k">return</span> <span class="n">output</span>
 
     <span class="k">def</span> <span class="nf">_stop_loss_costing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">cover</span><span class="p">,</span> <span class="n">deductible</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Stop loss costing via stop loss transformation.</span>
 <span class="sd">        Compute the expected value of layer transformed aggregate loss distribution.</span>
 
@@ -2080,7 +2080,7 @@ title="Source repository"
         <span class="k">return</span> <span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">lev</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="n">deductible</span><span class="o">+</span><span class="n">cover</span><span class="p">)</span> <span class="o">-</span> <span class="n">dist</span><span class="o">.</span><span class="n">lev</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="n">deductible</span><span class="p">))</span>
 
 <div class="viewcode-block" id="LossModel.costing"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.costing">[docs]</a>    <span class="k">def</span> <span class="nf">costing</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Actuarial costing (also referred to as risk costing) of (re)insurance covers,</span>
 <span class="sd">        such as quota share, excess-of-loss (including reinstatements or aggregate conditions) and stop loss.</span>
 
@@ -2146,7 +2146,7 @@ title="Source repository"
         <span class="k">return</span>  </div>
 
 <div class="viewcode-block" id="LossModel.print_costing_specs"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.print_costing_specs">[docs]</a>    <span class="k">def</span> <span class="nf">print_costing_specs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Print costing information of a given layer (specified via its index).</span>
 <span class="sd">        </span>
 <span class="sd">        :param idx: index corresponding to the policystructure layer of interest (default is 0).</span>
@@ -2204,7 +2204,7 @@ title="Source repository"
         <span class="k">return</span></div>
 
 <div class="viewcode-block" id="LossModel.print_aggr_loss_method_specs"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.print_aggr_loss_method_specs">[docs]</a>    <span class="k">def</span> <span class="nf">print_aggr_loss_method_specs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Print information of the aggregate loss distribution approximation for a given layer (specified via its index).</span>
 
 <span class="sd">        :param idx: index corresponding to the policystructure layer of interest (default is 0).</span>
@@ -2259,7 +2259,7 @@ title="Source repository"
         <span class="k">return</span></div>
 
 <div class="viewcode-block" id="LossModel.print_policy_layer_specs"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.print_policy_layer_specs">[docs]</a>    <span class="k">def</span> <span class="nf">print_policy_layer_specs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Print policy structure information of a given layer (specified via its index).</span>
 
 <span class="sd">        :param idx: index corresponding to the policystructure layer of interest (default is 0).</span>
@@ -2298,7 +2298,7 @@ title="Source repository"
         <span class="k">return</span></div>
 
     <span class="k">def</span> <span class="nf">_check_missing_dist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Check that the aggregate loss distribution is missing.</span>
 <span class="sd">        Helper method called before executing other methods based on ``dist`` property.</span>
 
@@ -2317,7 +2317,7 @@ title="Source repository"
         <span class="k">return</span> <span class="n">output</span>
 
 <div class="viewcode-block" id="LossModel.plot_dist_cdf"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.plot_dist_cdf">[docs]</a>    <span class="k">def</span> <span class="nf">plot_dist_cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">log_x_scale</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">log_y_scale</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Plot the cumulative distribution function of the aggregate loss distribution.</span>
 
 <span class="sd">        :param idx: index corresponding to the policystructure layer of interest (default is 0).</span>
