@@ -20,14 +20,10 @@ Reinsurance Contracs
 GEMAct can be used for costing the following reinsurance contracts and their combinations.
 
 * Excess-of-Loss (XL) including:
-    * individual and aggregate coverage modifers (cover and deductible),
+    * aggregate conditions (cover and deductible),
     * reinstatements.
 * **Quota-share (QS)**.
 * **Stop-loss (SL)**.
-* Reinsurance Programme including:
-    * drop-down and stretch-down layers.
-    * retention layer with a maintenance limit.
-
 
 Computational methods
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -36,9 +32,8 @@ GEMAct offers multiple numerical methods used within the context of loss distrib
 
 * Collective risk model:
     * Recursive method (Panjer recursion),
-    * Discrete Fourier transform, via the fast Fourier transform (FFT) algorithm,
-    * Monte Carlo simulation,
-    * Quasi-Monte Carlo simulation.
+    * Discrete Fourier transform, via the Fast Fourier Transform (FFT) algorithm,
+    * Monte Carlo simulation.
 * Loss (model) aggregation:
     * AEP algorithm,
     * Monte Carlo simulation.

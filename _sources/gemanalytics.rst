@@ -13,7 +13,7 @@ My research interests are primarily survival analysis, claims reserving models i
 Contacts:
 
 *  e-mail: gabriele(dot)pittarello(at)unito(dot)it
-* `Personal Webpage <https://gpitt71.github.io/>`
+* `Personal Webpage <https://gpitt71.github.io/>`_
 * `GitHub <https://github.com/gpitt71>`_
 * `LinkedIN <https://www.linkedin.com/in/gabrielepittarello/>`_
 
