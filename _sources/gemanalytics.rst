@@ -6,7 +6,7 @@ About us
 
 I am postdoctoral researcher in the Section of Biostatistics, at the Department of Public Health of the University of Copenhagen.
 
-I obtained my PhD in 'Advances in Claims Reserve Modelling' from the School of Statistical Sciences at 'La Sapienza' University of Rome.
+I obtained my PhD from the School of Statistical Sciences at 'La Sapienza', University of Rome.
 
 My research interests are primarily survival analysis, claims reserving models in non-life insurance and computational methods for non-life insurance.
 
@@ -19,12 +19,13 @@ Contacts:
 
 **Edoardo Luini** (*Project lead, Developer*)
 
-I work as a quantitative developer in the reinsurance industry. I am currently Teaching fellow in Actuarial Non-life Insurance at Università Cattolica del Sacro Cuore, Milano.
-I earned a PhD in Statistical Sciences, Università 'La Sapienza' di Roma. I have been visiting student at ETH Zürich.
+I am a quantitative and actuarial developer, with both technical expertise and business experience, in reinsurance and finance.
 
-I hold a master’s degree in Statistical and Actuarial Sciences from Università Cattolica del Sacro Cuore di Milano.
+Currently, I am a lecturer in Non-Life Actuarial Insurance at UCSC, Milan.
 
-contacts:
+I obtained a PhD in Statistical Sciences at ‘La Sapienza’, University of Rome.
+
+Contacts:
 
 *  e-mail: edoardo(dot)glaucoluini(at)unicatt(dot)it
 *  `GitHub <https://github.com/EdoLu>`_
@@ -33,7 +34,22 @@ contacts:
 
 I have been working in the reinsurance industry for more than 15 years. Currently, I am a pricing actuary in P&C reinsurance.
 
-In the past, I have been leading seminars in Risk Theory and Reinsurance Analytics at Università Cattolica del Sacro Cuore di Milano.
+In the past, I have been leading seminars in Risk Theory and Reinsurance Analytics at UCSC, Milan.
 
-I hold a 'laurea' in Actuarial Sciences from Università 'La Sapienza' di Roma.
+I hold a 'laurea' in Actuarial Sciences from 'La Sapienza', University of Roma.
+
 I am a fellow member of the Italian (ISOA, ONA) and Swiss (SAV) associations of actuaries.
+
+
+**Davide Ruffini** (*Business Expert, Contributor*)
+
+I am a Non-Life Pricing Actuary, specialized in Predictive Modelling.
+
+I hold a Master’s degree in Quantitative Finance from the University of Milano-Bicocca and
+I am a member of the Italian Istitute of Actuaries (ONA).
+
+Contacts:
+
+* e-mail: davideruffini(dot)dr(at)gmail(dot)com
+* `GitHub <https://github.com/Davide-Ruffini>`_
+* `LinkedIN <https://www.linkedin.com/in/davide-ruffini/>`_
