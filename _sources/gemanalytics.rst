@@ -41,7 +41,7 @@ I hold a 'laurea' in Actuarial Sciences from 'La Sapienza', University of Roma.
 I am a fellow member of the Italian (ISOA, ONA) and Swiss (SAV) associations of actuaries.
 
 
-**Davide Ruffini** (*Business Expert, Contributor*)
+**Davide Ruffini** (*Developer, Contributor*)
 
 I am a Non-Life Pricing Actuary, specialized in Predictive Modelling.
 
