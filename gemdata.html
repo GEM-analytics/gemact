@@ -28,8 +28,8 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=362ab14a" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -37,7 +37,7 @@
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="_static/documentation_options.js?v=404c2a73"></script>
-    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -393,15 +393,15 @@ The current version of the package has data sets for claims reserving.</p>
 <h2>Data sets for loss reserving<a class="headerlink" href="#data-sets-for-loss-reserving" title="Link to this heading">#</a></h2>
 <section id="the-sifa-data-set">
 <h3>The SIFA data set<a class="headerlink" href="#the-sifa-data-set" title="Link to this heading">#</a></h3>
-<p>The first data set is the SIFA data set from <span id="id1">Savelli and Clemente [<a class="reference internal" href="api.html#id79" title="Nino Savelli and Gian Paolo Clemente. Lezioni di matematica attuariale delle assicurazioni danni. EDUCatt-Ente per il diritto allo studio universitario dell'Università Cattolica, 2014. ISBN 9788867807048. URL: http://hdl.handle.net/10807/67154.">SC14</a>]</span>.</p>
+<p>The first data set is the SIFA data set from <span id="id1">Savelli and Clemente [<a class="reference internal" href="api.html#id84" title="Nino Savelli and Gian Paolo Clemente. Lezioni di matematica attuariale delle assicurazioni danni. EDUCatt-Ente per il diritto allo studio universitario dell'Università Cattolica, 2014. ISBN 9788867807048. URL: http://hdl.handle.net/10807/67154.">SC14</a>]</span>.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">incremental_payments</span></code>: Triangle of individual payments</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">incurred_number</span></code>: Triangle of claim payments numbers</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">cased_number</span></code>: Triangle of open numbers</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">cased_payments</span></code>: Triangle of cased amounts</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">reported_claims</span></code>: Reported claims by accident period</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">claims_inflation</span></code>: Vector of inflation from <span id="id2">Savelli and Clemente [<a class="reference internal" href="api.html#id79" title="Nino Savelli and Gian Paolo Clemente. Lezioni di matematica attuariale delle assicurazioni danni. EDUCatt-Ente per il diritto allo studio universitario dell'Università Cattolica, 2014. ISBN 9788867807048. URL: http://hdl.handle.net/10807/67154.">SC14</a>]</span>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">czj</span></code>: Coefficients of variation by development period from <span id="id3">Savelli and Clemente [<a class="reference internal" href="api.html#id79" title="Nino Savelli and Gian Paolo Clemente. Lezioni di matematica attuariale delle assicurazioni danni. EDUCatt-Ente per il diritto allo studio universitario dell'Università Cattolica, 2014. ISBN 9788867807048. URL: http://hdl.handle.net/10807/67154.">SC14</a>]</span>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">claims_inflation</span></code>: Vector of inflation from <span id="id2">Savelli and Clemente [<a class="reference internal" href="api.html#id84" title="Nino Savelli and Gian Paolo Clemente. Lezioni di matematica attuariale delle assicurazioni danni. EDUCatt-Ente per il diritto allo studio universitario dell'Università Cattolica, 2014. ISBN 9788867807048. URL: http://hdl.handle.net/10807/67154.">SC14</a>]</span>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">czj</span></code>: Coefficients of variation by development period from <span id="id3">Savelli and Clemente [<a class="reference internal" href="api.html#id84" title="Nino Savelli and Gian Paolo Clemente. Lezioni di matematica attuariale delle assicurazioni danni. EDUCatt-Ente per il diritto allo studio universitario dell'Università Cattolica, 2014. ISBN 9788867807048. URL: http://hdl.handle.net/10807/67154.">SC14</a>]</span>.</p></li>
 </ul>
 </section>
 <section id="data-set-simulated-with-synthetic-and-splice">
@@ -414,7 +414,7 @@ This data set was used in the illustration of the <code class="docutils literal 
 <li><p><code class="docutils literal notranslate"><span class="pre">cased_number_sim</span></code>: Triangle of open numbers</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">cased_payments_sim</span></code>: Triangle of cased amounts</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">reported_claims_sim</span></code>: Reported claims by accident period</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">czj_sim</span></code>: Coefficients of variation by development period from <span id="id4">Savelli and Clemente [<a class="reference internal" href="api.html#id79" title="Nino Savelli and Gian Paolo Clemente. Lezioni di matematica attuariale delle assicurazioni danni. EDUCatt-Ente per il diritto allo studio universitario dell'Università Cattolica, 2014. ISBN 9788867807048. URL: http://hdl.handle.net/10807/67154.">SC14</a>]</span>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">czj_sim</span></code>: Coefficients of variation by development period from <span id="id4">Savelli and Clemente [<a class="reference internal" href="api.html#id84" title="Nino Savelli and Gian Paolo Clemente. Lezioni di matematica attuariale delle assicurazioni danni. EDUCatt-Ente per il diritto allo studio universitario dell'Università Cattolica, 2014. ISBN 9788867807048. URL: http://hdl.handle.net/10807/67154.">SC14</a>]</span>.</p></li>
 </ul>
 <p>Below we provide the R code for interested readers:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>library(SynthETIC)

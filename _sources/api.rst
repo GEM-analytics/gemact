@@ -1899,6 +1899,164 @@ Then, use ``matplotlib`` library to show the pmf and the cdf of a GenBeta::
 .. image:: images/cdfGenBeta.png
   :width: 400
 
+``Multinomial``
+~~~~~~~~~~~~~~~~~~~~
+
+.. autoclass::  gemact.distributions.Multinomial
+   :members:
+   :inherited-members:
+
+Parametrization
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The multinomial probability mass function is given by
+
+.. math:: f(\mathbf{x}) = \frac{n!}{x_1!\cdots x_k!} \prod_{i=1}^k p_i^{x_i},
+
+where :math:`\sum_{i=1}^k x_i = n`, :math:`x_i \in \mathbb{N}_0`, :math:`p_i \ge 0` and :math:`\sum_{i=1}^k p_i = 1`.
+
+Example code on the usage of the Multinomial class::
+
+    from gemact import distributions
+
+    dist = distributions.Multinomial(n=10, p=[0.2, 0.3, 0.5])
+    x = [2, 3, 5]
+
+    print('PMF at x:', dist.pmf(x))
+    print('Mean vector:', dist.mean())
+    print('Random variates:\n', dist.rvs(size=3, random_state=42))
+
+``Dirichlet_Multinomial``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. autoclass::  gemact.distributions.Dirichlet_Multinomial
+   :members:
+   :inherited-members:
+
+Parametrization
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Let :math:`\alpha_0 = \sum_{i=1}^k \alpha_i`. The Dirichlet-multinomial mass function is
+
+.. math:: f(\mathbf{x}) = \frac{n!}{x_1!\cdots x_k!} \frac{\Gamma(\alpha_0)}{\Gamma(n+\alpha_0)} \prod_{i=1}^k \frac{\Gamma(x_i+\alpha_i)}{\Gamma(\alpha_i)},
+
+where :math:`x_i \in \mathbb{N}_0`, :math:`\sum_{i=1}^k x_i = n` and :math:`\alpha_i > 0` for all :math:`i`.
+
+Example code on the usage of the Dirichlet_Multinomial class::
+
+    from gemact import distributions
+
+    dist = distributions.Dirichlet_Multinomial(n=12, alpha=[2.0, 3.0, 4.0], seed=7)
+    x = [4, 5, 3]
+
+    print('PMF at x:', dist.pmf(x))
+    print('Mean vector:', dist.mean())
+    print('Random variates:\n', dist.rvs(size=2, random_state=21))
+
+``NegMultinom``
+~~~~~~~~~~~~~~~~~~~~
+
+.. autoclass::  gemact.distributions.NegMultinom
+   :members:
+   :inherited-members:
+
+Parametrization
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Let :math:`p_0 = 1 - \sum_{i=1}^k p_i`. The negative multinomial mass function is
+
+.. math:: f(\mathbf{x}) = \frac{\Gamma\!\left(x_0 + \sum_{i=1}^k x_i\right)}{\Gamma(x_0) \prod_{i=1}^k x_i!} p_0^{x_0} \prod_{i=1}^k p_i^{x_i},
+
+where :math:`x_0 > 0`, :math:`x_i \in \mathbb{N}_0`, :math:`p_i \ge 0` and :math:`\sum_{i=1}^k p_i < 1`.
+
+Example code on the usage of the NegMultinom class::
+
+    from gemact import distributions
+    import numpy as np
+
+    dist = distributions.NegMultinom(x0=5, p=[0.2, 0.3])
+    x = np.array([3, 4])
+
+    print('PMF at x:', dist.pmf(x))
+    print('Mean vector:', dist.mean())
+    print('Covariance matrix:\n', dist.cov())
+
+``MultivariateBinomial``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. autoclass::  gemact.distributions.MultivariateBinomial
+   :members:
+   :inherited-members:
+
+Parametrization
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The multivariate binomial vector :math:`\mathbf{X} = (X_1,\ldots,X_k)` models the number of successes in
+:math:`n` common Bernoulli trials with success probabilities :math:`p_i = \Pr(B_i = 1)` and pairwise joint success
+probabilities :math:`p_{ij} = \Pr(B_i = 1, B_j = 1)` for each coordinate.
+The marginal distributions are binomial with
+
+.. math:: X_i \sim \mathrm{Binomial}(n, p_i),\quad i=1,\ldots,k,
+
+while the dependence structure is governed by :math:`p_{ij}`.
+The first two moments are
+
+.. math:: \mathbb{E}[X_i] = n p_i, \qquad \operatorname{Cov}(X_i, X_j) = n \left(p_{ij} - p_i p_j\right).
+
+Example code on the usage of the MultivariateBinomial class::
+
+    from gemact import distributions
+    import numpy as np
+
+    p_joint = np.array([[0.3, 0.12, 0.10],
+                        [0.12, 0.4, 0.08],
+                        [0.10, 0.08, 0.35]])
+
+    dist = distributions.MultivariateBinomial(n=20, p_joint=p_joint)
+    x = np.array([5, 6, 4])
+
+    print('PMF at x:', dist.pmf(x))
+    print('Mean vector:', dist.mean())
+    print('Covariance matrix:\n', dist.cov())
+
+``MultivariatePoisson``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. autoclass::  gemact.distributions.MultivariatePoisson
+   :members:
+   :inherited-members:
+
+Parametrization
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Let :math:`\mathbf{X} = (X_1,\ldots,X_k)` be a multivariate Poisson vector with marginal means :math:`\mu_i`
+and pairwise joint intensities :math:`\lambda_{ij}`. Each component can be represented as
+
+.. math:: X_i = Y_i + \sum_{j \ne i} Y_{ij},
+
+where :math:`Y_i \sim \mathrm{Poisson}\left(\mu_i - \sum_{j \ne i} \lambda_{ij}\right)` and
+:math:`Y_{ij} = Y_{ji} \sim \mathrm{Poisson}(\lambda_{ij})` are independent. Consequently,
+
+.. math:: \mathbb{E}[X_i] = \mu_i, \qquad \operatorname{Cov}(X_i, X_j) = \lambda_{ij} \quad (i \ne j).
+
+Example code on the usage of the MultivariatePoisson class::
+
+    from gemact import distributions
+    import numpy as np
+
+    mu = np.array([2.0, 3.0, 1.5])
+    mu_joint = np.array([[0.0, 0.4, 0.2],
+                         [0.4, 0.0, 0.3],
+                         [0.2, 0.3, 0.0]])
+
+    dist = distributions.MultivariatePoisson(mu=mu, mu_joint=mu_joint)
+    x = np.array([1, 2, 0])
+
+    print('PMF at x:', dist.pmf(x))
+    print('Mean vector:', dist.mean())
+    print('Covariance matrix:\n', dist.cov())
+    print('Random variates:\n', dist.rvs(size=5, random_state=123))
+
 The ``copulas`` module
 ---------------------------
 
