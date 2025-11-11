@@ -29,6 +29,18 @@ contacts:
 *  e-mail: edoardo(dot)glaucoluini(at)unicatt(dot)it
 *  `GitHub <https://github.com/EdoLu>`_
 
+**Davide Ruffini** (*Developer*)
+
+I am an actuary and data scientist working on quantitative modelling projects in the (re)insurance industry. I collaborate with the GEMAct team on the design and implementation of new stochastic models for pricing and reserving.
+
+My research interests include dependence modelling, statistical learning for non-life insurance, and the development of reproducible actuarial software.
+
+Contacts:
+
+*  e-mail: davide(dot)ruffini(at)gmail(dot)com
+*  `GitHub <https://github.com/Davide-Ruffini>`_
+*  `LinkedIn <https://www.linkedin.com/in/davide-ruffini/>`_
+
 **Andrea Biancheri** (*Business Expert, Contributor*)
 
 I have been working in the reinsurance industry for more than 15 years. Currently, I am a pricing actuary in P&C reinsurance.

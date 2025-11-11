@@ -1,10 +1,10 @@
 Actuarial modeling with GEMAct
 ====================================
 
-Distributions
+Distributions (univariate)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following table lists the distributions supported by GEMAct and makes a comparison with `SciPy <https://scipy.org/>`_.
+The table below summarises the univariate distributions supported by GEMAct together with the availability of equivalent implementations in `SciPy <https://scipy.org/>`_.
 
 
 +--------------------------------------------------+---------------------+--------------------+-----------------------------+
@@ -82,8 +82,32 @@ The following table lists the distributions supported by GEMAct and makes a comp
 | Uniform                                          |`uniform`            |  continuous        |:math:`\textcolor{green}{Y}` |
 +--------------------------------------------------+---------------------+--------------------+-----------------------------+
 
-Copulas
+Multivariate Distributions and Copulas
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Multivariate Distributions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The table below lists the multivariate distributions currently provided by GEMAct and indicates whether a direct counterpart exists in `SciPy <https://scipy.org/>`_.
+
+
++--------------------------------------------------+---------------------------+-------------------------+-----------------------------+
+| Distribution                                     | GEMAct name               |   Support               | SciPy(Y/N)                  |
+|                                                  |                           |                         |                             |
++==================================================+===========================+=========================+=============================+
+| Multinomial                                      | `Multinomial`             |  multivariate discrete  |:math:`\textcolor{green}{Y}` |
++--------------------------------------------------+---------------------------+-------------------------+-----------------------------+
+| Dirichlet Multinomial                            | `Dirichlet_multinomial`   |  multivariate discrete  |:math:`\textcolor{green}{Y}` |
++--------------------------------------------------+---------------------------+-------------------------+-----------------------------+
+| Negative Multinomial                             | `NegMultinom`             |  multivariate discrete  |:math:`\textcolor{red}{N}`   |
++--------------------------------------------------+---------------------------+-------------------------+-----------------------------+
+| Multivariate Binomial                            | `MultivariateBinomial`    |  multivariate discrete  |:math:`\textcolor{red}{N}`   |
++--------------------------------------------------+---------------------------+-------------------------+-----------------------------+
+| Multivariate Poisson                             | `MultivariatePoisson`     |  multivariate discrete  |:math:`\textcolor{red}{N}`   |
++--------------------------------------------------+---------------------------+-------------------------+-----------------------------+
+
+Copulas
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The following table lists the copulas supported by GEMAct.
 
