@@ -15,30 +15,33 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-
-  
-  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
   
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="_static/documentation_options.js?v=404c2a73"></script>
-    <script src="_static/doctools.js?v=9bcbadda"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'genindex';</script>
     <link rel="canonical" href="https://github.com/GEM-analytics/gemact/genindex.html" />
@@ -47,6 +50,7 @@
     <link rel="search" title="Search" href="search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -62,19 +66,8 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="search.html"
       method="get">
@@ -82,7 +75,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search..."
          aria-label="Search..."
          autocomplete="off"
@@ -90,8 +82,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -109,7 +101,8 @@
       
         
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -139,21 +132,17 @@
     
     
     <img src="_static/GEMActlogo.png" class="logo__image only-light" alt="gemact - Home"/>
-    <script>document.write(`<img src="_static/GEMActlogo.png" class="logo__image only-dark" alt="gemact - Home"/>`);</script>
+    <img src="_static/GEMActlogo.png" class="logo__image only-dark pst-js-only" alt="gemact - Home"/>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -171,7 +160,6 @@
 <li class="toctree-l1"><a class="reference internal" href="gemdata.html">Data sets included in GEMAct</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modeling.html">Actuarial modeling with GEMAct</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API reference guide</a></li>
-
 <li class="toctree-l1"><a class="reference internal" href="gemanalytics.html">About us</a></li>
 </ul>
 
@@ -181,9 +169,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -233,7 +226,7 @@
 
 
 <button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
   title="Fullscreen mode"
   data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
@@ -247,24 +240,16 @@
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
+</button>
 
 </div></div>
       
@@ -294,8 +279,1100 @@ document.write(`
 <h1 id="index">Index</h1>
 
 <div class="genindex-jumpbox">
+ <a href="#A"><strong>A</strong></a>
+ | <a href="#B"><strong>B</strong></a>
+ | <a href="#C"><strong>C</strong></a>
+ | <a href="#D"><strong>D</strong></a>
+ | <a href="#E"><strong>E</strong></a>
+ | <a href="#F"><strong>F</strong></a>
+ | <a href="#G"><strong>G</strong></a>
+ | <a href="#H"><strong>H</strong></a>
+ | <a href="#I"><strong>I</strong></a>
+ | <a href="#J"><strong>J</strong></a>
+ | <a href="#K"><strong>K</strong></a>
+ | <a href="#L"><strong>L</strong></a>
+ | <a href="#M"><strong>M</strong></a>
+ | <a href="#N"><strong>N</strong></a>
+ | <a href="#P"><strong>P</strong></a>
+ | <a href="#R"><strong>R</strong></a>
+ | <a href="#S"><strong>S</strong></a>
+ | <a href="#T"><strong>T</strong></a>
+ | <a href="#U"><strong>U</strong></a>
+ | <a href="#V"><strong>V</strong></a>
+ | <a href="#W"><strong>W</strong></a>
+ | <a href="#Z"><strong>Z</strong></a>
  
 </div>
+<h2 id="A">A</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#gemact.distributions.Binom.abk">abk() (Binom method)</a>
+
+      <ul>
+        <li><a href="api.html#gemact.distributions.Geom.abk">(Geom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.Logser.abk">(Logser method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.NegBinom.abk">(NegBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.Poisson.abk">(Poisson method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMBinom.abk">(ZMBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMGeom.abk">(ZMGeom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMLogser.abk">(ZMLogser method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMNegBinom.abk">(ZMNegBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMPoisson.abk">(ZMPoisson method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTBinom.abk">(ZTBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTGeom.abk">(ZTGeom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTNegBinom.abk">(ZTNegBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTPoisson.abk">(ZTPoisson method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#gemact.lossmodel.Frequency.abp0g0">abp0g0() (Frequency method)</a>
+</li>
+      <li><a href="api.html#gemact.lossreserve.AggregateData">AggregateData (class in gemact.lossreserve)</a>
+</li>
+      <li><a href="api.html#gemact.copulas.AliMikhailHaqCopula">AliMikhailHaqCopula (class in gemact.copulas)</a>
+</li>
+      <li><a href="api.html#gemact.lossmodel.LayerTower.append">append() (LayerTower method)</a>
+</li>
+      <li><a href="api.html#gemact.helperfunctions.arg_type_handler">arg_type_handler() (in module gemact.helperfunctions)</a>
+</li>
+      <li><a href="api.html#gemact.helperfunctions.assert_member">assert_member() (in module gemact.helperfunctions)</a>
+</li>
+      <li><a href="api.html#gemact.helperfunctions.assert_not_none">assert_not_none() (in module gemact.helperfunctions)</a>
+</li>
+      <li><a href="api.html#gemact.helperfunctions.assert_type_value">assert_type_value() (in module gemact.helperfunctions)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="B">B</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#gemact.distributions.Beta">Beta (class in gemact.distributions)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#gemact.distributions.Binom">Binom (class in gemact.distributions)</a>
+</li>
+      <li><a href="api.html#gemact.distributions.Burr12">Burr12 (class in gemact.distributions)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="C">C</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#gemact.helperfunctions.cartesian_product">cartesian_product() (in module gemact.helperfunctions)</a>
+</li>
+      <li><a href="api.html#gemact.copulas.AliMikhailHaqCopula.cdf">cdf() (AliMikhailHaqCopula method)</a>
+
+      <ul>
+        <li><a href="api.html#gemact.copulas.ClaytonCopula.cdf">(ClaytonCopula method)</a>
+</li>
+        <li><a href="api.html#gemact.lossaggregation.Copula.cdf">(Copula method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.Exponential.cdf">(Exponential method)</a>
+</li>
+        <li><a href="api.html#gemact.copulas.FHLowerCopula.cdf">(FHLowerCopula method)</a>
+</li>
+        <li><a href="api.html#gemact.copulas.FHUpperCopula.cdf">(FHUpperCopula method)</a>
+</li>
+        <li><a href="api.html#gemact.copulas.FrankCopula.cdf">(FrankCopula method)</a>
+</li>
+        <li><a href="api.html#gemact.copulas.GaussCopula.cdf">(GaussCopula method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.GenBeta.cdf">(GenBeta method)</a>
+</li>
+        <li><a href="api.html#gemact.copulas.GumbelCopula.cdf">(GumbelCopula method)</a>
+</li>
+        <li><a href="api.html#gemact.copulas.IndependenceCopula.cdf">(IndependenceCopula method)</a>
+</li>
+        <li><a href="api.html#gemact.copulas.JoeCopula.cdf">(JoeCopula method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.LogGamma.cdf">(LogGamma method)</a>
+</li>
+        <li><a href="api.html#gemact.lossaggregation.LossAggregation.cdf">(LossAggregation method)</a>
+</li>
+        <li><a href="api.html#gemact.lossmodel.LossModel.cdf">(LossModel method)</a>
+</li>
+        <li><a href="api.html#gemact.lossreserve.LossReserve.cdf">(LossReserve method)</a>
+</li>
+        <li><a href="api.html#gemact.lossaggregation.Margins.cdf">(Margins method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.PWC.cdf">(PWC method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.PWL.cdf">(PWL method)</a>
+</li>
+        <li><a href="api.html#gemact.copulas.TCopula.cdf">(TCopula method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMBinom.cdf">(ZMBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMGeom.cdf">(ZMGeom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMLogser.cdf">(ZMLogser method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMNegBinom.cdf">(ZMNegBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMPoisson.cdf">(ZMPoisson method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTBinom.cdf">(ZTBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTGeom.cdf">(ZTGeom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTNegBinom.cdf">(ZTNegBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTPoisson.cdf">(ZTPoisson method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#gemact.lossmodel.Severity.censored_coeff_variation">censored_coeff_variation() (Severity method)</a>
+</li>
+      <li><a href="api.html#gemact.lossmodel.Severity.censored_mean">censored_mean() (Severity method)</a>
+</li>
+      <li><a href="api.html#gemact.distributions.GenBeta.censored_moment">censored_moment() (GenBeta method)</a>
+
+      <ul>
+        <li><a href="api.html#gemact.helperfunctions.censored_moment">(in module gemact.helperfunctions)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.LogGamma.censored_moment">(LogGamma method)</a>
+</li>
+        <li><a href="api.html#gemact.lossaggregation.LossAggregation.censored_moment">(LossAggregation method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.PWC.censored_moment">(PWC method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.PWL.censored_moment">(PWL method)</a>
+</li>
+      </ul></li>
+      <li><a href="api.html#gemact.lossmodel.Severity.censored_skewness">censored_skewness() (Severity method)</a>
+</li>
+      <li><a href="api.html#gemact.lossmodel.Severity.censored_std">censored_std() (Severity method)</a>
+</li>
+      <li><a href="api.html#gemact.lossmodel.Severity.censored_var">censored_var() (Severity method)</a>
+</li>
+      <li><a href="api.html#gemact.helperfunctions.check_condition">check_condition() (in module gemact.helperfunctions)</a>
+</li>
+      <li><a href="api.html#gemact.helperfunctions.check_none">check_none() (in module gemact.helperfunctions)</a>
+</li>
+      <li><a href="api.html#gemact.copulas.ClaytonCopula">ClaytonCopula (class in gemact.copulas)</a>
+</li>
+      <li><a href="api.html#gemact.lossmodel.LossModel.coeff_variation">coeff_variation() (LossModel method)</a>
+</li>
+      <li><a href="api.html#gemact.helperfunctions.compute_block2_crm_msep">compute_block2_crm_msep() (in module gemact.helperfunctions)</a>
+</li>
+      <li><a href="api.html#gemact.helperfunctions.compute_block2_crm_skewness">compute_block2_crm_skewness() (in module gemact.helperfunctions)</a>
+</li>
+      <li><a href="api.html#gemact.helperfunctions.compute_block3_crm_skewness">compute_block3_crm_skewness() (in module gemact.helperfunctions)</a>
+</li>
+      <li><a href="api.html#gemact.lossaggregation.Copula">Copula (class in gemact.lossaggregation)</a>
+</li>
+      <li><a href="api.html#gemact.distributions.MultivariateBinomial.correlation">correlation() (MultivariateBinomial method)</a>
+
+      <ul>
+        <li><a href="api.html#gemact.distributions.MultivariatePoisson.correlation">(MultivariatePoisson method)</a>
+</li>
+      </ul></li>
+      <li><a href="api.html#gemact.lossmodel.LossModel.costing">costing() (LossModel method)</a>
+</li>
+      <li><a href="api.html#gemact.distributions.Dirichlet_Multinomial.cov">cov() (Dirichlet_Multinomial method)</a>
+
+      <ul>
+        <li><a href="api.html#gemact.distributions.Multinomial.cov">(Multinomial method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.MultivariateBinomial.cov">(MultivariateBinomial method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.MultivariatePoisson.cov">(MultivariatePoisson method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.NegMultinom.cov">(NegMultinom method)</a>
+</li>
+      </ul></li>
+      <li><a href="api.html#gemact.helperfunctions.cov_to_corr">cov_to_corr() (in module gemact.helperfunctions)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="D">D</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#gemact.distributions.Dagum">Dagum (class in gemact.distributions)</a>
+</li>
+      <li><a href="api.html#gemact.distributions.Dirichlet_Multinomial">Dirichlet_Multinomial (class in gemact.distributions)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#gemact.lossmodel.Severity.discretize">discretize() (Severity method)</a>
+</li>
+      <li><a href="api.html#gemact.lossaggregation.LossAggregation.dist_calculate">dist_calculate() (LossAggregation method)</a>
+
+      <ul>
+        <li><a href="api.html#gemact.lossmodel.LossModel.dist_calculate">(LossModel method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="E">E</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#gemact.helperfunctions.ecdf">ecdf() (in module gemact.helperfunctions)</a>
+</li>
+      <li><a href="api.html#gemact.distributions.Exponential.entropy">entropy() (Exponential method)</a>
+
+      <ul>
+        <li><a href="api.html#gemact.distributions.Multinomial.entropy">(Multinomial method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#gemact.lossmodel.Severity.excess_frequency">excess_frequency() (Severity method)</a>
+</li>
+      <li><a href="api.html#gemact.distributions.Exponential">Exponential (class in gemact.distributions)</a>
+</li>
+      <li><a href="api.html#gemact.lossmodel.LayerTower.extend">extend() (LayerTower method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="F">F</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#gemact.copulas.FHLowerCopula">FHLowerCopula (class in gemact.copulas)</a>
+</li>
+      <li><a href="api.html#gemact.copulas.FHUpperCopula">FHUpperCopula (class in gemact.copulas)</a>
+</li>
+      <li><a href="api.html#gemact.helperfunctions.find_diagonal">find_diagonal() (in module gemact.helperfunctions)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#gemact.helperfunctions.find_interval">find_interval() (in module gemact.helperfunctions)</a>
+</li>
+      <li><a href="api.html#gemact.distributions.Fisk">Fisk (class in gemact.distributions)</a>
+</li>
+      <li><a href="api.html#gemact.copulas.FrankCopula">FrankCopula (class in gemact.copulas)</a>
+</li>
+      <li><a href="api.html#gemact.lossmodel.Frequency">Frequency (class in gemact.lossmodel)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="G">G</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#gemact.distributions.Gamma">Gamma (class in gemact.distributions)</a>
+</li>
+      <li><a href="api.html#gemact.copulas.GaussCopula">GaussCopula (class in gemact.copulas)</a>
+</li>
+      <li><a href="api.html#gemact.distributions.GenBeta">GenBeta (class in gemact.distributions)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#gemact.distributions.GenPareto">GenPareto (class in gemact.distributions)</a>
+</li>
+      <li><a href="api.html#gemact.distributions.Geom">Geom (class in gemact.distributions)</a>
+</li>
+      <li><a href="api.html#gemact.copulas.GumbelCopula">GumbelCopula (class in gemact.copulas)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="H">H</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#gemact.helperfunctions.handle_random_state">handle_random_state() (in module gemact.helperfunctions)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="I">I</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#gemact.helperfunctions.incrementals_2_cumulatives">incrementals_2_cumulatives() (in module gemact.helperfunctions)</a>
+</li>
+      <li><a href="api.html#gemact.copulas.IndependenceCopula">IndependenceCopula (class in gemact.copulas)</a>
+</li>
+      <li><a href="api.html#gemact.lossmodel.PolicyStructure.index_to_layer_name">index_to_layer_name() (PolicyStructure method)</a>
+</li>
+      <li><a href="api.html#gemact.lossmodel.LayerTower.insert">insert() (LayerTower method)</a>
+</li>
+      <li><a href="api.html#gemact.distributions.InvGamma">InvGamma (class in gemact.distributions)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#gemact.distributions.InvGauss">InvGauss (class in gemact.distributions)</a>
+</li>
+      <li><a href="api.html#gemact.distributions.InvParalogistic">InvParalogistic (class in gemact.distributions)</a>
+</li>
+      <li><a href="api.html#gemact.distributions.InvWeibull">InvWeibull (class in gemact.distributions)</a>
+</li>
+      <li><a href="api.html#gemact.distributions.Exponential.isf">isf() (Exponential method)</a>
+
+      <ul>
+        <li><a href="api.html#gemact.distributions.GenBeta.isf">(GenBeta method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.LogGamma.isf">(LogGamma method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="J">J</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#gemact.copulas.JoeCopula">JoeCopula (class in gemact.copulas)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="K">K</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#gemact.distributions.Binom.kurtosis">kurtosis() (Binom method)</a>
+
+      <ul>
+        <li><a href="api.html#gemact.distributions.GenBeta.kurtosis">(GenBeta method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.Geom.kurtosis">(Geom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.LogGamma.kurtosis">(LogGamma method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.NegBinom.kurtosis">(NegBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.Poisson.kurtosis">(Poisson method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.PWC.kurtosis">(PWC method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.PWL.kurtosis">(PWL method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="L">L</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#gemact.lossmodel.Layer">Layer (class in gemact.lossmodel)</a>
+</li>
+      <li><a href="api.html#gemact.lossmodel.PolicyStructure.layer_name_to_index">layer_name_to_index() (PolicyStructure method)</a>
+</li>
+      <li><a href="api.html#gemact.helperfunctions.layerFunc">layerFunc() (in module gemact.helperfunctions)</a>
+</li>
+      <li><a href="api.html#gemact.lossmodel.LayerTower">LayerTower (class in gemact.lossmodel)</a>
+</li>
+      <li><a href="api.html#gemact.distributions.Beta.lev">lev() (Beta method)</a>
+
+      <ul>
+        <li><a href="api.html#gemact.distributions.Burr12.lev">(Burr12 method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.Dagum.lev">(Dagum method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.Exponential.lev">(Exponential method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.Fisk.lev">(Fisk method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.Gamma.lev">(Gamma method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.GenBeta.lev">(GenBeta method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.GenPareto.lev">(GenPareto method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.InvGamma.lev">(InvGamma method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.InvGauss.lev">(InvGauss method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.InvWeibull.lev">(InvWeibull method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.LogGamma.lev">(LogGamma method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.Lognormal.lev">(Lognormal method)</a>
+</li>
+        <li><a href="api.html#gemact.lossaggregation.LossAggregation.lev">(LossAggregation method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.PWC.lev">(PWC method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.PWL.lev">(PWL method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.Weibull.lev">(Weibull method)</a>
+</li>
+      </ul></li>
+      <li><a href="api.html#gemact.distributions.Exponential.logcdf">logcdf() (Exponential method)</a>
+
+      <ul>
+        <li><a href="api.html#gemact.distributions.GenBeta.logcdf">(GenBeta method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.LogGamma.logcdf">(LogGamma method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMBinom.logcdf">(ZMBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMGeom.logcdf">(ZMGeom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMLogser.logcdf">(ZMLogser method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMNegBinom.logcdf">(ZMNegBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMPoisson.logcdf">(ZMPoisson method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTBinom.logcdf">(ZTBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTGeom.logcdf">(ZTGeom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTNegBinom.logcdf">(ZTNegBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTPoisson.logcdf">(ZTPoisson method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#gemact.distributions.LogGamma">LogGamma (class in gemact.distributions)</a>
+</li>
+      <li><a href="api.html#gemact.distributions.Lognormal">Lognormal (class in gemact.distributions)</a>
+</li>
+      <li><a href="api.html#gemact.distributions.Exponential.logpdf">logpdf() (Exponential method)</a>
+
+      <ul>
+        <li><a href="api.html#gemact.distributions.GenBeta.logpdf">(GenBeta method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.LogGamma.logpdf">(LogGamma method)</a>
+</li>
+      </ul></li>
+      <li><a href="api.html#gemact.distributions.Dirichlet_Multinomial.logpmf">logpmf() (Dirichlet_Multinomial method)</a>
+
+      <ul>
+        <li><a href="api.html#gemact.distributions.Multinomial.logpmf">(Multinomial method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.NegMultinom.logpmf">(NegMultinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMBinom.logpmf">(ZMBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMGeom.logpmf">(ZMGeom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMLogser.logpmf">(ZMLogser method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMNegBinom.logpmf">(ZMNegBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMPoisson.logpmf">(ZMPoisson method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTBinom.logpmf">(ZTBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTGeom.logpmf">(ZTGeom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTNegBinom.logpmf">(ZTNegBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTPoisson.logpmf">(ZTPoisson method)</a>
+</li>
+      </ul></li>
+      <li><a href="api.html#gemact.distributions.Logser">Logser (class in gemact.distributions)</a>
+</li>
+      <li><a href="api.html#gemact.distributions.Exponential.logsf">logsf() (Exponential method)</a>
+
+      <ul>
+        <li><a href="api.html#gemact.distributions.GenBeta.logsf">(GenBeta method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.LogGamma.logsf">(LogGamma method)</a>
+</li>
+      </ul></li>
+      <li><a href="api.html#gemact.lossaggregation.LossAggregation">LossAggregation (class in gemact.lossaggregation)</a>
+</li>
+      <li><a href="api.html#gemact.lossmodel.LossModel">LossModel (class in gemact.lossmodel)</a>
+</li>
+      <li><a href="api.html#gemact.lossreserve.LossReserve">LossReserve (class in gemact.lossreserve)</a>
+</li>
+      <li><a href="api.html#gemact.helperfunctions.lrcrm_f1">lrcrm_f1() (in module gemact.helperfunctions)</a>
+</li>
+      <li><a href="api.html#gemact.helperfunctions.lrcrm_f2">lrcrm_f2() (in module gemact.helperfunctions)</a>
+</li>
+      <li><a href="api.html#gemact.helperfunctions.lrcrm_f3">lrcrm_f3() (in module gemact.helperfunctions)</a>
+</li>
+      <li><a href="api.html#gemact.helperfunctions.lrcrm_skewness_f4">lrcrm_skewness_f4() (in module gemact.helperfunctions)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="M">M</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#gemact.helperfunctions.make_cdf">make_cdf() (in module gemact.helperfunctions)</a>
+</li>
+      <li><a href="api.html#gemact.helperfunctions.make_pdf">make_pdf() (in module gemact.helperfunctions)</a>
+</li>
+      <li><a href="api.html#gemact.lossaggregation.Margins">Margins (class in gemact.lossaggregation)</a>
+</li>
+      <li><a href="api.html#gemact.distributions.Dirichlet_Multinomial.mean">mean() (Dirichlet_Multinomial method)</a>
+
+      <ul>
+        <li><a href="api.html#gemact.distributions.Exponential.mean">(Exponential method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.GenBeta.mean">(GenBeta method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.LogGamma.mean">(LogGamma method)</a>
+</li>
+        <li><a href="api.html#gemact.lossaggregation.LossAggregation.mean">(LossAggregation method)</a>
+</li>
+        <li><a href="api.html#gemact.lossmodel.LossModel.mean">(LossModel method)</a>
+</li>
+        <li><a href="api.html#gemact.lossreserve.LossReserve.mean">(LossReserve method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.MultivariateBinomial.mean">(MultivariateBinomial method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.MultivariatePoisson.mean">(MultivariatePoisson method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.NegMultinom.mean">(NegMultinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.PWC.mean">(PWC method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.PWL.mean">(PWL method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTBinom.mean">(ZTBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTGeom.mean">(ZTGeom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTNegBinom.mean">(ZTNegBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTPoisson.mean">(ZTPoisson method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#gemact.distributions.GenBeta.median">median() (GenBeta method)</a>
+
+      <ul>
+        <li><a href="api.html#gemact.distributions.LogGamma.median">(LogGamma method)</a>
+</li>
+      </ul></li>
+      <li><a href="api.html#gemact.helperfunctions.memoize">memoize() (in module gemact.helperfunctions)</a>
+</li>
+      <li><a href="api.html#gemact.distributions.NegMultinom.mgf">mgf() (NegMultinom method)</a>
+</li>
+      <li><a href="api.html#gemact.distributions.GenBeta.moment">moment() (GenBeta method)</a>
+
+      <ul>
+        <li><a href="api.html#gemact.distributions.LogGamma.moment">(LogGamma method)</a>
+</li>
+        <li><a href="api.html#gemact.lossaggregation.LossAggregation.moment">(LossAggregation method)</a>
+</li>
+        <li><a href="api.html#gemact.lossmodel.LossModel.moment">(LossModel method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.PWC.moment">(PWC method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.PWL.moment">(PWL method)</a>
+</li>
+      </ul></li>
+      <li><a href="api.html#gemact.distributions.Multinomial">Multinomial (class in gemact.distributions)</a>
+</li>
+      <li><a href="api.html#gemact.helperfunctions.multivariate_t_cdf">multivariate_t_cdf() (in module gemact.helperfunctions)</a>
+</li>
+      <li><a href="api.html#gemact.distributions.MultivariateBinomial">MultivariateBinomial (class in gemact.distributions)</a>
+</li>
+      <li><a href="api.html#gemact.distributions.MultivariatePoisson">MultivariatePoisson (class in gemact.distributions)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="N">N</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#gemact.helperfunctions.ndarray_try_convert">ndarray_try_convert() (in module gemact.helperfunctions)</a>
+</li>
+      <li><a href="api.html#gemact.distributions.NegBinom">NegBinom (class in gemact.distributions)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#gemact.distributions.NegMultinom">NegMultinom (class in gemact.distributions)</a>
+</li>
+      <li><a href="api.html#gemact.helperfunctions.normalizernans">normalizernans() (in module gemact.helperfunctions)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="P">P</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#gemact.distributions.Binom.par_deductible_adjuster">par_deductible_adjuster() (Binom method)</a>
+
+      <ul>
+        <li><a href="api.html#gemact.distributions.Geom.par_deductible_adjuster">(Geom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.Logser.par_deductible_adjuster">(Logser method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.NegBinom.par_deductible_adjuster">(NegBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.Poisson.par_deductible_adjuster">(Poisson method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMBinom.par_deductible_adjuster">(ZMBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMGeom.par_deductible_adjuster">(ZMGeom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMLogser.par_deductible_adjuster">(ZMLogser method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMNegBinom.par_deductible_adjuster">(ZMNegBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMPoisson.par_deductible_adjuster">(ZMPoisson method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTBinom.par_deductible_adjuster">(ZTBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTGeom.par_deductible_adjuster">(ZTGeom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTNegBinom.par_deductible_adjuster">(ZTNegBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTPoisson.par_deductible_adjuster">(ZTPoisson method)</a>
+</li>
+      </ul></li>
+      <li><a href="api.html#gemact.distributions.Binom.par_deductible_reverter">par_deductible_reverter() (Binom method)</a>
+
+      <ul>
+        <li><a href="api.html#gemact.distributions.Geom.par_deductible_reverter">(Geom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.Logser.par_deductible_reverter">(Logser method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.NegBinom.par_deductible_reverter">(NegBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.Poisson.par_deductible_reverter">(Poisson method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMBinom.par_deductible_reverter">(ZMBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMGeom.par_deductible_reverter">(ZMGeom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMLogser.par_deductible_reverter">(ZMLogser method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMNegBinom.par_deductible_reverter">(ZMNegBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMPoisson.par_deductible_reverter">(ZMPoisson method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTBinom.par_deductible_reverter">(ZTBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTGeom.par_deductible_reverter">(ZTGeom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTNegBinom.par_deductible_reverter">(ZTNegBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTPoisson.par_deductible_reverter">(ZTPoisson method)</a>
+</li>
+      </ul></li>
+      <li><a href="api.html#gemact.distributions.Paralogistic">Paralogistic (class in gemact.distributions)</a>
+</li>
+      <li><a href="api.html#gemact.distributions.Pareto1">Pareto1 (class in gemact.distributions)</a>
+</li>
+      <li><a href="api.html#gemact.distributions.Pareto2">Pareto2 (class in gemact.distributions)</a>
+</li>
+      <li><a href="api.html#gemact.distributions.Exponential.partial_moment">partial_moment() (Exponential method)</a>
+
+      <ul>
+        <li><a href="api.html#gemact.distributions.Gamma.partial_moment">(Gamma method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.GenBeta.partial_moment">(GenBeta method)</a>
+</li>
+        <li><a href="api.html#gemact.helperfunctions.partial_moment">(in module gemact.helperfunctions)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.LogGamma.partial_moment">(LogGamma method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.Lognormal.partial_moment">(Lognormal method)</a>
+</li>
+      </ul></li>
+      <li><a href="api.html#gemact.distributions.Exponential.pdf">pdf() (Exponential method)</a>
+
+      <ul>
+        <li><a href="api.html#gemact.distributions.GenBeta.pdf">(GenBeta method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.LogGamma.pdf">(LogGamma method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.PWL.pdf">(PWL method)</a>
+</li>
+      </ul></li>
+      <li><a href="api.html#gemact.distributions.Binom.pgf">pgf() (Binom method)</a>
+
+      <ul>
+        <li><a href="api.html#gemact.distributions.Geom.pgf">(Geom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.Logser.pgf">(Logser method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.NegBinom.pgf">(NegBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.Poisson.pgf">(Poisson method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMBinom.pgf">(ZMBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMGeom.pgf">(ZMGeom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMNegBinom.pgf">(ZMNegBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMPoisson.pgf">(ZMPoisson method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTBinom.pgf">(ZTBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTGeom.pgf">(ZTGeom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTNegBinom.pgf">(ZTNegBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTPoisson.pgf">(ZTPoisson method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#gemact.lossreserve.LossReserve.plot_alpha_fl">plot_alpha_fl() (LossReserve method)</a>
+</li>
+      <li><a href="api.html#gemact.lossaggregation.LossAggregation.plot_cdf">plot_cdf() (LossAggregation method)</a>
+</li>
+      <li><a href="api.html#gemact.lossmodel.Severity.plot_discr_sev_cdf">plot_discr_sev_cdf() (Severity method)</a>
+</li>
+      <li><a href="api.html#gemact.lossmodel.LossModel.plot_dist_cdf">plot_dist_cdf() (LossModel method)</a>
+</li>
+      <li><a href="api.html#gemact.lossreserve.LossReserve.plot_ss_fl">plot_ss_fl() (LossReserve method)</a>
+</li>
+      <li><a href="api.html#gemact.distributions.Dirichlet_Multinomial.pmf">pmf() (Dirichlet_Multinomial method)</a>
+
+      <ul>
+        <li><a href="api.html#gemact.distributions.Multinomial.pmf">(Multinomial method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.MultivariateBinomial.pmf">(MultivariateBinomial method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.MultivariatePoisson.pmf">(MultivariatePoisson method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.NegMultinom.pmf">(NegMultinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMBinom.pmf">(ZMBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMGeom.pmf">(ZMGeom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMLogser.pmf">(ZMLogser method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMNegBinom.pmf">(ZMNegBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMPoisson.pmf">(ZMPoisson method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTBinom.pmf">(ZTBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTGeom.pmf">(ZTGeom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTNegBinom.pmf">(ZTNegBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTPoisson.pmf">(ZTPoisson method)</a>
+</li>
+      </ul></li>
+      <li><a href="api.html#gemact.distributions.Poisson">Poisson (class in gemact.distributions)</a>
+</li>
+      <li><a href="api.html#gemact.lossmodel.PolicyStructure">PolicyStructure (class in gemact.lossmodel)</a>
+</li>
+      <li><a href="api.html#gemact.distributions.Exponential.ppf">ppf() (Exponential method)</a>
+
+      <ul>
+        <li><a href="api.html#gemact.distributions.GenBeta.ppf">(GenBeta method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.LogGamma.ppf">(LogGamma method)</a>
+</li>
+        <li><a href="api.html#gemact.lossaggregation.LossAggregation.ppf">(LossAggregation method)</a>
+</li>
+        <li><a href="api.html#gemact.lossmodel.LossModel.ppf">(LossModel method)</a>
+</li>
+        <li><a href="api.html#gemact.lossreserve.LossReserve.ppf">(LossReserve method)</a>
+</li>
+        <li><a href="api.html#gemact.lossaggregation.Margins.ppf">(Margins method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.PWC.ppf">(PWC method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.PWL.ppf">(PWL method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMBinom.ppf">(ZMBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMGeom.ppf">(ZMGeom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMLogser.ppf">(ZMLogser method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMNegBinom.ppf">(ZMNegBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMPoisson.ppf">(ZMPoisson method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTBinom.ppf">(ZTBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTGeom.ppf">(ZTGeom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTNegBinom.ppf">(ZTNegBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTPoisson.ppf">(ZTPoisson method)</a>
+</li>
+      </ul></li>
+      <li><a href="api.html#gemact.lossmodel.LossModel.print_aggr_loss_method_specs">print_aggr_loss_method_specs() (LossModel method)</a>
+</li>
+      <li><a href="api.html#gemact.lossmodel.LossModel.print_costing_specs">print_costing_specs() (LossModel method)</a>
+</li>
+      <li><a href="api.html#gemact.lossreserve.LossReserve.print_loss_reserve">print_loss_reserve() (LossReserve method)</a>
+</li>
+      <li><a href="api.html#gemact.lossmodel.LossModel.print_policy_layer_specs">print_policy_layer_specs() (LossModel method)</a>
+</li>
+      <li><a href="api.html#gemact.distributions.PWC">PWC (class in gemact.distributions)</a>
+</li>
+      <li><a href="api.html#gemact.distributions.PWL">PWL (class in gemact.distributions)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="R">R</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#gemact.lossreserve.ReservingModel">ReservingModel (class in gemact.lossreserve)</a>
+</li>
+      <li><a href="api.html#gemact.lossmodel.Severity.return_period">return_period() (Severity method)</a>
+</li>
+      <li><a href="api.html#gemact.copulas.AliMikhailHaqCopula.rvs">rvs() (AliMikhailHaqCopula method)</a>
+
+      <ul>
+        <li><a href="api.html#gemact.copulas.ClaytonCopula.rvs">(ClaytonCopula method)</a>
+</li>
+        <li><a href="api.html#gemact.lossaggregation.Copula.rvs">(Copula method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.Dirichlet_Multinomial.rvs">(Dirichlet_Multinomial method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.Exponential.rvs">(Exponential method)</a>
+</li>
+        <li><a href="api.html#gemact.copulas.FHLowerCopula.rvs">(FHLowerCopula method)</a>
+</li>
+        <li><a href="api.html#gemact.copulas.FHUpperCopula.rvs">(FHUpperCopula method)</a>
+</li>
+        <li><a href="api.html#gemact.copulas.FrankCopula.rvs">(FrankCopula method)</a>
+</li>
+        <li><a href="api.html#gemact.copulas.GaussCopula.rvs">(GaussCopula method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.GenBeta.rvs">(GenBeta method)</a>
+</li>
+        <li><a href="api.html#gemact.copulas.GumbelCopula.rvs">(GumbelCopula method)</a>
+</li>
+        <li><a href="api.html#gemact.copulas.IndependenceCopula.rvs">(IndependenceCopula method)</a>
+</li>
+        <li><a href="api.html#gemact.copulas.JoeCopula.rvs">(JoeCopula method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.LogGamma.rvs">(LogGamma method)</a>
+</li>
+        <li><a href="api.html#gemact.lossaggregation.LossAggregation.rvs">(LossAggregation method)</a>
+</li>
+        <li><a href="api.html#gemact.lossmodel.LossModel.rvs">(LossModel method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.MultivariateBinomial.rvs">(MultivariateBinomial method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.MultivariatePoisson.rvs">(MultivariatePoisson method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.NegMultinom.rvs">(NegMultinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.PWC.rvs">(PWC method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.PWL.rvs">(PWL method)</a>
+</li>
+        <li><a href="api.html#gemact.copulas.TCopula.rvs">(TCopula method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMBinom.rvs">(ZMBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMGeom.rvs">(ZMGeom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMLogser.rvs">(ZMLogser method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMNegBinom.rvs">(ZMNegBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZMPoisson.rvs">(ZMPoisson method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTBinom.rvs">(ZTBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTGeom.rvs">(ZTGeom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTNegBinom.rvs">(ZTNegBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTPoisson.rvs">(ZTPoisson method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="S">S</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#gemact.lossmodel.Severity">Severity (class in gemact.lossmodel)</a>
+</li>
+      <li><a href="api.html#gemact.distributions.Exponential.sf">sf() (Exponential method)</a>
+
+      <ul>
+        <li><a href="api.html#gemact.distributions.GenBeta.sf">(GenBeta method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.LogGamma.sf">(LogGamma method)</a>
+</li>
+        <li><a href="api.html#gemact.lossaggregation.LossAggregation.sf">(LossAggregation method)</a>
+</li>
+        <li><a href="api.html#gemact.lossmodel.LossModel.sf">(LossModel method)</a>
+</li>
+        <li><a href="api.html#gemact.lossreserve.LossReserve.sf">(LossReserve method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.PWC.sf">(PWC method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.PWL.sf">(PWL method)</a>
+</li>
+      </ul></li>
+      <li><a href="api.html#gemact.helperfunctions.simulate">simulate() (in module gemact.helperfunctions)</a>
+</li>
+      <li><a href="api.html#gemact.distributions.Binom.skewness">skewness() (Binom method)</a>
+
+      <ul>
+        <li><a href="api.html#gemact.distributions.GenBeta.skewness">(GenBeta method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.Geom.skewness">(Geom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.LogGamma.skewness">(LogGamma method)</a>
+</li>
+        <li><a href="api.html#gemact.lossaggregation.LossAggregation.skewness">(LossAggregation method)</a>
+</li>
+        <li><a href="api.html#gemact.lossmodel.LossModel.skewness">(LossModel method)</a>
+</li>
+        <li><a href="api.html#gemact.lossreserve.LossReserve.skewness">(LossReserve method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.NegBinom.skewness">(NegBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.Poisson.skewness">(Poisson method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.PWC.skewness">(PWC method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.PWL.skewness">(PWL method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#gemact.lossmodel.LayerTower.sort">sort() (LayerTower method)</a>
+</li>
+      <li><a href="api.html#gemact.lossmodel.Layer.specs">specs() (Layer static method)</a>
+</li>
+      <li><a href="api.html#gemact.distributions.GenBeta.stats">stats() (GenBeta method)</a>
+
+      <ul>
+        <li><a href="api.html#gemact.distributions.LogGamma.stats">(LogGamma method)</a>
+</li>
+      </ul></li>
+      <li><a href="api.html#gemact.distributions.Exponential.std">std() (Exponential method)</a>
+
+      <ul>
+        <li><a href="api.html#gemact.distributions.GenBeta.std">(GenBeta method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.LogGamma.std">(LogGamma method)</a>
+</li>
+        <li><a href="api.html#gemact.lossaggregation.LossAggregation.std">(LossAggregation method)</a>
+</li>
+        <li><a href="api.html#gemact.lossmodel.LossModel.std">(LossModel method)</a>
+</li>
+        <li><a href="api.html#gemact.lossreserve.LossReserve.std">(LossReserve method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.PWC.std">(PWC method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.PWL.std">(PWL method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="T">T</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#gemact.copulas.TCopula">TCopula (class in gemact.copulas)</a>
+</li>
+      <li><a href="api.html#gemact.helperfunctions.triangle_dimension">triangle_dimension() (in module gemact.helperfunctions)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#gemact.distributions.GenBeta.truncated_moment">truncated_moment() (GenBeta method)</a>
+
+      <ul>
+        <li><a href="api.html#gemact.distributions.LogGamma.truncated_moment">(LogGamma method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="U">U</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#gemact.distributions.Uniform">Uniform (class in gemact.distributions)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="V">V</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#gemact.distributions.Dirichlet_Multinomial.var">var() (Dirichlet_Multinomial method)</a>
+
+      <ul>
+        <li><a href="api.html#gemact.distributions.Exponential.var">(Exponential method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.GenBeta.var">(GenBeta method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.LogGamma.var">(LogGamma method)</a>
+</li>
+        <li><a href="api.html#gemact.lossaggregation.LossAggregation.var">(LossAggregation method)</a>
+</li>
+        <li><a href="api.html#gemact.lossmodel.LossModel.var">(LossModel method)</a>
+</li>
+        <li><a href="api.html#gemact.lossreserve.LossReserve.var">(LossReserve method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.Multinomial.var">(Multinomial method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.MultivariateBinomial.var">(MultivariateBinomial method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.MultivariatePoisson.var">(MultivariatePoisson method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.NegMultinom.var">(NegMultinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.PWC.var">(PWC method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.PWL.var">(PWL method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTBinom.var">(ZTBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTGeom.var">(ZTGeom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTNegBinom.var">(ZTNegBinom method)</a>
+</li>
+        <li><a href="api.html#gemact.distributions.ZTPoisson.var">(ZTPoisson method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="W">W</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#gemact.distributions.Weibull">Weibull (class in gemact.distributions)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="Z">Z</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#gemact.distributions.ZMBinom">ZMBinom (class in gemact.distributions)</a>
+</li>
+      <li><a href="api.html#gemact.distributions.ZMGeom">ZMGeom (class in gemact.distributions)</a>
+</li>
+      <li><a href="api.html#gemact.distributions.ZMLogser">ZMLogser (class in gemact.distributions)</a>
+</li>
+      <li><a href="api.html#gemact.distributions.ZMNegBinom">ZMNegBinom (class in gemact.distributions)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#gemact.distributions.ZMPoisson">ZMPoisson (class in gemact.distributions)</a>
+</li>
+      <li><a href="api.html#gemact.distributions.ZTBinom">ZTBinom (class in gemact.distributions)</a>
+</li>
+      <li><a href="api.html#gemact.distributions.ZTGeom">ZTGeom (class in gemact.distributions)</a>
+</li>
+      <li><a href="api.html#gemact.distributions.ZTNegBinom">ZTNegBinom (class in gemact.distributions)</a>
+</li>
+      <li><a href="api.html#gemact.distributions.ZTPoisson">ZTPoisson (class in gemact.distributions)</a>
+</li>
+  </ul></td>
+</tr></table>
+
 
 
                 </article>
@@ -358,8 +1435,8 @@ By Gabriele Pittarello, Edoardo Luini, Manfred Marvin Marchione
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>

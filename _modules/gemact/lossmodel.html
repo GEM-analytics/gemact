@@ -1,9 +1,8 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../../" >
 
   <head>
     <meta charset="utf-8" />
@@ -14,42 +13,44 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-<link href="../../_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
   
-  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
-
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
-  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../_static/documentation_options.js?v=404c2a73"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/gemact/lossmodel';</script>
     <link rel="canonical" href="https://github.com/GEM-analytics/gemact/_modules/gemact/lossmodel.html" />
-    <link rel="shortcut icon" href="../../_static/webtab.png"/>
+    <link rel="icon" href="../../_static/webtab.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -57,32 +58,16 @@
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="../../search.html"
       method="get">
@@ -90,7 +75,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search..."
          aria-label="Search..."
          autocomplete="off"
@@ -98,16 +82,27 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -120,9 +115,13 @@
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
+  
+    
   
 
 <a class="navbar-brand logo" href="../../index.html">
+  
   
   
   
@@ -132,12 +131,19 @@
       
     
     
-    <img src="../../_static/GEMActlogo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../../_static/GEMActlogo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../../_static/GEMActlogo.png" class="logo__image only-light" alt="gemact - Home"/>
+    <img src="../../_static/GEMActlogo.png" class="logo__image only-dark pst-js-only" alt="gemact - Home"/>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -154,7 +160,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../gemdata.html">Data sets included in GEMAct</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../modeling.html">Actuarial modeling with GEMAct</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api.html">API reference guide</a></li>
-
 <li class="toctree-l1"><a class="reference internal" href="../../gemanalytics.html">About us</a></li>
 </ul>
 
@@ -164,14 +169,19 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -180,14 +190,14 @@
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -216,7 +226,7 @@
 
 
 <button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
   title="Fullscreen mode"
   data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
@@ -229,23 +239,17 @@
 </button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
-  </button>
-`);
-</script>
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
+</button>
 
 </div></div>
       
@@ -269,20 +273,22 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <h1>Source code for gemact.lossmodel</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">.libraries</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">config</span>
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">helperfunctions</span> <span class="k">as</span> <span class="n">hf</span>
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">distributions</span> <span class="k">as</span> <span class="n">distributions</span>
-<span class="kn">from</span> <span class="nn">.calculators</span> <span class="kn">import</span> <span class="n">LossModelCalculator</span> <span class="k">as</span> <span class="n">Calculator</span>
-<span class="kn">from</span> <span class="nn">.calculators</span> <span class="kn">import</span> <span class="n">LossModelTowerCalculator</span> <span class="k">as</span> <span class="n">TowerCalculator</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">.libraries</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">config</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">helperfunctions</span> <span class="k">as</span> <span class="n">hf</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">distributions</span> <span class="k">as</span> <span class="n">distributions</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.calculators</span><span class="w"> </span><span class="kn">import</span> <span class="n">LossModelCalculator</span> <span class="k">as</span> <span class="n">Calculator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.calculators</span><span class="w"> </span><span class="kn">import</span> <span class="n">LossModelTowerCalculator</span> <span class="k">as</span> <span class="n">TowerCalculator</span>
 
 <span class="n">quick_setup</span><span class="p">()</span>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">log</span><span class="o">.</span><span class="n">name</span><span class="p">(</span><span class="s1">&#39;lossmodel&#39;</span><span class="p">)</span>
 
-<div class="viewcode-block" id="PolicyStructure"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.PolicyStructure">[docs]</a><span class="k">class</span> <span class="nc">PolicyStructure</span><span class="p">:</span>
+<div class="viewcode-block" id="PolicyStructure">
+<a class="viewcode-back" href="../../api.html#gemact.lossmodel.PolicyStructure">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">PolicyStructure</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Policy structure component of a loss model.</span>
 
@@ -290,15 +296,15 @@ document.write(`
 <span class="sd">    :type layers: ``Layer``, ``LayerTower``, ``list``</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">layers</span> <span class="o">=</span> <span class="n">layers</span> <span class="k">if</span> <span class="n">layers</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">Layer</span><span class="p">()</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">layers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">layers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__layers</span>
 
     <span class="nd">@layers</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">layers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">layers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="n">hf</span><span class="o">.</span><span class="n">assert_type_value</span><span class="p">(</span>
             <span class="n">value</span><span class="p">,</span> <span class="s1">&#39;layers&#39;</span><span class="p">,</span>
             <span class="nb">type</span><span class="o">=</span><span class="p">(</span><span class="n">LayerTower</span><span class="p">,</span> <span class="n">Layer</span><span class="p">,</span> <span class="nb">list</span><span class="p">),</span> <span class="n">logger</span><span class="o">=</span><span class="n">logger</span>
@@ -314,10 +320,12 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">__layers</span> <span class="o">=</span> <span class="n">value</span>
     
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">length</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layers</span><span class="p">)</span>
 
-<div class="viewcode-block" id="PolicyStructure.index_to_layer_name"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.PolicyStructure.index_to_layer_name">[docs]</a>    <span class="k">def</span> <span class="nf">index_to_layer_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+<div class="viewcode-block" id="PolicyStructure.index_to_layer_name">
+<a class="viewcode-back" href="../../api.html#gemact.lossmodel.PolicyStructure.index_to_layer_name">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">index_to_layer_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return name of a layer given its index.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -329,8 +337,11 @@ document.write(`
             <span class="n">e</span><span class="o">.</span><span class="n">args</span> <span class="o">+=</span> <span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="p">)</span>
             <span class="k">raise</span>
         <span class="k">return</span> <span class="n">output</span></div>
+
     
-<div class="viewcode-block" id="PolicyStructure.layer_name_to_index"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.PolicyStructure.layer_name_to_index">[docs]</a>    <span class="k">def</span> <span class="nf">layer_name_to_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<div class="viewcode-block" id="PolicyStructure.layer_name_to_index">
+<a class="viewcode-back" href="../../api.html#gemact.lossmodel.PolicyStructure.layer_name_to_index">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">layer_name_to_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return index of a layer given its name.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -339,9 +350,13 @@ document.write(`
             <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;ValueError. No Layer has name &quot;</span><span class="si">%s</span><span class="s1">&quot;.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">)</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">output</span></div></div>
+        <span class="k">return</span> <span class="n">output</span></div>
+</div>
 
-<div class="viewcode-block" id="Layer"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.Layer">[docs]</a><span class="k">class</span> <span class="nc">Layer</span><span class="p">:</span>
+
+<div class="viewcode-block" id="Layer">
+<a class="viewcode-back" href="../../api.html#gemact.lossmodel.Layer">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Layer</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Policy structure non-proportional layer.</span>
 
@@ -374,7 +389,7 @@ document.write(`
 <span class="sd">    :type retention: ``bool``</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">cover</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">),</span>
         <span class="n">deductible</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
@@ -401,7 +416,7 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_and_set_category</span><span class="p">()</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">output</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-xs-</span><span class="si">%s</span><span class="s1">, </span><span class="si">%s</span><span class="s1">-xs-</span><span class="si">%s</span><span class="s1"> in aggr, </span><span class="si">%s</span><span class="s1"> share&#39;</span> <span class="o">%</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">cover</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">deductible</span><span class="p">,</span>
@@ -412,44 +427,44 @@ document.write(`
         <span class="k">return</span> <span class="n">output</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">deductible</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">deductible</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__deductible</span>
 
     <span class="nd">@deductible</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">deductible</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">deductible</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;deductible&#39;</span>
         <span class="n">hf</span><span class="o">.</span><span class="n">assert_type_value</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">logger</span><span class="o">=</span><span class="n">logger</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">),</span>
         <span class="n">lower_bound</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">upper_bound</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">),</span> <span class="n">upper_close</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__deductible</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">cover</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cover</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__cover</span>
 
     <span class="nd">@cover</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">cover</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cover</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;cover&#39;</span>
         <span class="n">hf</span><span class="o">.</span><span class="n">assert_type_value</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">),</span>
         <span class="n">lower_bound</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">lower_close</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__cover</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">aggr_deductible</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">aggr_deductible</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__aggr_deductible</span>
 
     <span class="nd">@aggr_deductible</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">aggr_deductible</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">aggr_deductible</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;aggr_deductible&#39;</span>
         <span class="n">hf</span><span class="o">.</span><span class="n">assert_type_value</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">),</span>
         <span class="n">lower_bound</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">upper_bound</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">),</span> <span class="n">upper_close</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__aggr_deductible</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">n_reinst</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">n_reinst</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__n_reinst</span>
 
     <span class="nd">@n_reinst</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">n_reinst</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">n_reinst</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;n_reinst&#39;</span>
         <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">hf</span><span class="o">.</span><span class="n">assert_type_value</span><span class="p">(</span>
@@ -459,11 +474,11 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">__n_reinst</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">reinst_percentage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">reinst_percentage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__reinst_percentage</span>
 
     <span class="nd">@reinst_percentage</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">reinst_percentage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">reinst_percentage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;reinst_percentage&#39;</span>
         <span class="n">name_two</span> <span class="o">=</span> <span class="s1">&#39;reinst_percentage size&#39;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_reinst</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -515,11 +530,11 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">__reinst_percentage</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">aggr_cover</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">aggr_cover</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__aggr_cover</span>
             
     <span class="nd">@aggr_cover</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">aggr_cover</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">aggr_cover</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;aggr_cover&#39;</span>
         <span class="n">hf</span><span class="o">.</span><span class="n">assert_type_value</span><span class="p">(</span>
             <span class="n">value</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span>
@@ -528,11 +543,11 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">__aggr_cover</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">manteinance_deductible</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">manteinance_deductible</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__manteinance_deductible</span>   
 
     <span class="nd">@manteinance_deductible</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">manteinance_deductible</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">manteinance_deductible</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;maintenance_limit&#39;</span>
         <span class="c1"># maintenance limit cannot be higher than cover/limit</span>
         <span class="n">hf</span><span class="o">.</span><span class="n">assert_type_value</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">logger</span><span class="o">=</span><span class="n">logger</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">),</span>
@@ -543,11 +558,11 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">__manteinance_deductible</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">share</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">share</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__share</span>
 
     <span class="nd">@share</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">share</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">share</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="n">hf</span><span class="o">.</span><span class="n">assert_type_value</span><span class="p">(</span>
             <span class="n">value</span><span class="p">,</span> <span class="s1">&#39;share&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="p">),</span> <span class="n">logger</span><span class="o">=</span><span class="n">logger</span><span class="p">,</span>
             <span class="n">upper_bound</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">upper_close</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -556,20 +571,20 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">__share</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">basis</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">basis</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__basis</span>
 
     <span class="nd">@basis</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">basis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">basis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="n">hf</span><span class="o">.</span><span class="n">assert_member</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">POLICY_LAYER_BASIS</span><span class="p">,</span> <span class="n">logger</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__basis</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">retention</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">retention</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__retention</span>
 
     <span class="nd">@retention</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">retention</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">retention</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="n">hf</span><span class="o">.</span><span class="n">assert_type_value</span><span class="p">(</span>
             <span class="n">value</span><span class="p">,</span>
             <span class="s1">&#39;retention&#39;</span><span class="p">,</span>
@@ -579,15 +594,15 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">__retention</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">category</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">category</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__category</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">exit_point</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">exit_point</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">deductible</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">cover</span>
     
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">identifier</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">identifier</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">output</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">deductible</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">cover</span><span class="p">,</span>
@@ -599,8 +614,10 @@ document.write(`
             <span class="p">)</span>
         <span class="k">return</span> <span class="n">output</span>
     
-<div class="viewcode-block" id="Layer.specs"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.Layer.specs">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">specs</span><span class="p">():</span>
+<div class="viewcode-block" id="Layer.specs">
+<a class="viewcode-back" href="../../api.html#gemact.lossmodel.Layer.specs">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">specs</span><span class="p">():</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Method (static) returning layer specifications names.</span>
 
@@ -613,8 +630,9 @@ document.write(`
             <span class="s1">&#39;maintenance_limit&#39;</span><span class="p">,</span> <span class="s1">&#39;share&#39;</span><span class="p">,</span>
             <span class="s1">&#39;basis&#39;</span>
             <span class="p">}</span></div>
+
     
-    <span class="k">def</span> <span class="nf">_check_presence_aggr_conditions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_check_presence_aggr_conditions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Method that check if aggregate conditions are present.</span>
 
@@ -634,7 +652,7 @@ document.write(`
                 <span class="k">return</span> <span class="kc">True</span>
         <span class="k">return</span> <span class="kc">False</span>
 
-    <span class="k">def</span> <span class="nf">_check_and_set_category</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_check_and_set_category</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Method that check and set the category of the layer.</span>
 
@@ -653,7 +671,10 @@ document.write(`
         <span class="p">)</span>
         <span class="k">return</span></div>
 
-<div class="viewcode-block" id="LayerTower"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LayerTower">[docs]</a><span class="k">class</span> <span class="nc">LayerTower</span><span class="p">(</span><span class="nb">list</span><span class="p">):</span>
+
+<div class="viewcode-block" id="LayerTower">
+<a class="viewcode-back" href="../../api.html#gemact.lossmodel.LayerTower">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">LayerTower</span><span class="p">(</span><span class="nb">list</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Policy structure tower of non-proportional layers.</span>
 
@@ -665,20 +686,25 @@ document.write(`
 <span class="sd">          Layer tower elements.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
             <span class="n">hf</span><span class="o">.</span><span class="n">assert_type_value</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="s1">&#39;item&#39;</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span> <span class="n">Layer</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">LayerTower</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_tower</span><span class="p">()</span>
 
-<div class="viewcode-block" id="LayerTower.append"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LayerTower.append">[docs]</a>    <span class="k">def</span> <span class="nf">append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+<div class="viewcode-block" id="LayerTower.append">
+<a class="viewcode-back" href="../../api.html#gemact.lossmodel.LayerTower.append">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Append object to the end of the list.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">hf</span><span class="o">.</span><span class="n">assert_type_value</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="s1">&#39;item&#39;</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span> <span class="n">Layer</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">LayerTower</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span></div>
+
     
-<div class="viewcode-block" id="LayerTower.insert"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LayerTower.insert">[docs]</a>    <span class="k">def</span> <span class="nf">insert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+<div class="viewcode-block" id="LayerTower.insert">
+<a class="viewcode-back" href="../../api.html#gemact.lossmodel.LayerTower.insert">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">insert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Insert Layer at a given index.</span>
 
@@ -689,16 +715,22 @@ document.write(`
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">hf</span><span class="o">.</span><span class="n">assert_type_value</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="s1">&#39;item&#39;</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span> <span class="n">Layer</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">LayerTower</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span></div>
+
     
-<div class="viewcode-block" id="LayerTower.extend"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LayerTower.extend">[docs]</a>    <span class="k">def</span> <span class="nf">extend</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+<div class="viewcode-block" id="LayerTower.extend">
+<a class="viewcode-back" href="../../api.html#gemact.lossmodel.LayerTower.extend">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">extend</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Extend by appending elements from the iterable.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
             <span class="n">hf</span><span class="o">.</span><span class="n">assert_type_value</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="s1">&#39;item&#39;</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span> <span class="n">Layer</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">LayerTower</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">args</span><span class="p">)</span></div>
+
     
-<div class="viewcode-block" id="LayerTower.sort"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LayerTower.sort">[docs]</a>    <span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="LayerTower.sort">
+<a class="viewcode-back" href="../../api.html#gemact.lossmodel.LayerTower.sort">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sort</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Stable sort in place by layer deductible.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -707,15 +739,16 @@ document.write(`
         <span class="nb">super</span><span class="p">(</span><span class="n">LayerTower</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span>
             <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
             <span class="p">)</span></div>
+
     
-    <span class="k">def</span> <span class="nf">_remove_layer_percentage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_remove_layer_percentage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set layer reinstatement percentage to 0.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">elt</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
             <span class="n">elt</span><span class="o">.</span><span class="n">reinst_percentage</span> <span class="o">=</span> <span class="mi">0</span>
 
-    <span class="k">def</span> <span class="nf">_arrange_retention_layer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_arrange_retention_layer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Arrange the retention layer</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -732,7 +765,7 @@ document.write(`
                 <span class="p">)</span>
         <span class="k">return</span>
 
-    <span class="k">def</span> <span class="nf">_check_tower</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_check_tower</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Perform sanity check of LayerTower items by removing eventual</span>
 <span class="sd">        duplicates, sorting items by layer deductibles and checking</span>
@@ -769,7 +802,7 @@ document.write(`
             <span class="k">if</span> <span class="bp">self</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">basis</span> <span class="o">==</span> <span class="s1">&#39;regular&#39;</span><span class="p">:</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Having regular basis above first layer may generate noncontiguous layers.&#39;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_remove_duplicates</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_remove_duplicates</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Remove duplicates.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -784,7 +817,10 @@ document.write(`
                     <span class="p">)</span>
         <span class="k">return</span></div>
 
-<div class="viewcode-block" id="Frequency"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.Frequency">[docs]</a><span class="k">class</span> <span class="nc">Frequency</span><span class="p">:</span>
+
+<div class="viewcode-block" id="Frequency">
+<a class="viewcode-back" href="../../api.html#gemact.lossmodel.Frequency">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Frequency</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Frequency component of the loss models underlying the collective risk model.</span>
 
@@ -797,27 +833,27 @@ document.write(`
 <span class="sd">    :type threshold: ``int`` or ``float``</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">par</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">par</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dist</span> <span class="o">=</span> <span class="n">dist</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">par</span> <span class="o">=</span> <span class="n">par</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span> <span class="o">=</span> <span class="n">threshold</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dist</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">par</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">dist</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dist</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dist</span>
 
     <span class="nd">@dist</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">dist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="n">hf</span><span class="o">.</span><span class="n">assert_member</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">DIST_DICT</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">SITE_LINK</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__dist</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">DIST_DICT</span><span class="p">[</span><span class="n">value</span><span class="p">])</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">par</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">par</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__par</span>
 
     <span class="nd">@par</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">par</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">par</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="n">hf</span><span class="o">.</span><span class="n">assert_type_value</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="s1">&#39;par&#39;</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span>
         
         <span class="k">try</span><span class="p">:</span>
@@ -833,11 +869,11 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">__par</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">threshold</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">threshold</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__threshold</span>
 
     <span class="nd">@threshold</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">threshold</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">threshold</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="n">hf</span><span class="o">.</span><span class="n">assert_type_value</span><span class="p">(</span>
             <span class="n">value</span><span class="p">,</span> <span class="s1">&#39;threshold&#39;</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">),</span>
             <span class="n">lower_bound</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">lower_close</span><span class="o">=</span><span class="kc">True</span>
@@ -846,20 +882,22 @@ document.write(`
         <span class="k">return</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">p0</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">p0</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">par</span><span class="p">[</span><span class="s1">&#39;p0M&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;zm&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">category</span><span class="p">()</span> <span class="k">else</span> <span class="kc">None</span>
         <span class="k">return</span> <span class="n">output</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__model</span>
 
     <span class="nd">@model</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="n">hf</span><span class="o">.</span><span class="n">assert_member</span><span class="p">(</span><span class="s1">&#39;frequency&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">category</span><span class="p">(),</span> <span class="n">logger</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">SITE_LINK</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__model</span> <span class="o">=</span> <span class="n">value</span>
 
-<div class="viewcode-block" id="Frequency.abp0g0"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.Frequency.abp0g0">[docs]</a>    <span class="k">def</span> <span class="nf">abp0g0</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fj</span><span class="p">):</span>
+<div class="viewcode-block" id="Frequency.abp0g0">
+<a class="viewcode-back" href="../../api.html#gemact.lossmodel.Frequency.abp0g0">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">abp0g0</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fj</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Parameters of the frequency distribution according to the (a, b, k) parametrization,</span>
 <span class="sd">        the probability generating function computed in zero given the discrete severity probs,</span>
@@ -872,9 +910,13 @@ document.write(`
 <span class="sd">        :rtype: ``tuple``</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">p0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">abk</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">p0</span><span class="p">,</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">pgf</span><span class="p">(</span><span class="n">fj</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span></div></div>
+        <span class="k">return</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">p0</span><span class="p">,</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">pgf</span><span class="p">(</span><span class="n">fj</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span></div>
+</div>
 
-<div class="viewcode-block" id="Severity"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.Severity">[docs]</a><span class="k">class</span> <span class="nc">Severity</span><span class="p">:</span>
+
+<div class="viewcode-block" id="Severity">
+<a class="viewcode-back" href="../../api.html#gemact.lossmodel.Severity">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Severity</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Severity component of the loss models underlying the collective risk model.</span>
 <span class="sd">    Severity model is always considered to start at (the relative) 0, i.e. the reporting threshold.</span>
@@ -885,27 +927,27 @@ document.write(`
 <span class="sd">    :type par: ``dict``</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">par</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">par</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dist</span> <span class="o">=</span> <span class="n">dist</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">par</span> <span class="o">=</span> <span class="n">par</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dist</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">par</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">loc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">par</span><span class="p">[</span><span class="s1">&#39;loc&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;loc&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">par</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">else</span> <span class="mf">.0</span>
         
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">dist</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dist</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dist</span>
 
     <span class="nd">@dist</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">dist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="n">hf</span><span class="o">.</span><span class="n">assert_member</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">DIST_DICT</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">SITE_LINK</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__dist</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">DIST_DICT</span><span class="p">[</span><span class="n">value</span><span class="p">])</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">par</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">par</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__par</span>
 
     <span class="nd">@par</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">par</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">par</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="n">hf</span><span class="o">.</span><span class="n">assert_type_value</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="s1">&#39;par&#39;</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">dist</span><span class="p">(</span><span class="o">**</span><span class="n">value</span><span class="p">)</span>
@@ -916,24 +958,26 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">__par</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">loc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">loc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__loc</span>
 
     <span class="nd">@loc</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">loc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">loc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="n">hf</span><span class="o">.</span><span class="n">assert_type_value</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="s1">&#39;loc&#39;</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__loc</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__model</span>
 
     <span class="nd">@model</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="n">hf</span><span class="o">.</span><span class="n">assert_member</span><span class="p">(</span><span class="s1">&#39;severity&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">category</span><span class="p">(),</span> <span class="n">logger</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">SITE_LINK</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__model</span> <span class="o">=</span> <span class="n">value</span>
     
-<div class="viewcode-block" id="Severity.excess_frequency"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.Severity.excess_frequency">[docs]</a>    <span class="k">def</span> <span class="nf">excess_frequency</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">base_frequency</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+<div class="viewcode-block" id="Severity.excess_frequency">
+<a class="viewcode-back" href="../../api.html#gemact.lossmodel.Severity.excess_frequency">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">excess_frequency</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">base_frequency</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Expected excess frequency function, i.e. expected frequency in excess of a given threshold.</span>
 
@@ -947,7 +991,10 @@ document.write(`
         <span class="n">hf</span><span class="o">.</span><span class="n">assert_type_value</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">),</span> <span class="n">lower_bound</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">lower_close</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">base_frequency</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Severity.return_period"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.Severity.return_period">[docs]</a>    <span class="k">def</span> <span class="nf">return_period</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">base_frequency</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Severity.return_period">
+<a class="viewcode-back" href="../../api.html#gemact.lossmodel.Severity.return_period">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">return_period</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">base_frequency</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Expected return period, given a base frequency.</span>
 
@@ -961,9 +1008,12 @@ document.write(`
         <span class="n">hf</span><span class="o">.</span><span class="n">assert_type_value</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">),</span> <span class="n">lower_bound</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">lower_close</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">1</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">excess_frequency</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">base_frequency</span><span class="p">)</span> </div>
 
-<div class="viewcode-block" id="Severity.censored_var"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.Severity.censored_var">[docs]</a>    <span class="k">def</span> <span class="nf">censored_var</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cover</span><span class="p">,</span> <span class="n">deductible</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Severity.censored_var">
+<a class="viewcode-back" href="../../api.html#gemact.lossmodel.Severity.censored_var">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">censored_var</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cover</span><span class="p">,</span> <span class="n">deductible</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Variance of the transformed severity min(max(x - u, 0), v).</span>
+<span class="sd">        Variance of the transformed severity min(max(x - d, 0), c).</span>
 <span class="sd">                </span>
 <span class="sd">        :param cover: cover, also referred to as limit. cover plus deductible is the upper priority or severity &#39;exit point&#39;.</span>
 <span class="sd">        :type cover: ``int``, ``float``</span>
@@ -972,11 +1022,12 @@ document.write(`
 <span class="sd">        :return: variance of the transformed severity.</span>
 <span class="sd">        :rtype: ``numpy.float``</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">censored_moment</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">u</span><span class="o">=</span><span class="n">deductible</span><span class="p">,</span> <span class="n">v</span><span class="o">=</span><span class="n">cover</span><span class="p">)</span> <span class="o">-</span> \
-                    <span class="bp">self</span><span class="o">.</span><span class="n">censored_mean</span><span class="p">(</span><span class="n">deductible</span><span class="o">=</span><span class="n">deductible</span><span class="p">,</span> <span class="n">cover</span><span class="o">=</span><span class="n">cover</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
-        <span class="k">return</span> <span class="n">output</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">censored_std</span><span class="p">(</span><span class="n">cover</span><span class="p">,</span> <span class="n">deductible</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span></div>
 
-<div class="viewcode-block" id="Severity.censored_std"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.Severity.censored_std">[docs]</a>    <span class="k">def</span> <span class="nf">censored_std</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cover</span><span class="p">,</span> <span class="n">deductible</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Severity.censored_std">
+<a class="viewcode-back" href="../../api.html#gemact.lossmodel.Severity.censored_std">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">censored_std</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cover</span><span class="p">,</span> <span class="n">deductible</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Standard deviation of the transformed severity min(max(x - u, 0), v).</span>
 <span class="sd">                </span>
@@ -987,9 +1038,12 @@ document.write(`
 <span class="sd">        :return: standard deviation of the transformed severity.</span>
 <span class="sd">        :rtype: ``numpy.float``</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">censored_var</span><span class="p">(</span><span class="n">deductible</span><span class="o">=</span><span class="n">deductible</span><span class="p">,</span> <span class="n">cover</span><span class="o">=</span><span class="n">cover</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">censored_coeff_variation</span><span class="p">(</span><span class="n">cover</span><span class="p">,</span> <span class="n">deductible</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">censored_mean</span><span class="p">(</span><span class="n">cover</span><span class="p">,</span> <span class="n">deductible</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Severity.censored_mean"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.Severity.censored_mean">[docs]</a>    <span class="k">def</span> <span class="nf">censored_mean</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cover</span><span class="p">,</span> <span class="n">deductible</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Severity.censored_mean">
+<a class="viewcode-back" href="../../api.html#gemact.lossmodel.Severity.censored_mean">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">censored_mean</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cover</span><span class="p">,</span> <span class="n">deductible</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Mean of the transformed severity min(max(x - u, 0), v).</span>
 <span class="sd">        Also referred to as the stop-loss transformation function.</span>
@@ -1001,9 +1055,12 @@ document.write(`
 <span class="sd">        :return: mean of the transformed severity.</span>
 <span class="sd">        :rtype: ``numpy.float``</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">censored_moment</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">u</span><span class="o">=</span><span class="n">deductible</span><span class="p">,</span> <span class="n">v</span><span class="o">=</span><span class="n">cover</span><span class="p">)</span></div>
-    
-<div class="viewcode-block" id="Severity.censored_skewness"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.Severity.censored_skewness">[docs]</a>    <span class="k">def</span> <span class="nf">censored_skewness</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cover</span><span class="p">,</span> <span class="n">deductible</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">censored_moment</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="n">deductible</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">cover</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Severity.censored_skewness">
+<a class="viewcode-back" href="../../api.html#gemact.lossmodel.Severity.censored_skewness">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">censored_skewness</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cover</span><span class="p">,</span> <span class="n">deductible</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Skewness of the transformed severity min(max(x - u, 0), v).</span>
 <span class="sd">                </span>
@@ -1014,13 +1071,16 @@ document.write(`
 <span class="sd">        :return: skewness of the transformed severity.</span>
 <span class="sd">        :rtype: ``numpy.float``</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">num1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">censored_moment</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">u</span><span class="o">=</span><span class="n">deductible</span><span class="p">,</span> <span class="n">v</span><span class="o">=</span><span class="n">cover</span><span class="p">)</span>
+        <span class="n">num1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">censored_moment</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="n">deductible</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">cover</span><span class="p">)</span>
         <span class="n">num2</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">censored_mean</span><span class="p">(</span><span class="n">deductible</span><span class="o">=</span><span class="n">deductible</span><span class="p">,</span> <span class="n">cover</span><span class="o">=</span><span class="n">cover</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">censored_var</span><span class="p">(</span><span class="n">deductible</span><span class="o">=</span><span class="n">deductible</span><span class="p">,</span> <span class="n">cover</span><span class="o">=</span><span class="n">cover</span><span class="p">)</span>
-        <span class="n">num3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">censored_mean</span><span class="p">(</span><span class="n">deductible</span><span class="o">=</span><span class="n">deductible</span><span class="p">,</span> <span class="n">cover</span><span class="o">=</span><span class="n">cover</span><span class="p">)</span> <span class="o">**</span> <span class="mi">3</span>
-        <span class="n">den</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">censored_std</span><span class="p">(</span><span class="n">deductible</span><span class="o">=</span><span class="n">deductible</span><span class="p">,</span> <span class="n">cover</span><span class="o">=</span><span class="n">cover</span><span class="p">)</span> <span class="o">**</span> <span class="mi">3</span>
+        <span class="n">num3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">censored_mean</span><span class="p">(</span><span class="n">deductible</span><span class="o">=</span><span class="n">deductible</span><span class="p">,</span> <span class="n">cover</span><span class="o">=</span><span class="n">cover</span><span class="p">)</span><span class="o">**</span><span class="mi">3</span>
+        <span class="n">den</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">censored_std</span><span class="p">(</span><span class="n">deductible</span><span class="o">=</span><span class="n">deductible</span><span class="p">,</span> <span class="n">cover</span><span class="o">=</span><span class="n">cover</span><span class="p">)</span><span class="o">**</span><span class="mi">3</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">num1</span> <span class="o">-</span> <span class="n">num2</span> <span class="o">-</span> <span class="n">num3</span><span class="p">)</span><span class="o">/</span><span class="n">den</span></div>
 
-<div class="viewcode-block" id="Severity.censored_coeff_variation"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.Severity.censored_coeff_variation">[docs]</a>    <span class="k">def</span> <span class="nf">censored_coeff_variation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cover</span><span class="p">,</span> <span class="n">deductible</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Severity.censored_coeff_variation">
+<a class="viewcode-back" href="../../api.html#gemact.lossmodel.Severity.censored_coeff_variation">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">censored_coeff_variation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cover</span><span class="p">,</span> <span class="n">deductible</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Coefficient of variation (CoV) of the transformed severity min(max(x - u, 0), v).</span>
 <span class="sd">                </span>
@@ -1031,9 +1091,14 @@ document.write(`
 <span class="sd">        :return: CoV of the transformed severity.</span>
 <span class="sd">        :rtype: ``numpy.float``</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">censored_std</span><span class="p">(</span><span class="n">deductible</span><span class="o">=</span><span class="n">deductible</span><span class="p">,</span> <span class="n">cover</span><span class="o">=</span><span class="n">cover</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">censored_mean</span><span class="p">(</span><span class="n">deductible</span><span class="o">=</span><span class="n">deductible</span><span class="p">,</span> <span class="n">cover</span><span class="o">=</span><span class="n">cover</span><span class="p">)</span></div>
+        <span class="n">num</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">censored_moment</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="n">deductible</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">cover</span><span class="p">)</span>
+        <span class="n">den</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">censored_moment</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="n">deductible</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">cover</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+        <span class="k">return</span>  <span class="p">(</span><span class="n">num</span><span class="o">/</span><span class="n">den</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span></div>
 
-<div class="viewcode-block" id="Severity.discretize"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.Severity.discretize">[docs]</a>    <span class="k">def</span> <span class="nf">discretize</span><span class="p">(</span>
+
+<div class="viewcode-block" id="Severity.discretize">
+<a class="viewcode-back" href="../../api.html#gemact.lossmodel.Severity.discretize">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">discretize</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">discr_method</span><span class="p">,</span>
         <span class="n">n_discr_nodes</span><span class="p">,</span>
@@ -1094,8 +1159,11 @@ document.write(`
                 <span class="n">discr_step</span><span class="p">,</span>
                 <span class="n">n_discr_nodes</span>
                 <span class="p">)</span></div>
+
     
-<div class="viewcode-block" id="Severity.plot_discr_sev_cdf"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.Severity.plot_discr_sev_cdf">[docs]</a>    <span class="k">def</span> <span class="nf">plot_discr_sev_cdf</span><span class="p">(</span>
+<div class="viewcode-block" id="Severity.plot_discr_sev_cdf">
+<a class="viewcode-back" href="../../api.html#gemact.lossmodel.Severity.plot_discr_sev_cdf">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">plot_discr_sev_cdf</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
             <span class="n">discr_method</span><span class="p">,</span>
             <span class="n">n_discr_nodes</span><span class="p">,</span>
@@ -1153,9 +1221,13 @@ document.write(`
         <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Discretized severity cumulative distribution function&#39;</span><span class="p">)</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;cdf&#39;</span><span class="p">)</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;nodes&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">ax</span></div></div>
+        <span class="k">return</span> <span class="n">ax</span></div>
+</div>
 
-<div class="viewcode-block" id="LossModel"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel">[docs]</a><span class="k">class</span> <span class="nc">LossModel</span><span class="p">:</span>
+
+<div class="viewcode-block" id="LossModel">
+<a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">LossModel</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Loss model for (re)insurance costing and risk modeling using a collective risk model framework.</span>
 
@@ -1191,7 +1263,7 @@ document.write(`
 <span class="sd">    :type sev_discr_step: ``float``</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">severity</span><span class="p">,</span>
         <span class="n">frequency</span><span class="p">,</span>
@@ -1233,134 +1305,136 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">costing</span><span class="p">()</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">severity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">severity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__severity</span>
 
     <span class="nd">@severity</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">severity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">severity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="n">hf</span><span class="o">.</span><span class="n">assert_type_value</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="s1">&#39;severity&#39;</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span> <span class="n">Severity</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__severity</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">frequency</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">frequency</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__frequency</span>
 
     <span class="nd">@frequency</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">frequency</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">frequency</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="n">hf</span><span class="o">.</span><span class="n">assert_type_value</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="s1">&#39;frequency&#39;</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span> <span class="n">Frequency</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__frequency</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">policystructure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">policystructure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__policystructure</span>
 
     <span class="nd">@policystructure</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">policystructure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">policystructure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="n">hf</span><span class="o">.</span><span class="n">assert_type_value</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="s1">&#39;policystructure&#39;</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span> <span class="n">PolicyStructure</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__policystructure</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">aggr_loss_dist_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">aggr_loss_dist_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__aggr_loss_dist_method</span>
 
     <span class="nd">@aggr_loss_dist_method</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">aggr_loss_dist_method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">aggr_loss_dist_method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">hf</span><span class="o">.</span><span class="n">assert_member</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">AGGREGATE_LOSS_APPROX_METHOD</span><span class="p">,</span> <span class="n">logger</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__aggr_loss_dist_method</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">n_sim</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">n_sim</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__n_sim</span>
 
     <span class="nd">@n_sim</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">n_sim</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">n_sim</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="n">hf</span><span class="o">.</span><span class="n">assert_type_value</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="s1">&#39;n_sim&#39;</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="n">lower_bound</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__n_sim</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">random_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">random_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__random_state</span>
 
     <span class="nd">@random_state</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">random_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">random_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__random_state</span> <span class="o">=</span> <span class="n">hf</span><span class="o">.</span><span class="n">handle_random_state</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">logger</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">qmc_sequence</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">qmc_sequence</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__qmc_sequence</span>
 
     <span class="nd">@qmc_sequence</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">qmc_sequence</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">qmc_sequence</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="n">hf</span><span class="o">.</span><span class="n">assert_member</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">QMC_SEQUENCE_METHOD</span><span class="p">,</span> <span class="n">logger</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__qmc_sequence</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">n_aggr_dist_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">n_aggr_dist_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__n_aggr_dist_nodes</span>
 
     <span class="nd">@n_aggr_dist_nodes</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">n_aggr_dist_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">n_aggr_dist_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="n">hf</span><span class="o">.</span><span class="n">assert_type_value</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="s1">&#39;n_aggr_dist_nodes&#39;</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="n">lower_bound</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__n_aggr_dist_nodes</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">tilt</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">tilt</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__tilt</span>
 
     <span class="nd">@tilt</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">tilt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">tilt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="n">hf</span><span class="o">.</span><span class="n">assert_type_value</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="s1">&#39;tilt&#39;</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__tilt</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">tilt_value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">tilt_value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__tilt_value</span>
 
     <span class="nd">@tilt_value</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">tilt_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">tilt_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="n">hf</span><span class="o">.</span><span class="n">assert_type_value</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="s1">&#39;tilt_value&#39;</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="n">lower_bound</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__tilt_value</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">sev_discr_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sev_discr_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__sev_discr_method</span>
 
     <span class="nd">@sev_discr_method</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">sev_discr_method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sev_discr_method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__sev_discr_method</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">n_sev_discr_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">n_sev_discr_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__n_sev_discr_nodes</span>
 
     <span class="nd">@n_sev_discr_nodes</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">n_sev_discr_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">n_sev_discr_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__n_sev_discr_nodes</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">sev_discr_step</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sev_discr_step</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__sev_discr_step</span>
 
     <span class="nd">@sev_discr_step</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">sev_discr_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sev_discr_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__sev_discr_step</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">dist</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dist</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dist</span>
     
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">pure_premium</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pure_premium</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pure_premium</span>
     
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">pure_premium_dist</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pure_premium_dist</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pure_premium_dist</span>
 
-<div class="viewcode-block" id="LossModel.dist_calculate"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.dist_calculate">[docs]</a>    <span class="k">def</span> <span class="nf">dist_calculate</span><span class="p">(</span>
+<div class="viewcode-block" id="LossModel.dist_calculate">
+<a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.dist_calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dist_calculate</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">aggr_loss_dist_method</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">n_aggr_dist_nodes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -1437,7 +1511,7 @@ document.write(`
         <span class="c1"># perform calculations.</span>
         <span class="c1"># if policystructure is a layer tower</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">policystructure</span><span class="o">.</span><span class="n">layers</span><span class="p">,</span> <span class="n">LayerTower</span><span class="p">):</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">aggr_loss_dist_method</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;mc&#39;</span><span class="p">,</span> <span class="s1">&#39;qmc&#39;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">aggr_loss_dist_method</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;mc&#39;</span><span class="p">,</span> <span class="s1">&#39;qmc&#39;</span><span class="p">):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">aggr_loss_dist_method</span> <span class="o">=</span> <span class="s1">&#39;mc&#39;</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Approximating aggregate loss distributions of Layer Tower.&#39;</span><span class="p">)</span>
             <span class="n">aggr_dist_list_excl_aggr_cond</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">policystructure</span><span class="o">.</span><span class="n">length</span>
@@ -1564,7 +1638,8 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">__dist</span> <span class="o">=</span> <span class="n">aggr_dist_list_incl_aggr_cond</span>
         <span class="k">return</span></div>
 
-    <span class="k">def</span> <span class="nf">_check_and_set_calculation_parameters</span><span class="p">(</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_check_and_set_calculation_parameters</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">aggr_loss_dist_method</span><span class="p">,</span>
         <span class="n">n_aggr_dist_nodes</span><span class="p">,</span>
@@ -1686,7 +1761,7 @@ document.write(`
                 <span class="p">)</span>
         <span class="k">return</span>
 
-    <span class="k">def</span> <span class="nf">_apply_aggr_conditions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">cover</span><span class="p">,</span> <span class="n">deductible</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_apply_aggr_conditions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">cover</span><span class="p">,</span> <span class="n">deductible</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Apply aggregate conditions, i.e. aggregate deductble and aggregate cover, to a aggregate loss distribution.</span>
 
@@ -1718,7 +1793,9 @@ document.write(`
         
         <span class="k">return</span> <span class="n">output</span>
 
-<div class="viewcode-block" id="LossModel.moment"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.moment">[docs]</a>    <span class="k">def</span> <span class="nf">moment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">central</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<div class="viewcode-block" id="LossModel.moment">
+<a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.moment">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">moment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">central</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Approximated aggregate loss distribution moment of order n.</span>
 <span class="sd">        It is based on ``dist`` property.</span>
@@ -1743,7 +1820,10 @@ document.write(`
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dist</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">moment</span><span class="p">(</span><span class="n">central</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="LossModel.ppf"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.ppf">[docs]</a>    <span class="k">def</span> <span class="nf">ppf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+
+<div class="viewcode-block" id="LossModel.ppf">
+<a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.ppf">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ppf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Aggregate loss distribution percent point function, a.k.a. the quantile function,</span>
 <span class="sd">        inverse of the cumulative distribution function.</span>
@@ -1766,7 +1846,10 @@ document.write(`
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dist</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">q</span><span class="p">)</span> </div>
 
-<div class="viewcode-block" id="LossModel.cdf"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.cdf">[docs]</a>    <span class="k">def</span> <span class="nf">cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+
+<div class="viewcode-block" id="LossModel.cdf">
+<a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.cdf">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Aggregate loss distribution cumulative distribution function.</span>
 
@@ -1788,7 +1871,10 @@ document.write(`
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dist</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="LossModel.sf"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.sf">[docs]</a>    <span class="k">def</span> <span class="nf">sf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+
+<div class="viewcode-block" id="LossModel.sf">
+<a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.sf">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Aggregate loss distribution survival function.</span>
 
@@ -1810,7 +1896,10 @@ document.write(`
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dist</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="LossModel.rvs"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.rvs">[docs]</a>    <span class="k">def</span> <span class="nf">rvs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+
+<div class="viewcode-block" id="LossModel.rvs">
+<a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.rvs">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">rvs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Random variates generator function.</span>
 
@@ -1835,7 +1924,10 @@ document.write(`
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dist</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">random_state</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="LossModel.mean"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.mean">[docs]</a>    <span class="k">def</span> <span class="nf">mean</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">use_dist</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+
+<div class="viewcode-block" id="LossModel.mean">
+<a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.mean">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">mean</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">use_dist</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Mean of the aggregate loss.</span>
 
@@ -1878,7 +1970,10 @@ document.write(`
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">frequency</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">*</span> <span class="n">factor</span> <span class="o">*</span> <span class="n">share</span> <span class="o">*</span> \
                 <span class="bp">self</span><span class="o">.</span><span class="n">severity</span><span class="o">.</span><span class="n">censored_mean</span><span class="p">(</span><span class="n">deductible</span><span class="o">=</span><span class="n">ded</span><span class="p">,</span> <span class="n">cover</span><span class="o">=</span><span class="n">cover</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="LossModel.var"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.var">[docs]</a>    <span class="k">def</span> <span class="nf">var</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">use_dist</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+
+<div class="viewcode-block" id="LossModel.var">
+<a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.var">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">use_dist</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Variance of the aggregate loss.</span>
 
@@ -1931,7 +2026,10 @@ document.write(`
 
             <span class="k">return</span> <span class="n">share</span> <span class="o">*</span> <span class="p">(</span><span class="n">output1</span> <span class="o">+</span> <span class="n">output2</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="LossModel.std"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.std">[docs]</a>    <span class="k">def</span> <span class="nf">std</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">use_dist</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+
+<div class="viewcode-block" id="LossModel.std">
+<a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.std">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">std</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">use_dist</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Standard deviation of the aggregate loss.</span>
 
@@ -1947,7 +2045,10 @@ document.write(`
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">use_dist</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="LossModel.skewness"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.skewness">[docs]</a>    <span class="k">def</span> <span class="nf">skewness</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">use_dist</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+
+<div class="viewcode-block" id="LossModel.skewness">
+<a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.skewness">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">skewness</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">use_dist</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Skewness of the aggregate loss.</span>
 
@@ -1996,8 +2097,8 @@ document.write(`
             <span class="k">if</span> <span class="n">factor</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="n">freq</span><span class="o">.</span><span class="n">par_deductible_reverter</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">factor</span><span class="p">)</span>
 
-            <span class="n">den1</span> <span class="o">=</span> <span class="n">freq</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">*</span> <span class="n">sev</span><span class="o">.</span><span class="n">censored_var</span><span class="p">(</span><span class="n">deductible</span><span class="o">=</span><span class="n">ded</span><span class="p">,</span> <span class="n">cover</span><span class="o">=</span><span class="n">cover</span><span class="p">)</span>
-            <span class="n">den2</span> <span class="o">=</span> <span class="n">freq</span><span class="o">.</span><span class="n">var</span><span class="p">()</span> <span class="o">*</span> <span class="n">sev</span><span class="o">.</span><span class="n">censored_mean</span><span class="p">(</span><span class="n">deductible</span><span class="o">=</span><span class="n">ded</span><span class="p">,</span> <span class="n">cover</span><span class="o">=</span><span class="n">cover</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+            <span class="n">den1</span> <span class="o">=</span> <span class="n">freq</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">*</span> <span class="n">sev_var</span>
+            <span class="n">den2</span> <span class="o">=</span> <span class="n">freq</span><span class="o">.</span><span class="n">var</span><span class="p">()</span> <span class="o">*</span> <span class="n">sev_mean</span><span class="o">**</span><span class="mi">2</span>
 
             <span class="n">num1</span> <span class="o">=</span> <span class="n">freq</span><span class="o">.</span><span class="n">skewness</span><span class="p">()</span> <span class="o">*</span> <span class="n">freq</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="o">**</span><span class="mi">3</span> <span class="o">*</span> <span class="n">sev_mean</span><span class="o">**</span><span class="mi">3</span>
             <span class="n">num2</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">freq</span><span class="o">.</span><span class="n">var</span><span class="p">()</span> <span class="o">*</span> <span class="n">sev_mean</span> <span class="o">*</span> <span class="n">sev_var</span>
@@ -2009,7 +2110,10 @@ document.write(`
 
             <span class="k">return</span> <span class="p">(</span><span class="n">num1</span> <span class="o">+</span> <span class="n">num2</span> <span class="o">+</span> <span class="n">num3</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">den1</span> <span class="o">+</span> <span class="n">den2</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">3</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="LossModel.coeff_variation"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.coeff_variation">[docs]</a>    <span class="k">def</span> <span class="nf">coeff_variation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">use_dist</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+
+<div class="viewcode-block" id="LossModel.coeff_variation">
+<a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.coeff_variation">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">coeff_variation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">use_dist</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Coefficient of variation (CoV) of the aggregate loss.</span>
 
@@ -2063,7 +2167,8 @@ document.write(`
 
             <span class="k">return</span> <span class="n">std</span> <span class="o">/</span> <span class="n">mean</span></div>
 
-    <span class="k">def</span> <span class="nf">_reinstatements_costing_adjuster</span><span class="p">(</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_reinstatements_costing_adjuster</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">premium</span><span class="p">,</span>
         <span class="n">dist</span><span class="p">,</span>
@@ -2105,7 +2210,7 @@ document.write(`
                 <span class="n">output</span> <span class="o">=</span> <span class="n">premium</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">reinst_percentage</span> <span class="o">/</span> <span class="n">cover</span> <span class="o">*</span> <span class="n">premium</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">output</span>
 
-    <span class="k">def</span> <span class="nf">_stop_loss_costing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">cover</span><span class="p">,</span> <span class="n">deductible</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_stop_loss_costing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">cover</span><span class="p">,</span> <span class="n">deductible</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Stop loss costing via stop loss transformation.</span>
 <span class="sd">        Compute the expected value of layer transformed aggregate loss distribution.</span>
@@ -2121,7 +2226,9 @@ document.write(`
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">lev</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="n">deductible</span><span class="o">+</span><span class="n">cover</span><span class="p">)</span> <span class="o">-</span> <span class="n">dist</span><span class="o">.</span><span class="n">lev</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="n">deductible</span><span class="p">))</span>
 
-<div class="viewcode-block" id="LossModel.costing"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.costing">[docs]</a>    <span class="k">def</span> <span class="nf">costing</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="LossModel.costing">
+<a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.costing">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">costing</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Actuarial costing (also referred to as risk costing) of (re)insurance covers,</span>
 <span class="sd">        such as quota share, excess-of-loss (including reinstatements or aggregate conditions) and stop loss.</span>
@@ -2187,7 +2294,10 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">__pure_premium</span> <span class="o">=</span> <span class="n">pure_premiums</span> 
         <span class="k">return</span>  </div>
 
-<div class="viewcode-block" id="LossModel.print_costing_specs"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.print_costing_specs">[docs]</a>    <span class="k">def</span> <span class="nf">print_costing_specs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+
+<div class="viewcode-block" id="LossModel.print_costing_specs">
+<a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.print_costing_specs">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">print_costing_specs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Print costing information of a given layer (specified via its index).</span>
 <span class="sd">        </span>
@@ -2245,7 +2355,10 @@ document.write(`
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{: &gt;10}</span><span class="s1"> </span><span class="si">{: &gt;55}</span><span class="s1"> </span><span class="si">{: &gt;15}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="o">*</span><span class="n">row</span><span class="p">))</span>
         <span class="k">return</span></div>
 
-<div class="viewcode-block" id="LossModel.print_aggr_loss_method_specs"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.print_aggr_loss_method_specs">[docs]</a>    <span class="k">def</span> <span class="nf">print_aggr_loss_method_specs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+
+<div class="viewcode-block" id="LossModel.print_aggr_loss_method_specs">
+<a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.print_aggr_loss_method_specs">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">print_aggr_loss_method_specs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Print information of the aggregate loss distribution approximation for a given layer (specified via its index).</span>
 
@@ -2300,7 +2413,10 @@ document.write(`
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{: &gt;10}</span><span class="s1"> </span><span class="si">{: &gt;35}</span><span class="s1"> </span><span class="si">{: &gt;15}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="o">*</span><span class="n">row</span><span class="p">))</span>
         <span class="k">return</span></div>
 
-<div class="viewcode-block" id="LossModel.print_policy_layer_specs"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.print_policy_layer_specs">[docs]</a>    <span class="k">def</span> <span class="nf">print_policy_layer_specs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+
+<div class="viewcode-block" id="LossModel.print_policy_layer_specs">
+<a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.print_policy_layer_specs">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">print_policy_layer_specs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Print policy structure information of a given layer (specified via its index).</span>
 
@@ -2339,7 +2455,8 @@ document.write(`
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{: &gt;10}</span><span class="s1"> </span><span class="si">{: &gt;30}</span><span class="s1"> </span><span class="si">{: &gt;15}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="o">*</span><span class="n">row</span><span class="p">))</span>
         <span class="k">return</span></div>
 
-    <span class="k">def</span> <span class="nf">_check_missing_dist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_check_missing_dist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Check that the aggregate loss distribution is missing.</span>
 <span class="sd">        Helper method called before executing other methods based on ``dist`` property.</span>
@@ -2358,7 +2475,9 @@ document.write(`
             <span class="p">)</span>
         <span class="k">return</span> <span class="n">output</span>
 
-<div class="viewcode-block" id="LossModel.plot_dist_cdf"><a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.plot_dist_cdf">[docs]</a>    <span class="k">def</span> <span class="nf">plot_dist_cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">log_x_scale</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">log_y_scale</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="LossModel.plot_dist_cdf">
+<a class="viewcode-back" href="../../api.html#gemact.lossmodel.LossModel.plot_dist_cdf">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">plot_dist_cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">log_x_scale</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">log_y_scale</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Plot the cumulative distribution function of the aggregate loss distribution.</span>
 
@@ -2402,7 +2521,9 @@ document.write(`
         <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Aggregate loss cumulative distribution function&#39;</span><span class="p">)</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;cdf&#39;</span><span class="p">)</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;nodes&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">ax</span></div></div>
+        <span class="k">return</span> <span class="n">ax</span></div>
+</div>
+
 </pre></div>
 
                 </article>
@@ -2412,8 +2533,8 @@ document.write(`
               
               
               
-                <footer class="prev-next-footer">
-                  <!-- Previous / next buttons -->
+                <footer class="prev-next-footer d-print-none">
+                  
 <div class="prev-next-area">
 </div>
                 </footer>
@@ -2438,6 +2559,7 @@ By Gabriele Pittarello, Edoardo Luini, Manfred Marvin Marchione
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
       © Copyright 2022, Gabriele Pittarello, Edoardo Luini, Manfred Marvin Marchione.
@@ -2464,8 +2586,8 @@ By Gabriele Pittarello, Edoardo Luini, Manfred Marvin Marchione
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
-<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>

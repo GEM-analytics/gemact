@@ -95,15 +95,15 @@ The table below lists the multivariate distributions currently provided by GEMAc
 | Distribution                                     | GEMAct name               |   Support               | SciPy(Y/N)                  |
 |                                                  |                           |                         |                             |
 +==================================================+===========================+=========================+=============================+
-| Multinomial                                      | `Multinomial`             |  multivariate discrete  |:math:`\textcolor{green}{Y}` |
+| Multinomial                                      | `multinomial`             |  multivariate discrete  |:math:`\textcolor{green}{Y}` |
 +--------------------------------------------------+---------------------------+-------------------------+-----------------------------+
-| Dirichlet Multinomial                            | `Dirichlet_multinomial`   |  multivariate discrete  |:math:`\textcolor{green}{Y}` |
+| Dirichlet Multinomial                            | `dirichlet multinomial`   |  multivariate discrete  |:math:`\textcolor{green}{Y}` |
 +--------------------------------------------------+---------------------------+-------------------------+-----------------------------+
-| Negative Multinomial                             | `NegMultinom`             |  multivariate discrete  |:math:`\textcolor{red}{N}`   |
+| Negative Multinomial                             | `negative multinomial`    |  multivariate discrete  |:math:`\textcolor{red}{N}`   |
 +--------------------------------------------------+---------------------------+-------------------------+-----------------------------+
-| Multivariate Binomial                            | `MultivariateBinomial`    |  multivariate discrete  |:math:`\textcolor{red}{N}`   |
+| Multivariate Binomial                            | `multivariate binomial`   |  multivariate discrete  |:math:`\textcolor{red}{N}`   |
 +--------------------------------------------------+---------------------------+-------------------------+-----------------------------+
-| Multivariate Poisson                             | `MultivariatePoisson`     |  multivariate discrete  |:math:`\textcolor{red}{N}`   |
+| Multivariate Poisson                             | `multivariate poisson`    |  multivariate discrete  |:math:`\textcolor{red}{N}`   |
 +--------------------------------------------------+---------------------------+-------------------------+-----------------------------+
 
 Copulas

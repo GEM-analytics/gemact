@@ -1,174 +1,207 @@
 API reference guide
-========================
+===================
+
+This page documents the GEMAct API exposed by the main modelling modules.
+The class entries below intentionally avoid properties and private implementation classes so that the rendered API focuses on constructors, parameters, and documented methods.
 
 ``LossModel``
----------------
-
-.. automodule:: gemact.lossmodel
-    :members:
-
+-------------
 
 Risk costing
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~
 
 GEMAct costing model is based on the collective risk theory. The aggregate loss :math:`X`, also referred to as aggregate claim cost, is
 
-.. math:: X=\sum_{i=1}^{N} Z_i,
+.. math::
    :label: crm
+
+   X = \sum_{i=1}^{N} Z_i,
 
 where the following assumptions hold:
 
 * :math:`N` is a random variable taking values in :math:`\mathbb{N}_0` representing the claim frequency.
 
-* :math:`\left\{ Z_i\right\}_{i \in \mathbb{N}}` is a sequence of i.i.d non-negative random variables independent of :math:`N`; :math:`Z` is the random variable representing the individual (claim) loss.
+* :math:`\left\{ Z_i\right\}_{i \in \mathbb{N}}` is a sequence of i.i.d. non-negative random variables independent of :math:`N`; :math:`Z` is the random variable representing the individual claim loss.
 
 Equation :eq:`crm` is often referred to as the frequency-severity loss model representation.
 This can encompass common coverage modifiers present in (re)insurance contracts. More specifically, we consider:
 
-    * For :math:`a \in [0, 1]`, the function :math:`Q_a` apportioning  the aggregate loss amount: 
-    .. math:: Q_a (X)= a X.
-    
-    * For :math:`c,d \geq 0`, the function :math:`L_{c, d}` applied to the individual claim loss:
-    .. math:: L_{c, d} (Z_i) = \min \left\{\max \left\{0, Z_i-d\right\}, c\right\}. %, \qquad c,d \geq 0.
-      :label: minmax
-    Herein, for each and every loss, the excess to a deductible :math:`d` (sometimes referred to as priority)
-    is considered up to a cover or limit :math:`c`.
-    Similarly to the individual loss :math:`Z_i`, Formula :eq:`minmax` can be applied to the aggregate loss :math:`X`.
+* For :math:`a \in [0, 1]`, the function :math:`Q_a` apportioning the aggregate loss amount:
+
+  .. math::
+
+     Q_a (X)= a X.
+
+* For :math:`c,d \geq 0`, the function :math:`L_{c, d}` applied to the individual claim loss:
+
+  .. math::
+     :label: minmax
+
+     L_{c, d} (Z_i) = \min \left\{\max \left\{0, Z_i-d\right\}, c\right\}.
+
+  Herein, for each and every loss, the excess to a deductible :math:`d`, sometimes referred to as priority,
+  is considered up to a cover or limit :math:`c`.
+  Similarly to the individual loss :math:`Z_i`, Formula :eq:`minmax` can be applied to the aggregate loss :math:`X`.
 
 The expected value of the aggregate loss constitutes the building block of an insurance tariff.
 Listed below are some examples of basic reinsurance contracts whose pure premium can be computed with GEMAct.
 
-    * The Quota Share (QS), where a share :math:`a` of the aggregate loss ceded to the reinsurance (along with the respective premium) and the remaining part is retained:
-    .. math:: \text{P}^{QS} = \mathbb{E}\left[ Q_a \left( X \right)\right].
-    * The Excess-of-loss (XL), where the insurer cedes to the reinsurer each and every loss exceeding a deductible :math:`d`, up to an agreed limit or cover :math:`c`, with :math:`c,d \geq 0`: 
-    .. math:: \text{P}^{XL} =  \mathbb{E}\left[ \sum_{i=1}^{N} L_{c,d} (Z_i) \right].
-    * The Stop Loss (SL), where the reinsurer covers the aggregate loss exceedance of a (aggregate) deductible :math:`v`, up to a (aggregate) limit or cover :math:`u`, with :math:`u,v \geq 0`:
-    .. math:: \text{P}^{SL} = \mathbb{E}\left[ L_{u, v} (X) \right].
-    * The Excess-of-loss with reinstatements (RS) (:cite:t:`sundt`). Assuming the aggregate cover :math:`u` is equal to :math:`(K + 1) c `, with :math:`K \in \mathbb{Z}^+`:
-    .. math:: \text{P}^{RS} =  \frac{\mathbb{E}\left[ L_{u, v} (X) \right]}{1+\frac{1}{c} \sum_{k=1}^K l_k \mathbb{E}\left[ L_{c, (k-1)c+v}(X) \right]}.
-       :label: rs
-    Where :math:`K` is the number of reinstatement layers and :math:`l_k \in [0, 1]` is the reinstatement premium percentage, with :math:`k=1, \ldots, K`.
-    When :math:`l_k = 0`, the :math:`k`-th resinstatement is said to be free.
+* The Quota Share (QS), where a share :math:`a` of the aggregate loss is ceded to the reinsurer together with the respective premium, and the remaining part is retained:
 
-The following table gives the correspondence between the ``LossModel`` class attributes and our costing model as presented below.
+  .. math::
+
+     \text{P}^{QS} = \mathbb{E}\left[ Q_a \left( X \right)\right].
+
+* The Excess-of-loss (XL), where the insurer cedes to the reinsurer each and every loss exceeding a deductible :math:`d`, up to an agreed limit or cover :math:`c`, with :math:`c,d \geq 0`:
+
+  .. math::
+
+     \text{P}^{XL} =  \mathbb{E}\left[ \sum_{i=1}^{N} L_{c,d} (Z_i) \right].
+
+* The Stop Loss (SL), where the reinsurer covers the aggregate loss exceedance of an aggregate deductible :math:`v`, up to an aggregate limit or cover :math:`u`, with :math:`u,v \geq 0`:
+
+  .. math::
+
+     \text{P}^{SL} = \mathbb{E}\left[ L_{u, v} (X) \right].
+
+* The Excess-of-loss with reinstatements (RS) (:cite:t:`sundt`). Assuming the aggregate cover :math:`u` is equal to :math:`(K + 1)c`, with :math:`K \in \mathbb{Z}^+`:
+
+  .. math::
+     :label: rs
+
+     \text{P}^{RS} =  \frac{\mathbb{E}\left[ L_{u, v} (X) \right]}{1+\frac{1}{c} \sum_{k=1}^K l_k \mathbb{E}\left[ L_{c, (k-1)c+v}(X) \right]}.
+
+  Where :math:`K` is the number of reinstatement layers and :math:`l_k \in [0, 1]` is the reinstatement premium percentage, with :math:`k=1, \ldots, K`.
+  When :math:`l_k = 0`, the :math:`k`-th reinstatement is said to be free.
+
+The following table gives the correspondence between the ``LossModel`` class attributes and the costing model above.
 
 +------------------------+-----------------------------------------+
 | Costing model notation | Parametrization in ``LossModel``        |
-|                        |                                         |
 +========================+=========================================+
-|:math:`d`               |      deductible                         |
+| :math:`d`              | ``deductible``                          |
 +------------------------+-----------------------------------------+
-| :math:`c`              |  cover                                  |
+| :math:`c`              | ``cover``                               |
 +------------------------+-----------------------------------------+
-| :math:`v`              | aggr_deductible                         |
+| :math:`v`              | ``aggr_deductible``                     |
 +------------------------+-----------------------------------------+
-|:math:`u`               |      aggr_cover                         |
+| :math:`u`              | ``aggr_cover``                          |
 +------------------------+-----------------------------------------+
-| :math:`K`              |       n_reinst                          |
+| :math:`K`              | ``n_reinst``                            |
 +------------------------+-----------------------------------------+
-|:math:`c_{k}`           |      reinst_percentage                  |
+| :math:`l_k`            | ``reinst_percentage``                   |
 +------------------------+-----------------------------------------+
-| :math:`\alpha`         | share                                   |
+| :math:`\alpha`         | ``share``                               |
 +------------------------+-----------------------------------------+
 
 For additional information the reader can refer to :cite:t:`b:kp`, :cite:t:`sundt`.
-Further details on the computational methods to approximate the aggregate loss distribution can be found in 
-:cite:t:`b:kp`, and :cite:t:`embrechts`.
+Further details on the computational methods to approximate the aggregate loss distribution can be found in :cite:t:`b:kp` and :cite:t:`embrechts`.
 
 Example
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^
 
 Below is an example of costing an XL contract with reinstatements::
 
-   from gemact.lossmodel import Frequency, Severity, PolicyStructure, LossModel
-   lossmodel_RS = LossModel(
-    frequency=Frequency(
-        dist='poisson',
-        par={'mu': 1.5}
-    ),
-    severity=Severity(
-        par= {'loc': 0,
-              'scale': 83.34,
-              'c': 0.834},
-        dist='genpareto'
-    ),
-    policystructure=PolicyStructure(
-        layers=Layer(
-            cover=100,
-            deductible=0,
-            aggr_deductible=100,
-            reinst_share=0.5,
-            n_reinst=2
-        )
-    ),
-    aggr_loss_dist_method='fft',
-    sev_discr_method='massdispersal',
-    n_aggr_dist_nodes=int(100000)
-    )
-    lossmodel_RS.print_costing_specs()
+   from gemact.lossmodel import Frequency, Severity, PolicyStructure, Layer, LossModel
 
+   lossmodel_RS = LossModel(
+       frequency=Frequency(
+           dist='poisson',
+           par={'mu': 1.5}
+       ),
+       severity=Severity(
+           par={'loc': 0, 'scale': 83.34, 'c': 0.834},
+           dist='genpareto'
+       ),
+       policystructure=PolicyStructure(
+           layers=Layer(
+               cover=100,
+               deductible=0,
+               aggr_deductible=100,
+               reinst_percentage=0.5,
+               n_reinst=2
+           )
+       ),
+       aggr_loss_dist_method='fft',
+       sev_discr_method='massdispersal',
+       n_aggr_dist_nodes=int(100000)
+   )
+   lossmodel_RS.print_costing_specs()
 
 Severity discretization
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
 
 When passing from a continuous distribution to an arithmetic distribution, it is important to preserve the distribution properties, either locally or globally.
-Given a bandiwith (or discretization step) :math:`h` and a number of nodes :math:`M`, in :cite:t:`b:kp` the method of mass dispersal and the method of local moments matching work as follows.
+Given a bandwidth, or discretization step, :math:`h` and a number of nodes :math:`M`, in :cite:t:`b:kp` the method of mass dispersal and the method of local moments matching work as follows.
 
 **Method of mass dispersal**
 
-.. math:: f_{0}=\operatorname{Pr}\left(Y<\frac{h}{2}\right)=F_{Y}\left(\frac{h}{2}-0\right)
+.. math::
    :label: md1
 
-.. math:: f_{j}=F_{Y}\left(j h+\frac{h}{2}-0\right)-F_{Y}\left(j h-\frac{h}{2}-0\right), \quad j=1,2, \ldots, M-1
+   f_{0}=\operatorname{Pr}\left(Y<\frac{h}{2}\right)=F_{Y}\left(\frac{h}{2}-0\right)
+
+.. math::
    :label: md2
 
+   f_{j}=F_{Y}\left(j h+\frac{h}{2}-0\right)-F_{Y}\left(j h-\frac{h}{2}-0\right), \quad j=1,2, \ldots, M-1
 
-.. math:: f_{M}=1-F_{X}[(M-0.5) h-0]
+.. math::
    :label: md3
+
+   f_{M}=1-F_{X}[(M-0.5) h-0]
 
 **Method of local moments matching**
 
 The following approach is applied to preserve the global mean of the distribution.
 
-.. math:: f_0 = m^0_0
+.. math::
    :label: lm1
 
-.. math:: f_j = m^{j}_0+ m^{j-1}_1 , \quad j=0,1, \ldots, M
+   f_0 = m^0_0
+
+.. math::
    :label: lm2
 
-.. math:: \sum_{j=0}^{1}\left(x_{k}+j h\right)^{r} m_{j}^{k}=\int_{x_{k}-0}^{x_{k}+ h-0} x^{r} d F_{X}(x), \quad r=0,1
+   f_j = m^{j}_0+ m^{j-1}_1, \quad j=0,1, \ldots, M
+
+.. math::
    :label: lm3
 
-.. math:: m_{j}^{k}=\int_{x_{k}-0}^{x_{k}+p h-0} \prod_{i \neq j} \frac{x-x_{k}-i h}{(j-i) h} d F_{X}(x), \quad j=0,1
+   \sum_{j=0}^{1}\left(x_{k}+j h\right)^{r} m_{j}^{k}=\int_{x_{k}-0}^{x_{k}+ h-0} x^{r} d F_{X}(x), \quad r=0,1
+
+.. math::
    :label: lm4
 
-In addition to these two methods, our package also provides the methods of upper and lower discretizations.
+   m_{j}^{k}=\int_{x_{k}-0}^{x_{k}+p h-0} \prod_{i \neq j} \frac{x-x_{k}-i h}{(j-i) h} d F_{X}(x), \quad j=0,1
+
+In addition to these two methods, GEMAct also provides upper and lower discretizations.
 
 Example
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^
 
 An example of code to implement severity discretization is given below::
 
     from gemact.lossmodel import Severity
     import numpy as np
 
-    severity=Severity(
-        par= {'loc': 0, 'scale': 83.34, 'c': 0.834},
+    severity = Severity(
+        par={'loc': 0, 'scale': 83.34, 'c': 0.834},
         dist='genpareto'
     )
 
     massdispersal = severity.discretize(
-    discr_method='massdispersal',
-    n_discr_nodes=50000,
-    discr_step=.01,
-    deductible=0
+        discr_method='massdispersal',
+        n_discr_nodes=50000,
+        discr_step=.01,
+        deductible=0
     )
 
     localmoments = severity.discretize(
-    discr_method='localmoments',
-    n_discr_nodes=50000,
-    discr_step=.01,
-    deductible=0
+        discr_method='localmoments',
+        n_discr_nodes=50000,
+        discr_step=.01,
+        deductible=0
     )
 
     meanMD = np.sum(massdispersal['sev_nodes'] * massdispersal['fj'])
@@ -178,2103 +211,1333 @@ An example of code to implement severity discretization is given below::
     print('Mean (mass dispersal): ', meanMD)
     print('Mean (local moments): ', meanLM)
 
+Classes
+~~~~~~~~~~~~~~
+
+``PolicyStructure``
+^^^^^^^^^^^^^^^^^^^
+
+.. autoclass:: gemact.lossmodel.PolicyStructure
+   :no-members:
+
+.. automethod:: gemact.lossmodel.PolicyStructure.index_to_layer_name
+
+.. automethod:: gemact.lossmodel.PolicyStructure.layer_name_to_index
+
+``Layer``
+^^^^^^^^^
+
+.. autoclass:: gemact.lossmodel.Layer
+   :no-members:
+
+.. automethod:: gemact.lossmodel.Layer.specs
+
+``LayerTower``
+^^^^^^^^^^^^^^
+
+.. autoclass:: gemact.lossmodel.LayerTower
+   :no-members:
+
+.. automethod:: gemact.lossmodel.LayerTower.append
+
+.. automethod:: gemact.lossmodel.LayerTower.insert
+
+.. automethod:: gemact.lossmodel.LayerTower.extend
+
+.. automethod:: gemact.lossmodel.LayerTower.sort
+
+``Frequency``
+^^^^^^^^^^^^^
+
+.. autoclass:: gemact.lossmodel.Frequency
+   :no-members:
+
+.. automethod:: gemact.lossmodel.Frequency.abp0g0
+
+``Severity``
+^^^^^^^^^^^^
+
+.. autoclass:: gemact.lossmodel.Severity
+   :no-members:
+
+.. automethod:: gemact.lossmodel.Severity.excess_frequency
+
+.. automethod:: gemact.lossmodel.Severity.return_period
+
+.. automethod:: gemact.lossmodel.Severity.censored_var
+
+.. automethod:: gemact.lossmodel.Severity.censored_std
+
+.. automethod:: gemact.lossmodel.Severity.censored_mean
+
+.. automethod:: gemact.lossmodel.Severity.censored_skewness
+
+.. automethod:: gemact.lossmodel.Severity.censored_coeff_variation
+
+.. automethod:: gemact.lossmodel.Severity.discretize
+
+.. automethod:: gemact.lossmodel.Severity.plot_discr_sev_cdf
+
+``LossModel``
+^^^^^^^^^^^^^
+
+.. autoclass:: gemact.lossmodel.LossModel
+   :no-members:
+
+.. automethod:: gemact.lossmodel.LossModel.dist_calculate
+
+.. automethod:: gemact.lossmodel.LossModel.moment
+
+.. automethod:: gemact.lossmodel.LossModel.ppf
+
+.. automethod:: gemact.lossmodel.LossModel.cdf
+
+.. automethod:: gemact.lossmodel.LossModel.sf
+
+.. automethod:: gemact.lossmodel.LossModel.rvs
+
+.. automethod:: gemact.lossmodel.LossModel.mean
+
+.. automethod:: gemact.lossmodel.LossModel.var
+
+.. automethod:: gemact.lossmodel.LossModel.std
+
+.. automethod:: gemact.lossmodel.LossModel.skewness
+
+.. automethod:: gemact.lossmodel.LossModel.coeff_variation
+
+.. automethod:: gemact.lossmodel.LossModel.costing
+
+.. automethod:: gemact.lossmodel.LossModel.print_costing_specs
+
+.. automethod:: gemact.lossmodel.LossModel.print_aggr_loss_method_specs
+
+.. automethod:: gemact.lossmodel.LossModel.print_policy_layer_specs
+
+.. automethod:: gemact.lossmodel.LossModel.plot_dist_cdf
+
+
 ``LossReserve``
-------------------
-
-.. automodule::  gemact.lossreserve
-   :members:
-
+---------------
 
 Claims reserving
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~
 
 GEMAct provides a software implementation of average cost methods for claims reserving based on the collective risk model framework.
-
-The methods implemented are the Fisher-Lange in :cite:t:`fisher99` the collective risk model for claims reserving in :cite:t:`ricotta16`.
+The methods implemented are the Fisher-Lange method in :cite:t:`fisher99` and the collective risk model for claims reserving in :cite:t:`ricotta16`.
 
 It allows for tail estimates and assumes the triangular inputs to be provided as a ``numpy.ndarray`` with two equal dimensions ``(I,J)``, where ``I=J``.
-
 The aim of average cost methods is to model incremental payments as in equation :eq:`acmethods`.
 
-.. math:: P_{i,j}=n_{i,j} \cdot m_{i,j}
+.. math::
    :label: acmethods
+
+   P_{i,j}=n_{i,j} \cdot m_{i,j}
 
 where :math:`n_{i,j}` is the number of payments in the cell :math:`i,j` and :math:`m_{i,j}` is the average cost in the cell :math:`i,j`.
 
 Example
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^
 
 It is possible to use the module ``gemdata`` to test GEMAct average cost methods::
 
     from gemact import gemdata
+
     ip_ = gemdata.incremental_payments
     in_ = gemdata.incurred_number
     cp_ = gemdata.cased_payments
-    cn_= gemdata.cased_number
+    cn_ = gemdata.cased_number
     reported_ = gemdata.reported_claims
     claims_inflation = gemdata.claims_inflation
-
 
 An example of Fisher-Lange implementation::
 
-    from gemact.lossreserve import AggregateData, ReservingModel
+    from gemact.lossreserve import AggregateData, ReservingModel, LossReserve
     from gemact import gemdata
 
-    ip_ = gemdata.incremental_payments
-    in_ = gemdata.incurred_number
-    cp_ = gemdata.cased_payments
-    cn_= gemdata.cased_number
-    reported_ = gemdata.reported_claims
-    claims_inflation = gemdata.claims_inflation
-
     ad = AggregateData(
-      incremental_payments=ip_,
-      cased_payments=cp_,
-      cased_number=cn_,
-      reported_claims=reported_,
-      incurred_number=in_
-      )
+        incremental_payments=gemdata.incremental_payments,
+        cased_payments=gemdata.cased_payments,
+        payments_number=gemdata.payments_number,
+        open_claims_number=gemdata.open_number,
+        reported_claims=gemdata.reported_claims
+    )
 
     rm = ReservingModel(
-      tail=True,
-      reserving_method="fisher_lange",
-      claims_inflation=claims_inflation
-      )
+        tail=True,
+        reserving_method="fisher_lange",
+        claims_inflation=gemdata.claims_inflation
+    )
 
-    lm = gemact.LossReserve(
-      data=ad,
-      reservingmodel=rm
-      )
+    lr = LossReserve(data=ad, reservingmodel=rm)
 
+Classes
+~~~~~~~~~~~~~~
 
-Observe the CRM for reserving requires different model assumptions::
+``AggregateData``
+^^^^^^^^^^^^^^^^^
 
-    from gemact import gemdata
+.. autoclass:: gemact.lossreserve.AggregateData
+   :no-members:
 
-    ip_ = gemdata.incremental_payments
-    in_ = gemdata.incurred_number
-    cp_ = gemdata.cased_payments
-    cn_= gemdata.cased_number
-    reported_ = gemdata.reported_claims
-    claims_inflation = gemdata.claims_inflation
+``ReservingModel``
+^^^^^^^^^^^^^^^^^^
 
-    from gemact.lossreserve import AggregateData, ReservingModel, LossReserve
-    ad = AggregateData(
-        incremental_payments=ip_,
-        cased_payments=cp_,
-        cased_number=cn_,
-        reported_claims=reported_,
-        incurred_number=in_)
+.. autoclass:: gemact.lossreserve.ReservingModel
+   :no-members:
 
+``LossReserve``
+^^^^^^^^^^^^^^^
 
-    mixing_fq_par = {'a': 1 / .08 ** 2,  # mix frequency
-                         'scale': .08 ** 2}
+.. autoclass:: gemact.lossreserve.LossReserve
+   :no-members:
 
-    mixing_sev_par = {'a': 1 / .08 ** 2, 'scale': .08 ** 2}  # mix severity
-    czj = gemdata.czj
-    claims_inflation= gemdata.claims_inflation
+.. automethod:: gemact.lossreserve.LossReserve.plot_ss_fl
 
-    rm =  ReservingModel(tail=True,
-             reserving_method="crm",
-             claims_inflation=claims_inflation,
-             mixing_fq_par=mixing_fq_par,
-             mixing_sev_par=mixing_sev_par,
-             czj=czj)
+.. automethod:: gemact.lossreserve.LossReserve.plot_alpha_fl
 
-    #Loss reserving: instance lr
-    lm = LossReserve(data=ad,
-                     reservingmodel=rm)
+.. automethod:: gemact.lossreserve.LossReserve.print_loss_reserve
+
+.. automethod:: gemact.lossreserve.LossReserve.mean
+
+.. automethod:: gemact.lossreserve.LossReserve.std
+
+.. automethod:: gemact.lossreserve.LossReserve.var
+
+.. automethod:: gemact.lossreserve.LossReserve.skewness
+
+.. automethod:: gemact.lossreserve.LossReserve.ppf
+
+.. automethod:: gemact.lossreserve.LossReserve.cdf
+
+.. automethod:: gemact.lossreserve.LossReserve.sf
 
 
 ``LossAggregation``
----------------------
-
-.. autoclass::  gemact.lossaggregation.LossAggregation
-   :members:
+-------------------
 
 Loss aggregation
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~
 
-.. math:: P\left[ X_1 +\ldots +X_d \right] \approx P_n(s)
+.. math::
    :label: pty
 
-The probability in equation :eq:`pty` can be approximated iteratively via the AEP algorithm, which is implemented for the first time in the GEMAct package, under the following assumptions:
+   P\left[ X_1 +\ldots +X_d \right] \approx P_n(s)
 
-Assuming:
+The probability in equation :eq:`pty` can be approximated iteratively via the AEP algorithm, which is implemented in GEMAct under the following assumptions:
 
-* :math:`𝑋=(X_i, \ldots, X_d)` vector of strictly positive random components.
+* :math:`X=(X_1, \ldots, X_d)` is a vector of strictly positive random components.
 
-* The joint c.d.f. :math:`H(x_1,…,x_d )=P\left[ X_1 +\ldots +X_d \right]` is known or it can be computed numerically.
+* The joint c.d.f. :math:`H(x_1,\ldots,x_d)=P\left[ X_1 +\ldots +X_d \right]` is known or it can be computed numerically.
 
-Refer to :cite:t:`arbenz11` for an extensive explanation on the AEP algorithm.
-It is possible to use a MC simulation for comparison.
+Refer to :cite:t:`arbenz11` for an extensive explanation of the AEP algorithm.
+It is possible to use Monte Carlo simulation for comparison.
 
 Example
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^
 
-Example code under a clayton assumption::
+Example code under a Frank copula assumption::
 
     from gemact.lossaggregation import LossAggregation, Copula, Margins
 
     lossaggregation = LossAggregation(
-    margins=Margins(
-    dist=['genpareto', 'lognormal'],
-    par=[{'loc': 0, 'scale': 1/.9, 'c': 1/.9}, {'loc': 0, 'scale': 10, 'shape': 1.5}],
-    ),
-    copula=Copula(
-    dist='frank',
-    par={'par': 1.2, 'dim': 2}
-    ),
-    n_sim=500000,
-    random_state=10,
-    n_iter=8
+        margins=Margins(
+            dist=['genpareto', 'lognormal'],
+            par=[
+                {'loc': 0, 'scale': 1/.9, 'c': 1/.9},
+                {'loc': 0, 'scale': 10, 'shape': 1.5}
+            ],
+        ),
+        copula=Copula(
+            dist='frank',
+            par={'par': 1.2, 'dim': 2}
+        ),
+        n_sim=500000,
+        random_state=10,
+        n_iter=8
     )
-    s = 300 # arbitrary value
-    p_aep = lossaggregation.cdf(x=s, method='aep')
-    print('P(X1+X2 <= s) = ', p_aep)
-    p_mc = lossaggregation.cdf(x=s, method='mc')
-    print('P(X1+X2 <= s) = ', p_mc)
 
-The ``distributions`` module
-------------------------------------
+    s = 300
+    p_aep = lossaggregation.cdf(x=s, method='aep')
+    p_mc = lossaggregation.cdf(x=s, method='mc')
+
+Classes
+~~~~~~~~~~~~~~
+
+``Margins``
+^^^^^^^^^^^
+
+.. autoclass:: gemact.lossaggregation.Margins
+   :no-members:
+
+.. automethod:: gemact.lossaggregation.Margins.ppf
+
+.. automethod:: gemact.lossaggregation.Margins.cdf
+
+``Copula``
+^^^^^^^^^^
+
+.. autoclass:: gemact.lossaggregation.Copula
+   :no-members:
+
+.. automethod:: gemact.lossaggregation.Copula.rvs
+
+.. automethod:: gemact.lossaggregation.Copula.cdf
+
+``LossAggregation``
+^^^^^^^^^^^^^^^^^^^
+
+.. autoclass:: gemact.lossaggregation.LossAggregation
+   :no-members:
+
+.. automethod:: gemact.lossaggregation.LossAggregation.dist_calculate
+
+.. automethod:: gemact.lossaggregation.LossAggregation.cdf
+
+.. automethod:: gemact.lossaggregation.LossAggregation.sf
+
+.. automethod:: gemact.lossaggregation.LossAggregation.ppf
+
+.. automethod:: gemact.lossaggregation.LossAggregation.rvs
+
+.. automethod:: gemact.lossaggregation.LossAggregation.moment
+
+.. automethod:: gemact.lossaggregation.LossAggregation.mean
+
+.. automethod:: gemact.lossaggregation.LossAggregation.skewness
+
+.. automethod:: gemact.lossaggregation.LossAggregation.var
+
+.. automethod:: gemact.lossaggregation.LossAggregation.std
+
+.. automethod:: gemact.lossaggregation.LossAggregation.lev
+
+.. automethod:: gemact.lossaggregation.LossAggregation.censored_moment
+
+.. automethod:: gemact.lossaggregation.LossAggregation.plot_cdf
+
+``distributions`` module
+------------------------
+
+The distribution classes below are documented at class level and through explicitly documented methods. Inherited private base classes are intentionally not expanded here to avoid repeated private-class documentation.
+
+Frequency distributions
+~~~~~~~~~~~~~~~~~~~~~~~
 
 ``Poisson``
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^
 
-.. autoclass::  gemact.distributions.Poisson
-   :members:
-   :inherited-members:
+.. autoclass:: gemact.distributions.Poisson
+   :no-members:
 
+.. automethod:: gemact.distributions.Poisson.pgf
 
-Parametrization
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. automethod:: gemact.distributions.Poisson.par_deductible_adjuster
 
-For a more detailed explanation refer to `SciPy Poisson distribution documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.poisson.html>`_, see :cite:t:`scipy`.
+.. automethod:: gemact.distributions.Poisson.par_deductible_reverter
 
-.. math:: f(k)=\exp (-\mu) \frac{\mu^{k}}{k !}
-   :label: poisson
+.. automethod:: gemact.distributions.Poisson.abk
 
-Given :math:`\mu \geq 0` and :math:`k \geq 0`.
+.. automethod:: gemact.distributions.Poisson.skewness
 
-Example code on the usage of the Poisson class::
-
-    from gemact import distributions
-    import numpy as np
-    mu = 4
-    dist = distributions.Poisson(mu=mu)
-    seq = np.arange(0,20)
-    nsim = int(1e+05)
-
-    # Compute the mean via pmf
-    mean = np.sum(dist.pmf(seq)*seq)
-    variance = np.sum(dist.pmf(seq)*(seq-mean)**2)
-
-    print('Mean',mean)
-    print('Theoretical mean', dist.mean())
-    print('Variance', variance)
-    print('Theoretical variance', dist.var())
-    #compare with simulations
-    print('Simulated mean', np.mean(dist.rvs(nsim)))
-    print('Simulated variance', np.var(dist.rvs(nsim)))
-
-Then, use ``matplotlib`` library to show the pmf and the cdf of a Poisson::
-
-    import matplotlib.pyplot as plt
-
-    #pmf
-    plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
-    plt.title('Probability mass function, ~Poisson(mu=4)')
-
-    #cdf
-    plt.step(np.arange(-2,20), dist.cdf(np.arange(-2,20)),'-', where='pre')
-    plt.title('Cumulative distribution function, ~ Poisson(mu=4)')
-
-.. image:: images/pmfPois.png
-  :width: 400
-
-.. image:: images/cdfPois.png
-  :width: 400
+.. automethod:: gemact.distributions.Poisson.kurtosis
 
 ``Binom``
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^
 
-.. autoclass::  gemact.distributions.Binom
-   :members:
-   :inherited-members:
+.. autoclass:: gemact.distributions.Binom
+   :no-members:
 
-Parametrization
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. automethod:: gemact.distributions.Binom.pgf
 
+.. automethod:: gemact.distributions.Binom.par_deductible_adjuster
 
-For a more detailed explanation refer to `SciPy Binomial distribution documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.binom.html>`_, see :cite:t:`scipy`.
+.. automethod:: gemact.distributions.Binom.par_deductible_reverter
 
-.. math:: f(k)=\left(
-   \begin{array}{l}
-      n \\
-      k
-   \end{array} \right) p^{k}(1-p)^{n-k}
-   :label: binomial
+.. automethod:: gemact.distributions.Binom.abk
 
-for :math:`k \in\{0,1, \ldots, n\}, 0 \leq p \leq 1`
+.. automethod:: gemact.distributions.Binom.skewness
 
-Example code on the usage of the Binom class::
-
-    from gemact import distributions
-    import numpy as np
-
-    n = 10
-    p = 0.5
-    dist = distributions.Binom(n=n, p=p)
-    seq = np.arange(0,20)
-    nsim = int(1e+05)
-
-    # Compute the mean via pmf
-    mean=np.sum(dist.pmf(seq)*seq)
-    variance=np.sum(dist.pmf(seq)*(seq-mean)**2)
-
-    print('Mean',mean)
-    print('Theoretical mean',dist.mean())
-    print('Variance',variance)
-    print('Theoretical variance',dist.var())
-    #compare with simulations
-    print('Simulated mean',np.mean(dist.rvs(nsim)))
-    print('Simulated variance',np.var(dist.rvs(nsim)))
-
-Then, use ``matplotlib`` library to show the pmf and the cdf of a Poisson::
-
-    import matplotlib.pyplot as plt
-    #pmf
-    plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
-    plt.title('Probability mass function, ~Binom(n=10,p=0.5)')
-
-    #cdf
-    plt.step(np.arange(-2,20),dist.cdf(np.arange(-2,20)),'-', where='pre')
-    plt.title('Cumulative distribution function, ~Binom(n=10,p=0.5)')
-
-.. image:: images/pmfBinom.png
-  :width: 400
-
-.. image:: images/cdfBinom.png
-  :width: 400
+.. automethod:: gemact.distributions.Binom.kurtosis
 
 ``Geom``
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^
 
-.. autoclass::  gemact.distributions.Geom
-   :members:
-   :inherited-members:
+.. autoclass:: gemact.distributions.Geom
+   :no-members:
 
-Parametrization
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. automethod:: gemact.distributions.Geom.pgf
 
-For a more detailed explanation refer to the `SciPy Geometric distribution documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.geom.html>`_, see :cite:t:`scipy`..
+.. automethod:: gemact.distributions.Geom.par_deductible_adjuster
 
-.. math:: f(k)=(1-p)^{k-1} p
-   :label: geom
+.. automethod:: gemact.distributions.Geom.par_deductible_reverter
 
-for :math:`k \geq 1,0<p \leq 1`
+.. automethod:: gemact.distributions.Geom.abk
 
-Example code on the usage of the Geom class::
+.. automethod:: gemact.distributions.Geom.skewness
 
-    from gemact import distributions
-    import numpy as np
-
-    p=0.8
-    dist=distributions.Geom(p=p)
-    seq=np.arange(0,100,.001)
-    nsim=int(1e+05)
-
-    # Compute the mean via pmf
-    mean=np.sum(dist.pmf(seq)*seq)
-    variance=np.sum(dist.pmf(seq)*(seq-mean)**2)
-
-    print('Mean',mean)
-    print('Theoretical mean',dist.mean())
-    print('Variance',variance)
-    print('Theoretical variance',dist.var())
-    #compare with simulations
-    print('Simulated mean',np.mean(dist.rvs(nsim)))
-    print('Simulated variance',np.var(dist.rvs(nsim)))
-
-Then, use ``matplotlib`` library to show the pmf and the cdf of a Geom::
-
-    import matplotlib.pyplot as plt
-
-    #pmf
-    plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
-    plt.title('Probability mass function, ~Geom(p=0.8)')
-
-    #cdf
-    plt.step(np.arange(-2,20),dist.cdf(np.arange(-2,20)),'-', where='pre')
-    plt.title('Cumulative distribution function, ~Geom(p=0.8)')
-
-.. image:: images/pmfGeom.png
-  :width: 400
-
-.. image:: images/cdfGeom.png
-  :width: 400
+.. automethod:: gemact.distributions.Geom.kurtosis
 
 ``NegBinom``
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^
 
-.. autoclass::  gemact.distributions.NegBinom
-   :members:
-   :inherited-members:
+.. autoclass:: gemact.distributions.NegBinom
+   :no-members:
 
-Parametrization
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. automethod:: gemact.distributions.NegBinom.pgf
 
-For a more detailed explanation refer to the `SciPy Negative Binomial documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.nbinom.html>`_, see :cite:t:`scipy`.
+.. automethod:: gemact.distributions.NegBinom.par_deductible_adjuster
 
-.. math:: f(k)=\left(\begin{array}{c}
-      k+n-1 \\
-      n-1
-   \end{array}\right) p^{n}(1-p)^{k}
-   :label: nbinomial
+.. automethod:: gemact.distributions.NegBinom.par_deductible_reverter
 
-for :math:`k \geq 0,0<p \leq 1`
+.. automethod:: gemact.distributions.NegBinom.abk
 
-Example code on the usage of the NegBinom class::
+.. automethod:: gemact.distributions.NegBinom.skewness
 
-    from gemact import distributions
-    import numpy as np
-
-    n = 10
-    p = .5
-    dist = distributions.NegBinom(n=n, p=p)
-    seq = np.arange(0,100,.001)
-    nsim = int(1e+05)
-
-    # Compute the mean via pmf
-    mean = np.sum(dist.pmf(seq)*seq)
-    variance = np.sum(dist.pmf(seq)*(seq-mean)**2)
-
-    print('Mean', mean)
-    print('Theoretical mean', dist.mean())
-    print('Variance', variance)
-    print('Theoretical variance', dist.var())
-    #compare with simulations
-    print('Simulated mean', np.mean(dist.rvs(nsim)))
-    print('Simulated variance', np.var(dist.rvs(nsim)))
-
-Then, use ``matplotlib`` library to show the pmf and the cdf of a NegBinom::
-
-    import matplotlib.pyplot as plt
-    #pmf
-    plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
-    plt.title('Probability mass function, ~NegBinom(n=10,p=0.8)')
-
-    #cdf
-    plt.step(np.arange(-2,20),dist.cdf(np.arange(-2,20)),'-', where='pre')
-    plt.title('Cumulative distribution function, ~NegBinom(n=10,p=0.8)')
-
-.. image:: images/pmfNBinom.png
-  :width: 400
-
-.. image:: images/cdfNBinom.png
-  :width: 400
+.. automethod:: gemact.distributions.NegBinom.kurtosis
 
 ``Logser``
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^
 
-.. autoclass::  gemact.distributions.Logser
-   :members:
-   :inherited-members:
+.. autoclass:: gemact.distributions.Logser
+   :no-members:
 
-Parametrization
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. automethod:: gemact.distributions.Logser.pgf
 
-For a more detailed explanation refer to the `SciPy Logarithmic distribution documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.logser.html>`_, see :cite:t:`scipy`.
+.. automethod:: gemact.distributions.Logser.abk
 
+.. automethod:: gemact.distributions.Logser.par_deductible_adjuster
 
-.. math:: f(k)=-\frac{p^{k}}{k \log (1-p)}
-   :label: logser
-
-Given :math:`0 < p < 1` and :math:`k \geq 1`.
-
-Example code on the usage of the Logser class::
-
-    from gemact import distributions
-    import numpy as np
-
-    dist=distributions.Logser(p=.5)
-    seq=np.arange(0,30,.001)
-    nsim=int(1e+05)
-
-    # Compute the mean via pmf
-    mean=np.sum(dist.pmf(seq)*seq)
-    variance=np.sum(dist.pmf(seq)*(seq-mean)**2)
-
-    print('Mean',mean)
-    print('Variance',variance)
-    #compare with simulations
-    print('Simulated mean',np.mean(dist.rvs(nsim)))
-    print('Simulated variance',np.var(dist.rvs(nsim)))
-
-Then, use ``matplotlib`` library to show the pmf and the cdf of a Logser::
-
-    import matplotlib.pyplot as plt
-
-    #pmf
-    plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
-    plt.title('Probability mass function, ~Logser(p=.5)')
-
-    #cdf
-    plt.step(np.arange(0,20),dist.cdf(np.arange(0,20)),'-', where='pre')
-    plt.title('Cumulative distribution function,  ~Logser(p=.5)')
-
-
-
-.. image:: images/pmfLogser.png
-  :width: 400
-
-.. image:: images/cdfLogser.png
-  :width: 400
+.. automethod:: gemact.distributions.Logser.par_deductible_reverter
 
 ``ZTPoisson``
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^
 
-.. autoclass::  gemact.distributions.ZTPoisson
-   :members:
+.. autoclass:: gemact.distributions.ZTPoisson
+   :no-members:
 
+.. automethod:: gemact.distributions.ZTPoisson.pmf
 
-Parametrization
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. automethod:: gemact.distributions.ZTPoisson.logpmf
 
-Let :math:`P(z)` denote the probability generating function of a Poisson distribution. 
+.. automethod:: gemact.distributions.ZTPoisson.cdf
 
-:math:`p_{0}` is :math:`p_{0}=P[z=0]`.
+.. automethod:: gemact.distributions.ZTPoisson.logcdf
 
-The probability generating function of a Zero-Truncated poisson is defined in equation :eq:`ztpois`.
+.. automethod:: gemact.distributions.ZTPoisson.rvs
 
-.. math:: P^{T}(z)=\frac{P(z)-p_{0}}{1-p_{0}}
-   :label: ztpois
+.. automethod:: gemact.distributions.ZTPoisson.ppf
 
+.. automethod:: gemact.distributions.ZTPoisson.mean
 
-Example code on the usage of the ZTPoisson class::
+.. automethod:: gemact.distributions.ZTPoisson.var
 
-    from gemact import distributions
-    import numpy as np
+.. automethod:: gemact.distributions.ZTPoisson.pgf
 
-    mu=2
-    dist=distributions.ZTpoisson(mu=mu)
-    seq=np.arange(0,30,.001)
-    nsim=int(1e+05)
+.. automethod:: gemact.distributions.ZTPoisson.abk
 
-    # Compute the mean via pmf
-    mean=np.sum(dist.pmf(seq)*seq)
-    variance=np.sum(dist.pmf(seq)*(seq-mean)**2)
+.. automethod:: gemact.distributions.ZTPoisson.par_deductible_adjuster
 
-    print('Mean',mean)
-    print('Variance',variance)
-    #compare with simulations
-    print('Simulated mean',np.mean(dist.rvs(nsim)))
-    print('Simulated variance',np.var(dist.rvs(nsim)))
-
-Then, use ``matplotlib`` library to show the pmf and the cdf of a ZTPoisson::
-
-    import matplotlib.pyplot as plt
-
-    #pmf
-    plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
-    plt.title('Probability mass function, ~ZTPoisson(mu=2)')
-    #cdf
-    plt.step(np.arange(0,20),dist.cdf(np.arange(0,20)),'-', where='pre')
-    plt.title('Cumulative distribution function,  ~ZTPoisson(mu=2)')
-
-.. image:: images/pmfZTPois.png
-  :width: 400
-
-.. image:: images/cdfZTPois.png
-  :width: 400
-
+.. automethod:: gemact.distributions.ZTPoisson.par_deductible_reverter
 
 ``ZMPoisson``
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^
 
-.. autoclass::  gemact.distributions.ZMPoisson
-   :members:
+.. autoclass:: gemact.distributions.ZMPoisson
+   :no-members:
 
-Parametrization
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. automethod:: gemact.distributions.ZMPoisson.pmf
 
-Let :math:`P(z)` denote the probability generating function of a Poisson distribution. 
+.. automethod:: gemact.distributions.ZMPoisson.logpmf
 
-:math:`p_{0}` is :math:`p_{0}=P[z=0]`.
+.. automethod:: gemact.distributions.ZMPoisson.cdf
 
-The probability generating function of a Zero-Truncated poisson is defined in equation :eq:`zmpois`
+.. automethod:: gemact.distributions.ZMPoisson.logcdf
 
-.. math:: P^{M}(z)=p_{0}^{M}+\frac{1-p_{0}^{M}}{1-p_{0}}\left[P(z)-p_{0}\right]
-   :label: zmpois
+.. automethod:: gemact.distributions.ZMPoisson.rvs
 
-Example code on the usage of the ZMPoisson class::
+.. automethod:: gemact.distributions.ZMPoisson.ppf
 
-    from gemact import distributions
-    import numpy as np
+.. automethod:: gemact.distributions.ZMPoisson.pgf
 
-    mu=2
-    p0m=0.1
-    dist=distributions.ZMPoisson(mu=mu,p0m=p0m)
-    seq=np.arange(0,30,.001)
-    nsim=int(1e+05)
+.. automethod:: gemact.distributions.ZMPoisson.abk
 
-    # Compute the mean via pmf
-    mean=np.sum(dist.pmf(seq)*seq)
-    variance=np.sum(dist.pmf(seq)*(seq-mean)**2)
+.. automethod:: gemact.distributions.ZMPoisson.par_deductible_adjuster
 
-    print('Mean',mean)
-    print('Variance',variance)
-    #compare with simulations
-    print('Simulated mean',np.mean(dist.rvs(nsim)))
-    print('Simulated variance',np.var(dist.rvs(nsim)))
-
-Then, use ``matplotlib`` library to show the pmf and the cdf of a ZMPoisson::
-
-    import matplotlib.pyplot as plt
-
-    #pmf
-    plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
-    plt.title('Probability mass function, ~ZMPoisson(mu=2,p0m=.1)')
-
-    #cdf
-    plt.step(np.arange(0,20),dist.cdf(np.arange(0,20)),'-', where='pre')
-    plt.title('Cumulative distribution function,  ~ZMPoisson(mu=2,p0m=.1)')
-
-.. image:: images/pmfZMPois.png
-  :width: 400
-
-.. image:: images/cdfZMPois.png
-  :width: 400
+.. automethod:: gemact.distributions.ZMPoisson.par_deductible_reverter
 
 ``ZTBinom``
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^
 
-.. autoclass::  gemact.distributions.ZTBinom
-   :members:
+.. autoclass:: gemact.distributions.ZTBinom
+   :no-members:
 
-Parametrization
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. automethod:: gemact.distributions.ZTBinom.pmf
 
-Let :math:`P(z)` denote the probability generating function of a binomial distribution. 
+.. automethod:: gemact.distributions.ZTBinom.logpmf
 
-:math:`p_{0}` is :math:`p_{0}=P[z=0]`.
+.. automethod:: gemact.distributions.ZTBinom.cdf
 
-The probability generating function of a Zero-Truncated binomial is defined in equation :eq:`ztbinom`.
+.. automethod:: gemact.distributions.ZTBinom.logcdf
 
-.. math:: P^{T}(z)=\frac{P(z)-p_{0}}{1-p_{0}}
-   :label: ztbinom
+.. automethod:: gemact.distributions.ZTBinom.rvs
 
-Example code on the usage of the ZTBinom class::
+.. automethod:: gemact.distributions.ZTBinom.ppf
 
-    from gemact import distributions
-    import numpy as np
+.. automethod:: gemact.distributions.ZTBinom.mean
 
-    n=10
-    p=.2
-    dist=distributions.ZTBinom(n=n, p=p)
-    seq=np.arange(0,30,.001)
-    nsim=int(1e+05)
+.. automethod:: gemact.distributions.ZTBinom.var
 
-    # Compute the mean via pmf
-    mean=np.sum(dist.pmf(seq)*seq)
-    variance=np.sum(dist.pmf(seq)*(seq-mean)**2)
+.. automethod:: gemact.distributions.ZTBinom.pgf
 
-    print('Mean',mean)
-    print('Variance',variance)
-    #compare with simulations
-    print('Simulated mean',np.mean(dist.rvs(nsim)))
-    print('Simulated variance',np.var(dist.rvs(nsim)))
+.. automethod:: gemact.distributions.ZTBinom.abk
 
-Then, use ``matplotlib`` library to show the pmf and the cdf of a ZTBinom::
+.. automethod:: gemact.distributions.ZTBinom.par_deductible_adjuster
 
-    import matplotlib.pyplot as plt
-
-    #pmf
-    plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
-    plt.title('Probability mass function, ~ZTBinom(n=10 p=.2)')
-
-
-    #cdf
-    plt.step(np.arange(0,20),dist.cdf(np.arange(0,20)),'-', where='pre')
-    plt.title('Cumulative distribution function,  ~ZTBinom(n=10 p=.2)')
-
-
-.. image:: images/pmfZTBinom.png
-  :width: 400
-
-.. image:: images/cdfZTBinom.png
-  :width: 400
-
-
+.. automethod:: gemact.distributions.ZTBinom.par_deductible_reverter
 
 ``ZMBinom``
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^
 
-.. autoclass::  gemact.distributions.ZMBinom
-   :members:
+.. autoclass:: gemact.distributions.ZMBinom
+   :no-members:
 
-Parametrization
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. automethod:: gemact.distributions.ZMBinom.pmf
 
-Let :math:`P(z)` denote the probability generating function of a binomial distribution. 
+.. automethod:: gemact.distributions.ZMBinom.logpmf
 
-:math:`p_{0}` is :math:`p_{0}=P[z=0]`.
+.. automethod:: gemact.distributions.ZMBinom.cdf
 
-The probability generating function of a Zero-Truncated binomial is defined in equation :eq:`zmbinom`
+.. automethod:: gemact.distributions.ZMBinom.logcdf
 
-.. math:: P^{M}(z)=p_{0}^{M}+\frac{1-p_{0}^{M}}{1-p_{0}}\left[P(z)-p_{0}\right]
-   :label: zmbinom
+.. automethod:: gemact.distributions.ZMBinom.rvs
 
-Example code on the usage of the ZMBinom class::
+.. automethod:: gemact.distributions.ZMBinom.ppf
 
-    from gemact import distributions
-    import numpy as np
+.. automethod:: gemact.distributions.ZMBinom.pgf
 
-    n=10
-    p=.2
-    p0m=.05
-    dist=distributions.ZMBinom(n=n,p=p,p0m=p0m)
-    seq=np.arange(0,100,.001)
-    nsim=int(1e+05)
+.. automethod:: gemact.distributions.ZMBinom.abk
 
-    # Compute the mean via pmf
-    mean=np.sum(dist.pmf(seq)*seq)
-    variance=np.sum(dist.pmf(seq)*(seq-mean)**2)
+.. automethod:: gemact.distributions.ZMBinom.par_deductible_adjuster
 
-    print('Mean',mean)
-    print('Variance',variance)
-    #compare with simulations
-    print('Simulated mean',np.mean(dist.rvs(nsim)))
-    print('Simulated variance',np.var(dist.rvs(nsim)))
-
-Then, use ``matplotlib`` library to show the pmf and the cdf of a ZMPoisson::
-
-    import matplotlib.pyplot as plt
-
-    #pmf
-    plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
-    plt.title('Probability mass function, ~ZMBinom(n=10,p=.5,p0m=.05)')
-
-    #cdf
-    plt.step(np.arange(0,20),dist.cdf(np.arange(0,20)),'-', where='pre')
-    plt.title('Cumulative distribution function,  ~ZMBinom(n=10,p=.5,p0m=.05)')
-
-.. image:: images/pmfZMBinom.png
-  :width: 400
-
-.. image:: images/cdfZMBinom.png
-  :width: 400
+.. automethod:: gemact.distributions.ZMBinom.par_deductible_reverter
 
 ``ZTGeom``
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^
 
-.. autoclass::  gemact.distributions.ZTGeom
-   :members:
+.. autoclass:: gemact.distributions.ZTGeom
+   :no-members:
 
-Parametrization
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. automethod:: gemact.distributions.ZTGeom.pmf
 
-Let :math:`P(z)` denote the probability generating function of a geometric distribution. 
+.. automethod:: gemact.distributions.ZTGeom.logpmf
 
-:math:`p_{0}` is :math:`p_{0}=P[z=0]`.
+.. automethod:: gemact.distributions.ZTGeom.cdf
 
-The probability generating function of a Zero-Truncated geometric is defined in equation :eq:`ztgeom`.
+.. automethod:: gemact.distributions.ZTGeom.logcdf
 
-.. math:: P^{T}(z)=\frac{P(z)-p_{0}}{1-p_{0}}
-   :label: ztgeom
+.. automethod:: gemact.distributions.ZTGeom.rvs
 
-Example code on the usage of the ZTGeom class::
+.. automethod:: gemact.distributions.ZTGeom.ppf
 
-    from gemact import distributions
-    import numpy as np
+.. automethod:: gemact.distributions.ZTGeom.mean
 
-    p=.2
-    dist=distributions.ZTGeom(p=p)
-    seq=np.arange(0,100,.001)
-    nsim=int(1e+05)
+.. automethod:: gemact.distributions.ZTGeom.var
 
-    # Compute the mean via pmf
-    mean=np.sum(dist.pmf(seq)*seq)
-    variance=np.sum(dist.pmf(seq)*(seq-mean)**2)
+.. automethod:: gemact.distributions.ZTGeom.pgf
 
-    print('Mean',mean)
-    print('Variance',variance)
-    #compare with simulations
-    print('Simulated mean',np.mean(dist.rvs(nsim)))
-    print('Simulated variance',np.var(dist.rvs(nsim)))
+.. automethod:: gemact.distributions.ZTGeom.abk
 
-Then, use ``matplotlib`` library to show the pmf and the cdf of a ZTGeom::
+.. automethod:: gemact.distributions.ZTGeom.par_deductible_adjuster
 
-    import matplotlib.pyplot as plt
-
-    #pmf
-    plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
-    plt.title('Probability mass function, ~ZTGeom(p=.2)')
-    #cdf
-    plt.step(np.arange(0,20),dist.cdf(np.arange(0,20)),'-', where='pre')
-    plt.title('Cumulative distribution function,  ~ZTGeom(p=.2)')
-
-.. image:: images/pmfZTGeom.png
-  :width: 400
-
-.. image:: images/cdfZTGeom.png
-  :width: 400
+.. automethod:: gemact.distributions.ZTGeom.par_deductible_reverter
 
 ``ZMGeom``
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^
 
-.. autoclass::  gemact.distributions.ZMGeom
-   :members:
+.. autoclass:: gemact.distributions.ZMGeom
+   :no-members:
 
-Parametrization
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. automethod:: gemact.distributions.ZMGeom.pmf
 
-Let :math:`P(z)` denote the probability generating function of a geometric distribution. 
+.. automethod:: gemact.distributions.ZMGeom.logpmf
 
-:math:`p_{0}` is :math:`p_{0}=P[z=0]`.
+.. automethod:: gemact.distributions.ZMGeom.cdf
 
-The probability generating function of a Zero-Modified geometric is defined in equation :eq:`zmgeom`.
+.. automethod:: gemact.distributions.ZMGeom.logcdf
 
-.. math:: P^{M}(z)=p_{0}^{M}+\frac{1-p_{0}^{M}}{1-p_{0}}\left[P(z)-p_{0}\right]
-   :label: zmgeom
+.. automethod:: gemact.distributions.ZMGeom.rvs
 
-Example code on the usage of the ZMGeom class::
+.. automethod:: gemact.distributions.ZMGeom.ppf
 
-    from gemact import distributions
-    import numpy as np
+.. automethod:: gemact.distributions.ZMGeom.pgf
 
-    p=.2
-    p0m=.01
-    dist=distributions.ZMGeom(p=p,p0m=p0m)
-    seq=np.arange(0,100,.001)
-    nsim=int(1e+05)
+.. automethod:: gemact.distributions.ZMGeom.abk
 
-    # Compute the mean via pmf
-    mean=np.sum(dist.pmf(seq)*seq)
-    variance=np.sum(dist.pmf(seq)*(seq-mean)**2)
+.. automethod:: gemact.distributions.ZMGeom.par_deductible_adjuster
 
-    print('Mean',mean)
-    print('Variance',variance)
-    #compare with simulations
-    print('Simulated mean',np.mean(dist.rvs(nsim)))
-    print('Simulated variance',np.var(dist.rvs(nsim)))
-
-Then, use ``matplotlib`` library to show the pmf and the cdf of a ZMGeom::
-
-    import matplotlib.pyplot as plt
-
-    #pmf
-    plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
-    plt.title('Probability mass function, ~ZMGeom(p=.2,p0m=.01)')
-
-    #cdf
-    plt.step(np.arange(0,20),dist.cdf(np.arange(0,20)),'-', where='pre')
-    plt.title('Cumulative distribution function,  ~ZMGeom(p=.2,p0m=.01)')
-
-.. image:: images/pmfZMGeom.png
-  :width: 400
-
-.. image:: images/cdfZMGeom.png
-  :width: 400
+.. automethod:: gemact.distributions.ZMGeom.par_deductible_reverter
 
 ``ZTNegBinom``
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^
 
-.. autoclass::  gemact.distributions.ZTNegBinom
-   :members:
+.. autoclass:: gemact.distributions.ZTNegBinom
+   :no-members:
 
-Parametrization
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. automethod:: gemact.distributions.ZTNegBinom.pmf
 
-Let :math:`P(z)` denote the probability generating function of a negative binomial distribution. 
+.. automethod:: gemact.distributions.ZTNegBinom.logpmf
 
-:math:`p_{0}` is :math:`p_{0}=P[z=0]`.
+.. automethod:: gemact.distributions.ZTNegBinom.cdf
 
-The probability generating function of a Zero-Truncated negative binomial is defined in equation :eq:`ztnbinom`.
+.. automethod:: gemact.distributions.ZTNegBinom.logcdf
 
-.. math:: P^{T}(z)=\frac{P(z)-p_{0}}{1-p_{0}}
-   :label: ztnbinom
+.. automethod:: gemact.distributions.ZTNegBinom.rvs
 
-Example code on the usage of the ZTNegBinom class::
+.. automethod:: gemact.distributions.ZTNegBinom.ppf
 
-    from gemact import distributions
-    import numpy as np
+.. automethod:: gemact.distributions.ZTNegBinom.mean
 
-    p=.2
-    n=10
-    dist=distributions.ZTNegBinom(p=p,n=n)
-    seq=np.arange(0,100,.001)
-    nsim=int(1e+05)
+.. automethod:: gemact.distributions.ZTNegBinom.var
 
-    # Compute the mean via pmf
-    mean=np.sum(dist.pmf(seq)*seq)
-    variance=np.sum(dist.pmf(seq)*(seq-mean)**2)
+.. automethod:: gemact.distributions.ZTNegBinom.pgf
 
-    print('Mean',mean)
-    print('Variance',variance)
-    #compare with simulations
-    print('Simulated mean',np.mean(dist.rvs(nsim)))
-    print('Simulated variance',np.var(dist.rvs(nsim)))
+.. automethod:: gemact.distributions.ZTNegBinom.abk
 
-Then, use ``matplotlib`` library to show the pmf and the cdf of a ZTNbinom::
+.. automethod:: gemact.distributions.ZTNegBinom.par_deductible_adjuster
 
-    import matplotlib.pyplot as plt
-
-    #pmf
-    plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
-    plt.title('Probability mass function, ~ZTNegBinom(p=.2,n=10)')
-
-    #cdf
-    plt.step(np.arange(0,100),dist.cdf(np.arange(0,100)),'-', where='pre')
-    plt.title('Cumulative distribution function,  ~ZTNegBinom(p=.2,n=10)')
-
-.. image:: images/pmfZTnbinom.png
-  :width: 400
-
-.. image:: images/cdfZTNbinom.png
-  :width: 400
-
+.. automethod:: gemact.distributions.ZTNegBinom.par_deductible_reverter
 
 ``ZMNegBinom``
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^
 
-.. autoclass::  gemact.distributions.ZMNegBinom
-   :members:
+.. autoclass:: gemact.distributions.ZMNegBinom
+   :no-members:
 
-Parametrization
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. automethod:: gemact.distributions.ZMNegBinom.pmf
 
-Let :math:`P(z)` denote the probability generating function of a negative binomial distribution. 
+.. automethod:: gemact.distributions.ZMNegBinom.logpmf
 
-:math:`p_{0}` is :math:`p_{0}=P[z=0]`.
+.. automethod:: gemact.distributions.ZMNegBinom.cdf
 
-The probability generating function of a Zero-Modified negative binomial is defined in equation :eq:`zmnbinom`.
+.. automethod:: gemact.distributions.ZMNegBinom.logcdf
 
-.. math:: P^{M}(z)=p_{0}^{M}+\frac{1-p_{0}^{M}}{1-p_{0}}\left[P(z)-p_{0}\right]
-   :label: zmnbinom
+.. automethod:: gemact.distributions.ZMNegBinom.rvs
 
-Example code on the usage of the ZMNegBinom class::
+.. automethod:: gemact.distributions.ZMNegBinom.ppf
 
-    from gemact import distributions
-    import numpy as np
+.. automethod:: gemact.distributions.ZMNegBinom.pgf
 
-    p=.2
-    n=100
-    p0M=.2
-    dist=distributions.ZMNegBinom(n=50,
-                                p=.8,
-                                p0m=.01)
-    seq=np.arange(0,100,.001)
-    nsim=int(1e+05)
+.. automethod:: gemact.distributions.ZMNegBinom.abk
 
-    # Compute the mean via pmf
-    mean=np.sum(dist.pmf(seq)*seq)
-    variance=np.sum(dist.pmf(seq)*(seq-mean)**2)
+.. automethod:: gemact.distributions.ZMNegBinom.par_deductible_adjuster
 
-    print('Mean',mean)
-    print('Variance',variance)
-    #compare with simulations
-    print('Simulated mean',np.mean(dist.rvs(nsim)))
-    print('Simulated variance',np.var(dist.rvs(nsim)))
-
-Then, use ``matplotlib`` library to show the pmf and the cdf of a ZMNbinom::
-
-    import matplotlib.pyplot as plt
-
-    #pmf
-    plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
-    plt.title('Probability mass function, ~ZMNegBinom(p=.2,n=10)')
-
-    #cdf
-    plt.step(np.arange(0,100),dist.cdf(np.arange(0,100)),'-', where='pre')
-    plt.title('Cumulative distribution function,  ~ZMNegBinom(p=.2,n=10)')
-
-.. image:: images/pmfZMNegBinom.png
-  :width: 400
-
-.. image:: images/cdfZMNegBinom.png
-  :width: 400
+.. automethod:: gemact.distributions.ZMNegBinom.par_deductible_reverter
 
 ``ZMLogser``
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^
 
-.. autoclass::  gemact.distributions.ZMLogser
-   :members:
+.. autoclass:: gemact.distributions.ZMLogser
+   :no-members:
 
-Parametrization
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. automethod:: gemact.distributions.ZMLogser.pmf
 
-Let :math:`P(z)` denote the probability generating function of a logarithmic distribution. 
+.. automethod:: gemact.distributions.ZMLogser.logpmf
 
-:math:`p_{0}` is :math:`p_{0}=P[z=0]`.
+.. automethod:: gemact.distributions.ZMLogser.cdf
 
-The probability generating function of a Zero-Modified logarithmic is defined in equation :eq:`zmlogser`.
+.. automethod:: gemact.distributions.ZMLogser.logcdf
 
-.. math:: P^{M}(z)=p_{0}^{M}+\frac{1-p_{0}^{M}}{1-p_{0}}\left[P(z)-p_{0}\right]
-   :label: zmlogser
+.. automethod:: gemact.distributions.ZMLogser.rvs
 
+.. automethod:: gemact.distributions.ZMLogser.ppf
 
-Example code on the usage of the ZMLogser class::
+.. automethod:: gemact.distributions.ZMLogser.abk
 
-    from gemact import distributions
-    import numpy as np
+.. automethod:: gemact.distributions.ZMLogser.par_deductible_adjuster
 
-    p=.2
-    p0m=.01
-    dist=distributions.ZMlogser(p=p,p0m=p0m)
-    seq=np.arange(0,100,.001)
-    nsim=int(1e+05)
+.. automethod:: gemact.distributions.ZMLogser.par_deductible_reverter
 
-    # Compute the mean via pmf
-    mean=np.sum(dist.pmf(seq)*seq)
-    variance=np.sum(dist.pmf(seq)*(seq-mean)**2)
-
-    print('Mean',mean)
-    print('Variance',variance)
-    #compare with simulations
-    print('Simulated mean',np.mean(dist.rvs(nsim)))
-    print('Simulated variance',np.var(dist.rvs(nsim)))
-
-Then, use ``matplotlib`` library to show the pmf and the cdf of a ZMlogser::
-
-    import matplotlib.pyplot as plt
-
-    #pmf
-    plt.vlines(x=seq, ymin=0, ymax=dist.pmf(seq))
-    plt.title('Probability mass function, ~ZMlogser(p=.2, p0m=.01)')
-    #cdf
-    plt.step(np.arange(0,10),dist.cdf(np.arange(0,10)),'-', where='pre')
-    plt.title('Cumulative distribution function,  ~ZMlogser(p=.2, p0m=.01)')
-
-.. image:: images/pmfZMLogser.png
-  :width: 400
-
-.. image:: images/cdfZMLogser.png
-  :width: 400
-
-
-``Gamma``
-~~~~~~~~~~~~~~~~~~~~
-
-.. autoclass::  gemact.distributions.Gamma
-   :members:
-   :inherited-members:
-
-Parametrization
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-For a better explanation refer to the `SciPy Gamma distribution documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.gamma.html>`_, see :cite:t:`scipy`.
-
-.. math:: f(x, a)=\frac{x^{a-1} e^{-x}}{\Gamma(a)}
-   :label: gamma
-
-Given :math:`f(x, a)=\frac{x^{a-1} e^{-x}}{\Gamma(a)}` and :math:`x \geq 0, a>0`. :math:`\Gamma(a)` refers to the gamma function.
-
-Example code on the usage of the Gamma class::
-
-    from gemact import distributions
-    import numpy as np
-
-    a=2
-    b=5
-    dist=distributions.Gamma(a=a,
-                             beta=b)
-    seq=np.arange(0,100,.1)
-    nsim=int(1e+05)
-
-    print('Theorical mean',dist.mean())
-    print('Theorical variance',dist.var())
-    #compare with simulations
-    print('Simulated mean',np.mean(dist.rvs(nsim)))
-    print('Simulated variance',np.var(dist.rvs(nsim)))
-
-Then, use ``matplotlib`` library to show the pmf and the cdf of a Gamma::
-
-    import matplotlib.pyplot as plt
-
-    #pmf
-    plt.hist(dist.rvs(nsim),
-             bins=100,
-             density=True)
-    plt.title('Probability density function, ~Gamma(a=2, beta=5)')
-    #cdf
-    plt.plot(seq,dist.cdf(seq))
-    plt.title('Cumulative distribution function,  ~Gamma(a=2, beta=5)')
-
-.. image:: images/pdfGamma.png
-  :width: 400
-
-.. image:: images/cdfGamma.png
-  :width: 400
-
-``Exponential``
-~~~~~~~~~~~~~~~~~~~~
-
-.. autoclass::  gemact.distributions.Exponential
-   :members:
-   :inherited-members:
-
-Parametrization
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. math:: f(x, \theta)=\theta \cdot e^{-\theta x}
-   :label: exponential
-
-Given :math:`\theta \geq 0`. 
-
-Example code on the usage of the Exponential class::
-
-    from gemact import distributions
-    import numpy as np
-
-    theta=.1
-    dist=distributions.Exponential(theta=theta)
-    seq=np.arange(0,200,.1)
-    nsim=int(1e+05)
-
-    print('Theorical mean',dist.mean())
-    print('Theorical variance',dist.var())
-    #compare with simulations
-    print('Simulated mean',np.mean(dist.rvs(nsim)))
-    print('Simulated variance',np.var(dist.rvs(nsim)))
-
-Then, use ``matplotlib`` library to show the pmf and the cdf of an Exponential::
-
-    import matplotlib.pyplot as plt
-
-    #pmf
-    plt.hist(dist.rvs(nsim),
-             bins=100,
-             density=True)
-    plt.title('Probability density function, ~Gamma(a=2, beta=5)')
-    #cdf
-    plt.plot(seq,dist.cdf(seq))
-    plt.title('Cumulative distribution function,  ~Gamma(a=2, beta=5)')
-
-.. image:: images/pdfExponential.png
-  :width: 400
-
-.. image:: images/cdfExponential.png
-  :width: 400
-
-``InvGauss``
-~~~~~~~~~~~~~~~~~~~~
-
-.. autoclass::  gemact.distributions.InvGauss
-   :members:
-   :inherited-members:
-
-Parametrization
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-For a better explanation refer to the `SciPy InvGauss distribution documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.invgauss.html>`_, see :cite:t:`scipy`.
-
-.. math:: f(x, \mu)=\frac{1}{\sqrt{2 \pi x^{3}}} \exp \left(-\frac{(x-\mu)^{2}}{2 x \mu^{2}}\right)
-   :label: invgauss
-
-
-``InvGamma``
-~~~~~~~~~~~~~~~~~~~~
-
-.. autoclass::  gemact.distributions.InvGamma
-   :members:
-   :inherited-members:
-
-Parametrization
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-For a better explanation refer to the `SciPy Inverse Gamma distribution documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.invgamma.html>`_, see :cite:t:`scipy`.
-:cite:t:`scipy`.
-
-.. math:: f(x, a)=\frac{x^{-a-1}}{\Gamma(a)} \exp \left(-\frac{1}{x}\right)
-   :label: invgamma
-
-Given :math:`x>=0, a>0 `. :math:`\Gamma(a)` refers to the gamma function.
-
-``GenPareto``
-~~~~~~~~~~~~~~~~~~~~
-
-.. autoclass::  gemact.distributions.GenPareto
-   :members:
-   :inherited-members:
-
-Parametrization
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-For a better explanation refer to the `SciPy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.genpareto.html>`_, see :cite:t:`scipy`.
-
-
-.. math:: f(x, c)=(1+c x)^{-1-1 / c}
-   :label: genpareto
-
-Given :math:`x \geq 0` if :math:`c \geq 0`. :math:`0 \leq x \leq-1 / c if c<0`.
-
-Example code on the usage of the GenPareto class::
-
-    from gemact import distributions
-    import numpy as np
-
-    c=.4
-    loc=0
-    scale=0.25
-
-    dist=distributions.Genpareto(c=c,
-                                loc=loc,
-                                scale=scale)
-
-    seq=np.arange(0,100,.1)
-    nsim=int(1e+05)
-
-    print('Theorical mean',dist.mean())
-    print('Theorical variance',dist.var())
-    #compare with simulations
-    print('Simulated mean',np.mean(dist.rvs(nsim)))
-    print('Simulated variance',np.var(dist.rvs(nsim)))
-
-Then, use ``matplotlib`` library to show the pmf and the cdf of a GenPareto::
-
-    import matplotlib.pyplot as plt
-
-    #pmf
-    plt.hist(dist.rvs(nsim),
-             bins=50,
-             density=True)
-    plt.title('Probability density function, ~GenPareto(a=2, beta=5)')
-
-    #cdf
-    plt.plot(seq,dist.cdf(seq))
-    plt.title('Cumulative distribution function,  ~GenPareto(a=2, beta=5)')
-
-.. image:: images/pdfGenPareto.png
-  :width: 400
-
-.. image:: images/cdfGenPareto.png
-  :width: 400
-
-
-``Pareto2``
-~~~~~~~~~~~~~~~~~~~~
-
-.. autoclass::  gemact.distributions.Pareto2
-   :members:
-   :inherited-members:
-
-Parametrization
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. math:: f(x,s,m,p)=\frac{1/s}{\theta[1+(x-m) / p]^{1/s+1}}
-   :label: pareto2
-
-Given :math:`x>m,-\infty<m<\infty, 1/s>0  p>0`.
-
-Example code on the usage of the Pareto2 class::
-
-    from gemact import distributions
-    import numpy as np
-
-    s=2
-    dist=distributions.Pareto2(s=.9)
-
-    seq=np.arange(0,100,.1)
-    nsim=int(1e+08)
-
-``Pareto1``
-~~~~~~~~~~~~~~~~~~~~
-
-.. autoclass::  gemact.distributions.Pareto1
-   :members:
-   :inherited-members:
-
-``Lognormal``
-~~~~~~~~~~~~~~~~~~~~
-
-.. autoclass::  gemact.distributions.Lognormal
-   :members:
-   :inherited-members:
-
-Parametrization
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-For a better explanation refer to the `SciPy Lognormal distribution documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.lognorm.html>`_, see :cite:t:`scipy`.
-
-.. math:: f(x, s)=\frac{1}{s x \sqrt{2 \pi}} \exp \left(-\frac{\log ^{2}(x)}{2 s^{2}}\right)
-   :label: lognorm
-
-Given :math:`x>0, s>0`.
-
-Example code on the usage of the Lognormal class::
-
-    from gemact import distributions
-    import numpy as np
-
-    s=2
-    dist=distributions.Lognorm(s=s)
-
-    seq=np.arange(0,100,.1)
-    nsim=int(1e+08)
-
-    print('Theorical mean',dist.mean())
-    print('Theorical variance',dist.var())
-    #compare with simulations
-    print('Simulated mean',np.mean(dist.rvs(nsim)))
-    print('Simulated variance',np.var(dist.rvs(nsim)))
-
-Then, use ``matplotlib`` library to show the pmf and the cdf of a LogNorm::
-
-    import matplotlib.pyplot as plt
-    #pmf
-    plt.hist(dist.rvs(nsim),
-             bins=20,
-             density=True)
-    plt.title('Probability density function, ~LogNormal(s=2)')
-    #cdf
-    plt.plot(seq,dist.cdf(seq))
-    plt.title('Cumulative distribution function, ~LogNormal(s=2)')
-
-.. image:: images/pdfLogNormal.png
-  :width: 400
-
-.. image:: images/cdfLogNormal.png
-  :width: 400
-
-``Burr12``
-~~~~~~~~~~~~~~~~~~~~
-
-.. autoclass::  gemact.distributions.Burr12
-   :members:
-   :inherited-members:
-
-Parametrization
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-For a better explanation refer to the `Scipy Burr12 distribution documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.burr12.html>`_ , see :cite:t:`scipy`.
-
-.. math:: f(x, c, d)=c d x^{c-1} /\left(1+x^{c}\right)^{d+1}
-   :label: burr12
-
-Given :math:`x>=0 and c, d>0`.
-
-Example code on the usage of the Burr12 class::
-
-    from gemact import distributions
-    import numpy as np
-
-    c=2
-    d=3
-    dist=distributions.Burr12(c=c,
-                              d=d)
-
-    seq=np.arange(0,100,.1)
-    nsim=int(1e+05)
-
-    print('Theorical mean',dist.mean())
-    print('Theorical variance',dist.var())
-    #compare with simulations
-    print('Simulated mean',np.mean(dist.rvs(nsim)))
-    print('Simulated variance',np.var(dist.rvs(nsim)))
-
-Then, use ``matplotlib`` library to show the pmf and the cdf of a Burr12::
-
-    import matplotlib.pyplot as plt
-
-    #pmf
-    plt.hist(dist.rvs(nsim),
-             bins=100,
-             density=True)
-    plt.title('Probability density function, ~Burr12(c=c,d=d)')
-
-    #cdf
-    plt.plot(seq,dist.cdf(seq))
-    plt.title('Cumulative distribution function,  ~Burr12(c=c,d=d)')
-
-.. image:: images/pdfBurr12.png
-  :width: 400
-
-.. image:: images/cdfBurr12.png
-  :width: 400
-
-``Paralogistic``
-~~~~~~~~~~~~~~~~~~~~
-
-.. autoclass::  gemact.distributions.Paralogistic
-   :members:
-   :inherited-members:
-
-Parametrization
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. math:: f(x, a)=a^2 x^{a-1} /\left(1+x^{a}\right)^{a+1}
-   :label: paralogistic
-
-Given :math:`x>=0 and a >0`.
-
-Example code on the usage of the Paralogistic class::
-
-    from gemact import distributions
-    import numpy as np
-
-    a=2
-
-    dist=distributions.Paralogistic(a=a)
-
-    seq=np.arange(0,100,.1)
-    nsim=int(1e+05)
-
-    print('Theorical mean',dist.mean())
-    print('Theorical variance',dist.var())
-    #compare with simulations
-    print('Simulated mean',np.mean(dist.rvs(nsim)))
-    print('Simulated variance',np.var(dist.rvs(nsim)))
-
-Then, use ``matplotlib`` library to show the pmf and the cdf of a Burr12::
-
-    import matplotlib.pyplot as plt
-
-    #pmf
-    plt.hist(dist.rvs(nsim),
-             bins=100,
-             density=True)
-    plt.title('Probability density function, ~Paralogistic(a=a)')
-
-    #cdf
-    plt.plot(seq,dist.cdf(seq))
-    plt.title('Cumulative distribution function,  ~Paralogistic(a=a)')
-
-.. image:: images/pdfParalogistic.png
-  :width: 400
-
-.. image:: images/cdfParalogistic.png
-  :width: 400
-
-``Dagum``
-~~~~~~~~~~~~~~~~~~~~
-
-.. autoclass::  gemact.distributions.Dagum
-   :members:
-   :inherited-members:
-
-Parametrization
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-For a better explanation refer to the `SciPy Dagum distribution documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.mielke.html>`_ ,see :cite:t:`scipy`.
-
-.. math:: f(x, k, s)=\frac{k x^{k-1}}{\left(1+x^{s}\right)^{1+k / s}}
-   :label: dagum
-
-Given :math:`x>0` , :math:`k,s>0`.
-
-
-Example code on the usage of the Dagum class::
-
-    from gemact import distributions
-    import numpy as np
-
-    d=2
-    s=4.2
-    dist=distributions.Dagum(d=d,
-                             s=s)
-
-    seq=np.arange(0,3,.001)
-    nsim=int(1e+05)
-
-    print('Theorical mean',dist.mean())
-    print('Theorical variance',dist.var())
-    #compare with simulations
-    print('Simulated mean',np.mean(dist.rvs(nsim)))
-    print('Simulated variance',np.var(dist.rvs(nsim)))
-
-Then, use ``matplotlib`` library to show the pmf and the cdf of a Dagum::
-
-    import matplotlib.pyplot as plt
-
-    #pmf
-    plt.hist(dist.rvs(nsim),
-             bins=100,
-             density=True)
-    plt.title('Probability density function, ~Dagum(d=4,s=2)')
-
-    #cdf
-    plt.plot(seq,dist.cdf(seq))
-    plt.title('Cumulative distribution function,  ~Dagum(d=c,s=4.2)')
-
-.. image:: images/pdfDagum.png
-  :width: 400
-
-.. image:: images/cdfDagum.png
-  :width: 400
-
-
-``Inverse Paralogistic``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. autoclass::  gemact.distributions.InvParalogistic
-   :members:
-   :inherited-members:
-
-Parametrization
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-
-.. math:: f(x, b)=\frac{b x^{b-1}}{\left(1+x^{b}\right)^{2}}
-   :label: invparalogistic
-
-Given :math:`x>0` , :math:`b>0`.
-
-
-Example code on the usage of the InvParalogistic class::
-
-    from gemact import distributions
-    import numpy as np
-
-    b=2
-    dist=distributions.InvParalogistic(b=b)
-
-    seq=np.arange(0,3,.001)
-    nsim=int(1e+05)
-
-    print('Theorical mean',dist.mean())
-    print('Theorical variance',dist.var())
-    #compare with simulations
-    print('Simulated mean',np.mean(dist.rvs(nsim)))
-    print('Simulated variance',np.var(dist.rvs(nsim)))
-
-Then, use ``matplotlib`` library to show the pmf and the cdf of a Dagum::
-
-    import matplotlib.pyplot as plt
-
-    #pmf
-    plt.hist(dist.rvs(nsim),
-             bins=100,
-             density=True)
-    plt.title('Probability density function, ~InvParalogistic(b=2)')
-
-    #cdf
-    plt.plot(seq,dist.cdf(seq))
-    plt.title('Cumulative distribution function,  ~InvParalogistic(b=2)')
-
-.. image:: images/pdfInvParalogistic.png
-  :width: 400
-
-.. image:: images/cdfInvParalogistic.png
-  :width: 400
-
-``Weibull``
-~~~~~~~~~~~~~~~~~~~~
-
-.. autoclass::  gemact.distributions.Weibull
-   :members:
-   :inherited-members:
-
-Parametrization
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-For a better explanation refer to the `SciPy Weibull distribution documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.weibull_min.html>`_ , see :cite:t:`scipy`.
-
-.. math:: f(x, c)=c x^{c-1} \exp \left(-x^{c}\right)
-   :label: weibull_min
-
-Given :math:`x>0` , :math:`c>0`.
-
-
-Example code on the usage of the Weibull class::
-
-    from gemact import distributions
-    import numpy as np
-
-    c=2.2
-    dist=distributions.Weibull_min(c=c)
-
-    seq=np.arange(0,3,.001)
-    nsim=int(1e+05)
-
-    print('Theorical mean',dist.mean())
-    print('Theorical variance',dist.var())
-    #compare with simulations
-    print('Simulated mean',np.mean(dist.rvs(nsim)))
-    print('Simulated variance',np.var(dist.rvs(nsim)))
-
-
-Then, use ``matplotlib`` library to show the pmf and the cdf of a Weibull_min::
-
-    import matplotlib.pyplot as plt
-
-    #pmf
-    plt.hist(dist.rvs(nsim),
-             bins=100,
-             density=True)
-    plt.title('Probability density function, ~Weibull_min(s=2.2)')
-
-    #cdf
-    plt.plot(seq,dist.cdf(seq))
-    plt.title('Cumulative distribution function,  ~Invweibull(c=7.2)')
-
-.. image:: images/pdfWeibull_min.png
-  :width: 400
-
-.. image:: images/cdfWeibull_min.png
-  :width: 400
-
-``InvWeibull``
-~~~~~~~~~~~~~~~~~~~~
-
-.. autoclass::  gemact.distributions.InvWeibull
-   :members:
-   :inherited-members:
-
-Parametrization
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-For a better explanation refer to the`Scipy Inverse Weibull distribution documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.invweibull.html>`_   :cite:t:`scipy` .
-
-.. math:: f(x, c)=c x^{-c-1} \exp \left(-x^{-c}\right)
-   :label: invweibull
-
-Given :math:`x>0` , :math:`c>0`.
-
-
-Example code on the usage of the InvWeibull class::
-
-    from gemact import distributions
-    import numpy as np
-
-    c=7.2
-    dist=distributions.Invweibull(c=c)
-
-    seq=np.arange(0,3,.001)
-    nsim=int(1e+05)
-
-    print('Theorical mean',dist.mean())
-    print('Theorical variance',dist.var())
-    #compare with simulations
-    print('Simulated mean',np.mean(dist.rvs(nsim)))
-    print('Simulated variance',np.var(dist.rvs(nsim)))
-
-Then, use ``matplotlib`` library to show the pmf and the cdf of a Invweibull::
-
-    import matplotlib.pyplot as plt
-
-    #pmf
-    plt.hist(dist.rvs(nsim),
-             bins=100,
-             density=True)
-    plt.title('Probability density function, ~Invweibull(c=7.2)')
-    #cdf
-    plt.plot(seq,dist.cdf(seq))
-    plt.title('Cumulative distribution function,  ~Invweibull(c=7.2)')
-
-.. image:: images/pdfInvweibull.png
-  :width: 400
-
-.. image:: images/cdfInvweibull.png
-  :width: 400
-
+Severity distributions
+~~~~~~~~~~~~~~~~~~~~~~
 
 ``Beta``
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^
 
-.. autoclass::  gemact.distributions.Beta
-   :members:
-   :inherited-members:
+.. autoclass:: gemact.distributions.Beta
+   :no-members:
 
-Parametrization
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. automethod:: gemact.distributions.Beta.lev
 
-For a better explanation refer to the `SciPy Beta distribution documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.beta.html>`_, :cite:t:`scipy` .
+``Exponential``
+^^^^^^^^^^^^^^^
 
-.. math:: f(x, a, b)=\frac{\Gamma(a+b) x^{a-1}(1-x)^{b-1}}{\Gamma(a) \Gamma(b)}
-   :label: beta
+.. autoclass:: gemact.distributions.Exponential
+   :no-members:
 
-Given :math:`0<=x<=1, a>0, b>0` , :math:`\Gamma` is the gamma function.
+.. automethod:: gemact.distributions.Exponential.pdf
 
-Example code on the usage of the Beta class::
+.. automethod:: gemact.distributions.Exponential.logpdf
 
-    from gemact import distributions
-    import numpy as np
+.. automethod:: gemact.distributions.Exponential.cdf
 
-    a=2
-    b=5
-    dist=distributions.Beta(a=a,
-                            b=b)
+.. automethod:: gemact.distributions.Exponential.logcdf
 
-    seq=np.arange(0,1,.001)
-    nsim=int(1e+05)
+.. automethod:: gemact.distributions.Exponential.sf
 
-    print('Theorical mean',dist.mean())
-    print('Theorical variance',dist.var())
-    #compare with simulations
-    print('Simulated mean',np.mean(dist.rvs(nsim)))
-    print('Simulated variance',np.var(dist.rvs(nsim)))
+.. automethod:: gemact.distributions.Exponential.logsf
 
-Then, use ``matplotlib`` library to show the pmf and the cdf of a Beta::
+.. automethod:: gemact.distributions.Exponential.isf
 
-    import matplotlib.pyplot as plt
+.. automethod:: gemact.distributions.Exponential.rvs
 
-    #pmf
-    plt.hist(dist.rvs(nsim),
-             bins=100,
-             density=True)
-    plt.title('Probability density function, ~Beta(a=2,b=5)')
-    #cdf
-    plt.plot(seq,dist.cdf(seq))
-    plt.title('Cumulative distribution function,  ~Beta(a=2,b=5)')
+.. automethod:: gemact.distributions.Exponential.entropy
 
-.. image:: images/pdfBeta.png
-  :width: 400
+.. automethod:: gemact.distributions.Exponential.mean
 
-.. image:: images/cdfBeta.png
-  :width: 400
+.. automethod:: gemact.distributions.Exponential.var
 
-``Loggamma``
-~~~~~~~~~~~~~~~~~~~~
+.. automethod:: gemact.distributions.Exponential.std
 
-.. autoclass::  gemact.distributions.LogGamma
-   :members:
-   :inherited-members:
+.. automethod:: gemact.distributions.Exponential.ppf
 
-Parametrization
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. automethod:: gemact.distributions.Exponential.lev
 
-.. math:: f(x)=\frac{\lambda^\alpha}{\Gamma(\alpha)} \frac{(\log x)^{\alpha-1}}{x^{\lambda / 1}}
-   :label: loggamma
+.. automethod:: gemact.distributions.Exponential.partial_moment
 
-where :math:`x>0, \alpha>0, \lambda >0` and :math:`\Gamma(\alpha)` is the Gamma function.
+``Gamma``
+^^^^^^^^^
+
+.. autoclass:: gemact.distributions.Gamma
+   :no-members:
+
+.. automethod:: gemact.distributions.Gamma.lev
+
+.. automethod:: gemact.distributions.Gamma.partial_moment
+
+``InvGamma``
+^^^^^^^^^^^^
+
+.. autoclass:: gemact.distributions.InvGamma
+   :no-members:
+
+.. automethod:: gemact.distributions.InvGamma.lev
+
+``GenPareto``
+^^^^^^^^^^^^^
+
+.. autoclass:: gemact.distributions.GenPareto
+   :no-members:
+
+.. automethod:: gemact.distributions.GenPareto.lev
+
+``Pareto2``
+^^^^^^^^^^^
+
+.. autoclass:: gemact.distributions.Pareto2
+   :no-members:
+
+``Pareto1``
+^^^^^^^^^^^
+
+.. autoclass:: gemact.distributions.Pareto1
+   :no-members:
+
+``Lognormal``
+^^^^^^^^^^^^^
+
+.. autoclass:: gemact.distributions.Lognormal
+   :no-members:
+
+.. automethod:: gemact.distributions.Lognormal.lev
+
+.. automethod:: gemact.distributions.Lognormal.partial_moment
 
 ``GenBeta``
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^
 
-.. autoclass::  gemact.distributions.GenBeta
-   :members:
-   :inherited-members:
+.. autoclass:: gemact.distributions.GenBeta
+   :no-members:
 
-Parametrization
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. automethod:: gemact.distributions.GenBeta.rvs
 
-.. math:: f(x)=\frac{\Gamma(shape_1+shape_2)}{\Gamma(shape_1) \Gamma(shape_2)}(\frac{x}{scale})^{shape_1 shape_3}\left(1-(\frac{x}{scale})^{shape_3}\right)^{shape_2-1} \frac{shape_3}{x}
-   :label: genbeta
+.. automethod:: gemact.distributions.GenBeta.pdf
 
-Given :math:`0<=x<=scale, shape_1>0, shape_2>0` , :math:`\Gamma` is the gamma function.
+.. automethod:: gemact.distributions.GenBeta.cdf
 
-Example code on the usage of the GenBeta class::
+.. automethod:: gemact.distributions.GenBeta.logpdf
 
-    from gemact import distributions
-    import numpy as np
+.. automethod:: gemact.distributions.GenBeta.logcdf
 
-    shape1=1
-    shape2=2
-    shape3=3
-    scale=4
+.. automethod:: gemact.distributions.GenBeta.sf
 
-    dist=GenBeta(shape1=shape1,
-                 shape2=shape2,
-                 shape3=shape3,
-                 scale=scale)
+.. automethod:: gemact.distributions.GenBeta.logsf
 
-    seq=np.arange(0,1,.001)
-    nsim=int(1e+05)
+.. automethod:: gemact.distributions.GenBeta.ppf
 
-    print('Theorical mean',dist.mean())
-    print('Theorical variance',dist.var())
-    #compare with simulations
-    print('Simulated mean',np.mean(dist.rvs(nsim)))
-    print('Simulated variance',np.var(dist.rvs(nsim)))
+.. automethod:: gemact.distributions.GenBeta.isf
 
+.. automethod:: gemact.distributions.GenBeta.moment
 
-Then, use ``matplotlib`` library to show the pmf and the cdf of a GenBeta::
+.. automethod:: gemact.distributions.GenBeta.stats
 
-    import matplotlib.pyplot as plt
+.. automethod:: gemact.distributions.GenBeta.median
 
-    #pmf
-    plt.hist(dist.rvs(nsim),
-             bins=100,
-             density=True)
-    plt.title('Probability density function, ~GenBeta(shape1=1,shape2=2,shape3=3,scale=4)')
-    #cdf
-    plt.plot(np.arange(-1,8,.001),dist.cdf(np.arange(-1,8,.001)))
-    plt.title('Cumulative distribution function,  ~GenBeta(shape1=1,shape2=2,shape3=3,scale=4)')
+.. automethod:: gemact.distributions.GenBeta.mean
 
+.. automethod:: gemact.distributions.GenBeta.var
 
-.. image:: images/pdfGenBeta.png
-  :width: 400
+.. automethod:: gemact.distributions.GenBeta.std
 
-.. image:: images/cdfGenBeta.png
-  :width: 400
+.. automethod:: gemact.distributions.GenBeta.skewness
+
+.. automethod:: gemact.distributions.GenBeta.kurtosis
+
+.. automethod:: gemact.distributions.GenBeta.lev
+
+.. automethod:: gemact.distributions.GenBeta.censored_moment
+
+.. automethod:: gemact.distributions.GenBeta.partial_moment
+
+.. automethod:: gemact.distributions.GenBeta.truncated_moment
+
+``Burr12``
+^^^^^^^^^^
+
+.. autoclass:: gemact.distributions.Burr12
+   :no-members:
+
+.. automethod:: gemact.distributions.Burr12.lev
+
+``Paralogistic``
+^^^^^^^^^^^^^^^^
+
+.. autoclass:: gemact.distributions.Paralogistic
+   :no-members:
+
+``Dagum``
+^^^^^^^^^
+
+.. autoclass:: gemact.distributions.Dagum
+   :no-members:
+
+.. automethod:: gemact.distributions.Dagum.lev
+
+``InvParalogistic``
+^^^^^^^^^^^^^^^^^^^
+
+.. autoclass:: gemact.distributions.InvParalogistic
+   :no-members:
+
+``Weibull``
+^^^^^^^^^^^
+
+.. autoclass:: gemact.distributions.Weibull
+   :no-members:
+
+.. automethod:: gemact.distributions.Weibull.lev
+
+``InvWeibull``
+^^^^^^^^^^^^^^
+
+.. autoclass:: gemact.distributions.InvWeibull
+   :no-members:
+
+.. automethod:: gemact.distributions.InvWeibull.lev
+
+``InvGauss``
+^^^^^^^^^^^^
+
+.. autoclass:: gemact.distributions.InvGauss
+   :no-members:
+
+.. automethod:: gemact.distributions.InvGauss.lev
+
+``Fisk``
+^^^^^^^^
+
+.. autoclass:: gemact.distributions.Fisk
+   :no-members:
+
+.. automethod:: gemact.distributions.Fisk.lev
+
+``LogGamma``
+^^^^^^^^^^^^
+
+.. autoclass:: gemact.distributions.LogGamma
+   :no-members:
+
+.. automethod:: gemact.distributions.LogGamma.pdf
+
+.. automethod:: gemact.distributions.LogGamma.cdf
+
+.. automethod:: gemact.distributions.LogGamma.sf
+
+.. automethod:: gemact.distributions.LogGamma.ppf
+
+.. automethod:: gemact.distributions.LogGamma.rvs
+
+.. automethod:: gemact.distributions.LogGamma.moment
+
+.. automethod:: gemact.distributions.LogGamma.mean
+
+.. automethod:: gemact.distributions.LogGamma.var
+
+.. automethod:: gemact.distributions.LogGamma.std
+
+.. automethod:: gemact.distributions.LogGamma.logpdf
+
+.. automethod:: gemact.distributions.LogGamma.logcdf
+
+.. automethod:: gemact.distributions.LogGamma.logsf
+
+.. automethod:: gemact.distributions.LogGamma.isf
+
+.. automethod:: gemact.distributions.LogGamma.stats
+
+.. automethod:: gemact.distributions.LogGamma.median
+
+.. automethod:: gemact.distributions.LogGamma.skewness
+
+.. automethod:: gemact.distributions.LogGamma.kurtosis
+
+.. automethod:: gemact.distributions.LogGamma.lev
+
+.. automethod:: gemact.distributions.LogGamma.censored_moment
+
+.. automethod:: gemact.distributions.LogGamma.partial_moment
+
+.. automethod:: gemact.distributions.LogGamma.truncated_moment
+
+``Uniform``
+^^^^^^^^^^^
+
+.. autoclass:: gemact.distributions.Uniform
+   :no-members:
+
+Empirical and piecewise distributions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+``PWL``
+^^^^^^^
+
+.. autoclass:: gemact.distributions.PWL
+   :no-members:
+
+.. automethod:: gemact.distributions.PWL.cdf
+
+.. automethod:: gemact.distributions.PWL.pdf
+
+.. automethod:: gemact.distributions.PWL.ppf
+
+.. automethod:: gemact.distributions.PWL.rvs
+
+.. automethod:: gemact.distributions.PWL.sf
+
+.. automethod:: gemact.distributions.PWL.moment
+
+.. automethod:: gemact.distributions.PWL.mean
+
+.. automethod:: gemact.distributions.PWL.var
+
+.. automethod:: gemact.distributions.PWL.std
+
+.. automethod:: gemact.distributions.PWL.skewness
+
+.. automethod:: gemact.distributions.PWL.kurtosis
+
+.. automethod:: gemact.distributions.PWL.censored_moment
+
+.. automethod:: gemact.distributions.PWL.lev
+
+``PWC``
+^^^^^^^
+
+.. autoclass:: gemact.distributions.PWC
+   :no-members:
+
+.. automethod:: gemact.distributions.PWC.cdf
+
+.. automethod:: gemact.distributions.PWC.ppf
+
+.. automethod:: gemact.distributions.PWC.rvs
+
+.. automethod:: gemact.distributions.PWC.sf
+
+.. automethod:: gemact.distributions.PWC.moment
+
+.. automethod:: gemact.distributions.PWC.mean
+
+.. automethod:: gemact.distributions.PWC.var
+
+.. automethod:: gemact.distributions.PWC.std
+
+.. automethod:: gemact.distributions.PWC.skewness
+
+.. automethod:: gemact.distributions.PWC.kurtosis
+
+.. automethod:: gemact.distributions.PWC.censored_moment
+
+.. automethod:: gemact.distributions.PWC.lev
+
+Multivariate distributions
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ``Multinomial``
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^
 
-.. autoclass::  gemact.distributions.Multinomial
-   :members:
-   :inherited-members:
+.. autoclass:: gemact.distributions.Multinomial
+   :no-members:
 
-Parametrization
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. automethod:: gemact.distributions.Multinomial.cov
 
-The multinomial probability mass function is given by
+.. automethod:: gemact.distributions.Multinomial.var
 
-.. math:: f(\mathbf{x}) = \frac{n!}{x_1!\cdots x_k!} \prod_{i=1}^k p_i^{x_i},
+.. automethod:: gemact.distributions.Multinomial.entropy
 
-where :math:`\sum_{i=1}^k x_i = n`, :math:`x_i \in \mathbb{N}_0`, :math:`p_i \ge 0` and :math:`\sum_{i=1}^k p_i = 1`.
+.. automethod:: gemact.distributions.Multinomial.pmf
 
-Example code on the usage of the Multinomial class::
-
-    from gemact import distributions
-
-    dist = distributions.Multinomial(n=10, p=[0.2, 0.3, 0.5])
-    x = [2, 3, 5]
-
-    print('PMF at x:', dist.pmf(x))
-    print('Mean vector:', dist.mean())
-    print('Random variates:\n', dist.rvs(size=3, random_state=42))
+.. automethod:: gemact.distributions.Multinomial.logpmf
 
 ``Dirichlet_Multinomial``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. autoclass::  gemact.distributions.Dirichlet_Multinomial
-   :members:
-   :inherited-members:
+.. autoclass:: gemact.distributions.Dirichlet_Multinomial
+   :no-members:
 
-Parametrization
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. automethod:: gemact.distributions.Dirichlet_Multinomial.cov
 
-Let :math:`\alpha_0 = \sum_{i=1}^k \alpha_i`. The Dirichlet-multinomial mass function is
+.. automethod:: gemact.distributions.Dirichlet_Multinomial.var
 
-.. math:: f(\mathbf{x}) = \frac{n!}{x_1!\cdots x_k!} \frac{\Gamma(\alpha_0)}{\Gamma(n+\alpha_0)} \prod_{i=1}^k \frac{\Gamma(x_i+\alpha_i)}{\Gamma(\alpha_i)},
+.. automethod:: gemact.distributions.Dirichlet_Multinomial.pmf
 
-where :math:`x_i \in \mathbb{N}_0`, :math:`\sum_{i=1}^k x_i = n` and :math:`\alpha_i > 0` for all :math:`i`.
+.. automethod:: gemact.distributions.Dirichlet_Multinomial.logpmf
 
-Example code on the usage of the Dirichlet_Multinomial class::
+.. automethod:: gemact.distributions.Dirichlet_Multinomial.mean
 
-    from gemact import distributions
-
-    dist = distributions.Dirichlet_Multinomial(n=12, alpha=[2.0, 3.0, 4.0], seed=7)
-    x = [4, 5, 3]
-
-    print('PMF at x:', dist.pmf(x))
-    print('Mean vector:', dist.mean())
-    print('Random variates:\n', dist.rvs(size=2, random_state=21))
+.. automethod:: gemact.distributions.Dirichlet_Multinomial.rvs
 
 ``NegMultinom``
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^
 
-.. autoclass::  gemact.distributions.NegMultinom
-   :members:
-   :inherited-members:
+.. autoclass:: gemact.distributions.NegMultinom
+   :no-members:
 
-Parametrization
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. automethod:: gemact.distributions.NegMultinom.pmf
 
-Let :math:`p_0 = 1 - \sum_{i=1}^k p_i`. The negative multinomial mass function is
+.. automethod:: gemact.distributions.NegMultinom.logpmf
 
-.. math:: f(\mathbf{x}) = \frac{\Gamma\!\left(x_0 + \sum_{i=1}^k x_i\right)}{\Gamma(x_0) \prod_{i=1}^k x_i!} p_0^{x_0} \prod_{i=1}^k p_i^{x_i},
+.. automethod:: gemact.distributions.NegMultinom.mean
 
-where :math:`x_0 > 0`, :math:`x_i \in \mathbb{N}_0`, :math:`p_i \ge 0` and :math:`\sum_{i=1}^k p_i < 1`.
+.. automethod:: gemact.distributions.NegMultinom.var
 
-Example code on the usage of the NegMultinom class::
+.. automethod:: gemact.distributions.NegMultinom.cov
 
-    from gemact import distributions
-    import numpy as np
+.. automethod:: gemact.distributions.NegMultinom.rvs
 
-    dist = distributions.NegMultinom(x0=5, p=[0.2, 0.3])
-    x = np.array([3, 4])
-
-    print('PMF at x:', dist.pmf(x))
-    print('Mean vector:', dist.mean())
-    print('Covariance matrix:\n', dist.cov())
+.. automethod:: gemact.distributions.NegMultinom.mgf
 
 ``MultivariateBinomial``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. autoclass::  gemact.distributions.MultivariateBinomial
-   :members:
-   :inherited-members:
+.. autoclass:: gemact.distributions.MultivariateBinomial
+   :no-members:
 
-Parametrization
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. automethod:: gemact.distributions.MultivariateBinomial.pmf
 
-The multivariate binomial vector :math:`\mathbf{X} = (X_1,\ldots,X_k)` models the number of successes in
-:math:`n` common Bernoulli trials with success probabilities :math:`p_i = \Pr(B_i = 1)` and pairwise joint success
-probabilities :math:`p_{ij} = \Pr(B_i = 1, B_j = 1)` for each coordinate.
-The marginal distributions are binomial with
+.. automethod:: gemact.distributions.MultivariateBinomial.mean
 
-.. math:: X_i \sim \mathrm{Binomial}(n, p_i),\quad i=1,\ldots,k,
+.. automethod:: gemact.distributions.MultivariateBinomial.cov
 
-while the dependence structure is governed by :math:`p_{ij}`.
-The first two moments are
+.. automethod:: gemact.distributions.MultivariateBinomial.var
 
-.. math:: \mathbb{E}[X_i] = n p_i, \qquad \operatorname{Cov}(X_i, X_j) = n \left(p_{ij} - p_i p_j\right).
+.. automethod:: gemact.distributions.MultivariateBinomial.correlation
 
-Example code on the usage of the MultivariateBinomial class::
-
-    from gemact import distributions
-    import numpy as np
-
-    p_joint = np.array([[0.3, 0.12, 0.10],
-                        [0.12, 0.4, 0.08],
-                        [0.10, 0.08, 0.35]])
-
-    dist = distributions.MultivariateBinomial(n=20, p_joint=p_joint)
-    x = np.array([5, 6, 4])
-
-    print('PMF at x:', dist.pmf(x))
-    print('Mean vector:', dist.mean())
-    print('Covariance matrix:\n', dist.cov())
+.. automethod:: gemact.distributions.MultivariateBinomial.rvs
 
 ``MultivariatePoisson``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^
 
-.. autoclass::  gemact.distributions.MultivariatePoisson
-   :members:
-   :inherited-members:
+.. autoclass:: gemact.distributions.MultivariatePoisson
+   :no-members:
 
-Parametrization
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. automethod:: gemact.distributions.MultivariatePoisson.pmf
 
-Let :math:`\mathbf{X} = (X_1,\ldots,X_k)` be a multivariate Poisson vector with marginal means :math:`\mu_i`
-and pairwise joint intensities :math:`\lambda_{ij}`. Each component can be represented as
+.. automethod:: gemact.distributions.MultivariatePoisson.mean
 
-.. math:: X_i = Y_i + \sum_{j \ne i} Y_{ij},
+.. automethod:: gemact.distributions.MultivariatePoisson.cov
 
-where :math:`Y_i \sim \mathrm{Poisson}\left(\mu_i - \sum_{j \ne i} \lambda_{ij}\right)` and
-:math:`Y_{ij} = Y_{ji} \sim \mathrm{Poisson}(\lambda_{ij})` are independent. Consequently,
+.. automethod:: gemact.distributions.MultivariatePoisson.var
 
-.. math:: \mathbb{E}[X_i] = \mu_i, \qquad \operatorname{Cov}(X_i, X_j) = \lambda_{ij} \quad (i \ne j).
+.. automethod:: gemact.distributions.MultivariatePoisson.correlation
 
-Example code on the usage of the MultivariatePoisson class::
+.. automethod:: gemact.distributions.MultivariatePoisson.rvs
 
-    from gemact import distributions
-    import numpy as np
-
-    mu = np.array([2.0, 3.0, 1.5])
-    mu_joint = np.array([[0.0, 0.4, 0.2],
-                         [0.4, 0.0, 0.3],
-                         [0.2, 0.3, 0.0]])
-
-    dist = distributions.MultivariatePoisson(mu=mu, mu_joint=mu_joint)
-    x = np.array([1, 2, 0])
-
-    print('PMF at x:', dist.pmf(x))
-    print('Mean vector:', dist.mean())
-    print('Covariance matrix:\n', dist.cov())
-    print('Random variates:\n', dist.rvs(size=5, random_state=123))
-
-The ``copulas`` module
----------------------------
-
-Guide to copulas
+``copulas`` module
+------------------
 
 ``ClaytonCopula``
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^
 
-.. autoclass::  gemact.copulas.ClaytonCopula
-   :members:
+.. autoclass:: gemact.copulas.ClaytonCopula
+   :no-members:
 
-Parametrization
-^^^^^^^^^^^^^^^^^^^^^^
+.. automethod:: gemact.copulas.ClaytonCopula.cdf
 
-Clayton copula cumulative density function:
-
-.. math:: C_{\delta}^{C l}\left(u_{1}, \ldots, u_{d}\right)=\left(u_{1}^{-\delta}+u_{2}^{-\delta}+\cdots+u_{d}^{-\delta}-d+1\right)^{-1 / \delta}
-
-Given :math:`u_{k} \in[0,1], k=1, \ldots, d` , :math:`\delta > 0` .
-
-
-Example code on the usage of the ClaytonCopula class::
-
-    from gemact import copulas
-
-    clayton_c=copulas.ClaytonCopula(par=1.4,
-                                    dim=2)
-    clayton_c.rvs(size=100,
-                  random_state= 42)
-
-
+.. automethod:: gemact.copulas.ClaytonCopula.rvs
 
 ``FrankCopula``
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^
 
+.. autoclass:: gemact.copulas.FrankCopula
+   :no-members:
 
-.. autoclass::  gemact.copulas.FrankCopula
-   :members:
+.. automethod:: gemact.copulas.FrankCopula.cdf
 
-Parametrization
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-
-
-Frank copula cumulative density function:
-
-.. math:: C_{\theta}^{F r}\left(u_{1}, \ldots, u_{d}\right)=-\frac{1}{\delta} \log \left(1+\frac{\prod_{i}\left(\exp \left(-\delta u_{i}\right)-1\right)}{\exp (-\delta)-1}\right)
-
-Given :math:`u_{k} \in[0,1], k=1, \ldots, d` , :math:`\delta >= 0` .
-
-
-Example code on the usage of the FrankCopula class::
-
-    from gemact import copulas
-    frank_c=copulas.FrankCopula(par=1.4,
-                                dim=2)
-    frank_c.rvs(size=100,
-                  random_state= 42)
+.. automethod:: gemact.copulas.FrankCopula.rvs
 
 ``GumbelCopula``
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^
 
-.. autoclass::  gemact.copulas.GumbelCopula
-   :members:
+.. autoclass:: gemact.copulas.GumbelCopula
+   :no-members:
 
-Parametrization
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. automethod:: gemact.copulas.GumbelCopula.cdf
 
-Gumbel copula cumulative density function:
-
-.. math:: C_{\theta}^{G u}\left(u_{1}, \ldots, u_{d}\right)=\exp \left(-\left(\sum_{i}\left(-\log u_{i}\right)^{\delta}\right)^{1 / \delta}\right)
-
-Given :math:`u_{k} \in[0,1], k=1, \ldots, d` , :math:`\delta >= 1` .
-
-
-Example code on the usage of the GumbelCopula class::
-
-    from gemact import copulas
-
-    gumbel_c=copulas.GumbelCopula(par=1.4,
-                                  dim=2)
-    gumbel_c.rvs(size=100,
-                  random_state= 42)
-
+.. automethod:: gemact.copulas.GumbelCopula.rvs
 
 ``GaussCopula``
-~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^
 
+.. autoclass:: gemact.copulas.GaussCopula
+   :no-members:
 
+.. automethod:: gemact.copulas.GaussCopula.cdf
 
-.. autoclass::  gemact.copulas.GaussCopula
-   :members:
-
-Parametrization
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Gauss copula cumulative density function is based on the scipy function `multivariate_normal`.
-For a better explanation refer to the `SciPy Multivariate Normal documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.multivariate_normal.html>`_, :cite:t:`scipy` .
-
-.. math:: f(x)=\frac{1}{\sqrt{(2 \pi)^{k} \operatorname{det} \Sigma}} \exp \left(-\frac{1}{2}(x-\mu)^{T} \Sigma^{-1}(x-\mu)\right)
-
-
-Example code on the usage of the GaussCopula class::
-
-    from gemact import copulas
-
-    corr_mx=np.array([[1,.4],[.4,1]])
-
-    gauss_c=copulas.GaussCopula(corr=corr_mx)
-    gauss_c.rvs(size=100,
-                  random_state= 42)
+.. automethod:: gemact.copulas.GaussCopula.rvs
 
 ``TCopula``
-~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^
 
-.. autoclass::  gemact.copulas.TCopula
-   :members:
+.. autoclass:: gemact.copulas.TCopula
+   :no-members:
 
-Parametrization
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. automethod:: gemact.copulas.TCopula.cdf
 
+.. automethod:: gemact.copulas.TCopula.rvs
 
-T copula cumulative density function:
+``IndependenceCopula``
+^^^^^^^^^^^^^^^^^^^^^^
 
-.. math:: C_{v, C}^{t}\left(u_{1}, \ldots, u_{d}\right)=\boldsymbol{t}_{v, C}\left(t_{v}^{-1}\left(u_{1}\right), \ldots, t_{v}^{-1}\left(u_{d}\right)\right)
+.. autoclass:: gemact.copulas.IndependenceCopula
+   :no-members:
 
-Given :math:`u_{k} \in[0,1], k=1, \ldots, d`. :math:`t_{v}^{-1}` is the inverse student’s t function and :math:`\boldsymbol{t}_{v, C}` is the cumulative distribution function of the multivariate student’s t distribution with a given mean and correlation matrix C.
-Degrees of freedom :math:`v>0` .
+.. automethod:: gemact.copulas.IndependenceCopula.cdf
 
-Example code on the usage of the TCopula class::
+.. automethod:: gemact.copulas.IndependenceCopula.rvs
 
-    from gemact import copulas
+``FHLowerCopula``
+^^^^^^^^^^^^^^^^^
 
-    corr_mx=np.array([[1,.4],[.4,1]])
+.. autoclass:: gemact.copulas.FHLowerCopula
+   :no-members:
 
-    t_c=copulas.TCopula(corr=corr_mx,
-                        df=5)
-    t_c.rvs(size=100,
-            random_state= 42)
+.. automethod:: gemact.copulas.FHLowerCopula.cdf
 
-``Independence Copula``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. automethod:: gemact.copulas.FHLowerCopula.rvs
 
-.. autoclass::  gemact.copulas.IndependenceCopula
-   :members:
+``FHUpperCopula``
+^^^^^^^^^^^^^^^^^
 
-Parametrization
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. autoclass:: gemact.copulas.FHUpperCopula
+   :no-members:
 
+.. automethod:: gemact.copulas.FHUpperCopula.cdf
 
-Independence Copula.
+.. automethod:: gemact.copulas.FHUpperCopula.rvs
 
-.. math:: C^{U}\left(u_{1}, \ldots, u_{d}\right)=\prod^d_{k=1} u_k
+``JoeCopula``
+^^^^^^^^^^^^^
 
-Given :math:`u_{k} \in[0,1], k=1, \ldots, d`.
+.. autoclass:: gemact.copulas.JoeCopula
+   :no-members:
 
-Example code on the usage of the IndependentCopula class::
+.. automethod:: gemact.copulas.JoeCopula.cdf
 
-    from gemact import copulas
+.. automethod:: gemact.copulas.JoeCopula.rvs
 
-    i_c = copulas.IndependentCopula(dim=2)
-    i_c.rvs(1,random_state=42)
+``AliMikhailHaqCopula``
+^^^^^^^^^^^^^^^^^^^^^^^
 
-``Fréchet–Hoeffding Lower Bound``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. autoclass:: gemact.copulas.AliMikhailHaqCopula
+   :no-members:
 
-.. autoclass::  gemact.copulas.FHLowerCopula
-   :members:
+.. automethod:: gemact.copulas.AliMikhailHaqCopula.cdf
 
-Parametrization
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. automethod:: gemact.copulas.AliMikhailHaqCopula.rvs
 
-The Fréchet–Hoeffding Lower Bound Copula.
+``helperfunctions`` module
+--------------------------
 
-.. math:: C^{FHL}\left(u_{1},u_{2}\right)=\max (u+v-1,0)
+The following helper functions have docstrings. They are listed explicitly and private helpers are not included.
 
-Given :math:`u_{k} \in[0,1], k=1, 2`.
+``arg_type_handler``
+^^^^^^^^^^^^^^^^^^^^
 
-Example code on the usage of the FHLowerCopula class::
+.. autofunction:: gemact.helperfunctions.arg_type_handler
 
-    from gemact import copulas
+``ecdf``
+^^^^^^^^
 
-    fhl_c = copulas.FHLowerCopula
-    fhl_c.rvs(10,
-            random_state=42)
+.. autofunction:: gemact.helperfunctions.ecdf
 
+``normalizernans``
+^^^^^^^^^^^^^^^^^^
 
+.. autofunction:: gemact.helperfunctions.normalizernans
 
-``Fréchet–Hoeffding Upper Bound``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+``lrcrm_f1``
+^^^^^^^^^^^^
 
-.. autoclass::  gemact.copulas.FHUpperCopula
-   :members:
+.. autofunction:: gemact.helperfunctions.lrcrm_f1
 
-Parametrization
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+``lrcrm_f2``
+^^^^^^^^^^^^
 
-The Fréchet–Hoeffding Upper Bound Copula.
+.. autofunction:: gemact.helperfunctions.lrcrm_f2
 
-.. math:: C^{FHU}\left(u_{1},u_{2}\right)=\min (u,v)
+``lrcrm_f3``
+^^^^^^^^^^^^
 
-Given :math:`u_{k} \in[0,1], k=1, 2`.
+.. autofunction:: gemact.helperfunctions.lrcrm_f3
 
-Example code on the usage of the FHUpperCopula class::
+``cartesian_product``
+^^^^^^^^^^^^^^^^^^^^^
 
-    from gemact import copulas
+.. autofunction:: gemact.helperfunctions.cartesian_product
 
-    fhu_c = copulas.FHUpperCopula
-    fhu_c.rvs(10,
-            random_state=42)
+``cov_to_corr``
+^^^^^^^^^^^^^^^
 
+.. autofunction:: gemact.helperfunctions.cov_to_corr
 
+``multivariate_t_cdf``
+^^^^^^^^^^^^^^^^^^^^^^
 
+.. autofunction:: gemact.helperfunctions.multivariate_t_cdf
+
+``assert_member``
+^^^^^^^^^^^^^^^^^
+
+.. autofunction:: gemact.helperfunctions.assert_member
+
+``assert_type_value``
+^^^^^^^^^^^^^^^^^^^^^
+
+.. autofunction:: gemact.helperfunctions.assert_type_value
+
+``ndarray_try_convert``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+.. autofunction:: gemact.helperfunctions.ndarray_try_convert
+
+``check_condition``
+^^^^^^^^^^^^^^^^^^^
+
+.. autofunction:: gemact.helperfunctions.check_condition
+
+``handle_random_state``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+.. autofunction:: gemact.helperfunctions.handle_random_state
+
+``assert_not_none``
+^^^^^^^^^^^^^^^^^^^
+
+.. autofunction:: gemact.helperfunctions.assert_not_none
+
+``check_none``
+^^^^^^^^^^^^^^
+
+.. autofunction:: gemact.helperfunctions.check_none
+
+``layerFunc``
+^^^^^^^^^^^^^
+
+.. autofunction:: gemact.helperfunctions.layerFunc
+
+``triangle_dimension``
+^^^^^^^^^^^^^^^^^^^^^^
+
+.. autofunction:: gemact.helperfunctions.triangle_dimension
+
+``compute_block2_crm_msep``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. autofunction:: gemact.helperfunctions.compute_block2_crm_msep
+
+``lrcrm_skewness_f4``
+^^^^^^^^^^^^^^^^^^^^^
+
+.. autofunction:: gemact.helperfunctions.lrcrm_skewness_f4
+
+``compute_block2_crm_skewness``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. autofunction:: gemact.helperfunctions.compute_block2_crm_skewness
+
+``compute_block3_crm_skewness``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. autofunction:: gemact.helperfunctions.compute_block3_crm_skewness
+
+``find_diagonal``
+^^^^^^^^^^^^^^^^^
+
+.. autofunction:: gemact.helperfunctions.find_diagonal
+
+``incrementals_2_cumulatives``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. autofunction:: gemact.helperfunctions.incrementals_2_cumulatives
+
+``make_pdf``
+^^^^^^^^^^^^
+
+.. autofunction:: gemact.helperfunctions.make_pdf
+
+``make_cdf``
+^^^^^^^^^^^^
+
+.. autofunction:: gemact.helperfunctions.make_cdf
+
+``find_interval``
+^^^^^^^^^^^^^^^^^
+
+.. autofunction:: gemact.helperfunctions.find_interval
+
+``simulate``
+^^^^^^^^^^^^
+
+.. autofunction:: gemact.helperfunctions.simulate
+
+``memoize``
+^^^^^^^^^^^
+
+.. autofunction:: gemact.helperfunctions.memoize
+
+``partial_moment``
+^^^^^^^^^^^^^^^^^^
+
+.. autofunction:: gemact.helperfunctions.partial_moment
+
+``censored_moment``
+^^^^^^^^^^^^^^^^^^^
+
+.. autofunction:: gemact.helperfunctions.censored_moment
 
 
 References
-=================
-.. bibliography::
+----------
 
-
-
+.. bibliography:: refs.bib
